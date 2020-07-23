@@ -1,0 +1,11 @@
+---
+name: item
+properties:
+  - name: name
+    type: string
+  - name: description
+    type: string
+  - name: cover_photo
+    type: string
+  - name: tags
+    type: array

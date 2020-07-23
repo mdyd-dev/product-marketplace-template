@@ -1,0 +1,31 @@
+{% assign CANT_BE_BLANK = "can't be blank" %}
+
+<!-- convert tags -->
+{% liquid
+  assign tags = item.properties.tags | split: ','
+  assign properties = item.properties
+  assign properties = properties | add_hash_key: 'tags', tags
+%}
+
+{% liquid
+  assign valid = true
+  assign errors = '{}' | parse_json
+  assign perrors = '{}' | parse_json
+  assign errors = errors | add_hash_key: "properties", perrors
+
+  if item.properties.name == "" or item.properties.name == null
+    assign valid = false
+    assign perrors = perrors | add_hash_key: "name", CANT_BE_BLANK
+  endif
+
+  if item.properties.description == ""
+    assign valid = false
+    assign perrors = perrors | add_hash_key: "description", CANT_BE_BLANK
+  endif
+
+  assign item = item | add_hash_key: 'errors', errors
+
+  export item
+  export valid,  namespace: 'item'
+  export errors, namespace: 'item'
+%}

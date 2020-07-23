@@ -1,0 +1,6 @@
+{% liquid
+  include 'data/items/main', id: params.id
+  include 'data/items/wiki', name: context.exports.item.properties.name
+
+  include 'presentation/simple/items/show', item: context.exports.item
+%}

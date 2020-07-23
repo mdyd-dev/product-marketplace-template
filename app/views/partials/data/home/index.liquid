@@ -1,0 +1,5 @@
+{% liquid
+  graphql items = 'items/search', limit: 6, featured: true | fetch: 'items'
+
+  export items
+%}

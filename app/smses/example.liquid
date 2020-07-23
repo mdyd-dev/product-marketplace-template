@@ -1,0 +1,8 @@
+---
+to: '{{ form.mobile_number }}'
+delay: 0
+enabled: true
+trigger_condition: false
+---
+Hello {{ form.first_name }} via sms.
+{% comment %} Note: Trigger condition is set to false, just in case someone actually deploys this example to production :) {% endcomment %}

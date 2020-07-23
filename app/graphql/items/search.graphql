@@ -1,0 +1,20 @@
+query search($id: ID, $limit: Int = 1, $tag: String, $keyword: String) {
+  items: models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      properties: [
+        { name: "tags" contains: $tag }
+        { name: "description" contains: $keyword }
+      ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      properties id created_at
+    }
+  }
+}

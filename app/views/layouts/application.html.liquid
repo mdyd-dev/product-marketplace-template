@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'layout/head' %}
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet">
+  </head>
+
+  <body class="antialiased font-sans leading-relaxed">
+
+    <div class="section hero">
+      <div class="container">
+        <div class="row">
+          <div class="u-full-width">
+            <a href="/">
+              <h1>product-store<small style="font-size: 0.5em"> 0.0.2-alpine</small></h1>
+            </a>
+          </div>
+        </div>
+
+        {{ content_for_layout }}
+        {% include 'layout/scripts' %}
+      </div>
+    </div>
+  </body>
+</html>

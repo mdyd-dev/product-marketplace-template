@@ -1,0 +1,15 @@
+mutation create_item($name: String, $description: String, $cover_photo: String, $tags: [String]) {
+  model_create(
+    model: {
+      model_schema_name: "item"
+      properties: [
+        { name: "name" value: $name }
+        { name: "description" value: $description }
+        { name: "tags" value_array: $tags }
+        { name: "cover_photo" value: $cover_photo }
+      ]
+    }
+  ){
+    id properties
+  }
+}

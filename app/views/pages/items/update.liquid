@@ -1,0 +1,14 @@
+---
+method: post
+---
+
+{% liquid
+  include 'data/items/validate', item: params.item
+
+  if context.exports.item.valid
+    include 'data/items/update', item: context.exports.item
+    include 'async-operation', uuid: context.exports.operation_uuid, success: '/app'
+  else
+    include 'presentation/simple/items/edit', item: context.exports.item
+  endif
+%}

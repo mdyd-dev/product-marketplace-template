@@ -1,0 +1,53 @@
+{% liquid
+  if item.id
+    assign path = 'update'
+  else
+    assign path = 'create'
+  endif
+%}
+
+<div class="row">
+  <form action="/app/items/{% print path %}" method="post">
+    {% if item.id %}
+      <input type="hidden" name="item[id]" value="{% print item.id %}"/>
+    {% endif %}
+
+    <div class="u-full-width">
+      <input class="u-full-width" type="text" placeholder="name" name="item[properties][name]" value="{% print item.properties.name %}"/>
+      {% if item.errors.properties.name %}
+        <span class="danger">{% print item.errors.properties.name %}</span>
+      {% endif %}
+    </div>
+
+    <div class="u-full-width">
+      <textarea class="u-full-width" type="text" placeholder="description" name="item[properties][description]" rows="20">{% print item.properties.description %}</textarea>
+
+      {% if item.errors.properties.description %}
+        <span class="danger">{% print item.errors.properties.description %}</span>
+      {% endif %}
+    </div>
+
+    <div class="u-full-width">
+      <input class="u-full-width" type="text" placeholder="tags" name="item[properties][tags]" value="{{ item.properties.tags | join: ',' }}"/>
+      {% if item.errors.properties.tags %}
+        <span class="danger">{% print item.errors.properties.tags %}</span>
+      {% endif %}
+    </div>
+
+    <div class="u-full-width">
+      <select class="u-full-width" name="item[properties][cover_photo]">
+      {% for icon in context.exports.lib.icons %}
+        <option value="{% print icon %}" {% if item.properties.cover_photo == icon %}selected{% endif %}>{% print icon %}</option>
+      {% endfor %}
+      </select>
+
+      {% if item.errors.properties.cover_photo %}
+        <span class="danger">{% print item.errors.properties.cover_photo %}</span>
+      {% endif %}
+    </div>
+
+    <div class="u-full-width">
+      <input class="u-full-width" type="submit" value="{% print path %}"/>
+    </div>
+  </form>
+</div>

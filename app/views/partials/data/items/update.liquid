@@ -1,0 +1,10 @@
+<!-- push to background -->
+{% liquid
+  assign args = item.properties | add_hash_key: 'id', item.id
+
+  graphql result = 'items/update', args: args
+
+  assign operation_uuid = '' | uuid
+
+  export operation_uuid
+%}
