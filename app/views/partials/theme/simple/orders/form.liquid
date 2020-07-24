@@ -6,22 +6,29 @@
   endif
 %}
 
-{{ order.errors }}
-
 <div class="row">
+  {{ order.errors }}
+  <h5>order details</h5>
+  <table class="u-full-width">
+    <tr>
+      <th class="">name</th>
+      <th class="">price</th>
+      <th class="">quantity</th>
+      <th class="">total</th>
+    </tr>
+    <tr>
+      <td class="">{% print item.properties.name  %}</td>
+      <td class="">{% echo item.properties.price | pricify %}</td>
+      <td class="">1</td>
+      <td class="">{% echo order.properties.total | pricify %}</td>
+    </tr>
+  </table>
+
   <form action="/orders/{% print path %}" method="post">
     {% include 'authenticity_token' %}
 
-    {% if order.id %}
-      <input type="hidden" name="order[id]" value="{% print order.id %}"/>
-    {% endif %}
+    <input type="hidden" name="item_id" value="{% print item.id %}"/>
 
-    <div class="u-full-width">
-      <label for="name">name</label>
-      <input class="u-full-width" type="text" placeholder="name" name="order[properties][name]" value="{% echo order.properties.name %}"/>
-      {% if order.errors.properties.name %}
-        <span class="danger">{% echo order.errors.properties.name %}</span>
-      {% endif %}
-    </div>
+    <input name="" type="submit" value="checkout" class="button-primary"/>
   </form>
 </div>

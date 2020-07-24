@@ -50,6 +50,14 @@
     </div>
 
     <div class="u-full-width">
+      <label for="price">price</label>
+      <input class="u-full-width" type="number" placeholder="price" name="item[properties][price]" value="{{ item.properties.price | default: 10 }}"/>
+      {% if item.errors.properties.price %}
+        <span class="danger">{% echo item.errors.properties.price %}</span>
+      {% endif %}
+    </div>
+
+    <div class="u-full-width">
       <label for="cover_photo">cover_photo</label>
       <select class="u-full-width" name="item[properties][cover_photo]">
       {% for icon in context.exports.lib.icons %}

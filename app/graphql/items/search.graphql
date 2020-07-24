@@ -3,6 +3,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
     per_page: $limit
     filter: {
       id: { value: $id }
+      model_schema_name: { value: "item" }
       properties: [
         { name: "tags" contains: $tag }
         { name: "description" contains: $keyword }
@@ -16,6 +17,16 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
     total_entries
     results {
       properties id created_at
+
+      orders: related_models(
+        join_on_property: "id"
+        foreign_property: "item_id"
+        model_schema_name: "order"
+      ){
+        id
+        created_at
+        status: property(name: "status")
+      }
     }
   }
 }

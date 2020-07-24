@@ -9,7 +9,7 @@
     <div class="row menu">
       <a href="/items/new" class="button button-primary">List your item</a>
       {% if context.session.current_user_id  %}
-        <a href="/dashboard" class=button>dashboard</a>
+        <a href="/dashboard" class="button">dashboard</a>
         <form action="/sessions/destroy" method="post">
           {% include 'authenticity_token' %}
           <input name="" type="submit" value="log out {% print context.session.current_user_id %}"/>

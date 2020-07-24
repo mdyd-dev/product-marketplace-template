@@ -1,0 +1,39 @@
+{% assign CANT_BE_BLANK = "can't be blank" %}
+{% assign MINIMAL_TOTAL = 10 %}
+{% assign TOO_LITTLE = "has to be equal or greater than " | append: MINIMAL_TOTAL %}
+
+{% assign total = item.properties.price | default: 0 %}
+
+{% parse_json order %}
+{
+  "properties": {
+    "item_id": "{% print item.id %}",
+    "buyer":   "{% echo current_user_id %}",
+    "total":    {% echo total %},
+    "status":  "init"
+  }
+}
+{% endparse_json %}
+
+{% liquid
+  assign valid = true
+  assign errors = '{}' | parse_json
+  assign perrors = '{}' | parse_json
+  assign errors = errors | add_hash_key: 'properties', perrors
+
+  if order.properties.item_id == "" or order.properties.item_id == null
+    assign valid = false
+    assign perrors = perrors | add_hash_key: "item_id", CANT_BE_BLANK
+  endif
+
+  if order.properties.total < MINIMAL_TOTAL
+    assign valid = false
+    assign perrors = perrors | add_hash_key: "total", TOO_LITTLE
+  endif
+%}
+
+{% liquid
+  export order
+  export errors, namespace: 'order'
+  export valid,  namespace: 'order'
+%}

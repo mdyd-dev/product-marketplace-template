@@ -1,0 +1,22 @@
+<h5><a href="/dashboard">dashboard</a> / orders</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>created_at</th>
+      <th>item_it</th>
+      <th>buyer</th>
+      <th>status</th>
+      <th>paid_at</th>
+    </tr>
+  </thead>
+  {% for order in orders.results %}
+    <tr>
+      <td>{% print order.created_at %}</td>
+      <td>{% print order.properties.item_id %}</td>
+      <td>{% print order.properties.buyer %}</td>
+      <td>{% print order.properties.status %}</td>
+      <td>{% echo order.properties.paid_at %}</td>
+    </tr>
+  {% endfor %}
+</table>

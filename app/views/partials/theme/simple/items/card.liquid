@@ -8,5 +8,9 @@
   </a>
 
   <small>{% echo item.properties.tags | join: ", " %}</small>
-  <h5> $100 </h5>
+  <h5>{% echo item.properties.price | pricify %}</h5>
+
+  {% if  item.orders[0].status == 'sold' %}
+    <strong>sold</strong>
+  {% endif %}
 </div>

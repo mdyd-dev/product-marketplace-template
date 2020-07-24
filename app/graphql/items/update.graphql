@@ -1,8 +1,7 @@
-mutation update_item($id: ID!,$name: String, $description: String, $cover_photo: String, $tags: [String], $owner: String, $type: String) {
+mutation update_item($id: ID!,$name: String, $description: String, $cover_photo: String, $tags: [String], $owner: String, $type: String, $price: Int) {
   model_update(
     id: $id
     model: {
-      model_schema_name: "item"
       properties: [
         { name: "name" value: $name }
         { name: "description" value: $description }
@@ -10,6 +9,7 @@ mutation update_item($id: ID!,$name: String, $description: String, $cover_photo:
         { name: "cover_photo" value: $cover_photo }
         { name: "owner" value: $owner }
         { name: "type" value: $type }
+        { name: "price" value_int: $price }
       ]
     }
   ){

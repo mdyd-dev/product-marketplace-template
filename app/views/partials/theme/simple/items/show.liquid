@@ -34,7 +34,7 @@
 
     <form action="/orders/new" method="get">
       <input type="hidden" name="item_id" value="{% print item.id %}">
-      <input type="submit" value="buy for $100" class="button-primary">
+      <input type="submit" value="buy for {% echo item.properties.price | pricify %}" class="button-primary">
     </form>
   </div>
 </div>

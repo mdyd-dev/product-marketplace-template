@@ -1,0 +1,23 @@
+query search($id: ID, $limit: Int = 20, $buyer: String, $item_id: String, $status: String, $paid_at: String) {
+  orders: models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      model_schema_name: { value: "order" }
+      properties: [
+        { name: "buyer" value: $buyer }
+        { name: "item_id" value: $item_id }
+        { name: "paid_at" value: $paid_at }
+        { name: "status" value: $status }
+      ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      properties id created_at
+    }
+  }
+}

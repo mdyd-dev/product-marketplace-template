@@ -1,11 +1,19 @@
 {% assign CANT_BE_BLANK = "can't be blank" %}
+{% assign MINIMAL_PRICE = 10 %}
+{% assign TOO_LITTLE = "has to be equal or greater than " | append: MINIMAL_PRICE %}
 
 <!-- convert tags -->
 {% liquid
   assign tags = item.properties.tags | split: ','
   assign properties = item.properties
   assign properties = properties | add_hash_key: 'tags', tags
-  assign properties = properties | add_hash_key: 'owner', context.session.current_user_id
+
+  if current_user_id
+    assign properties = properties | add_hash_key: 'owner', current_user_id
+  endif
+
+  assign price = item.properties.price | plus: 0
+  assign properties = properties | add_hash_key: 'price', price
 %}
 
 {% liquid
@@ -25,14 +33,14 @@
     assign properties = properties | add_hash_key: 'description', context.exports.wiki.about
   endif
 
+  if item.properties.price <  MINIMAL_PRICE
+    assign valid = false
+    assign perrors = perrors | add_hash_key: "price", TOO_LITTLE
+  endif
+
   if item.properties.description == ""
     assign valid = false
     assign perrors = perrors | add_hash_key: "description", CANT_BE_BLANK
-  endif
-
-  if item.properties.owner == "" or item.properties.owner == null
-    assign valid = false
-    assign perrors = perrors | add_hash_key: "owner", CANT_BE_BLANK
   endif
 
   assign item = item | add_hash_key: 'errors', errors
