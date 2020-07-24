@@ -7,6 +7,6 @@
   </head>
 
   <body class="antialiased font-sans leading-relaxed">
-    {% include 'theme/simple/layout/main' %}
+    {% include 'theme/simple/layout/main', current_user_id: context.session.current_user_id %}
   </body>
 </html>

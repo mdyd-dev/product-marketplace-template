@@ -8,14 +8,14 @@
     </div>
     <div class="row menu">
       <a href="/items/new" class="button button-primary">{% echo 'app.list-your-item' | t %}</a>
-      {% if context.session.current_user_id  %}
+      {% if current_user_id  %}
         <a href="/dashboard" class="button">{{ 'app.dashboard' | t }}</a>
         <form action="/sessions/destroy" method="post">
           {% include 'authenticity_token' %}
-          <input name="" type="submit" value="{{ 'app.logout' | t  }}"/>
+          <input name="" type="submit" value="{{ 'app.logout' | t: user: current_user_id }}"/>
         </form>
       {% else %}
-        <a href="/sessions/new" class="button">{{ 'app.login' | t: user: context.session.current_user_id }}</a>
+        <a href="/sessions/new" class="button">{{ 'app.login' }}</a>
       {% endif %}
     </div>
 
