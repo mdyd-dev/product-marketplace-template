@@ -1,0 +1,27 @@
+{% liquid
+  if order.id
+    assign path = 'update'
+  else
+    assign path = 'create'
+  endif
+%}
+
+{{ order.errors }}
+
+<div class="row">
+  <form action="/orders/{% print path %}" method="post">
+    {% include 'authenticity_token' %}
+
+    {% if order.id %}
+      <input type="hidden" name="order[id]" value="{% print order.id %}"/>
+    {% endif %}
+
+    <div class="u-full-width">
+      <label for="name">name</label>
+      <input class="u-full-width" type="text" placeholder="name" name="order[properties][name]" value="{% echo order.properties.name %}"/>
+      {% if order.errors.properties.name %}
+        <span class="danger">{% echo order.errors.properties.name %}</span>
+      {% endif %}
+    </div>
+  </form>
+</div>

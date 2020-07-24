@@ -9,3 +9,7 @@ properties:
     type: string
   - name: tags
     type: array
+  - name: owner
+    type: string
+  - name: type
+    type: string

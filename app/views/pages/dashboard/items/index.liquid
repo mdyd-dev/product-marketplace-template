@@ -1,0 +1,4 @@
+{% liquid
+  include 'data/dashboard/main', items: 100
+  include 'theme/simple/dashboard/items/index', items: context.exports.items
+%}

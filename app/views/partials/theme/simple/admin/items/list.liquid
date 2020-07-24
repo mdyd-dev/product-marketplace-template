@@ -1,0 +1,36 @@
+Total: {{ items.total_entries }}
+
+<table class="u-full-width">
+  {% for item in items.results %}
+    <tr>
+      <td>
+        <a href="/app/items/show?id={% print item.id %}">
+          <img alt="cover" src="{% echo 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url %}" width="200px"/>
+        </a>
+      </td>
+      <td>
+        <strong> {% print item.properties.name %} </strong>
+        <br/>
+        <small> {{ item.properties.description | split: ' ' | limit: 20 | join: ' ' | append: '...' }} </small>
+        <br/>
+        <small>
+          {% for tag in item.properties.tags %}
+            <a href="?query[tag]={%- print tag %}">{% print tag %}</a>
+          {% endfor %}
+        </small>
+      </td>
+      <td>
+        <form action="/items/edit" method="get">
+          <input type="hidden" name="id" value="{% print item.id %}">
+          <input type="submit" value="edit">
+        </form>
+      </td>
+      <td>
+        <form action="/items/delete" method="post">
+          <input type="hidden" name="id" value="{% print item.id %}">
+          <input type="submit" value="X">
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+</table>

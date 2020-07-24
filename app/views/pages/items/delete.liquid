@@ -4,6 +4,6 @@ method: post
 
 {% liquid
   include 'data/items/delete', id: params.id
-  include 'async-operation', uuid: context.exports.operation_uuid, success: '/app'
+  include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/'
 %}
 

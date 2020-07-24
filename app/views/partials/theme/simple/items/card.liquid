@@ -1,0 +1,12 @@
+<div class="card">
+  <a href="/items/show?id={% print item.id %}">
+    <img alt="cover" src="{% echo 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url %}" width="200px"/>
+  </a>
+
+  <a href="/items/show?id={% print item.id %}">
+    <h5>{% print item.properties.name %}</h5>
+  </a>
+
+  <small>{% echo item.properties.tags | join: ", " %}</small>
+  <h5> $100 </h5>
+</div>

@@ -2,12 +2,10 @@
   graphql items = 'items/search', limit: 100, keyword: query.k, tag: query.tag | fetch: 'items'
 
   if id
-    graphql item  = 'items/search', id: id | fetch: 'items' | fetch: 'results' | first
+    graphql item  = 'items/search', id: id, limit: 1 | fetch: 'items' | fetch: 'results' | first
     export item
   endif
 
+  export query, namespace: "search"
   export items
-
-  assign icons = "alarm ambulance ban bandage calendar flame disc crop command compass copy stack star cut globe glass-full" | split: ' '
-  export icons, namespace: 'lib'
 %}

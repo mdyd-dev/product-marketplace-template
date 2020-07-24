@@ -1,4 +1,4 @@
-mutation update_item($id: ID!,$name: String, $description: String, $cover_photo: String, $tags: [String]) {
+mutation update_item($id: ID!,$name: String, $description: String, $cover_photo: String, $tags: [String], $owner: String, $type: String) {
   model_update(
     id: $id
     model: {
@@ -8,6 +8,8 @@ mutation update_item($id: ID!,$name: String, $description: String, $cover_photo:
         { name: "description" value: $description }
         { name: "tags" value_array: $tags }
         { name: "cover_photo" value: $cover_photo }
+        { name: "owner" value: $owner }
+        { name: "type" value: $type }
       ]
     }
   ){

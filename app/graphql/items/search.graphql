@@ -1,4 +1,4 @@
-query search($id: ID, $limit: Int = 1, $tag: String, $keyword: String) {
+query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: String) {
   items: models(
     per_page: $limit
     filter: {
@@ -6,6 +6,7 @@ query search($id: ID, $limit: Int = 1, $tag: String, $keyword: String) {
       properties: [
         { name: "tags" contains: $tag }
         { name: "description" contains: $keyword }
+        { name: "owner" value: $owner }
       ]
     }
     sort: [

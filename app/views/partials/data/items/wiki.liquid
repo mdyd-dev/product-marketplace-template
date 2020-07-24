@@ -4,8 +4,5 @@
 
 {% liquid
   graphql about = 'wiki', data: data | fetch: 'api_call_send' | fetch: 'response' | dig: 'body' | parse_json | dig: 'extract'
-
-  echo about
-
   export about, namespace: 'wiki'
 %}

@@ -7,8 +7,9 @@ method: post
 
   if context.exports.item.valid
     include 'data/items/update', item: context.exports.item
-    include 'async-operation', uuid: context.exports.operation_uuid, success: '/app'
+    include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/'
   else
-    include 'presentation/simple/items/edit', item: context.exports.item
+    include 'data/items/main'
+    include 'theme/simple/items/edit', item: context.exports.item
   endif
 %}

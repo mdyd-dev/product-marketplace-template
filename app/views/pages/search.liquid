@@ -4,4 +4,4 @@ slug: s
 
 {% include 'data/items/search', query: context.params %}
 
-{% include 'presentation/simple/home/index', items: context.exports.items, query: context.params.query %}
+{% include 'theme/simple/home/index', items: context.exports.items, search: context.exports.search  %}
