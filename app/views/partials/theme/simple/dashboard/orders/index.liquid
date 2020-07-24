@@ -1,18 +1,18 @@
-<h5><a href="/dashboard">dashboard</a> / orders</h5>
+<h5><a href="/dashboard">{% echo 'app.dashboard' | t %}</a> / {% echo 'app.orders' | t %}</h5>
 
 <table>
   <thead>
     <tr>
-      <th>created_at</th>
-      <th>item_it</th>
-      <th>buyer</th>
-      <th>status</th>
-      <th>paid_at</th>
+      <th>{{ "app.item_id" | t }}</th>
+      <th>{{ "app.created_at" | t }}</th>
+      <th>{{ "app.buyer" | t }}</th>
+      <th>{{ "app.status" | t }}</th>
+      <th>{{ "app.paid_at" | t }}</th>
     </tr>
   </thead>
   {% for order in orders.results %}
     <tr>
-      <td>{% print order.created_at %}</td>
+      <td>{% echo order.created_at | l %}</td>
       <td>{% print order.properties.item_id %}</td>
       <td>{% print order.properties.buyer %}</td>
       <td>{% print order.properties.status %}</td>

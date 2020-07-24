@@ -11,10 +11,10 @@
   <h5>order details</h5>
   <table class="u-full-width">
     <tr>
-      <th class="">name</th>
-      <th class="">price</th>
-      <th class="">quantity</th>
-      <th class="">total</th>
+      <th class="">{{ 'app.name' | t }}</th>
+      <th class="">{{ 'app.price' | t }}</th>
+      <th class="">{{ 'app.quantity' | t }}</th>
+      <th class="">{{ 'app.total' | t }}</th>
     </tr>
     <tr>
       <td class="">{% print item.properties.name  %}</td>
@@ -29,6 +29,6 @@
 
     <input type="hidden" name="item_id" value="{% print item.id %}"/>
 
-    <input name="" type="submit" value="checkout" class="button-primary"/>
+    <input name="" type="submit" value="{{ 'app.checkout' | t }}" class="button-primary"/>
   </form>
 </div>

@@ -1,6 +1,6 @@
-<h4>dashboard</h4>
+<h4>{% echo 'app.dashboard' | t %}</h4>
 
 <ul>
-  <li><a href="/dashboard/items">your items</a></li>
-  <li><a href="/dashboard/orders">your orders</a></li>
+  <li><a href="/dashboard/items">{{ 'app.your-items' | t }}</a></li>
+  <li><a href="/dashboard/orders">{{ 'app.your-orders' | t }}</a></li>
 </ul>

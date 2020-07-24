@@ -3,7 +3,27 @@ en:
     title: items-markeplace-mvp
     version: 0.0.2-alpine
 
-    list-your-item: List your item
-    dashboard: Dashboard
-    login: Log in
-    logout: Log out %{user}
+    list-your-item: list your item
+    dashboard: dashboard
+    login: log in
+    logout: log out %{user}
+
+    order: order
+    your-orders: your orders
+    orders: orders
+    item: item
+    items: items
+    your-items: your items
+
+    item_id: item ID
+    created_at: created at
+    buyer: buyer
+    status: status
+    paid_at: paid at
+
+    name: name
+    price: price
+    quantity: quantity
+    total: total
+
+    checkout: checkout
