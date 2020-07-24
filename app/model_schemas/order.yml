@@ -5,6 +5,8 @@ properties:
     type: string
   - name: buyer
     type: string
+  - name: seller
+    type: string
   - name: total
     type: integer
   - name: paid_at

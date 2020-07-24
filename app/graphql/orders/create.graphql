@@ -1,10 +1,11 @@
-mutation create($item_id: String, $buyer: String, $status: String, $paid_at: String, $total: Int) {
+mutation create($item_id: String, $buyer: String, $status: String, $paid_at: String, $total: Int, $seller: String) {
   model_create(
     model: {
       model_schema_name: "order"
       properties: [
         { name: "item_id" value: $item_id }
         { name: "buyer" value: $buyer }
+        { name: "seller" value: $seller }
         { name: "total" value_int: $total }
         { name: "paid_at" value: $paid_at }
         { name: "status" value: $status }

@@ -9,6 +9,7 @@
   "properties": {
     "item_id": "{% print item.id %}",
     "buyer":   "{% echo current_user_id %}",
+    "seller":  "{% echo item.properties.owner %}",
     "total":    {% echo total %},
     "status":  "init"
   }
@@ -20,6 +21,16 @@
   assign errors = '{}' | parse_json
   assign perrors = '{}' | parse_json
   assign errors = errors | add_hash_key: 'properties', perrors
+
+  if order.properties.seller == "" or order.properties.seller == null
+    assign valid = false
+    assign perrors = perrors | add_hash_key: "seller", CANT_BE_BLANK
+  endif
+
+  if order.properties.buyer == "" or order.properties.buyer == null
+    assign valid = false
+    assign perrors = perrors | add_hash_key: "buyer", CANT_BE_BLANK
+  endif
 
   if order.properties.item_id == "" or order.properties.item_id == null
     assign valid = false

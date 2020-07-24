@@ -1,4 +1,5 @@
 <div class="card">
+  <small>{% print item.properties.type %}</small>
   <a href="/items/show?id={% print item.id %}">
     <img alt="cover" src="{% echo 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url %}" width="200px"/>
   </a>
@@ -9,6 +10,8 @@
 
   <small>{% echo item.properties.tags | join: ", " %}</small>
   <h5>{% echo item.properties.price | pricify %}</h5>
+
+  {% include 'theme/simple/business_card', user: item.properties.owner %}
 
   {% if  item.orders[0].status == 'sold' %}
     <strong>sold</strong>

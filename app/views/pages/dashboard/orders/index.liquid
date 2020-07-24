@@ -1,4 +1,0 @@
-{% liquid
-  include 'data/dashboard/orders', limit: 100, current_user_id: context.session.current_user_id
-  include 'theme/simple/dashboard/orders/index', orders: context.exports.orders
-%}

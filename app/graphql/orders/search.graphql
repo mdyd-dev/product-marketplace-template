@@ -1,4 +1,4 @@
-query search($id: ID, $limit: Int = 20, $buyer: String, $item_id: String, $status: String, $paid_at: String) {
+query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id: String, $status: String, $paid_at: String) {
   orders: models(
     per_page: $limit
     filter: {
@@ -6,6 +6,7 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $item_id: String, $statu
       model_schema_name: { value: "order" }
       properties: [
         { name: "buyer" value: $buyer }
+        { name: "seller" value: $seller }
         { name: "item_id" value: $item_id }
         { name: "paid_at" value: $paid_at }
         { name: "status" value: $status }
@@ -18,6 +19,12 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $item_id: String, $statu
     total_entries
     results {
       properties id created_at
+
+      item: related_model(join_on_property: "item_id", foreign_property: "id", model_schema_name: "item") {
+        id
+        created_at
+        properties
+      }
     }
   }
 }
