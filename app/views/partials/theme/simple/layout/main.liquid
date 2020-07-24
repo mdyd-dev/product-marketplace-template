@@ -1,26 +1,39 @@
-<style>
-  .menu * { display: inline-block; }
-</style>
-<div class="section hero">
-  <div class="container">
-    <div class="row">
-      <a href="/"><h1>{{ 'app.title' | t }}<small style="font-size: 0.5em"> {{ 'app.version' | t }}</small></h1></a>
-    </div>
-    <div class="row menu">
-      <a href="/items/new" class="button button-primary">{% echo 'app.list-your-item' | t %}</a>
-      {% if current_user_id  %}
-        <a href="/dashboard" class="button">{{ 'app.dashboard' | t }}</a>
-        <form action="/sessions/destroy" method="post">
-          {% include 'authenticity_token' %}
-          <input name="" type="submit" value="{{ 'app.logout' | t: user: current_user_id }}"/>
-        </form>
-      {% else %}
-        <a href="/sessions/new" class="button">{{ 'app.login' }}</a>
-      {% endif %}
-    </div>
+<div class="container">
 
+  <header class="text-gray-700 body-font">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-blue-500 rounded-full" viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+        <span class="ml-3 text-xl">{{ 'app.title' | t }}</span>
+      </a>
+
+      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <a href="/items/new" class="mr-5 hover:text-gray-900">{% echo 'app.list-your-item' | t %}</a>
+
+        {% if context.session.current_user_id  %}
+          <a href="/dashboard" class="mr-5 hover:text-gray-900">{{ 'app.dashboard' | t }}</a>
+
+          <form action="/sessions/destroy" method="post">
+            {% include 'authenticity_token' %}
+            <input name="" type="submit" value="log out {% print context.session.current_user_id %}"/>
+          </form>
+        {% else %}
+          <a href="/sessions/new" class="inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0">{{ 'app.login' }}
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        {% endif %}
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
     {{ content_for_layout }}
+  </main>
 
-    {% include 'layout/scripts' %}
-  </div>
+  {% include 'layout/scripts' %}
 </div>

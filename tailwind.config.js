@@ -14,6 +14,10 @@ module.exports = {
     content: ['app/**/*.liquid', './src/**/*.liquid', './src/js/**/*.js'],
   },
   theme: {
+    container: {
+      center: true,
+      padding: '0'
+    },
     extend: {
       colors: {
         // `ex` prefix will create classes like `text-ex-red`
