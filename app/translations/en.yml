@@ -1,0 +1,9 @@
+en:
+  app:
+    title: items-markeplace-mvp
+    version: 0.0.2-alpine
+
+    list-your-item: List your item
+    dashboard: Dashboard
+    login: Log in
+    logout: Log out %{user}

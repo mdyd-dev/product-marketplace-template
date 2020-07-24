@@ -4,18 +4,18 @@
 <div class="section hero">
   <div class="container">
     <div class="row">
-      <a href="/"><h1>items-store-mvp<small style="font-size: 0.5em"> 0.0.2-alpine</small></h1></a>
+      <a href="/"><h1>{{ 'app.title' | t }}<small style="font-size: 0.5em"> {{ 'app.version' | t }}</small></h1></a>
     </div>
     <div class="row menu">
-      <a href="/items/new" class="button button-primary">List your item</a>
+      <a href="/items/new" class="button button-primary">{% echo 'app.list-your-item' | t %}</a>
       {% if context.session.current_user_id  %}
-        <a href="/dashboard" class="button">dashboard</a>
+        <a href="/dashboard" class="button">{{ 'app.dashboard' | t }}</a>
         <form action="/sessions/destroy" method="post">
           {% include 'authenticity_token' %}
-          <input name="" type="submit" value="log out {% print context.session.current_user_id %}"/>
+          <input name="" type="submit" value="{{ 'app.logout' | t  }}"/>
         </form>
       {% else %}
-        <a href="/sessions/new" class=button>login</a>
+        <a href="/sessions/new" class="button">{{ 'app.login' | t: user: context.session.current_user_id }}</a>
       {% endif %}
     </div>
 

@@ -8,7 +8,7 @@ method: post
 
   if context.exports.order.valid
     include 'data/orders/create', order: context.exports.order
-    include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/'
+    include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/dashboard/orders'
   else
     include 'theme/simple/orders/new', item: context.exports.item, order: context.exports.order
   endif
