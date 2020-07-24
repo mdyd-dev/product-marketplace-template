@@ -1,0 +1,76 @@
+import { Selector } from 'testcafe';
+
+fixture `New Fixture`
+    .page `https://demo.staging.gapps.platformos.com/`;
+
+const testDisc = ('testdisc-edited')
+const clearData = ('ctrl+a delete')
+    
+test(`Login Test`, async t => {
+    await t
+        .click(Selector('a').withText('LOGIN'))
+        .typeText('input[name="email"]', 'emailexample')
+        .typeText('input[name="password"]', 'passwordexample')
+        .click(Selector('input[name="login"'))
+        .click(Selector('a').withText('LIST YOUR ITEM'))
+        .typeText('input[placeholder="name"]', 'testname')
+        .typeText('input[placeholder="type"]', 'testtype')
+        .typeText('textarea[placeholder="description"]', 'testdesc')
+        .typeText('input[placeholder="tags"]', 'first-tag,second-tag,third-tag')
+        .click(Selector('[name="item[properties][cover_photo]"]'))
+        .click(Selector('option').withText('flame'))
+        .click(Selector('input[value="create"]'))
+        .click(Selector('.card a').withText('testname'))
+        .doubleClick(Selector('h2').withText('testname'))
+        .doubleClick(Selector('div').withText('testdesc'))
+        .doubleClick(Selector('li').withText('first-tag'))
+        .doubleClick(Selector('li').withText('second-tag'))
+        .doubleClick(Selector('li').withText('third-tag'))
+        .doubleClick(Selector('div').withText('owner: emailexample'))
+        .click(Selector('.button').withText('EDIT'))
+        .click(Selector('input[placeholder="name"]'))
+        .pressKey(clearData)
+        .click(Selector('input[placeholder="type"]'))
+        .pressKey(clearData)
+        .click(Selector('textarea[placeholder="description"]'))
+        .pressKey(clearData)
+        .click(Selector('input[placeholder="tags"]'))
+        .pressKey(clearData)
+        .click(Selector('[name="item[properties][cover_photo]"]'))
+        .click(Selector('option').withText('disc'))
+        .typeText('input[placeholder="name"]', 'testdisc-edited')
+        .typeText('input[placeholder="type"]', 'testtype-edited')
+        .typeText('textarea[placeholder="description"]', 'testdesc-edited')
+        .typeText('input[placeholder="tags"]', 'first-tag,second-tag,third-tag,editedtags')
+        .click(Selector('input[value="update"]'))
+        .click(Selector('h1').withText('item-store'))
+        .click(Selector('.card a').withText(testDisc))
+        .doubleClick(Selector('h2').withText(testDisc))
+        .doubleClick(Selector('div').withText(testDisc))
+        .doubleClick(Selector('li').withText('editedtags'))
+        .doubleClick(Selector('div').withText('owner: emailexample'))
+        .click(Selector('input[value="buy for $100"]'))
+        .click(Selector('h1').withText('item-store'))
+        .typeText('input[placeholder="search..."]', testDisc)
+        .pressKey('enter')
+        .click(Selector('h1').withText('item-store'))
+        .click(Selector('input[value="log out emailexample"]'))
+        .typeText('input[placeholder="search..."]', testDisc)
+        .pressKey('enter')
+        .click(Selector('h1').withText('item-store'))
+        .click(Selector('.card a').withText(testDisc))
+        .click(Selector('input[value="buy for $100"]'))
+        .click(Selector('h1').withText('item-store'))
+        .click(Selector('a').withText('LOGIN'))
+        .typeText('input[name="email"]', 'emailexample')
+        .typeText('input[name="password"]', 'passwordexample')
+        .click(Selector('input[name="login"'))
+        .click(Selector('h1').withText('item-store'))
+        .click(Selector('.card a').withText(testDisc))
+        .click(Selector('input[value="delete"]'))
+        
+        
+
+        ;
+});
+
