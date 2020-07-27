@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {% include 'layout/head' %}
+    {% include 'theme/simple/layout/head' %}
   </head>
 
-  <body class="antialiased font-sans leading-normal">
+  <body class="font-sans antialiased leading-normal">
     {% include 'theme/simple/layout/main', current_user_id: context.session.current_user_id %}
   </body>
 </html>
