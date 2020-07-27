@@ -8,6 +8,7 @@
       <th>{{ "app.buyer" | t }}</th>
       <th>{{ "app.seller" | t }}</th>
       <th>{{ "app.status" | t }}</th>
+      <th>{{ "app.total" | t }}</th>
       <th>{{ "app.paid_at" | t }}</th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
       <td>{% print order.properties.buyer %}</td>
       <td>{% print order.properties.seller %}</td>
       <td>{% print order.properties.status %}</td>
+      <td>{% echo order.properties.total | pricify %}</td>
       <td>
         {% echo order.properties.paid_at %}
         {% if order.properties.paid_at == null and role == 'seller' %}
