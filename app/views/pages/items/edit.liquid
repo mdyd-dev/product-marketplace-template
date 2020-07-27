@@ -1,5 +1,5 @@
 {% liquid
-  include 'data/items/main', id: params.id
+  include 'lib/items/main', id: params.id
 
   if context.exports.item
     include 'theme/simple/items/edit', item: context.exports.item

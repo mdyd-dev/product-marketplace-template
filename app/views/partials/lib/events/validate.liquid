@@ -1,0 +1,8 @@
+{% liquid
+  assign valid = true
+  if event.type == ''
+    assign valid = false
+  endif
+
+  export valid, namespace: registry
+%}

@@ -4,6 +4,6 @@
   setTimeout(
     function() {
       window.location = "{{ success }}"
-    }, 100
+    }, {{ wait | default: 500 }}
   )
 </script>
