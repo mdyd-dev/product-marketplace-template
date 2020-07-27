@@ -1,0 +1,14 @@
+{% background "bg-task-name" %}
+{% liquid
+  assign registry = 'event'
+  assign event_type = 'page_visited'
+  assign object_id = 'home_page'
+
+  include 'lib/events/build', type: event_type, actor_id: context.session.current_user_id, object_id: object_id, registry: registry
+  include 'lib/events/validate', event: context.exports[registry]
+  if context.exports[registry].valid
+    include 'lib/events/create', event: context.exports[registry], registry: registry
+    include 'lib/events/broadcast', event: context.exports[registry]
+  endif
+%}
+{% endbackground %}

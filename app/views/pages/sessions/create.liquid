@@ -2,7 +2,8 @@
 method: post
 ---
 {% liquid
-  include 'data/sessions/validate', email: context.params.email, password: context.params.password
-  include 'data/sessions/create', email: context.params.email
-  include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/dashboard'
+  include 'lib/sessions/validate', email: context.params.email, password: context.params.password
+  include 'lib/sessions/create', email: context.params.email
+  include 'lib/events/create', type: 'session_created', id: content.params.email
+  include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/dashboard', wait: 1000
 %}
