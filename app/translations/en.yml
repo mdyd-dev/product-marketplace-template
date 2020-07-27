@@ -1,36 +1,35 @@
 en:
   app:
     title: items-markeplace-mvp
-    version: 0.21.37-alpine
 
-    list-your-item: list your item
-    dashboard: dashboard
-    login: log in
-    logout: log out %{user}
+    list-your-item: List your item
+    dashboard: Dashboard
+    login: Log in
+    logout: Log out %{user}
 
-    order: order
-    your-orders: your orders
-    orders: orders
-    item: item
-    items: items
-    your-items: your items
+    order: Order
+    your-orders: Your orders
+    orders: Orders
+    item: Item
+    items: Items
+    your-items: Your items
 
-    item_id: item ID
-    created_at: created at
-    buyer: buyer
-    seller: seller
-    status: status
-    paid_at: paid at
+    item_id: Item ID
+    created_at: Created at
+    buyer: Buyer
+    seller: Seller
+    status: Status
+    paid_at: Paid at
 
-    name: name
-    price: price
-    quantity: quantity
-    total: total
+    name: Name
+    price: Price
+    quantity: Quantity
+    total: Total
 
-    checkout: checkout
-    mark-as-paid: mark as paid
-    pay: pay
+    checkout: Checkout
+    mark-as-paid: Mark as paid
+    pay: Pay
 
-    selling: selling
-    buying: buying
+    selling: Selling
+    buying: Buying
 

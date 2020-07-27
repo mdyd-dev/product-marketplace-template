@@ -1,19 +1,35 @@
-<div class="card">
-  <small>{% print item.properties.type %}</small>
-  <a href="/items/show?id={% print item.id %}">
-    <img alt="cover" src="{% echo 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url %}" width="200px"/>
+<div class="lg:w-1/3 md:w-1/2 mb-8 p-4 w-full card">
+
+  <a class="block relative h-64 rounded overflow-hidden" href="/items/show?id={{ item.id }}">
+    <img alt="{% print item.properties.name %}" class="object-cover object-center w-full h-full block" src="https://dummyimage.com/640x4:3/eee/000&text={% print item.properties.name %}">
+
+    <img alt="{% print item.properties.name %}"
+      class="absolute top-0 left-0 h-10 w-10 mt-2 ml-2 opacity-50"
+      src="{{ 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url }}" />
   </a>
 
-  <a href="/items/show?id={% print item.id %}">
-    <h5>{% print item.properties.name %}</h5>
-  </a>
+  <div class="mt-4">
+    <h2 class="text-gray-900 title-font text-lg font-medium">
+      <a href="/items/show?id={{ item.id }}">
+        {% print item.properties.name %}
+      </a>
+    </h2>
 
-  <small>{% echo item.properties.tags | join: ", " %}</small>
-  <h5>{% echo item.properties.price | pricify %}</h5>
+    <h3 class="text-gray-500 text-xs title-font mb-1">{% echo item.properties.tags | join: ", " %}</h3>
 
-  {% include 'theme/simple/business_card', user: item.properties.owner %}
+    <div class="flex justify-between">
+      <p class="mt-1">
+        {% if item.orders[0].status == 'sold' %}
+          <span class="line-through">{% echo item.properties.price | pricify %}</span>
+          <span class="font-bold">&mdash; Sold</span>
+        {% else %}
+          <span class="text-lg">{% echo item.properties.price | pricify %}</span>
+        {% endif %}
+      </p>
 
-  {% if  item.orders[0].status == 'sold' %}
-    <strong>sold</strong>
-  {% endif %}
+      <h3 class="text-gray-500 text-xs title-font mb-1">
+        {% include 'theme/simple/business_card', user: item.properties.owner %}
+      </h3>
+    </div>
+  </div>
 </div>

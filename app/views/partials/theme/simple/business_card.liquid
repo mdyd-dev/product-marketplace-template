@@ -1,9 +1,5 @@
-{% assign name = user | default: 'missing-user-email' %}
+{% assign name = user | default: 'Unknown' %}
 
-<style>
-  div.business_card { border: solid 1px #eee; padding: 5px 10px; margin: 10px 0 }
-</style>
-
-<div class="business_card">
-  owner: {% print name %}
-</div>
+<span class="business_card">
+  By {% print name %}
+</span>

@@ -29,9 +29,6 @@ module.exports = {
       // fontFamily: {
       //   sans: ['Lato', ...defaultTheme.fontFamily.sans],
       // },
-      screens: {
-        xxl: '1410px',
-      },
     },
   },
   variants: {
