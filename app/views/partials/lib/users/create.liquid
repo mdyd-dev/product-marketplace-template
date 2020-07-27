@@ -1,0 +1,7 @@
+{% liquid
+  include 'lib/users/validate', object: user
+  if context.exports.object.valid
+    include 'lib/users/save', object: context.exports.object
+    include 'lib/sessions/create', object.context.exports.object
+  endif
+%}
