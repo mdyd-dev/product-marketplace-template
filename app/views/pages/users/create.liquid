@@ -1,0 +1,14 @@
+---
+slug: users
+method: post
+---
+{% liquid
+  include 'lib/users/validate', object: context.params.user
+
+  if context.exports.object.valid
+    include 'lib/users/save', object: context.exports.object
+    echo context.exports.object.id
+  else
+    include 'theme/simple/users/new', object: context.exports.object
+  endif
+%}

@@ -1,0 +1,20 @@
+<form action="/users" method="post">
+  {% include 'authenticity_token' %}
+  <div class="row">
+    <div class="u-full-width">
+      <input placeholder="email" name="user[email]" type="text" value="{{ object.email }}"/>
+      {% if object.errors.email %}
+        <span class="danger">{% echo object.errors.email %}</span>
+      {% endif %}
+    </div>
+    <div class="u-full-width">
+      <input placeholder="password" name="user[password]" type="password" value="{{ object.password }}"/>
+      {% if object.errors.password %}
+        <span class="danger">{% echo object.errors.password %}</span>
+      {% endif %}
+    </div>
+    <div class="u-full-width">
+      <input type="submit" value="Sign Up"/>
+    </div>
+  </div>
+</form>

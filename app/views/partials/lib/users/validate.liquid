@@ -1,0 +1,28 @@
+{% assign CANT_BE_BLANK = "can't be blank" %}
+{% assign EMAIL_ALREADY_TAKEN = "already taken" %}
+
+{% liquid
+  assign valid = true
+  assign errors = '{}' | parse_json
+
+  if object.email == null or object.email == empty
+    assign errors = errors | add_hash_key: "email", CANT_BE_BLANK
+  else
+    graphql emails_count = 'users/emails_count', email: object.email | dig: 'users', 'total_entries'
+    if emails_count > 0
+      assign errors = errors | add_hash_key: "email", EMAIL_ALREADY_TAKEN
+    endif
+  endif
+
+
+  if object.password == null or object.password == empty
+    assign errors = errors | add_hash_key: "password", CANT_BE_BLANK
+  endif
+
+  if errors != empty
+    assign valid = false
+  endif
+  assign object = object | add_hash_key: 'errors', errors
+  assign object = object | add_hash_key: 'valid', valid
+  export object
+%}
