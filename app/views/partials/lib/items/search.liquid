@@ -7,7 +7,7 @@
     echo '{ "properties": { "name": "price", "order": "ASC" } }'
   endparse_json
 
-  graphql items = 'items/search', limit: 100, keyword: query.k, tag: query.tag, sort: sort_price_asc | fetch: 'items'
+  graphql items = 'items/search', limit: limit, keyword: query.k, tag: query.tag, sort: sort_price_desc | fetch: 'items'
 
   if id
     graphql item  = 'items/search', id: id, limit: 1 | fetch: 'items' | fetch: 'results' | first
