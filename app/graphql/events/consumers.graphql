@@ -1,7 +1,7 @@
 query consumers($name: String) {
   admin_liquid_partials(
     filter: {
-      path: { starts_with: "data/consumers", contains: $name }
+      path: { starts_with: "lib/consumers", contains: $name }
     }
   ) {
     results {

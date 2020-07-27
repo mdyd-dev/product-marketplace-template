@@ -2,5 +2,5 @@
   include 'lib/items/index'
   include 'theme/simple/home/index', items: context.exports.items
 
-  include 'lib/events/create-item'
+  include 'lib/events/create-event', event_type: 'page_visited', actor_id: context.session.current_user_id, object_id: 'home_page'
 %}
