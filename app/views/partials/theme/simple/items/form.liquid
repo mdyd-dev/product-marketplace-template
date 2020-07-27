@@ -6,72 +6,83 @@
   endif
 %}
 
-{{ item.errors }}
+<!-- {{ item.errors }} -->
 
-<div class="row">
-  <form action="/items/{% print path %}" method="post">
-    {% include 'authenticity_token' %}
 
-    {% if item.id %}
-      <input type="hidden" name="item[id]" value="{% print item.id %}"/>
-    {% endif %}
+<section class="text-gray-700 body-font">
+  <div class="container flex flex-wrap items-center px-5 mx-auto">
+    <h1 class="text-3xl font-medium text-gray-900 title-font">{{ path | capitalize }} Item</h1>
+  </div>
 
-    <div class="u-full-width">
-      <label for="name">name</label>
-      <input class="u-full-width" type="text" placeholder="name" name="item[properties][name]" value="{% echo item.properties.name %}"/>
-      {% if item.errors.properties.name %}
-        <span class="danger">{% echo item.errors.properties.name %}</span>
+  <div class="container flex flex-wrap items-center px-5 mx-auto">
+    <form action="/items/{{ path }}" method="post" class="w-1/2 p-8 bg-gray-200 rounded-lg">
+      {% include 'authenticity_token' %}
+
+      {% if item.id %}
+      <input type="hidden" name="item[id]" value="{{ item.id }}" />
       {% endif %}
-    </div>
 
-    <div class="u-full-width">
-      <label for="type">type</label>
-      <input class="u-full-width" type="text" placeholder="type" name="item[properties][type]" value="{% echo item.properties.type %}"/>
-      {% if item.errors.properties.type %}
-        <span class="danger">{% echo item.errors.properties.type %}</span>
-      {% endif %}
-    </div>
+      <div class="my-3">
+        <label class="block" for="name">Name</label>
+        <input class="w-2/3 form-input" type="text" name="item[properties][name]" value="{{ item.properties.name }}" />
+        {% if item.errors.properties.name %}
+        <span class="text-red-800">{{ item.errors.properties.name }}</span>
+        {% endif %}
+      </div>
 
-    <div class="u-full-width">
-      <label for="description">description</label>
-      <textarea class="u-full-width" type="text" placeholder="description" name="item[properties][description]" rows="20">{% echo item.properties.description %}</textarea>
+      <div class="mt-3">
+        <label class="block" for="type">Type</label>
+        <input class="w-2/3 form-input" type="text" name="item[properties][type]" value="{{ item.properties.type }}" />
+        {% if item.errors.properties.type %}
+        <span class="text-red-800">{{ item.errors.properties.type }}</span>
+        {% endif %}
+      </div>
 
-      {% if item.errors.properties.description %}
-        <span class="danger">{% echo item.errors.properties.description %}</span>
-      {% endif %}
-    </div>
+      <div class="mt-3">
+        <label class="block" for="description">Description</label>
+        <textarea class="w-full form-input" type="text" name="item[properties][description]"
+          rows="3">{{ item.properties.description }}</textarea>
 
-    <div class="u-full-width">
-      <label for="tags">tags</label>
-      <input class="u-full-width" type="text" placeholder="tags" name="item[properties][tags]" value="{{ item.properties.tags | join: ',' }}"/>
-      {% if item.errors.properties.tags %}
-        <span class="danger">{% echo item.errors.properties.tags %}</span>
-      {% endif %}
-    </div>
+        {% if item.errors.properties.description %}
+        <span class="text-red-800">{{ item.errors.properties.description }}</span>
+        {% endif %}
+      </div>
 
-    <div class="u-full-width">
-      <label for="price">price</label>
-      <input class="u-full-width" type="number" placeholder="price" name="item[properties][price]" value="{{ item.properties.price | default: 10 }}"/>
-      {% if item.errors.properties.price %}
-        <span class="danger">{% echo item.errors.properties.price %}</span>
-      {% endif %}
-    </div>
+      <div class="mt-3">
+        <label class="block" for="tags">Tags</label>
+        <input class="w-full form-input" type="text" name="item[properties][tags]"
+          value="{{ item.properties.tags | join: ',' }}" />
+        {% if item.errors.properties.tags %}
+        <span class="text-red-800">{{ item.errors.properties.tags }}</span>
+        {% endif %}
+      </div>
 
-    <div class="u-full-width">
-      <label for="cover_photo">cover_photo</label>
-      <select class="u-full-width" name="item[properties][cover_photo]">
-      {% for icon in context.exports.lib.icons %}
-        <option value="{% print icon %}" {% if item.properties.cover_photo == icon %}selected{% endif %}>{% print icon %}</option>
-      {% endfor %}
-      </select>
+      <div class="mt-3">
+        <label class="block" for="price">Price</label>
+        <input class="w-32 form-input" type="number" name="item[properties][price]"
+          value="{{ item.properties.price | default: 10 }}" />
+        {% if item.errors.properties.price %}
+          <span class="text-red-800">{{ item.errors.properties.price }}</span>
+        {% endif %}
+      </div>
 
-      {% if item.errors.properties.cover_photo %}
-        <span class="danger">{% echo item.errors.properties.cover_photo %}</span>
-      {% endif %}
-    </div>
+      <div class="mt-3">
+        <label class="block" for="cover_photo">Icon</label>
+        <select class="w-64 form-select" name="item[properties][cover_photo]">
+          {% for icon in context.exports.lib.icons %}
+          <option value="{{ icon }}" {% if item.properties.cover_photo == icon %}selected{% endif %}>
+            {{ icon }}
+          </option>
+          {% endfor %}
+        </select>
 
-    <div class="u-full-width">
-      <input class="u-full-width" type="submit" value="{% print path %}"/>
-    </div>
-  </form>
-</div>
+        {% if item.errors.properties.cover_photo %}
+        <span class="text-red-800">{{ item.errors.properties.cover_photo }}</span>
+        {% endif %}
+      </div>
+
+        <button class="mt-8 button" value="{{ path }}">Submit</button>
+    </form>
+
+  </div>
+</section>
