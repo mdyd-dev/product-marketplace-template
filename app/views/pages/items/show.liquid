@@ -3,5 +3,4 @@
   include 'theme/simple/items/show', item: context.exports.item
 
   assign object_id = 'items-show#' | append: context.exports.item.id
-  include 'lib/events/create-event', type: 'page_visited', actor_id: context.session.current_user_id, object_id: object_id
 %}
