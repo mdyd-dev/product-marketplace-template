@@ -1,21 +1,21 @@
-<div class="lg:w-1/3 md:w-1/2 mb-8 p-4 w-full card">
+<div class="w-full p-4 mb-8 lg:w-1/3 md:w-1/2 card">
 
-  <a class="block relative h-64 rounded overflow-hidden" href="/items/show?id={{ item.id }}">
-    <img alt="{% print item.properties.name %}" class="object-cover object-center w-full h-full block" src="https://dummyimage.com/640x4:3/eee/000&text={% print item.properties.name %}">
+  <a class="relative block h-64 overflow-hidden rounded" href="/items/show?id={{ item.id }}">
+    <img alt="{% print item.properties.name %}" class="block object-cover object-center w-full h-full" src="https://dummyimage.com/640x4:3/eee/000&text={% print item.properties.name %}">
 
     <img alt="{% print item.properties.name %}"
-      class="absolute top-0 left-0 h-10 w-10 mt-2 ml-2 opacity-50"
+      class="absolute top-0 left-0 w-10 h-10 mt-2 ml-2 opacity-50" loading="lazy"
       src="{{ 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url }}" />
   </a>
 
   <div class="mt-4">
-    <h2 class="text-gray-900 title-font text-lg font-medium">
+    <h2 class="text-lg font-medium text-gray-900 title-font">
       <a href="/items/show?id={{ item.id }}">
         {% print item.properties.name %}
       </a>
     </h2>
 
-    <h3 class="text-gray-500 text-xs title-font mb-1">{% echo item.properties.tags | join: ", " %}</h3>
+    <h3 class="mb-1 text-xs text-gray-500 title-font">{% echo item.properties.tags | join: ", " %}</h3>
 
     <div class="flex justify-between">
       <p class="mt-1">
@@ -27,7 +27,7 @@
         {% endif %}
       </p>
 
-      <h3 class="text-gray-500 text-xs title-font mb-1">
+      <h3 class="mb-1 text-xs text-gray-500 title-font">
         {% include 'theme/simple/business_card', user: item.properties.owner %}
       </h3>
     </div>
