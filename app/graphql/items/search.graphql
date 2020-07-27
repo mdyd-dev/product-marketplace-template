@@ -6,7 +6,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
       model_schema_name: { value: "item" }
       properties: [
         { name: "tags" contains: $tag }
-        { name: "description" contains: $keyword }
+        { name: "description" contains: $keyword } 
         { name: "owner" value: $owner }
       ]
     }

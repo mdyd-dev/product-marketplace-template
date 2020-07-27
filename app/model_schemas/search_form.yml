@@ -1,0 +1,5 @@
+---
+name: search_form
+properties:
+  - name: tags
+    type: array

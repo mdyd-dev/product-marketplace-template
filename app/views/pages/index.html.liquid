@@ -1,4 +1,6 @@
 {% liquid
   include 'lib/items/index'
-  include 'theme/simple/home/index', items: context.exports.items
+  include 'lib/search/main'
+
+  include 'theme/simple/home/index', items: context.exports.items, filters: context.exports.search_form.properties
 %}

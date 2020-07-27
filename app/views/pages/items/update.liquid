@@ -8,6 +8,7 @@ method: post
   if context.exports.item.valid
     include 'lib/items/update', item: context.exports.item
     include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/'
+    include 'lib/events/create-event', type: 'item_updated', actor_id: context.session.current_user_id, object_id: context.exports.item.id
   else
     include 'lib/items/main'
     include 'theme/simple/items/edit', item: context.exports.item

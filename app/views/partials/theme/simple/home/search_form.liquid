@@ -1,0 +1,16 @@
+<form action="/s">
+  <input class="form-input my-4 block w-full"
+    name="k"
+    type="text"
+    value="{% echo query.k %}"
+    placeholder="Search"/>
+
+  filter by tags:
+  <select class="form-input my-4 block w-full" name="tag">
+    {% for tag in filters.tags %}
+      <option value="{% echo tag %}"{% if query.tag == tag %}selected{%endif%}>{% echo tag %}</option>
+    {% endfor %}
+  </select>
+
+  <input name="submit" type="submit" value="search"/>
+</form>
