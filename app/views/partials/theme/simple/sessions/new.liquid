@@ -1,5 +1,30 @@
+<section class="text-gray-700 body-font">
 
+  <div class="container items-center px-5 mx-auto">
+    <div class="mx-auto mb-2 text-center lg:w-2/6 md:w-1/2">
+      <h1 class="text-3xl font-medium text-gray-900 title-font">Log In</h1>
+    </div>
 
-<h1>Log In</h1>
-{% include 'theme/simple/sessions/form' %}
-Don't have an account? <a href='/sign-up'>Register</a>
+    <div class="w-full p-8 mx-auto mt-10 bg-gray-200 rounded-lg lg:w-2/6 md:w-1/2 md:mt-0">
+      <form action="/sessions/create" method="post">
+        {% include 'authenticity_token' %}
+
+        <label class="block mt-3">
+          <span class="block">E-mail</span>
+          <input name="email" type="text" class="w-full form-input" />
+        </label>
+
+        <label class="block mt-3">
+          <span class="block">Password</span>
+          <input name="password" type="password" class="w-full form-input" />
+        </label>
+
+        <button name="login" value="login" class="mt-3 button">Log in</button>
+      </form>
+
+      <p class="mt-8 text-gray-600">
+        Don't have an account? <a href='/sign-up'>Register</a>
+      </p>
+    </div>
+  </div>
+</section>
