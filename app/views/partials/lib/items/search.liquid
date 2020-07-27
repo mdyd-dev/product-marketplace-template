@@ -1,5 +1,13 @@
 {% liquid
-  graphql items = 'items/search', limit: 100, keyword: query.k, tag: query.tag | fetch: 'items'
+  parse_json sort_price_desc
+    echo '{ "properties": { "name": "price", "order": "DESC" } }'
+  endparse_json
+
+  parse_json sort_price_asc
+    echo '{ "properties": { "name": "price", "order": "ASC" } }'
+  endparse_json
+
+  graphql items = 'items/search', limit: 100, keyword: query.k, tag: query.tag, sort: sort_price_asc | fetch: 'items'
 
   if id
     graphql item  = 'items/search', id: id, limit: 1 | fetch: 'items' | fetch: 'results' | first

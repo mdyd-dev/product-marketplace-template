@@ -1,10 +1,9 @@
-<div class="row">
-  <div class="eight columns">
-    {% include 'theme/simple/items/list', items: items, query: query %}
+<div class="flex flex-wrap w-full">
+  <div class="w-1/2">
+    <h3>the most recent items</h3>
+    {% include 'theme/simple/items/index', items: items %}
   </div>
-  <div class="four columns">
-    <h4>new item</h4>
-    {% include 'theme/simple/items/form', item: item %}
+  <div class="w-1/2">
     <h4>event logs</h4>
   </div>
 </div>

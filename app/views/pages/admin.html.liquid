@@ -1,5 +1,6 @@
----
-authorization_policies: [admin_policy]
----
+{% include 'lib/users/search' %}
+{% include 'lib/orders/search' %}
+{% include 'lib/items/search' %}
 
-Admin Section
+
+{% include 'theme/simple/admin/index', items: context.exports.items %}

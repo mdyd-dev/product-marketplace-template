@@ -1,4 +1,4 @@
-query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: String) {
+query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: String, $sort: ModelsSortInput = { created_at: { order: DESC } }) {
   items: models(
     per_page: $limit
     filter: {
@@ -11,7 +11,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
       ]
     }
     sort: [
-      { created_at: { order: DESC }}
+      $sort
     ]
   ){
     total_entries
