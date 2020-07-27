@@ -8,12 +8,7 @@
 
 <!-- {{ item.errors }} -->
 
-
 <section class="text-gray-700 body-font">
-  <div class="container flex flex-wrap items-center px-5 mx-auto">
-    <h1 class="text-3xl font-medium text-gray-900 title-font">{{ path | capitalize }} Item</h1>
-  </div>
-
   <div class="container flex flex-wrap items-center px-5 mx-auto">
     <form action="/items/{{ path }}" method="post" class="w-1/2 p-8 bg-gray-200 rounded-lg">
       {% include 'authenticity_token' %}
@@ -62,7 +57,7 @@
         <input class="w-32 form-input" type="number" name="item[properties][price]"
           value="{{ item.properties.price | default: 10 }}" />
         {% if item.errors.properties.price %}
-          <span class="text-red-800">{{ item.errors.properties.price }}</span>
+        <span class="text-red-800">{{ item.errors.properties.price }}</span>
         {% endif %}
       </div>
 
@@ -81,7 +76,7 @@
         {% endif %}
       </div>
 
-        <button class="mt-8 button" value="{{ path }}">Submit</button>
+      <button class="mt-8 button" value="{{ path }}">Submit</button>
     </form>
 
   </div>
