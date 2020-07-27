@@ -2,6 +2,6 @@
 slug: s
 ---
 
-{% include 'data/items/search', query: context.params %}
+{% include 'lib/items/search', query: context.params %}
 
 {% include 'theme/simple/home/index', items: context.exports.items, search: context.exports.search  %}
