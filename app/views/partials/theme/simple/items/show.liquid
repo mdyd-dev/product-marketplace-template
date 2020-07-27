@@ -1,16 +1,5 @@
-<style>
-  ul { margin-top: 10px }
-  ul.tags li {
-    display:inline;
-  }
+    <!-- <img alt="cover" src="{% echo 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url %}" width="100%"/>
 
-</style>
-<div class="row">
-  <div class="four columns">
-    <img alt="cover" src="{% echo 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url %}" width="100%"/>
-  </div>
-
-  <div class="eight columns">
     <h2>{% print item.properties.name %}</h2>
     <div>{% print item.properties.description %}</div>
 
@@ -23,7 +12,6 @@
 
     {% include 'theme/simple/business_card', user: item.properties.owner %}
 
-
     {% if item.properties.owner == context.session.current_user_id %}
       <a href="/items/edit?id={% print item.id %}" class="button">edit</a>
       <form action="/items/delete" method="post">
@@ -35,6 +23,83 @@
     <form action="/orders/new" method="get">
       <input type="hidden" name="item_id" value="{% print item.id %}">
       <input type="submit" value="buy for {% echo item.properties.price | pricify %}" class="button-primary">
-    </form>
+    </form> -->
+
+
+<section class="overflow-hidden text-gray-700 body-font">
+  <div class="container px-5">
+    <div class="flex flex-wrap">
+      <div class="relative w-1/2">
+        <img alt="{{ item.properties.name }}" class="object-cover object-center w-full h-64 rounded lg:h-auto" src="https://dummyimage.com/800x4:3/eee/000&text={% print item.properties.name %}">
+        <img alt="{% print item.properties.name %}"
+          class="absolute top-0 left-0 w-10 h-10 mt-2 ml-2 opacity-50"
+          src="{{ 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url }}" />
+      </div>
+
+      <div class="w-full mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
+        <h2 class="text-sm tracking-widest text-gray-500 title-font">
+          {% include 'theme/simple/business_card', user: item.properties.owner %}
+        </h2>
+
+        <h1 class="flex justify-between mb-1 text-3xl font-medium text-gray-900 title-font">
+          <span>{{ item.properties.name }}</span>
+        </h1>
+
+        <div class="flex flex-wrap mb-4">
+          {% if item.properties.tags %}
+            <ul class="flex w-full tags">
+              <li><strong>tags: </strong></li>
+              {% for tag in item.properties.tags %}
+                <li class="ml-2">{{ tag }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+
+        <p class="mt-4 leading-relaxed">{% print item.properties.description %}</p>
+
+        <div class="flex items-center pb-5 mt-6 mb-5 border-b-2 border-gray-200">
+          <div class="flex items-center">
+            <span class="mr-3">Size</span>
+            <div class="relative">
+              <select class="py-2 pl-3 pr-10 text-base border border-gray-400 rounded appearance-none focus:outline-none focus:border-blue-500">
+                <option>SM</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+              </select>
+              <span class="absolute top-0 right-0 flex items-center justify-center w-10 h-full text-center text-gray-600 pointer-events-none">
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6"></path>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="flex">
+          <span class="text-2xl font-medium text-gray-900 title-font">{{ item.properties.price | pricify }}</span>
+
+          <form action="/orders/new" method="get" class="ml-auto ">
+            <input type="hidden" name="item_id" value="{{ item.id }}">
+            <button type="submit" value="buy" class="button">
+              Buy for {{ item.properties.price | pricify }}
+            </button>
+          </form>
+        </div>
+
+        {% if item.properties.owner == context.session.current_user_id %}
+          <p class="py-4 mt-4 border-t border-blue-300">Item Administration</p>
+          <span class="flex">
+            <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
+
+            <form action="/items/delete" method="post" class="ml-2">
+              <input type="hidden" name="id" value="{{ item.id }}">
+              <button value="delete" class="button button-secondary">Delete</button>
+            </form>
+          </span>
+        {% endif %}
+
+        </div>
+    </div>
   </div>
-</div>
+</section>

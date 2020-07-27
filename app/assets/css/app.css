@@ -860,15 +860,53 @@ body {
   border-color: #63b3ed;
 }
 
-.btn {
-  font-weight: 700;
-  text-transform: capitalize;
-  padding-left: 1rem;
-  padding-right: 1rem;
+.button {
+  display: flex;
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  align-items: center;
+  --bg-opacity: 1;
+  background-color: #4299e1;
+  background-color: rgba(66, 153, 225, var(--bg-opacity));
+  border-width: 0;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  border-width: 1px;
-  border-radius: 0.125rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.25rem;
+}
+
+.button:focus {
+  outline: 0;
+}
+
+.button:hover {
+  --bg-opacity: 1;
+  background-color: #3182ce;
+  background-color: rgba(49, 130, 206, var(--bg-opacity));
+}
+
+.button-secondary  {
+  --text-opacity: 1;
+  color: #4299e1;
+  color: rgba(66, 153, 225, var(--text-opacity));
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  --border-opacity: 1;
+  border-color: #4299e1;
+  border-color: rgba(66, 153, 225, var(--border-opacity));
+  border-width: 2px;
+}
+
+.button-secondary:hover  {
+  --bg-opacity: 1;
+  background-color: #ebf8ff;
+  background-color: rgba(235, 248, 255, var(--bg-opacity));
+  --border-opacity: 1;
+  border-color: #3182ce;
+  border-color: rgba(49, 130, 206, var(--border-opacity));
 }
 
 .space-y-0 > :not(template) ~ :not(template) {
