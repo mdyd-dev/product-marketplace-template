@@ -1,9 +1,13 @@
 <section class="text-gray-700 body-font">
   <div class="container mx-auto">
     <div class="flex flex-wrap -m-4 cards">
+      {% if items.results.size > 0 %}
       {% for item in items.results %}
         {% include 'theme/simple/items/card', item: item %}
       {% endfor %}
+      {% else %}
+        <p class="container my-8 ml-8 text-lg">No items found. Try refining your search filters.</p>
+      {% endif %}
     </div>
   </div>
 </section>
