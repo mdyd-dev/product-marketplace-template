@@ -12,13 +12,13 @@ pipeline {
   }
 
   stages {
-    environment {
-      MPKIT_TOKEN = credentials('POS_TOKEN')
-      MPKIT_EMAIL = "darek+ci@near-me.com"
-      MPKIT_URL = "${qa_url}"
-      CI = true
-    }
     stage('Deploy') {
+      environment {
+        MPKIT_TOKEN = credentials('POS_TOKEN')
+        MPKIT_EMAIL = "darek+ci@near-me.com"
+        MPKIT_URL = "${qa_url}"
+        CI = true
+      }
       agent { docker { image 'platformos/pos-cli' } }
       steps {
         sh 'pos-cli deploy'
