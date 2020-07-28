@@ -11,12 +11,18 @@
 
         <label class="block mt-3">
           <span class="block">E-mail</span>
-          <input name="email" type="text" class="w-full form-input" />
+          <input name="user[email]" type="text" value="{{ object.email }}" class="w-full form-input" />
+          {% if item.errors.email %}
+            <span class="text-red-800">{{ item.errors.email }}</span>
+          {% endif %}
         </label>
 
         <label class="block mt-3">
           <span class="block">Password</span>
-          <input name="password" type="password" class="w-full form-input" />
+          <input name="user[password]" type="password" value="{{ object.password }}" class="w-full form-input" />
+          {% if item.errors.password %}
+            <span class="text-red-800">{{ item.errors.password }}</span>
+          {% endif %}
         </label>
 
         <button name="login" value="login" class="mt-3 button">Log in</button>
