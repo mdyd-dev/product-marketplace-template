@@ -1,10 +1,10 @@
-<form action="/s" class="flex mx-4 mb-4">
+<form action="/s" class="flex mx-4 my-6">
   <div class="flex-1 w-auto">
     <label for="" class="block mb-1 text-gray-600 capitalize">Keywords</label>
     <input class="w-full form-input "
       name="k"
       type="text"
-      value="{% echo query.k %}"
+      value="{{ query.k }}"
       placeholder="Search" />
   </div>
 
@@ -13,7 +13,7 @@
     <select class="form-select" name="tag">
       <option value="" class="text-gray-600">All categories</option>
       {% for tag in filters.tags %}
-        <option value="{{ tag }}"{% if query.tag == tag %}selected{%endif%}>{{ tag }}</option>
+        <option value="{{ tag }}" {% if query.tag == tag %}selected{% endif %}>{{ tag }}</option>
       {% endfor %}
     </select>
   </div>
