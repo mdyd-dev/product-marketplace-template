@@ -1,9 +1,12 @@
 {% liquid
   graphql result = 'sessions/create', email: object.email, password: object.password
+
   if result.errors.size > 0
     assign errors = '{"email": "Invalid email or password"}' | parse_json
     assign valid = false
     export errors, namespace: 'object'
     export valid, namespace: 'object'
+  else
+    session current_user_id = object.email
   endif
 %}

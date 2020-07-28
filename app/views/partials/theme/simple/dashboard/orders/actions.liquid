@@ -1,3 +1,4 @@
+{% if order.order_status.properties.status != 'app.order_statuses.paid' %}
 {% if order.properties.paid_at == null and role == 'seller' %}
   <form action="/order_statuses/create" method="post">
     {% include 'authenticity_token' %}
@@ -15,5 +16,15 @@
     <input type="hidden" name="order_id" value="{{ order.id }}"/>
 
     <button name="" value="{{ 'app.pay' | t }}" class="button">{{ 'app.pay' | t }}</button>
+  </form>
+{% endif %}
+{% endif %}
+
+{% if order.order_status.properties.status != 'app.order_statuses.paid' %}
+  <form action="/order_statuses/create" method="post">
+    {% include 'authenticity_token' %}
+    <input type="hidden" name="status" value="app.order_statuses.canceled"/>
+    <input type="hidden" name="order_id" value="{{ order.id }}"/>
+    <input name="" type="submit" value="{% echo 'app.cancel' | t %}"/>
   </form>
 {% endif %}
