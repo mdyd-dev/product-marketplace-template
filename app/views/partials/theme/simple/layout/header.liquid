@@ -18,7 +18,9 @@
 
       <form action="/sessions/destroy" method="post">
         {% include 'authenticity_token' %}
-        <input name="" type="submit" value="log out {{ context.current_user.id }}" />
+        <button class="button button-secondary button-sm">
+          Log out
+        </button>
       </form>
       {% else %}
       <a href="/sessions/new"

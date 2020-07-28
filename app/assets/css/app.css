@@ -862,18 +862,18 @@ body {
 
 .button {
   display: flex;
+  align-items: center;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   --text-opacity: 1;
   color: #fff;
   color: rgba(255, 255, 255, var(--text-opacity));
-  align-items: center;
   --bg-opacity: 1;
   background-color: #4299e1;
   background-color: rgba(66, 153, 225, var(--bg-opacity));
   border-width: 0;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
   border-radius: 0.25rem;
 }
 
@@ -894,10 +894,10 @@ body {
   --bg-opacity: 1;
   background-color: #fff;
   background-color: rgba(255, 255, 255, var(--bg-opacity));
+  border-width: 2px;
   --border-opacity: 1;
   border-color: #4299e1;
   border-color: rgba(66, 153, 225, var(--border-opacity));
-  border-width: 2px;
 }
 
 .button-secondary:hover  {
@@ -907,6 +907,14 @@ body {
   --border-opacity: 1;
   border-color: #3182ce;
   border-color: rgba(49, 130, 206, var(--border-opacity));
+}
+
+.button-sm {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.875rem;
 }
 
 .space-y-0 > :not(template) ~ :not(template) {
