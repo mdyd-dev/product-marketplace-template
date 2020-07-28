@@ -1,7 +1,7 @@
 import { Selector } from 'testcafe';
 
 fixture `Basic complete happy scenario`
-  .page(process.env.MP_URL);
+  .page(process.env.MPKIT_URL);
 
 test(`Login Test`, async t => {
 
