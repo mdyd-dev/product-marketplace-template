@@ -33,3 +33,7 @@ en:
     selling: Selling
     buying: Buying
 
+    order_statuses:
+      order_status: status
+      pending_payment: pending
+      paid: paid

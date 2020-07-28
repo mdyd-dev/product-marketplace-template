@@ -9,7 +9,5 @@ properties:
     type: string
   - name: total
     type: integer
-  - name: paid_at
-    type: datetime
   - name: status
     type: string

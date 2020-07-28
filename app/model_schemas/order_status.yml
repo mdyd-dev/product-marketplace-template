@@ -1,0 +1,9 @@
+---
+name: order_status
+properties:
+  - name: order_id
+    type: string
+  - name: status
+    type: string
+  - name: timestamp
+    type: datetime

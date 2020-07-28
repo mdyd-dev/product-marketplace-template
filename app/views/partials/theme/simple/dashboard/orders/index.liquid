@@ -1,15 +1,15 @@
 <h5><a href="/dashboard">{% echo 'app.dashboard' | t %}</a> / {{ 'app.' | append: role | t }} / {% echo 'app.orders' | t %}</h5>
 
-<table>
+<table class="table-auto">
   <thead>
     <tr>
-      <th>{{ "app.created_at" | t }}</th>
-      <th>{{ "app.item_id" | t }}</th>
-      <th>{{ "app.buyer" | t }}</th>
-      <th>{{ "app.seller" | t }}</th>
-      <th>{{ "app.status" | t }}</th>
-      <th>{{ "app.total" | t }}</th>
-      <th>{{ "app.paid_at" | t }}</th>
+      <th class="w-1/6 px-4 py-2">{{ "app.created_at" | t }}</th>
+      <th class="w-1/6 px-4 py-2">{{ "app.item_id" | t }}</th>
+      <th class="w-1/6 px-4 py-2">{{ "app.buyer" | t }}</th>
+      <th class="w-1/6 px-4 py-2">{{ "app.seller" | t }}</th>
+      <th class="w-1/6 px-4 py-2">{{ "app.status" | t }}</th>
+      <th class="w-1/6 px-4 py-2">{{ "app.total" | t }}</th>
+      <th class="w-1/6 px-4 py-2">{{ "app.paid_at" | t }}</th>
     </tr>
   </thead>
   {% for order in orders.results %}
@@ -18,23 +18,12 @@
       <td><a href="/items/show?id={% echo order.properties.item_id %}">{% print order.item.properties.name %}</a></td>
       <td>{% print order.properties.buyer %}</td>
       <td>{% print order.properties.seller %}</td>
-      <td>{% print order.properties.status %}</td>
+      <td>
+        {% echo order.order_status.properties.status | default: 'app.order_statuses.pending_payment' | t %}
+      </td>
       <td>{% echo order.properties.total | pricify %}</td>
       <td>
-        {% echo order.properties.paid_at %}
-        {% if order.properties.paid_at == null and role == 'seller' %}
-          <form action="/dashboard/orders/mark-as-paid" method="post">
-            {% include 'authenticity_token' %}
-            <input name="" type="submit" value="{% echo 'app.mark-as-paid' | t %}"/>
-          </form>
-        {% endif %}
-
-        {% if order.properties.paid_at == null and role == 'buyer' %}
-          <form action="/dashboard/orders/pay" method="post">
-            {% include 'authenticity_token' %}
-            <input name="" type="submit" value="{% echo 'app.pay' | t %}"/>
-          </form>
-        {% endif %}
+        {% include 'theme/simple/dashboard/orders/actions' %}
       </td>
     </tr>
   {% endfor %}

@@ -1,4 +1,4 @@
-mutation update($id: ID!, $item_id: String, $buyer: String, $status: String, $paid_at: String, $total: Int, $seller: String) {
+mutation update($id: ID!, $item_id: String, $buyer: String, $status: String, $total: Int, $seller: String) {
   model_update(
     id: $id
     model: {
@@ -7,7 +7,6 @@ mutation update($id: ID!, $item_id: String, $buyer: String, $status: String, $pa
         { name: "buyer" value: $buyer }
         { name: "seller" value: $seller }
         { name: "total" value_int: $total }
-        { name: "paid_at" value: $paid_at }
         { name: "status" value: $status }
       ]
     }

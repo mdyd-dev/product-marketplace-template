@@ -1,0 +1,19 @@
+---
+method: post
+slug: order_statuses/create
+---
+
+{% liquid
+  assign registry = 'order_status'
+
+  include 'lib/orders/search', id: context.params.order_id
+  include 'lib/order_statuses/validate', order: context.exports.order, current_user_id: context.session.current_user_id, status: context.params.status, registry: registry
+
+  if context.exports[registry].valid
+    include 'lib/order_statuses/create', object: context.exports[registry].object, registry: registry
+
+    include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/dashboard/buy/orders'
+  else
+    echo 'failed'
+  endif
+%}
