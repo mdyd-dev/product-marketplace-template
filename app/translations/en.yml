@@ -29,6 +29,7 @@ en:
     checkout: Checkout
     mark-as-paid: Mark as paid
     pay: Pay
+    cancel: Cancel
 
     selling: Selling
     buying: Buying
@@ -37,3 +38,4 @@ en:
       order_status: status
       pending_payment: pending
       paid: paid
+      canceled: canceled
