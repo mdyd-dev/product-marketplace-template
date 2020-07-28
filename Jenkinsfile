@@ -27,10 +27,10 @@ pipeline {
 
     stage('Test') {
       environment {
-        MP_URL = "${qa_url}"
+        MPKIT_URL = "${qa_url}"
       }
 
-      agent { docker { image "testcafe/testcafe" } }
+      agent { docker { image "platformos/testcafe" } }
       steps {
         sh 'testcafe "chromium:headless" test'
       }
