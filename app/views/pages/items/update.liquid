@@ -3,6 +3,7 @@ method: post
 ---
 
 {% liquid
+  include 'lib/must_be_authenticated'
   include 'lib/items/validate', item: params.item
 
   if context.exports.item.valid

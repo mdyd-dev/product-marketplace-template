@@ -1,4 +1,5 @@
 {% liquid
+  include 'lib/must_be_authenticated'
   include 'lib/items/main', id: params.id
 
   if context.exports.item

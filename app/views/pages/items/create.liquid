@@ -1,8 +1,8 @@
 ---
 method: post
 ---
-
 {% liquid
+  include 'lib/must_be_authenticated'
   include 'lib/items/validate', item: params.item, current_user_id: context.session.current_user_id
 
   if context.exports.item.valid
