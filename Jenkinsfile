@@ -15,7 +15,7 @@ pipeline {
     environment {
       MPKIT_TOKEN = credentials('POS_TOKEN')
       MPKIT_EMAIL = "darek+ci@near-me.com"
-      MPKIT_URL = qa_url
+      MPKIT_URL = "${qa_url}"
       CI = true
     }
     stage('Deploy') {
@@ -27,7 +27,7 @@ pipeline {
 
     stage('Test') {
       environment {
-        MP_URL = qa_url
+        MP_URL = "${qa_url}"
       }
 
       agent { docker { image "testcafe/testcafe" } }
