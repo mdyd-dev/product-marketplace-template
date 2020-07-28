@@ -6,29 +6,38 @@
   endif
 %}
 
-<div class="row">
-  {{ order.errors }}
-  <h5>order details</h5>
-  <table class="u-full-width">
+
+<h1 class="mb-8 ml-4 text-3xl font-medium text-gray-900 title-font">
+  <a href="/dashboard">{{ 'app.dashboard' | t }}</a>
+  / {{ 'app.' | append: role | t }}
+  / {{ 'app.orders' | t }}
+</h1>
+
+{{ order.errors }}
+
+<table class="w-full table-auto">
+  <thead>
     <tr>
-      <th class="">{{ 'app.name' | t }}</th>
-      <th class="">{{ 'app.price' | t }}</th>
-      <th class="">{{ 'app.quantity' | t }}</th>
-      <th class="">{{ 'app.total' | t }}</th>
+      <th class="px-4 py-2">{{ 'app.name' | t }}</th>
+      <th class="px-4 py-2">{{ 'app.price' | t }}</th>
+      <th class="px-4 py-2">{{ 'app.quantity' | t }}</th>
+      <th class="px-4 py-2">{{ 'app.total' | t }}</th>
     </tr>
+  </thead>
+  <tbody>
     <tr>
-      <td class="">{% print item.properties.name  %}</td>
-      <td class="">{% echo item.properties.price | pricify %}</td>
-      <td class="">1</td>
-      <td class="">{% echo order.properties.total | pricify %}</td>
+      <td class="px-4 py-2 border">{{ item.properties.name }}</td>
+      <td class="px-4 py-2 border">{{ item.properties.price | pricify }}</td>
+      <td class="px-4 py-2 border">1</td>
+      <td class="px-4 py-2 border">{{ order.properties.total | pricify }}</td>
     </tr>
-  </table>
+  </tbody>
+</table>
 
-  <form action="/orders/{% print path %}" method="post">
-    {% include 'authenticity_token' %}
+<form action="/orders/{{ path }}" method="post">
+  {% include 'authenticity_token' %}
 
-    <input type="hidden" name="item_id" value="{% print item.id %}"/>
+  <input type="hidden" name="item_id" value="{{ item.id }}"/>
 
-    <input name="" type="submit" value="{{ 'app.checkout' | t }}" class="button-primary"/>
-  </form>
-</div>
+  <button type="submit" value="submit" class="button">{{ 'app.checkout' | t }}</button>
+</form>
