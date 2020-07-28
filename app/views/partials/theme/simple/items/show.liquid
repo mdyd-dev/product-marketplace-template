@@ -68,6 +68,7 @@
           <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
 
           <form action="/items/delete" method="post" class="ml-2">
+            {% include 'authenticity_token' %}
             <input type="hidden" name="id" value="{{ item.id }}">
             <button value="delete" class="button button-secondary">Delete</button>
           </form>

@@ -1,7 +1,7 @@
 import { Selector } from 'testcafe';
 
-fixture`New Fixture`
-  .page`https://demo.staging.gapps.platformos.com/`;
+fixture `Basic complete happy scenario`
+  .page(process.env.MP_URL);
 
 test(`Login Test`, async t => {
 
