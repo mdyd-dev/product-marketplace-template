@@ -1,20 +1,19 @@
 <form action="/users" method="post">
   {% include 'authenticity_token' %}
-  <div class="row">
-    <div class="u-full-width">
-      <input placeholder="email" name="user[email]" type="text" value="{{ object.email }}"/>
-      {% if object.errors.email %}
-        <span class="danger">{% echo object.errors.email %}</span>
-      {% endif %}
-    </div>
-    <div class="u-full-width">
-      <input placeholder="password" name="user[password]" type="password" value="{{ object.password }}"/>
-      {% if object.errors.password %}
-        <span class="danger">{% echo object.errors.password %}</span>
-      {% endif %}
-    </div>
-    <div class="u-full-width">
-      <input type="submit" value="Sign Up"/>
-    </div>
-  </div>
+  <label class="block mt-3">
+    <span class="block">E-mail</span>
+    <input name="user[email]" type="text" value="{{ object.email }}" class="w-full form-input" />
+    {% if object.errors.email %}
+      <span class="text-red-800">{{ object.errors.email }}</span>
+    {% endif %}
+  </label>
+
+  <label class="block mt-3">
+    <span class="block">Password</span>
+    <input name="user[password]" type="password" value="{{ object.password }}" class="w-full form-input" />
+    {% if object.errors.password %}
+      <span class="text-red-800">{{ object.errors.password }}</span>
+    {% endif %}
+  </label>
+  <button name="signup" value="signup" class="mt-3 button">Sign Up</button>
 </form>

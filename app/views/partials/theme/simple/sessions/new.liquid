@@ -1,5 +1,4 @@
 <section class="text-gray-700 body-font">
-
   <div class="container items-center px-5 mx-auto">
     <div class="mx-auto mb-2 text-center lg:w-2/6 md:w-1/2">
       <h1 class="text-3xl font-medium text-gray-900 title-font">Log In</h1>
@@ -12,16 +11,16 @@
         <label class="block mt-3">
           <span class="block">E-mail</span>
           <input name="user[email]" type="text" value="{{ object.email }}" class="w-full form-input" />
-          {% if item.errors.email %}
-            <span class="text-red-800">{{ item.errors.email }}</span>
+          {% if object.errors.email %}
+            <span class="text-red-800">{{ object.errors.email }}</span>
           {% endif %}
         </label>
 
         <label class="block mt-3">
           <span class="block">Password</span>
           <input name="user[password]" type="password" value="{{ object.password }}" class="w-full form-input" />
-          {% if item.errors.password %}
-            <span class="text-red-800">{{ item.errors.password }}</span>
+          {% if object.errors.password %}
+            <span class="text-red-800">{{ object.errors.password }}</span>
           {% endif %}
         </label>
 
