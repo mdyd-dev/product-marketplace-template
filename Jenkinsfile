@@ -13,6 +13,7 @@ pipeline {
 
   stages {
     stage('Deploy') {
+      when { branch 'master' }
       environment {
         MPKIT_TOKEN = credentials('POS_TOKEN')
         MPKIT_EMAIL = "darek+ci@near-me.com"
@@ -26,6 +27,7 @@ pipeline {
     }
 
     stage('Test') {
+      when { branch 'master' }
       environment {
         MPKIT_URL = "${qa_url}"
       }
