@@ -1,1 +1,5 @@
-{% log event, type: "from-log-consumer" %}
+{% log event.payload.uuid, log: 'slack' %}
+
+{% parse_json crash %}
+  { "incorrect": "false" }
+{% endparse_json %}
