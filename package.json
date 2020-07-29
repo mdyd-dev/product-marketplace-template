@@ -1,10 +1,9 @@
 {
   "scripts": {
-    "dev-sync": "pos-cli sync dev",
+    "dev-sync": "pos-cli sync dev --livereload",
     "dev-gui": "pos-cli gui serve dev",
     "dev-watch": "npx webpack-cli -w",
-    "lr": "npx livereload \"app\" -e \"liquid,js,css\" -w 1000 -d https://mvp-mp.prod01.london.platform-os.com/ > /dev/null",
-    "start": "npx concurrently npm:dev-* npm:lr",
+    "start": "npx concurrently npm:dev-*",
     "build": "cross-env NODE_ENV=production npx webpack-cli",
     "build:dev": "cross-env NODE_ENV=development npx webpack-cli",
     "test": "testcafe 'chromium:headless' test",
