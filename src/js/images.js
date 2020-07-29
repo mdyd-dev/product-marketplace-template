@@ -1,7 +1,14 @@
-const _form = document.querySelector('[data-s3-uppy="form"]');
-const _log = document.querySelector('[data-s3-uppy="log"]');
+const Uppy = require('@uppy/core');
+const Dashboard = require('@uppy/dashboard');
+const GoldenRetriever = require('@uppy/golden-retriever');
+const AWSS3 = require('@uppy/aws-s3');
 
-const uppy = Uppy.Core({
+import '@uppy/core/dist/style.min.css';
+import '@uppy/dashboard/dist/style.min.css';
+
+const _form = document.querySelector('[data-s3-uppy="form"]');
+
+const uppy = Uppy({
   autoProceed: true,
   restrictions: {
     maxFileSize: 2097152, // Limit size to 2 MB on the javascript side
@@ -9,23 +16,22 @@ const uppy = Uppy.Core({
     allowedFileTypes: ['image/png', 'image/jpeg', 'image/webp'],
   },
 })
-  .use(Uppy.Dashboard, {
+  .use(Dashboard, {
     inline: true,
     target: '#drag-drop-area',
     note: 'Images only, up to 3 files, 2MB each',
     width: '100%',
     height: 403,
+    proudlyDisplayPoweredByUppy: false,
     locale: {
-      importFrom: '',
-      dropPasteImport: 'dropPasteImport',
-      dropPaste: 'dropPaste',
-      dropHint: 'dropHint',
-      browse: 'browse',
+      strings: {
+        dropPasteImport: 'Drag & drop, paste, or %{browse} to upload file',
+        browse: 'browse your computer'
+      }
     }
   })
-  .use(Uppy.DragDrop)
-  .use(Uppy.GoldenRetriever)
-  .use(Uppy.AwsS3, {
+  .use(GoldenRetriever)
+  .use(AWSS3, {
     getUploadParameters() {
       // 1. Get URL to post to from action attribute
       const _url = _form.getAttribute('action');

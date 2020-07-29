@@ -3,4 +3,5 @@
 tmp/
 /node_modules/
 .DS_Store
-app/assets/css/app.css
+app/assets/css/*.css
+app/assets/js/*.js

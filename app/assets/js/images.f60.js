@@ -1,0 +1,14 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["images"],{
+
+/***/ "./src/js/images.js":
+/*!**************************!*\
+  !*** ./src/js/images.js ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("const _form = document.querySelector('[data-s3-uppy=\"form\"]');\n\nconst uppy = Uppy.Core({\n  autoProceed: true,\n  restrictions: {\n    maxFileSize: 2097152,\n    // Limit size to 2 MB on the javascript side\n    maxNumberOfFiles: 3,\n    allowedFileTypes: ['image/png', 'image/jpeg', 'image/webp']\n  }\n}).use(Uppy.Dashboard, {\n  inline: true,\n  target: '#drag-drop-area',\n  note: 'Images only, up to 3 files, 2MB each',\n  width: '100%',\n  height: 403,\n  proudlyDisplayPoweredByUppy: false,\n  locale: {\n    importFrom: '',\n    dropPasteImport: 'dropPasteImport',\n    dropPaste: 'dropPaste',\n    dropHint: 'dropHint',\n    browse: 'browse'\n  }\n}).use(Uppy.DragDrop).use(Uppy.GoldenRetriever).use(Uppy.AwsS3, {\n  getUploadParameters() {\n    // 1. Get URL to post to from action attribute\n    const _url = _form.getAttribute('action'); // 2. Create Array from FormData object to make it easy to operate on\n\n\n    const _formDataArray = Array.from(new FormData(_form)); // 3. Create a JSON object from array\n\n\n    const _fields = _formDataArray.reduce((acc, cur) => ({ ...acc,\n      [cur[0]]: cur[1]\n    }), {}); // 4. Return resolved promise with Uppy. Uppy it will add file in file param as the last param\n\n\n    return Promise.resolve({\n      method: 'POST',\n      url: _url,\n      fields: _fields\n    });\n  }\n\n});\nuppy.on('complete', ({\n  failed,\n  successful\n}) => {\n  /*\n    For every successfully uploaded image to S3, send request to the Instance\n    that will create a model with the uploaded image's URL as direct_url param.\n  */\n  Promise.all(successful.map(({\n    response\n  }) => createImage(response.body.location))).then(() => {\n    console.log('File uploaded and image created!');\n  });\n});\n\nconst createImage = imageUrl => {\n  // Get logged in user id\n  const userId = _form.dataset.s3UppyUserId;\n  const itemUuid = _form.dataset.itemUuid; // Create model for this user with s3 image url\n\n  return fetch('/api/items/photos', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json',\n      Accept: 'application/json'\n    },\n    body: JSON.stringify({\n      photo: {\n        direct_url: imageUrl,\n        user_id: userId,\n        item_uuid: itemUuid\n      }\n    })\n  }).then(response => response.json());\n};\n\n//# sourceURL=webpack:///./src/js/images.js?");
+
+/***/ })
+
+}]);

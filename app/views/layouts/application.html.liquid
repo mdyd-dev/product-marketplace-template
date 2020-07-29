@@ -3,6 +3,7 @@
   <head>
     {% include 'theme/simple/layout/head' %}
     {% yield 'custom_styles' %}
+    <script>window.cdnUrl = '{{ "" | asset_url }}';</script>
   </head>
 
   <body class="font-sans antialiased leading-normal">

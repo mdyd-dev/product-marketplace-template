@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const WebpackRequireFrom = require('webpack-require-from');
 
 const prod = process.env.NODE_ENV === 'production';
 
@@ -59,7 +60,10 @@ const config = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css'
+      filename: 'css/[name].[chunkhash:3].css'
+    }),
+    new WebpackRequireFrom({
+      variableName: 'window.cdnUrl',
     })
   ],
   mode: prod ? 'production' : 'development'

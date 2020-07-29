@@ -1,14 +1,2 @@
 <!-- This is where Uppy will inject itself -->
 <div id="drag-drop-area"></div>
-
-
-<!-- TODO: Use webpack to bundle it up. -->
-{%- content_for custom_styles %}
-<link href="https://transloadit.edgly.net/releases/uppy/v1.19.1/uppy.min.css" rel="stylesheet">
-{%- endcontent_for %}
-
-{%- content_for custom_scripts %}
-<script src="https://transloadit.edgly.net/releases/uppy/v1.19.1/uppy.min.js" defer></script>
-<script src="{{ 'js/images.js' | asset_url }}" defer></script>
-{%- endcontent_for %}
-
