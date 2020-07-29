@@ -90,7 +90,7 @@ test(`Login Test`, async t => {
     .click(Selector('main').find('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //deleting exist item
-    .click(Selector('main').find('#deletebutton'))
+    .click(Selector('main').find('#deletebutton')) // why not button.withText('...') ?
     .click(Selector('header').find('button').withText('Log out'))
 
 
