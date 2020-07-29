@@ -1,28 +1,43 @@
 import { Selector } from 'testcafe';
 
-fixture `Basic complete happy scenario`
-  .page(process.env.MPKIT_URL);
+fixture`Basic complete happy scenario`.page(process.env.MPKIT_URL);
 
-test(`Login Test`, async t => {
+test(`Login Test`, async (t) => {
+  const user = { email: 'user@email.com', password: 'password' };
+  const buyer = { email: 'user2@email.com', password: 'password' };
+  const item = {
+    name: 'testItem',
+    type: 'typeTest',
+    description: 'testDesc',
+    tags: 'something,testTag,somethingelse',
+    price: '1000',
+  };
+  const editedItem = {
+    name: 'testItemEdited',
+    type: 'typeTestEdited',
+    description: 'testDescEdited',
+    tags: ',tagAddedAfterEdit',
+    price: '1050',
+  };
+  const clearField = 'ctrl+a delete';
 
-  const user = { email: "user@email.com", password: "password" }
-  const buyer = { email: "user2@email.com", password: "password" }
-  const item = { name: "testItem", type: "typeTest", description: "testDesc", tags: "something,testTag,somethingelse", price: "1000" }
-  const editedItem = { name: "testItemEdited", type: "typeTestEdited", description: "testDescEdited", tags: ",tagAddedAfterEdit", price: "1050" }
-  const clearField = 'ctrl+a delete'
+  // Use prettifier to format code and keep it consistent
+  // In vs code command pallette: Format Document
+
+  // You could use faker to dont test the app with the same data.
+  // See example usage: https://github.com/mdyd-dev/pos-cli/blob/7e26a789a76d28649aa10caa528b4a72a65ff4d1/gui/admin/tests/Models.js
 
   await t
     .click(Selector('header').find('a').withText('Log in'))
     .typeText('input[name="user[email]"]', user.email)
     .typeText('input[name="user[password]"]', user.password)
-    .click(Selector('main').find('button').withText('Log in'))
-
+    .click(Selector('main').find('button').withText('Log in'));
 
   await t
     //listing the item for sale
     .click(Selector('a').withText('List your item'))
     .typeText('input[name="item[properties][name]"]', item.name) // When labels are configured correctly (and they should, and are now, i think) test should select input by clicking on label - this way it tests label and does not depend on field name which is invisible for user
-    .typeText('input[name="item[properties][type]"]', item.type)
+    .typeText('input[name="item[properties][type]"]', item.type) // see example: https://github.com/mdyd-dev/pos-cli/blob/7e26a789a76d28649aa10caa528b4a72a65ff4d1/gui/admin/tests/Models.js#L15-L32
     .typeText('textarea[name="item[properties][description]"]', item.description)
     .typeText('input[name="item[properties][tags]"]', item.tags)
     .doubleClick(Selector('main').find('[name="item[properties][price]"]'))
@@ -33,15 +48,14 @@ test(`Login Test`, async t => {
     .click(Selector('main').find('button').withText('browse files'))
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
     .wait(1000)
-    .click(Selector('button[value="create"]')) // button.withText..
-
+    .click(Selector('button[value="create"]')); // button.withText..
 
   await t
     //searching item by its description
     .typeText('input[name="k"]', item.description)
     .click(Selector('main').find('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(item.name))
-    .click(Selector('main').find('a').withText('Edit'))
+    .click(Selector('main').find('a').withText('Edit'));
 
   await t
     //change of item information
@@ -62,7 +76,7 @@ test(`Login Test`, async t => {
     .click(Selector('main').find('option').withText('car'))
     .click(Selector('button[value="update"]'))
     .click(Selector('span').withText('MVP Marketplace'))
-    .click(Selector('header').find('button').withText('Log out')) //Logging out from seller account
+    .click(Selector('header').find('button').withText('Log out')); //Logging out from seller account
 
   await t
     //logging at buyer account and checks if seller item after edit exists
@@ -77,8 +91,7 @@ test(`Login Test`, async t => {
     .click(Selector('main').find('button#buybutton'))
     .click(Selector('main').find('button#checkoutbutton'))
     .click(Selector('span').withText('MVP Marketplace'))
-    .click(Selector('header').find('button').withText('Log out'))
-
+    .click(Selector('header').find('button').withText('Log out'));
 
   await t
     //checks if bought item still exists at auctions
@@ -91,8 +104,5 @@ test(`Login Test`, async t => {
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //deleting exist item
     .click(Selector('main').find('#deletebutton')) // why not button.withText('...') ?
-    .click(Selector('header').find('button').withText('Log out'))
-
-
-    ;
+    .click(Selector('header').find('button').withText('Log out'));
 });
