@@ -7,7 +7,10 @@
     "build": "cross-env NODE_ENV=production npx webpack-cli",
     "build:dev": "cross-env NODE_ENV=development npx webpack-cli",
     "test": "testcafe 'chromium:headless' test",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "clean": "rm -rf app/assets/{js,css}/*",
+    "deploy": "npm run build && pos-cli deploy",
+    "predeploy": "npm run clean"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
