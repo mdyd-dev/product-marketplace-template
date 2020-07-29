@@ -1,5 +1,0 @@
-mutation delete_item($id: ID!) {
-  model_delete(
-    id: $id
-  ){ id }
-}

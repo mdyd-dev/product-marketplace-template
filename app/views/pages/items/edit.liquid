@@ -1,9 +1,0 @@
-{% liquid
-  include 'data/items/main', id: params.id
-
-  if context.exports.item
-    include 'theme/simple/items/edit', item: context.exports.item
-  else
-    include 'theme/simple/items/404'
-  endif
-%}

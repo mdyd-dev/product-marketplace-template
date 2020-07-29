@@ -1,8 +1,0 @@
-{%  parse_json data %}
-  { "name": "{{ name | capitalize }}" }
-{% endparse_json %}
-
-{% liquid
-  graphql about = 'wiki', data: data | fetch: 'api_call_send' | fetch: 'response' | dig: 'body' | parse_json | dig: 'extract'
-  export about, namespace: 'wiki'
-%}
