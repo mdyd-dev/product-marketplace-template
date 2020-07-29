@@ -6,7 +6,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
       model_schema_name: { value: "item" }
       properties: [
         { name: "tags" contains: $tag }
-        { name: "description" contains: $keyword } 
+        { name: "description" contains: $keyword }
         { name: "owner" value: $owner }
       ]
     }
@@ -26,6 +26,12 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
         id
         created_at
         status: property(name: "status")
+      }
+      photos: related_models(model_schema_name: "item_photo", join_on_property: "uuid", foreign_property: "item_uuid"){
+        photo: property_upload(name: "photo"){
+          url
+          versions
+        }
       }
     }
   }

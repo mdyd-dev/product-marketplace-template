@@ -1,0 +1,24 @@
+{% assign CANT_BE_BLANK = "can't be blank" %}
+{% liquid
+  assign valid = true
+  assign errors = '{}' | parse_json
+
+  if object.direct_url == null or object.direct_url == empty
+    assign errors = errors | add_hash_key: "direct_upload_url", CANT_BE_BLANK
+  endif
+
+  if object.user_id == null or object.user_id == empty
+    assign errors = errors | add_hash_key: "user_id", CANT_BE_BLANK
+  endif
+
+  if object.item_uuid == null or object.item_uuid == empty
+    assign errors = errors | add_hash_key: "item_uuid", CANT_BE_BLANK
+  endif
+
+  if errors != empty
+    assign valid = false
+  endif
+  assign object = object | add_hash_key: 'errors', errors
+  assign object = object | add_hash_key: 'valid', valid
+  export object
+%}

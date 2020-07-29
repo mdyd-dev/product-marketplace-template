@@ -4,6 +4,8 @@
   else
     assign path = 'create'
   endif
+  assign uuid = '' | uuid
+  assign item_uuid = item.properties.uuid | default: uuid
 %}
 
 <!-- {{ item.errors }} -->
@@ -16,6 +18,7 @@
       {% if item.id %}
       <input type="hidden" name="item[id]" value="{{ item.id }}" />
       {% endif %}
+      <input type="hidden" name="item[properties][uuid]" value="{{ item_uuid }}" />
 
       <div class="my-3">
         <label class="block" for="name">Name</label>
@@ -76,8 +79,14 @@
         {% endif %}
       </div>
 
+      <div class="mt-3">
+        <label class="block">Photos</label>
+        {% include 'theme/simple/items/uppy_area' %}
+      </div>
+
       <button class="mt-8 button" value="{{ path }}">Submit</button>
     </form>
 
   </div>
 </section>
+{% include 'theme/simple/items/uppy_form', item_uuid: item_uuid %}

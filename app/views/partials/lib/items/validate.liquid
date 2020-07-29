@@ -37,6 +37,11 @@
     assign perrors = perrors | add_hash_key: "description", CANT_BE_BLANK
   endif
 
+  if item.properties.uuid == "" or item.properties.uuid == null
+    assign valid = false
+    assign perrors = perrors | add_hash_key: "uuid", CANT_BE_BLANK
+  endif
+
   assign item = item | add_hash_key: 'errors', errors
 
   export item

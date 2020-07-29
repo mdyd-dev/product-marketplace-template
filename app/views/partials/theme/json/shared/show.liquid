@@ -1,0 +1,10 @@
+{% liquid
+  if object.valid
+    echo object
+  else
+    response_status 422
+    echo '{ "errors": '
+    echo object.errors
+    echo '}'
+  endif
+%}

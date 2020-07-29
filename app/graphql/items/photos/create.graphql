@@ -1,0 +1,12 @@
+mutation model_create($direct_url: String!, $user_id: ID!, $item_uuid: String!) {
+  object: model_create(model: {
+    model_schema_name: "item_photo"
+    user_id: $user_id
+    properties: [
+      { name: "photo" value: $direct_url }
+      { name: "item_uuid" value: $item_uuid }
+    ]
+  }) {
+    id
+  }
+}

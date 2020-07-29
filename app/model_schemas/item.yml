@@ -1,6 +1,7 @@
 ---
 name: item
 properties:
+  - name: uuid
   - name: name
     type: string
   - name: description

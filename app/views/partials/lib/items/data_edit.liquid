@@ -1,0 +1,10 @@
+{% liquid
+  assign icons = "alarm ambulance ban bandage calendar car yin-yang flame disc crop command compass copy stack star cut globe glass-full virus key trophy wand woman" | split: ' ' | sort
+  export icons, namespace: 'lib'
+
+  if id
+    graphql item  = 'items/search', limit: 1, id: id | fetch: 'items' | fetch: 'results' | first
+    export item
+  endif
+  include 'lib/items/photos/presigned_url'
+%}

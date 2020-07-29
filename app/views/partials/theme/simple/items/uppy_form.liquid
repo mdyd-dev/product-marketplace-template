@@ -1,0 +1,11 @@
+{% assign data = context.exports.item_photo_presigned_url %}
+
+<form action="{{ data.upload_url }}"
+  data-s3-uppy="form"
+  data-s3-uppy-user-id="{{ context.current_user.id }}"
+  data-item-uuid="{{item_uuid}}"
+  hidden>
+  {% for field in data.upload_url_payload %}
+    <input type="hidden" name="{{ field[0] }}" value='{{ field[1] }}'>
+  {% endfor %}
+</form>

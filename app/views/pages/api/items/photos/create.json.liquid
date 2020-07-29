@@ -1,0 +1,8 @@
+---
+slug: api/items/photos
+method: post
+---
+{% liquid
+  include 'lib/items/photos/create', photo: context.params.photo
+  include 'theme/json/shared/show', object: context.exports.object
+%}

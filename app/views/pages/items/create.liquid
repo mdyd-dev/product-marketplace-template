@@ -10,7 +10,7 @@ method: post
     include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/'
     include 'lib/events/create-event', type: 'item_created', actor_id: context.session.current_user_id, object_id: context.exports.item.id
   else
-    include 'lib/items/main'
+    include 'lib/items/data_new'
     include 'theme/simple/items/new', item: context.exports.item
   endif
 %}
