@@ -21,7 +21,7 @@ test(`Login Test`, async t => {
   await t
     //listing the item for sale
     .click(Selector('a').withText('List your item'))
-    .typeText('input[name="item[properties][name]"]', item.name)
+    .typeText('input[name="item[properties][name]"]', item.name) // When labels are configured correctly (and they should, and are now, i think) test should select input by clicking on label - this way it tests label and does not depend on field name which is invisible for user
     .typeText('input[name="item[properties][type]"]', item.type)
     .typeText('textarea[name="item[properties][description]"]', item.description)
     .typeText('input[name="item[properties][tags]"]', item.tags)
@@ -33,7 +33,7 @@ test(`Login Test`, async t => {
     .click(Selector('main').find('button').withText('browse files'))
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
     .wait(1000)
-    .click(Selector('button[value="create"]'))
+    .click(Selector('button[value="create"]')) // button.withText..
 
 
   await t
