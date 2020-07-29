@@ -3,6 +3,7 @@
     <label for="k" class="block mb-1 text-gray-600 capitalize">Keywords</label>
     <input class="w-full form-input"
       name="k"
+      id="k"
       type="text"
       value="{{ query.k }}"
       placeholder="Search" />
@@ -10,7 +11,7 @@
 
   <div class="w-auto mx-6">
     <label for="tag" class="block mb-1 text-gray-600 capitalize">Category</label>
-    <select class="form-select" name="tag">
+    <select class="form-select" id="tag" name="tag">
       <option value="" class="text-gray-600">All categories</option>
       {% for tag in filters.tags %}
         <option value="{{ tag }}" {% if query.tag == tag %}selected{% endif %}>{{ tag }}</option>

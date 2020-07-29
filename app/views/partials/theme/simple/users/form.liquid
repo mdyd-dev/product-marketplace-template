@@ -1,16 +1,17 @@
 <form action="/users" method="post">
   {% include 'authenticity_token' %}
-  <label class="block mt-3">
+
+  <label class="block mt-3" for="email">
     <span class="block">E-mail</span>
-    <input name="user[email]" type="text" value="{{ object.email }}" class="w-full form-input" />
+    <input name="user[email]" type="text" id="email" value="{{ object.email }}" class="w-full form-input" />
     {% if object.errors.email %}
       <span class="text-red-800">{{ object.errors.email }}</span>
     {% endif %}
   </label>
 
-  <label class="block mt-3">
+  <label class="block mt-3" for="password">
     <span class="block">Password</span>
-    <input name="user[password]" type="password" value="{{ object.password }}" class="w-full form-input" />
+    <input name="user[password]" type="password" id="password" value="{{ object.password }}" class="w-full form-input" />
     {% if object.errors.password %}
       <span class="text-red-800">{{ object.errors.password }}</span>
     {% endif %}
