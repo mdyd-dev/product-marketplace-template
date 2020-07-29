@@ -7,7 +7,8 @@
     "start": "npx concurrently npm:dev-* npm:lr",
     "build": "cross-env NODE_ENV=production npx webpack-cli",
     "build:dev": "cross-env NODE_ENV=development npx webpack-cli",
-    "test": "testcafe 'chromium:headless' test"
+    "test": "testcafe 'chromium:headless' test",
+    "postinstall": "npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",

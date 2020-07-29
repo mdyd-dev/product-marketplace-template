@@ -12,9 +12,16 @@ const uppy = Uppy.Core({
   .use(Uppy.Dashboard, {
     inline: true,
     target: '#drag-drop-area',
-    note: 'Images only, up to 3 files, 2MB each', // Fix, it doesnt work post 1.6.0
+    note: 'Images only, up to 3 files, 2MB each',
     width: '100%',
-    height: 200
+    height: 403,
+    locale: {
+      importFrom: '',
+      dropPasteImport: 'dropPasteImport',
+      dropPaste: 'dropPaste',
+      dropHint: 'dropHint',
+      browse: 'browse',
+    }
   })
   .use(Uppy.DragDrop)
   .use(Uppy.GoldenRetriever)
