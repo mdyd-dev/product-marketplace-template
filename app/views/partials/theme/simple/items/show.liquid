@@ -58,7 +58,7 @@
 
           <form action="/orders/new" method="get" class="ml-auto ">
             <input type="hidden" name="item_id" value="{{ item.id }}">
-            <button class="button">
+            <button id="#buybutton" class="button">
               Buy for {{ item.properties.price | pricify }}
             </button>
           </form>
