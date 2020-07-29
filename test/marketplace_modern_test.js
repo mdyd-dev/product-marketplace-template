@@ -72,7 +72,7 @@ test(`Login Test`, async t => {
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //Buying item, logging off from buyer account
     .click(Selector('main').find('button[id="#buybutton"]'))
-    .click(Selector('main').find('button[value="submit"]'))
+    .click(Selector('main').find('button[id="#checkoutbutton"]'))
     .click(Selector('span').withText('MVP Marketplace'))
     .click(Selector('header').find('button').withText('Log out'))
 
