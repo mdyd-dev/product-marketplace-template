@@ -37,5 +37,5 @@
   {% include 'authenticity_token' %}
   <input type="hidden" name="item_id" value="{{ item.id }}"/>
 
-  <button class="button">{{ 'app.checkout' | t }}</button>
+  <button id="#checkoutbutton" class="button">{{ 'app.checkout' | t }}</button>
 </form>
