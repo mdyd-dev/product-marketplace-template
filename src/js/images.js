@@ -1,15 +1,17 @@
-const Uppy = require('@uppy/core');
-const Dashboard = require('@uppy/dashboard');
-const GoldenRetriever = require('@uppy/golden-retriever');
-const AWSS3 = require('@uppy/aws-s3');
+import Uppy from '@uppy/core';
+import Dashboard from '@uppy/dashboard';
+import GoldenRetriever from '@uppy/golden-retriever';
+import AWSS3 from '@uppy/aws-s3';
+import Webcam from '@uppy/webcam';
 
 import '@uppy/core/dist/style.min.css';
 import '@uppy/dashboard/dist/style.min.css';
+import '@uppy/webcam/dist/style.min.css';
 
 const _form = document.querySelector('[data-s3-uppy="form"]');
 
 const uppy = Uppy({
-  autoProceed: true,
+  autoProceed: false,
   restrictions: {
     maxFileSize: 2097152, // Limit size to 2 MB on the javascript side
     maxNumberOfFiles: 3,
@@ -18,6 +20,8 @@ const uppy = Uppy({
 })
   .use(Dashboard, {
     inline: true,
+    replaceTargetContent: true,
+    showProgressDetails: true,
     target: '#drag-drop-area',
     note: 'Images only, up to 3 files, 2MB each',
     width: '100%',
@@ -26,10 +30,11 @@ const uppy = Uppy({
     locale: {
       strings: {
         dropPasteImport: 'Drag & drop, paste, or %{browse} to upload file',
-        browse: 'browse your computer'
-      }
-    }
+        browse: 'browse your computer',
+      },
+    },
   })
+  .use(Webcam, { target: Dashboard, countdown: 3, modes: ['picture'] })
   .use(GoldenRetriever)
   .use(AWSS3, {
     getUploadParameters() {
