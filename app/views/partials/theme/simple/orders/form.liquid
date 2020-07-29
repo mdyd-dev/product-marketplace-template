@@ -36,8 +36,7 @@
 
 <form action="/orders/{{ path }}" method="post">
   {% include 'authenticity_token' %}
-
   <input type="hidden" name="item_id" value="{{ item.id }}"/>
 
-  <button type="submit" value="submit" class="button">{{ 'app.checkout' | t }}</button>
+  <button class="button">{{ 'app.checkout' | t }}</button>
 </form>

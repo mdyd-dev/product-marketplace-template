@@ -58,7 +58,7 @@
 
           <form action="/orders/new" method="get" class="ml-auto ">
             <input type="hidden" name="item_id" value="{{ item.id }}">
-            <button type="submit" value="buy" class="button">
+            <button class="button">
               Buy for {{ item.properties.price | pricify }}
             </button>
           </form>
@@ -72,7 +72,8 @@
           <form action="/items/delete" method="post" class="ml-2">
             {% include 'authenticity_token' %}
             <input type="hidden" name="id" value="{{ item.id }}">
-            <button value="delete" class="button button-secondary">Delete</button>
+
+            <button class="button button-secondary">Delete</button>
           </form>
         </span>
         {% endif %}
