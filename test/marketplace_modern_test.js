@@ -30,6 +30,9 @@ test(`Login Test`, async t => {
     .typeText(Selector('main').find('[name="item[properties][price]"]'), item.price)
     .click(Selector('main').find('[name="item[properties][cover_photo]"]'))
     .click(Selector('main').find('option').withText('bandage'))
+    .click(Selector('main').find('button').withText('browse files'))
+    .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
+    .wait(1000)
     .click(Selector('button[value="create"]'))
 
 
@@ -87,7 +90,8 @@ test(`Login Test`, async t => {
     .click(Selector('main').find('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //deleting exist item
-    .click(Selector('main').find('button[value="delete"]'))
+    .click(Selector('main').find('button[id="#deletebuttonid"]'))
+    .click(Selector('header').find('button').withText('Log out'))
 
 
     ;
