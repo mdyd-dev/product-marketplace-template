@@ -1,0 +1,4 @@
+{% liquid
+  include 'lib/dashboard/orders', limit: 100, seller: context.session.current_user_id
+  include 'theme/simple/dashboard/orders/index', orders: context.exports.orders, role: 'seller'
+%}

@@ -1,0 +1,7 @@
+<!-- push to background -->
+{% liquid
+  graphql result = 'orders/create', args: order.properties
+
+  assign last_operation_uuid = '' | uuid
+  export last_operation_uuid
+%}

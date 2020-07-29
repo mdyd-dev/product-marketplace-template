@@ -1,0 +1,13 @@
+{% background "bg-task-name", type: type, object_id: object_id, actor_id: actor_id %}
+{% liquid
+  assign registry = 'event'
+
+  include 'lib/events/build', type: type, actor_id: actor_id, object_id: object_id, registry: registry
+  include 'lib/events/validate', event: context.exports[registry]
+
+  if context.exports[registry].valid
+    include 'lib/events/create', event: context.exports[registry], registry: registry
+    include 'lib/events/broadcast', event: context.exports[registry]
+  endif
+%}
+{% endbackground %}

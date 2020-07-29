@@ -1,0 +1,16 @@
+mutation update($id: ID!, $item_id: String, $buyer: String, $status: String, $total: Int, $seller: String) {
+  model_update(
+    id: $id
+    model: {
+      properties: [
+        { name: "item_id" value: $item_id }
+        { name: "buyer" value: $buyer }
+        { name: "seller" value: $seller }
+        { name: "total" value_int: $total }
+        { name: "status" value: $status }
+      ]
+    }
+  ){
+    id properties
+  }
+}

@@ -1,0 +1,13 @@
+---
+name: order
+properties:
+  - name: item_id
+    type: string
+  - name: buyer
+    type: string
+  - name: seller
+    type: string
+  - name: total
+    type: integer
+  - name: status
+    type: string

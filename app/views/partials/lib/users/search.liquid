@@ -1,0 +1,10 @@
+{% liquid
+  graphql users = 'users/search', limit: 100 | fetch: 'users'
+
+  if id
+    graphql user  = 'users/search', id: id, limit: 1 | fetch: 'users' | fetch: 'results' | first
+    export user
+  endif
+
+  export users
+%}

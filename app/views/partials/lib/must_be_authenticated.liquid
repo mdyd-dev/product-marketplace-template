@@ -1,0 +1,8 @@
+{% liquid
+  unless context.current_user
+    redirect_to '/sessions/new'
+    comment
+      TODO: support flash messages
+    endcomment
+  endunless
+%}

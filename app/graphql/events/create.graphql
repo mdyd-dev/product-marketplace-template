@@ -1,0 +1,7 @@
+mutation create_event($payload: ActivityStreamsPayload!) {
+  activity_create(
+    payload: $payload
+  ) {
+    payload
+  }
+}

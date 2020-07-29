@@ -1,0 +1,35 @@
+query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id: String, $status: String) {
+  orders: models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      model_schema_name: { value: "order" }
+      properties: [
+        { name: "buyer" value: $buyer }
+        { name: "seller" value: $seller }
+        { name: "item_id" value: $item_id }
+        { name: "status" value: $status }
+      ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      properties id created_at
+
+      item: related_model(join_on_property: "item_id", foreign_property: "id", model_schema_name: "item") {
+        id
+        created_at
+        properties
+      }
+
+      order_status: related_model(join_on_property: "id", foreign_property: "order_id", model_schema_name: "order_status") {
+        id
+        created_at
+        properties
+      }
+    }
+  }
+}

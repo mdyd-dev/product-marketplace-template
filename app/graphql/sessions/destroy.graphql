@@ -1,0 +1,3 @@
+mutation{
+  user_session_destroy
+}

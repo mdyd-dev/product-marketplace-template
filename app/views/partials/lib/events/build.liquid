@@ -1,0 +1,19 @@
+{% assign actor_id = actor_id | default: 'anonymous' %}
+{% assign object_id = object_id | default: 'n/a' %}
+
+{% parse_json payload %}
+  {
+    "type": {{ type | json }},
+    "object": {
+      "id": {{ object_id | json }}
+    },
+    "actor": {
+      "id": {{ actor_id | json }}
+    },
+    "date": {{ 'now' | to_time | json }}
+  }
+{%  endparse_json %}
+
+{% liquid
+  export payload, namespace: registry
+%}

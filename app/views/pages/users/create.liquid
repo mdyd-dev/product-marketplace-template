@@ -1,0 +1,12 @@
+---
+slug: users
+method: post
+---
+{% liquid
+  include 'lib/users/create', user: context.params.user
+  if context.exports.object.valid
+    redirect_to '/'
+  else
+    include 'theme/simple/users/new', object: context.exports.object
+  endif
+%}

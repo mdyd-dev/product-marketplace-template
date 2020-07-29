@@ -1,0 +1,16 @@
+query users($id: ID, $email: String!){
+  users(
+    per_page:1
+    filter: {
+      email: { value: $email }
+      id: { value: $id }
+    }
+  ){
+    total_entries
+    results {
+      id
+      email
+      properties
+    }
+  }
+}

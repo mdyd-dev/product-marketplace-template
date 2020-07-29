@@ -1,0 +1,5 @@
+{% liquid
+  graphql search_form = 'search/search_form' | dig: "models" | dig: "results" | first
+
+  export search_form
+%}

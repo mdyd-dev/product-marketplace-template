@@ -1,0 +1,10 @@
+{% liquid
+  graphql orders = 'orders/search', limit: 100, buyer: buyer, item_id: item_id, status: status | fetch: 'orders'
+
+  if id
+    graphql order  = 'orders/search', id: id, limit: 1 | fetch: 'orders' | fetch: 'results' | first
+    export order
+  endif
+
+  export orders
+%}

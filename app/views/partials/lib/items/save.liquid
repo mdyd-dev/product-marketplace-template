@@ -1,0 +1,9 @@
+<!-- push to background -->
+{% liquid
+  graphql item = 'items/create', args: item.properties | fetch: 'model_create'
+
+  assign last_operation_uuid = '' | uuid
+  export last_operation_uuid
+  export item
+%}
+

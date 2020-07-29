@@ -1,0 +1,19 @@
+{% liquid
+  parse_json sort_price_desc
+    echo '{ "properties": { "name": "price", "order": "DESC" } }'
+  endparse_json
+
+  parse_json sort_price_asc
+    echo '{ "properties": { "name": "price", "order": "ASC" } }'
+  endparse_json
+
+  graphql items = 'items/search', limit: limit, keyword: query.k, tag: query.tag, sort: sort_price_desc | fetch: 'items'
+
+  if id
+    graphql item  = 'items/search', id: id, limit: 1 | fetch: 'items' | fetch: 'results' | first
+    export item
+  endif
+
+  export query, namespace: "search"
+  export items
+%}

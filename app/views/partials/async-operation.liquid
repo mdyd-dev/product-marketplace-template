@@ -1,0 +1,9 @@
+<p class="text-lg font-light">Waiting for <code class="font-semibold">{{ uuid }}</code> operation to complete.</p>
+
+<script>
+  setTimeout(
+    function() {
+      window.location = "{{ success }}"
+    }, {{ wait | default: 500 }}
+  )
+</script>
