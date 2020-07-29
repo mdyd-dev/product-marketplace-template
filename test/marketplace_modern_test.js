@@ -74,8 +74,8 @@ test(`Login Test`, async t => {
     .click(Selector('main').find('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //Buying item, logging off from buyer account
-    .click(Selector('main').find('button[id="#buybutton"]'))
-    .click(Selector('main').find('button[id="#checkoutbutton"]'))
+    .click(Selector('main').find('button#buybutton'))
+    .click(Selector('main').find('button#checkoutbutton'))
     .click(Selector('span').withText('MVP Marketplace'))
     .click(Selector('header').find('button').withText('Log out'))
 
@@ -90,7 +90,7 @@ test(`Login Test`, async t => {
     .click(Selector('main').find('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //deleting exist item
-    .click(Selector('main').find('button[id="#deletebuttonid"]'))
+    .click(Selector('main').find('#deletebutton'))
     .click(Selector('header').find('button').withText('Log out'))
 
 
