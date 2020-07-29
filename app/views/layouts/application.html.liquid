@@ -2,9 +2,11 @@
 <html lang="en">
   <head>
     {% include 'theme/simple/layout/head' %}
+    {% yield 'custom_styles' %}
   </head>
 
   <body class="font-sans antialiased leading-normal">
     {% include 'theme/simple/layout/main', current_user_id: context.session.current_user_id %}
+    {% yield 'custom_scripts' %}
   </body>
 </html>

@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "dev-sync": "pos-cli sync staging",
-    "dev-gui": "pos-cli gui serve staging",
+    "dev-sync": "pos-cli sync dev",
+    "dev-gui": "pos-cli gui serve dev",
     "dev-watch": "npx webpack-cli -w",
-    "lr": "npx livereload \"app\" -e \"liquid,js,css\" -w 1000 -d https://demo.staging.gapps.platformos.com > /dev/null",
+    "lr": "npx livereload \"app\" -e \"liquid,js,css\" -w 1000 -d https://mvp-mp.prod01.london.platform-os.com/ > /dev/null",
     "start": "npx concurrently npm:dev-* npm:lr",
     "build": "cross-env NODE_ENV=production npx webpack-cli",
     "build:dev": "cross-env NODE_ENV=development npx webpack-cli",
