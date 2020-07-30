@@ -36,6 +36,9 @@ en:
     selling: Selling
     buying: Buying
 
+    dashboard-items:
+      list-your-first-item: List your first item
+
     order_statuses:
       order_status: status
       pending_payment: pending

@@ -4,7 +4,14 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
     filter: {
       id: {value: $id},
       model_schema_name: {value: "item"},
-      properties: [{name: "tags", contains: $tag}, {name: "description", contains: $keyword}, {name: "owner", value: $owner}]
+      properties: [
+        { name: "tags", contains: $tag },
+        { name: "owner", value: $owner }
+      ]
+      or: [
+        { properties: {name: "description", contains: $keyword } }
+        { properties: {name: "name", contains: $keyword } }
+      ]
     },
     sort: [$sort])
   {

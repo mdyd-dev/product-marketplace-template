@@ -4,33 +4,39 @@
   / {{ 'app.orders.list' | t }}
 </h1>
 
-<table class="w-full table-auto">
-  <thead>
-    <tr>
-      <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.created_at" | t }}</th>
-      <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.item_id" | t }}</th>
-      <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.buyer" | t }}</th>
-      <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.seller" | t }}</th>
-      <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.status" | t }}</th>
-      <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.total" | t }}</th>
-      <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.paid_at" | t }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for order in orders.results %}
+{% if orders.total_entries > 0 %}
+  <table class="w-full table-auto">
+    <thead>
       <tr>
-        <td class="px-4 py-2 border-b">{{ order.created_at | l }}</td>
-        <td class="px-4 py-2 border-b"><a href="/items/show?id={{ order.properties.item_id }}">{{ order.item.properties.name }}</a></td>
-        <td class="px-4 py-2 border-b">{{ order.properties.buyer }}</td>
-        <td class="px-4 py-2 border-b">{{ order.properties.seller }}</td>
-        <td class="px-4 py-2 border-b">
-          {{ order.order_status.properties.status | default: 'app.order_statuses.pending_payment' | t }}
-        </td>
-        <td class="px-4 py-2 border-b">{{ order.properties.total | pricify }}</td>
-        <td class="px-4 py-2 border-b">
-          {% include 'theme/simple/dashboard/orders/actions' %}
-        </td>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.created_at" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.item_id" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.buyer" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.seller" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.status" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.total" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.paid_at" | t }}</th>
       </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {% for order in orders.results %}
+        <tr>
+          <td class="px-4 py-2 border-b">{{ order.created_at | l }}</td>
+          <td class="px-4 py-2 border-b"><a href="/items/show?id={{ order.properties.item_id }}">{{ order.item.properties.name }}</a></td>
+          <td class="px-4 py-2 border-b">{{ order.properties.buyer }}</td>
+          <td class="px-4 py-2 border-b">{{ order.properties.seller }}</td>
+          <td class="px-4 py-2 border-b">
+            {{ order.order_status.properties.status | default: 'app.order_statuses.pending_payment' | t }}
+          </td>
+          <td class="px-4 py-2 border-b">{{ order.properties.total | pricify }}</td>
+          <td class="px-4 py-2 border-b">
+            {% include 'theme/simple/dashboard/orders/actions' %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p class="w-full text-center text-lg font-medium">
+    Your orders will appear here.
+  </p>
+{% endif %}
