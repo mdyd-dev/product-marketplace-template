@@ -6,21 +6,20 @@
   endif
 %}
 
-<h1 class="mb-8 ml-4 text-3xl font-medium text-gray-900 title-font">
+<!-- `role` does not exist -->
+<h1 class="mb-8 text-3xl font-medium text-gray-900 title-font">
   <a href="/dashboard">{{ 'app.dashboard' | t }}</a>
-  / {{ 'app.' | append: role | t }}
+  <!-- / {{ 'app.' | append: role | t }} -->
   / {{ 'app.orders' | t }}
 </h1>
-
-{{ order.errors }}
 
 <table class="w-full table-auto">
   <thead>
     <tr>
-      <th class="px-4 py-2">{{ 'app.name' | t }}</th>
-      <th class="px-4 py-2">{{ 'app.price' | t }}</th>
-      <th class="px-4 py-2">{{ 'app.quantity' | t }}</th>
-      <th class="px-4 py-2">{{ 'app.total' | t }}</th>
+      <th class="px-4 py-2 text-left">{{ 'app.name' | t }}</th>
+      <th class="px-4 py-2 text-left">{{ 'app.price' | t }}</th>
+      <th class="px-4 py-2 text-left">{{ 'app.quantity' | t }}</th>
+      <th class="px-4 py-2 text-left">{{ 'app.total' | t }}</th>
     </tr>
   </thead>
   <tbody>
@@ -33,7 +32,7 @@
   </tbody>
 </table>
 
-<form action="/orders/{{ path }}" method="post">
+<form action="/orders/{{ path }}" method="post" class="mt-4">
   {% include 'authenticity_token' %}
   <input type="hidden" name="item_id" value="{{ item.id }}"/>
 

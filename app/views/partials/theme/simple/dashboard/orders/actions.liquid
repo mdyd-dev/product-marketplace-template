@@ -10,7 +10,7 @@
   {% endif %}
 
   {% if order.properties.paid_at == null and role == 'buyer' %}
-    <form action="/order_statuses/create" method="post">
+    <form action="/order_statuses/create" method="post" class="mt-2">
       {% include 'authenticity_token' %}
       <input type="hidden" name="status" value="app.order_statuses.paid"/>
       <input type="hidden" name="order_id" value="{{ order.id }}"/>
@@ -21,7 +21,7 @@
 {% endif %}
 
 {% if order.order_status.properties.status != 'app.order_statuses.paid' %}
-  <form action="/order_statuses/create" method="post">
+  <form action="/order_statuses/create" method="post" class="mt-2">
     {% include 'authenticity_token' %}
     <input type="hidden" name="status" value="app.order_statuses.canceled"/>
     <input type="hidden" name="order_id" value="{{ order.id }}"/>
