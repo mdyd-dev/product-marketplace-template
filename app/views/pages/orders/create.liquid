@@ -8,6 +8,11 @@ method: post
 
   if context.exports.order.valid
     include 'lib/orders/create', order: context.exports.order
+    include 'lib/events/create-event', type: 'order_created', actor_id: context.session.current_user_id, target_id: context.exports.item.id, object_id: context.exports.order.id
+
+    include 'lib/order_statuses/validate', order: context.exports.order, current_user_id: context.session.current_user_id, status: 'app.order_statuses.placed', registry: 'os'
+    include 'lib/order_statuses/create', object: context.exports.os.object
+    include 'lib/events/create-event', type: 'order_status_created', actor_id: context.session.current_user_id, target_id: context.exports[registry].object.properties.order_id, object_id: context.exports[registry].object.id
     include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/dashboard/buy/orders'
   else
     include 'theme/simple/orders/new', item: context.exports.item, order: context.exports.order

@@ -43,6 +43,7 @@ en:
     order_statuses:
       order_status: status
       pending_payment: pending
+      placed: new
       paid: paid
       canceled: canceled
       shipped: shipped

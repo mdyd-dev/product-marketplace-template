@@ -1,7 +1,6 @@
 <!-- push to background -->
 {% liquid
-  graphql result = 'orders/create', args: order.properties
+  graphql order = 'orders/create', args: order.properties | dig: 'model_create'
 
-  assign last_operation_uuid = '' | uuid
-  export last_operation_uuid
+  export order
 %}
