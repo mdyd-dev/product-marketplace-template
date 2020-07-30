@@ -11,13 +11,13 @@
   </a>
 
   <div class="mt-4">
-    <h2 class="text-lg font-medium text-gray-900 title-font">
+    <h2 class="text-lg font-medium text-gray-900 ">
       <a href="/items/show?id={{ item.id }}">
         {% print item.properties.name %}
       </a>
     </h2>
 
-    <h3 class="mb-1 text-xs text-gray-500 title-font">{% echo item.properties.tags | join: ", " %}</h3>
+    <h3 class="mb-1 text-xs text-gray-500 ">{% echo item.properties.tags | join: ", " %}</h3>
 
     <div class="flex justify-between">
       <p class="mt-1">
@@ -29,7 +29,7 @@
         {% endif %}
       </p>
 
-      <h3 class="mb-1 text-xs text-gray-500 title-font">
+      <h3 class="mb-1 text-xs text-gray-500 ">
         {% include 'theme/simple/business_card', user: item.properties.owner %}
       </h3>
     </div>

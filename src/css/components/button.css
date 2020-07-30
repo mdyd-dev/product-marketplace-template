@@ -1,4 +1,4 @@
-.button {
+.button, .button[href] {
   @apply flex items-center px-6 py-2 text-white bg-blue-500 border-0 rounded;
 }
 

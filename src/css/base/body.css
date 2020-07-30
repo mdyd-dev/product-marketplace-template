@@ -2,12 +2,12 @@ body {
   @apply antialiased;
 }
 
-main {
-  a:link {
-    @apply text-blue-700;
-  }
-
-  a:hover {
-    @apply text-blue-500;
-  }
+/* purgecss start ignore */
+main a[href] {
+  @apply text-blue-700;
 }
+
+main a:hover {
+  @apply text-blue-600;
+}
+/* purgecss end ignore */

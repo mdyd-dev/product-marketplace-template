@@ -1,3 +1,7 @@
-<h5><a href="/dashboard">{% echo 'app.dashboard' | t %}</a>/ {{ 'app.' | append: role | t }} / {% echo 'app.items' | t %}</h5>
+<h1 class="mb-6 text-3xl font-medium">
+  <a href="/dashboard">{{ 'app.dashboard' | t }}</a>
+  / {{ 'app.' | append: role | t }}
+  / {{ 'app.items' | t }}
+</h1>
 
 {% include 'theme/simple/items/index', items: items %}
