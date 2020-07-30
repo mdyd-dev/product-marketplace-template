@@ -32,6 +32,7 @@ en:
     mark-as-paid: Mark as paid
     pay: Pay
     cancel: Cancel
+    ship: Ship
 
     selling: Selling
     buying: Buying
@@ -44,6 +45,7 @@ en:
       pending_payment: pending
       paid: paid
       canceled: canceled
+      shipped: shipped
 
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself
