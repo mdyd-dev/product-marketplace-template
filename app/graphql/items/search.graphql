@@ -13,6 +13,13 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
       properties
       id
       created_at
+
+      status: related_model(join_on_property: "id", foreign_property: "item_id", model_schema_name: "item_status") {
+        id
+        created_at
+        properties
+      }
+
       orders: related_models(join_on_property: "id", foreign_property: "item_id", model_schema_name: "order") @include(if: $withOrders) {
         id
         created_at

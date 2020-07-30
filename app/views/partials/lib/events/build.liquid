@@ -10,6 +10,9 @@
     "actor": {
       "id": {{ actor_id | json }}
     },
+    "target": {
+      "id": {{ target_id | json }}
+    },
     "date": {{ 'now' | to_time | json }}
   }
 {%  endparse_json %}

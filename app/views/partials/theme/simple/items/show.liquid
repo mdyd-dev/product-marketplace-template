@@ -35,12 +35,21 @@
         <div class="flex">
           <span class="text-2xl font-medium text-gray-900 ">{{ item.properties.price | pricify }}</span>
 
+          {% if item.status.properties.name != 'app.item_statuses.sold' %}
           <form action="/orders/new" method="get" class="ml-auto ">
             <input type="hidden" name="item_id" value="{{ item.id }}">
             <button id="buybutton" class="button">
               Buy for {{ item.properties.price | pricify }}
             </button>
           </form>
+          {% else %}
+          <form action="/orders/new" method="get" class="ml-auto ">
+            <input type="hidden" name="item_id" value="{{ item.id }}">
+            <button class="button" disabled>
+              Sold
+            </button>
+          </form>
+          {% endif %}
         </div>
 
         {%- if item.properties.owner == context.session.current_user_id %}

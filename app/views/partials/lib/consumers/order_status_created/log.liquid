@@ -1,0 +1,10 @@
+{% liquid
+  include 'lib/orders/search', id: context.params.order_id
+  include 'lib/items/search', id: context.exports.order.properties.item_id
+
+  assign order_status = context.exports.order.order_status.properties.status
+  if order_status == 'app.order_statuses.paid'
+    include 'lib/item_statuses/validate', item_id: context.exports.item.id, name: 'app.item_statuses.sold', registry: 'status'
+    include 'lib/item_statuses/create', object: context.exports['status'].object
+  endif
+%}

@@ -1,0 +1,14 @@
+mutation create($item_id: String!, $name: String!, $timestamp: String!) {
+  model_create(
+    model: {
+      model_schema_name: "item_status"
+      properties: [
+        { name: "item_id" value: $item_id }
+        { name: "timestamp" value: $timestamp }
+        { name: "name" value: $name }
+      ]
+    }
+  ){
+    id properties
+  }
+}

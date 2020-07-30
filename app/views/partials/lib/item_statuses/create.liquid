@@ -1,0 +1,4 @@
+{% liquid
+  graphql object = 'item_statuses/create', args: object | dig: "model_create"
+  export object, namespace: registry
+%}

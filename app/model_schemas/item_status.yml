@@ -1,0 +1,9 @@
+---
+name: item_status
+properties:
+  - name: item_id
+    type: string
+  - name: name
+    type: string
+  - name: timestamp
+    type: datetime

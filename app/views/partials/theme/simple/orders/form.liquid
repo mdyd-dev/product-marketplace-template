@@ -13,6 +13,7 @@
   / {{ 'app.orders' | t }}
 </h1>
 
+
 <table class="w-full table-auto">
   <thead>
     <tr>
@@ -38,3 +39,7 @@
 
   <button id="checkoutbutton" class="button">{{ 'app.checkout' | t }}</button>
 </form>
+
+{% if order.errors.base %}
+  <h3 class="text-red-400">{{ order.errors.base | t }}</h3>
+{% endif %}
