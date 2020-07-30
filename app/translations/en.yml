@@ -11,6 +11,7 @@ en:
     your-orders: Your orders
     orders:
       new: new order
+      list: Orders
     item: Item
     items: Items
     your-items: Your items

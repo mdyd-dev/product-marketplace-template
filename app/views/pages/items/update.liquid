@@ -3,7 +3,10 @@ method: post
 ---
 {% liquid
   include 'lib/must_be_authenticated'
-  include 'lib/items/validate', item: params.item
+  include 'lib/items/main', id: context.params.item.id
+
+  assign owner = context.exports.item.properties.owner | default: context.session.current_user_id
+  include 'lib/items/validate', item: params.item, owner: owner
 
   if context.exports.item.valid
     include 'lib/items/update', item: context.exports.item

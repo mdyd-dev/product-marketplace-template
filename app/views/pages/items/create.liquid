@@ -3,7 +3,7 @@ method: post
 ---
 {% liquid
   include 'lib/must_be_authenticated'
-  include 'lib/items/validate', item: params.item, current_user_id: context.session.current_user_id
+  include 'lib/items/validate', item: params.item, owner: context.session.current_user_id
 
   if context.exports.item.valid
     include 'lib/items/save', item: context.exports.item
