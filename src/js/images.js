@@ -11,7 +11,7 @@ import '@uppy/webcam/dist/style.min.css';
 const _form = document.querySelector('[data-s3-uppy="form"]');
 
 const uppy = Uppy({
-  autoProceed: false,
+  autoProceed: true,
   restrictions: {
     maxFileSize: 2097152, // Limit size to 2 MB on the javascript side
     maxNumberOfFiles: 3,
