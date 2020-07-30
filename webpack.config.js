@@ -10,8 +10,8 @@ const config = {
     app: './src/js/app'
   },
   output: {
-    filename: 'js/[name].js',
-    chunkFilename: 'js/[name].js',
+    filename: 'js/[name].js?v=[chunkhash:3]',
+    chunkFilename: 'js/[name].js?v=[chunkhash:3]',
     path: path.resolve('app/assets')
   },
   devServer: {
@@ -60,7 +60,7 @@ const config = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css'
+      filename: 'css/[name].css?v=[chunkhash:3]'
     }),
     new WebpackRequireFrom({
       variableName: 'window.cdnUrl',
