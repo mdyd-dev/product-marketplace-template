@@ -46,3 +46,4 @@ en:
       blank: cannot be blank
       too_little: "has to be equal or greater than %{value}"
       taken: already taken
+      session_create_failed: Invalid email or password

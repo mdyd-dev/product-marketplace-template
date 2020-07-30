@@ -1,21 +1,20 @@
-{% assign CANT_BE_BLANK = "can't be blank" %}
-
 {% liquid
   assign valid = true
-  assign errors = '{}' | parse_json
+  assign errors = '{}' | parse_json 
 
   if object.email == null or object.email == empty
-    assign errors = errors | add_hash_key: "email", CANT_BE_BLANK
+    include 'lib/register_error', hash: errors, field_name: 'email', key: 'app.errors.blank'
   endif
 
   if object.password == null or object.password == empty
-    assign errors = errors | add_hash_key: "password", CANT_BE_BLANK
+    include 'lib/register_error', hash: errors, field_name: 'password', key: 'app.errors.blank'
   endif
 
   if errors != empty
     assign valid = false
   endif
-  assign object = object | add_hash_key: 'errors', errors
-  assign object = object | add_hash_key: 'valid', valid
+
   export object
+  export errors, namespace: "object"
+  export valid,  namespace: "object"
 %}

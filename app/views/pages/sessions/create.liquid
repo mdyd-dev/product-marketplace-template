@@ -3,9 +3,15 @@ method: post
 ---
 {% liquid
   include 'lib/sessions/validate', object: context.params.user
-  include 'lib/sessions/create', object: context.exports.object
+
   if context.exports.object.valid
-    redirect_to '/'
+    include 'lib/sessions/create', object: context.exports.object
+
+    if context.exports.object.valid
+      redirect_to '/'
+    else
+      include 'theme/simple/sessions/new', object: context.exports.object
+    endif
   else
     include 'theme/simple/sessions/new', object: context.exports.object
   endif
