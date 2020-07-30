@@ -1,45 +1,41 @@
-{% assign CANT_BE_BLANK = "can't be blank" %}
 {% assign MINIMAL_PRICE = 10 %}
-{% assign TOO_LITTLE = "has to be equal or greater than " | append: MINIMAL_PRICE %}
 
 <!-- convert tags -->
-{% liquid
-  assign tags = item.properties.tags | split: ','
-  assign properties = item.properties
-  assign properties = properties | add_hash_key: 'tags', tags
-
-  if current_user_id
-    assign properties = properties | add_hash_key: 'owner', current_user_id
-  endif
-
-  assign price = item.properties.price | plus: 0
-  assign properties = properties | add_hash_key: 'price', price
-%}
+{% parse_json item %}
+  {
+    "properties": {
+      "tags": {{ item.properties.tags | split: ',' }},
+      "owner": {{ current_user_id | json }}, 
+      "description": {{ item.properties.description | default: "" | json }},
+      "type": {{ item.properties.type | default: "" | json }},
+      "price": {{ item.properties.price | plus: 0 }}
+    }
+  }
+{% endparse_json %}
 
 {% liquid
   assign valid = true
-  assign errors = '{}' | parse_json
-  assign perrors = '{}' | parse_json
-  assign errors = errors | add_hash_key: "properties", perrors
+  assign errors = '{ "properties": {}}' | parse_json
 
   if item.properties.name == "" or item.properties.name == null
     assign valid = false
-    assign perrors = perrors | add_hash_key: "name", CANT_BE_BLANK
+    include 'lib/register_error', hash: errors.properties, field_name: 'name', key: 'app.errors.blank'
   endif
 
   if item.properties.price <  MINIMAL_PRICE
     assign valid = false
-    assign perrors = perrors | add_hash_key: "price", TOO_LITTLE
+    assign msg = 'app.errors.too_little' | t: value: MINIMAL_PRICE
+    include 'lib/register_error', hash: errors.properties, field_name: 'price', message: msg
   endif
 
   if item.properties.description == ""
     assign valid = false
-    assign perrors = perrors | add_hash_key: "description", CANT_BE_BLANK
+    include 'lib/register_error', hash: errors.properties, field_name: 'description', key: 'app.errors.blank'
   endif
 
   if item.properties.uuid == "" or item.properties.uuid == null
     assign valid = false
-    assign perrors = perrors | add_hash_key: "uuid", CANT_BE_BLANK
+    include 'lib/register_error', hash: errors.properties, field_name: 'uuid', key: 'app.errors.blank'
   endif
 
   assign item = item | add_hash_key: 'errors', errors

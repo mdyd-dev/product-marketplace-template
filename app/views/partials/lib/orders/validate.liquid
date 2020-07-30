@@ -1,6 +1,4 @@
-{% assign CANT_BE_BLANK = "can't be blank" %}
 {% assign MINIMAL_TOTAL = 10 %}
-{% assign TOO_LITTLE = "has to be equal or greater than " | append: MINIMAL_TOTAL %}
 
 {% assign total = item.properties.price | default: 0 %}
 
@@ -22,24 +20,29 @@
   assign perrors = '{}' | parse_json
   assign errors = errors | add_hash_key: 'properties', perrors
 
+  if order.properties.seller == order.properties.buyer
+    assign valid = false
+    assign errors = errors | add_hash_key: "base", 'app.errors.cannot_sell_to_yourself'
+  endif
+
   if order.properties.seller == "" or order.properties.seller == null
     assign valid = false
-    assign perrors = perrors | add_hash_key: "seller", CANT_BE_BLANK
+    assign perrors = perrors | add_hash_key: "seller", 'app.errors.blank'
   endif
 
   if order.properties.buyer == "" or order.properties.buyer == null
     assign valid = false
-    assign perrors = perrors | add_hash_key: "buyer", CANT_BE_BLANK
+    assign perrors = perrors | add_hash_key: "buyer", 'app.errors.blank'
   endif
 
   if order.properties.item_id == "" or order.properties.item_id == null
     assign valid = false
-    assign perrors = perrors | add_hash_key: "item_id", CANT_BE_BLANK
+    assign perrors = perrors | add_hash_key: "item_id", 'app.errors.blank'
   endif
 
   if order.properties.total < MINIMAL_TOTAL
     assign valid = false
-    assign perrors = perrors | add_hash_key: "total", TOO_LITTLE
+    assign perrors = perrors | add_hash_key: "total", 'app.errors.too_little'
   endif
 %}
 

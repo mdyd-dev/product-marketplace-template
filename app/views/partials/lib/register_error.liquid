@@ -1,0 +1,19 @@
+{% comment %}
+  @params
+    hash
+    field_name
+    message:
+{% endcomment %}
+
+{% liquid
+  if key
+    assign msg = key | t
+  else
+    assign msg = message
+  endif
+
+  assign list = hash[field_name] | default: '[]' | parse_json
+  assign list = list | add_to_array: msg
+
+  assign hash = hash | add_hash_key: field_name, list
+%}

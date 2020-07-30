@@ -9,7 +9,8 @@ en:
 
     order: Order
     your-orders: Your orders
-    orders: Orders
+    orders:
+      new: new order
     item: Item
     items: Items
     your-items: Your items
@@ -39,3 +40,9 @@ en:
       pending_payment: pending
       paid: paid
       canceled: canceled
+
+    errors:
+      cannot_sell_to_yourself: You cannot sell to yourself
+      blank: cannot be blank
+      too_little: "has to be equal or greater than %{value}"
+      taken: already taken
