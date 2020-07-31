@@ -1,8 +1,0 @@
----
-method: post
----
-<!-- find order  -->
-{% liquid
-  include 'lib/dashboard/orders', id: context.params.order_id, current_user_id: context.session.current_user_id
-  echo context.exports
-%}

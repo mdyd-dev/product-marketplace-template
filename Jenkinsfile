@@ -16,7 +16,7 @@ pipeline {
     stage('build') {
       when { branch 'master' }
 
-      agent { docker { image 'node:12-alpine' } }
+      agent { docker {image 'node:12-alpine'; args '-u root' } }
       steps {
         sh 'npm ci -S'
         sh 'npm run build'

@@ -1,4 +1,4 @@
 {% liquid
   include 'theme/simple/dashboard/index'
-  include 'lib/events/create-event', type: 'page_visited', actor_id: context.session.current_user_id, object_id: 'dashboard'
+  include 'lib/events/create-event', type: 'page_visited', actor_id: context.current_user.id, object_id: 'dashboard'
 %}

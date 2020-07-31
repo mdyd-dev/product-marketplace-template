@@ -1,6 +1,10 @@
-{% include 'lib/users/search' %}
-{% include 'lib/orders/search' %}
-{% include 'lib/items/search' %}
+{% liquid
+  include 'lib/must_be_authenticated'
+  include 'lib/must_be_superadmin'
 
+  include 'lib/users/search', limit: 10
+  include 'lib/orders/search', limit: 10
+  include 'lib/items/search', limit: 10
 
-{% include 'theme/simple/admin/index', items: context.exports.items %}
+  include 'theme/simple/admin/index', items: context.exports.items, users: context.exports.users, orders: context.exports.orders
+%}

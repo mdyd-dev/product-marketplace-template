@@ -1,8 +1,9 @@
 {% liquid
+  assign valid = true
+
   unless context.current_user
+    include 'lib/flash/publish', error: 'app.errors.unauthenticated'
+
     redirect_to '/sessions/new'
-    comment
-      TODO: support flash messages
-    endcomment
   endunless
 %}

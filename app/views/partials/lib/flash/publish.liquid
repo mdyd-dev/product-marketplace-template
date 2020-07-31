@@ -1,0 +1,12 @@
+{% parse_json flash %}
+  {
+    "error":  {{ error | json }},
+    "notice": {{ notice | json }},
+    "from":   {{ context.location.pathname | json }}
+  }
+{% endparse_json %}
+
+{% liquid
+  assign sflash = flash | json
+  session sflash = sflash
+%}

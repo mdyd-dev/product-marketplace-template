@@ -1,6 +1,6 @@
-query users($id: ID, $email: String!){
+query users($id: ID, $email: String, $limit: Int = 1){
   users(
-    per_page:1
+    per_page: $limit
     filter: {
       email: { value: $email }
       id: { value: $id }

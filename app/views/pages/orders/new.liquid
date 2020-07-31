@@ -1,5 +1,5 @@
 {% liquid
   include 'lib/items/main', id: context.params.item_id
-  include 'lib/orders/validate', item: context.exports.item, current_user_id: context.session.current_user_id
+  include 'lib/orders/validate', item: context.exports.item, current_user_id: context.current_user.id
   include 'theme/simple/orders/new', item: context.exports.item, order: context.exports.order
 %}

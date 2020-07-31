@@ -6,7 +6,28 @@
           <div class="flex-grow">
             <h2 class="mb-3 text-lg font-medium text-gray-900 title-font">Recent items</h2>
             <div class="mx-4">
-              {% include 'theme/simple/items/index', items: items %}
+
+              <h2>users</h2>
+              {% for user in users.results %}
+                <li>
+                  {{ user }}
+                </li>
+              {% endfor %}
+
+              <h2>items</h2>
+              {% for item in items.results %}
+                <li>
+                  {{ item }}
+                </li>
+              {% endfor %}
+
+              <h2>orders</h2>
+              {% for order in orders.results %}
+                <li>
+                  {{ order }}
+                </li>
+              {% endfor %}
+
             </div>
           </div>
         </div>
@@ -19,5 +40,3 @@
         </div>
       </div>
     </div>
-  </div>
-</section>

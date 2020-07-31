@@ -5,13 +5,13 @@ method: post
   include 'lib/must_be_authenticated'
   include 'lib/items/main', id: context.params.item.id
 
-  assign owner = context.exports.item.properties.owner | default: context.session.current_user_id
+  assign owner = context.exports.item.properties.owner | default: context.current_user.id
   include 'lib/items/validate', item: params.item, owner: owner
 
   if context.exports.item.valid
     include 'lib/items/update', item: context.exports.item
     include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/'
-    include 'lib/events/create-event', type: 'item_updated', actor_id: context.session.current_user_id, object_id: context.exports.item.id
+    include 'lib/events/create-event', type: 'item_updated', actor_id: context.current_user.id, object_id: context.exports.item.id
   else
     include 'lib/items/data_edit', id: params.id
     include 'theme/simple/items/edit', item: context.exports.item

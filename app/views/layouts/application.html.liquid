@@ -7,7 +7,7 @@
   </head>
 
   <body class="font-sans antialiased leading-normal">
-    {% include 'theme/simple/layout/main', current_user_id: context.session.current_user_id %}
+    {% include 'theme/simple/layout/main', current_user_id: context.current_user.id %}
     {% yield 'custom_scripts' %}
   </body>
 </html>

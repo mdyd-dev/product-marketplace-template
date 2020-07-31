@@ -12,9 +12,9 @@
     <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto">
       <a href="/items/new" class="mr-5 hover:text-gray-900">{{ 'app.list-your-item' | t }}</a>
 
-
       {% if context.current_user.id  %}
       <a href="/dashboard" class="mr-5 hover:text-gray-900">{{ 'app.dashboard' | t }}</a>
+      <a href="/admin" class="mr-5 hover:text-gray-900">{{ 'app.admin' | t }}</a>
 
       <form action="/sessions/destroy" method="post">
         {% include 'authenticity_token' %}

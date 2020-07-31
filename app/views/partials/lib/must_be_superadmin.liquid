@@ -1,0 +1,9 @@
+{% liquid
+  assign valid = true
+
+  unless context.current_user.email == 'godot@tlen.pl'
+    include 'lib/flash/publish', error: 'app.errors.unauthorized'
+
+    redirect_to '/sessions/new'
+  endunless
+%}

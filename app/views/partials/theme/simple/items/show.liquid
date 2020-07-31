@@ -52,7 +52,7 @@
           {% endif %}
         </div>
 
-        {%- if item.properties.owner == context.session.current_user_id %}
+        {%- if item.properties.owner == context.current_user.id %}
         <p class="py-4 mt-4 border-t border-blue-300">Item Administration</p>
         <span class="flex">
           <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
