@@ -1,5 +1,5 @@
 <section class="overflow-hidden text-gray-700 body-font">
-  <div class="container px-5">
+  <div class="container">
     <div class="flex flex-wrap">
       <div class="relative w-1/2">
         {%- assign dummy_url = 'https://dummyimage.com/800x4:3/eee/000&text=' | append: item.properties.name %}
@@ -30,7 +30,7 @@
           {%- endif %}
         </div>
 
-        <p class="mt-4 leading-relaxed">{% print item.properties.description %}</p>
+        <p class="mt-4 leading-relaxed">{{ item.properties.description }}</p>
 
         <div class="flex">
           <span class="text-2xl font-medium text-gray-900 ">{{ item.properties.price | pricify }}</span>

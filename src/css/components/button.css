@@ -6,8 +6,8 @@
   @apply outline-none;
 }
 
-.button:hover {
-  @apply bg-blue-600;
+.button:hover, .button[href]:hover {
+  @apply text-white bg-blue-600;
 }
 
 .button-secondary {

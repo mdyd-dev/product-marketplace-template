@@ -1,9 +1,23 @@
-<div class="flex flex-wrap w-full">
-  <div class="w-1/2">
-    <h3>the most recent items</h3>
-    {% include 'theme/simple/items/index', items: items %}
+<section class="text-gray-700 body-font">
+  <div class="container flex flex-wrap mx-auto mt-6">
+    <div class="flex flex-wrap w-full">
+      <div class="lg:w-1/2 md:w-full">
+        <div class="flex flex-col p-6 border-2 border-gray-200 rounded-lg sm:flex-row">
+          <div class="flex-grow">
+            <h2 class="mb-3 text-lg font-medium text-gray-900 title-font">Recent items</h2>
+            <div class="mx-4">
+              {% include 'theme/simple/items/index', items: items %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pl-4 lg:w-1/2 md:w-full">
+        <div class="flex flex-col p-6 border-2 border-gray-200 rounded-lg sm:flex-row">
+          <div class="flex-grow">
+            <h2 class="mb-3 text-lg font-medium text-gray-900 title-font">Event logs</h2>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="w-1/2">
-    <h4>event logs</h4>
-  </div>
-</div>
+</section>

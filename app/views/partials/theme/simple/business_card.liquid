@@ -1,5 +1,3 @@
 {% assign name = user | default: 'Unknown' %}
 
-<span class="business_card">
-  By {% print name %}
-</span>
+<span class="business_card">By {{ name }}</span>

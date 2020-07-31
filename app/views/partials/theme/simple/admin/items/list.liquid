@@ -1,34 +1,34 @@
 Total: {{ items.total_entries }}
 
-<table class="u-full-width">
+<table class="table-auto">
   {% for item in items.results %}
     <tr>
       <td>
-        <a href="/app/items/show?id={% print item.id %}">
-          <img alt="cover" src="{% echo 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url %}" width="200px"/>
+        <a href="/app/items/show?id={{ item.id }}">
+          <img alt="cover" src="{{ 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url }}" width="200px" />
         </a>
       </td>
       <td>
-        <strong> {% print item.properties.name %} </strong>
+        <span class="font-semibold">{{ item.properties.name }}</span>
         <br/>
-        <small> {{ item.properties.description | split: ' ' | limit: 20 | join: ' ' | append: '...' }} </small>
+        <span class="text-sm">{{ item.properties.description | split: ' ' | limit: 20 | join: ' ' | append: '...' }}</span>
         <br/>
-        <small>
+        <p>
           {% for tag in item.properties.tags %}
-            <a href="?query[tag]={%- print tag %}">{% print tag %}</a>
+            <a href="?query[tag]={{- tag -}}">{{ tag }}</a>
           {% endfor %}
-        </small>
+        </p>
       </td>
       <td>
         <form action="/items/edit" method="get">
-          <input type="hidden" name="id" value="{% print item.id %}">
-          <input type="submit" value="edit">
+          <input type="hidden" name="id" value="{{ item.id }}">
+          <button>Edit</button>
         </form>
       </td>
       <td>
         <form action="/items/delete" method="post">
-          <input type="hidden" name="id" value="{% print item.id %}">
-          <input type="submit" value="X">
+          <input type="hidden" name="id" value="{{ item.id }}">
+          <button>X</button>
         </form>
       </td>
     </tr>

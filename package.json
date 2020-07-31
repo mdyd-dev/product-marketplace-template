@@ -9,7 +9,7 @@
     "test": "testcafe 'chromium:headless' test",
     "postinstall": "npm run build",
     "clean": "rm -rf app/assets/{js,css}/*",
-    "deploy": "npm run build && pos-cli deploy",
+    "deploy": "npm run build && CI=true pos-cli deploy",
     "predeploy": "npm run clean"
   },
   "devDependencies": {
