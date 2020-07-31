@@ -58,12 +58,12 @@
           <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
 
           <form action="/items/delete" method="post" class="ml-2"
-            onSubmit="if(!confirm('Are you sure you want to delete this item?')){ return false; }"
+            onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }"
           >
             {% include 'authenticity_token' %}
             <input type="hidden" name="id" value="{{ item.id }}">
 
-            <button id="deletebutton" class="button button-secondary">Delete</button>
+            <button id="deletebutton" class="button button-secondary">{{ 'app.delete' | t }}</button>
           </form>
         </span>
         {%- endif %}
