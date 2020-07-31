@@ -7,10 +7,12 @@
     "build": "cross-env NODE_ENV=production npx webpack-cli",
     "build:dev": "cross-env NODE_ENV=development npx webpack-cli",
     "test": "testcafe 'chromium:headless' test",
-    "postinstall": "npm run build",
     "clean": "rm -rf app/assets/{js,css}/*",
+    "deploy": "npm run build && pos-cli deploy",
     "deploy": "npm run build && CI=true pos-cli deploy",
-    "predeploy": "npm run clean"
+    "predeploy": "npm run clean",
+    "ci:build": "docker run -it -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD:/app -w /app node:12-alpine npm ci -S && npm run build",
+    "ci:test": "docker run -it -e MPKIT_URL=$MPKIT_URL -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD:/app -w /app testcafe/testcafe 'chromium:headless --sandbox' --skip-js-errors test"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
@@ -36,6 +38,9 @@
     "webpack": "^4.44.0",
     "webpack-cli": "^3.3.12",
     "webpack-require-from": "^1.8.1"
+  },
+  "optionalDependencies": {
+    "fsevents": "^1.2.11"
   },
   "browserslist": "> 1% or last 2 years",
   "name": "win-project-k8s-poc-mvp",
