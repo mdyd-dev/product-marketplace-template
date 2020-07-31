@@ -1,6 +1,7 @@
 @Library('pipeline-utils')_  // it's not a typo
 
-def qa_url = "https://demo.staging.gapps.platformos.com/"
+// def qa_url = "https://demo.staging.gapps.platformos.com/"
+def qa_url = "https://getmarketplace.staging.gapps.platformos.com/"
 
 pipeline {
   agent any
@@ -12,6 +13,16 @@ pipeline {
   }
 
   stages {
+    stage('build') {
+      when { branch 'master' }
+
+      agent { docker { image 'node:12-alpine' } }
+      steps {
+        sh 'npm ci -S'
+        sh 'npm run build'
+      }
+    }
+
     stage('Deploy') {
       when { branch 'master' }
       environment {
@@ -34,7 +45,7 @@ pipeline {
 
       agent { docker { image "platformos/testcafe" } }
       steps {
-        sh 'testcafe "chromium:headless" test'
+        sh 'testcafe "chromium:headless" test --skip-js-errors'
       }
       post { failure { archiveArtifacts "screenshots/" } }
     }

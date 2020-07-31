@@ -3,8 +3,8 @@ import { Selector } from 'testcafe';
 fixture`Basic complete happy scenario`.page(process.env.MPKIT_URL);
 
 test(`Login Test`, async (t) => {
-  const user = { email: 'user@email.com', password: 'password' };
-  const buyer = { email: 'user2@email.com', password: 'password' };
+  const user = { email: 'darek+gm-seller@platformos.com', password: 'seller' };
+  const buyer = { email: 'darek+gm-buyer@platformos.com', password: 'buyer' };
   const item = {
     name: 'testItem',
     type: 'typeTest',
@@ -103,6 +103,6 @@ test(`Login Test`, async (t) => {
     .click(Selector('main').find('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //deleting exist item
-    .click(Selector('main').find('#deletebutton')) // why not button.withText('...') ?
+    // .click(Selector('main').find('#deletebutton')) // why not button.withText('...') ?
     .click(Selector('header').find('button').withText('Log out'));
 });
