@@ -8,7 +8,7 @@
     "build:dev": "cross-env NODE_ENV=development npx webpack-cli",
     "test": "testcafe 'chromium:headless' test",
     "clean": "rm -rf app/assets/{js,css}/*",
-    "deploy": "npm run build && pos-cli deploy",
+    "postinstall": "npm run build",
     "deploy": "npm run build && CI=true pos-cli deploy",
     "predeploy": "npm run clean",
     "ci:build": "docker run -it -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD:/app -w /app node:12-alpine npm ci -S && npm run build",
