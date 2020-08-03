@@ -30,7 +30,7 @@
       </p>
 
       <h3 class="mb-1 text-xs text-gray-500 ">
-        {% include 'theme/simple/business_card', user: item.properties.owner %}
+        {% include 'theme/simple/business_card', user: item.owner.email %}
       </h3>
     </div>
   </div>

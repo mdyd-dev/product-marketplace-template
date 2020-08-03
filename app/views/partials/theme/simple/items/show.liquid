@@ -12,7 +12,7 @@
 
       <div class="w-full mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
         <h2 class="text-sm tracking-widest text-gray-500 ">
-          {% include 'theme/simple/business_card', user: item.properties.owner %}
+          {% include 'theme/simple/business_card', user: item.owner.email %}
         </h2>
 
         <h1 class="mb-1 text-3xl font-medium">

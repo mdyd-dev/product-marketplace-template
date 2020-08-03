@@ -21,6 +21,11 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
       id
       created_at
 
+      owner: related_user(join_on_property: "owner", foreign_property: "id") {
+        id
+        email
+      }
+
       status: related_model(join_on_property: "id", foreign_property: "item_id", model_schema_name: "item_status") {
         id
         created_at
