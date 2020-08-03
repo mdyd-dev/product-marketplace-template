@@ -1,4 +1,4 @@
-{% if order.order_status.properties.status == 'app.order_statuses.placed' %}
+{% if order.status.name == 'app.order_statuses.placed' %}
   {% if order.properties.paid_at == null and role == 'seller' %}
     <form action="/order_statuses/create" method="post">
       {% include 'authenticity_token' %}
@@ -20,7 +20,7 @@
   {% endif %}
 {% endif %}
 
-{% if order.order_status.properties.status == 'app.order_statuses.placed' %}
+{% if order.status.name == 'app.order_statuses.placed' %}
   <form action="/order_statuses/create" method="post" class="mt-2">
     {% include 'authenticity_token' %}
     <input type="hidden" name="status" value="app.order_statuses.canceled"/>
@@ -30,7 +30,7 @@
   </form>
 {% endif %}
 
-{% if order.order_status.properties.status == 'app.order_statuses.paid' and role == 'seller' %}
+{% if order.status.name == 'app.order_statuses.paid' and role == 'seller' %}
   <form action="/order_statuses/create" method="post" class="mt-2">
     {% include 'authenticity_token' %}
     <input type="hidden" name="status" value="app.order_statuses.shipped"/>

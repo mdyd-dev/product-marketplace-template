@@ -1,6 +1,6 @@
-{% parse_json object %}
+{% parse_json status %}
 {
-  "status": {{ status | json }},
+  "name": {{ status | json }},
   "order_id": {{ order.id | json }},
   "timestamp": {{ 'now' | to_time | json }}
 }
@@ -9,22 +9,22 @@
 {% liquid
   assign valid = true
 
-  if object.order_id == blank
+  if status.order_id == blank
     assign valid = false
   endif
 
-  if current_user_id == empty
+  if current_user_id == blank
     assign valid = false
   endif
 
-  if object.status == empty
+  if status.name == blank
     assign valid = false
   endif
 
-  if object.timestamp == empty
+  if status.timestamp == blank
     assign valid = false
   endif
 
-  export object, namespace: registry
-  export valid, namespace: registry
+  export status
+  export valid, namespace: 'status'
 %}

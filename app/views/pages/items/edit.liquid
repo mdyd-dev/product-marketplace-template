@@ -1,9 +1,12 @@
 {% liquid
   include 'lib/must_be_authenticated'
-  include 'lib/items/data_edit', id: params.id
+
+  include 'lib/items/main'
+  include 'lib/items/photos/presigned_url'
+  include 'lib/items/search', id: context.params.id
 
   if context.exports.item
-    include 'theme/simple/items/edit', item: context.exports.item
+    include 'theme/simple/items/edit', item: context.exports.item, icons: context.exports.lib.icons
   else
     include 'theme/simple/items/404'
   endif

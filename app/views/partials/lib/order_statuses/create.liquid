@@ -1,5 +1,12 @@
 {% liquid
-  graphql object = 'order_statuses/create', args: object | dig: "model_create"
+  graphql r = 'order_statuses/create', args: status
 
-  export object, namespace: registry
+  if r.errors
+    log r.errors, type: "Graphql error:"
+    break
+  else
+    assign status = r.model_create
+  endif
+
+  export status
 %}

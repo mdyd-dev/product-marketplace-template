@@ -4,16 +4,15 @@ slug: order_statuses/create
 ---
 
 {% liquid
-  assign registry = 'order_status'
-
   include 'lib/orders/search', id: context.params.order_id
-  include 'lib/order_statuses/validate', order: context.exports.order, current_user_id: context.current_user.id, status: context.params.status, registry: registry
+  include 'lib/order_statuses/validate', order: context.exports.order, current_user_id: context.current_user.id, status: context.params.status
 
-  if context.exports[registry].valid
-    include 'lib/order_statuses/create', object: context.exports[registry].object, registry: registry
-    include 'lib/events/create-event', type: 'order_status_created', actor_id: context.current_user.id, target_id: context.exports[registry].object.properties.order_id, object_id: context.exports[registry].object.id
-    include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/dashboard/buy/orders'
+  if context.exports.status.valid
+    include 'lib/order_statuses/create', status: context.exports.status
+    assign status = context.exports.status
+    include 'lib/events/create-event', type: 'order_status_created', actor_id: context.current_user.id, target_id: status.object.properties.order_id, object_id: status.object.id
   else
+    echo context.exports.status
     echo 'failed'
   endif
 %}

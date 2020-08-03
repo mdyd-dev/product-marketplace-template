@@ -2,6 +2,6 @@
   graphql consumers = 'events/consumers', name: event.payload.type | fetch: "admin_liquid_partials" | fetch: "results"
 
   for consumer in consumers
-    include consumer.path, event: event
+    include consumer.path, event: event.payload
   endfor
 %}

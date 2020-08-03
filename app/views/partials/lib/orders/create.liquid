@@ -1,6 +1,15 @@
 <!-- push to background -->
 {% liquid
-  graphql order = 'orders/create', args: order.properties | dig: 'model_create'
+  graphql r = 'orders/create', args: order
+
+  if r.errors
+    log r.errors, type: "Graphql error:"
+    redirect_to '/500'
+    break
+  else
+    assign order = r.model_create
+    include 'lib/events/create-event', type: 'order_created', actor_id: order.buyer, target_id: order.item_id, object_id: order.id
+  endif
 
   export order
 %}

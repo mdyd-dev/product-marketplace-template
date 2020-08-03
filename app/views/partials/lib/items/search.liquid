@@ -7,10 +7,6 @@
       echo '{ "properties": { "name": "price", "order": "DESC" } }'
     endparse_json
 
-    parse_json sort_price_asc
-      echo '{ "properties": { "name": "price", "order": "ASC" } }'
-    endparse_json
-
     graphql items = 'items/search', limit: limit, keyword: query.k, tag: query.tag, sort: sort_price_desc | fetch: 'items'
 
     export query, namespace: "search"

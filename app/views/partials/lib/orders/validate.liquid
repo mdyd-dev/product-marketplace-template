@@ -1,48 +1,44 @@
 {% assign MINIMAL_TOTAL = 10 %}
 
-{% assign total = item.properties.price | default: 0 %}
+{% assign total = item.price | default: 0 %}
 
 {% parse_json order %}
 {
-  "properties": {
-    "item_id": "{% print item.id %}",
-    "buyer":   "{% echo current_user_id %}",
-    "seller":  "{% echo item.properties.owner %}",
-    "total":    {% echo total %},
-    "status":  "init"
-  }
+  "item_id": "{% print item.id %}",
+  "buyer":   "{% echo current_user_id %}",
+  "seller":  "{% echo item.owner.id %}",
+  "total":    {% echo total %},
+  "name":  "init"
 }
 {% endparse_json %}
 
 {% liquid
   assign valid = true
   assign errors = '{}' | parse_json
-  assign perrors = '{}' | parse_json
-  assign errors = errors | add_hash_key: 'properties', perrors
 
-  if order.properties.seller == order.properties.buyer
+  if order.seller == order.buyer
     assign valid = false
-    assign errors = errors | add_hash_key: "base", 'app.errors.cannot_sell_to_yourself'
+    include 'lib/register_error', hash: errors, field_name: 'base', key: 'app.errors.cannot_sell_to_yourself'
   endif
 
-  if order.properties.seller == "" or order.properties.seller == null
+  if order.seller == "" or order.seller == null
     assign valid = false
-    assign perrors = perrors | add_hash_key: "seller", 'app.errors.blank'
+    include 'lib/register_error', hash: errors, field_name: 'seller', key: 'app.errors.blank'
   endif
 
-  if order.properties.buyer == "" or order.properties.buyer == null
+  if order.buyer == "" or order.buyer == null
     assign valid = false
-    assign perrors = perrors | add_hash_key: "buyer", 'app.errors.blank'
+    include 'lib/register_error', hash: errors, field_name: 'buyer', key: 'app.errors.blank'
   endif
 
-  if order.properties.item_id == "" or order.properties.item_id == null
+  if order.item_id == "" or order.item_id == null
     assign valid = false
-    assign perrors = perrors | add_hash_key: "item_id", 'app.errors.blank'
+    include 'lib/register_error', hash: errors, field_name: 'item_it', key: 'app.errors.blank'
   endif
 
-  if order.properties.total < MINIMAL_TOTAL
+  if order.total < MINIMAL_TOTAL
     assign valid = false
-    assign perrors = perrors | add_hash_key: "total", 'app.errors.too_little'
+    include 'lib/register_error', hash: errors, field_name: 'total', key: 'app.errors.too_little'
   endif
 %}
 

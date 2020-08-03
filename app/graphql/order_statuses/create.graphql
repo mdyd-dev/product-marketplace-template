@@ -1,11 +1,11 @@
-mutation create($order_id: String!, $status: String!, $timestamp: String!) {
+mutation create($order_id: String!, $name: String!, $timestamp: String!) {
   model_create(
     model: {
       model_schema_name: "order_status"
       properties: [
         { name: "order_id" value: $order_id }
         { name: "timestamp" value: $timestamp }
-        { name: "status" value: $status }
+        { name: "name" value: $name }
       ]
     }
   ){

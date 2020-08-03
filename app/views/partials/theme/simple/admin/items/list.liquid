@@ -5,16 +5,16 @@ Total: {{ items.total_entries }}
     <tr>
       <td>
         <a href="/app/items/show?id={{ item.id }}">
-          <img alt="cover" src="{{ 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url }}" width="200px" />
+          <img alt="cover" src="{{ 'images/icons/' | append: item.cover_photo | append: '.svg' | asset_url }}" width="200px" />
         </a>
       </td>
       <td>
-        <span class="font-semibold">{{ item.properties.name }}</span>
+        <span class="font-semibold">{{ item.name }}</span>
         <br/>
-        <span class="text-sm">{{ item.properties.description | split: ' ' | limit: 20 | join: ' ' | append: '...' }}</span>
+        <span class="text-sm">{{ item.description | split: ' ' | limit: 20 | join: ' ' | append: '...' }}</span>
         <br/>
         <p>
-          {% for tag in item.properties.tags %}
+          {% for tag in item.tags %}
             <a href="?query[tag]={{- tag -}}">{{ tag }}</a>
           {% endfor %}
         </p>

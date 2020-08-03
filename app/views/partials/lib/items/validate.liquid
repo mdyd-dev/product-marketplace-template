@@ -3,50 +3,47 @@
 <!-- convert tags -->
 {% parse_json item %}
   {
-    "id": {{ item.id | json }},
-    "properties": {
-      "name": {{ item.properties.name | json }},
-      "tags": {{ item.properties.tags | split: ',' }},
-      "owner": {{ owner | json }},
-      "description": {{ item.properties.description | default: "" | json }},
-      "type": {{ item.properties.type | default: "" | json }},
-      "price": {{ item.properties.price | plus: 0 }},
-      "uuid": {{ item.properties.uuid | json }}
-    }
+    "id":          {{ item.id | json }},
+    "owner":       {{ owner | json }},
+    "name":        {{ item.name | json }},
+    "cover_photo": {{ item.cover_photo | json }},
+    "tags":        {{ item.tags | split: ',' }},
+    "description": {{ item.description | default: "" | json }},
+    "type":        {{ item.type | default: "" | json }},
+    "price":       {{ item.price | plus: 0 }},
+    "uuid":        {{ item.uuid | json }}
   }
 {% endparse_json %}
 
 {% liquid
   assign valid = true
-  assign errors = '{ "properties": {}}' | parse_json
+  assign errors = '{}' | parse_json
 
-  if item.properties.owner == "" or item.properties.owner == null
+  if item.owner == "" or item.owner == null
     assign valid = false
-    include 'lib/register_error', hash: errors.properties, field_name: 'owner', key: 'app.errors.blank'
+    include 'lib/register_error', hash: errors, field_name: 'owner', key: 'app.errors.blank'
   endif
 
-  if item.properties.name == "" or item.properties.name == null
+  if item.name == "" or item.name == null
     assign valid = false
-    include 'lib/register_error', hash: errors.properties, field_name: 'name', key: 'app.errors.blank'
+    include 'lib/register_error', hash: errors, field_name: 'name', key: 'app.errors.blank'
   endif
 
-  if item.properties.price <  MINIMAL_PRICE
+  if item.price <  MINIMAL_PRICE
     assign valid = false
     assign msg = 'app.errors.too_little' | t: value: MINIMAL_PRICE
-    include 'lib/register_error', hash: errors.properties, field_name: 'price', message: msg
+    include 'lib/register_error', hash: errors, field_name: 'price', message: msg
   endif
 
-  if item.properties.description == ""
+  if item.description == ""
     assign valid = false
-    include 'lib/register_error', hash: errors.properties, field_name: 'description', key: 'app.errors.blank'
+    include 'lib/register_error', hash: errors, field_name: 'description', key: 'app.errors.blank'
   endif
 
-  if item.properties.uuid == "" or item.properties.uuid == null
+  if item.uuid == "" or item.uuid == null
     assign valid = false
-    include 'lib/register_error', hash: errors.properties, field_name: 'uuid', key: 'app.errors.blank'
+    include 'lib/register_error', hash: errors, field_name: 'uuid', key: 'app.errors.blank'
   endif
-
-  assign item = item | add_hash_key: 'errors', errors
 
   export item
   export valid,  namespace: 'item'

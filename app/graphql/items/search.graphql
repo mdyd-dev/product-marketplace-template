@@ -9,15 +9,22 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
         { name: "owner", value: $owner }
       ]
       or: [
-        { properties: {name: "description", contains: $keyword } }
-        { properties: {name: "name", contains: $keyword } }
+        { properties: { name: "description", contains: $keyword } }
+        { properties: { name: "name", contains: $keyword } }
       ]
     },
     sort: [$sort])
   {
     total_entries
     results {
-      properties
+      uuid: property(name: "uuid")
+      name: property(name: "name")
+      type: property(name: "type")
+      cover_photo: property(name: "cover_photo")
+      description: property(name: "description")
+      price: property_int(name: "price")
+      tags: property_array(name: "tags")
+
       id
       created_at
 
@@ -29,7 +36,8 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
       status: related_model(join_on_property: "id", foreign_property: "item_id", model_schema_name: "item_status") {
         id
         created_at
-        properties
+        name: property(name: "name")
+        item_id: property(name: "item_id")
       }
 
       orders: related_models(join_on_property: "id", foreign_property: "item_id", model_schema_name: "order") @include(if: $withOrders) {
@@ -42,6 +50,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
           properties
         }
       }
+
       photos: related_models(model_schema_name: "item_photo", join_on_property: "uuid", foreign_property: "item_uuid") {
         photo: property_upload(name: "photo") {
           url

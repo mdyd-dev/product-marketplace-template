@@ -1,13 +1,20 @@
+<pre>
+  {{ context.session.session_id }}
+  {{ context.session.sflash }}
+</pre>
+<pre>
+  {{ item }}
+</pre>
 <section class="overflow-hidden text-gray-700 body-font">
   <div class="container">
     <div class="flex flex-wrap">
       <div class="relative w-1/2">
-        {%- assign dummy_url = 'https://dummyimage.com/800x4:3/eee/000&text=' | append: item.properties.name %}
-        {%- assign cover_url = item.photos[0].photo.url | default: dummy_url %}
-        <img alt="{{ item.properties.name }}" class="object-cover object-center w-full h-64 rounded lg:h-auto"
+        {%- assign dummy_url = 'https://dummyimage.com/800x4:3/eee/000&text=' | append: item.name %}
+        {%- assign cover_url = item.photos.last.photo.url | default: dummy_url %}
+        <img alt="{{ item.name }}" class="object-cover object-center w-full h-64 rounded lg:h-auto"
           src="{{ cover_url }}">
-        <img alt="{% print item.properties.name %}" class="absolute top-0 left-0 w-10 h-10 mt-2 ml-2 opacity-50"
-          src="{{ 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url }}" />
+        <img alt="{% print item.name %}" class="absolute top-0 left-0 w-10 h-10 mt-2 ml-2 opacity-50"
+          src="{{ 'images/icons/' | append: item.cover_photo | append: '.svg' | asset_url }}" />
       </div>
 
       <div class="w-full mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
@@ -16,30 +23,30 @@
         </h2>
 
         <h1 class="mb-1 text-3xl font-medium">
-          {{ item.properties.name }}
+          {% print item.name %}
         </h1>
 
         <div class="flex flex-wrap mb-4">
-          {%- if item.properties.tags.size > 0 %}
+          {%- if item.tags.size > 0 %}
           <ul class="flex w-full tags">
             <li><strong>tags: </strong></li>
-            {%- for tag in item.properties.tags %}
+            {%- for tag in item.tags %}
               <li class="ml-2">{{ tag }}</li>
             {%- endfor %}
           </ul>
           {%- endif %}
         </div>
 
-        <p class="mt-4 leading-relaxed">{{ item.properties.description }}</p>
+        <p class="mt-4 leading-relaxed">{% print item.description %}</p>
 
         <div class="flex">
-          <span class="text-2xl font-medium text-gray-900 ">{{ item.properties.price | pricify }}</span>
+          <span class="text-2xl font-medium text-gray-900 ">{{ item.price | pricify }}</span>
 
-          {% if item.status.properties.name != 'app.item_statuses.sold' %}
+          {% if item.status.name != 'app.item_statuses.sold' %}
           <form action="/orders/new" method="get" class="ml-auto ">
             <input type="hidden" name="item_id" value="{{ item.id }}">
             <button id="buybutton" class="button">
-              Buy for {{ item.properties.price | pricify }}
+              Buy for {{ item.price | pricify }}
             </button>
           </form>
           {% else %}
@@ -52,7 +59,7 @@
           {% endif %}
         </div>
 
-        {%- if item.properties.owner == context.current_user.id %}
+        {%- if item.owner.id == context.current_user.id %}
         <p class="py-4 mt-4 border-t border-blue-300">Item Administration</p>
         <span class="flex">
           <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>

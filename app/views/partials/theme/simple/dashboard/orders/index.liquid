@@ -9,7 +9,7 @@
     <thead>
       <tr>
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.created_at" | t }}</th>
-        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.item_id" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.item" | t }}</th>
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.seller" | t }}</th>
         <th class="px-4 py-2 text-lg font-medium text-left"></th>
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.buyer" | t }}</th>
@@ -21,17 +21,17 @@
       {% for order in orders.results %}
         <tr>
           <td class="px-4 py-2 border-b">{{ order.created_at | l }}</td>
-          <td class="px-4 py-2 border-b"><a href="/items/show?id={{ order.properties.item_id }}">{{ order.item.properties.name }}</a></td>
-          <td class="px-4 py-2 border-b">{{ order.properties.seller }}</td>
+          <td class="px-4 py-2 border-b"><a href="/items/show?id={{ order.item.id }}">{{ order.item.name }}</a></td>
+          <td class="px-4 py-2 border-b">{{ order.seller.email | split: '@' | first }}</td>
           <td class="px-1 py-1 border-b">=></td>
-          <td class="px-4 py-2 border-b">{{ order.properties.buyer }}</td>
+          <td class="px-4 py-2 border-b">{{ order.buyer.email | split: '@' | first }}</td>
           <td class="px-4 py-2 border-b">
-            {{ order.order_status.properties.status | default: 'missing-state-invalid-order' | t }}
-            {% if  order.order_status.properties.timestamp %}
-            <br/><small>{{ order.order_status.properties.timestamp | to_time | l }}</small>
+            {{ order.status.name | default: 'missing-state-invalid-order' | t }}
+            {% if  order.order_status.timestamp %}
+            <br/><small>{{ order.order_status.timestamp | to_time | l }}</small>
             {% endif %}
           </td>
-          <td class="px-4 py-2 border-b">{{ order.properties.total | pricify }}</td>
+          <td class="px-4 py-2 border-b">{{ order.total | pricify }}</td>
           <td class="px-4 py-2 border-b">
             {% include 'theme/simple/dashboard/orders/actions' %}
           </td>

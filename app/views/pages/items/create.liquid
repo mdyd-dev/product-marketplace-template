@@ -9,11 +9,15 @@ method: post
     include 'lib/items/save', item: context.exports.item
     include 'lib/events/create-event', type: 'item_created', actor_id: context.current_user.id, object_id: context.exports.item.id
 
-    session flash_notice = 'app.orders.placed'
-    include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/'
+    include 'lib/flash/publish', notice: 'app.item_created'
+    assign item_url = '/items/show?id=' | append: context.exports.item.id
+    redirect_to item_url
+    break
   else
-    include 'lib/items/data_new'
-    include 'theme/simple/items/new', item: context.exports.item
+    include 'lib/items/main'
+    include 'lib/items/photos/presigned_url'
+
+    include 'theme/simple/items/new', item: context.exports.item, icons: context.exports.lib.icons
   endif
 %}
 

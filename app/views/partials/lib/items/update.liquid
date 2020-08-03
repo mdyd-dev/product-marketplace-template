@@ -1,9 +1,4 @@
 <!-- push to background -->
 {% liquid
-  assign args = item.properties | add_hash_key: 'id', item.id
-
-  graphql result = 'items/update', args: args
-
-  assign last_operation_uuid = '' | uuid
-  export last_operation_uuid
+  graphql result = 'items/update', args: item
 %}

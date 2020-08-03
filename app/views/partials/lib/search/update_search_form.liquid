@@ -7,6 +7,4 @@
     assign tags = search_form.properties.tags | concat: tags | uniq | sort
     graphql search_form = 'search/update_search_form', id: search_form.id, tags: tags
   endif
-
-  log search_form
 %}

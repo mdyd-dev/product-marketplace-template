@@ -4,7 +4,7 @@
 {% liquid
   if context.session.sflash
     assign flash = context.session.sflash | parse_json
-    include 'theme/simple/layout/flash', error: flash.error
+    include 'theme/simple/layout/flash', error: flash.error, notice: flash.notice
 
     if context.location.pathname != flash.from
       session sflash = nil

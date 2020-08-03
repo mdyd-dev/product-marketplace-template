@@ -57,3 +57,30 @@ en:
 
     confirm-delete: Are you sure you want to delete this item?
     delete: Delete
+
+
+  lib:
+    icons:
+    - alarm
+    - ambulance
+    - ban
+    - bandage
+    - calendar
+    - car
+    - yin-yang
+    - flame
+    - disc
+    - crop
+    - command
+    - compass
+    - copy
+    - stack
+    - star
+    - cut
+    - globe
+    - glass-full
+    - virus
+    - key
+    - trophy
+    - wand
+    - woman

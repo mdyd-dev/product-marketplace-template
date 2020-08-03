@@ -1,31 +1,31 @@
 <div class="w-full p-4 mb-8 lg:w-1/3 md:w-1/2 card">
 
   <a class="relative block h-64 overflow-hidden rounded" href="/items/show?id={{ item.id }}">
-    {% assign dummy_url = 'https://dummyimage.com/800x4:3/eee/000&text=' | append: item.properties.name %}
-    {% assign cover_url = item.photos[0].photo.url | default: dummy_url %}
-    <img alt="{% print item.properties.name %}" class="block object-cover object-center w-full h-full" src="{{ cover_url }}">
+    {% assign dummy_url = 'https://dummyimage.com/800x4:3/eee/000&text=' | append: item.name %}
+    {% assign cover_url = item.photos.last.photo.url | default: dummy_url %}
+    <img alt="{% print item.name %}" class="block object-cover object-center w-full h-full" src="{{ cover_url }}">
 
-    <img alt="{% print item.properties.name %}"
+    <img alt="{% print item.name %}"
       class="absolute top-0 left-0 w-10 h-10 mt-2 ml-2 opacity-50" loading="lazy"
-      src="{{ 'images/icons/' | append: item.properties.cover_photo | append: '.svg' | asset_url }}" />
+      src="{{ 'images/icons/' | append: item.cover_photo | append: '.svg' | asset_url }}" />
   </a>
 
   <div class="mt-4">
     <h2 class="text-lg font-medium text-gray-900 ">
       <a href="/items/show?id={{ item.id }}">
-        {% print item.properties.name %}
+        {% print item.name %}
       </a>
     </h2>
 
-    <h3 class="mb-1 text-xs text-gray-500 ">{% echo item.properties.tags | join: ", " %}</h3>
+    <h3 class="mb-1 text-xs text-gray-500 ">{% echo item.tags | join: ", " %}</h3>
 
     <div class="flex justify-between">
       <p class="mt-1">
         {% if item.orders[0].status == 'sold' %}
-          <span class="line-through">{% echo item.properties.price | pricify %}</span>
+          <span class="line-through">{% echo item.price | pricify %}</span>
           <span class="font-bold">&mdash; Sold</span>
         {% else %}
-          <span class="text-lg">{% echo item.properties.price | pricify %}</span>
+          <span class="text-lg">{% echo item.price | pricify %}</span>
         {% endif %}
       </p>
 

@@ -8,11 +8,15 @@
             <div class="mx-4">
 
               <h2>users</h2>
-              {% for user in users.results %}
-                <li>
-                  {{ user }}
-                </li>
-              {% endfor %}
+              <table class="table">
+                <tr>
+                  {% for user in users.results %}
+                    <td>{% print user.id %}</td>
+                    <td>{% print user.email %}</td>
+                    <td>{% print user.created_at  %}</td>
+                  {% endfor %}
+                </tr>
+              </table>
 
               <h2>items</h2>
               {% for item in items.results %}

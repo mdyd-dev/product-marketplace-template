@@ -1,8 +1,10 @@
 {% liquid
   assign valid = true
-  if event.type == ''
+
+  if event.payload.type == '' or event.payload.type == blank
+    log event, type: 'ERROR: event type is blank'
     assign valid = false
   endif
 
-  export valid, namespace: registry
+  export valid, namespace: 'event'
 %}

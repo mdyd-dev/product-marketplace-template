@@ -1,0 +1,35 @@
+<h3 class="mb-3 text-lg font-medium text-gray-900 title-font">Recent items</h3>
+<h2>users</h2>
+<table class="table">
+  {% for user in users.results %}
+    <tr>
+      <td>{% print user.id %}</td>
+      <td>{% print user.email %}</td>
+      <td>{% print user.created_at  %}</td>
+    </tr>
+  {% endfor %}
+</table>
+
+<h2>items</h2>
+<table class="table">
+  {% for item in items.results %}
+    <tr>
+      <td>{% print item.id %}</td>
+      <td>{% print item.created_at  %}</td>
+      <td>{% print item.name %}</td>
+      <td>{% print item.status.name %}</td>
+    </tr>
+  {% endfor %}
+</table>
+
+<h2>orderitems</h2>
+<table class="table">
+  {% for order in orders.results %}
+    <tr>
+      <td>{% print order.id %}</td>
+      <td>{% print order.created_at  %}</td>
+      <td>{% print order.item_id %}</td>
+      <td>{% print order.status.name %}</td>
+    </tr>
+  {% endfor %}
+</table>

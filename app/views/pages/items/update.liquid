@@ -3,17 +3,21 @@ method: post
 ---
 {% liquid
   include 'lib/must_be_authenticated'
-  include 'lib/items/main', id: context.params.item.id
-
-  assign owner = context.exports.item.properties.owner | default: context.current_user.id
-  include 'lib/items/validate', item: params.item, owner: owner
+  include 'lib/items/search', id: context.params.item.id
+  include 'lib/items/validate', item: params.item, owner: context.exports.item.owner.id
 
   if context.exports.item.valid
     include 'lib/items/update', item: context.exports.item
-    include 'async-operation', uuid: context.exports.last_operation_uuid, success: '/'
     include 'lib/events/create-event', type: 'item_updated', actor_id: context.current_user.id, object_id: context.exports.item.id
+
+    include 'lib/flash/publish', notice: 'app.item_updated'
+    assign item_url = '/items/show?id=' | append: context.exports.item.id
+    redirect_to item_url
+    break
   else
-    include 'lib/items/data_edit', id: params.id
+    include 'lib/items/main'
+    include 'lib/items/photos/presigned_url'
+
     include 'theme/simple/items/edit', item: context.exports.item
   endif
 %}

@@ -1,4 +1,4 @@
-query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id: String, $status: String) {
+query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id: String, $name: String) {
   orders: models(
     per_page: $limit
     filter: {
@@ -8,7 +8,7 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id
         { name: "buyer" value: $buyer }
         { name: "seller" value: $seller }
         { name: "item_id" value: $item_id }
-        { name: "status" value: $status }
+        { name: "name" value: $name }
       ]
     }
     sort: [
@@ -17,18 +17,31 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id
   ){
     total_entries
     results {
-      properties id created_at
+      id created_at
+
+      total: property(name: "total")
+
+      buyer: related_user(join_on_property: "buyer", foreign_property: "id") {
+        id
+        email
+      }
+
+      seller: related_user(join_on_property: "seller", foreign_property: "id") {
+        id
+        email
+      }
 
       item: related_model(join_on_property: "item_id", foreign_property: "id", model_schema_name: "item") {
         id
         created_at
-        properties
+        name: property(name: "name")
+        price: property(name: "price")
       }
 
-      order_status: related_model(join_on_property: "id", foreign_property: "order_id", model_schema_name: "order_status") {
+      status: related_model(join_on_property: "id", foreign_property: "order_id", model_schema_name: "order_status") {
         id
         created_at
-        properties
+        name: property(name: "name")
       }
     }
   }
