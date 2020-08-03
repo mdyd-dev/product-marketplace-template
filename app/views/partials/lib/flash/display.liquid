@@ -2,10 +2,12 @@
   display and reset flash msg
 {% endcomment %}
 {% liquid
-  assign flash = context.session.sflash | parse_json
-  include 'theme/simple/layout/flash', error: flash.error
+  if context.session.sflash
+    assign flash = context.session.sflash | parse_json
+    include 'theme/simple/layout/flash', error: flash.error
 
-  if context.location.pathname != flash.from
-    session sflash = nil
+    if context.location.pathname != flash.from
+      session sflash = nil
+    endif
   endif
 %}
