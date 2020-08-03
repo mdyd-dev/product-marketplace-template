@@ -1,0 +1,6 @@
+{% liquid
+  include 'lib/marketplace_setup/validate', object: constants
+  if context.exports.object.valid
+    include 'lib/marketplace_setup/save', object: context.exports.object
+  endif
+%}

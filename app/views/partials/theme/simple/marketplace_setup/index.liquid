@@ -1,0 +1,26 @@
+<section class="text-gray-700 body-font">
+  <div class="container items-centermx-auto">
+    <div class="mx-auto mb-2 text-center lg:w-2/6 md:w-1/2">
+      <h1 class="text-3xl font-medium">Setup your marketplace</h1>
+    </div>
+
+    <div class="w-full p-8 mx-auto mt-10 bg-gray-200 rounded-lg lg:w-2/6 md:w-1/2 md:mt-0">
+      <form action="/marketplace_setup" method="post">
+        {% include 'authenticity_token' %}
+
+        {% assign keys = 'stripe_sk_key,stripe_pk_key,stripe_client_id' | split: ',' %}
+        {% for key in keys %}
+          <label class="block mt-3" for="{{key}}">
+            <span class="block">{{key}}</span>
+            <input name="constants[{{key}}]" type="text" id="{{key}}" value="{{ object[key] }}" class="w-full form-input" />
+            {% if object.errors[key] %}
+              <span class="text-red-800">{{ object.errors[key] }}</span>
+            {% endif %}
+          </label>
+        {% endfor %}
+
+        <button class="mt-3 button">Save</button>
+      </form>
+    </div>
+  </div>
+</section>

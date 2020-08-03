@@ -1,0 +1,14 @@
+mutation set_constants($stripe_pk_key: String!, $stripe_sk_key: String!, $stripe_client_id: String!) {
+  stripe_pk_key: constant_set(name: "stripe_pk_key", value: $stripe_pk_key){
+    name
+    value
+  }
+  stripe_sk_key: constant_set(name: "stripe_sk_key", value: $stripe_sk_key){
+    name
+    value
+  }
+  stripe_client_id: constant_set(name: "stripe_client_id", value: $stripe_client_id){
+    name
+    value
+  }
+}
