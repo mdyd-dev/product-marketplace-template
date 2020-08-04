@@ -19,7 +19,7 @@ method: post
       include 'redirect_to', url: url, notice: 'app.items.created'
     endif
   else
-    include 'lib/items/main'
+    include 'lib/queries/categories'
     include 'lib/queries/presigned_url'
 
     include 'theme/simple/items/new', item: context.exports.object, icons: context.exports.lib.icons

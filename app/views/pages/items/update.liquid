@@ -21,9 +21,9 @@ method: post
       include 'redirect_to', url: url, notice: 'app.items.updated'
     endif
   else
-    include 'lib/items/main'
+    include 'lib/queries/categories'
     include 'lib/queries/presigned_url'
 
-    include 'theme/simple/items/edit', item: context.exports.object
+    include 'theme/simple/items/edit', item: context.exports.object, icons: context.exports.lib.icons
   endif
 %}
