@@ -1,0 +1,11 @@
+<h2 class="text-xl">test results</h2>
+{% liquid
+  graphql tests = 'tests' | dig: "admin_liquid_partials" | dig: "results"
+
+  for test in tests
+    assign contract = '{ "errors": {}, "success": true }' | parse_json
+    include test.path, registry: test.path, contract: contract
+
+    include 'test/test_report', name: test.path, contract: contract
+  endfor
+%}

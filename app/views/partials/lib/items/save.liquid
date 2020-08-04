@@ -1,7 +1,16 @@
 <!-- push to background -->
 {% liquid
-  graphql item = 'items/create', args: item | fetch: 'model_create'
+  graphql r = 'items/create', args: item
 
-  export item
+  if r.errors
+    log r.errors, type: "Graphql error:"
+  else
+    assign item = r.model_create
+    assign success = true
+
+    include 'lib/events/create-event', type: 'item_created', actor_id: item.owner, object_id: item.id
+
+    export item
+    export success, namespace: 'item'
+  endif
 %}
-

@@ -1,0 +1,37 @@
+{% parse_json data %}
+  {
+    "id":          null,
+    "owner":       1,
+    "name":        "item-name",
+    "cover_photo": "item.cover_photo",
+    "tags":        ["item.tags"],
+    "description": "item.description",
+    "type":        "item.type",
+    "price":       9,
+    "uuid":        "item.uuid"
+  }
+{% endparse_json %}
+
+{% liquid
+  include 'lib/items/validate', item: data, owner: null
+
+  if context.exports.item.name == blank
+    include 'test/register_error', contract: contract, field_name: 'item.name', key: 'app.test.should.not.be_blank'
+  endif
+
+  if context.exports.item.errors.name
+    include 'test/register_error', contract: contract, field_name: 'item.errors.name', key: 'app.test.should.be_blank'
+  endif
+
+  if context.exports.item.errors.size == 0
+    include 'test/register_error', contract: contract, field_name: 'contact.errors', key: 'app.test.should.not.be_empty'
+  endif
+
+  if context.exports.item.valid
+    include 'test/register_error', contract: contract, field_name: 'contract', key: 'app.test.should.not.be_valid'
+  endif
+
+  if context.exports.item.errors.price.size == 0
+    include 'test/register_error', contract: contract, field_name: 'item.price', key: 'app.test.should.not.be_valid'
+  endif
+%}

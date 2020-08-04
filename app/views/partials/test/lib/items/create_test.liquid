@@ -1,0 +1,29 @@
+{% parse_json data %}
+  {
+    "id":          null,
+    "owner":       "1",
+    "name":        "item-name",
+    "cover_photo": "item.cover_photo",
+    "tags":        ["item.tags"],
+    "description": "item.description",
+    "type":        "item.type",
+    "price":       100,
+    "uuid":        "item.uuid"
+  }
+{% endparse_json %}
+
+{% liquid
+  include 'lib/items/save', item: data
+
+  echo context.exports.item
+
+  if context.exports.item == blank
+    include 'test/register_error', contract: contract, field_name: 'item.id', key: 'app.test.should.be_set'
+  endif
+
+  if context.exports.item.id == blank
+    include 'test/register_error', contract: contract, field_name: 'item.id', key: 'app.test.should.be_set'
+  endif
+
+  include 'lib/items/delete', id: context.exports.item.id
+%}

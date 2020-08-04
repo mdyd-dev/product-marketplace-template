@@ -1,0 +1,11 @@
+query test_partials {
+  admin_liquid_partials(
+    filter: {
+      path: { starts_with: "test/", ends_with: "_test" }
+    }
+  ) {
+    results {
+      path
+    }
+  }
+}
