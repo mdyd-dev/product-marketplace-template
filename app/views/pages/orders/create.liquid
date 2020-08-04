@@ -3,22 +3,30 @@ method: post
 ---
 
 {% liquid
-  include 'lib/items/search', id: context.params.item_id
-  include 'lib/orders/validate', item: context.exports.item, current_user_id: context.current_user.id
+  include 'lib/queries/items/find', id: context.params.item_id
 
+  include 'lib/commands/orders/create/build', item: context.exports.item, current_user_id: context.current_user.id
+  include 'lib/commands/orders/create/check', order: context.exports.order
 
   if context.exports.order.valid
-    include 'lib/orders/create', order: context.exports.order
+    include 'lib/commands/orders/create/execute', order: context.exports.order
 
-    include 'lib/order_statuses/validate', order: context.exports.order, current_user_id: context.current_user.id, status: 'app.order_statuses.placed'
-    include 'lib/order_statuses/create', status: context.exports.status
-    include 'lib/events/create-event', type: 'order_status_created', actor_id: context.current_user.id, target_id: context.exports[registry].object.properties.order_id, object_id: context.exports[registry].object.id
+    if context.exports.order.valid
+      assign order = context.exports.order
 
-    include 'lib/flash/publish', notice: 'app.order_created'
-    assign url = '/dashboard/buy/orders'
-    redirect_to url
-    break
+      include 'lib/commands/order_statuses/create/check', order: order, current_user_id: context.current_user.id, status: 'app.order_statuses.placed'
+      include 'lib/commands/order_statuses/create/execute', status: context.exports.status
+
+      include 'lib/events/create-event', type: 'order_created', actor_id: order.buyer.id, target_id: order.seller.id, object_id: order.id
+
+      include 'lib/flash/publish', notice: 'app.orders.created'
+      include 'redirect_to', url: '/dashboard/buy/orders'
+    else
+      redirect_to '/500'
+      break
+    endif
   else
     include 'theme/simple/orders/new', item: context.exports.item, order: context.exports.order
   endif
+
 %}

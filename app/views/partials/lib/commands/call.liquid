@@ -1,0 +1,13 @@
+{% liquid
+  echo "calling command " | append: command
+
+  assign path = 'lib/commands/' | append: command | append: '/build'
+  include path,
+
+  assign path = 'lib/commands/' | append: command | append: '/check'
+  include path
+
+  assign path = 'lib/commands/' | append: command | append: '/execute'
+  include path
+
+%}

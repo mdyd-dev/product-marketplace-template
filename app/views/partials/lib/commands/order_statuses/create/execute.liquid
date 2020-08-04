@@ -1,0 +1,15 @@
+<!-- push to background -->
+{% liquid
+  graphql r = 'order_statuses/create', args: status
+
+  if r.errors
+    log r.errors, type: 'errors.graphql.invalid'
+    assign status = status | add_hash_key: 'errors', r.errors
+    assign status = status | add_hash_key: 'valid', false
+  else
+    assign status = r.model_create
+    assign status = status | add_hash_key: 'valid', true
+  endif
+
+  export status
+%}

@@ -1,0 +1,4 @@
+{% liquid
+  graphql item  = 'items/search', id: id, limit: 1 | fetch: 'items' | fetch: 'results' | first
+  export item
+%}

@@ -1,0 +1,15 @@
+{% parse_json object %}
+  {
+    "id":          {{ object.id | json }},
+    "name":        {{ object.name | json }},
+    "cover_photo": {{ object.cover_photo | json }},
+    "tags":        {{ object.tags | split: ',' }},
+    "description": {{ object.description | default: "" | json }},
+    "type":        {{ object.type | default: "" | json }},
+    "price":       {{ object.price | plus: 0 }}
+  }
+{% endparse_json %}
+
+{% liquid
+  export object
+%}

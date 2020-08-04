@@ -1,8 +1,9 @@
 {% comment %}
   @params
-    hash
+    contract - { errors: {}, valid: true }
     field_name
     message:
+    key: i18n to be resolved into message
 {% endcomment %}
 
 {% liquid
@@ -12,8 +13,12 @@
     assign msg = message
   endif
 
-  assign list = hash[field_name] | default: '[]' | parse_json
-  assign list = list | add_to_array: msg
+  assign errors = contract.errors
 
-  assign hash = hash | add_hash_key: field_name, list
+  assign field_erorrs = errors[field_name] | default: '[]' | parse_json
+  assign field_erorrs = field_erorrs | add_to_array: msg
+
+  assign errors = errors | add_hash_key: field_name, field_erorrs
+
+  assign contract = contract | add_hash_key: 'valid', false
 %}

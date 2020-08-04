@@ -5,11 +5,11 @@
 
   if context.exports.event.valid
     include 'lib/events/create', event: context.exports.event
-    include 'lib/events/broadcast', event: context.exports.event
+    log context.exports.event.payload.type, type: 'info.events.created'
 
-    log context.exports.event.payload.type, type: 'showme EVENT'
+    include 'lib/events/broadcast', event: context.exports.event
   else
-    log context.exports.event, type: 'EventCreate error:'
+    log context.exports.event, type: 'errors.events.invalid'
   endif
 %}
 {% endbackground %}

@@ -41,5 +41,5 @@
 </form>
 
 {% if order.errors.base %}
-  <h3 class="text-red-400">{{ order.errors.base | t }}</h3>
+  <h3 class="text-red-400">{{ order.errors.base | join: ', ' }}</h3>
 {% endif %}

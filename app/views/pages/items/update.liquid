@@ -3,21 +3,27 @@ method: post
 ---
 {% liquid
   include 'lib/must_be_authenticated'
-  include 'lib/items/search', id: context.params.item.id
-  include 'lib/items/validate', item: params.item, owner: context.exports.item.owner.id
 
-  if context.exports.item.valid
-    include 'lib/items/update', item: context.exports.item
-    include 'lib/events/create-event', type: 'item_updated', actor_id: context.current_user.id, object_id: context.exports.item.id
+  include 'lib/queries/items/find', id: context.params.item.id
 
-    include 'lib/flash/publish', notice: 'app.item_updated'
-    assign item_url = '/items/show?id=' | append: context.exports.item.id
-    redirect_to item_url
-    break
+  include 'lib/commands/items/update/build', object: context.params.item
+  include 'lib/commands/items/update/check', object: context.exports.object
+
+  if context.exports.object.valid
+    include 'lib/commands/items/update/execute', object: context.exports.object
+
+    if context.exports.object.valid
+      assign object = context.exports.object
+
+      include 'lib/events/create-event', type: 'item_updated', actor_id: context.current_user.id, object_id: context.exports.object.id
+
+      assign url = '/items/show?id=' | append: object.id
+      include 'redirect_to', url: url, notice: 'app.items.updated'
+    endif
   else
     include 'lib/items/main'
-    include 'lib/items/photos/presigned_url'
+    include 'lib/queries/presigned_url'
 
-    include 'theme/simple/items/edit', item: context.exports.item
+    include 'theme/simple/items/edit', item: context.exports.object
   endif
 %}

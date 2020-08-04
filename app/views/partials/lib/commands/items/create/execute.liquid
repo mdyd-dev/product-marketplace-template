@@ -1,0 +1,15 @@
+<!-- push to background -->
+{% liquid
+  graphql r= 'items/create', args: object
+
+  if r.errors
+    log r.errors, type: 'errors.graphql.invalid'
+    assign object = object | add_hash_key: 'errors', r.errors
+    assign object = object | add_hash_key: 'valid', false
+  else
+    assign object = r.model_create
+    assign object = object | add_hash_key: 'valid', true
+  endif
+
+  export object
+%}
