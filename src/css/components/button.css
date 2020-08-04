@@ -10,11 +10,11 @@
   @apply text-white bg-blue-600;
 }
 
-.button-secondary {
+.button.button-secondary {
   @apply text-blue-500 bg-white border-2 border-blue-500;
 }
 
-.button-secondary:hover  {
+.button.button-secondary:hover  {
   @apply bg-blue-100 border-blue-600;
 }
 
