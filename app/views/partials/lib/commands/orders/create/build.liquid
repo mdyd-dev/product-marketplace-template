@@ -1,0 +1,20 @@
+{% comment %}
+  params: @item
+          @current_user_id
+{% endcomment %}
+
+{% assign total = item.price | default: 0 %}
+
+{% parse_json order %}
+{
+  "item_id": "{% print item.id %}",
+  "buyer":   "{% echo current_user_id %}",
+  "seller":  "{% echo item.owner.id %}",
+  "total":    {% echo total %},
+  "name":  "init"
+}
+{% endparse_json %}
+
+{% liquid
+  export order
+%}

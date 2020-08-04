@@ -1,6 +1,3 @@
-{% assign actor_id = actor_id | default: 'anonymous' %}
-{% assign object_id = object_id | default: 'n/a' %}
-
 {% parse_json payload %}
   {
     "type": {{ type | json }},

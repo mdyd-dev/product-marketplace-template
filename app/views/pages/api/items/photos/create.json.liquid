@@ -3,6 +3,12 @@ slug: api/items/photos
 method: post
 ---
 {% liquid
-  include 'lib/items/photos/create', photo: context.params.photo
-  include 'theme/json/shared/show', object: context.exports.object
+  include 'lib/commands/item_photos/create/build', object: context.params.photo
+  include 'lib/commands/item_photos/create/check', object: context.exports.object
+
+  if context.exports.object.valid
+    include 'lib/commands/item_photos/create/execute', object: context.exports.object
+
+    include 'theme/json/shared/show', object: context.exports.object
+  endif
 %}

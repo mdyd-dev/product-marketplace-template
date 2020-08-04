@@ -1,0 +1,13 @@
+{% liquid
+  graphql result = 'sessions/create', email: object.email, password: object.password
+
+  if result.errors.size > 0
+    assign errors = '{}' | parse_json
+    assign valid = false
+
+    include 'lib/register_error', hash: errors, field_name: 'email', key: 'app.errors.session_create_failed'
+
+    export errors, namespace: 'object'
+    export valid, namespace: 'object'
+  endif
+%}

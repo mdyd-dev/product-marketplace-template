@@ -1,6 +1,0 @@
-{% liquid
-  include 'lib/items/photos/validate', object: photo
-  if context.exports.object.valid
-    include 'lib/items/photos/save', object: context.exports.object
-  endif
-%}

@@ -1,4 +1,4 @@
-mutation create($item_id: String, $buyer: String, $total: Int, $seller: String) {
+mutation create($item_id: String!, $buyer: String!, $total: Int!, $seller: String!) {
   model_create(
     model: {
       model_schema_name: "order"

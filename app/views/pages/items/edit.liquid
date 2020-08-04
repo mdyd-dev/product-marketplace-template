@@ -2,8 +2,9 @@
   include 'lib/must_be_authenticated'
 
   include 'lib/items/main'
-  include 'lib/items/photos/presigned_url'
-  include 'lib/items/search', id: context.params.id
+  include 'lib/queries/items/find', id: context.params.id
+
+  include 'lib/queries/presigned_url'
 
   if context.exports.item
     include 'theme/simple/items/edit', item: context.exports.item, icons: context.exports.lib.icons

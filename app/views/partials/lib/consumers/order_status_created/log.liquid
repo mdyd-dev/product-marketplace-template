@@ -1,6 +1,6 @@
 {% liquid
-  include 'lib/orders/search', id: context.params.order_id
-  include 'lib/items/search', id: context.exports.order.properties.item_id
+  include 'lib/queries/orders/find', id: context.params.order_id
+  include 'lib/queries/items/find', id: context.exports.order.properties.item_id
 
   assign order_status = context.exports.order.status.properties.name
   if order_status == 'app.order_statuses.paid'

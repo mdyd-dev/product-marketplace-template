@@ -2,13 +2,15 @@
 method: post
 ---
 {% liquid
-  include 'lib/sessions/validate', object: context.params.user
+  include 'lib/commands/sessions/create/build', object: context.params.user
+  include 'lib/commands/sessions/create/check', object: context.exports.object
 
   if context.exports.object.valid
-    include 'lib/sessions/create', object: context.exports.object
+    include 'lib/commands/sessions/create/execute', object: context.exports.object
 
     if context.exports.object.valid
-      redirect_to '/'
+
+      include 'redirect_to', url: '/', notice: 'app.sessions.created'
     else
       include 'theme/simple/sessions/new', object: context.exports.object
     endif

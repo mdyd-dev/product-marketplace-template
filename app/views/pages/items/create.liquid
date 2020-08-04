@@ -3,21 +3,28 @@ method: post
 ---
 {% liquid
   include 'lib/must_be_authenticated'
-  include 'lib/items/validate', item: params.item, owner: context.current_user.id
 
-  if context.exports.item.valid
-    include 'lib/items/save', item: context.exports.item
-    include 'lib/events/create-event', type: 'item_created', actor_id: context.current_user.id, object_id: context.exports.item.id
+  include 'lib/commands/items/create/build', object: context.params.item, owner: context.current_user.id
+  include 'lib/commands/items/create/check', object: context.exports.object
 
-    include 'lib/flash/publish', notice: 'app.item_created'
-    assign item_url = '/items/show?id=' | append: context.exports.item.id
-    redirect_to item_url
-    break
+  if context.exports.object.valid
+    include 'lib/commands/items/create/execute', object: context.exports.object
+
+    if context.exports.object.valid
+      assign object = context.exports.object
+
+      include 'lib/events/create-event', type: 'item_created', actor_id: context.current_user.id, object_id: context.exports.object.id
+
+      assign url = '/items/show?id=' | append: object.id
+      include 'redirect_to', url: url, notice: 'app.items.created'
+    endif
   else
     include 'lib/items/main'
-    include 'lib/items/photos/presigned_url'
+    include 'lib/queries/presigned_url'
 
-    include 'theme/simple/items/new', item: context.exports.item, icons: context.exports.lib.icons
+    include 'theme/simple/items/new', item: context.exports.object, icons: context.exports.lib.icons
   endif
 %}
+
+
 

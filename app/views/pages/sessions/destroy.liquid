@@ -2,6 +2,6 @@
 method: post
 ---
 {% liquid
-  include 'lib/sessions/destroy'
-  redirect_to '/'
+  include 'lib/commands/sessions/destroy/execute'
+  include 'redirect_to', url: '/', notice: 'app.session.destroyed'
 %}

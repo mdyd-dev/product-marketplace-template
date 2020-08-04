@@ -1,9 +1,8 @@
 <div class="flex">
-  <div class="m-2 w-1/5 {%if contract.success%}text-green-500{%else%}text-red-800{%endif%}">
+  <div class="m-2 w-2/6 {%if contract.success%}text-green-500{%else%}text-red-800{%endif%}">
     {{ name | replace: 'test/', '' }}
-    <small> {% if contract.success %} [PASSED] {% else %} [FAILED] {% endif %} </small>
   </div>
-  <div class="w-4/5">
+  <div class="w-4/6">
     {% for e in contract.errors %}
       <div class="flex">
         <div class="w-1/6 m-2"> {{ e[0] }} </div>
