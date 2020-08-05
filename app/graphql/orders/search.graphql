@@ -17,7 +17,8 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id
   ){
     total_entries
     results {
-      id created_at
+      id
+      created_at
 
       total: property(name: "total")
 

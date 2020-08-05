@@ -1,5 +1,5 @@
 {% liquid
-  graphql orders = 'orders/search', limit: 20, page: 1, buyer: buyer, item_id: item_id, status: status | fetch: 'orders'
+  graphql orders = 'orders/search', limit: limit, page: 1, buyer: buyer, item_id: item_id, status: status | fetch: 'orders'
 
   export orders
 %}

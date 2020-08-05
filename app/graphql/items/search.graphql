@@ -4,6 +4,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
     filter: {
       id: {value: $id},
       model_schema_name: {value: "item"},
+      deleted_at: { exists: false }
       properties: [
         { name: "tags", contains: $tag },
         { name: "owner", value: $owner }
@@ -47,7 +48,6 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
         order_status: related_model(join_on_property: "id", foreign_property: "order_id", model_schema_name: "order_status") {
           id
           created_at
-          properties
         }
       }
 

@@ -5,12 +5,13 @@ query users($id: ID, $email: String, $limit: Int = 1){
       email: { value: $email }
       id: { value: $id }
     }
+    sort: [{ id: { order: ASC } }]
   ){
     total_entries
     results {
       id
       email
-      properties
+      created_at
     }
   }
 }

@@ -5,7 +5,7 @@
     <tr>
       <td>{% print user.id %}</td>
       <td>{% print user.email %}</td>
-      <td>{% print user.created_at  %}</td>
+      <td>{% echo user.created_at | l %}</td>
     </tr>
   {% endfor %}
 </table>
@@ -15,21 +15,22 @@
   {% for item in items.results %}
     <tr>
       <td>{% print item.id %}</td>
-      <td>{% print item.created_at  %}</td>
+      <td>{% echo item.created_at | l %}</td>
       <td>{% print item.name %}</td>
-      <td>{% print item.status.name %}</td>
+      <td>{% echo item.status.name  %}</td>
+      <td>{% echo item.status.created_at  %}</td>
     </tr>
   {% endfor %}
 </table>
 
-<h2>orderitems</h2>
+<h2>orders</h2>
 <table class="table">
   {% for order in orders.results %}
     <tr>
       <td>{% print order.id %}</td>
-      <td>{% print order.created_at  %}</td>
+      <td>{% echo order.created_at | l %}</td>
       <td>{% print order.item_id %}</td>
-      <td>{% print order.status.name %}</td>
+      <td>{% echo order.status.name | default: 'missing' | t %}</td>
     </tr>
   {% endfor %}
 </table>
