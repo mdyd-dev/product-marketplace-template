@@ -1,15 +1,15 @@
 <!-- push to background -->
 {% liquid
-  graphql r = 'orders/create', args: order
+  graphql r = 'orders/create', args: object
 
   if r.errors
     log r.errors, type: 'errors.graphql.invalid'
-    assign order = order | add_hash_key: 'errors', r.errors
-    assign order = order | add_hash_key: 'valid', false
+    assign object = object | add_hash_key: 'errors', r.errors
+    assign object = object | add_hash_key: 'valid', false
   else
-    assign order = r.model_create
-    assign order = order | add_hash_key: 'valid', true
+    assign object = r.model_create
+    assign object = object | add_hash_key: 'valid', true
   endif
 
-  export order
+  export object
 %}

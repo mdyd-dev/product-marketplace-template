@@ -5,7 +5,7 @@
 
 {% assign total = item.price | default: 0 %}
 
-{% parse_json order %}
+{% parse_json object %}
 {
   "item_id": "{% print item.id %}",
   "buyer":   "{% echo current_user_id %}",
@@ -16,5 +16,5 @@
 {% endparse_json %}
 
 {% liquid
-  export order
+  export object
 %}

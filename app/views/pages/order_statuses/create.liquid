@@ -18,6 +18,8 @@ slug: order_statuses/create
       include "redirect_to", url: "/dashboard", notice: 'app.order.status.updated'
       break
     else
+      echo context.exports.object
+      break
       include "redirect_to", url: "/500", error: 'app.errors.500'
     endif
   else

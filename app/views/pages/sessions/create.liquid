@@ -9,7 +9,6 @@ method: post
     include 'lib/commands/sessions/create/execute', object: context.exports.object
 
     if context.exports.object.valid
-
       include 'redirect_to', url: '/', notice: 'app.sessions.created'
     else
       include 'theme/simple/sessions/new', object: context.exports.object

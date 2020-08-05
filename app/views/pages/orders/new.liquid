@@ -4,7 +4,7 @@
   include 'lib/queries/items/find', id: context.params.item_id
 
   include 'lib/commands/orders/create/build', item: context.exports.item, current_user_id: context.current_user.id
-  include 'lib/commands/orders/create/check', order: context.exports.order
+  include 'lib/commands/orders/create/check', object: context.exports.object
 
-  include 'theme/simple/orders/new', item: context.exports.item, order: context.exports.order
+  include 'theme/simple/orders/new', item: context.exports.item, order: context.exports.object
 %}

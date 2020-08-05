@@ -10,6 +10,30 @@ mutation create($item_id: String!, $buyer: String!, $total: Int!, $seller: Strin
       ]
     }
   ){
-    id properties
+    id
+    total: property(name: "total")
+
+    buyer: related_user(join_on_property: "buyer", foreign_property: "id") {
+      id
+      email
+    }
+
+    seller: related_user(join_on_property: "seller", foreign_property: "id") {
+      id
+      email
+    }
+
+    item: related_model(join_on_property: "item_id", foreign_property: "id", model_schema_name: "item") {
+      id
+      created_at
+      name: property(name: "name")
+      price: property(name: "price")
+    }
+
+    status: related_model(join_on_property: "id", foreign_property: "order_id", model_schema_name: "order_status") {
+      id
+      created_at
+      name: property(name: "name")
+    }
   }
 }
