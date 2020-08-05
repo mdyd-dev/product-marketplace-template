@@ -1,5 +1,5 @@
-<form action="/s" class="flex my-6">
-  <div class="flex-1 w-auto">
+<form action="/s" class="flex flex-wrap my-6">
+  <div class="w-full md:flex-1 md:w-auto">
     <label for="k" class="block mb-1 text-gray-600 capitalize">Keywords</label>
     <input class="w-full form-input"
       name="k"
@@ -9,9 +9,9 @@
       placeholder="Search" />
   </div>
 
-  <div class="w-auto mx-6">
+  <div class="w-full my-6 md:my-0 md:mx-6 md:w-auto">
     <label for="tag" class="block mb-1 text-gray-600 capitalize">Category</label>
-    <select class="form-select" id="tag" name="tag">
+    <select class="w-full form-select" id="tag" name="tag">
       <option value="" class="text-gray-600">All categories</option>
       {% for tag in filters.tags %}
         <option value="{{ tag }}" {% if query.tag == tag %}selected{% endif %}>{{ tag }}</option>
@@ -19,5 +19,5 @@
     </select>
   </div>
 
-  <button name="submit" value="search" class="mt-auto text-center button">Search</button>
+  <button name="submit" value="search" class="w-full md:mt-auto md:w-auto button">Search</button>
 </form>

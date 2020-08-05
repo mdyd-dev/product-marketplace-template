@@ -15,7 +15,12 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      padding: '0'
+      padding: {
+        default: '1rem',
+        sm: '1rem',
+        lg: '0',
+        xl: '0',
+      },
     },
     extend: {
       colors: {
