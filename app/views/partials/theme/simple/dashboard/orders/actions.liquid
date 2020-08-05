@@ -40,10 +40,3 @@
   </form>
 {% endif %}
 
-    <form action="/order_statuses/create" method="post" class="mt-2">
-      {% include 'authenticity_token' %}
-      <input type="hidden" name="status" value="app.order_statuses.paid"/>
-      <input type="hidden" name="order_id" value="{{ order.id }}"/>
-
-      <button class="button button-sm">{{ 'app.pay' | t }}</button>
-    </form>
