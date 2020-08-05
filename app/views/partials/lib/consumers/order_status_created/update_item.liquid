@@ -10,9 +10,8 @@
 
     if context.exports.object.valid
       include 'lib/commands/item_statuses/create/execute', object: context.exports.object
-      log context.exports.object, type: 'showme from consumers'
     else
-      log context.exports.object, type: 'showme'
+      log context.exports.object, type: 'ERROR 500'
     endif
   endif
 %}

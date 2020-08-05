@@ -2,8 +2,7 @@
   graphql r = 'item_statuses/create', args: object
 
   if r.errors
-    log object, type: 'errors.graphql.invalid item-statuses-create-execute'
-    log r.errors, type: 'errors.graphql.invalid item-statuses-create-execute'
+    log r.errors, type: 'errors.graphql.invalid'
     assign object = object | add_hash_key: 'errors', r.errors
     assign object = object | add_hash_key: 'valid', false
   else
