@@ -55,7 +55,7 @@ en:
       too_little: "has to be equal or greater than %{value}"
       taken: already taken
       session_create_failed: Invalid email or password
-      unauthorized: The system has determined that <b class="text-xl">you are not</b> presently <b class="text-xl">authorized</b> to use this system function.
+      unauthorized: The system has determined that <span class="font-semibold">you are not</span> presently <span class="font-semibold">authorized</span> to use this system function.
       unauthenticated: Please sign in with you credentials or register new account before proceeding.
 
     confirm-delete: Are you sure you want to delete this item?
