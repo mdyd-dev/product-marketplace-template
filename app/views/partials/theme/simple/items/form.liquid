@@ -10,17 +10,18 @@
 
 <section class="text-gray-700 body-font">
   <div class="container flex flex-wrap items-center mx-auto">
-    <form action="/items/{{ path }}" method="post" class="w-1/2 p-8 bg-gray-200 rounded-lg">
+    <form action="/items/{{ path }}" method="post" class="w-1/2 p-8 bg-gray-200 rounded-lg shadow-md">
       {% include 'authenticity_token' %}
 
       {% if item.id %}
-        <input type="hidden" name="item[id]" value="{{ item.id }}" />
+      <input type="hidden" name="item[id]" value="{{ item.id }}" />
       {% endif %}
       <input type="hidden" name="item[uuid]" value="{{ item_uuid }}" />
 
       <div class="my-3">
         <label class="block" for="name">Name</label>
-        <input class="w-2/3 form-input" type="text" id="name" name="item[name]" value="{{ item.name }}" autofocus />
+        <input class="w-2/3 form-input" type="text" id="name" name="item[name]" value="{{ item.name }}" autofocus
+          required />
         {% if item.errors.name %}
         <span class="text-red-800">{{ item.errors.name }}</span>
         {% endif %}
@@ -36,8 +37,8 @@
 
       <div class="mt-3">
         <label class="block" for="description">Description</label>
-        <textarea class="w-full form-input" type="text" id="description" name="item[description]"
-          rows="3">{{ item.description }}</textarea>
+        <textarea class="w-full form-input" type="text" id="description" name="item[description]" rows="3"
+          required>{{ item.description }}</textarea>
 
         {% if item.errors.description %}
         <span class="text-red-800">{{ item.errors.description }}</span>
@@ -46,8 +47,7 @@
 
       <div class="mt-3">
         <label class="block" for="tags">Tags</label>
-        <input class="w-full form-input" type="text" id="tags" name="item[tags]"
-          value="{{ item.tags | join: ',' }}" />
+        <input class="w-full form-input" type="text" id="tags" name="item[tags]" value="{{ item.tags | join: ',' }}" />
         {% if item.errors.tags %}
         <span class="text-red-800">{{ item.errors.tags }}</span>
         {% endif %}

@@ -1,12 +1,12 @@
 <section class="overflow-hidden text-gray-700 body-font">
   <div class="container">
     <div class="flex flex-wrap">
-      <div class="relative w-1/2">
+      <div class="relative w-full">
         {%- assign dummy_url = 'https://dummyimage.com/800x4:3/eee/000&text=' | append: item.name %}
         {%- assign cover_url = item.photos.last.photo.url | default: dummy_url %}
-        <img alt="{{ item.name }}" class="object-cover object-center w-full h-64 rounded lg:h-auto"
+        <img alt="{{ item.name }}" class="object-center w-full h-full rounded"
           src="{{ cover_url }}">
-        <img alt="{% print item.name %}" class="absolute top-0 left-0 w-10 h-10 mt-2 ml-2 opacity-50"
+        <img alt="{{ item.name }}" class="absolute top-0 left-0 w-10 h-10 mt-2 ml-2 opacity-50"
           src="{{ 'images/icons/' | append: item.cover_photo | append: '.svg' | asset_url }}" />
       </div>
 
@@ -16,7 +16,7 @@
         </h2>
 
         <h1 class="mb-1 text-3xl font-medium">
-          {% print item.name %}
+          {{ item.name }}
         </h1>
 
         <div class="flex flex-wrap mb-4">
@@ -30,9 +30,9 @@
           {%- endif %}
         </div>
 
-        <p class="mt-4 leading-relaxed">{% print item.description %}</p>
+        <p class="mt-4 leading-relaxed">{{ item.description }}</p>
 
-        <div class="flex">
+        <div class="flex mt-4">
           <span class="text-2xl font-medium text-gray-900 ">{{ item.price | pricify }}</span>
 
           {% if item.status.name != 'app.item_statuses.sold' %}
