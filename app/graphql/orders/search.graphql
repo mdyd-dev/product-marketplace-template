@@ -37,6 +37,12 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id
         created_at
         name: property(name: "name")
         price: property(name: "price")
+
+        status: related_model(join_on_property: "id", foreign_property: "item_id", model_schema_name: "item_status") {
+          id
+          created_at
+          name: property(name: "name")
+        }
       }
 
       status: related_model(join_on_property: "id", foreign_property: "order_id", model_schema_name: "order_status") {

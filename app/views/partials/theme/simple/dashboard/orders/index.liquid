@@ -21,7 +21,12 @@
       {% for order in orders.results %}
         <tr>
           <td class="px-4 py-2 border-b">{{ order.created_at | l }}</td>
-          <td class="px-4 py-2 border-b"><a href="/items/show?id={{ order.item.id }}">{{ order.item.name }}</a></td>
+          <td class="px-4 py-2 border-b">
+            <a href="/items/show?id={{ order.item.id }}">
+              {{ order.item.name }}
+              <small> {% echo order.item.status.name | default: 'app.item_statuses.none' | t %}</small>
+            </a>
+          </td>
           <td class="px-4 py-2 border-b">{{ order.seller.email | split: '@' | first }}</td>
           <td class="px-1 py-1 border-b">=></td>
           <td class="px-4 py-2 border-b">{{ order.buyer.email | split: '@' | first }}</td>

@@ -41,6 +41,10 @@ en:
     dashboard-items:
       list-your-first-item: List your first item
 
+    item_statuses:
+      sold: sold
+      none: missing
+
     order_statuses:
       order_status: status
       pending_payment: pending
