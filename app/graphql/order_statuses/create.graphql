@@ -9,6 +9,9 @@ mutation create($order_id: String!, $name: String!, $timestamp: String!) {
       ]
     }
   ){
-    id properties
+    id
+    order_id: property(name: "order_id")
+    timestamp: property(name: "timestamp")
+    name: property(name: "name")
   }
 }
