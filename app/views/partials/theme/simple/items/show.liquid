@@ -1,12 +1,13 @@
 <section class="overflow-hidden text-gray-700 body-font">
   <div class="container">
     <div class="flex flex-wrap">
-      <div class="relative w-full">
+      <div class="relative w-full md:w-1/2">
         {%- assign dummy_url = 'https://dummyimage.com/800x4:3/eee/000&text=' | append: item.name %}
         {%- assign cover_url = item.photos.last.photo.url | default: dummy_url %}
         <img alt="{{ item.name }}" class="object-center w-full h-full rounded"
           src="{{ cover_url }}">
-        <img alt="{{ item.name }}" class="absolute top-0 left-0 w-10 h-10 mt-2 ml-2 opacity-50"
+
+        <img alt="{{ item.type }}" class="absolute top-0 left-0 w-10 h-10 mt-2 ml-2 opacity-50"
           src="{{ 'images/icons/' | append: item.cover_photo | append: '.svg' | asset_url }}" />
       </div>
 
@@ -22,7 +23,7 @@
         <div class="flex flex-wrap mb-4">
           {%- if item.tags.size > 0 %}
           <ul class="flex w-full tags">
-            <li><strong>tags: </strong></li>
+            <li><span class="font-semibold">tags: </span></li>
             {%- for tag in item.tags %}
               <li class="ml-2">{{ tag }}</li>
             {%- endfor %}
