@@ -10,9 +10,9 @@ method: post
     include 'lib/commands/users/create/execute', object: context.exports.object
 
     if context.exports.object.valid
-      include 'lib/sessions/create', object: context.exports.object
+      include 'lib/commands/sessions/create/execute', object: context.exports.object
 
-      include 'lib/events/create-event', type: 'account_created', actor_id: context.exports.object.id
+      include 'lib/commands/events/create', type: 'account_created', actor_id: context.exports.object.id
 
       include 'redirect_to', url: '/dashboard', notice: 'app.account.created'
     else

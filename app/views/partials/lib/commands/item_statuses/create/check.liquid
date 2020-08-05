@@ -1,8 +1,8 @@
 {% liquid
   assign c = '{ "errors": {}, "valid": true }' | parse_json
 
-  if object.order_id == blank
-    include 'lib/register_error', contract: c, field_name: 'order_id', key: 'app.errors.blank'
+  if object.item_id == blank
+    include 'lib/register_error', contract: c, field_name: 'item_id', key: 'app.errors.blank'
   endif
 
   if object.name == blank
