@@ -1,4 +1,4 @@
-{% parse_json payload %}
+{% parse_json object %}
   {
     "type": {{ type | json }},
     "object": {
@@ -15,5 +15,5 @@
 {%  endparse_json %}
 
 {% liquid
-  export payload, namespace: 'event'
+  export object
 %}

@@ -13,7 +13,7 @@ method: post
     if context.exports.object.valid
       assign object = context.exports.object
 
-      include 'lib/events/create-event', type: 'item_created', actor_id: context.current_user.id, object_id: context.exports.object.id
+      include 'lib/commands/events/create', type: 'item_created', actor_id: context.current_user.id, object_id: context.exports.object.id
 
       assign url = '/items/show?id=' | append: object.id
       include 'redirect_to', url: url, notice: 'app.items.created'

@@ -4,15 +4,24 @@ slug: order_statuses/create
 ---
 
 {% liquid
-  include 'lib/orders/search', id: context.params.order_id
-  include 'lib/order_statuses/validate', order: context.exports.order, current_user_id: context.current_user.id, status: context.params.status
+  include 'lib/queries/orders/find', id: context.params.order_id
 
-  if context.exports.status.valid
-    include 'lib/order_statuses/create', status: context.exports.status
-    assign status = context.exports.status
-    include 'lib/events/create-event', type: 'order_status_created', actor_id: context.current_user.id, target_id: status.object.properties.order_id, object_id: status.object.id
+  include 'lib/commands/order_statuses/create/build', order: context.exports.order, current_user_id: context.current_user.id, name: context.params.status
+  include 'lib/commands/order_statuses/create/check', object: context.exports.object
+
+  if context.exports.object.valid
+    include 'lib/commands/order_statuses/create/execute', object: context.exports.object
+
+    if context.exports.object.valid
+      assign object = context.exports.object
+      include 'lib/commands/events/create', type: 'order_status_created', actor_id: context.current_user.id, target_id: object.order_id, object_id: object.id
+      include "redirect_to", url: "/dashboard", notice: 'app.order.status.updated'
+      break
+    else
+      include "redirect_to", url: "/500", error: 'app.errors.500'
+    endif
   else
-    echo context.exports.status
+    echo context.exports.object
     echo 'failed'
   endif
 %}

@@ -44,7 +44,7 @@ test(`Login Test`, async (t) => {
     .pressKey(clearField)
     .typeText(Selector('main').find('[name="item[price]"]'), item.price)
     .click(Selector('main').find('[name="item[cover_photo]"]'))
-    .click(Selector('main').find('option').withText('bandage'))
+    .click(Selector('main').find('option').withText('Bandage'))
     .click(Selector('main').find('button').withText('browse files'))
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
     .wait(1000)
@@ -76,7 +76,7 @@ test(`Login Test`, async (t) => {
     .pressKey(clearField)
     .typeText(Selector('main').find('[name="item[price]"]'), editedItem.price)
     .click(Selector('main').find('[name="item[cover_photo]"]'))
-    .click(Selector('main').find('option').withText('car'))
+    .click(Selector('main').find('option').withText('Car'))
     .click(Selector('button[value="update"]'))
     .click(Selector('span').withText('MVP Marketplace'))
     .click(Selector('header').find('button').withText('Log out')); //Logging out from seller account

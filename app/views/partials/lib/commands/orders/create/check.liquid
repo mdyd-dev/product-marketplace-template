@@ -1,7 +1,6 @@
 {% assign MINIMAL_TOTAL = 10 %}
 
 {% liquid
-  assign valid = true
   assign c = '{ "errors": {}, "valid": true }' | parse_json
 
   if order.seller == order.buyer

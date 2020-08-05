@@ -1,0 +1,18 @@
+{% liquid
+  log event, type: 'showme from consumers'
+  include 'lib/queries/orders/find', id: event.
+  include 'lib/queries/items/find',  id: context.exports.order.properties.item_id
+
+  assign order_status = context.exports.order.status.properties.name
+  if order_status == 'app.order_statuses.paid'
+
+    include 'lib/item_statuses/create/build', item_id: context.exports.item.id, name: 'app.item_statuses.sold'
+    include 'lib/item_statuses/create/check', object: context.exports.object
+
+    if context.exports.object.valid
+      include 'lib/item_statuses/create/execute', object: context.exports.object
+    else
+      log context.exports.object, type: 'showme'
+    endif
+  endif
+%}
