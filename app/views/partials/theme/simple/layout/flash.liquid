@@ -1,11 +1,11 @@
 {% if error %}
-  <div class="mb-4 p-4 w-full text-red-800 p-8 border-2 border-gray-200 rounded-lg">
+  <div class="w-full p-4 p-8 mb-4 text-red-800 border-2 border-red-200 rounded-lg">
     {{ error | t }}
   </div>
 {% endif %}
 
 {% if notice %}
-  <div class="p-4 w-full text-gray-800 p-8 border-2 border-gray-200 rounded-lg">
+  <div class="w-full p-4 p-8 text-gray-800 border-2 border-red-200 rounded-lg">
     {{ notice | t }}
   </div>
 {% endif %}
