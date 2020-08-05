@@ -1,0 +1,10 @@
+{% comment %}
+  @params
+    uuid
+{% endcomment %}
+
+{% liquid
+  include 'lib/commands/activities/publish/build', uuid: uuid, type: type, ids: ids
+  include 'lib/commands/activities/publish/check', object: context.exports.object
+  include 'lib/commands/activities/publish/execute', object: context.exports.object
+%}

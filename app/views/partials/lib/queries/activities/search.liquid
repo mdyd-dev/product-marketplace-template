@@ -1,0 +1,4 @@
+{% liquid
+  graphql activities = 'activities/search', feed: feed, feed_id: feed_id | fetch: 'activities'
+  export activities
+%}

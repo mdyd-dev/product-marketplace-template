@@ -1,0 +1,8 @@
+query ac($feed_id: ID!, $feed: String!) {
+  activities: streams(feed_id: $feed_id, feed_type: $feed){
+    total_entries
+    results {
+      payload
+    }
+  }
+}

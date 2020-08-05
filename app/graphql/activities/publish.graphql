@@ -1,0 +1,3 @@
+mutation publish($uuid: ID!, $type: String!, $ids: [ID]!) {
+  activity_publish(feed_type: $type, ids: $ids, uuid: $uuid)
+}

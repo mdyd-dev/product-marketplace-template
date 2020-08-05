@@ -1,36 +1,43 @@
-<h3 class="mb-3 text-lg font-medium text-gray-900 title-font">Recent items</h3>
-<h2>users</h2>
-<table class="table">
-  {% for user in users.results %}
-    <tr>
-      <td>{% print user.id %}</td>
-      <td>{% print user.email %}</td>
-      <td>{% echo user.created_at | l %}</td>
-    </tr>
-  {% endfor %}
-</table>
+<div class="flex w-full">
+  <div class="w-3/4">
+    <h3 class="mb-3 text-lg font-medium text-gray-900 title-font">Recent items</h3>
+    <h2 class="mb-6 text-3xl font-medium">users</h2>
+    <table class="table-auto w-full">
+      {% for user in users.results %}
+        <tr>
+          <td class="px-4 py-2 border-b">{% print user.id %}</td>
+          <td class="px-4 py-2 border-b">{% print user.email %}</td>
+          <td class="px-4 py-2 border-b">{% echo user.created_at | l %}</td>
+        </tr>
+      {% endfor %}
+    </table>
 
-<h2>items</h2>
-<table class="table">
-  {% for item in items.results %}
-    <tr>
-      <td>{% print item.id %}</td>
-      <td>{% echo item.created_at | l %}</td>
-      <td>{% print item.name %}</td>
-      <td>{% echo item.status.name  %}</td>
-      <td>{% echo item.status.created_at  %}</td>
-    </tr>
-  {% endfor %}
-</table>
+    <h2 class="mb-6 text-3xl font-medium">items</h2>
+    <table class="table-auto w-full">
+      {% for item in items.results %}
+        <tr>
+          <td class="px-4 py-2 border-b">{% print item.id %}</td>
+          <td class="px-4 py-2 border-b">{% echo item.created_at | l %}</td>
+          <td class="px-4 py-2 border-b">{% print item.name %}</td>
+          <td class="px-4 py-2 border-b">{% echo item.status.name  %}</td>
+          <td class="px-4 py-2 border-b">{% echo item.status.created_at  %}</td>
+        </tr>
+      {% endfor %}
+    </table>
 
-<h2>orders</h2>
-<table class="table">
-  {% for order in orders.results %}
-    <tr>
-      <td>{% print order.id %}</td>
-      <td>{% echo order.created_at | l %}</td>
-      <td>{% print order.item_id %}</td>
-      <td>{% echo order.status.name | default: 'missing' | t %}</td>
-    </tr>
-  {% endfor %}
-</table>
+    <h2 class="mb-6 text-3xl font-medium">orders</h2>
+    <table class="table-auto w-full">
+      {% for order in orders.results %}
+        <tr>
+          <td class="px-4 py-2 border-b">{% print order.id %}</td>
+          <td class="px-4 py-2 border-b">{% echo order.created_at | l %}</td>
+          <td class="px-4 py-2 border-b">{% print order.item_id %}</td>
+          <td class="px-4 py-2 border-b">{% echo order.status.name | default: 'missing' | t %}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+  <div class="w-1/4">
+    {% include 'theme/simple/admin/activity_log', activities: activities %}
+  </div>
+</div>

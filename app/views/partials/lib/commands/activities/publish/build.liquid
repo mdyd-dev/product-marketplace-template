@@ -1,0 +1,11 @@
+{% parse_json object %}
+  {
+    "uuid": {{ uuid | json }},
+    "type": {{ type | default: "custom" | json }},
+    "ids":  {{ ids  | default: '1' | split: ',' }}
+  }
+{% endparse_json %}
+
+{% liquid
+  export object
+%}

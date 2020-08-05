@@ -5,6 +5,7 @@
   include 'lib/queries/users/search', limit: 10
   include 'lib/queries/orders/search', limit: 10
   include 'lib/queries/items/search', limit: 10
+  include 'lib/queries/activities/search', feed: "system", feed_id: "1"
 
-  include 'theme/simple/admin/recent', items: context.exports.items, users: context.exports.users, orders: context.exports.orders
+  include 'theme/simple/admin/recent', items: context.exports.items, users: context.exports.users, orders: context.exports.orders, activities: context.exports.activities
 %}
