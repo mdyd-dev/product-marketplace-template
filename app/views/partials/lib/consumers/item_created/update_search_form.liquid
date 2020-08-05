@@ -1,8 +1,4 @@
 {% liquid
-  log event, type: 'info.events.item_created'
   include 'lib/queries/items/find', id: event.object.id
-
-  log context.exports, type: 'info.events.item_created'
-
   include 'lib/search/update_search_form', tags: context.exports.item.tags
 %}
