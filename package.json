@@ -49,6 +49,7 @@
   "description": "eCommerece MVP POC Kubernetes Synergy",
   "author": "SpaceX",
   "license": "ISC",
+  "repository": "mdyd-dev/marketplace-template-poc",
   "dependencies": {
     "@uppy/aws-s3": "^1.6.9",
     "@uppy/core": "^1.12.2",
