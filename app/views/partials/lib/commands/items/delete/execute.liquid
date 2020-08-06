@@ -1,4 +1,8 @@
 <!--  background -->
 {% liquid
-  graphql result = 'items/delete', id: id
+  graphql result = 'items/delete', id: object.id
+
+  if result.errors
+  else
+  endif
 %}

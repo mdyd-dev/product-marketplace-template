@@ -1,0 +1,10 @@
+{% liquid
+  include 'lib/commands/items/delete/build', id: id
+  include 'lib/commands/items/delete/check',  object: context.exports.object
+
+  echo context.exports.object
+
+  if context.exports.object.valid
+    include 'lib/commands/items/delete/execute', object: context.exports.object
+  endif
+%}
