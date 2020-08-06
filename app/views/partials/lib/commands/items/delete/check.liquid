@@ -5,6 +5,10 @@
     include 'lib/register_error', contract: c, field_name: 'id', key: 'app.errors.blank'
   endif
 
+  if object.orders.size > 0
+    include 'lib/register_error', contract: c, field_name: 'base', key: 'app.errors.item_with_orders'
+  endif
+
   assign object = object | add_hash_key: 'valid', c.valid
   assign object = object | add_hash_key: 'errors', c.errors
 

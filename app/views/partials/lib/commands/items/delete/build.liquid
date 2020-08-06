@@ -1,9 +1,5 @@
-{% parse_json object %}
-{
-  "id": {{ id | json }}
-}
-{% endparse_json %}
-
 {% liquid
+  assign object = item
+
   export object
 %}

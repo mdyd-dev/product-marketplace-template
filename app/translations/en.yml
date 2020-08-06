@@ -61,6 +61,7 @@ en:
       session_create_failed: Invalid email or password
       unauthorized: The system has determined that <span class="font-semibold">you are not</span> presently <span class="font-semibold">authorized</span> to use this system function.
       unauthenticated: Please <b class="font-semibold">sign in</b> with you credentials or <b class="font-semibold">register</b> new account before continuing.
+      item_with_orders: The system has determined that <span class="font-semibold">your item</span> has <span class="font-semibold">open orders</span>. Cowardly refusing destroying.
 
     confirm-delete: Are you sure you want to delete this item?
     delete: Delete

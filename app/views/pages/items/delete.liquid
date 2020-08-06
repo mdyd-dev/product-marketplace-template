@@ -4,12 +4,16 @@ method: post
 {% liquid
   include 'lib/must_be_authenticated'
 
-  include 'lib/commands/items/delete', id: context.params.id
+  include 'lib/queries/items/find', id: context.params.id, withOrders: true
+  include 'lib/commands/items/delete', item: context.exports.item
 
   if context.exports.object.valid
     include 'redirect_to', url: '/dashboard/sell/items'
   else
-    echo context.exports.object
+    assign item_url = '/items/show?id=' | append: context.exports.object.id
+    assign error = context.exports.object.errors.base[0]
+
+    include 'redirect_to', url: item_url, error: error
   endif
 %}
 
