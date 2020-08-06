@@ -34,7 +34,7 @@ const uppy = Uppy({
       },
     },
   })
-  .use(Webcam, { target: Dashboard, countdown: 3, modes: ['picture'] })
+  .use(Webcam, { target: Dashboard, modes: ['picture'] })
   .use(GoldenRetriever)
   .use(AWSS3, {
     getUploadParameters() {
