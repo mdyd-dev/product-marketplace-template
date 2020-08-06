@@ -5,5 +5,5 @@ slug: s
 {% liquid
   include 'lib/queries/items/search', query: context.params, limit: 200
   include 'lib/search/main'
-  include 'theme/simple/home/index', items: context.exports.items, search: context.exports.search, filters: context.exports.search_form.properties
+  include 'theme/simple/home/index', items: context.exports.items, search: context.exports.search, filters: context.exports.search_form
 %}

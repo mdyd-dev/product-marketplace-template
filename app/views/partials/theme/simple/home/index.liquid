@@ -1,2 +1,5 @@
-{% include 'theme/simple/home/search_form', query: search.query, filters: filters %}
-{% include 'theme/simple/items/index', items: items %}
+<form action="/s" name="search">
+  {% include 'theme/simple/home/search_form', query: search.query, filters: filters %}
+  {% include 'theme/simple/home/sort_form', query: search.query, filters: filters %}
+  {% include 'theme/simple/items/index', items: items %}
+</form>
