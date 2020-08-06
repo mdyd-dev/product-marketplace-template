@@ -1,0 +1,24 @@
+{% parse_json data %}
+  {
+    "url": "https://{{ context.location.host }}/webhooks/account_updated",
+    "connect": "true",
+    "enabled_events": {
+       "0": "account.updated"
+    }
+  }
+{% endparse_json %}
+{% liquid
+  if data.indempotency_key == blank
+    assign indempotency_key = 20 | random_string
+    assign data = data | add_hash_key: "indempotency_key", indempotency_key
+  endif
+  graphql response = 'modules/stripe/api_call', template: 'modules/stripe/webhook_create', data: data
+  log response, type: 'webhooks/create api_call'
+  assign response = response | dig: 'api_call', 'response'
+
+  parse_json webhook
+    include 'modules/stripe/lib/api_response_mappers/webhook_create', response: response
+  endparse_json
+  graphql result = 'modules/stripe/model_create', object: webhook
+  log result, type: 'webhooks/create model_create'
+%}

@@ -1,0 +1,7 @@
+{% liquid
+  graphql result = "modules/stripe/accounts", external_id: context.current_user.id
+  log result
+  assign account = result | dig: 'accounts', 'results', 0
+
+  export account
+%}

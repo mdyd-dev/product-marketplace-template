@@ -1,0 +1,42 @@
+---
+name: webhook_create
+to: https://api.stripe.com/v1/webhook_endpoints
+enabled: true
+format: https
+trigger_condition: true
+request_type: Post
+callback: >
+  {% liquid
+    assign response_data = response.body | to_hash
+    if response_data.error
+      log response_data.error, type: 'modules/payments/create_webhook'
+    endif
+  %}
+headers: >
+  {% if data %}
+    {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": "Bearer {{ context.constants.stripe_sk_key }}",
+      "Idempotency-Key": "{{ data.indempotency_key }}"
+    }
+  {% endif %}
+---
+{%- assign allowed_params = 'url,connect,disabled' | split: ',' -%}
+{%- assign request_params = '' | split: "|" -%}
+{%- for var in data -%}
+  {%- if var[1] != blank -%}
+    {%- if var[0] == 'enabled_events' and var[1].size > 0 -%}
+      {% log var[1], type: "ENABLED EVENTS" %}
+      {% assign event_hash = var[1] | to_hash %}
+      {% for event in event_hash %}
+        {%- capture pair %}enabled_events[{{ event[0] }}]={{ event[1] | url_encode }}{% endcapture -%}
+        {%- assign request_params = request_params | add_to_array: pair -%}
+      {% endfor %}
+    {% elsif allowed_params contains var[0] %}
+      {%- capture pair %}{{ var[0] }}={{ var[1] | url_encode }}{% endcapture -%}
+      {%- assign request_params = request_params | add_to_array: pair -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{% log request_params, type: "REQUEST PARAMS.........." %}
+{{ request_params | join: '&' | html_safe }}

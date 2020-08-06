@@ -1,0 +1,19 @@
+mutation create($external_id: String!, $gateway_id: String!, $state: String!, $queued: Boolean!) {
+  model: model_create(
+    model: {
+      model_schema_name: "modules/stripe/account"
+      properties: [
+        { name: "external_id" value: $external_id }
+        { name: "gateway_id" value: $gateway_id }
+        { name: "state" value: $state }
+        { name: "queued" value_boolean: $queued }
+      ]
+    }
+  ){
+    id
+    external_id: property(name: "external_id")
+    gateway_id: property(name: "gateway_id")
+    state: property(name: "state")
+    queued: property(name: "queued")
+  }
+}

@@ -1,0 +1,17 @@
+{% parse_json object %}
+  {
+    "stripe_account": { "stripe_user_id": "12345" }
+  }
+{% endparse_json %}
+
+{% liquid
+  include 'modules/stripe/lib/account/create/call', object: object
+
+  if context.exports.object.valid != true
+    include 'test/register_error', contract: contract, field_name: 'base', key: 'test.should.be_valid'
+  endif
+
+  if context.exports.object.gateway_id == blank
+    include 'test/register_error', contract: contract, field_name: 'gateway_id', key: 'test.should.not.be_null'
+  endif
+%}

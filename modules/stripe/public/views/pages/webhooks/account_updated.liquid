@@ -1,0 +1,14 @@
+---
+slug: webhooks/account_updated
+method: post
+layout_name: ''
+---
+{% liquid
+  include 'modules/stripe/lib/webhooks/account_updated/call'
+  if context.exports.object.valid
+    echo context.exports.object
+  else
+    response_status 403
+    echo context.exports.object
+  endif
+%}

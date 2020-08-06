@@ -1,0 +1,14 @@
+{% liquid
+  graphql g = 'modules/stripe/accounts', gateway_id: object.id
+  log object, type: 'webhooks/account_updated/save object'
+  assign account = g.accounts.results.first
+%}
+
+{% parse_json object %}
+  {
+    "raw_data": {{ object }},
+    "data": "{{ object | json | replace: '"', '\"' }}" },
+    "id": "{{ account.id }}"
+  }
+{% endparse_json %}
+{% export object %}

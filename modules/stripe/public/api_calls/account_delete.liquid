@@ -1,0 +1,23 @@
+---
+name: account_delete
+to: https://api.stripe.com/v1/accounts/{{ data.gateway_id }}/reject
+enabled: true
+format: https
+trigger_condition: true
+request_type: Post
+callback: >
+  {%- assign response_data = response.body | to_hash -%}
+  {% if response_data.error %}
+    {%- log response_data.error, type: 'modules/payments/delete_account' -%}
+  {% endif %}
+headers: >
+  {% if data %}
+    {%- include 'modules/stripe/shared/api_credentials' -%}
+    {
+      "Stripe-Account": "{{ data.gateway_id }}",
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": "Bearer {{ context.exports.payments.gateway.secret_key  }}"
+    }
+  {% endif %}
+---
+reason={{ data.reason | default: "other" }}

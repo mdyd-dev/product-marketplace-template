@@ -1,0 +1,14 @@
+name: webhook_endpoint
+properties:
+- name: gateway_id
+  type: string
+- name: enabled_events
+  type: array
+- name: livemode
+  type: boolean
+- name: status
+  type: string
+- name: url
+  type: string
+- name: secret
+  type: string

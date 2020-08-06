@@ -1,0 +1,25 @@
+{% parse_json data %}
+  {
+    "payouts_enabled": false,
+    "charges_enabled": false
+  }
+{% endparse_json %}
+{% parse_json object %}
+  {
+    "id": "123",
+    "raw_data": {{ data }},
+    "state": "pending"
+  }
+{% endparse_json %}
+
+{% liquid
+  include 'modules/stripe/lib/account/update/execute', object: object
+
+  comment
+    TODO: insert object into data to update
+  if context.exports.object.valid != true
+    echo context.exports.object
+    include 'test/register_error', contract: contract, field_name: 'base', key: 'test.should.be_valid'
+  endif
+  endcomment
+%}

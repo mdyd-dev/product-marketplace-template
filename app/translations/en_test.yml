@@ -1,0 +1,5 @@
+en:
+  test:
+    should:
+      not:
+        be_blank: should not be blank

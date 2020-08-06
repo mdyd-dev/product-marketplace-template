@@ -1,0 +1,27 @@
+{% liquid
+  assign t = object.stripe_signature[0] | split: '=' | last
+  assign secret = object.stripe_signature[1] | split: '=' | last
+  assign webhook_listen_url = "https://" | append: context.location.host | append: "/webhooks/account_updated"
+  log webhook_listen_url
+  graphql g = 'modules/stripe/webhook_endpoints', livemode: context.exports.payment.livemode, url: webhook_listen_url
+  assign last_webhook_config = g.webhook_endpoints.results.last
+  if last_webhook_config.id == blank
+    log "webhook_endpoint NOT FOUND", type: "ERROR"
+  endif
+  assign signed_payload = t | append: '.' | append: object.post_params
+  assign saved_secret = last_webhook_config.properties.secret
+  log saved_secret, type: "DEBUG webhooks secret"
+  assign signed_payload_hmac = signed_payload | compute_hmac: saved_secret
+  log secret, type: "DEBUG secret"
+  log signed_payload_hmac, type: "DEBUG signed_payload_hmac"
+  if secret == signed_payload_hmac
+    assign webhook_data = object.post_params | parse_json
+    assign webhook_name = params.type | replace: ".", "_"
+    assign gateway = context.exports.payments.gateway_name
+    assign object = webhook_data.data.object
+    assign object = object | add_hash_key: 'valid', true
+  else
+    assign object = '{"errors": { "token": ["secret not match"] }, "valid": false }' | parse_json
+  endif
+  export object
+%}

@@ -1,0 +1,17 @@
+mutation create($id: ID!, $state: String!) {
+  model_update(
+    id: $id,
+    model: {
+      model_schema_name: "modules/stripe/account"
+      properties: [
+        { name: "state" value: $state }
+      ]
+    }
+  ){
+    id
+    external_id: property(name: "external_id")
+    gateway_id: property(name: "gateway_id")
+    state: property(name: "state")
+    queued: property(name: "queued")
+  }
+}

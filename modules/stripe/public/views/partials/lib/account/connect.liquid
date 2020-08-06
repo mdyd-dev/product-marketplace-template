@@ -1,0 +1,5 @@
+{% include 'modules/stripe/lib/stripe_account/fetch/call', params: params %}
+
+{% if context.exports.object.valid %}
+  {% include 'modules/stripe/lib/account/create/call', object: context.exports.object %}
+{% endif %}

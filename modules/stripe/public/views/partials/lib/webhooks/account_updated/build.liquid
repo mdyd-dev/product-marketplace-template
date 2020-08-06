@@ -1,0 +1,7 @@
+{% parse_json object %}
+  {
+    "stripe_signature": {{ context.headers.HTTP_STRIPE_SIGNATURE | split: "," }},
+    "post_params": {{ context.post_params }}
+  }
+{% endparse_json %}
+{% export object %}

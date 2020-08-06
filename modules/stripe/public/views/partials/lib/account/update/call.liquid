@@ -1,0 +1,8 @@
+{% liquid
+  include 'modules/stripe/account/update/build', object: object
+  include 'modules/stripe/account/update/validate', object: context.exports.object
+
+  if context.exports.object.valid
+    include 'modules/stripe/account/update/execute', object: context.exports.object
+  endif
+%}

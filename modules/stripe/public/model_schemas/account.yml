@@ -1,0 +1,17 @@
+---
+name: account
+properties:
+- name: gateway_id
+  type: string
+- name: external_id
+  type: string
+- name: state
+  type: string
+- name: queued
+  type: boolean
+- name: last_errors
+  type: text
+- name: last_error
+  type: text
+- name: data
+  type: text

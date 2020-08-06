@@ -1,0 +1,14 @@
+{% parse_json data %}
+{
+  "external_id": "{{ current_user.id }}",
+  "gateway_id": "{{ object.stripe_account.stripe_user_id }}",
+  "state": "pending",
+  "queued": false,
+  "valid": true
+}
+{% endparse_json %}
+
+{% liquid
+  assign object = data
+  export object
+%}
