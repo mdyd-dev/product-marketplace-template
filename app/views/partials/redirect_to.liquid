@@ -1,5 +1,11 @@
 {% liquid
-    include 'lib/flash/publish', notice: notice, error: error
-    redirect_to url
-    break
+
+  if context.session.return_to
+    assign url = context.session.return_to
+    session return_to = null
+  endif
+
+  include 'lib/flash/publish', notice: notice, error: error
+  redirect_to url
+  break
 %}

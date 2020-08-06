@@ -1,8 +1,9 @@
 {% liquid
-  assign valid = true
-
   unless context.current_user
     include 'lib/flash/publish', error: 'app.errors.unauthenticated'
+
+    assign return_to = context.location.href
+    session return_to = return_to
 
     redirect_to '/sessions/new'
     break
