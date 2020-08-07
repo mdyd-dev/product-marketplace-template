@@ -22,7 +22,7 @@ method: post
     include 'lib/queries/categories'
     include 'lib/queries/presigned_url'
 
-    include 'theme/simple/items/new', item: context.exports.object, icons: context.exports.lib.icons
+    include 'theme/simple/items/new', item: context.exports.object, lib: context.exports.lib
   endif
 %}
 

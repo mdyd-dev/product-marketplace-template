@@ -21,6 +21,13 @@
         </h1>
 
         <div class="flex flex-wrap mb-4">
+          <ul class="flex w-full tags">
+            <li><span class="font-semibold">category: </span></li>
+            <li class="ml-2">{{ 'categories.' | append: item.category | t }}</li>
+          </ul>
+        </div>
+
+        <div class="flex flex-wrap mb-4">
           {%- if item.tags.size > 0 %}
           <ul class="flex w-full tags">
             <li><span class="font-semibold">tags: </span></li>

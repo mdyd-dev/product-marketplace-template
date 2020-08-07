@@ -1,5 +1,56 @@
-{% liquid
-  assign icons = 'lib.categories' | t
+{% comment %}
+  keys copied from translation/en_categories.yml in order  to keep specific order
+{% endcomment %}
+{%- capture categories -%}
+clothing
+clothing/children
+clothing/children/baby_clothes
+clothing/children/boy_clothes
+clothing/children/girl_clothes
+clothing/accessories
+clothing/accessories/bags
+clothing/accessories/children
+clothing/accessories/men
+clothing/accessories/women
+clothing/fancy_dress
+clothing/general
+clothing/lingerie
+clothing/lingerie/bodies
+clothing/lingerie/bras
+clothing/lingerie/combination_sets
+clothing/lingerie/nightwear
+clothing/lingerie/socks_n_hosiery
+clothing/lingerie/suspenders_n_garters
+clothing/lingerie/women_underwear
+clothing/men_clothing
+clothing/men_clothing/men_outerwear
+clothing/men_clothing/men_socks
+clothing/men_clothing/men_sportswear
+clothing/men_clothing/men_suits
+clothing/men_clothing/men_swimwear
+clothing/men_clothing/men_tops
+clothing/men_clothing/men_trousers
+clothing/men_clothing/men_underwear
+clothing/novelty_t_shirts
+clothing/shoes
+clothing/shoes/children_footwear
+clothing/shoes/men_footwear
+clothing/shoes/women_footwear
+clothing/women
+clothing/women/maternity
+clothing/women/women_dresses_n_skirts
+clothing/women/women_outerwear
+clothing/women/women_sportswear
+clothing/women/women_suits
+clothing/women/women_swimwear
+clothing/women/women_tops
+clothing/women/women_trousers
+{%- endcapture -%}
 
+{% liquid
+  assign categories = categories | replace_regex: "$", "," | replace_regex: "\n", "" | split: ","
+  assign icons = 'lib.categories' | t
+ 
   export icons, namespace: 'lib'
+  export categories, namespace: 'lib'
 %}

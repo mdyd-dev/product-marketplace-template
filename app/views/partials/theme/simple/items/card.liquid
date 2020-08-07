@@ -16,6 +16,9 @@
       <a href="/items/show?id={{ item.id }}">
         {{ item.name }}
       </a>
+      {% if item.category %}
+      <small>{{ 'categories.' | append: item.category | t }}</small>
+      {% endif %}
     </h2>
 
     <h3 class="mb-1 text-xs text-gray-500 ">{{ item.tags | join: ", " }}</h3>

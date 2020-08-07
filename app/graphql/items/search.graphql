@@ -1,4 +1,4 @@
-query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: String, $sort: ModelsSortInput = {created_at: {order: DESC}}, $withOrders: Boolean = false) {
+query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $category: String, $owner: String, $sort: ModelsSortInput = {created_at: {order: DESC}}, $withOrders: Boolean = false) {
   items: models(
     per_page: $limit,
     filter: {
@@ -8,6 +8,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
       properties: [
         { name: "tags", contains: $tag },
         { name: "owner", value: $owner }
+        { name: "category", starts_with: $category }
       ]
       or: [
         { properties: { name: "description", contains: $keyword } }
@@ -21,6 +22,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $owner: 
       uuid: property(name: "uuid")
       name: property(name: "name")
       type: property(name: "type")
+      category: property(name: "category")
       cover_photo: property(name: "cover_photo")
       description: property(name: "description")
       price: property_int(name: "price")

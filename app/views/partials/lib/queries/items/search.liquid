@@ -9,8 +9,18 @@
 }
 {% endparse_json %}
 
+{% parse_json query %}
+{
+  "limit": {{ limit | default: 20 }},
+  "keyword": {{ query.k | json }},
+  "tag": {{ query.tag | json }},
+  "sort": {{ sort_options[query.sort] | json }},
+  "category": {{ query.category | json }}
+}
+{% endparse_json %}
+
 {% liquid
-  graphql items = 'items/search', limit: limit, keyword: query.k, tag: query.tag, sort: sort_options[query.sort] | fetch: 'items'
+  graphql items = 'items/search', args: query | fetch: 'items'
 
   export query, namespace: "search"
   export items

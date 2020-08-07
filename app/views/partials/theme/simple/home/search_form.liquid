@@ -10,6 +10,18 @@
   </div>
 
   <div class="w-full my-6 md:my-0 md:mx-6 md:w-auto">
+    <select class="form-select" id="category" name="category">
+      {% for category in lib.categories %}
+        {% assign ident = category | split: '/' | size | minus: 1 | times: 2 %}
+        <option value="{{ category }}" {% if query.category == category %}selected{% endif %}>
+          {% for step in (1..ident) %} {{ "&nbsp;" }} {% endfor %}
+          {{ 'categories.' | append: category | t }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="w-full my-6 md:my-0 md:mx-6 md:w-auto">
     <label for="tag" class="block mb-1 text-gray-600 capitalize">Tags</label>
     <select class="w-full form-select" id="tag" name="tag">
       <option value="" class="text-gray-600">All tags</option>

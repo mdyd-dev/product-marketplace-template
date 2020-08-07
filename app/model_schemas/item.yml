@@ -16,3 +16,5 @@ properties:
     type: string
   - name: price
     type: integer
+  - name: category
+    type: string

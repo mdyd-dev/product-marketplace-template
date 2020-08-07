@@ -7,7 +7,7 @@
   include 'lib/queries/presigned_url'
 
   if context.exports.item
-    include 'theme/simple/items/edit', item: context.exports.item, icons: context.exports.lib.icons
+    include 'theme/simple/items/edit', item: context.exports.item, lib: context.exports.lib
   else
     include 'theme/simple/items/404'
   endif
