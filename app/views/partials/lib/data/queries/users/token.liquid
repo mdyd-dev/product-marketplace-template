@@ -1,0 +1,11 @@
+{% liquid
+  graphql r = 'users/token', email: email
+
+  if r.errors
+    log r.errors, type: 'showme'
+
+     return_rc r.user
+  endif
+
+  return_rc r.user
+%}

@@ -32,6 +32,7 @@ en:
         delta: Since yesterday
   app:
     title: MVP Marketplace
+    support_email: "support@getmarkeplace.co"
 
     total_entries: "Total items:"
     no_items_found: No items found
@@ -151,6 +152,10 @@ en:
     cancel: Cancel
     ship: Ship
 
+    emails:
+      passwords:
+        reset:
+          subject: Reset Password
     p-dashboard:
       selling: Selling
       buying: Buying
@@ -196,6 +201,11 @@ en:
 
     account:
       created: Your account has been created
+      reset_password:
+        title: Reset password
+        send_link: Send email with authentication link
+    authentication_links:
+      created: Please check your email. We have sent you a password resetting instructions.
 
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself

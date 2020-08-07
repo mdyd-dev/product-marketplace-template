@@ -1,0 +1,9 @@
+mutation email_send($data: HashObject!, $template: String!){
+  email_send(
+    template: { name: $template }
+    data: $data
+  ){
+    is_scheduled_to_send
+    errors { message }
+  }
+}

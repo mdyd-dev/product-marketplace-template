@@ -1,0 +1,11 @@
+mutation update_user($id: ID!, $password: String, $username: String) {
+  user: user_update(
+    id: $id
+    user: {
+      password: $password
+      properties: { name: "username", value: $username }
+    }
+  ){
+    id
+  }
+}

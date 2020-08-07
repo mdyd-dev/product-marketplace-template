@@ -1,0 +1,15 @@
+{% liquid
+  graphql r = "email_send", template: template, data: object
+
+  if r.errors
+    log r.errors, type: 'errors.graphql.invalid'
+
+    hash_assign object['valid'] = false
+    hash_assign object['errors'] = r.errors
+  else
+    assign object = r.user
+    hash_assign object['valid'] = true
+  endif
+
+  return_rc object
+%}

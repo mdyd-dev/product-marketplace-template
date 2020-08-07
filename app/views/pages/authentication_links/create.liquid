@@ -1,0 +1,14 @@
+---
+method: post
+---
+{% liquid
+  function_rc object = 'lib/commands/authentication_links/create', email: context.params.authentication_link.email, host: context.location.host
+
+  if object.valid
+    include 'lib/commands/emails/auth-link', object: object
+    include 'lib/commands/events/create', type: 'authentication_link_created', actor_id: object.id
+    include 'redirect_to', url: '/', notice: 'app.authentication_links.created'
+  else
+    include 'theme/simple/authentication_links/new', object: object
+  endif
+%}
