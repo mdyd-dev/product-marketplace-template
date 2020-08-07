@@ -68,10 +68,10 @@ en:
 
   lib:
     sort_options:
-      price_asc: Price Ascending
-      price_desc: Price Descending
-      name_asc: Name Ascending
-      name_desc: Name Descending
+      price_asc: Price from lowest
+      price_desc: Price from highest
+      name_asc: Name A-Z
+      name_desc: Name Z-A
       created_at_asc: The oldest first
       created_at_desc: The Most Recent
     categories:
