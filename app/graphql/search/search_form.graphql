@@ -8,6 +8,7 @@ query search_form($id: ID) {
     sort: { created_at: { order: DESC } }
   ){
     results {
+      id
       tags: property_array(name: "tags")
     }
   }

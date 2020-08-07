@@ -4,7 +4,7 @@
     "owner":       {{ owner | json }},
     "name":        {{ object.name | json }},
     "cover_photo": {{ object.cover_photo | json }},
-    "tags":        {{ object.tags | split: ',' | uniq }},
+    "tags":        {{ object.tags | downcase | split: ',' | uniq }},
     "description": {{ object.description | default: "" | json }},
     "type":        {{ object.type | default: "" | json }},
     "category":    {{ object.category | default: "" | json }},
