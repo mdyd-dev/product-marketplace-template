@@ -1,1 +1,6 @@
-{{ context.params }}
+{% liquid
+  assign id = context.params.slug2 | split: '-' | last
+
+  include 'lib/queries/items/find', id: id
+  include 'theme/simple/items/show', item: context.exports.item
+%}

@@ -10,9 +10,9 @@ method: post
   if context.exports.object.valid
     include 'redirect_to', url: '/dashboard/sell/items'
   else
-    assign item_url = '/items/show?id=' | append: context.exports.object.id
     assign error = context.exports.object.errors.base[0]
 
+    function_rc item_url = 'link_to', item: item
     include 'redirect_to', url: item_url, error: error
   endif
 %}

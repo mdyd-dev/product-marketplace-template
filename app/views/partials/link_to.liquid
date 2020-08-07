@@ -1,0 +1,6 @@
+{% liquid
+  assign id = item.name | slugify | append: "-" | append: item.id
+  assign link = '/items/' | append: id
+
+  return_rc link
+%}

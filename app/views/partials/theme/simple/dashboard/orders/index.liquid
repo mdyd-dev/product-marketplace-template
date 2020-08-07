@@ -23,7 +23,8 @@
         <tr>
           <td class="px-4 py-2 border-b">{{ order.created_at | l }}</td>
           <td class="px-4 py-2 border-b">
-            <a href="/items/show?id={{ order.item.id }}">
+            {% function_rc item_url = 'link_to', item: item %}
+            <a href="/items/show?id={{ item_url }}">
               {% print order.item.name %}
               <small> {% echo order.item.status.name | default: 'app.item_statuses.none' | t %}</small>
             </a>

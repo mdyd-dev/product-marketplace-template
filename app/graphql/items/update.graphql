@@ -15,6 +15,7 @@ mutation update_item($id: ID!, $name: String, $description: String, $cover_photo
       ]
     }
   ){
-    id properties
+    id
+    name: property(name: "name")
   }
 }

@@ -1,6 +1,7 @@
 <div class="w-full px-0 mb-8 md:p-4 lg:w-1/3 md:w-1/2 card">
+  {% function_rc item_url = 'link_to', item: item %}
 
-  <a class="relative block h-64 overflow-hidden rounded shadow-sm" href="/items/show?id={{ item.id }}">
+  <a class="relative block h-64 overflow-hidden rounded shadow-sm" href="{% print item_url %}">
     {% assign dummy_url = 'https://dummyimage.com/800x4:3/eee/000&text=' | append: item.name %}
     {% assign cover_url = item.photos.last.photo.url | default: dummy_url %}
     <img alt="{{ item.name }}" class="block object-cover object-center w-full h-full" src="{{ cover_url }}">
@@ -13,7 +14,7 @@
 
   <div class="mt-4">
     <h2 class="text-lg font-medium text-gray-900 ">
-      <a href="/items/show?id={{ item.id }}">
+      <a href="{% print item_url %}">
         {{ item.name }}
       </a>
       {% if item.category %}
