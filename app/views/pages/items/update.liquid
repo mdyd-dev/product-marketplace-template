@@ -18,7 +18,7 @@ method: post
       include 'lib/commands/events/create', type: 'item_updated', actor_id: context.current_user.id, object_id: context.exports.object.id
 
       function_rc url = 'link_to', item: object
-      include 'redirect_to', url: '/items/testitem-4', notice: 'app.items.updated'
+      include 'redirect_to', url: url, notice: 'app.items.updated'
     endif
   else
     include 'lib/queries/categories'

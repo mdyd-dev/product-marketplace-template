@@ -12,6 +12,7 @@
   <div class="w-full my-6 md:my-0 md:mx-6 md:w-auto">
     <label for="tag" class="block mb-1 text-gray-600 capitalize">Category</label>
     <select class="form-select" id="category" name="category">
+      <option value="" class="text-gray-600"> no category</option>
       {% for category in lib.categories %}
         {% assign ident = category | split: '/' | size | minus: 1 | times: 2 %}
         <option value="{{ category }}" {% if query.category == category %}selected{% endif %}>
