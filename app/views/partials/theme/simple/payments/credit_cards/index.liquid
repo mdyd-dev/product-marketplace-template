@@ -1,0 +1,41 @@
+<div class="container flex flex-wrap items-center mx-auto">
+  <h1 class="text-3xl font-medium">Credit Cards</h1>
+</div>
+
+<div class="relative">
+  {% if credit_cards == empty %}
+    <p>You have not saved any credit cards yet.</p>
+  {%- else -%}
+    <ol class="mb-4 grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
+      {% for credit_card in credit_cards -%}
+        {% parse_json credit_card %}
+          {% include "functions/add_icon_to_credit_card", credit_card: credit_card %}
+        {% endparse_json %}
+        <li class="flex flex-col px-4 pt-3 rounded shadow" data-credit-card-row="{{ credit_card | json | raw_escape_string }}">
+          <div class="flex items-center flex-grow">
+            {% if credit_card.icon %}
+              <img src="{{ credit_card.icon }}" alt="{{ credit_card.properties.brand | raw_escape_string }}" class="h-10 mr-4">
+            {% endif %}
+
+            <div>
+              <h3 class="font-bold">
+                {{ credit_card.properties.brand }} <span class="font-mono text-gray-700 text-sm">...{{ credit_card.properties.last4 }}</span>
+              </h3>
+
+              <div class="text-sm text-gray-700">
+                Expires: {{ credit_card.properties.exp_month }}/{{ credit_card.properties.exp_year }}
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-200 mt-3 -mx-4 px-4 py-1 flex justify-end">
+            {% include 'payments/delete_card_form_config', id: credit_card.id %}
+          </div>
+        </li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+  <button type="button" class="btn btn-green" data-stripe-checkout-button="{&quot;email&quot;:&quot;piotr@near-me.com&quot;,&quot;icon&quot;:&quot;https://uploads.staging.oregon.platform-os.com/instances/1306/assets/img/logo.png?updated=1581944039&quot;,&quot;title&quot;:&quot;Golfstix&quot;,&quot;description&quot;:&quot;Save your Credit Card&quot;,&quot;publicKey&quot;:&quot;pk_test_SPPcNzeM8erhW5dFekV6nniy00gwTzJtrX&quot;,&quot;label&quot;:&quot;Save Card&quot;}">
+    Add Credit Card
+  </button>
+</div>

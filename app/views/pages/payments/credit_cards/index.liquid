@@ -1,0 +1,7 @@
+---
+slug: payments/credit_cards
+---
+{% liquid
+  assign credit_cards = '' | split: ','
+  include 'theme/simple/payments/credit_cards/index', credit_cards: credit_cards
+%}

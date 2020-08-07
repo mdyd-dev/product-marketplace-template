@@ -1,0 +1,17 @@
+mutation create($gateway_id: String!, $url: String!, $secret: String!, $livemode: String!, $enabled_events: [String!]) {
+  model: model_create(
+    model: {
+      model_schema_name: "modules/stripe/webhook_endpoint"
+      properties: [
+        { name: "gateway_id" value: $gateway_id }
+        { name: "url" value: $url }
+        { name: "secret" value: $secret }
+        { name: "livemode" value: $livemode }
+        { name: "enabled_events" value_array: $enabled_events }
+      ]
+    }
+  ){
+    id
+    gateway_id: property(name: "gateway_id")
+  }
+}

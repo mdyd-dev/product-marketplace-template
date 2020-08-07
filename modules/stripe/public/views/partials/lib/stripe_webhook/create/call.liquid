@@ -15,10 +15,5 @@
   graphql response = 'modules/stripe/api_call', template: 'modules/stripe/webhook_create', data: data
   log response, type: 'webhooks/create api_call'
   assign response = response | dig: 'api_call', 'response'
-
-  parse_json webhook
-    include 'modules/stripe/lib/api_response_mappers/webhook_create', response: response
-  endparse_json
-  graphql result = 'modules/stripe/model_create', object: webhook
-  log result, type: 'webhooks/create model_create'
+  return_rc response
 %}

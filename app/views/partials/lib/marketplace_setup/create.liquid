@@ -2,6 +2,6 @@
   include 'lib/marketplace_setup/validate', object: constants
   if context.exports.object.valid
     include 'lib/marketplace_setup/save', object: context.exports.object
-    include 'modules/stripe/lib/webhook_endpoints/create'
+    include 'modules/stripe/lib/webhook_endpoints/create/call'
   endif
 %}
