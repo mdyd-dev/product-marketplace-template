@@ -1,0 +1,34 @@
+<h1 class="text-3xl">
+  {{ "categories." | append: category | t }} Category
+</h1>
+
+<section class="text-gray-700 body-font">
+  <div class="container mx-auto">
+    <div class="flex flex-wrap -mx-4 cards">
+      {% if items.results.size > 0 %}
+      {% for item in items.results %}
+        {% include 'theme/simple/items/card', item: item %}
+      {% endfor %}
+      {% else %}
+        <p class="container my-8 text-lg">No items found.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<div class="text-gray-900">
+  {% for c in categories %}
+    {% assign ident = c | split: '/' | size %}
+    <a class="m-2 text-gray-900 hover:text-gray-900" href="/c/{{c}}">
+      {% if ident == 3 %}
+        <small>
+          {% print c %}
+        </small>
+      {% else %}
+        <strong>
+          {% print c %}
+        </strong>
+      {% endif %}
+    </a>
+  {% endfor %}
+</div>

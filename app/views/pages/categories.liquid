@@ -1,0 +1,11 @@
+---
+slug: c
+---
+{% liquid
+  assign template = "/c/{+category}"
+  assign query = context.location.pathname | extract_url_params: template
+
+  include 'lib/queries/items/search', query: query, limit: 100
+  include 'lib/queries/categories'
+  include 'theme/simple/categories/index', items: context.exports.items, category: query.category, categories: context.exports.lib.categories
+%}
