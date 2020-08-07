@@ -8,7 +8,9 @@ it is still in active development and some concepts are being validated and migh
 
 # benefits and features
 
-- as a customer I can search for an item
+- as a customer I can search for an item by name, description
+- as a customer I can search for an item by tag
+- as a customer I can search for an item by category
 - as a customer I can order an item
 
 - as an entrepreneur I can list an item
@@ -69,5 +71,11 @@ TBD
 ## events
 
 TBD
+
+## categories
+
+categories can be adjusted by:
+- modifying a new category tree in the `app/views/queries/categies.liquid` file
+- adding a translation to the `app/translations/en_categies.liquid` file
 
 ## TESTS
