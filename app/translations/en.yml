@@ -68,8 +68,8 @@ en:
 
   lib:
     sort_options:
-      price_asc: Price from lowest
-      price_desc: Price from highest
+      price_asc: Price (lowest first)
+      price_desc: Price (highest first)
       name_asc: Name A-Z
       name_desc: Name Z-A
       created_at_asc: The oldest first
