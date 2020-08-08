@@ -12,7 +12,7 @@
     "deploy": "npm run build && CI=true pos-cli deploy",
     "predeploy": "npm run clean",
     "ci:build": "docker run -it -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD:/app -w /app node:12-alpine npm ci -S && npm run build",
-    "ci:test": "docker run -it -e MPKIT_URL=$MPKIT_URL -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD:/app -w /app testcafe/testcafe 'chromium:headless --sandbox' --skip-js-errors test"
+    "ci:test": "docker run -it -e MPKIT_URL=$MPKIT_URL -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD/test:/app -w /app platformos/testcafe 'chromium:headless --sandbox' --skip-js-errors /app"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",

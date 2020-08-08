@@ -38,7 +38,7 @@ it is still in active development and some concepts are being validated and migh
 
 npm ci -S
 npm build
-pos-cli deploy <YOUR_NAME_ENV>
+pos-cli deploy <YOUR_ENV_NAME>
 
 ```
 - open web browser with your instance URL where you will be provided with post-install steps
