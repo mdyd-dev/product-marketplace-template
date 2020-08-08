@@ -6,22 +6,21 @@ fixture`Basic complete happy scenario`
   .page`https://getmarketplace.staging.gapps.platformos.com/`;
 
 const NewEmail = faker.internet.email()
-const FakeTag = faker.internet.userName()
 const NewPassword = faker.internet.password()
 const item = {
-  name: "Gaming Laptop",
-  type: "computers and software",
-  description: "A gaming laptop with Rtx 2060 and 32 GB of DDR4 RAM and the last series of i7 processor",
-  tags: 'Laptop,Gaming,Computer,somethingelse',
+  name: faker.commerce.productName(),
+  type: faker.commerce.productMaterial(),
+  description: faker.commerce.productAdjective(),
+  tags: ((faker.commerce.product())),
   price: "5000"
 }
 const buyer = { email: "JohnSmith@email.com", password: "password" }
 
 const editedItem = {
-  name: "Office Notebook",
-  type: "computers and software",
-  description: "Office laptop",
-  tags: 'OfficeLaptop',
+  name: faker.commerce.productName(),
+  type: faker.commerce.productMaterial(),
+  description: faker.commerce.productAdjective(),
+  tags: (faker.commerce.product()),
   price: "1050"
 }
 const clearField = 'ctrl+a delete'
@@ -50,8 +49,8 @@ test('Item listing', async t => {
     .click(Selector('a').withText('List your item'))
     .typeText(Selector('input[name="item[name]"]'), item.name)
     .typeText('input[name="item[type]"]', item.type)
-    .typeText('textarea[name="item[description]"]', FakeTag)
-    .typeText('input[name="item[tags]"]', FakeTag)
+    .typeText('textarea[name="item[description]"]', item.description)
+    .typeText('input[name="item[tags]"]', item.tags)
     .doubleClick(Selector('main').find('[name="item[price]"]'))
     .pressKey(clearField)
     .typeText(Selector('main').find('[name="item[price]"]'), item.price)
@@ -75,7 +74,7 @@ test('Edit item', async t => {
     .typeText('input[name="user[email]"]', NewEmail)
     .typeText('input[name="user[password]"]', NewPassword)
     .click(Selector('main').find('button').withText('Log in'))
-    .typeText('input[name="k"]', FakeTag)
+    .typeText('input[name="k"]', item.description)
     .click(Selector('main').find('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(item.name))
     .click(Selector('main').find('a').withText('Edit'))
