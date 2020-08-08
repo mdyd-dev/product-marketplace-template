@@ -29,6 +29,20 @@ it is still in active development and some concepts are being validated and migh
 - installation wizard
 - stripe integration
 
+# installation
+
+- clone the repository
+- assumed you have created and activated platformOS instance and configured pos-cli - otherwise [links]
+
+```sh
+
+npm ci -S
+npm build
+pos-cli deploy <YOUR_NAME_ENV>
+
+```
+- open web browser with your instance URL where you will be provided with post-install steps
+
 # development guidelines
 
 ## platformOS project
