@@ -1,18 +1,18 @@
 <div class="flex flex-wrap my-6">
   <div class="w-full md:flex-1 md:w-auto">
-    <label for="k" class="block mb-1 text-gray-600 capitalize">Keywords</label>
+    <label for="k" class="block mb-1 text-gray-600 capitalize">{{ 'app.search.keywords' | t  }}</label>
     <input class="w-full form-input"
       name="k"
       id="k"
       type="text"
       value="{{ query.k }}"
-      placeholder="Search" />
+     />
   </div>
 
   <div class="w-full my-6 md:my-0 md:mx-6 md:w-auto">
-    <label for="tag" class="block mb-1 text-gray-600 capitalize">Category</label>
+    <label for="tag" class="block mb-1 text-gray-600 capitalize">{{ 'app.search.category' | t  }}</label>
     <select class="form-select" id="category" name="category">
-      <option value="" class="text-gray-600"> no category</option>
+      <option value="" class="text-gray-600">{{ 'app.search.all_categories' | t }}</option>
       {% for category in lib.categories %}
         {% assign ident = category | split: '/' | size | minus: 1 | times: 2 %}
         <option value="{{ category }}" {% if query.category == category %}selected{% endif %}>
@@ -24,14 +24,14 @@
   </div>
 
   <div class="w-full my-6 md:my-0 md:mx-6 md:w-auto">
-    <label for="tag" class="block mb-1 text-gray-600 capitalize">Tags</label>
+    <label for="tag" class="block mb-1 text-gray-600 capitalize">{{ 'app.search.tags' | t  }}</label>
     <select class="w-full form-select" id="tag" name="tag">
-      <option value="" class="text-gray-600">All tags</option>
+      <option value="" class="text-gray-600">{{ 'app.search.all_tags' | t  }}</option>
       {% for tag in filters.tags %}
         <option value="{{ tag }}" {% if query.tag == tag %}selected{% endif %}>{{ tag }}</option>
       {% endfor %}
     </select>
   </div>
 
-  <button name="submit" value="search" class="w-full md:mt-auto md:w-auto button">Search</button>
+  <button name="submit" value="search" class="w-full md:mt-auto md:w-auto button">{{ 'app.search.search' | t  }}</button>
 </div>

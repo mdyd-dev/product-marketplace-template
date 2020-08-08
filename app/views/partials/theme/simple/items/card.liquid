@@ -17,12 +17,16 @@
       <a href="{% print item_url %}">
         {{ item.name }}
       </a>
-      {% if item.category %}
-      <small>{{ 'categories.' | append: item.category | t }}</small>
-      {% endif %}
     </h2>
 
-    <h3 class="mb-1 text-xs text-gray-500 ">{{ item.tags | join: ", " }}</h3>
+    <h3 class="mb-1 text-xs text-gray-500 ">
+      {% if item.category %}
+        <div>
+          {{ 'categories.' | append: item.category | t }}
+        </div>
+      {% endif %}
+      {{ item.tags | join: ", " }}
+    </h3>
 
     <div class="flex justify-between">
       <p class="mt-1">

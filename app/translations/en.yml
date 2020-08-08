@@ -42,6 +42,14 @@ en:
       bank_account: Bank Account
       credit_cards: Credit Cards
 
+    search:
+      all_categories: All categories
+      all_tags: All tags
+      search: Search
+      keywords: Keywords
+      category: Category
+      tags: Tags
+
     dashboard-items:
       list-your-first-item: List your first item
 
