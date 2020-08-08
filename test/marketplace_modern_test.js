@@ -1,66 +1,84 @@
 import { Selector } from 'testcafe';
+import faker from 'faker';
 
-fixture`Basic complete happy scenario`.page(process.env.MPKIT_URL);
+fixture`Basic complete happy scenario`
 
-test(`Login Test`, async (t) => {
-  const user = { email: 'darek+gm-seller@platformos.com', password: 'seller' };
-  const buyer = { email: 'darek+gm-buyer@platformos.com', password: 'buyer' };
-  const item = {
-    name: 'testItem',
-    type: 'typeTest',
-    description: 'testDesc',
-    tags: 'something,testTag,somethingelse',
-    price: '1000',
-  };
-  const editedItem = {
-    name: 'testItemEdited',
-    type: 'typeTestEdited',
-    description: 'testDescEdited',
-    tags: ',tagAddedAfterEdit',
-    price: '1050',
-  };
-  const clearField = 'ctrl+a delete';
+  .page`https://getmarketplace.staging.gapps.platformos.com/`;
 
-  // Use prettifier to format code and keep it consistent
-  // In vs code command pallette: Format Document
+const NewEmail = faker.internet.email()
+const FakeTag = faker.internet.userName()
+const NewPassword = faker.internet.password()
+const item = {
+  name: "Gaming Laptop",
+  type: "computers and software",
+  description: "A gaming laptop with Rtx 2060 and 32 GB of DDR4 RAM and the last series of i7 processor",
+  tags: 'Laptop,Gaming,Computer,somethingelse',
+  price: "5000"
+}
+const buyer = { email: "JohnSmith@email.com", password: "password" }
 
-  // You could use faker to dont test the app with the same data.
-  // See example usage: https://github.com/mdyd-dev/pos-cli/blob/7e26a789a76d28649aa10caa528b4a72a65ff4d1/gui/admin/tests/Models.js
+const editedItem = {
+  name: "Office Notebook",
+  type: "computers and software",
+  description: "Office laptop",
+  tags: 'OfficeLaptop',
+  price: "1050"
+}
+const clearField = 'ctrl+a delete'
+const mainPage = (Selector('header').find('span').withText('MVP Marketplace'))
+
+
+test(`Login Test`, async t => {
+
 
   await t
     .click(Selector('header').find('a').withText('Log in'))
-    .typeText('input[name="user[email]"]', user.email)
-    .typeText('input[name="user[password]"]', user.password)
-    .click(Selector('main').find('button').withText('Log in'));
+    .click(Selector('main').find('p').withText('Register'))
+    .typeText('input[name="user[email]"]', NewEmail)
+    .typeText('input[name="user[password]"]', NewPassword)
+    .click(Selector('button').withText('Sign Up'))
 
+});
+
+test('Item listing', async t => {
   await t
     //listing the item for sale
     .click(Selector('a').withText('List your item'))
-    .typeText('input[name="item[name]"]', item.name) // When labels are configured correctly (and they should, and are now, i think) test should select input by clicking on label - this way it tests label and does not depend on field name which is invisible for user
-    .typeText('input[name="item[type]"]', item.type) // see example: https://github.com/mdyd-dev/pos-cli/blob/7e26a789a76d28649aa10caa528b4a72a65ff4d1/gui/admin/tests/Models.js#L15-L32
-    .typeText('textarea[name="item[description]"]', item.description)
-    .typeText('input[name="item[tags]"]', item.tags)
+    .typeText('input[name="user[email]"]', NewEmail)
+    .typeText('input[name="user[password]"]', NewPassword)
+    .click(Selector('button').withText('Log in'))
+    .click(Selector('a').withText('List your item'))
+    .typeText(Selector('input[name="item[name]"]'), item.name)
+    .typeText('input[name="item[type]"]', item.type)
+    .typeText('textarea[name="item[description]"]', FakeTag)
+    .typeText('input[name="item[tags]"]', FakeTag)
     .doubleClick(Selector('main').find('[name="item[price]"]'))
     .pressKey(clearField)
     .typeText(Selector('main').find('[name="item[price]"]'), item.price)
     .click(Selector('main').find('[name="item[cover_photo]"]'))
-    .click(Selector('main').find('option').withText('Bandage'))
+    .click(Selector('main').find('option').withText('Disc'))
+
+  await t
+    //upload file
     .click(Selector('main').find('button').withText('browse files'))
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
     .wait(1000)
-    .click(Selector('button[value="create"]')); // button.withText..
-  // assert a browser redirects to item details page
+    .click(Selector('button[value="create"]'))
+    .click(mainPage)
 
+});
+
+test('Edit item', async t => {
   await t
-    //searching item by its description
-    .click(Selector('a').withText('MVP Marketplace'))
-    .navigateTo('/')
-    .typeText('input[name="k"]', item.description)
+    //searching item by its tag
+    .click(Selector('header').find('a').withText('Log in'))
+    .typeText('input[name="user[email]"]', NewEmail)
+    .typeText('input[name="user[password]"]', NewPassword)
+    .click(Selector('main').find('button').withText('Log in'))
+    .typeText('input[name="k"]', FakeTag)
     .click(Selector('main').find('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(item.name))
-    .click(Selector('main').find('a').withText('Edit'));
-
-  await t
+    .click(Selector('main').find('a').withText('Edit'))
     //change of item information
     .doubleClick(Selector('main').find('[name="item[name]"]'))
     .pressKey(clearField)
@@ -71,16 +89,21 @@ test(`Login Test`, async (t) => {
     .doubleClick(Selector('main').find('[name="item[description]"]'))
     .pressKey(clearField)
     .typeText('textarea[name="item[description]"]', editedItem.description)
-    .typeText('input[name="item[tags]"]', editedItem.tags)
+    .doubleClick(Selector('main').find('[name="item[tags]"]'))
+    .pressKey(clearField)
+    .typeText('input[name="item[tags]"]', editedItem.description)
     .doubleClick(Selector('main').find('[name="item[price]"]'))
     .pressKey(clearField)
     .typeText(Selector('main').find('[name="item[price]"]'), editedItem.price)
     .click(Selector('main').find('[name="item[cover_photo]"]'))
-    .click(Selector('main').find('option').withText('Car'))
+    .click(Selector('main').find('option').withText('Copy'))
     .click(Selector('button[value="update"]'))
     .click(Selector('span').withText('MVP Marketplace'))
-    .click(Selector('header').find('button').withText('Log out')); //Logging out from seller account
+    .click(Selector('header').find('button').withText('Log out')) //Logging out from seller account
 
+});
+
+test('Buy test', async t => {
   await t
     //logging at buyer account and checks if seller item after edit exists
     .click(Selector('header').find('a').withText('Log in'))
@@ -91,21 +114,26 @@ test(`Login Test`, async (t) => {
     .click(Selector('main').find('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //Buying item, logging off from buyer account
-    .click(Selector('main').find('button#buybutton'))
-    .click(Selector('main').find('button#checkoutbutton'))
+    .click(Selector('main').find('button'))
+    .click(Selector('main').find('button').withText('Checkout'))
     .click(Selector('span').withText('MVP Marketplace'))
-    .click(Selector('header').find('button').withText('Log out'));
+    .click(Selector('header').find('button').withText('Log out'))
 
+});
+
+test('Delete item test', async t => {
   await t
     //checks if bought item still exists at auctions
     .click(Selector('header').find('a').withText('Log in'))
-    .typeText('input[name="user[email]"]', user.email)
-    .typeText('input[name="user[password]"]', user.password)
+    .typeText('input[name="user[email]"]', NewEmail)
+    .typeText('input[name="user[password]"]', NewPassword)
     .click(Selector('main').find('button').withText('Log in'))
-    .typeText('input[name="k"]', item.description)
-    .click(Selector('main').find('button').withText('Search'))
+    .click(Selector('header').find('a').withText('Dashboard'))
+    .click(Selector('main').find('a').withText('Your items'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //deleting exist item
-    // .click(Selector('main').find('#deletebutton')) // why not button.withText('...') ?
-    .click(Selector('header').find('button').withText('Log out'));
+    .setNativeDialogHandler(() => true)
+    .click(Selector('main').find('button').withText('Delete'))
+    .click(Selector('header').find('button').withText('Log out'))
+
 });
