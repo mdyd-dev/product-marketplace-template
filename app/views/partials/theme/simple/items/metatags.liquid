@@ -1,0 +1,73 @@
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+
+<meta property="og:title" content='{{ item.name }}' />
+<meta property="og:description" content='{{ item.description }}' />
+<meta property="og:url" content="{{ context.location.url }}" />
+<meta property="og:site_name" content="platformOS Documentation" />
+<meta property="article:section" content="{{ item.category }}" />
+
+<meta property="article:published_time" content="{{ item.created_at }}" />
+<meta property="article:modified_time" content="{{ item.updated_at }}" />
+<meta property="og:updated_time" content="{{ item.content_updated_at }}" />
+
+{% assign img = item.photos.last.photo.url %}
+{% if img -%}
+<meta property="og:image" content="{{ img }}" />
+<meta property="og:image:width" content="730" />
+<meta property="og:image:height" content="412" />
+{%- endif %}
+
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content='{{ item.description }}' />
+<meta name="twitter:title" content='{{ item.name }}' />
+<meta name="twitter:image" content="{{ img }}" />
+
+
+<script type='application/ld+json'>
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://{{ context.location.host }}",
+        "url": "https://{{ context.location.host }}",
+        "name": "MVP Marketplace",
+        "inLanguage": "en-US",
+        "description": "MVP Marketplace is the best way to sell your unnecessary things."
+      },
+      {
+        "@type": "ImageObject",
+        "inLanguage": "en-US",
+        "url": "{{ img }}",
+        "width": 730,
+        "height": 412,
+        "caption": "{{ item.name }}"
+      },
+      {
+        "@type": "WebPage",
+        "url": "{{ context.location.url }}",
+        "name": "{{ item.name }}",
+        "description": "{{ item.description }}",
+        "isPartOf": {
+          "@id": "https://{{ context.location.host }}"
+        },
+        "inLanguage": "en-US",
+        "primaryImageOfPage": {
+          "@id": "{{ img }}"
+        },
+        "datePublished": "{{ item.created_at }}",
+        "dateModified": "{{ item.updated_at }}",
+        "potentialAction": [
+          {
+            "@type": "ReadAction",
+            "target": [
+              "{{ context.location.url }}"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  </script>
