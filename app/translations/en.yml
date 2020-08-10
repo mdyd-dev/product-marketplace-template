@@ -32,6 +32,7 @@ en:
     checkout: Checkout
     mark-as-paid: Mark as paid
     pay: Pay
+    pay_with_money: Pay
     cancel: Cancel
     ship: Ship
 
