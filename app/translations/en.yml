@@ -10,11 +10,27 @@ en:
 
     order: Order
     your-orders: Your orders
+
     orders:
       new: new order
       list: Orders
+
+    users:
+      new: new user
+      list: Users
+
+    items:
+      list: Items
+      new: new item
+
+    categories:
+      list: Categories
+      new: new category
+
+    activities:
+      list: Activities
+
     item: Item
-    items: Items
     your-items: Your items
 
     item_id: Item ID
