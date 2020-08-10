@@ -22,7 +22,7 @@
       {% endfor %}
     </select>
   </div>
-
+{% comment %}
   <div class="w-full my-6 md:my-0 md:mx-6 md:w-auto">
     <label for="tag" class="block mb-1 text-gray-600 capitalize">{{ 'app.search.tags' | t  }}</label>
     <select class="w-full form-select" id="tag" name="tag">
@@ -32,6 +32,7 @@
       {% endfor %}
     </select>
   </div>
+{% endcomment %}
 
   <button name="submit" value="search" class="w-full md:mt-auto md:w-auto button">{{ 'app.search.search' | t  }}</button>
 </div>
