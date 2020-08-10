@@ -2,5 +2,9 @@
   assign id = context.params.slug2 | split: '-' | last
 
   include 'lib/queries/items/find', id: id
-  include 'theme/simple/items/show', item: context.exports.item
+  if context.exports.item.id
+    include 'theme/simple/items/show', item: context.exports.item
+  else
+    render 'theme/simple/404', status: 404
+  endif
 %}
