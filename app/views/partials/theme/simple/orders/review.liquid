@@ -12,8 +12,7 @@
     <input type="hidden" name="status" value="app.order_statuses.paid"/>
     <input type="hidden" name="order_id" value="{{ order.id }}"/>
 
-    order: {{order}}<br>
-    checkout_session: {{ checkout_session  }}
+    order total: {{order.total}}<br>
 
     <button class="button button-sm">
       {{ 'app.pay' | t }}

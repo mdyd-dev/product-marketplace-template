@@ -1,10 +1,10 @@
 {% liquid
   assign valid = true
 
-  unless context.current_user.email == 'godot@tlen.pl'
+  if context.current_user.email != 'godot@tlen.pl' and context.current_user.email != 'piotr@near-me.com'
     include 'lib/flash/publish', error: 'app.errors.unauthorized'
 
     redirect_to '/sessions/new'
     break
-  endunless
+  endif
 %}

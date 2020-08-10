@@ -3,6 +3,7 @@ slug: marketplace_setup
 method: post
 ---
 {% liquid
+  include 'lib/must_be_superadmin'
   include 'lib/marketplace_setup/create', constants: context.params.constants
   if context.exports.object.valid
     redirect_to '/'

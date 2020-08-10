@@ -1,14 +1,20 @@
 <section class="text-gray-700 body-font">
   <div class="container items-centermx-auto">
-    <div class="mx-auto mb-2 text-center lg:w-2/6 md:w-1/2">
+    <div class="mx-auto mb-2 text-center lg:w-4/6 md:w-3/4">
       <h1 class="text-3xl font-medium">Setup your marketplace</h1>
+      <p>
+        Please visit <a href="https://stripe.com" target="_blank">https://stripe.com</a>
+        and register your connect account.
+        <br>
+        This will also create webhooks to your marketplace
+      </p>
     </div>
 
     <div class="w-full p-8 mx-auto mt-10 bg-gray-200 rounded-lg lg:w-2/6 md:w-1/2 md:mt-0">
       <form action="/marketplace_setup" method="post">
         {% include 'authenticity_token' %}
 
-        {% assign keys = 'stripe_sk_key,stripe_pk_key,stripe_client_id' | split: ',' %}
+        {% assign keys = 'stripe_pk_key,stripe_sk_key,stripe_client_id' | split: ',' %}
         {% for key in keys %}
           <label class="block mt-3" for="{{key}}">
             <span class="block">{{key}}</span>

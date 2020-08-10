@@ -1,5 +1,5 @@
 {% liquid
-  assign webhook_listen_url = "https://" | append: context.location.host | append: "/webhooks/account_updated"
+  assign webhook_listen_url = "https://" | append: context.location.host | append: "/webhooks/checkout_session_completed"
   graphql g = 'modules/stripe/webhook_endpoints', livemode: context.exports.payment.livemode, url: webhook_listen_url
   assign last_webhook_config = g.webhook_endpoints.results.last
   if last_webhook_config.id == blank

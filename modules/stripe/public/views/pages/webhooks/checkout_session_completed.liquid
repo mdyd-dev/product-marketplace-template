@@ -1,0 +1,14 @@
+---
+slug: webhooks/checkout_session_completed
+method: post
+layout_name: ''
+---
+{% liquid
+  include 'modules/stripe/lib/webhooks/checkout_session_completed/call'
+  if context.exports.object.valid
+    echo context.exports.object
+  else
+    response_status 403
+    echo context.exports.object
+  endif
+%}

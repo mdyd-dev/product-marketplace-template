@@ -14,7 +14,7 @@
 
       {% if context.current_user.id  %}
       <a href="/dashboard" class="mr-5 hover:text-gray-900">{{ 'app.dashboard' | t }}</a>
-      {% if context.current_user.email == 'godot@tlen.pl' %}
+      {% if context.current_user.email == 'godot@tlen.pl' or context.current_user.email == 'piotr@near-me.com' %}
         <a href="/admin" class="mr-5 hover:text-gray-900">{{ 'app.admin' | t }}</a>
       {% endif %}
 
