@@ -1,0 +1,15 @@
+.glider-prev, .glider-next {
+  @apply absolute top-0 w-16 h-full cursor-pointer !important;
+}
+
+.glider-prev.disabled, .glider-next.disabled {
+  @apply cursor-default !important;
+}
+
+.glider-prev {
+  @apply left-0 !important;
+}
+
+.glider-next {
+  @apply right-0 !important;
+}
