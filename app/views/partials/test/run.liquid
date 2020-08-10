@@ -1,14 +1,15 @@
 <h2 class="text-xl">test results</h2>
 {% liquid
-  graphql tests = 'tests', path: params.name | dig: "admin_liquid_partials" | dig: "results"
+  graphql tests = 'tests', path: context.params.name | dig: "admin_liquid_partials" | dig: "results"
 
   if tests.size == 0
     echo 'no tests found'
   endif
+
   for test in tests
     assign contract = '{ "errors": {}, "success": true }' | parse_json
-    include test.path, registry: test.path, contract: contract
 
+    include test.path, registry: test.path, contract: contract
     include 'test/test_report', name: test.path, contract: contract
   endfor
 %}

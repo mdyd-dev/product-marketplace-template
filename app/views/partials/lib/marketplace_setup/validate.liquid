@@ -5,7 +5,7 @@
 
   for key in keys
     if object[key] == null or object[key] == empty
-      include 'lib/register_error', hash: errors, field_name: key, key: 'app.errors.blank'
+      include 'lib/register_error', contract: errors, field_name: key, key: 'app.errors.blank'
     endif
   endfor
 

@@ -1,3 +1,4 @@
+{% comment %}PARTIAL INPUT{% endcomment %}
 {% parse_json item %}
   {
     "id":          null,
@@ -12,9 +13,11 @@
   }
 {% endparse_json %}
 
-{% liquid
-  include 'lib/commands/items/create/check', item: item
+{% comment %}LOAD TESTED PARTIAL/FUNCTION{% endcomment %}
+{% include 'lib/commands/items/create/check', item: item %}
 
+{% comment %}TEST OUTPUT ERRORS RETURNED{% endcomment %}
+{% liquid
   if context.exports.item.name == blank
     include 'test/register_error', contract: contract, field_name: 'item.name', key: 'app.test.should.not.be_blank'
   endif

@@ -7,7 +7,7 @@
     "description": {{ object.description | default: "" | json }},
     "type":        {{ object.type | default: "" | json }},
     "category":    {{ object.category | default: "" | json }},
-    "price":       {{ object.price | plus: 0 }}
+    "price":       {{ object.price | to_positive_integer }}
   }
 {% endparse_json %}
 

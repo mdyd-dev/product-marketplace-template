@@ -5,7 +5,7 @@
     assign errors = '{}' | parse_json
     assign valid = false
 
-    include 'lib/register_error', hash: errors, field_name: 'email', key: 'app.errors.session_create_failed'
+    include 'lib/register_error', contract: errors, field_name: 'email', key: 'app.errors.session_create_failed'
 
     export errors, namespace: 'object'
     export valid, namespace: 'object'
