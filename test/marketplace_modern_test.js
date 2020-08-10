@@ -1,10 +1,12 @@
 import { Selector } from 'testcafe';
 import faker from 'faker';
+import { ClientFunction } from 'testcafe';
 
 fixture`Basic complete happy scenario`
 
   .page`https://getmarketplace.staging.gapps.platformos.com/`;
 
+const getURL = ClientFunction(() => window.location.href)
 const NewEmail = faker.internet.email()
 const NewPassword = faker.internet.password()
 const item = {
@@ -12,8 +14,13 @@ const item = {
   type: faker.commerce.productMaterial(),
   description: faker.commerce.productAdjective(),
   tags: ((faker.commerce.product())),
-  price: "5000"
+  price: '10000',
 }
+
+const cheatedPrice = {
+  price: '10',
+}
+
 const buyer = { email: "JohnSmith@email.com", password: "password" }
 
 const editedItem = {
@@ -21,11 +28,10 @@ const editedItem = {
   type: faker.commerce.productMaterial(),
   description: faker.commerce.productAdjective(),
   tags: (faker.commerce.product()),
-  price: "1050"
+  price: '10000',
 }
 const clearField = 'ctrl+a delete'
 const mainPage = (Selector('header').find('span').withText('MVP Marketplace'))
-
 
 test(`Login Test`, async t => {
 
@@ -39,8 +45,12 @@ test(`Login Test`, async t => {
 
 });
 
+
 test('Item listing', async t => {
+
+
   await t
+
     //listing the item for sale
     .click(Selector('a').withText('List your item'))
     .typeText('input[name="user[email]"]', NewEmail)
@@ -58,6 +68,7 @@ test('Item listing', async t => {
     .click(Selector('main').find('option').withText('Disc'))
 
   await t
+
     //upload file
     .click(Selector('main').find('button').withText('browse files'))
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
@@ -68,17 +79,27 @@ test('Item listing', async t => {
 });
 
 test('Edit item', async t => {
+
+
   await t
+
     //searching item by its tag
     .click(Selector('header').find('a').withText('Log in'))
     .typeText('input[name="user[email]"]', NewEmail)
     .typeText('input[name="user[password]"]', NewPassword)
     .click(Selector('main').find('button').withText('Log in'))
-    .typeText('input[name="k"]', item.description)
+    .typeText('input[name="k"]', item.name)
     .click(Selector('main').find('button').withText('Search'))
+    .expect(Selector('h2 a').withText(item.name).exists).ok()
     .click(Selector('main').find('h2 a').withText(item.name))
     .click(Selector('main').find('a').withText('Edit'))
-    //change of item information
+  //change of item information
+
+  await t
+
+  const url = await getURL();
+
+  await t
     .doubleClick(Selector('main').find('[name="item[name]"]'))
     .pressKey(clearField)
     .typeText('input[name="item[name]"]', editedItem.name)
@@ -97,31 +118,35 @@ test('Edit item', async t => {
     .click(Selector('main').find('[name="item[cover_photo]"]'))
     .click(Selector('main').find('option').withText('Copy'))
     .click(Selector('button[value="update"]'))
+    .expect(Selector('h1').withText(editedItem.name).exists).ok()
     .click(Selector('span').withText('MVP Marketplace'))
     .click(Selector('header').find('button').withText('Log out')) //Logging out from seller account
-
-});
-
-test('Buy test', async t => {
-  await t
     //logging at buyer account and checks if seller item after edit exists
     .click(Selector('header').find('a').withText('Log in'))
     .typeText('input[name="user[email]"]', buyer.email)
     .typeText('input[name="user[password]"]', buyer.password)
     .click(Selector('main').find('button').withText('Log in'))
-    .typeText('input[name="k"]', editedItem.description)
+    .typeText('input[name="k"]', editedItem.name)
     .click(Selector('main').find('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //Buying item, logging off from buyer account
     .click(Selector('main').find('button'))
-    .click(Selector('main').find('button').withText('Checkout'))
+    .navigateTo(url)
+    .doubleClick(Selector('main').find('[name="item[price]"]'))
+    .pressKey(clearField)
+    .typeText(Selector('main').find('[name="item[price]"]'), cheatedPrice.price)
+    .click(Selector('button[value="update"]'))
+    //.click(Selector('main').find('button').withText('Checkout'))
     .click(Selector('span').withText('MVP Marketplace'))
     .click(Selector('header').find('button').withText('Log out'))
 
 });
 
 test('Delete item test', async t => {
+
+
   await t
+
     //checks if bought item still exists at auctions
     .click(Selector('header').find('a').withText('Log in'))
     .typeText('input[name="user[email]"]', NewEmail)
