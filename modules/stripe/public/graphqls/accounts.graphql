@@ -20,14 +20,6 @@ query accounts($external_id: String, $gateway_id: String) {
       data: property(name: "data")
       last_errors: property(name: "last_errors")
       last_error: property(name: "last_error")
-      persons: models(
-        join_on_property: "gateway_id"
-        foreign_property: "external_id"
-        model_name: "modules/payments/person"
-      ) {
-        id
-        data: property(name: "data")
-      }
     }
   }
 }

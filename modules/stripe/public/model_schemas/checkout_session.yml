@@ -1,0 +1,9 @@
+---
+name: checkout_session
+properties:
+- name: gateway_id
+  type: string
+- name: external_id
+  type: string
+- name: data
+  type: text

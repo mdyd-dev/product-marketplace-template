@@ -1,4 +1,8 @@
-mutation set_constants($stripe_pk_key: String!, $stripe_sk_key: String!, $stripe_client_id: String!) {
+mutation set_constants($mpo_fee_percent: String!, $stripe_pk_key: String!, $stripe_sk_key: String!, $stripe_client_id: String!) {
+  mpo_fee_percent: constant_set(name: "mpo_fee_percent", value: $mpo_fee_percent){
+    name
+    value
+  }
   stripe_pk_key: constant_set(name: "stripe_pk_key", value: $stripe_pk_key){
     name
     value

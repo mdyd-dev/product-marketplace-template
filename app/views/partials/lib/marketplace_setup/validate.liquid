@@ -1,7 +1,7 @@
 {% liquid
   assign valid = true
   assign errors = '{}' | parse_json
-  assign keys = 'stripe_sk_key,stripe_pk_key,stripe_client_id' | split: ','
+  assign keys = 'mpo_fee_percent,stripe_sk_key,stripe_pk_key,stripe_client_id' | split: ','
 
   for key in keys
     if object[key] == null or object[key] == empty

@@ -71,6 +71,12 @@ en:
     dashboard-items:
       list-your-first-item: List your first item
 
+    marketplace_setup:
+      mpo_fee_percent: Owner fee percent
+      stripe_pk_key: Stripe Publishable key
+      stripe_sk_key: Stripe Secret key
+      stripe_client_id: Stripe Owner Connect Account client ID
+
     item_statuses:
       sold: sold
       none: missing

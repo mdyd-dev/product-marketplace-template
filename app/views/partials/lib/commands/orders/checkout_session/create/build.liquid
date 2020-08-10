@@ -1,3 +1,8 @@
+{% liquid
+  assign mpo_fee_percent = context.constants.mpo_fee_percent | divided_by: 100.0
+  assign application_fee = order.total | times: mpo_fee_percent | ceil
+%}
+
 {% parse_json data %}
 {
  "payment_method_types": ["card"],
@@ -13,7 +18,10 @@
       }
     {% endfor %}
   ],
+  "client_reference_id": "{{order.id}}",
   "mode": "payment",
+  "payment_intent_data[application_fee_amount]": {{application_fee}},
+  "payment_intent_data[transfer_data][destination]": "{{seller_account.gateway_id}}",
   "success_url": "https://{{context.location.host}}/orders/success/{{order.id}}",
   "cancel_url": "https://{{context.location.host}}/orders/cancel/{{order.id}}"
 }

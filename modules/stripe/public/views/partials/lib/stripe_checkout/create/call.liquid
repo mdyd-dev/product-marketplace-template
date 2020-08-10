@@ -2,5 +2,6 @@
   graphql response = 'modules/stripe/api_call', template: "modules/stripe/checkout_session_create", data: object
   assign checkout_session = response.api_call.response.body | parse_json
 
+  log checkout_session, type: 'checkout_session'
   return_rc checkout_session
 %}

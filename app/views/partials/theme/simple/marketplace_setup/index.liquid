@@ -14,10 +14,10 @@
       <form action="/marketplace_setup" method="post">
         {% include 'authenticity_token' %}
 
-        {% assign keys = 'stripe_pk_key,stripe_sk_key,stripe_client_id' | split: ',' %}
+        {% assign keys = 'mpo_fee_percent,stripe_pk_key,stripe_sk_key,stripe_client_id' | split: ',' %}
         {% for key in keys %}
           <label class="block mt-3" for="{{key}}">
-            <span class="block">{{key}}</span>
+            <span class="block">{{ 'app.marketplace_setup.' | append: key | t}}</span>
             <input name="constants[{{key}}]" type="text" id="{{key}}" value="{{ object[key] }}" class="w-full form-input" />
             {% if object.errors[key] %}
               <span class="text-red-800">{{ object.errors[key] }}</span>
