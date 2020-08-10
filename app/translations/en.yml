@@ -41,6 +41,7 @@ en:
       settings: Settings
       bank_account: Bank Account
       credit_cards: Credit Cards
+      profile: Profile
 
     search:
       all_categories: All categories

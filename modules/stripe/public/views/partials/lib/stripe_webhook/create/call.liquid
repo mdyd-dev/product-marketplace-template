@@ -1,9 +1,9 @@
 {% parse_json data %}
   {
-    "url": "https://{{ context.location.host }}/webhooks/account_updated",
+    "url": "https://{{ context.location.host }}{{path}}",
     "connect": "true",
     "enabled_events": {
-       "0": "account.updated"
+       "0": "{{event}}"
     }
   }
 {% endparse_json %}

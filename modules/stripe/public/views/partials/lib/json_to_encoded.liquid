@@ -1,0 +1,13 @@
+{%- assign request_params = '' | split: "|" -%}
+{%- for var in data -%}
+  {%- capture pair %}{{ var[0] }}={{ var[1] | url_encode }}{% endcapture -%}
+  {% liquid
+    assign query = '{}' | parse_json
+    assign query = query | add_hash_key: var[0], var[1] | querify
+  %}
+  {%- assign request_params = request_params | add_to_array: query -%}
+{%- endfor -%}
+{% liquid
+  assign request_params = request_params | join: '&' | html_safe
+  return_rc request_params
+%}

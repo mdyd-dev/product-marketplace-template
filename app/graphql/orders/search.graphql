@@ -44,7 +44,18 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id
           name: property(name: "name")
         }
       }
+      lines: related_models(join_on_property: "item_id", foreign_property: "id", model_schema_name: "item") {
+        item_id: id
+        created_at
+        name: property(name: "name")
+        price: property_int(name: "price")
 
+        status: related_model(join_on_property: "id", foreign_property: "item_id", model_schema_name: "item_status") {
+          id
+          created_at
+          name: property(name: "name")
+        }
+      }
       status: related_model(join_on_property: "id", foreign_property: "order_id", model_schema_name: "order_status") {
         id
         created_at

@@ -1,0 +1,22 @@
+{% parse_json data %}
+{
+ "payment_method_types": ["card"],
+ "line_items": [
+    {% for line in order.lines %}
+      {
+        "price_data": {
+          "product_data": { "name": "{{line.name}}" },
+          "unit_amount": {{ line.price | times: 100 }},
+          "currency": "usd"
+        },
+        "quantity": 1
+      }
+    {% endfor %}
+  ],
+  "mode": "payment",
+  "success_url": "https://{{context.location.host}}/orders/success/{{order.id}}",
+  "cancel_url": "https://{{context.location.host}}/orders/cancel/{{order.id}}"
+}
+{% endparse_json %}
+
+{% return_rc data %}

@@ -14,7 +14,7 @@
     "url": "{{ body.url }}",
     "secret": "{{ body.secret }}",
     "livemode": "{{ body.livemode }}",
-    "enabled_events": ["account.updated"],
+    "enabled_events": ["{{event}}"],
     "valid": true
   }
 {%- else -%}

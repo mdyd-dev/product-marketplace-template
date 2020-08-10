@@ -2,6 +2,7 @@
   include 'lib/marketplace_setup/validate', object: constants
   if context.exports.object.valid
     include 'lib/marketplace_setup/save', object: context.exports.object
-    include 'modules/stripe/lib/webhook_endpoints/create/call'
+    include 'modules/stripe/lib/webhook_endpoints/create/call', event: 'account.updated', path: '/webhooks/account_updated'
+    include 'modules/stripe/lib/webhook_endpoints/create/call', event: 'checkout.session.completed', path: '/webhooks/checkout_session_completed'
   endif
 %}

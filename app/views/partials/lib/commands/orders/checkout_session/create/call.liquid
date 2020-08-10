@@ -1,0 +1,6 @@
+{% liquid
+  function_rc object = 'lib/commands/orders/checkout_session/create/build', order: order
+  function_rc checkout_session = 'modules/stripe/lib/stripe_checkout/create/call', object: object
+
+  return_rc checkout_session
+%}

@@ -1,0 +1,7 @@
+
+{% liquid
+  function_rc order = 'lib/queries/orders/find', id: context.params.order_id
+  function_rc checkout_session = 'lib/commands/orders/checkout_session/create/call', order: order
+  include 'theme/simple/orders/review', order: order, checkout_session: checkout_session
+%}
+

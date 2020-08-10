@@ -16,7 +16,7 @@ headers: >
     {
       "Stripe-Account": "{{ data.gateway_id }}",
       "Content-Type": "application/x-www-form-urlencoded",
-      "Authorization": "Bearer {{ context.exports.payments.gateway.secret_key  }}"
+      "Authorization": "Bearer {{ context.constants.stripe_sk_key }}"
     }
   {% endif %}
 ---
