@@ -10,7 +10,7 @@
 
 <section class="text-gray-700 body-font">
   <div class="container flex flex-wrap items-center mx-auto">
-    <form action="/items/{{ path }}" method="post" class="w-1/2 p-8 bg-gray-200 rounded-lg shadow-md">
+    <form action="/items/{{ path }}" method="post" class="w-full p-8 bg-gray-200 rounded-lg shadow-md md:w-1/2">
       {% include 'authenticity_token' %}
 
       {% if item.id %}
