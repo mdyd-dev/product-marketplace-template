@@ -13,6 +13,8 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
       or: [
         { properties: { name: "description", contains: $keyword } }
         { properties: { name: "name", contains: $keyword } }
+        { properties: { name: "tags", contains: $keyword } }
+        { properties: { name: "category", contains: $keyword } }
       ]
     },
     sort: [$sort])
