@@ -5,6 +5,8 @@
   endparse_json
   if webhook.valid
     graphql result = 'modules/stripe/webhook_endpoint_create', args: webhook
-    log result, type: 'webhooks/create model_create'
+    log result, type: 'webhook_endpoints/create model_create'
+  else
+    log webhook, type: 'webhook_endpoints/create invalid'
   endif
 %}
