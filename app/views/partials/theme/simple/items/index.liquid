@@ -1,12 +1,13 @@
 <section class="text-gray-700 body-font">
   <div class="container mx-auto">
+    <span>{{ 'app.total_entries' | t }} {{ items.total_entries }}</span>
     <div class="flex flex-wrap -mx-4 cards">
       {% if items.results.size > 0 %}
       {% for item in items.results %}
         {% include 'theme/simple/items/card', item: item %}
       {% endfor %}
       {% else %}
-        <p class="container my-8 text-lg">No items found.</p>
+      <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
       {% endif %}
     </div>
   </div>

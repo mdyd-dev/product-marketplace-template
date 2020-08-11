@@ -2,73 +2,7 @@
   keys copied from translation/en_categories.yml in order  to keep specific order
 {% endcomment %}
 {%- capture categories -%}
-clothing
-clothing/children
-clothing/children/baby_clothes
-clothing/children/boy_clothes
-clothing/children/girl_clothes
-clothing/accessories
-clothing/accessories/bags
-clothing/accessories/children
-clothing/accessories/men
-clothing/accessories/women
-clothing/fancy_dress
-clothing/general
-clothing/lingerie
-clothing/lingerie/bodies
-clothing/lingerie/bras
-clothing/lingerie/combination_sets
-clothing/lingerie/nightwear
-clothing/lingerie/socks_n_hosiery
-clothing/lingerie/suspenders_n_garters
-clothing/lingerie/women_underwear
-clothing/men_clothing
-clothing/men_clothing/men_outerwear
-clothing/men_clothing/men_socks
-clothing/men_clothing/men_sportswear
-clothing/men_clothing/men_suits
-clothing/men_clothing/men_swimwear
-clothing/men_clothing/men_tops
-clothing/men_clothing/men_trousers
-clothing/men_clothing/men_underwear
-clothing/novelty_t_shirts
-clothing/shoes
-clothing/shoes/children_footwear
-clothing/shoes/men_footwear
-clothing/shoes/women_footwear
-clothing/women
-clothing/women/maternity
-clothing/women/women_dresses_n_skirts
-clothing/women/women_outerwear
-clothing/women/women_sportswear
-clothing/women/women_suits
-clothing/women/women_swimwear
-clothing/women/women_tops
-clothing/women/women_trousers
-health_n_beauty
-health_n_beauty/bodycare_n_fitness
-health_n_beauty/bodycare_n_fitness/bodycare_appliances
-health_n_beauty/bodycare_n_fitness/shaving
-health_n_beauty/cosmetics_n_skincare
-health_n_beauty/cosmetics_n_skincare/cosmetics
-health_n_beauty/cosmetics_n_skincare/fragrance
-health_n_beauty/cosmetics_n_skincare/skincare
-health_n_beauty/haircare
-health_n_beauty/haircare/haircare_appliances
-health_n_beauty/haircare/haircare_products
-health_n_beauty/health
-health_n_beauty/health/contact_lenses
-health_n_beauty/health/diet
-health_n_beauty/health/glasses
-health_n_beauty/health/medical
-health_n_beauty/health/nutrition
-health_n_beauty/health/oral_health
-health_n_beauty/health/vitamins_n_supplements
-jewellery
-jewellery/mens_jewellery
-jewellery/mens_watches
-jewellery/womens_jewellery
-jewellery/womens_watches
+  {% include 'lib/queries/raw_category_list' %}
 {%- endcapture -%}
 
 {% liquid

@@ -3,7 +3,7 @@ slug: s
 ---
 
 {% liquid
-  include 'lib/queries/items/search', query: context.params, limit: 200
+  include 'lib/queries/items/search', query: context.params, limit: 50
   include 'lib/queries/categories'
   include 'lib/search/main'
 

@@ -45,6 +45,11 @@ pos-cli deploy <YOUR_ENV_NAME>
 
 # development guidelines
 
+## seed 
+
+pos-cli data clean --auto-confirm
+pos-cli data import --path=data.zip --zip
+
 ## platformOS project
 
 - assumed you are proficient in platformOS 

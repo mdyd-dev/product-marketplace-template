@@ -2,6 +2,9 @@ en:
   app:
     title: MVP Marketplace
 
+    total_entries: "Total entries:"
+    no_items_found: No items found
+
     list-your-item: List your item
     admin: Admin
     dashboard: Dashboard
