@@ -2,53 +2,45 @@ import { Selector } from 'testcafe';
 import faker from 'faker';
 import { ClientFunction } from 'testcafe';
 
-fixture`Basic complete happy scenario`
+fixture`Basic complete happy scenario`.page`https://getmarketplace.staging.gapps.platformos.com/`;
 
-  .page`https://getmarketplace.staging.gapps.platformos.com/`;
-
-const getURL = ClientFunction(() => window.location.href)
-const NewEmail = faker.internet.email()
-const NewPassword = faker.internet.password()
+const getURL = ClientFunction(() => window.location.href);
+const NewEmail = faker.internet.email();
+const NewPassword = faker.internet.password();
 const item = {
   name: faker.commerce.productName(),
   type: faker.commerce.productMaterial(),
   description: faker.commerce.productAdjective(),
-  tags: ((faker.commerce.product())),
+  tags: faker.commerce.product(),
   price: '10000',
-}
+};
 
 const cheatedPrice = {
   price: '10',
-}
+};
 
-const buyer = { email: "JohnSmith@email.com", password: "password" }
+const buyer = { email: 'JohnSmith@email.com', password: 'password' };
 
 const editedItem = {
   name: faker.commerce.productName(),
   type: faker.commerce.productMaterial(),
   description: faker.commerce.productAdjective(),
-  tags: (faker.commerce.product()),
+  tags: faker.commerce.product(),
   price: '10000',
-}
-const clearField = 'ctrl+a delete'
-const mainPage = (Selector('header').find('span').withText('MVP Marketplace'))
+};
+const clearField = 'ctrl+a delete';
+const mainPage = Selector('header').find('span').withText('MVP Marketplace');
 
-test(`Login Test`, async t => {
-
-
+test(`Login Test`, async (t) => {
   await t
     .click(Selector('header').find('a').withText('Log in'))
     .click(Selector('main').find('p').withText('Register'))
     .typeText('input[name="user[email]"]', NewEmail)
     .typeText('input[name="user[password]"]', NewPassword)
-    .click(Selector('button').withText('Sign Up'))
-
+    .click(Selector('button').withText('Sign Up'));
 });
 
-
-test('Item listing', async t => {
-
-
+test('Item listing', async (t) => {
   await t
 
     //listing the item for sale
@@ -65,7 +57,7 @@ test('Item listing', async t => {
     .pressKey(clearField)
     .typeText(Selector('main').find('[name="item[price]"]'), item.price)
     .click(Selector('main').find('[name="item[cover_photo]"]'))
-    .click(Selector('main').find('option').withText('Disc'))
+    .click(Selector('main').find('option').withText('Disc'));
 
   await t
 
@@ -74,13 +66,10 @@ test('Item listing', async t => {
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
     .wait(1000)
     .click(Selector('button[value="create"]'))
-    .click(mainPage)
-
+    .click(mainPage);
 });
 
-test('Edit item', async t => {
-
-
+test('Edit item', async (t) => {
   await t
 
     //searching item by its tag
@@ -90,12 +79,24 @@ test('Edit item', async t => {
     .click(Selector('main').find('button').withText('Log in'))
     .typeText('input[name="k"]', item.name)
     .click(Selector('main').find('button').withText('Search'))
-    .expect(Selector('h2 a').withText(item.name).exists).ok()
     .click(Selector('main').find('h2 a').withText(item.name))
-    .click(Selector('main').find('a').withText('Edit'))
+    //checks if all data is correct
+    .expect(Selector('h1').withText(item.name).exists)
+    .ok()
+    .expect(Selector('ul.tags li:nth-child(2)').innerText)
+    .eql(item.tags.toLowerCase(), 'check element text')
+    .expect(Selector('div p').withText(item.description).exists)
+    .ok()
+    .expect(
+      Selector('div span').withText(
+        (10000).toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 })
+      ).innerText
+    )
+    .eql('$10,000', 'check element text');
+  await t.click(Selector('main').find('a').withText('Edit'));
   //change of item information
 
-  await t
+  await t;
 
   const url = await getURL();
 
@@ -118,7 +119,8 @@ test('Edit item', async t => {
     .click(Selector('main').find('[name="item[cover_photo]"]'))
     .click(Selector('main').find('option').withText('Copy'))
     .click(Selector('button[value="update"]'))
-    .expect(Selector('h1').withText(editedItem.name).exists).ok()
+    .expect(Selector('h1').withText(editedItem.name).exists)
+    .ok()
     .click(Selector('span').withText('MVP Marketplace'))
     .click(Selector('header').find('button').withText('Log out')) //Logging out from seller account
     //logging at buyer account and checks if seller item after edit exists
@@ -138,13 +140,10 @@ test('Edit item', async t => {
     .click(Selector('button[value="update"]'))
     //.click(Selector('main').find('button').withText('Checkout'))
     .click(Selector('span').withText('MVP Marketplace'))
-    .click(Selector('header').find('button').withText('Log out'))
-
+    .click(Selector('header').find('button').withText('Log out'));
 });
 
-test('Delete item test', async t => {
-
-
+test('Delete item test', async (t) => {
   await t
 
     //checks if bought item still exists at auctions
@@ -158,6 +157,5 @@ test('Delete item test', async t => {
     //deleting exist item
     .setNativeDialogHandler(() => true)
     .click(Selector('main').find('button').withText('Delete'))
-    .click(Selector('header').find('button').withText('Log out'))
-
+    .click(Selector('header').find('button').withText('Log out'));
 });
