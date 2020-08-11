@@ -1,8 +1,8 @@
 {% liquid
-  include 'lib/queries/orders/find', id: event.target.id
-  include 'lib/queries/items/find',  id: context.exports.order.item.id
+  function_rc order = 'lib/queries/orders/find', id: event.target.id
+  include 'lib/queries/items/find',  id: order.item.id
 
-  assign order_status = context.exports.order.status.name
+  assign order_status = order.status.name
 
   if order_status == 'app.order_statuses.paid'
     include 'lib/commands/item_statuses/create/build', item_id: context.exports.item.id, name: 'app.item_statuses.sold'
