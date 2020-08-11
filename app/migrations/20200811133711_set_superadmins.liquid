@@ -1,0 +1,9 @@
+{% graphql r %}
+mutation set_constants {
+  superadmins: constant_set(name: "superadmins", value: "godot@tlen.pl,piotr@near-me.com,admin@example.com"){
+    name
+    value
+  }
+}
+{% endgraphql %}
+{% log r, type: 'migrations/set_superadmins' %}

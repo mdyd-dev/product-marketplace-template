@@ -1,10 +1,10 @@
 {% liquid
   assign valid = true
-
-  if context.current_user.email != 'godot@tlen.pl' and context.current_user.email != 'piotr@near-me.com'
+  assign superadmins = context.constants.superadmins | split: ','
+  unless superadmins contains context.current_user.email
     include 'lib/flash/publish', error: 'app.errors.unauthorized'
 
     redirect_to '/sessions/new'
     break
-  endif
+  endunless
 %}

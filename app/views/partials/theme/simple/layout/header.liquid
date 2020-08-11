@@ -14,7 +14,8 @@
 
       {% if context.current_user.id  %}
       <a href="/dashboard" class="mr-5 hover:text-gray-900">{{ 'app.dashboard' | t }}</a>
-      {% if context.current_user.email == 'godot@tlen.pl' or context.current_user.email == 'piotr@near-me.com' %}
+      {% assign superadmins = context.constants.superadmins | split: ',' %}
+      {% if superadmins contains context.current_user.email %}
         <a href="/admin" class="mr-5 hover:text-gray-900">{{ 'app.admin' | t }}</a>
       {% endif %}
 
