@@ -138,8 +138,11 @@ test('Edit item', async (t) => {
     .pressKey(clearField)
     .typeText(Selector('main').find('[name="item[price]"]'), cheatedPrice.price)
     .click(Selector('button[value="update"]'))
-    //.click(Selector('main').find('button').withText('Checkout'))
-    .click(Selector('span').withText('MVP Marketplace'))
+    .click(Selector('main').find('button').withText('Buy for $10'))
+    .click(Selector('main').find('button').withText('Checkout'))
+    .click(Selector('header').find('a').withText('Dashboard'))
+    .click(Selector('main').find('a').withText('Your orders').nth(1))
+    .click(Selector('button').withText('Cancel'))
     .click(Selector('header').find('button').withText('Log out'));
 });
 
