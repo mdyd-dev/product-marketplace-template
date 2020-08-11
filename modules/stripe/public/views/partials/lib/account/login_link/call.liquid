@@ -1,0 +1,9 @@
+{% parse_json account_data %}
+  {
+    "gateway_id": "{{ account.gateway_id }}"
+  }
+{% endparse_json %}
+{% liquid
+  graphql link_body = 'modules/stripe/api_call', data: account_data, template: "modules/stripe/account_login_link" | dig: 'api_call', 'response', 'body' | parse_json
+  return_rc link_body.url
+%}

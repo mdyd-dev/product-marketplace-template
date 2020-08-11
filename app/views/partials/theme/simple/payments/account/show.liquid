@@ -3,14 +3,14 @@
     <p>
       You have successfully connected your Stripe account, but it is still <b>pending verification</b>.
       You can check details of the verification process and manage account details in the
-      <a class="text-green-600 font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer" href="/payments/stripe_dashboard">
+      <a class="text-green-600 font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer" href="/payments/account/stripe-dashboard">
         Stripe Account Dashboard
       </a>
     </p>
   {%- elsif account.state == "verified" -%}
     <p>
       You have successfully connected and verified your Stripe account. You can manage account details in the
-      <a class="text-green-600 font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer" href="/payments/stripe_dashboard">
+      <a class="text-green-600 font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer" href="/payments/account/stripe-dashboard">
         Stripe Account Dashboard
       </a>
     </p>
@@ -21,7 +21,7 @@
 
     <p>
       There is a problem with your bank account verification process. Go to
-      <a class="text-green-600 font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer" href="/payments/stripe_dashboard">
+      <a class="text-green-600 font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer" href="/payments/account/stripe-dashboard">
         Stripe Account Dashboard
       </a> to find out more.
     </p>

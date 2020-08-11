@@ -1,4 +1,4 @@
-mutation create($id: ID!, $state: String!) {
+mutation account_update($id: ID!, $state: String!) {
   model_update(
     id: $id,
     model: {
