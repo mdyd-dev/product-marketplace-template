@@ -1,0 +1,8 @@
+{% liquid
+  assign config = '{}' | parse_json
+  assign keys = 'mpo_fee_percent,stripe_pk_key,stripe_sk_key,stripe_client_id' | split: ','
+  for key in keys
+    assign config = config | add_hash_key: key, context.constants[key]
+  endfor
+  return_rc config
+%}
