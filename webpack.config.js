@@ -7,37 +7,38 @@ const prod = process.env.NODE_ENV === 'production';
 
 const config = {
   entry: {
-    app: './src/js/app'
+    app: './src/js/app',
   },
   output: {
     filename: 'js/[name].js?v=[chunkhash:5]',
     chunkFilename: 'js/[name].js?v=[chunkhash:5]',
-    path: path.resolve('app/assets')
+    path: path.resolve('app/assets'),
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'app'),
     watchContentBase: true,
     writeToDisk: true,
-    open: true
+    open: true,
   },
   bail: true,
+  performance: { hints: false },
   stats: {
     assetsSort: '!size',
     builtAt: false,
     children: false,
-    modules: false
+    modules: false,
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader?cacheDirectory'
+        loader: 'babel-loader?cacheDirectory',
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader?url=false', 'postcss-loader']
-      }
-    ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader?url=false', 'postcss-loader'],
+      },
+    ],
   },
   optimization: {
     minimizer: [
@@ -50,23 +51,23 @@ const config = {
           },
         },
         extractComments: false,
-      })
+      }),
     ],
     splitChunks: {
       cacheGroups: {
-        vendors: false // Do not emit vendors~* files that are almost empty in this setup
-      }
-    }
+        vendors: false, // Do not emit vendors~* files that are almost empty in this setup
+      },
+    },
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css?v=[chunkhash:5]'
+      filename: 'css/[name].css?v=[chunkhash:5]',
     }),
     new WebpackRequireFrom({
       variableName: 'window.cdnUrl',
-    })
+    }),
   ],
-  mode: prod ? 'production' : 'development'
+  mode: prod ? 'production' : 'development',
 };
 
 module.exports = config;
