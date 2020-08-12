@@ -1,8 +1,10 @@
-<h1 class="mb-6 text-3xl font-medium">
+<h1 class="mb-6 text-2xl">
   <a href="/dashboard">{{ 'app.dashboard' | t }}</a>
   / {{ 'app.' | append: role | t }}
   / {{ 'app.orders.list' | t }}
+  {% if orders.total_entries > 0 -%}
   ({{ orders.total_entries  }})
+  {%- endif %}
 </h1>
 
 {% if orders.total_entries > 0 %}
@@ -47,7 +49,7 @@
     </tbody>
   </table>
 {% else %}
-  <p class="w-full text-lg font-medium">
-    Your orders will appear here once you have any.
+  <p class="w-full text-lg">
+    Your orders will appear here. Right now you don't have any.
   </p>
 {% endif %}

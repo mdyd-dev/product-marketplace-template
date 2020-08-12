@@ -8,7 +8,7 @@
 <div class="flex w-full">
   <div class="w-3/4">
     <h3 class="mb-3 text-lg font-medium text-gray-900 title-font">Recent items</h3>
-    <h2 class="mb-6 text-3xl font-medium">{% echo 'app.users.list' | t %}</h2>
+    <h2 class="mb-6 text-2xl">{% echo 'app.users.list' | t %}</h2>
     <table class="table-auto w-full">
       {% for user in users.results %}
         <tr>
@@ -19,7 +19,7 @@
       {% endfor %}
     </table>
 
-    <h2 class="mb-6 text-3xl font-medium">{% echo 'app.items.list' | t %}</h2>
+    <h2 class="mb-6 text-2xl">{% echo 'app.items.list' | t %}</h2>
     <table class="table-auto w-full">
       {% for item in items.results %}
         <tr>
@@ -32,7 +32,7 @@
       {% endfor %}
     </table>
 
-    <h2 class="mb-6 text-3xl font-medium">{% echo 'app.orders.list' | t %}</h2>
+    <h2 class="mb-6 text-2xl">{% echo 'app.orders.list' | t %}</h2>
     <table class="table-auto w-full">
       {% for order in orders.results %}
         <tr>

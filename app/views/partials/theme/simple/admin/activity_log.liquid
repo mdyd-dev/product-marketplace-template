@@ -1,5 +1,5 @@
-<h2 class="mb-6 text-3xl font-medium">{% echo 'app.activities.list' | t %} ({{ activities.total_entries }})</h2>
-<table class="table-auto w-full">
+<h2 class="mb-6 text-2xl">{% echo 'app.activities.list' | t %} ({{ activities.total_entries }})</h2>
+<table class="w-full table-auto">
   {% for activity in activities.results %}
     <tr>
       <td class="px-4 py-2 border-b">{% print activity.payload.date | to_time %}</td>

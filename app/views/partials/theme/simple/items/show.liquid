@@ -31,7 +31,7 @@
           {% include 'theme/simple/business_card', user: item.owner.email %}
         </h2>
 
-        <h1 class="mb-1 text-3xl font-medium">
+        <h1 class="mb-1 text-2xl">
           {{ item.name }}
         </h1>
 
@@ -56,7 +56,7 @@
         <p class="mt-4 leading-relaxed">{{ item.description }}</p>
 
         <div class="flex mt-4">
-          <span class="text-2xl font-medium text-gray-900 ">{{ item.price | pricify_cents }}</span>
+          <span class="text-2xl text-gray-900 ">{{ item.price | pricify_cents }}</span>
           {% if item.status.name != 'app.item_statuses.sold' %}
           <form action="/orders/new" method="get" class="ml-auto ">
             <input type="hidden" name="item_id" value="{{ item.id }}">
