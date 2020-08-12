@@ -56,12 +56,12 @@
         <p class="mt-4 leading-relaxed">{{ item.description }}</p>
 
         <div class="flex mt-4">
-          <span class="text-2xl font-medium text-gray-900 ">{{ item.price | pricify }}</span>
+          <span class="text-2xl font-medium text-gray-900 ">{{ item.price | pricify_cents }}</span>
           {% if item.status.name != 'app.item_statuses.sold' %}
           <form action="/orders/new" method="get" class="ml-auto ">
             <input type="hidden" name="item_id" value="{{ item.id }}">
             <button id="buybutton" class="button">
-              Buy for {{ item.price | pricify }}
+              Buy for {{ item.price | pricify_cents }}
             </button>
           </form>
           {% else %}

@@ -26,9 +26,9 @@
   <tbody>
     <tr>
       <td class="px-4 py-2 border">{{ item.name }}</td>
-      <td class="px-4 py-2 border">{{ item.price | pricify }}</td>
+      <td class="px-4 py-2 border">{{ item.price | pricify_cents }}</td>
       <td class="px-4 py-2 border">1</td>
-      <td class="px-4 py-2 border">{{ order.total | pricify }}</td>
+      <td class="px-4 py-2 border">{{ order.total | pricify_cents }}</td>
     </tr>
   </tbody>
 </table>
