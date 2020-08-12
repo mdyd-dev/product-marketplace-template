@@ -230,3 +230,22 @@ test(`Checkout button clicking not by buyer`, async (t) => {
     .click(Selector('button').withText('Pay'))
     .click(Selector('main').find('a').withText('Your orders').nth(1));
 });
+
+/*test('Breakin-in test', async (t) => {
+  await t
+  .click(Selector('header').find('a').withText('Log in'))
+  .typeText(emailInput, 'user@email.com')
+  .typeText(passInput, 'password')
+  .click(logInBtn)
+  .typeText('input[name="k"]', 'Watch')
+  .click(Selector('main').find('button').withText('Search'))
+  .click(Selector('main').find('h2 a').withText('Watch'))
+  await t
+  var itemEditUrl = await getURL()
+  var itemEditUrl = itemEditUrl.split('-')
+  var editItemId = itemEditUrl[itemEditUrl.length -1]
+  await t
+  .navigateTo('https://getmarketplace.staging.gapps.platformos.com/items/edit?id=' + editItemId)
+
+});
+*/
