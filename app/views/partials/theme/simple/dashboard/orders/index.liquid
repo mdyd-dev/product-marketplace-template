@@ -38,7 +38,7 @@
             <br/><small>{{ order.order_status.timestamp | to_time | l }}</small>
             {% endif %}
           </td>
-          <td class="px-4 py-2 border-b">{{ order.total | pricify }}</td>
+          <td class="px-4 py-2 border-b">{{ order.total | pricify_cents }}</td>
           <td class="px-4 py-2 border-b">
             {% include 'theme/simple/dashboard/orders/actions' %}
           </td>

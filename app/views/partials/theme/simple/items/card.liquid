@@ -31,10 +31,10 @@
     <div class="flex justify-between">
       <p class="mt-1">
         {% if item.orders[0].status == 'sold' %}
-        <span class="line-through">{{ item.price | pricify }}</span>
+        <span class="line-through">{{ item.price | pricify_cents }}</span>
         <span class="font-bold">&mdash; Sold</span>
         {% else %}
-        <span class="text-lg">{{ item.price | pricify }}</span>
+        <span class="text-lg">{{ item.price | pricify_cents }}</span>
         {% endif %}
       </p>
 
