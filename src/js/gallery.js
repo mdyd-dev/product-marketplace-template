@@ -1,14 +1,17 @@
 import 'glider-js/glider.css';
 import Glider from 'glider-js';
 
+const el = document.querySelector('.glider');
 
-new Glider(document.querySelector('[glider]'), {
-  slidesToShow: 1,
-  dots: '.glider-dots',
-  draggable: true,
-  scrollLock: true,
-  arrows: {
-    prev: '.glider-prev',
-    next: '.glider-next'
-  }
-});
+if (el) {
+  new Glider(el, {
+    slidesToShow: 1,
+    dots: '.glider-dots',
+    draggable: true,
+    scrollLock: true,
+    arrows: {
+      prev: '.glider-prev',
+      next: '.glider-next'
+    }
+  });
+}

@@ -7,7 +7,7 @@
     <script>window.cdnUrl = '{{ "" | asset_url }}';</script>
   </head>
 
-  <body class="font-sans antialiased leading-normal">
+  <body class="font-sans antialiased leading-normal text-gray-700">
     {% include 'theme/simple/layout/main', current_user_id: context.current_user.id %}
     {% yield 'custom_scripts' %}
   </body>

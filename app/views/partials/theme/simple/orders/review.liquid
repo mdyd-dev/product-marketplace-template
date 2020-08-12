@@ -1,25 +1,25 @@
+<h3 class="mb-4 text-xl font-bold">
+  Please confirm and submit your order
+</h3>
 
-<div>
-  <h3 class="text-xl font-bold mb-4 md:hidden">
-    Please confirm and submit your order
-  </h3>
+<form action="/orders/pay" id="pay-form" method="post" class="w-1/2"
+  data-checkout-session-id="{{ checkout_session.id }}"
+  data-stripe-pk-key="{{ context.constants.stripe_pk_key }}"
+>
+  {% include 'authenticity_token' %}
+  <input type="hidden" name="status" value="app.order_statuses.paid"/>
+  <input type="hidden" name="order_id" value="{{ order.id }}"/>
 
-  <form action="/orders/pay" id="pay-form" method="post" class="mt-2"
-    data-checkout-session-id={{checkout_session.id}}
-    data-stripe-pk-key={{ context.constants.stripe_pk_key }}
-  >
-    {% include 'authenticity_token' %}
-    <input type="hidden" name="status" value="app.order_statuses.paid"/>
-    <input type="hidden" name="order_id" value="{{ order.id }}"/>
+  <p>
+    Order value: ${{ order.total }}
+  </p>
 
-    order total: {{order.total}}<br>
+  <button class="button">
+    {{ 'app.pay' | t }}
+  </button>
+</form>
 
-    <button class="button button-sm">
-      {{ 'app.pay' | t }}
-    </button>
-  </form>
-</div>
-
+{% content_for custom_scripts %}
 <script src="https://js.stripe.com/v3/"></script>
 <script>
   const form = document.getElementById('pay-form');
@@ -39,3 +39,4 @@
     // using `error.message`.
   });
 </script>
+{% endcontent_for %}

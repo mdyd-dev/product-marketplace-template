@@ -7,7 +7,7 @@ if (uppy) {
   });
 }
 
-const gallery = document.querySelector('[glider]');
+const gallery = document.querySelector('.glider');
 import(/* webpackChunkName: "gallery" */ './gallery.js').then(() => {
   console.log('Gallery module loaded.');
 });
