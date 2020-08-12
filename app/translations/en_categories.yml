@@ -10,10 +10,8 @@ en:
     home_decor_n_festive_needs: Home Decor & Festive Needs
     home_decor_n_festive_needs/table_decor_n_handicrafts: Table Decor & Handicrafts
     home_decor_n_festive_needs/table_decor_n_handicrafts/showpieces: Showpieces
-    home_decor_n_festive_needs/table_decor_n_handicrafts/showpieces/religious_idols: Religious
-      Idols
-    ? home_decor_n_festive_needs/table_decor_n_handicrafts/showpieces/religious_idols/divine_gifts_n_artificial_jewellery_religious_idols
-    : Divine Gifts & Artificial Jewellery Religious Idols
+    home_decor_n_festive_needs/table_decor_n_handicrafts/showpieces/religious_idols: Religious Idols
+    home_decor_n_festive_needs/table_decor_n_handicrafts/showpieces/religious_idols/divine_gifts_n_artificial_jewellery_religious_idols: Divine Gifts & Artificial Jewellery Religious Idols
     jewellery: Jewellery
     jewellery/accessories: Accessories
     jewellery/accessories/brooches: Brooches
@@ -44,20 +42,15 @@ en:
     jewellery/accessories/brooches/fashion_point_blue_crystal_brooch: Fashion Point
       Blue crystal Brooch (Blue, Silver)
     jewellery/accessories/brooches/fashion_point_ganesha_design_brooch: Fashion Point
-      Ganesha design Brooch (Multicolor)
-    jewellery/accessories/brooches/gurjari_oxidiesd_kurta_button_brooch_brooch: gurjari
-      oxidiesd kurta button brooch Brooch (Black)
-    jewellery/accessories/brooches/gurjari_oxidiesd_kutra_button_brooch_brooch: gurjari
-      oxidiesd kutra button brooch Brooch (Black)
-    jewellery/accessories/brooches/gurjari_oxidised_kurta_button_brooch_brooch: gurjari
-      oxidised kurta button brooch Brooch (Black)
+      Ganesha Brooch (Multicolor)
+    jewellery/accessories/brooches/gurjari_oxidiesd_kurta_button_brooch_brooch: Brooch (Black)
     jewellery/accessories/brooches/hbs_saree_pin_animal_brooch: hbs saree pin animal
       Brooch (Gold)
     jewellery/accessories/brooches/juhi_creations_gw2_brooch: JUHI CREATIONS GW2 Brooch
       (Gold, White)
     jewellery/accessories/brooches/mentiezi_red_flower_brooch: Mentiezi Red Flower
       Brooch (Gold, Red)
-    jewellery/accessories/brooches/misshruts_an_emerald_brooch_brooch: misshruts An
+    jewellery/accessories/brooches/misshruts_an_emerald_brooch_brooch: An
       Emerald Brooch Brooch (Gold, Green)
     jewellery/accessories/brooches/mivera_brooch: Mivera Brooch (Pink)
     jewellery/accessories/brooches/remix_yellow-pin_brooch: Remix Yellow-Pin Brooch
@@ -69,8 +62,7 @@ en:
     jewellery/accessories/brooches/samaa_s-0003_brooch: Samaa S-0003 Brooch (Blue)
     jewellery/accessories/brooches/scion_floral_saree_pin_quilling_brooch: Scion Floral
       Saree Pin Quilling Brooch (Brown)
-    jewellery/accessories/brooches/sharp_n_style_pink_rose_brouch_brooch: sharp n
-      style Pink Rose Brouch Brooch (Pink)
+    jewellery/accessories/brooches/sharp_n_style_pink_rose_brouch_brooch: Pink Rose Brouch Brooch (Pink)
     jewellery/accessories/brooches/shihibas_belly_button_piercing_brooch: Shihibas
       Belly Button Piercing Brooch (Platinum)
     jewellery/accessories/brooches/silver_shoppee_my_love_brooch: Silver Shoppee My
@@ -112,8 +104,7 @@ en:
     jewellery/mangalsutras_n_tanmaniyas/decon_alloy_mangalsutra: Decon Alloy Mangalsutra
     jewellery/mangalsutras_n_tanmaniyas/decon_metal_mangalsutra: Decon Metal Mangalsutra
     jewellery/mangalsutras_n_tanmaniyas/jewelfox_gold_tanmaniya: JewelFox Gold Tanmaniya
-    jewellery/mangalsutras_n_tanmaniyas/knp_enterprise_audi_style_alloy_mangalsutra: knp
-      enterprise Audi Style Alloy Mangalsutra
+    jewellery/mangalsutras_n_tanmaniyas/knp_enterprise_audi_style_alloy_mangalsutra: Audi Style Alloy Mangalsutra
     jewellery/mangalsutras_n_tanmaniyas/parinaaz_alloy_mangalsutra: Parinaaz Alloy
       Mangalsutra
     jewellery/mangalsutras_n_tanmaniyas/spangel_fashion_audi_style_alloy_mangalsutra: Spangel
@@ -135,17 +126,17 @@ en:
     jewellery/necklaces_n_chains/necklaces: Necklaces
     jewellery/necklaces_n_chains/necklaces/chkokko_chains_alloy_necklace: CHKOKKO
       Chains Alloy Necklace
-    jewellery/necklaces_n_chains/necklaces/dgold_beads_stone_necklace: dgold Beads
+    jewellery/necklaces_n_chains/necklaces/dgold_beads_stone_necklace: Beads
       Stone Necklace
-    jewellery/necklaces_n_chains/necklaces/dgold_citrine_stone_necklace: dgold Citrine
+    jewellery/necklaces_n_chains/necklaces/dgold_citrine_stone_necklace: Citrine
       Stone Necklace
-    jewellery/necklaces_n_chains/necklaces/dgold_garnet_stone_necklace: dgold Garnet
+    jewellery/necklaces_n_chains/necklaces/dgold_garnet_stone_necklace: Garnet
       Stone Necklace
-    jewellery/necklaces_n_chains/necklaces/dgold_onyx_stone_necklace_set: Dgold Onyx
+    jewellery/necklaces_n_chains/necklaces/dgold_onyx_stone_necklace_set: Onyx
       Stone Necklace Set
-    jewellery/necklaces_n_chains/necklaces/dgold_quartz_stone_necklace: dgold Quartz
+    jewellery/necklaces_n_chains/necklaces/dgold_quartz_stone_necklace: Quartz
       Stone Necklace
-    jewellery/necklaces_n_chains/necklaces/dgold_spinel_stone_necklace: dgold Spinel
+    jewellery/necklaces_n_chains/necklaces/dgold_spinel_stone_necklace: Spinel
       Stone Necklace
     jewellery/necklaces_n_chains/necklaces/imagica_alloy_necklace: Imagica Alloy Necklace
     jewellery/necklaces_n_chains/necklaces/imagica_emerald_stone_necklace: Imagica
@@ -182,7 +173,7 @@ en:
     jewellery/precious_jewellery/classyworld_brass_cufflink: classyworld Brass Cufflink
       (Silver-01)
     jewellery/rings: Rings
-    jewellery/rings/diwine_jewels_silver_zircon_rhodium_na_k_ring: diwine jewels Silver
+    jewellery/rings/diwine_jewels_silver_zircon_rhodium_na_k_ring: Silver
       Zircon Rhodium NA K Ring
     jewellery/rings/frabjous_sterling_silver_toe_ring_set: Frabjous Sterling Silver
       Toe Ring Set
