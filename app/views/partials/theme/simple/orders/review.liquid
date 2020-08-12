@@ -11,13 +11,14 @@
   <input type="hidden" name="order_id" value="{{ order.id }}"/>
 
   <p>
-    Order value: ${{ order.total }}
+    Order total: {{ order.total | pricify_cents }}<br>
   </p>
 
   <button class="button">
     {{ 'app.pay' | t }}
   </button>
 </form>
+</div>
 
 {% content_for custom_scripts %}
 <script src="https://js.stripe.com/v3/"></script>
