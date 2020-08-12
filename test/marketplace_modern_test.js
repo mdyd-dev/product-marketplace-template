@@ -107,7 +107,7 @@ test('Item listing', async (t) => {
     .click(Selector('button').withText('browse files'))
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
     .wait(1000)
-    .click(Selector('button[value="create"]'))
+    .click(Selector('button').withText('Submit'))
     .click(mainPage);
 });
 
@@ -141,24 +141,24 @@ test('Edit item', async (t) => {
   const url = await getURL();
 
   await t
-    .doubleClick(Selector('main').find('[name="item[name]"]'))
+    .doubleClick(nameField)
     .pressKey(clearField)
-    .typeText('input[name="item[name]"]', editedItem.name)
-    .doubleClick(Selector('main').find('[name="item[type]"]'))
+    .typeText(nameField, editedItem.name)
+    .doubleClick(typeField)
     .pressKey(clearField)
-    .typeText('input[name="item[type]"]', editedItem.type)
-    .doubleClick(Selector('main').find('[name="item[description]"]'))
+    .typeText(typeField, editedItem.type)
+    .doubleClick(descriptionField)
     .pressKey(clearField)
-    .typeText('textarea[name="item[description]"]', editedItem.description)
-    .doubleClick(Selector('main').find('[name="item[tags]"]'))
+    .typeText(descriptionField, editedItem.description)
+    .doubleClick(tagsField)
     .pressKey(clearField)
-    .typeText('input[name="item[tags]"]', editedItem.description)
-    .doubleClick(Selector('main').find('[name="item[price]"]'))
+    .typeText(tagsField, editedItem.tags)
+    .doubleClick(priceField)
     .pressKey(clearField)
-    .typeText(Selector('main').find('[name="item[price]"]'), editedItem.price)
+    .typeText(priceField, editedItem.price)
     .click(Selector('main').find('[name="item[cover_photo]"]'))
     .click(Selector('main').find('option').withText('Copy'))
-    .click(Selector('button[value="update"]'))
+    .click(Selector('button').withText('Submit'))
     .expect(Selector('h1').withText(editedItem.name).exists)
     .ok()
     .click(Selector('span').withText('MVP Marketplace'))
@@ -169,23 +169,24 @@ test('Edit item', async (t) => {
     .typeText(passInput, buyer.password)
     .click(logInBtn)
     .typeText('input[name="k"]', editedItem.name)
-    .click(Selector('main').find('button').withText('Search'))
+    .click(Selector('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //Buying item, logging off from buyer account
-    .click(Selector('main').find('button'))
+    .wait(5000)
+    .click(Selector('button').withText('Buy'))
     .navigateTo(url);
   await t.expect(getURL()).contains(url);
   await t
-    .doubleClick(Selector('main').find('[name="item[price]"]'))
+    .doubleClick(priceField)
     .pressKey(clearField)
-    .typeText(Selector('main').find('[name="item[price]"]'), cheatedPrice.price)
-    .click(Selector('button[value="update"]'))
-    .click(Selector('main').find('button').withText('Buy for $10'))
+    .typeText(priceField, cheatedPrice.price)
+    .click(Selector('button').withText('Submit'))
+    .click(Selector('button').withText('Buy'))
     //.click(Selector('main').find('button').withText('Checkout'))
     .click(Selector('header').find('a').withText('Dashboard'))
     .click(Selector('main').find('a').withText('Your orders').nth(1))
     //.click(Selector('button').withText('Cancel'))
-    .click(Selector('header').find('button').withText('Log out'));
+    .click(Selector('button').withText('Log out'));
 });
 
 test('Delete item test', async (t) => {
@@ -200,8 +201,8 @@ test('Delete item test', async (t) => {
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //deleting exist item
     .setNativeDialogHandler(() => true)
-    .click(Selector('main').find('button').withText('Delete'))
-    .click(Selector('header').find('button').withText('Log out'));
+    .click(Selector('button').withText('Delete'))
+    .click(Selector('button').withText('Log out'));
 });
 
 test(`Checks if cheat item price attempt shows denied message`, async (t) => {
