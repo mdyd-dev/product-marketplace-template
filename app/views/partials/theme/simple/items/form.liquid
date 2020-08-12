@@ -72,9 +72,8 @@
 
       <div class="mt-3">
         <label class="block" for="price">Price</label>
-          {{ item.price | default: 1000 | pricify_cents: "Euro" }}
         <input class="w-32 form-input" type="number" id="price" name="item[price]"
-          value="{{ item.price | default: 1000 | pricify_cents | replace: '$', '' }}" />
+          value="{{ item.price | default: 1000 | pricify_cents | replace_regex: '[\$\,]', '' }}" />
         {% if item.errors.price %}
         <span class="text-red-800">{{ item.errors.price }}</span>
         {% endif %}
