@@ -1,46 +1,52 @@
 {% if account.id != blank  %}
-  {%- if account.state == "pending" -%}
-    <p>
-      You have successfully connected your Stripe account, but it is still <b>pending verification</b>.
-      You can check details of the verification process and manage account details in the
-      <a class="font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer" href="/payments/account/stripe-dashboard">
-        Stripe Account Dashboard
-      </a>
-    </p>
-  {%- elsif account.state == "verified" -%}
-    <p>
-      You have successfully connected and verified your Stripe account. You can manage account details in the
-      <a class="font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer" href="/payments/account/stripe-dashboard">
-        Stripe Account Dashboard
-      </a>
-    </p>
-  {%- else -%}
-    <p class="mb-2 text-xl">
-      Verification status: <span class="font-bold text-red-500">{{ account.state | humanize | downcase }}</span>
-    </p>
+{%- if account.state == "pending" -%}
+<h2 class="mb-2 text-xl">Verification pending</h2>
 
-    <p>
-      There is a problem with your bank account verification process. Go to
-      <a class="font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer" href="/payments/account/stripe-dashboard">
-        Stripe Account Dashboard
-      </a> to find out more.
-    </p>
-  {%- endif -%}
+<p>
+  You have successfully connected your Stripe account, but it is still <b>pending verification</b>.
+  You can check details of the verification process and manage account details in the
+  <a class="font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer"
+    href="/payments/account/stripe-dashboard">
+    Stripe Account Dashboard
+  </a>
+</p>
+{%- elsif account.state == "verified" -%}
+<h2 class="mb-2 text-xl">Account verified</h2>
 
-  <hr class="my-6">
+<p>
+  You have successfully connected and verified your Stripe account. You can manage account details in the
+  <a class="font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer"
+    href="/payments/account/stripe-dashboard">
+    Stripe Account Dashboard
+  </a>
+</p>
+{%- else -%}
+<h2 class="mb-2 text-xl">
+  Verification status: <span class="font-bold text-red-500">{{ account.state | humanize | downcase }}</span>
+</h2>
 
-  <h3 class="mb-2 text-lg font-bold">Remove Bank Account</h3>
-  <p class="mb-2">
-    When you remove your bank account following things will happen:
-  </p>
-  <ul class="mb-4 ml-4 list-disc">
-    <li>All your currently active products will be unpublished and no longer visible on the marketplace.</li>
-    <li>You will not be able to publish any new products until you connect with Stripe again and your account is verified.</li>
-  </ul>
+<p>
+  There is a problem with your bank account verification process. Go to
+  <a class="font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer"
+    href="/payments/account/stripe-dashboard">
+    Stripe Account Dashboard
+  </a> to find out more.
+</p>
+{%- endif -%}
 
-  <p>
-    <button type="submit" class="text-red-800 underline" data-remove-merchant-account-button>
-      Delete my Bank Account
-    </button>
-  </p>
+<hr class="my-6">
+
+<h3 class="text-lg font-bold">Remove Bank Account</h3>
+<p class="mb-2">
+  When you remove your bank account following things will happen:
+</p>
+<ul class="mb-4 ml-4 list-disc">
+  <li>All your currently active products will be unpublished and no longer visible on the marketplace.</li>
+  <li>You will not be able to publish any new products until you connect with Stripe again and your account is verified.
+  </li>
+</ul>
+
+<button class="text-red-800 underline" data-remove-merchant-account-button>
+  Delete my Bank Account
+</button>
 {% endif %}
