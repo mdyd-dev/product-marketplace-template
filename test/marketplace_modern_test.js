@@ -10,6 +10,11 @@ const itemBeforeCheckout = 'https://getmarketplace.staging.gapps.platformos.com/
 const itemCheckoutUrl = 'https://getmarketplace.staging.gapps.platformos.com/orders/new?item_id=3275';
 const emailInput = 'label #email';
 const passInput = 'label #password';
+const nameField = '#name';
+const typeField = '#type';
+const descriptionField = '#description';
+const tagsField = '#tags';
+const priceField = '#price';
 const NewEmail = faker.internet.email();
 const NewPassword = faker.internet.password();
 const logInBtn = Selector('button').withText('Log in');
@@ -82,24 +87,24 @@ test('Item listing', async (t) => {
 
     //listing the item for sale
     .click(Selector('a').withText('List your item'))
-    .typeText('input[name="user[email]"]', NewEmail)
-    .typeText('input[name="user[password]"]', NewPassword)
+    .typeText(emailInput, NewEmail)
+    .typeText(passInput, NewPassword)
     .click(logInBtn)
     .click(Selector('a').withText('List your item'))
-    .typeText(Selector('input[name="item[name]"]'), item.name)
-    .typeText('input[name="item[type]"]', item.type)
-    .typeText('textarea[name="item[description]"]', item.description)
-    .typeText('input[name="item[tags]"]', item.tags)
-    .doubleClick(Selector('main').find('[name="item[price]"]'))
+    .typeText(Selector(nameField), item.name)
+    .typeText(typeField, item.type)
+    .typeText(descriptionField, item.description)
+    .typeText(tagsField, item.tags)
+    .doubleClick(Selector(priceField))
     .pressKey(clearField)
-    .typeText(Selector('main').find('[name="item[price]"]'), item.price)
+    .typeText(priceField, item.price)
     .click(Selector('main').find('[name="item[cover_photo]"]'))
     .click(Selector('main').find('option').withText('Disc'));
 
   await t
 
     //upload file
-    .click(Selector('main').find('button').withText('browse files'))
+    .click(Selector('button').withText('browse files'))
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
     .wait(1000)
     .click(Selector('button[value="create"]'))
