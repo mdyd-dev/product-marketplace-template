@@ -8,7 +8,7 @@
   assign item_uuid = item.uuid | default: uuid
 %}
 
-<section class=" ">
+<section class="">
   <div class="container flex flex-wrap items-center mx-auto">
     <form action="/items/{{ path }}" method="post" class="w-full p-8 bg-gray-200 rounded-lg shadow-md md:w-1/2">
       {% include 'authenticity_token' %}
@@ -20,7 +20,7 @@
 
       <div class="my-3">
         <label class="block" for="name">Name</label>
-        <input class="w-2/3 form-input" type="text" id="name" name="item[name]" value="{{ item.name }}" autofocus
+        <input class="w-2/3 form-input" type="text" id="name" name="item[name]" value="{{ item.name }}" autofocus required
          />
         {% if item.errors.name %}
         <span class="text-red-800">{{ item.errors.name }}</span>
