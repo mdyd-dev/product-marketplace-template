@@ -5,9 +5,6 @@ import { ClientFunction } from 'testcafe';
 fixture`Basic complete happy scenario`.page`https://getmarketplace.staging.gapps.platformos.com/`;
 
 const getURL = ClientFunction(() => window.location.href);
-const itemEditingUrl = 'https://getmarketplace.staging.gapps.platformos.com/items/edit?id=151';
-const itemBeforeCheckout = 'https://getmarketplace.staging.gapps.platformos.com/items/3275';
-const itemCheckoutUrl = 'https://getmarketplace.staging.gapps.platformos.com/orders/new?item_id=3275';
 const emailInput = 'label #email';
 const passInput = 'label #password';
 const nameField = '#name';
@@ -138,8 +135,6 @@ test('Edit item', async (t) => {
   await t.click(Selector('main').find('a').withText('Edit'));
   //change of item information
 
-  const url = await getURL();
-
   await t
     .doubleClick(nameField)
     .pressKey(clearField)
@@ -172,19 +167,11 @@ test('Edit item', async (t) => {
     .click(Selector('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //Buying item, logging off from buyer account
-    .wait(5000)
     .click(Selector('button').withText('Buy'))
-    .navigateTo(url);
-  await t.expect(getURL()).contains(url);
   await t
-    .doubleClick(priceField)
-    .pressKey(clearField)
-    .typeText(priceField, cheatedPrice.price)
-    .click(Selector('button').withText('Submit'))
-    .click(Selector('button').withText('Buy'))
     //.click(Selector('main').find('button').withText('Checkout'))
     .click(Selector('header').find('a').withText('Dashboard'))
-    .click(Selector('main').find('a').withText('Your orders').nth(1))
+    //.click(Selector('main').find('a').withText('Your orders').nth(1))
     //.click(Selector('button').withText('Cancel'))
     .click(Selector('button').withText('Log out'));
 });
@@ -205,35 +192,11 @@ test('Delete item test', async (t) => {
     .click(Selector('button').withText('Log out'));
 });
 
-test(`Checks if cheat item price attempt shows denied message`, async (t) => {
+
+test('Breakin-in test, edition by none user', async (t) => {
   const signInNotification = 'Please sign in with you credentials or register new account before continuing.';
   const notAuthorizedUser = 'Permission denied';
-
-  await t.navigateTo(itemEditingUrl);
-  await t
-    .expect(Selector('div').withText(signInNotification).exists)
-    .ok()
-    .typeText(Selector(emailInput), 'user@email.com')
-    .typeText(Selector(passInput), 'password')
-    .click(logInBtn);
-  await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok();
-});
-
-test(`Checkout button clicking not by buyer`, async (t) => {
-  await t.navigateTo(itemBeforeCheckout).expect(Selector('button').withText('Sold').exists).ok();
-  await t
-    .navigateTo(itemCheckoutUrl)
-    .typeText(emailInput, NewEmail)
-    .typeText(passInput, NewPassword)
-    .click(logInBtn)
-    .click(Selector('button').withText('Checkout'))
-    .click(Selector('button').withText('Pay'))
-    .click(Selector('main').find('a').withText('Your orders').nth(1));
-});
-
-/*test('Breakin-in test', async (t) => {
-  await t
-  .click(Selector('header').find('a').withText('Log in'))
+  await t.click(Selector('header').find('a').withText('Log in'))
   .typeText(emailInput, 'user@email.com')
   .typeText(passInput, 'password')
   .click(logInBtn)
@@ -246,6 +209,6 @@ test(`Checkout button clicking not by buyer`, async (t) => {
   var editItemId = itemEditUrl[itemEditUrl.length -1]
   await t
   .navigateTo('https://getmarketplace.staging.gapps.platformos.com/items/edit?id=' + editItemId)
+  await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok()
 
 });
-*/
