@@ -48,10 +48,10 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
       orders: related_models(join_on_property: "id", foreign_property: "item_id", model_schema_name: "order") @include(if: $withOrders) {
         id
         created_at
-        status: property(name: "status")
         order_status: related_model(join_on_property: "id", foreign_property: "order_id", model_schema_name: "order_status") {
           id
           created_at
+          name: property(name: "name")
         }
       }
 
