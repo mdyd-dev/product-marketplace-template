@@ -19,7 +19,7 @@
       </a>
     </h2>
 
-    <h3 class="mb-1 text-xs text-gray-500 ">
+    <h3 class="mb-1 text-xs text-gray-700 ">
       {% if item.category %}
         <div>
           {{ 'categories.' | append: item.category | t }}
@@ -38,7 +38,7 @@
         {% endif %}
       </p>
 
-      <h3 class="mb-1 text-xs text-gray-500 ">
+      <h3 class="mb-1 text-xs text-gray-700 ">
         {% include 'theme/simple/business_card', user: item.owner.email %}
       </h3>
     </div>

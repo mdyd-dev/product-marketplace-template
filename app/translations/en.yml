@@ -2,7 +2,7 @@ en:
   app:
     title: MVP Marketplace
 
-    total_entries: "Total entries:"
+    total_entries: "Total items:"
     no_items_found: No items found
 
     list-your-item: List your item
