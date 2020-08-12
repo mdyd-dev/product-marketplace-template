@@ -1,13 +1,13 @@
 <div class="flex items-center my-2">
 
-  <div class="text-gray-700">
+  <div class="">
     <span>{{ 'app.total_entries' | t }} {{ items.total_entries }}</span>
   </div>
 
   <div class="ml-auto">
-    <label for="sort" class="text-right text-gray-700">Sort by</label>
+    <label for="sort" class="text-right ">Sort by</label>
     <select class="w-full form-select" id="sort" name="sort">
-      <option value="" class="text-gray-700">Choose sorting</option>
+      <option value="" class="">Choose sorting</option>
       {% for s in filters.sort_options %}
         <option value="{{ s[0] }}" {% if query.sort == s[0] %}selected{% endif %}>{{ s[1] }}</option>
       {% endfor %}
