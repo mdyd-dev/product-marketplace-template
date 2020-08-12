@@ -97,6 +97,7 @@ en:
       cannot_sell_to_yourself: You cannot sell to yourself
       blank: cannot be blank
       too_little: "has to be equal or greater than %{value}"
+      too_much: "has to be equal or smaller than %{value}"
       taken: already taken
       session_create_failed: Invalid email or password
       unauthorized: The system has determined that <span class="font-semibold">you are not</span> presently <span class="font-semibold">authorized</span> to use this system function.

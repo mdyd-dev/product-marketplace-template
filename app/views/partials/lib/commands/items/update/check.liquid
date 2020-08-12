@@ -1,4 +1,5 @@
 {% assign MINIMAL_PRICE = 10 | times: 100 %}
+{% assign MAXIMAL_PRICE = 100000 | times: 100 %}
 
 {% liquid
   assign c = '{ "errors": {}, "valid": true }' | parse_json
@@ -10,6 +11,12 @@
   if object.price <  MINIMAL_PRICE
     assign min_price = MINIMAL_PRICE | pricify_cents
     assign msg = 'app.errors.too_little' | t: value: min_price
+    include 'lib/register_error', contract: c, field_name: 'price', message: msg
+  endif
+
+  if object.price >  MAXIMAL_PRICE
+    assign max_price = MAXIMAL_PRICE | pricify_cents
+    assign msg = 'app.errors.too_much' | t: value: max_price
     include 'lib/register_error', contract: c, field_name: 'price', message: msg
   endif
 

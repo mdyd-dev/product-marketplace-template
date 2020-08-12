@@ -21,7 +21,7 @@
       <div class="my-3">
         <label class="block" for="name">Name</label>
         <input class="w-2/3 form-input" type="text" id="name" name="item[name]" value="{{ item.name }}" autofocus
-          required />
+         />
         {% if item.errors.name %}
         <span class="text-red-800">{{ item.errors.name }}</span>
         {% endif %}
@@ -81,7 +81,7 @@
 
       <div class="mt-3">
         <label class="block" for="cover_photo">Icon</label>
-        <select class="w-64 form-select" id="price" name="item[cover_photo]">
+        <select class="w-64 form-select" id="icon" name="item[cover_photo]">
           {% for icon in lib.icons %}
           <option value="{{ icon[0] }}" {% if item.cover_photo == icon[0] %}selected{% endif %}>
             {{ icon[1] }}
