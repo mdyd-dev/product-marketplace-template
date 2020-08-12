@@ -1,0 +1,5 @@
+{% liquid
+  unless user_id == item.owner.id
+    include 'redirect_to', url: '/', error: 'app.errors.denied'
+  endunless
+%}
