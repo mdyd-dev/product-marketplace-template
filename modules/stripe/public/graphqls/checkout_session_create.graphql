@@ -1,0 +1,16 @@
+mutation create($external_id: String!, $data: String!, $status: String!) {
+  model: model_create(
+    model: {
+      model_schema_name: "modules/stripe/checkout_session"
+      properties: [
+        { name: "external_id" value: $external_id }
+        { name: "data" value: $data }
+        { name: "status" value: $status }
+      ]
+    }
+  ){
+    id
+    external_id: property(name: "external_id")
+    status: property(name: "status")
+  }
+}

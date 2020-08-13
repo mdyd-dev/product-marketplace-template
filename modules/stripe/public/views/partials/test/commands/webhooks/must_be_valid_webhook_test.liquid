@@ -1,0 +1,7 @@
+{% liquid
+  function_rc result = 'modules/stripe/lib/webhooks/must_be_valid_webhook'
+
+  if result == true
+    include 'test/register_error', contract: contract, field_name: 'base', key: 'test.should.be_false'
+  endif
+%}

@@ -4,11 +4,17 @@ method: post
 layout_name: ''
 ---
 {% liquid
-  include 'modules/stripe/lib/webhooks/checkout_session_completed/call'
-  if context.exports.object.valid
-    echo context.exports.object
+  function_rc valid_webhook = 'modules/stripe/lib/webhooks/must_be_valid_webhook', webhook_path: '/webhooks/checkout_session_completed'
+  unless valid_webhook
+    response_status 403
+    break
+  endunless
+
+  function_rc object = 'modules/stripe/lib/webhooks/checkout_session_completed/call', post_params: context.post_params
+  if object.valid
+    echo object
   else
     response_status 403
-    echo context.exports.object
+    echo object
   endif
 %}

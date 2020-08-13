@@ -1,10 +1,8 @@
 ---
 name: checkout_session_create
 to: https://api.stripe.com/v1/checkout/sessions
-enabled: true
 format: https
 request_type: Post
-trigger_condition: true
 callback: >
   {% liquid
     assign response_data = response.body | to_hash

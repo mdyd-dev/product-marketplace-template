@@ -1,0 +1,7 @@
+{% liquid
+  function_rc object = 'modules/stripe/lib/checkout_session/create/build', object: object
+  function_rc object = 'modules/stripe/lib/checkout_session/create/validate', object: object
+  if object.valid
+    include 'modules/stripe/lib/checkout_session/create/execute', object: object
+  endif
+%}

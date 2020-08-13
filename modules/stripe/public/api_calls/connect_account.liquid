@@ -1,9 +1,7 @@
 ---
 name: connect_account
 to: https://connect.stripe.com/oauth/token
-enabled: true
 format: https
-trigger_condition: true
 request_type: Post
 callback: >
   {%- assign response_data = response.body | to_hash -%}

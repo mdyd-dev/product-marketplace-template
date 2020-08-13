@@ -1,9 +1,7 @@
 ---
 name: account_delete
 to: https://api.stripe.com/v1/accounts/{{ data.gateway_id }}/reject
-enabled: true
 format: https
-trigger_condition: true
 request_type: Post
 callback: >
   {%- assign response_data = response.body | to_hash -%}

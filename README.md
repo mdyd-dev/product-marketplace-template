@@ -98,3 +98,12 @@ categories can be adjusted by:
 - adding a translation to the `app/translations/en_categies.liquid` file
 
 ## TESTS
+
+
+### Use real US address like:
+
+```
+722 Laurel Ave
+Burlingame, CA 94010
+USA
+```

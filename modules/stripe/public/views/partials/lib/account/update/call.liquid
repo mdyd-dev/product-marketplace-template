@@ -1,8 +1,9 @@
 {% liquid
-  include 'modules/stripe/lib/account/update/build', object: object
-  include 'modules/stripe/lib/account/update/validate', object: context.exports.object
+  function_rc object = 'modules/stripe/lib/account/update/build', object: object
+  function_rc object = 'modules/stripe/lib/account/update/validate', object: object
 
-  if context.exports.object.valid
-    include 'modules/stripe/lib/account/update/execute', object: context.exports.object
+  if object.valid
+    include 'modules/stripe/lib/account/update/execute', object: object
   endif
+  return_rc object
 %}

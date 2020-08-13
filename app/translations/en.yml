@@ -13,6 +13,8 @@ en:
 
     order: Order
     your-orders: Your orders
+    back: Back
+    continue: Continue
 
     orders:
       new: new order
@@ -33,6 +35,32 @@ en:
 
     activities:
       list: Activities
+
+    payments:
+      account:
+        bank_account: Bank Account
+        new:
+          no_account: No Account
+          you_have_to_connect: You have not connected your Product MVP Marketplace account to Stripe yet. It’s required if you are planning to sell products on Product MVP Marketplace.
+          connect_with_stripe: Connect with Stripe
+        show:
+          account_information: Seller Account Information
+          account_verified: Account verified
+          verification_pending: Verification pending
+          stripe_account_dashboard: Stripe Account Dashboard
+          you_have_connected: Your Stripe account is connected, but it is still
+          pending_verification: pending verification
+          check_details: You can check details of the verification process and manage account details in the
+          there_is_a_problem: There is a problem with your bank account verification process.
+          go_to:  Go to
+          to_find_more: to find out more.
+          verification_status: "Verification status:"
+          you_have_successfully_connected: You have successfully connected and verified your Stripe account.
+          you_can_manage_details: You can manage account details in the
+        success:
+          payout_account_added: Your payout account has been added.
+        failure:
+          failed_adding_account: Failed adding payout account.
 
     item: Item
     your-items: Your items

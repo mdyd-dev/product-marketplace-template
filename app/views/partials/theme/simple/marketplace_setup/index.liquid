@@ -1,18 +1,26 @@
 <div class="container items-center mx-auto">
-  <div class="mx-auto mb-2 text-center lg:w-4/6 md:w-3/4">
-    <h1 class="text-2xl">Global Stripe Configuration</h1>
-    <p>
-      Please visit <a href="https://stripe.com" target="_blank" rel="extrnal noopener">https://stripe.com</a>
-      and register your <span class="font-semibold">Stripe Connect</span> account.
-      <br>
-      This will also create webhooks to your marketplace
-    </p>
+  <div class="mx-auto mb-2 lg:w-4/6 md:w-3/4 p-8">
+    <h1 class="text-2xl text-center">Global Stripe Configuration</h1>
+    <ul class="list-decimal leading-8">
+      <li>
+        Please visit <a href="https://stripe.com" target="_blank" rel="extrnal noopener">https://stripe.com</a>
+        and register your <span class="font-semibold">Stripe Connect</span> account.
+      </li>
+      <li>
+        Copy and add this redirect uri in your
+        <a href="https://dashboard.stripe.com/settings/applications" target="_blank" rel="extrnal noopener">stripe settings</a>
+        <br>
+        <span class="select-all bg-gray-200 p-2 ">https://{{context.location.host}}/payments/account/success</span>
+      </li>
+      <li>
+        Enter your Stripe public key, secret key, and connect account client ID
+      </li>
+    </ul>
   </div>
 
-  <div class="w-full p-8 mx-auto mt-10 bg-gray-200 rounded-lg md:w-2/3 md:mt-0">
+  <div class="w-full p-8 mx-auto mt-10 bg-gray-200 rounded-lg mb-2 lg:w-4/6 md:w-3/4">
     <form action="/marketplace_setup" method="post">
       {% include 'authenticity_token' %}
-
       {% assign keys = 'mpo_fee_percent,stripe_pk_key,stripe_sk_key,stripe_client_id' | split: ',' %}
       {% for key in keys %}
         <label class="block mt-4" for="{{ key }}">

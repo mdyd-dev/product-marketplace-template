@@ -1,0 +1,8 @@
+{% parse_json object %}
+  {
+    "data": "{{ object | json | replace: '"', '\"' }}",
+    "external_id": "{{ object.client_reference_id }}",
+    "status": "completed"
+  }
+{% endparse_json %}
+{% return_rc object %}

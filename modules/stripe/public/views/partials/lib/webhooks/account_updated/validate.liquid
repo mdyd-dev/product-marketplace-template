@@ -1,33 +1,12 @@
 {% liquid
-  assign webhook_listen_url = "https://" | append: context.location.host | append: "/webhooks/account_updated"
-  graphql g = 'modules/stripe/webhook_endpoints', livemode: context.exports.payment.livemode, url: webhook_listen_url
-  assign last_webhook_config = g.webhook_endpoints.results.last
-  if last_webhook_config.id == blank
-    log "webhook_endpoint NOT FOUND", type: "ERROR"
-    break
+  assign c = '{ "errors": {}, "valid": true }' | parse_json
+
+  if object.id == blank
+    include 'lib/register_error', contract: c, field_name: 'id', key: 'test.should.not.be_empty'
   endif
 
-  assign secret = object.stripe_signature[1] | split: '=' | last
-  assign t = object.stripe_signature[0] | split: '=' | last
-  assign saved_secret = last_webhook_config.properties.secret
-  assign signed_payload = t | append: '.' | append: context.post_params
-  assign signed_payload_hmac = signed_payload | compute_hmac: saved_secret
+  hash_assign object['valid'] = c.valid
+  hash_assign object['errors'] = c.errors
 
-  if secret == signed_payload_hmac
-    assign webhook_data = object.post_params | parse_json
-    assign webhook_name = params.type | replace: ".", "_"
-    assign gateway = context.exports.payments.gateway_name
-    assign object = webhook_data.data.object
-    assign object = object | add_hash_key: 'valid', true
-  else
-    assign object = '{"errors": { "token": ["secret not match"] }, "valid": false }' | parse_json
-
-    log 'DEBUG secret not match'
-    log saved_secret, type: "DEBUG saved secret"
-    log signed_payload, type: "DEBUG signed_payload"
-    log signed_payload_hmac, type: "DEBUG signed_payload_hmac"
-    log secret, type: "DEBUG secret"
-    log g, type: 'DEBUG g'
-  endif
-  export object
+  return_rc object
 %}

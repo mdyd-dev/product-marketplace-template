@@ -1,0 +1,32 @@
+{% liquid
+  assign webhook_listen_url = "https://" | append: context.location.host | append: webhook_path
+  graphql g = 'modules/stripe/webhook_endpoints', livemode: context.exports.payment.livemode, url: webhook_listen_url
+  assign last_webhook_config = g.webhook_endpoints.results.last
+  if last_webhook_config.id == blank
+    log "webhook_endpoint NOT FOUND", type: "ERROR"
+
+    assign no = false
+    return_rc no
+  endif
+
+  assign stripe_signature = context.headers.HTTP_STRIPE_SIGNATURE | split: ","
+  assign secret = stripe_signature[1] | split: '=' | last
+  assign t = stripe_signature[0] | split: '=' | last
+  assign saved_secret = last_webhook_config.properties.secret
+  assign signed_payload = t | append: '.' | append: context.post_params
+  assign signed_payload_hmac = signed_payload | compute_hmac: saved_secret
+
+  if secret != signed_payload_hmac
+    log 'DEBUG secret not match'
+    log saved_secret, type: "DEBUG saved secret"
+    log signed_payload, type: "DEBUG signed_payload"
+    log signed_payload_hmac, type: "DEBUG signed_payload_hmac"
+    log secret, type: "DEBUG secret"
+    log g, type: 'DEBUG g'
+    assign no = false
+    return_rc no
+  else
+    assign yes = true
+    return_rc yes
+  endif
+%}

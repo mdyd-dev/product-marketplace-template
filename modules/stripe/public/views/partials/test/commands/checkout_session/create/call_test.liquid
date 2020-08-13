@@ -1,0 +1,17 @@
+{% parse_json object %}
+  {
+    "reference_id": "12345"
+  }
+{% endparse_json %}
+
+{% liquid
+  function_rc object = 'modules/stripe/lib/checkout_session/create/call', object: object
+
+  if object.valid != true
+    include 'test/register_error', contract: contract, field_name: 'base', key: 'test.should.be_valid'
+  endif
+
+  if object.status != 'completed'
+    include 'test/register_error', contract: contract, field_name: 'gateway_id', key: 'test.should.not.match'
+  endif
+%}
