@@ -1,35 +1,33 @@
-<section class=" ">
-  <div class="container items-center mx-auto">
-    <div class="mx-auto mb-2 text-center lg:w-2/6 md:w-1/2">
-      <h1 class="text-2xl">Log In</h1>
-    </div>
-
-    <div class="w-full p-8 mx-auto mt-10 bg-gray-200 rounded-lg shadow-md lg:w-2/6 md:w-1/2 md:mt-0">
-      <form action="/sessions/create" method="post">
-        {% include 'authenticity_token' %}
-
-        <label class="block mt-3" for="email">
-          <span class="block">E-mail</span>
-          <input name="user[email]" type="text" id="email" value="{{ object.email }}" class="w-full form-input" autofocus />
-          {% if object.errors.email %}
-            <span class="text-red-800">{{ object.errors.email }}</span>
-          {% endif %}
-        </label>
-
-        <label class="block mt-3" for="password">
-          <span class="block">Password</span>
-          <input name="user[password]" type="password" id="password" value="{{ object.password }}" class="w-full form-input" />
-          {% if object.errors.password %}
-            <span class="text-red-800">{{ object.errors.password }}</span>
-          {% endif %}
-        </label>
-
-        <button class="mt-3 button">Log in</button>
-      </form>
-
-      <p class="mt-8 ">
-        Don't have an account? <a href='/sign-up' class="underline">Register</a>
-      </p>
-    </div>
+<div class="container items-center mx-auto">
+  <div class="mx-auto mb-2 text-center lg:w-2/6 md:w-1/2">
+    <h1 class="text-2xl">Log In</h1>
   </div>
-</section>
+
+  <div class="w-full p-8 mx-auto mt-10 bg-gray-200 rounded-lg shadow-md lg:w-2/6 md:w-1/2 md:mt-0">
+    <form action="/sessions/create" method="post">
+      {% include 'authenticity_token' %}
+
+      <label class="block mt-3" for="email">
+        <span class="block">E-mail</span>
+        <input name="user[email]" type="text" id="email" value="{{ object.email }}" class="w-full form-input" autofocus />
+        {% if object.errors.email %}
+          <span class="text-red-800">{{ object.errors.email }}</span>
+        {% endif %}
+      </label>
+
+      <label class="block mt-3" for="password">
+        <span class="block">Password</span>
+        <input name="user[password]" type="password" id="password" value="{{ object.password }}" class="w-full form-input" />
+        {% if object.errors.password %}
+          <span class="text-red-800">{{ object.errors.password }}</span>
+        {% endif %}
+      </label>
+
+      <button class="mt-3 button">Log in</button>
+    </form>
+
+    <p class="mt-8 ">
+      Don't have an account? <a href='/sign-up' class="underline">Register</a>
+    </p>
+  </div>
+</div>

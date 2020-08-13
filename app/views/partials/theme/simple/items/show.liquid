@@ -2,95 +2,93 @@
   {% include 'theme/simple/items/metatags', item: item %}
 {% endcontent_for %}
 
-<section class="overflow-hidden  ">
-  <div class="container">
-    <div class="flex flex-wrap">
-      <div class="w-full md:w-1/2">
-        {% if item.photos.size > 1 %}
-          <div class="relative glider-contain">
-            <div class="overflow-x-hidden glider" glider>
-              {% for p in item.photos %}
-                <div><img alt="{{ item.name }}" src="{{ p.photo.url }}" class="object-cover w-full" loading="lazy"></div>
-              {% endfor %}
-            </div>
-
-            <button role="button" aria-label="Previous" class="glider-prev">&nbsp;</button>
-            <button role="button" aria-label="Next" class="glider-next">&nbsp;</button>
-
-            <div role="tablist" class="py-4 glider-dots"></div>
+<div class="container">
+  <div class="flex flex-wrap">
+    <div class="w-full md:w-1/2">
+      {% if item.photos.size > 1 %}
+        <div class="relative glider-contain">
+          <div class="overflow-x-hidden glider" glider>
+            {% for p in item.photos %}
+              <div><img alt="{{ item.name }}" src="{{ p.photo.url }}" class="object-cover w-full" loading="lazy"></div>
+            {% endfor %}
           </div>
+
+          <button role="button" aria-label="Previous" class="glider-prev">&nbsp;</button>
+          <button role="button" aria-label="Next" class="glider-next">&nbsp;</button>
+
+          <div role="tablist" class="py-4 glider-dots"></div>
+        </div>
+      {% else %}
+        {%- assign dummy_url = 'https://dummyimage.com/800x4:3/eee/000&text=' | append: item.name %}
+        {%- assign cover_url = item.photos.last.photo.url | default: dummy_url %}
+        <img alt="{{ item.name }}" class="object-center w-full h-full rounded" src="{{ cover_url }}">
+      {% endif %}
+    </div>
+
+    <div class="w-full mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
+      <h2 class="text-sm tracking-widest ">
+        {% include 'theme/simple/business_card', user: item.owner.email %}
+      </h2>
+
+      <h1 class="mb-1 text-2xl">
+        {{ item.name }}
+      </h1>
+
+      <div class="flex flex-wrap mb-4">
+        <ul class="flex w-full categories">
+          <li><span class="font-semibold">category: </span></li>
+          <li class="ml-2">{{ 'categories.' | append: item.category | t }}</li>
+        </ul>
+      </div>
+
+      <div class="flex flex-wrap mb-4">
+        {%- if item.tags.size > 0 %}
+        <ul class="flex w-full tags">
+          <li><span class="font-semibold">tags: </span></li>
+          {%- for tag in item.tags %}
+            <li class="ml-2">{{ tag }}</li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
+      </div>
+
+      <p class="mt-4 leading-relaxed">{{ item.description }}</p>
+
+      <div class="flex mt-4">
+        <span class="text-2xl text-gray-900 ">{{ item.price | pricify_cents }}</span>
+        {% if item.status.name != 'app.item_statuses.sold' %}
+        <form action="/orders/new" method="get" class="ml-auto ">
+          <input type="hidden" name="item_id" value="{{ item.id }}">
+          <button id="buybutton" class="button">
+            Buy for {{ item.price | pricify_cents }}
+          </button>
+        </form>
         {% else %}
-          {%- assign dummy_url = 'https://dummyimage.com/800x4:3/eee/000&text=' | append: item.name %}
-          {%- assign cover_url = item.photos.last.photo.url | default: dummy_url %}
-          <img alt="{{ item.name }}" class="object-center w-full h-full rounded" src="{{ cover_url }}">
+        <form action="/orders/new" method="get" class="ml-auto ">
+          <input type="hidden" name="item_id" value="{{ item.id }}">
+          <button class="button" disabled>
+            Sold
+          </button>
+        </form>
         {% endif %}
       </div>
 
-      <div class="w-full mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
-        <h2 class="text-sm tracking-widest  ">
-          {% include 'theme/simple/business_card', user: item.owner.email %}
-        </h2>
+      {%- if item.owner.id == context.current_user.id %}
+      <p class="py-4 mt-4 border-t border-blue-300">Item Administration</p>
+      <span class="flex">
+        <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
 
-        <h1 class="mb-1 text-2xl">
-          {{ item.name }}
-        </h1>
+        <form action="/items/delete" method="post" class="ml-2"
+          onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }"
+        >
+          {% include 'authenticity_token' %}
+          <input type="hidden" name="id" value="{{ item.id }}">
 
-        <div class="flex flex-wrap mb-4">
-          <ul class="flex w-full categories">
-            <li><span class="font-semibold">category: </span></li>
-            <li class="ml-2">{{ 'categories.' | append: item.category | t }}</li>
-          </ul>
-        </div>
+          <button id="deletebutton" class="button button-secondary">{{ 'app.delete' | t }}</button>
+        </form>
+      </span>
+      {%- endif %}
 
-        <div class="flex flex-wrap mb-4">
-          {%- if item.tags.size > 0 %}
-          <ul class="flex w-full tags">
-            <li><span class="font-semibold">tags: </span></li>
-            {%- for tag in item.tags %}
-              <li class="ml-2">{{ tag }}</li>
-            {%- endfor %}
-          </ul>
-          {%- endif %}
-        </div>
-
-        <p class="mt-4 leading-relaxed">{{ item.description }}</p>
-
-        <div class="flex mt-4">
-          <span class="text-2xl text-gray-900 ">{{ item.price | pricify_cents }}</span>
-          {% if item.status.name != 'app.item_statuses.sold' %}
-          <form action="/orders/new" method="get" class="ml-auto ">
-            <input type="hidden" name="item_id" value="{{ item.id }}">
-            <button id="buybutton" class="button">
-              Buy for {{ item.price | pricify_cents }}
-            </button>
-          </form>
-          {% else %}
-          <form action="/orders/new" method="get" class="ml-auto ">
-            <input type="hidden" name="item_id" value="{{ item.id }}">
-            <button class="button" disabled>
-              Sold
-            </button>
-          </form>
-          {% endif %}
-        </div>
-
-        {%- if item.owner.id == context.current_user.id %}
-        <p class="py-4 mt-4 border-t border-blue-300">Item Administration</p>
-        <span class="flex">
-          <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
-
-          <form action="/items/delete" method="post" class="ml-2"
-            onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }"
-          >
-            {% include 'authenticity_token' %}
-            <input type="hidden" name="id" value="{{ item.id }}">
-
-            <button id="deletebutton" class="button button-secondary">{{ 'app.delete' | t }}</button>
-          </form>
-        </span>
-        {%- endif %}
-
-      </div>
     </div>
   </div>
-</section>
+</div>
