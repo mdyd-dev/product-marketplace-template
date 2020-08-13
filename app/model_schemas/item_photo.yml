@@ -5,43 +5,44 @@ properties:
     belongs_to: item
   - name: photo
     type: upload
-    image_versions:
-      uncropped:
-        output:
-          format: jpeg
-          quality: 80
-        resize:
-          width: 1920
-      small:
-        output:
-          format: jpeg
-          quality: 80
-        resize:
-          width: 640
-          height: 480
-          fit: cover
-      medium:
-        output:
-          format: jpeg
-          quality: 80
-        resize:
-          width: 1280
-          height: 960
-          fit: cover
-      big:
-        output:
-          format: jpeg
-          quality: 80
-        resize:
-          width: 1920
-          height: 1440
-          fit: cover
-      thumb:
-        output:
-          format: jpeg
-          quality: 80
-        resize:
-          width: 320
-          height: 240
-          fit: cover
-          without_enlargement: false
+    options:
+      versions:
+        - name: uncropped
+          output:
+            format: jpeg
+            quality: 80
+          resize:
+            width: 1920
+        - name: small
+          output:
+            format: jpeg
+            quality: 80
+          resize:
+            width: 640
+            height: 480
+            fit: cover
+        - name: medium
+          output:
+            format: jpeg
+            quality: 80
+          resize:
+            width: 1280
+            height: 960
+            fit: cover
+        - name: big
+          output:
+            format: jpeg
+            quality: 80
+          resize:
+            width: 1920
+            height: 1440
+            fit: cover
+        - name: thumb
+          output:
+            format: jpeg
+            quality: 80
+          resize:
+            width: 320
+            height: 240
+            fit: cover
+            without_enlargement: false
