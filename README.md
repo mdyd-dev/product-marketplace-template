@@ -94,7 +94,7 @@ TBD
 ## categories
 
 categories can be adjusted by:
-- modifying a new category tree in the `app/views/queries/categies.liquid` file
+- edit: https://github.com/mdyd-dev/marketplace-template-poc/blob/master/app/views/partials/lib/queries/raw_category_list.liquid
 - adding a translation to the `app/translations/en_categies.liquid` file
 
 ## TESTS
