@@ -28,6 +28,7 @@ en:
     items:
       list: Items
       new: new item
+      created: Item created
 
     categories:
       list: Categories
