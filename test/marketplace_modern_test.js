@@ -5,8 +5,16 @@ import { ClientFunction } from 'testcafe';
 fixture`Basic complete happy scenario`.page`https://getmarketplace.staging.gapps.platformos.com/`;
 
 const getURL = ClientFunction(() => window.location.href);
+const emailInput = 'label #email';
+const passInput = 'label #password';
+const nameField = '#name';
+const typeField = '#type';
+const descriptionField = '#description';
+const tagsField = '#tags';
+const priceField = '#price';
 const NewEmail = faker.internet.email();
 const NewPassword = faker.internet.password();
+const logInBtn = Selector('button').withText('Log in');
 const item = {
   name: faker.commerce.productName(),
   type: faker.commerce.productMaterial(),
@@ -31,12 +39,43 @@ const editedItem = {
 const clearField = 'ctrl+a delete';
 const mainPage = Selector('header').find('span').withText('MVP Marketplace');
 
+test(`Logging attempt with empty data`, async (t) => {
+  await t
+    .click(Selector('header').find('a').withText('Log in'))
+    .click(logInBtn)
+    .expect(Selector('label').withText('E-mail').textContent)
+    .contains('"cannot be blank"')
+    .expect(Selector('label').withText('Password').textContent)
+    .contains('"cannot be blank"');
+});
+
+test(`Registration attempt with taken data`, async (t) => {
+  await t
+    .click(Selector('header').find('a').withText('Log in'))
+    .click(Selector('p').withText('Register'))
+    .typeText(emailInput, 'user@email.com')
+    .typeText(passInput, 'password')
+    .click(Selector('main').find('button').withText('Sign Up'))
+    .expect(Selector('html').textContent)
+    .contains('"already taken"');
+});
+
+test(`Logging attempt with wrong data`, async (t) => {
+  await t
+    .click(Selector('header').find('a').withText('Log in'))
+    .typeText(emailInput, 'user@email.com')
+    .typeText(passInput, 'wrongpassword')
+    .click(logInBtn)
+    .expect(Selector('html').textContent)
+    .contains('"Invalid email or password"');
+});
+
 test(`Login Test`, async (t) => {
   await t
     .click(Selector('header').find('a').withText('Log in'))
     .click(Selector('main').find('p').withText('Register'))
-    .typeText('input[name="user[email]"]', NewEmail)
-    .typeText('input[name="user[password]"]', NewPassword)
+    .typeText(emailInput, NewEmail)
+    .typeText(passInput, NewPassword)
     .click(Selector('button').withText('Sign Up'));
 });
 
@@ -45,27 +84,27 @@ test('Item listing', async (t) => {
 
     //listing the item for sale
     .click(Selector('a').withText('List your item'))
-    .typeText('input[name="user[email]"]', NewEmail)
-    .typeText('input[name="user[password]"]', NewPassword)
-    .click(Selector('button').withText('Log in'))
+    .typeText(emailInput, NewEmail)
+    .typeText(passInput, NewPassword)
+    .click(logInBtn)
     .click(Selector('a').withText('List your item'))
-    .typeText(Selector('input[name="item[name]"]'), item.name)
-    .typeText('input[name="item[type]"]', item.type)
-    .typeText('textarea[name="item[description]"]', item.description)
-    .typeText('input[name="item[tags]"]', item.tags)
-    .doubleClick(Selector('main').find('[name="item[price]"]'))
+    .typeText(Selector(nameField), item.name)
+    .typeText(typeField, item.type)
+    .typeText(descriptionField, item.description)
+    .typeText(tagsField, item.tags)
+    .doubleClick(Selector(priceField))
     .pressKey(clearField)
-    .typeText(Selector('main').find('[name="item[price]"]'), item.price)
+    .typeText(priceField, item.price)
     .click(Selector('main').find('[name="item[cover_photo]"]'))
     .click(Selector('main').find('option').withText('Disc'));
 
   await t
 
     //upload file
-    .click(Selector('main').find('button').withText('browse files'))
+    .click(Selector('button').withText('browse files'))
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
     .wait(1000)
-    .click(Selector('button[value="create"]'))
+    .click(Selector('button').withText('Submit'))
     .click(mainPage);
 });
 
@@ -74,9 +113,9 @@ test('Edit item', async (t) => {
 
     //searching item by its tag
     .click(Selector('header').find('a').withText('Log in'))
-    .typeText('input[name="user[email]"]', NewEmail)
-    .typeText('input[name="user[password]"]', NewPassword)
-    .click(Selector('main').find('button').withText('Log in'))
+    .typeText(emailInput, NewEmail)
+    .typeText(passInput, NewPassword)
+    .click(logInBtn)
     .typeText('input[name="k"]', item.name)
     .click(Selector('main').find('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(item.name))
@@ -96,69 +135,80 @@ test('Edit item', async (t) => {
   await t.click(Selector('main').find('a').withText('Edit'));
   //change of item information
 
-  await t;
-
-  const url = await getURL();
-
   await t
-    .doubleClick(Selector('main').find('[name="item[name]"]'))
+    .doubleClick(nameField)
     .pressKey(clearField)
-    .typeText('input[name="item[name]"]', editedItem.name)
-    .doubleClick(Selector('main').find('[name="item[type]"]'))
+    .typeText(nameField, editedItem.name)
+    .doubleClick(typeField)
     .pressKey(clearField)
-    .typeText('input[name="item[type]"]', editedItem.type)
-    .doubleClick(Selector('main').find('[name="item[description]"]'))
+    .typeText(typeField, editedItem.type)
+    .doubleClick(descriptionField)
     .pressKey(clearField)
-    .typeText('textarea[name="item[description]"]', editedItem.description)
-    .doubleClick(Selector('main').find('[name="item[tags]"]'))
+    .typeText(descriptionField, editedItem.description)
+    .doubleClick(tagsField)
     .pressKey(clearField)
-    .typeText('input[name="item[tags]"]', editedItem.description)
-    .doubleClick(Selector('main').find('[name="item[price]"]'))
+    .typeText(tagsField, editedItem.tags)
+    .doubleClick(priceField)
     .pressKey(clearField)
-    .typeText(Selector('main').find('[name="item[price]"]'), editedItem.price)
+    .typeText(priceField, editedItem.price)
     .click(Selector('main').find('[name="item[cover_photo]"]'))
     .click(Selector('main').find('option').withText('Copy'))
-    .click(Selector('button[value="update"]'))
+    .click(Selector('button').withText('Submit'))
     .expect(Selector('h1').withText(editedItem.name).exists)
     .ok()
     .click(Selector('span').withText('MVP Marketplace'))
     .click(Selector('header').find('button').withText('Log out')) //Logging out from seller account
     //logging at buyer account and checks if seller item after edit exists
     .click(Selector('header').find('a').withText('Log in'))
-    .typeText('input[name="user[email]"]', buyer.email)
-    .typeText('input[name="user[password]"]', buyer.password)
-    .click(Selector('main').find('button').withText('Log in'))
+    .typeText(emailInput, buyer.email)
+    .typeText(passInput, buyer.password)
+    .click(logInBtn)
     .typeText('input[name="k"]', editedItem.name)
-    .click(Selector('main').find('button').withText('Search'))
+    .click(Selector('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //Buying item, logging off from buyer account
-    .click(Selector('main').find('button'))
-    .navigateTo(url)
-    .doubleClick(Selector('main').find('[name="item[price]"]'))
-    .pressKey(clearField)
-    .typeText(Selector('main').find('[name="item[price]"]'), cheatedPrice.price)
-    .click(Selector('button[value="update"]'))
-    .click(Selector('main').find('button').withText('Buy for $10'))
-    .click(Selector('main').find('button').withText('Checkout'))
+    .click(Selector('button').withText('Buy'))
+  await t
+    //.click(Selector('main').find('button').withText('Checkout'))
     .click(Selector('header').find('a').withText('Dashboard'))
-    .click(Selector('main').find('a').withText('Your orders').nth(1))
-    .click(Selector('button').withText('Cancel'))
-    .click(Selector('header').find('button').withText('Log out'));
+    //.click(Selector('main').find('a').withText('Your orders').nth(1))
+    //.click(Selector('button').withText('Cancel'))
+    .click(Selector('button').withText('Log out'));
 });
 
 test('Delete item test', async (t) => {
   await t
-
     //checks if bought item still exists at auctions
     .click(Selector('header').find('a').withText('Log in'))
-    .typeText('input[name="user[email]"]', NewEmail)
-    .typeText('input[name="user[password]"]', NewPassword)
-    .click(Selector('main').find('button').withText('Log in'))
+    .typeText(emailInput, NewEmail)
+    .typeText(passInput, NewPassword)
+    .click(logInBtn)
     .click(Selector('header').find('a').withText('Dashboard'))
     .click(Selector('main').find('a').withText('Your items'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //deleting exist item
     .setNativeDialogHandler(() => true)
-    .click(Selector('main').find('button').withText('Delete'))
-    .click(Selector('header').find('button').withText('Log out'));
+    .click(Selector('button').withText('Delete'))
+    .click(Selector('button').withText('Log out'));
+});
+
+
+test('Breakin-in test, edition by none user', async (t) => {
+  const signInNotification = 'Please sign in with you credentials or register new account before continuing.';
+  const notAuthorizedUser = 'Permission denied';
+  await t.click(Selector('header').find('a').withText('Log in'))
+  .typeText(emailInput, 'user@email.com')
+  .typeText(passInput, 'password')
+  .click(logInBtn)
+  .typeText('input[name="k"]', 'Watch')
+  .click(Selector('main').find('button').withText('Search'))
+  .click(Selector('main').find('h2 a').withText('Watch'))
+  await t
+  var itemEditUrl = await getURL()
+  var itemEditUrl = itemEditUrl.split('-')
+  var editItemId = itemEditUrl[itemEditUrl.length -1]
+  await t
+  .navigateTo('https://getmarketplace.staging.gapps.platformos.com/items/edit?id=' + editItemId)
+  await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok()
+
 });

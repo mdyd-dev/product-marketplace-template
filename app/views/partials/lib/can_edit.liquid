@@ -1,0 +1,10 @@
+{% liquid
+  unless user_id == item.owner.id
+    include 'redirect_to', url: '/', error: 'app.errors.denied'
+  endunless
+
+  if item.orders.size > 0
+    function_rc url = 'link_to', item: item
+    include 'redirect_to', url: url, error: 'app.errors.cannot_edit_coz_has_active_orders'
+  endif
+%}
