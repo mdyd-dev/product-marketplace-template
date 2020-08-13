@@ -9,7 +9,7 @@
         <div class="relative glider-contain">
           <div class="overflow-x-hidden glider" glider>
             {% for p in item.photos %}
-              <div><img alt="{{ item.name }}" src="{{ p.photo.url }}" class="object-cover w-full" loading="lazy"></div>
+              <div><img alt="{{ item.name }}" src="{{ p.photo.versions.uncropped }}" class="object-cover w-full" loading="lazy"></div>
             {% endfor %}
           </div>
 
@@ -20,7 +20,7 @@
         </div>
       {% else %}
         {%- assign dummy_url = 'https://dummyimage.com/800x4:3/eee/000&text=' | append: item.name %}
-        {%- assign cover_url = item.photos.last.photo.url | default: dummy_url %}
+        {%- assign cover_url = item.photos.last.photo.versions.uncropped | default: dummy_url %}
         <img alt="{{ item.name }}" class="object-center w-full h-full rounded" src="{{ cover_url }}">
       {% endif %}
     </div>

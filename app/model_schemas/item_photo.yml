@@ -12,7 +12,7 @@ properties:
             format: jpeg
             quality: 80
           resize:
-            width: 1920
+            fit: inside
         - name: small
           output:
             format: jpeg
@@ -20,29 +20,5 @@ properties:
           resize:
             width: 640
             height: 480
-            fit: cover
-        - name: medium
-          output:
-            format: jpeg
-            quality: 80
-          resize:
-            width: 1280
-            height: 960
-            fit: cover
-        - name: big
-          output:
-            format: jpeg
-            quality: 80
-          resize:
-            width: 1920
-            height: 1440
-            fit: cover
-        - name: thumb
-          output:
-            format: jpeg
-            quality: 80
-          resize:
-            width: 320
-            height: 240
-            fit: cover
-            without_enlargement: false
+            fit: inside
+            without_enlargement: true

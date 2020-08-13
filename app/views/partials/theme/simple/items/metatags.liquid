@@ -11,7 +11,7 @@
 <meta property="article:modified_time" content="{{ item.updated_at }}" />
 <meta property="og:updated_time" content="{{ item.content_updated_at }}" />
 
-{% assign img = item.photos.last.photo.url %}
+{% assign img = item.photos | last | dig: 'photo', 'versions', 'uncropped' %}
 {% if img -%}
 <meta property="og:image" content="{{ img }}" />
 <meta property="og:image:width" content="730" />
