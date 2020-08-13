@@ -95,8 +95,6 @@ test('Item listing', async (t) => {
     .doubleClick(Selector(priceField))
     .pressKey(clearField)
     .typeText(priceField, item.price)
-    .click(Selector('main').find('[name="item[cover_photo]"]'))
-    .click(Selector('main').find('option').withText('Disc'));
 
   await t
 
@@ -151,8 +149,6 @@ test('Edit item', async (t) => {
     .doubleClick(priceField)
     .pressKey(clearField)
     .typeText(priceField, editedItem.price)
-    .click(Selector('main').find('[name="item[cover_photo]"]'))
-    .click(Selector('main').find('option').withText('Copy'))
     .click(Selector('button').withText('Submit'))
     .expect(Selector('h1').withText(editedItem.name).exists)
     .ok()

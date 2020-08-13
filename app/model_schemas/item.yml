@@ -6,13 +6,9 @@ properties:
     type: string
   - name: description
     type: string
-  - name: cover_photo
-    type: string
   - name: tags
     type: array
   - name: owner
-    type: string
-  - name: type
     type: string
   - name: price
     type: integer

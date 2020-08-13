@@ -26,9 +26,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
 
       uuid: property(name: "uuid")
       name: property(name: "name")
-      type: property(name: "type")
       category: property(name: "category")
-      cover_photo: property(name: "cover_photo")
       description: property(name: "description")
       price: property_int(name: "price")
       tags: property_array(name: "tags")
