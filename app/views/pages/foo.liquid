@@ -1,6 +1,0 @@
-{% liquid
-  comment
-    include 'modules/stripe/lib/webhook_endpoints/create/call', event: 'account.updated', path: '/webhooks/account_updated', connect: true
-  endcomment
-  include 'modules/stripe/lib/webhook_endpoints/create/call', event: 'checkout.session.completed', path: '/webhooks/checkout_session_completed', connect: false
-%}
