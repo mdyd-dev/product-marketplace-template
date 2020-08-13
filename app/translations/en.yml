@@ -121,6 +121,9 @@ en:
       canceled: canceled
       shipped: shipped
 
+    sessions:
+      created: Logged in
+
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself
       blank: cannot be blank
