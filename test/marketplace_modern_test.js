@@ -8,7 +8,6 @@ const getURL = ClientFunction(() => window.location.href);
 const emailInput = 'label #email';
 const passInput = 'label #password';
 const nameField = '#name';
-const typeField = '#type';
 const descriptionField = '#description';
 const tagsField = '#tags';
 const priceField = '#price';
@@ -89,7 +88,6 @@ test('Item listing', async (t) => {
     .click(logInBtn)
     .click(Selector('a').withText('List your item'))
     .typeText(Selector(nameField), item.name)
-    .typeText(typeField, item.type)
     .typeText(descriptionField, item.description)
     .typeText(tagsField, item.tags)
     .doubleClick(Selector(priceField))
@@ -101,7 +99,6 @@ test('Item listing', async (t) => {
     //upload file
     .click(Selector('button').withText('browse files'))
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
-    .wait(1000)
     .click(Selector('button').withText('Submit'))
     .click(mainPage);
 });
@@ -109,7 +106,7 @@ test('Item listing', async (t) => {
 test('Edit item', async (t) => {
   await t
 
-    //searching item by its tag
+    //searching item by its name
     .click(Selector('header').find('a').withText('Log in'))
     .typeText(emailInput, NewEmail)
     .typeText(passInput, NewPassword)
@@ -137,9 +134,6 @@ test('Edit item', async (t) => {
     .doubleClick(nameField)
     .pressKey(clearField)
     .typeText(nameField, editedItem.name)
-    .doubleClick(typeField)
-    .pressKey(clearField)
-    .typeText(typeField, editedItem.type)
     .doubleClick(descriptionField)
     .pressKey(clearField)
     .typeText(descriptionField, editedItem.description)
@@ -190,7 +184,6 @@ test('Delete item test', async (t) => {
 
 
 test('Breakin-in test, edition by none user', async (t) => {
-  const signInNotification = 'Please sign in with you credentials or register new account before continuing.';
   const notAuthorizedUser = 'Permission denied';
   await t.click(Selector('header').find('a').withText('Log in'))
   .typeText(emailInput, 'user@email.com')
