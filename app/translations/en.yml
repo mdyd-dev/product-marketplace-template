@@ -29,6 +29,7 @@ en:
       list: Items
       new: new item
       created: Item created
+      updated: Item updated
 
     categories:
       list: Categories
