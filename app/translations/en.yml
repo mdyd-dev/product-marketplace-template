@@ -40,6 +40,7 @@ en:
       account:
         bank_account: Bank Account
         new:
+          to_start_selling: To start selling please
           no_account: No Account
           you_have_to_connect: You have not connected your Product MVP Marketplace account to Stripe yet. It’s required if you are planning to sell products on Product MVP Marketplace.
           connect_with_stripe: Connect with Stripe
@@ -123,6 +124,9 @@ en:
 
     sessions:
       created: Logged in
+
+    account:
+      created: You account has been created
 
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself
