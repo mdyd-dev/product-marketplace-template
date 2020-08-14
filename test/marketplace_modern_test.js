@@ -110,6 +110,8 @@ test('Edit item', async (t) => {
     .click(logInBtn)
     .typeText('input[name="k"]', item.name)
     .click(Selector('main').find('button').withText('Search'))
+    .expect(Selector('main').withText('h2 a').exists)
+    .ok("'Item should exists but it doesn't")
     .click(Selector('main').find('h2 a').withText(item.name))
     //checks if all data is correct
     .expect(Selector('h1').withText(item.name).exists)
@@ -195,6 +197,6 @@ test('Breakin-in test, edition by none user', async (t) => {
   var editItemId = itemEditUrl[itemEditUrl.length -1]
   await t
   .navigateTo(editURL + editItemId)
-  await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok()
+  await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok("message 'Permission denied' doesn't exists")
 
 });
