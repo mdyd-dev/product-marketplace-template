@@ -1,0 +1,14 @@
+<div class="flex w-full">
+  <div class="w-3/4">
+    <h3 class="mb-3 text-lg font-medium text-gray-900 title-font">Recent items</h3>
+    <h2 class="mb-6 text-2xl">{% echo 'app.users.list' | t %}</h2>
+    <table class="table-auto w-full">
+      {% for user in users.results %}
+        <tr>
+          <td class="px-4 py-2 border-b">{% print user.id %}</td>
+          <td class="px-4 py-2 border-b">{% print user.email %}</td>
+          <td class="px-4 py-2 border-b">{% echo user.created_at | l %}</td>
+        </tr>
+      {% endfor %}
+    </table>
+</div>

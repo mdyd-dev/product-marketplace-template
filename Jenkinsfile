@@ -1,7 +1,8 @@
 @Library('pipeline-utils')_  // it's not a typo
 
 // def qa_url = "https://demo.staging.gapps.platformos.com/"
-def qa_url = "https://getmarketplace.staging.gapps.platformos.com/"
+def qa_url = "https://getmarketplace-qa.staging.gapps.platformos.com/"
+def live_url = "https://getmarketplace.staging.gapps.platformos.com/"
 
 pipeline {
   agent any
@@ -23,7 +24,7 @@ pipeline {
       }
     }
 
-    stage('Deploy') {
+    stage('Deploy QA') {
       when { branch 'master' }
       environment {
         MPKIT_TOKEN = credentials('POS_TOKEN')
@@ -48,6 +49,20 @@ pipeline {
         sh 'testcafe "chromium:headless" test --skip-js-errors'
       }
       post { failure { archiveArtifacts "screenshots/" } }
+    }
+
+    stage('Deploy LIVE') {
+      when { branch 'master' }
+      environment {
+        MPKIT_TOKEN = credentials('POS_TOKEN')
+        MPKIT_EMAIL = "darek+ci@near-me.com"
+        MPKIT_URL = "${live_url}"
+        CI = true
+      }
+      agent { docker { image 'platformos/pos-cli' } }
+      steps {
+        sh 'pos-cli deploy'
+      }
     }
   }
 }
