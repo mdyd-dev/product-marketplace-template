@@ -13,5 +13,5 @@
   function_rc filters = 'lib/data/queries/search/filters'
   function_rc presigned_url = 'lib/data/queries/presigned_url'
 
-  include 'theme/simple/items/edit', item: item, lib: filters, presigned_url: presigned_url
+  include 'theme/simple/items/edit', item: item, lib: filters, presigned_url: presigned_url, user: context.current_user
 %}
