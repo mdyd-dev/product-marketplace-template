@@ -3,7 +3,7 @@
 
   <label class="block mt-3" for="email">
     <span class="block">E-mail</span>
-    <input name="user[email]" type="text" id="email" value="{{ object.email }}" class="w-full form-input" autofocus />
+    <input name="user[email]" type="email" id="email" value="{{ object.email }}" class="w-full form-input" autofocus />
     {% if object.errors.email %}
       <span class="text-red-800">{{ object.errors.email }}</span>
     {% endif %}
