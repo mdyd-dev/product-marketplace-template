@@ -1,8 +1,8 @@
 {% liquid
   include 'lib/must_be_authenticated'
 
-  include 'lib/queries/categories'
+  function_rc filters = 'lib/search/filters', query: context.params
   include 'lib/queries/presigned_url'
 
-  include 'theme/simple/items/new', lib: context.exports.lib
+  include 'theme/simple/items/new', lib: filters
 %}

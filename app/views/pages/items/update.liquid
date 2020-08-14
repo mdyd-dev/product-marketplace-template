@@ -22,9 +22,9 @@ method: post
       include 'redirect_to', url: url, notice: 'app.items.updated'
     endif
   else
-    include 'lib/queries/categories'
+    function_rc filters = 'lib/search/filters', query: context.params
     include 'lib/queries/presigned_url'
 
-    include 'theme/simple/items/edit', item: context.exports.object, lib: context.exports.lib
+    include 'theme/simple/items/edit', item: context.exports.object, lib: filters
   endif
 %}
