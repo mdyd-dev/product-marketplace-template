@@ -1,9 +1,10 @@
 en:
   test:
     should:
-      be_valid: should be valid
-      match: match
       be_false: should be false
+      be_valid: should be valid
+      equal: should equal
+      match: match
       not:
         be_empty: should not be empty
         be_blank: should not be blank

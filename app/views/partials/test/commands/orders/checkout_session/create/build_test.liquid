@@ -1,0 +1,24 @@
+{% parse_json order %}
+{
+  "id": "123",
+  "total": 40000,
+  "lines": [
+    {
+      "name": "bag",
+      "item_id": 1,
+      "price": 40000
+    }
+  ]
+}
+{% endparse_json %}
+{% liquid
+  function_rc checkout_session = 'lib/commands/orders/checkout_session/create/build', order: order
+
+  unless checkout_session.line_items[0].price_data.unit_amount == 40000
+    include 'test/register_error', contract: contract, field_name: 'base', message: 'wrong amount'
+  endunless
+
+  unless checkout_session['payment_intent_data[application_fee_amount]'] == 5190
+    include 'test/register_error', contract: contract, field_name: 'base', key: 'test.should.equal'
+  endunless
+%}
