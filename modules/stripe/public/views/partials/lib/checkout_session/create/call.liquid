@@ -5,4 +5,5 @@
     function_rc object = 'modules/stripe/lib/checkout_session/create/save', object: object
     include 'lib/commands/events/create', type: 'stripe_payment_completed', actor_id: context.current_user.id, object_id: object.external_id
   endif
+  return_rc object
 %}
