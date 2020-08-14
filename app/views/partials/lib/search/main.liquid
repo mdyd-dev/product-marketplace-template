@@ -1,9 +1,0 @@
-{% liquid
-  graphql search_form = 'search/search_form' | dig: "models" | dig: "results" | first
-
-  assign sort_options = 'lib.sort_options' | t
-  assign h = '{}' | parse_json
-  assign search_form = search_form | default: h | add_hash_key: "sort_options", sort_options
-
-  export search_form
-%}

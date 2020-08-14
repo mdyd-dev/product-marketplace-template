@@ -9,7 +9,7 @@
     <select class="w-full form-select" id="sort" name="sort">
       <option value="" class="">Choose sorting</option>
       {% for s in filters.sort_options %}
-        <option value="{{ s[0] }}" {% if query.sort == s[0] %}selected{% endif %}>{{ s[1] }}</option>
+        <option value="{{ s[0] }}" {% if filters.query.sort == s[0] %}selected{% endif %}>{{ s[1] }}</option>
       {% endfor %}
     </select>
   </div>

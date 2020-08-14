@@ -1,0 +1,13 @@
+{% liquid
+  assign search_form = '{}' | parse_json
+
+  assign sort_options = 'lib.sort_options' | t
+  hash_assign search_form['sort_options'] = sort_options
+
+  function_rc categories = 'lib/data/queries/categories/search'
+  hash_assign search_form['categories'] = categories
+
+  hash_assign search_form['query'] = query
+
+  return_rc search_form
+%}

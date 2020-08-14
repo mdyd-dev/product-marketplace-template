@@ -5,7 +5,7 @@
       name="k"
       id="k"
       type="text"
-      value="{{ query.keyword }}"
+      value="{{ filters.query.k }}"
      />
   </div>
 
@@ -13,9 +13,9 @@
     <label for="category" class="block mb-1  capitalize">{{ 'app.search.category' | t  }}</label>
     <select class="form-select" id="category" name="category">
       <option value="" class="">{{ 'app.search.all_categories' | t }}</option>
-      {% for category in lib.categories %}
+      {% for category in filters.categories %}
         {% assign ident = category | split: '/' | size | minus: 1 | times: 2 %}
-        <option value="{{ category }}" {% if query.category == category %}selected{% endif %}>
+        <option value="{{ category }}" {% if filters.query.category == category %}selected{% endif %}>
           {% for step in (1..ident) %} {{ "&nbsp;" }} {% endfor %}
           {{ 'categories.' | append: category | t }}
         </option>

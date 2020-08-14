@@ -2,13 +2,11 @@
   keys copied from translation/en_categories.yml in order  to keep specific order
 {% endcomment %}
 {%- capture categories -%}
-  {% include 'lib/queries/raw_category_list' %}
+  {% include 'lib/data/queries/categories/raw_category_list' %}
 {%- endcapture -%}
 
 {% liquid
   assign categories = categories | replace_regex: "$", "," | replace_regex: "\n", "" | split: ","
-  assign icons = 'lib.categories' | t
- 
-  export icons, namespace: 'lib'
-  export categories, namespace: 'lib'
+
+  return_rc categories
 %}

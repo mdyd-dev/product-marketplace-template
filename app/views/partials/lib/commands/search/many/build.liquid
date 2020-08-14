@@ -13,14 +13,9 @@
 {
   "limit": {{ limit | default: 20 }},
   "keyword": {{ query.k | json }},
-  "tag": {{ query.tag | json }},
   "sort": {{ sort_options[query.sort] | json }},
   "category": {{ query.category | json }}
 }
 {% endparse_json %}
 
-{% liquid
-  graphql r = 'items/search', args: query
-
-  return_rc r.items
-%}
+{% return_rc query %}

@@ -1,0 +1,5 @@
+{% liquid
+  graphql r = 'items/search', args: query
+
+  return_rc r.items
+%}

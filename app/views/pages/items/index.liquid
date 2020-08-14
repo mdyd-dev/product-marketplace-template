@@ -3,9 +3,10 @@ slug: s
 ---
 
 {% liquid
-  include 'lib/queries/items/search', query: context.params, limit: 50
-  include 'lib/queries/categories'
-  include 'lib/search/main'
+  function_rc query = 'lib/commands/search/many/build', query: context.params, limit: 50
+  function_rc items = 'lib/commands/search/many/execute', query: query
 
-  include 'theme/simple/home/index', items: context.exports.items, search: context.exports.search, filters: context.exports.search_form, lib: context.exports.lib
+  function_rc filters = 'lib/search/filters', query: context.params
+
+  include 'theme/simple/home/index', items: items, filters: filters
 %}

@@ -1,7 +1,8 @@
 {% liquid
-  include 'lib/queries/items/search', limit: 9, featured: true
-  include 'lib/search/main'
-  include 'lib/queries/categories'
+  function_rc query = 'lib/commands/search/many/build', limit: 9, featured: true
+  function_rc items = 'lib/commands/search/many/execute', query: query
 
-  include 'theme/simple/home/index', items: context.exports.items, filters: context.exports.search_form, lib: context.exports.lib
+  function_rc filters = 'lib/search/filters', query: context.params
+
+  include 'theme/simple/home/index', items: items, filters: filters
 %}
