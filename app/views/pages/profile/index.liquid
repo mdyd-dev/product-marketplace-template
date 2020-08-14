@@ -1,4 +1,6 @@
 ---
 slug: profile
 ---
-{{ context.current_user }}
+{% liquid
+  include 'theme/simple/profile/show', user: context.current_user
+%}

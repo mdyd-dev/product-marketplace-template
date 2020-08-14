@@ -117,7 +117,7 @@ en:
 
     item_statuses:
       sold: sold
-      none: missing
+      none: "&nbsp;"
 
     order_statuses:
       order_status: status
