@@ -5,10 +5,11 @@
     "tags":        {{ object.tags | downcase | split: ',' | uniq }},
     "description": {{ object.description | default: "" | json }},
     "category":    {{ object.category | default: "" | json }},
-    "price":       {{ object.price | to_positive_integer: 1 | times: 100 }}
+    "price":       {{ object.price | plus: 0 | times: 100 | to_positive_integer: 1 }}
   }
 {% endparse_json %}
 
 {% liquid
+  echo object
   export object
 %}
