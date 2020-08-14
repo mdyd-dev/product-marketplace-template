@@ -11,6 +11,7 @@ const nameField = '#name';
 const descriptionField = '#description';
 const tagsField = '#tags';
 const priceField = '#price';
+const editURL = '/items/edit?id='
 const NewEmail = faker.internet.email();
 const NewPassword = faker.internet.password();
 const logInBtn = Selector('button').withText('Log in');
@@ -93,10 +94,6 @@ test('Item listing', async (t) => {
     .doubleClick(Selector(priceField))
     .pressKey(clearField)
     .typeText(priceField, item.price)
-
-  await t
-
-    //upload file
     .click(Selector('button').withText('browse files'))
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
     .click(Selector('button').withText('Submit'))
@@ -197,7 +194,7 @@ test('Breakin-in test, edition by none user', async (t) => {
   var itemEditUrl = itemEditUrl.split('-')
   var editItemId = itemEditUrl[itemEditUrl.length -1]
   await t
-  .navigateTo('https://getmarketplace.staging.gapps.platformos.com/items/edit?id=' + editItemId)
+  .navigateTo(editURL + editItemId)
   await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok()
 
 });
