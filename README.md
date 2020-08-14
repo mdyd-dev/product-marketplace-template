@@ -8,13 +8,12 @@ it is still in active development and some concepts are being validated and migh
 
 # installation
 
-- install `pos-cli`: https://documentation.platformos.com/get-started/hello-world/install-pos-cli
+- install [pos-cli](https://documentation.platformos.com/get-started/hello-world/install-pos-cli)
 - create instance: https://partners.platformos.com/instances/new
 - add instance to pos-cli
 - clone the repository
 - build assets
 - deploy
-- go to site
 
 ```sh
 mkdir marketplace; cd marketplace/
@@ -29,7 +28,7 @@ pos-cli deploy <YOUR_ENV_NAME>
 
 # setup
 
-- To access admin panel you have to create user with email address: `admin@example.com`
+- To access admin panel register user with email address: `admin@example.com`
 - Enter `Admin` section from main menu and go to `Marketplace Setup` section
 
 
@@ -60,10 +59,7 @@ pos-cli deploy <YOUR_ENV_NAME>
 
 ## first changes
 
-1. Run sync
-
-    pos-cli sync <YOUR_ENV_NAME>
-    
+1. Run sync `pos-cli sync <YOUR_ENV_NAME>`
 2. Edit your marketplace name in file `app/translations/en.yml`, key: `en.app.title`
 3. See changes on your website
 
