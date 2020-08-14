@@ -58,7 +58,7 @@ en:
           pending_verification: pending verification
           check_details: You can check details of the verification process and manage account details in the
           there_is_a_problem: There is a problem with your bank account verification process.
-          go_to:  Go to
+          go_to: Go to
           to_find_more: to find out more.
           verification_status: "Verification status:"
           you_have_successfully_connected: You have successfully connected and verified your Stripe account.

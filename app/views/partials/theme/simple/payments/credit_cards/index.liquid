@@ -6,7 +6,7 @@
   {% if credit_cards == empty %}
     <p>You have not saved any credit cards yet.</p>
   {%- else -%}
-    <ol class="mb-4 grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
+    <ol class="grid gap-4 mb-4 sm:grid-cols-2 xl:grid-cols-3">
       {% for credit_card in credit_cards -%}
         {% parse_json credit_card %}
           {% include "functions/add_icon_to_credit_card", credit_card: credit_card %}
@@ -18,8 +18,8 @@
             {% endif %}
 
             <div>
-              <h3 class="font-bold">
-                {{ credit_card.properties.brand }} <span class="font-mono  text-sm">...{{ credit_card.properties.last4 }}</span>
+              <h3 class="font-semibold">
+                {{ credit_card.properties.brand }} <span class="font-mono text-sm">...{{ credit_card.properties.last4 }}</span>
               </h3>
 
               <div class="text-sm ">
@@ -28,7 +28,7 @@
             </div>
           </div>
 
-          <div class="bg-gray-200 mt-3 -mx-4 px-4 py-1 flex justify-end">
+          <div class="flex justify-end px-4 py-1 mt-3 -mx-4 bg-gray-200">
             {% include 'payments/delete_card_form_config', id: credit_card.id %}
           </div>
         </li>

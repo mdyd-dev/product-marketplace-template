@@ -9,16 +9,16 @@
     </h2>
     <p>
       {{ 'app.payments.account.show.you_have_connected' | t }}
-      <b>{{ 'app.payments.account.show.pending_verification' | t }}</b>.
+      <span class="font-semibold">{{ 'app.payments.account.show.pending_verification' | t }}</span>.
       <br>
       {{ 'app.payments.account.show.check_details' | t }}
-      <a class="font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer"
+      <a class="font-semibold underline hover:no-underline" target="_blank" rel="noopener noreferrer"
         href="/payments/account/stripe-dashboard">
         {{ 'app.payments.account.show.stripe_account_dashboard' | t }}
       </a>
     </p>
   {%- elsif account.state == "verified" -%}
-    <h2 class="my-2 text-xl">
+    <h2 class="my-2 text-xl text-green-700">
       {{ 'app.payments.account.show.account_verified' | t }}
     </h2>
 
@@ -26,23 +26,22 @@
       {{ 'app.payments.account.show.you_have_successfully_connected' | t }}
       <br/>
       {{ 'app.payments.account.show.you_can_manage_details' | t }}
-      <a class="font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer"
+      <a class="font-semibold underline hover:no-underline" target="_blank" rel="noopener noreferrer"
         href="/payments/account/stripe-dashboard">
         {{ 'app.payments.account.show.stripe_account_dashboard' | t }}
-      </a>
+      </a>.
     </p>
   {%- else -%}
     <h2 class="my-2 text-xl">
       {{ 'app.payments.account.show.verification_status' | t }}
-      <span class="font-bold text-red-500">{{ account.state | humanize | downcase }}</span>
+      <span class="font-semibold text-red-700">{{ account.state | humanize | downcase }}</span>
     </h2>
 
     <p>
-      There is a problem with your bank account verification process.
       {{ 'app.payments.account.show.there_is_a_problem' | t }}
       <br/>
       {{ 'app.payments.account.show.go_to' | t }}
-      <a class="font-bold underline hover:no-underline" target="_blank" rel="noopener noreferrer"
+      <a class="font-semibold underline hover:no-underline" target="_blank" rel="noopener noreferrer"
         href="/payments/account/stripe-dashboard">
         {{ 'app.payments.account.show.stripe_account_dashboard' | t }}
       </a>
