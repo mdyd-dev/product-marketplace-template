@@ -1,0 +1,5 @@
+{% liquid
+  graphql r  = 'users/search', id: id, limit: 1
+
+  return_rc r.users.results.first
+%}

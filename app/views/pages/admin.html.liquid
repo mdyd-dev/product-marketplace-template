@@ -2,17 +2,17 @@
   include 'lib/must_be_authenticated'
   include 'lib/must_be_superadmin'
 
-  include 'lib/queries/users/search', limit: 10
-  include 'lib/queries/orders/search', limit: 10
-  include 'lib/queries/items/search', limit: 10
-  include 'lib/queries/activities/search', feed: "system", feed_id: "1"
-  include 'lib/queries/categories', limit: 10
+  assign template = "/admin/{section}"
+  assign query = context.location.pathname | extract_url_params: template
 
+  assign path = 'lib/data/queries/' | append: query.section | append: '/search'
+
+  if query.section == 'activities'
+    function_rc list = path, feed: "system", feed_id: 1
+  else
+    function_rc list = path, limit: 200
+  endif
 %}
-{% include 'theme/simple/admin/recent',
-     items: context.exports.items,
-     users: context.exports.users,
-     orders: context.exports.orders,
-     activities: context.exports.activities,
-     categories: context.exports.lib.categories
-%}
+
+{% include 'theme/simple/admin/menu' %}
+{% include 'theme/simple/admin/recent', list: list, title: section %}
