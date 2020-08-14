@@ -1,23 +1,11 @@
 {% if error %}
   <div class="w-full p-4 mb-4 text-red-800 border border-red-200 rounded shadow-sm">
-    {% liquid
-      if error contains 'app.error'
-        echo error | t
-      else
-        echo error
-      endif
-    %}
+    {{error}}
   </div>
 {% endif %}
 
 {% if notice %}
   <div class="w-full p-4 mb-4 text-green-800 border border-green-200 rounded shadow-sm">
-    {% liquid
-      if notice contains 'app.notice'
-        echo notice | t
-      else
-        echo notice
-      endif
-    %}
+    {{notice}}
   </div>
 {% endif %}

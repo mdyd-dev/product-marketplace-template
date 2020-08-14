@@ -17,9 +17,12 @@ en:
     continue: Continue
 
     orders:
+      created: Order has been placed
       new: new order
       list: Orders
       payment_success: Payment success
+      status:
+        updated: Order status changed
 
     users:
       new: new user
@@ -126,9 +129,10 @@ en:
 
     sessions:
       created: Logged in
+      destroyed: Logged out
 
     account:
-      created: You account has been created
+      created: Your account has been created
 
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself

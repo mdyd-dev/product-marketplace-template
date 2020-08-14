@@ -1,3 +1,11 @@
+{% liquid
+  if error and error contains 'app.'
+    assign error = error | t
+  endif
+  if notice and notice contains 'app.'
+    assign notice = notice | t
+  endif
+%}
 {% parse_json flash %}
   {
     "error":  {{ error | json }},
