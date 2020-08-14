@@ -1,10 +1,12 @@
 {% liquid
   assign id = context.params.slug2 | split: '-' | last
 
-  include 'lib/queries/items/find', id: id
-  if context.exports.item.id
-    include 'theme/simple/items/show', item: context.exports.item
-  else
+  function_rc item = 'lib/data/queries/items/find', id: id
+
+  unless item.id
     render 'theme/simple/404', status: 404
-  endif
+    break
+  endunless
+
+  include 'theme/simple/items/show', item: item
 %}

@@ -2,7 +2,7 @@
   function_rc query = 'lib/commands/search/many/build', limit: 9, featured: true
   function_rc items = 'lib/commands/search/many/execute', query: query
 
-  function_rc filters = 'lib/search/filters', query: context.params
+  function_rc filters = 'lib/data/queries/search/filters', query: context.params
 
   include 'theme/simple/home/index', items: items, filters: filters
 %}

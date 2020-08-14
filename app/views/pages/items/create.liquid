@@ -19,9 +19,10 @@ method: post
       include 'redirect_to', url: url, notice: 'app.items.created'
     endif
   else
-    function_rc filters = 'lib/search/filters', query: context.params 
-    include 'lib/queries/presigned_url'
-    include 'theme/simple/items/new', item: context.exports.object, lib: filters
+    function_rc filters = 'lib/data/queries/search/filters', query: context.params
+    function_rc presigned_url = 'lib/data/queries/presigned_url'
+
+    include 'theme/simple/items/new', item: context.exports.object, lib: filters, presigned_url: presigned_url
   endif
 %}
 

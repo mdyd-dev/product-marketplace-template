@@ -1,5 +1,5 @@
 mutation presign {
-  presign: property_upload_presigned_url(model_schema_name: "item_photo", property_name: "photo") {
+  presigned: property_upload_presigned_url(model_schema_name: "item_photo", property_name: "photo") {
     upload_url
     upload_url_payload
   }

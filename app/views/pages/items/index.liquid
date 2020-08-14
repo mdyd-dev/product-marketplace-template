@@ -6,7 +6,7 @@ slug: s
   function_rc query = 'lib/commands/search/many/build', query: context.params, limit: 50
   function_rc items = 'lib/commands/search/many/execute', query: query
 
-  function_rc filters = 'lib/search/filters', query: context.params
+  function_rc filters = 'lib/queries/search/filters', query: context.params
 
   include 'theme/simple/home/index', items: items, filters: filters
 %}
