@@ -1,8 +1,9 @@
 {% liquid
-  include 'lib/marketplace_setup/validate', object: constants
-  if context.exports.object.valid
-    include 'lib/marketplace_setup/save', object: context.exports.object
+  function_rc object = 'lib/commands/marketplace_setup/create/validate', object: constants
+  if object.valid
+    include 'lib/commands/marketplace_setup/create/save', object: context.exports.object
     include 'modules/stripe/lib/webhook_endpoints/create/call', event: 'account.updated', path: '/webhooks/account_updated', connect: true
     include 'modules/stripe/lib/webhook_endpoints/create/call', event: 'checkout.session.completed', path: '/webhooks/checkout_session_completed', connect: false
   endif
+  return_rc object
 %}

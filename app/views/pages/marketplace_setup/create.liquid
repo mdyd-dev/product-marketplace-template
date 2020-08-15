@@ -4,10 +4,10 @@ method: post
 ---
 {% liquid
   include 'lib/must_be_superadmin'
-  include 'lib/marketplace_setup/create', constants: context.params.constants
-  if context.exports.object.valid
+  function_rc object = 'lib/commands/marketplace_setup/create/call', constants: context.params.constants
+  if object.valid
     redirect_to '/'
   else
-    include 'theme/simple/marketplace_setup/index', object: context.exports.object
+    include 'theme/simple/marketplace_setup/index', object: object
   endif
 %}

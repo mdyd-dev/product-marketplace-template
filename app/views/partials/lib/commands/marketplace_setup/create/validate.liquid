@@ -8,8 +8,8 @@
     endif
   endfor
 
-  assign object = object | add_hash_key: 'valid', c.valid
-  assign object = object | add_hash_key: 'errors', c.errors
+  hash_assign object['valid'] = c.valid
+  hash_assign object['errors'] = c.errors
 
-  export object
+  return_rc object
 %}
