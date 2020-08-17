@@ -1,7 +1,7 @@
 {% liquid
-  function_rc response = 'modules/stripe/lib/stripe_webhook/create/call', event: event, path: path
+  function_rc response = 'modules/stripe/lib/stripe_webhook/create/call', event: stripe_event, path: path
   parse_json webhook
-    include 'modules/stripe/lib/webhook_endpoints/create/build', response: response, event: event
+    include 'modules/stripe/lib/webhook_endpoints/create/build', response: response, event: stripe_event
   endparse_json
   if webhook.valid
     graphql result = 'modules/stripe/webhook_endpoint_create', args: webhook
