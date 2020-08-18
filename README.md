@@ -9,20 +9,37 @@ it is still in active development and some concepts are being validated and migh
 # installation
 
 - install [pos-cli](https://documentation.platformos.com/get-started/hello-world/install-pos-cli)
-- create instance: https://partners.platformos.com/instances/new
+
+```sh
+npm install -g @platformos/pos-cli
+```
+
+- create instance https://partners.platformos.com/instances/new
+
 - add instance to pos-cli
+
+``` sh
+mkdir marketplace; cd marketplace/
+pos-cli env add <YOUR_ENV_NAME> --email <YOUR_EMAIL> --url <YOUR_INSTANCE_URL>
+```
+
 - clone the repository
+
+``` sh
+pos-cli init --url=https://github.com/mdyd-dev/marketplace-template-poc.git
+```
+
 - build assets
+
+```sh
+npm ci -S
+npm build
+```
+
 - deploy
 
 ```sh
-mkdir marketplace; cd marketplace/
-pos-cli env add <YOUR_ENV_NAME> --email <YOUR_EMAIL> --url <YOUR_INSTANCE_URL>
-pos-cli init --url=https://github.com/mdyd-dev/marketplace-template-poc.git
-npm ci -S
-npm build
 pos-cli deploy <YOUR_ENV_NAME>
-
 ```
 - open web browser with your instance URL where you will be provided with post-install steps
 
