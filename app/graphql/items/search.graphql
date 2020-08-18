@@ -30,6 +30,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
       description: property(name: "description")
       price: property_int(name: "price")
       tags: property_array(name: "tags")
+      cover_photo_url: property(name: "cover_photo_url")
 
       owner: related_user(join_on_property: "owner", foreign_property: "id") {
         id
