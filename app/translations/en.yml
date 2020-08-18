@@ -152,6 +152,7 @@ en:
 
   lib:
     sort_options:
+      relevance: Relevance
       price_asc: Price (lowest first)
       price_desc: Price (highest first)
       name_asc: Name A-Z
