@@ -1,0 +1,22 @@
+{% liquid
+  graphql instance = 'modules/monitoring/instance' | dig: 'instance'
+  unless data
+    assign data = '{}' | parse_json
+  endunless
+  hash_assign data['distinct_id'] = instance.id
+  hash_assign data['instance_id'] = instance.id
+  hash_assign data['token'] = "377404cb3e579051250ca9a2b129ea7b"
+%}
+{% parse_json mixpanel_data %}
+{
+  "event": "{{event_name}}",
+  "properties": {{ data }}
+}
+{% endparse_json %}
+
+{% comment %}TODO: move token to api_call when hash_assign is fixed{% endcomment %}
+{% liquid
+  graphql r = 'modules/monitoring/api_call', data: mixpanel_data, template: 'modules/monitoring/mixpanel_create_event'
+  log r, type: 'monitoring/migration/track_first_deploy'
+  return_rc r
+%}

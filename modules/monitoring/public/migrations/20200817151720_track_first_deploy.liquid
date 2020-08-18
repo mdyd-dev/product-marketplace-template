@@ -1,0 +1,9 @@
+{% parse_json data %}
+  {
+    "marketplace": "products"
+  }
+{% endparse_json %}
+
+{% liquid
+  function_rc res = 'modules/monitoring/commands/track_event', event_name: 'marketplace_install', data: data
+%}

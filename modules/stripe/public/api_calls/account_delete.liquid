@@ -10,7 +10,6 @@ callback: >
   {% endif %}
 headers: >
   {% if data %}
-    {%- include 'modules/stripe/shared/api_credentials' -%}
     {
       "Stripe-Account": "{{ data.gateway_id }}",
       "Content-Type": "application/x-www-form-urlencoded",

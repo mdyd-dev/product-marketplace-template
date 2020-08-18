@@ -1,0 +1,23 @@
+---
+name: mixpanel_create_event
+to: https://api.mixpanel.com/track
+format: https
+request_type: Post
+callback: >
+  {%- assign response_data = response.body | to_hash -%}
+  {% if response_data.error %}
+    {%- log response_data.error, type: 'modules/monitoring/mixpanel_create_event' -%}
+  {% endif %}
+headers: >
+  {% if data %}
+    {
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  {% endif %}
+---
+{% comment %}TODO: uncomment when hash_assign is fixed
+{% liquid
+  hash_assign data['properties']['token'] = "377404cb3e579051250ca9a2b129ea7b"
+%}
+{% endcomment %}
+data={{data}}
