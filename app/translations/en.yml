@@ -33,6 +33,9 @@ en:
       new: new item
       created: Item created
       updated: Item updated
+      ordered_times:
+        other: Ordered %{count} times
+        one: Ordered %{count} time
 
     categories:
       list: Categories
