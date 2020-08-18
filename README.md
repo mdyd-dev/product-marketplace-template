@@ -26,7 +26,7 @@ pos-cli env add <YOUR_ENV_NAME> --email <YOUR_EMAIL> --url <YOUR_INSTANCE_URL>
 - clone the repository
 
 ``` sh
-pos-cli init --url=https://github.com/mdyd-dev/marketplace-template-poc.git
+pos-cli init --url https://github.com/mdyd-dev/marketplace-template-poc.git
 ```
 
 - build assets
