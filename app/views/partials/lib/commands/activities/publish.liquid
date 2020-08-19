@@ -4,7 +4,7 @@
 {% endcomment %}
 
 {% liquid
-  include 'lib/commands/activities/publish/build', uuid: uuid, type: type, ids: ids
-  include 'lib/commands/activities/publish/check', object: context.exports.object
-  include 'lib/commands/activities/publish/execute', object: context.exports.object
+  function_rc object = 'lib/commands/activities/publish/build', uuid: uuid, type: type, ids: ids
+  function_rc object = 'lib/commands/activities/publish/check', object: object
+  function_rc object = 'lib/commands/activities/publish/execute', object: object
 %}

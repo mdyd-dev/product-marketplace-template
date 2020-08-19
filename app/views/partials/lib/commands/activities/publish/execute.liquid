@@ -1,3 +1,9 @@
 {% liquid
   graphql r = 'activities/publish', args: object
+
+  comment
+  check for errors
+  endcomment
+
+  return_rc r
 %}

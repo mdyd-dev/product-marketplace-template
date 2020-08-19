@@ -3,12 +3,12 @@
 
   if r.errors
     log r.errors, type: 'errors.graphql.invalid'
-    assign object = object | add_hash_key: 'errors', r.errors
-    assign object = object | add_hash_key: 'valid', false
+    hash_assign object['errors'] = r.errors
+    hash_assign object['valid'] = false
   else
     assign object = r.activity_create.payload
-    assign object = object | add_hash_key: 'valid', true
+    hash_assign object['valid'] = true
   endif
 
-  export object
+  return_rc object
 %}

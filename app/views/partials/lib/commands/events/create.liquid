@@ -1,17 +1,17 @@
 {% background "bg-task-name", type: type, object_id: object_id, actor_id: actor_id, target_id: target_id %}
 
 {% liquid
-  include 'lib/commands/events/create/build', type: type, actor_id: actor_id, object_id: object_id, target_id: target_id
-  include 'lib/commands/events/create/check', object: context.exports.object
+  function_rc object = 'lib/commands/events/create/build', type: type, actor_id: actor_id, object_id: object_id, target_id: target_id
+  function_rc object = 'lib/commands/events/create/check', object: object
 
-  if context.exports.object.valid
-    include 'lib/commands/events/create/execute', object: context.exports.object
+  if object.valid
+    function_rc object = 'lib/commands/events/create/execute', object: object
 
-    if context.exports.object.valid
-      include 'lib/commands/events/broadcast/execute', object: context.exports.object
+    if object.valid
+      include 'lib/commands/events/broadcast/execute', object: object
     endif
   else
-    log context.exports.object, type: 'errors.events.invalid'
+    log object, type: 'errors.events.invalid'
   endif
 %}
 

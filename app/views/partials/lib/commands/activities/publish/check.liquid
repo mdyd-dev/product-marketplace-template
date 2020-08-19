@@ -1,4 +1,5 @@
 {% liquid
-  assign object = object | add_hash_key: 'valid', true
-  export object
+  hash_assign object['valid'] = true
+ 
+  return_rc object
 %}
