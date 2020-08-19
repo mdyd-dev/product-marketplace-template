@@ -1,6 +1,5 @@
 {% liquid
-  graphql result = 'users/create', args: object
+  graphql r = 'users/create', args: object
 
-  assign id = result | dig: 'user', 'id'
-  export id, namespace: 'object'
+  return_rc r.user
 %}

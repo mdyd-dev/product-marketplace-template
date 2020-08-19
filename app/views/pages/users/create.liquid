@@ -3,22 +3,22 @@ slug: users
 method: post
 ---
 {% liquid
-  include 'lib/commands/users/create/build', object: context.params.user
-  include 'lib/commands/users/create/check', object: context.exports.object
+  function_rc object = 'lib/commands/users/create/build', object: context.params.user
+  function_rc object = 'lib/commands/users/create/check', object: object
 
-  if context.exports.object.valid
-    include 'lib/commands/users/create/execute', object: context.exports.object
+  if object.valid
+    function_rc object = 'lib/commands/users/create/execute', object: object
 
-    if context.exports.object.valid
-      include 'lib/commands/sessions/create/execute', object: context.exports.object
+    if object.valid
+      function_rc session = 'lib/commands/sessions/create/execute', object: object
 
-      include 'lib/commands/events/create', type: 'account_created', actor_id: context.exports.object.id
+      include 'lib/commands/events/create', type: 'account_created', actor_id: object.id
 
       include 'redirect_to', url: '/dashboard', notice: 'app.account.created'
     else
     endif
 
   else
-    include 'theme/simple/users/new', object: context.exports.object
+    include 'theme/simple/users/new', object: object
   endif
 %}

@@ -2,18 +2,18 @@
 method: post
 ---
 {% liquid
-  include 'lib/commands/sessions/create/build', object: context.params.user
-  include 'lib/commands/sessions/create/check', object: context.exports.object
+  function_rc object = 'lib/commands/sessions/create/build', object: context.params.user
+  function_rc object = 'lib/commands/sessions/create/check', object: object
 
-  if context.exports.object.valid
-    include 'lib/commands/sessions/create/execute', object: context.exports.object
+  if object.valid
+    function_rc object = 'lib/commands/sessions/create/execute', object: object
 
-    if context.exports.object.valid
+    if object.valid
       include 'redirect_to', url: '/', notice: 'app.sessions.created'
     else
-      include 'theme/simple/sessions/new', object: context.exports.object
+      include 'theme/simple/sessions/new', object: object
     endif
   else
-    include 'theme/simple/sessions/new', object: context.exports.object
+    include 'theme/simple/sessions/new', object: object
   endif
 %}
