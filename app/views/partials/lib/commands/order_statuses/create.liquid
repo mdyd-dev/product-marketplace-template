@@ -1,0 +1,7 @@
+{% liquid
+  function_rc object = 'lib/commands/order_statuses/create/build', order: order, current_user_id: current_user_id, name: name
+  function_rc object = 'lib/commands/order_statuses/create/check', object: object
+  function_rc object = 'lib/commands/order_statuses/create/execute', object: object
+
+  return_rc object
+%}

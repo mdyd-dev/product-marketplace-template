@@ -94,7 +94,7 @@ test('Item listing', async (t) => {
     .doubleClick(Selector(priceField))
     .pressKey(clearField)
     .typeText(priceField, item.price)
-    .click(Selector('button').withText('browse files'))
+    .click(Selector('button').withText('browse your computer'))
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
     .click(Selector('button').withText('Submit'))
     .click(mainPage);

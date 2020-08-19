@@ -3,22 +3,18 @@ method: post
 ---
 
 {% liquid
-  include 'lib/queries/items/find', id: context.params.item_id
+  function_rc item = 'lib/data/queries/items/find', id: context.params.item_id
 
-  include 'lib/commands/orders/create/build', item: context.exports.item, current_user_id: context.current_user.id
-  include 'lib/commands/orders/create/check', object: context.exports.object
+  function_rc object = 'lib/commands/orders/create/build', item: item, current_user_id: context.current_user.id
+  function_rc object = 'lib/commands/orders/create/check', object: object
 
-  if context.exports.object.valid
-    include 'lib/commands/orders/create/execute', object: context.exports.object
+  if object.valid
+    function_rc object = 'lib/commands/orders/create/execute', object: object
 
-    if context.exports.object.valid
-      assign order = context.exports.object
+    if object.valid
+      function_rc status = 'lib/commands/order_statuses/create', order: object, current_user_id: current_user_id, name: 'app.order_statuses.placed'
 
-      include 'lib/commands/order_statuses/create/build', order: context.exports.object, current_user_id: context.current_user.id, name: 'app.order_statuses.placed'
-      include 'lib/commands/order_statuses/create/check', object: context.exports.object
-      include 'lib/commands/order_statuses/create/execute', object: context.exports.object
-
-      include 'lib/commands/events/create', type: 'order_created', actor_id: order.buyer.id, target_id: order.seller.id, object_id: order.id
+      include 'lib/commands/events/create', type: 'order_created', actor_id: object.buyer.id, target_id: object.seller.id, object_id: object.id
 
       include 'lib/flash/publish', notice: 'app.orders.created'
       include 'redirect_to', url: '/dashboard/buy/orders'
@@ -27,7 +23,7 @@ method: post
       break
     endif
   else
-    include 'theme/simple/orders/new', item: context.exports.item, order: context.exports.object
+    include 'theme/simple/orders/new', item: item, order: object
   endif
 
 %}

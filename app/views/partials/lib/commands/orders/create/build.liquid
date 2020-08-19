@@ -8,13 +8,12 @@
 {% parse_json object %}
 {
   "item_id": "{% print item.id %}",
-  "buyer":   "{% echo current_user_id %}",
-  "seller":  "{% echo item.owner.id %}",
-  "total":    {% echo total %},
-  "name":  "init"
+  "buyer":   "{% print current_user_id %}",
+  "seller":  "{% print item.owner.id %}",
+  "total":    {% echo total %}
 }
 {% endparse_json %}
 
 {% liquid
-  export object
+  return_rc object
 %}
