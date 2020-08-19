@@ -1,5 +1,5 @@
 {% liquid
-  graphql id = 'items/photos/create', args: object | dig: 'object', 'id'
+  graphql r = 'items/photos/create', args: object
 
-  export id, namespace: 'object'
+  return_rc r.object
 %}
