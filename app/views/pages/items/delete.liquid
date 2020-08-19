@@ -8,7 +8,7 @@ method: post
   include 'lib/commands/items/delete', item: context.exports.item
 
   if context.exports.object.valid
-    include 'redirect_to', url: '/dashboard/sell/items'
+    include 'redirect_to', url: '/dashboard/sell/items', notice: 'app.items.deleted'
   else
     assign error = context.exports.object.errors.base[0]
 

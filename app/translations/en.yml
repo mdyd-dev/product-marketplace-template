@@ -33,6 +33,7 @@ en:
       new: new item
       created: Item created
       updated: Item updated
+      deleted: Item has been deleted successfully
       ordered_times:
         other: Ordered %{count} times
         one: Ordered %{count} time
