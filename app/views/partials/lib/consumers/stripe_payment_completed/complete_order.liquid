@@ -3,5 +3,6 @@
   assign user_id = event.actor.id
   assign status = 'app.order_statuses.paid'
   log event, type: 'event'
-  include 'lib/commands/order_statuses/create/call', order_id: order_id, current_user_id: user, name: status
+
+  include 'lib/commands/order_statuses/create', order_id: order_id, current_user_id: user.id, name: status
 %}

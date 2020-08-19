@@ -4,12 +4,12 @@ slug: order_statuses/create
 ---
 
 {% liquid
-  include 'lib/commands/order_statuses/create/call', order_id: context.params.order_id, current_user_id: context.current_user.id, name: context.params.status
+  function_rc object = 'lib/commands/order_statuses/create', order_id: context.params.order_id, current_user_id: context.current_user.id, name: context.params.status
 
-  if context.exports.object.valid
+  if object.valid
       include "redirect_to", url: "/dashboard", notice: 'app.orders.status.updated'
   else
-    echo context.exports.object
+    echo object
     echo 'failed'
   endif
 %}

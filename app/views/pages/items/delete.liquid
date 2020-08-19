@@ -4,15 +4,15 @@ method: post
 {% liquid
   include 'lib/must_be_authenticated'
 
-  include 'lib/queries/items/find', id: context.params.id, withOrders: true
-  include 'lib/commands/items/delete', item: context.exports.item
+  function_rc item = 'lib/data/queries/items/find', id: context.params.id, withOrders: true
+  function_rc object = 'lib/commands/items/delete', item: item
 
-  if context.exports.object.valid
+  if object.valid
     include 'redirect_to', url: '/dashboard/sell/items', notice: 'app.items.deleted'
   else
-    assign error = context.exports.object.errors.base[0]
+    assign error = object.errors.base[0]
 
-    function_rc item_url = 'link_to', item: context.exports.item
+    function_rc item_url = 'link_to', item: item
     include 'redirect_to', url: item_url, error: error
   endif
 %}

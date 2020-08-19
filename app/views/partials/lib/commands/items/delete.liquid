@@ -1,10 +1,10 @@
 {% liquid
-  include 'lib/commands/items/delete/build', id: id
-  include 'lib/commands/items/delete/check',  object: context.exports.object
+  function_rc object = 'lib/commands/items/delete/build', item: item
+  function_rc object = 'lib/commands/items/delete/check',  object: object
 
-  echo context.exports.object
-
-  if context.exports.object.valid
-    include 'lib/commands/items/delete/execute', object: context.exports.object
+  if object.valid
+    function_rc object = 'lib/commands/items/delete/execute', object: object
   endif
+
+  return_rc object
 %}
