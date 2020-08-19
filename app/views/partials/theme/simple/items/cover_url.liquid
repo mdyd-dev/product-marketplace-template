@@ -1,0 +1,11 @@
+{% liquid
+  assign dummy_url = 'https://dummyimage.com/800x4:3/eee/000&text=' | append: item.name
+
+  if item.photos.size > 0
+    assign cover_url = item.photos | first | dig: 'photo', 'versions', 'small' | default: dummy_url
+  else
+    assign cover_url = item.cover_photo_url
+  endif
+
+  return_rc cover_url
+%}
