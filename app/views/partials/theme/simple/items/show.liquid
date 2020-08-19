@@ -8,7 +8,7 @@
       {% if item.photos.size > 1 %}
         <div class="relative glider-contain">
           <div class="overflow-x-hidden glider" glider>
-            {% for p in item.photos reversed limit: 5%}
+            {% for p in item.photos limit: 5%}
               <div><img alt="{{ item.name }}" src="{{ p.photo.versions.uncropped }}" class="object-cover w-full"></div>
             {% endfor %}
           </div>
