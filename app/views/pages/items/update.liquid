@@ -4,21 +4,17 @@ method: post
 {% liquid
   include 'lib/must_be_authenticated'
 
-  include 'lib/queries/items/find', id: context.params.item.id
-  include 'lib/can_edit', user_id: context.current_user.id, item: context.exports.item
+  function_rc item = 'lib/data/queries/items/find', id: context.params.item.id
+  include 'lib/can_edit', user_id: context.current_user.id, item: item
 
-  echo context.params.item
+  function_rc object = 'lib/commands/items/update/build', object: context.params.item
+  function_rc object = 'lib/commands/items/update/check', object: object
 
-  include 'lib/commands/items/update/build', object: context.params.item
-  include 'lib/commands/items/update/check', object: context.exports.object
+  if object.valid
+    function_rc object = 'lib/commands/items/update/execute', object: object
 
-  if context.exports.object.valid
-    include 'lib/commands/items/update/execute', object: context.exports.object
-
-    if context.exports.object.valid
-      assign object = context.exports.object
-
-      include 'lib/commands/events/create', type: 'item_updated', actor_id: context.current_user.id, object_id: context.exports.object.id
+    if object.valid
+      include 'lib/commands/events/create', type: 'item_updated', actor_id: context.current_user.id, object_id: object.id
 
       function_rc url = 'link_to', item: object
       include 'redirect_to', url: url, notice: 'app.items.updated'
@@ -27,6 +23,6 @@ method: post
     function_rc filters = 'lib/data/queries/search/filters', query: context.params
     function_rc presigned_url = 'lib/data/queries/presigned_url'
 
-    include 'theme/simple/items/edit', item: context.exports.object, lib: filters, presigned_url: presigned_url
+    include 'theme/simple/items/edit', item: object, lib: filters, presigned_url: presigned_url
   endif
 %}
