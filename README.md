@@ -43,6 +43,13 @@ pos-cli deploy <YOUR_ENV_NAME>
 ```
 - open web browser with your instance URL where you will be provided with post-install steps
 
+
+## populate database with sample data 
+
+``` sh
+pos-cli data import --path=seed/data.zip --zip
+```
+
 # setup
 
 - To access admin panel register user with email address: `admin@example.com`
@@ -67,10 +74,11 @@ pos-cli deploy <YOUR_ENV_NAME>
 
 - as an admin I can browse all events
 
+- stripe integration
+
 # road map
 
 - installation wizard
-- stripe integration
 
 # development guidelines
 
@@ -79,11 +87,6 @@ pos-cli deploy <YOUR_ENV_NAME>
 1. Run sync `pos-cli sync <YOUR_ENV_NAME>`
 2. Edit your marketplace name in file `app/translations/en.yml`, key: `en.app.title`
 3. See changes on your website
-
-## seed 
-
-    pos-cli data clean --auto-confirm
-    pos-cli data import --path=data.zip --zip
 
 ## platformOS project
 
@@ -97,9 +100,10 @@ business logic and presentation logic are separated and should not interfere wit
 - no HTML tags in business logic
 - no data queries in presentation layer
 
-## business logic
+## commands / business logic
 
-- for business logic use commands [/app/views/partials/lib/commands]
+- location: /app/views/partials/lib/commands
+- for business logic use commands 
 - general command consists of 3 stages:
   - build
   - check
@@ -109,22 +113,27 @@ business logic and presentation logic are separated and should not interfere wit
 - commands are designed to be easily executed as background job [heavy commands - external API call, expensive operations computations, reports]
 - each command might produce an event
 
-## presentation views - HTML / JSON 
-
-- app/views/partials/theme 
-- prepare / fetch external data in a page and pass it to partials as local variable
-- no graphql queries are allowed within theme folder
-- partials to be aware ONLY of local variables - no context.session OR context.exports are allowed
-
-- if you do not agree - please raise an issue OR fork the project 
-
 ## data queries
 
-TBD
+- location: /app/views/partials/lib/data/queries
+- generaly these are wrappers on graphql queries
+
+## presentation views - HTML / JSON 
+
+- location: app/views/partials/theme 
+- partials to be aware ONLY of local variables - no context.session OR context.exports are allowed
+- prepare / fetch external data in a page and pass it to partials as local variable
+- also no graphql queries are allowed within theme folder
 
 ## events
 
-TBD
+- each command produces an event 
+- example: when users logs in the system produces `user_session_created` event ` { actor: { id: LOGGED_USER_ID } }`
+- then the event can be asynchronously consumed by a consumer 
+
+### consumers
+
+- location: app/views/partials/lib/consumers 
 
 ## categories
 
@@ -135,7 +144,7 @@ categories can be adjusted by:
 ## TESTS
 
 
-### Use real US address like:
+## Use real US address like:
 
 ```
 722 Laurel Ave
