@@ -72,6 +72,7 @@ test(`Logging attempt with wrong data`, async (t) => {
 
 test(`Login Test`, async (t) => {
   const loginConfirmation = 'Logged in';
+  const signupConfirmation = 'Your account has been created';
   await t
     .click(Selector('header').find('a').withText('Log in'))
     .click(Selector('main').find('p').withText('Register'))
@@ -79,8 +80,8 @@ test(`Login Test`, async (t) => {
     .typeText(passInput, NewPassword)
     .click(Selector('button').withText('Sign Up'));
   await t
-    .expect(Selector('main').withText(loginConfirmation).exists)
-    .ok('message ' + loginConfirmation + " doesn't exists")
+    .expect(Selector('main').withText(signupConfirmation).exists)
+    .ok('message ' + signupConfirmation + " doesn't exists")
     .click(Selector('header').find('a').withText('Dashboard'))
     .click(Selector('a').withText('Profile'))
     await t.expect(Selector('main').textContent)
