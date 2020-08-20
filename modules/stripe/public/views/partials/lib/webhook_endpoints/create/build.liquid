@@ -3,23 +3,28 @@
 %}
 {% comment %}TODO: use standard errors{% endcomment %}
 {% log body, type: "RESPONSE BODY........" %}
-{%- if response.status == 200 -%}
-  {
-    {%- if body.error -%}
-      "errors": [
-        {"message": "{{ body.error.message }}"}
-      ],
-    {%- endif -%}
-    "gateway_id": "{{ body.id }}",
-    "url": "{{ body.url }}",
-    "secret": "{{ body.secret }}",
-    "livemode": "{{ body.livemode }}",
-    "enabled_events": ["{{event}}"],
-    "valid": true
-  }
-{%- else -%}
-  {
-    "errors": {{ body.error.message | json }},
-    "valid": false
-  }
-{%- endif -%}
+{% parse_json webhook %}
+  {%- if response.status == 200 -%}
+    {
+      {%- if body.error -%}
+        "errors": [
+          {"message": "{{ body.error.message }}"}
+        ],
+      {%- endif -%}
+      "gateway_id": "{{ body.id }}",
+      "url": "{{ body.url }}",
+      "secret": "{{ body.secret }}",
+      "livemode": "{{ body.livemode }}",
+      "enabled_events": ["{{event}}"],
+      "valid": true
+    }
+  {%- else -%}
+    {
+      "errors": {{ body.error.message | json }},
+      "valid": false
+    }
+  {%- endif -%}
+{% endparse_json %}
+{% liquid
+  return_rc webhook
+%}

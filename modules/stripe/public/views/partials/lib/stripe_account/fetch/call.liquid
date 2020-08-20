@@ -6,8 +6,10 @@
 {% endparse_json %}
 
 {% liquid
-  include 'modules/stripe/lib/stripe_account/fetch/validate', object: object
-  if context.exports.object.valid
-    include 'modules/stripe/lib/stripe_account/fetch/execute', object: object
+  function_rc object = 'modules/stripe/lib/stripe_account/fetch/validate', object: object
+  if object.valid
+    function_rc object = 'modules/stripe/lib/stripe_account/fetch/execute', object: object
   endif
+
+  return_rc object
 %}

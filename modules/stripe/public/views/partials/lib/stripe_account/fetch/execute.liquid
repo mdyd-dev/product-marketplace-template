@@ -1,11 +1,11 @@
 {% liquid
   graphql response = 'modules/stripe/api_call', template: "modules/stripe/connect_account", data: object
   assign stripe_account = response.api_call.response.body | parse_json
-  assign object = object | add_hash_key: 'stripe_account', stripe_account
+  hash_assign object['stripe_account'] = stripe_account
   if stripe_account.error
-    assign object = object | add_hash_key: 'valid', false
+    hash_assign object['valid'] = false
   endif
   log object, type: 'account/connect_account'
 
-  export object
+  return_rc object
 %}

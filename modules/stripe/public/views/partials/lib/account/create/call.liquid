@@ -1,6 +1,8 @@
 {% liquid
-  include 'modules/stripe/lib/account/create/build', object: object
-  if context.exports.object.valid
-    include 'modules/stripe/lib/account/create/execute', object: context.exports.object
+  function_rc object = 'modules/stripe/lib/account/create/build', object: object
+  if object.valid
+    function_rc object = 'modules/stripe/lib/account/create/execute', object: object
   endif
+
+  return_rc object
 %}

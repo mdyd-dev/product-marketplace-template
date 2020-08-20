@@ -3,13 +3,13 @@
 {% endparse_json %}
 
 {% liquid
-  include 'modules/stripe/lib/webhooks/account_updated/validate', object: object
+  function_rc object = 'modules/stripe/lib/webhooks/account_updated/validate', object: object
 
   comment
     TODO: stub webhook endpoint secret in database
   endcomment
-  if context.exports.object.errors.token[0] != 'secret not match'
-    echo context.exports.object
+  if object.errors.token[0] != 'secret not match'
+    echo object
     include 'test/register_error', contract: contract, field_name: 'base', key: 'test.should.be_valid'
   endif
 %}

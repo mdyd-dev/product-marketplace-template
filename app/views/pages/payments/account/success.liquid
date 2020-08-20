@@ -1,7 +1,7 @@
 {% liquid
-  include 'modules/stripe/lib/account/connect', params: context.params
+  function_rc object = 'modules/stripe/lib/account/connect', params: context.params
 
-  if context.exports.object.valid
+  if object.valid
     include 'theme/simple/payments/account/success'
   else
     include 'theme/simple/payments/account/failure'

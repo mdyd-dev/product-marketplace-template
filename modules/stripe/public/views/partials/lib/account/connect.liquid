@@ -1,5 +1,9 @@
-{% include 'modules/stripe/lib/stripe_account/fetch/call', params: params %}
+{% liquid
+  function_rc object = 'modules/stripe/lib/stripe_account/fetch/call', params: params %}
 
-{% if context.exports.object.valid %}
-  {% include 'modules/stripe/lib/account/create/call', object: context.exports.object %}
-{% endif %}
+  if object.valid
+    function_rc object = 'modules/stripe/lib/account/create/call', object: object
+  endif
+
+  return_rc object
+%}

@@ -6,4 +6,4 @@
 https://connect.stripe.com/express/oauth/authorize?redirect_uri={{ redirect_url }}&client_id={{ context.constants.stripe_client_id }}&state={{ state }}&stripe_user[email]={{context.current_user.email}}&suggested_capabilities[]=card_payments&suggested_capabilities[]=transfers
 {% endcapture %}
 
-{% export connect_url, namespace: 'stripe' %}
+{% return_rc connect_url %}

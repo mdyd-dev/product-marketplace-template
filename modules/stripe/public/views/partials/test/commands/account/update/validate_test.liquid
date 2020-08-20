@@ -12,13 +12,13 @@
 {% endparse_json %}
 
 {% liquid
-  include 'modules/stripe/lib/account/update/validate', object: object
+  function_rc object = 'modules/stripe/lib/account/update/validate', object: object
 
-  if context.exports.object.valid != true
+  if object.valid != true
     include 'test/register_error', contract: contract, field_name: 'base', key: 'test.should.be_valid'
   endif
 
-  if context.exports.object.account_state != 'pending'
-    include 'test/register_error', contract: contract, field_name: 'account_state', message: 'wrong state'
+  if object.state != 'pending'
+    include 'test/register_error', contract: contract, field_name: 'state', message: 'wrong state'
   endif
 %}

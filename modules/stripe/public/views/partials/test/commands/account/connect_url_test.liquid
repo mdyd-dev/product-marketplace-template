@@ -1,7 +1,7 @@
 {% liquid
-  include 'modules/stripe/lib/account/connect_url'
+  function_rc connect_url = 'modules/stripe/lib/account/connect_url'
 
-  if context.exports.stripe.connect_url == blank
+  if connect_url == blank
     include 'test/register_error', contract: contract, field_name: 'base', key: 'test.should.not.be_blank'
   endif
 %}

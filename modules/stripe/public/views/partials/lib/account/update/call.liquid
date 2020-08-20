@@ -3,7 +3,7 @@
   function_rc object = 'modules/stripe/lib/account/update/validate', object: object
 
   if object.valid
-    include 'modules/stripe/lib/account/update/execute', object: object
+    function_rc object = 'modules/stripe/lib/account/update/execute', object: object
   endif
   return_rc object
 %}
