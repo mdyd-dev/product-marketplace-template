@@ -88,6 +88,11 @@ pos-cli data import --path=seed/data.zip --zip
 2. Edit your marketplace name in file `app/translations/en.yml`, key: `en.app.title`
 3. See changes on your website
 
+## seed 
+
+    pos-cli data clean <env> --auto-confirm
+    pos-cli data import <env> --path=data.zip --zip
+
 ## platformOS project
 
 - assumed you are proficient in platformOS 
