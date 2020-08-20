@@ -47,7 +47,7 @@ pos-cli deploy <YOUR_ENV_NAME>
 ## populate database with sample data 
 
 ``` sh
-pos-cli data import --path=seed/data.zip --zip
+pos-cli data import <YOUR_ENV_NAME> --path=seed/data.zip --zip
 ```
 
 # setup
