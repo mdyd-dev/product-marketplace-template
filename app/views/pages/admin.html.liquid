@@ -2,17 +2,6 @@
   include 'lib/must_be_authenticated'
   include 'lib/must_be_superadmin'
 
-  assign template = "/admin/{section}"
-  assign query = context.location.pathname | extract_url_params: template
-  assign section = query.section | default: 'users'
-  assign path = 'lib/data/queries/' | append: section | append: '/search'
-
-  if query.section == 'activities'
-    function_rc list = path, feed: "system", feed_id: 1
-  else
-    function_rc list = path, limit: 200
-  endif
+  include 'theme/simple/admin/menu', section: 'admin'
+  include 'theme/simple/admin/recent', list: list, section: section
 %}
-
-{% include 'theme/simple/admin/menu', section: section %}
-{% include 'theme/simple/admin/recent', list: list, section: query.section %}

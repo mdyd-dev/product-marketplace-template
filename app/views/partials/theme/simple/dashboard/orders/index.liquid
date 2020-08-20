@@ -1,12 +1,3 @@
-<h1 class="mb-6 text-2xl">
-  <a href="/dashboard">{{ 'app.dashboard' | t }}</a>
-  / {{ 'app.' | append: role | t }}
-  / {{ 'app.orders.list' | t }}
-  {% if orders.total_entries > 0 -%}
-  ({{ orders.total_entries  }})
-  {%- endif %}
-</h1>
-
 {% if orders.total_entries > 0 %}
   <table class="w-full table-auto">
     <thead>
@@ -42,7 +33,8 @@
           </td>
           <td class="px-4 py-2 border-b">{{ order.total | pricify_cents }}</td>
           <td class="px-4 py-2 border-b">
-            {% include 'theme/simple/dashboard/orders/actions' %}
+            {% assign actions = 'theme/simple/dashboard/orders/actions/' | append: role  %}
+            {% include actions %}
           </td>
         </tr>
       {% endfor %}

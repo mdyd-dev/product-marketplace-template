@@ -1,5 +1,6 @@
 {% liquid
   include 'lib/must_be_authenticated'
   include 'lib/dashboard/orders', limit: 100, seller: context.current_user.id
+  include 'theme/simple/dashboard/breadcrumbs', name: 'orders', total: context.exports.orders.total_entries, role: 'seller'
   include 'theme/simple/dashboard/orders/index', orders: context.exports.orders, role: 'seller'
 %}

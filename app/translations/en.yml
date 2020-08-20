@@ -23,10 +23,20 @@ en:
       payment_success: Payment success
       status:
         updated: Order status changed
+      attr:
+        id: ID
+        created_at: Created at
+        seller: Seller
+        buyer: Buyer
+        total: Total
 
     users:
       new: new user
       list: Users
+      attr:
+        id: ID
+        created_at: Created at
+        email: Email
 
     items:
       list: Items

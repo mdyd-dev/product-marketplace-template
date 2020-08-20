@@ -1,0 +1,9 @@
+{% liquid
+  include 'lib/must_be_authenticated'
+  include 'lib/must_be_superadmin'
+
+  function_rc list = 'lib/data/queries/orders/search', limit: 200
+
+  include 'theme/simple/admin/menu', section: 'orders'
+  include 'theme/simple/dashboard/orders/index', orders: list, role: 'admin'
+%}
