@@ -3,8 +3,8 @@ slug: s
 ---
 
 {% liquid
-  function_rc query = 'lib/commands/search/many/build', query: context.params, limit: 50
-  function_rc items = 'lib/commands/search/many/execute', query: query
+  function_rc query = 'lib/data/queries/items/search/build', query: context.params, limit: 50
+  function_rc items = 'lib/data/queries/items/search/execute', query: query
 
   function_rc filters = 'lib/data/queries/search/filters', query: context.params
 

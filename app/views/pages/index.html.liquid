@@ -1,8 +1,6 @@
 {% liquid
-  function_rc query = 'lib/commands/search/many/build', limit: 9, featured: true
-  function_rc items = 'lib/commands/search/many/execute', query: query
-
   function_rc filters = 'lib/data/queries/search/filters', query: context.params
+  function_rc items = 'lib/data/queries/items/search', limit: 9, featured: true
 
   include 'theme/simple/home/index', items: items, filters: filters
 %}

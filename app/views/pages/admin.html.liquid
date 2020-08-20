@@ -4,8 +4,8 @@
 
   assign template = "/admin/{section}"
   assign query = context.location.pathname | extract_url_params: template
-
-  assign path = 'lib/data/queries/' | append: query.section | append: '/search'
+  assign section = query.section | default: 'users'
+  assign path = 'lib/data/queries/' | append: section | append: '/search'
 
   if query.section == 'activities'
     function_rc list = path, feed: "system", feed_id: 1
@@ -14,5 +14,5 @@
   endif
 %}
 
-{% include 'theme/simple/admin/menu' %}
+{% include 'theme/simple/admin/menu', section: section %}
 {% include 'theme/simple/admin/recent', list: list, section: query.section %}
