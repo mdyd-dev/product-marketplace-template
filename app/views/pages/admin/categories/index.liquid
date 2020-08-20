@@ -1,0 +1,9 @@
+{% liquid
+  include 'lib/must_be_authenticated'
+  include 'lib/must_be_superadmin'
+
+  function_rc list = 'lib/data/queries/categories/search'
+
+  include 'theme/simple/admin/menu', section: 'categories'
+  include 'theme/simple/admin/categories/index', list: list, section: 'categories'
+%}

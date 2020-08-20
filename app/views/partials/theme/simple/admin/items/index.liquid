@@ -1,0 +1,35 @@
+<div class="w-full text-xs">
+  <div class="">
+    <h2 class="mb-6 text-2xl">{% echo 'app.' | append: section | append: '.list' | t %} ({% print list.total_entries %})</h2>
+  </div>
+
+  <div class="flex">
+    <div class="flex-1 my-2 px-2 text-xl ">
+      {% print 'app.items.attr.name' | t %}
+    </div>
+    <div class="flex-1 my-2 px-2 text-xl ">
+      {% print 'app.items.attr.category' | t %}
+    </div>
+    <div class="flex-1 my-2 px-2 text-xl ">
+      {% print 'app.items.attr.created_at' | t %}
+    </div>
+  </div>
+
+  <div class="">
+  {% for record in list.results %}
+    <div class="flex">
+      <div class="flex-1 my-2 px-2 ">
+        <a href="/items/{% print record.id %}">
+          {% print record.name %}
+        </a>
+      </div>
+      <div class="flex-1 my-2 px-2 ">
+        {% print record.category %}
+      </div>
+      <div class="flex-1 my-2 px-2 ">
+        {% print record.created_at %}
+      </div>
+    </div>
+  {% endfor %}
+
+</div>

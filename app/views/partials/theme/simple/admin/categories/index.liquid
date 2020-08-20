@@ -1,0 +1,25 @@
+<div class="w-full">
+  <div class="flex border-b">
+    <div class="flex-1 text-xl ">
+      {% print 'app.categories.attr.key' | t %}
+    </div>
+    <div class="flex-1 text-xl">
+      {% print 'app.categories.attr.name' | t %}
+    </div>
+  </div>
+
+  <div class="">
+  {% for record in list %}
+    <div class="flex p-2">
+      <div class="flex-1 ">
+        {% print record %}
+      </div>
+      <div class="flex-1 ">
+        <a href="/c/{{record}}">
+        {% print 'categories.' | append: record | t %}
+        </a>
+      </div>
+    </div>
+  {% endfor %}
+
+</div>

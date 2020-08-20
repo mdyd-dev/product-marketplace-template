@@ -5,6 +5,5 @@
   function_rc list = 'lib/data/queries/orders/search', limit: 200
 
   include 'theme/simple/admin/menu', section: 'orders'
-  include 'theme/simple/admin/breadcrumbs', total_entries: list.total_entries, role: 'admin'
   include 'theme/simple/dashboard/orders/index', orders: list, role: 'admin'
 %}

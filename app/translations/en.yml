@@ -1,5 +1,14 @@
 en:
   admin:
+    menu:
+      setup: Configuration
+      items: Items
+      activities: Activities
+      setup: Setup
+      categories: Categories
+      orders: Orders
+      users: Users
+      home: Home
     metric:
       total_revenue: Total Revenue
       total_users: Total Users
@@ -67,10 +76,18 @@ en:
       ordered_times:
         other: Ordered %{count} times
         one: Ordered %{count} time
+      attr:
+        id: ID
+        name: Name
+        category: Category
+        created_at: CreatedAt
 
     categories:
       list: Categories
       new: new category
+      attr:
+        name: Category Name
+        key: Key
 
     payments:
       account:

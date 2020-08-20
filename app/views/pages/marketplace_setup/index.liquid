@@ -5,6 +5,6 @@ slug: marketplace_setup
   include 'lib/must_be_superadmin'
 
   function_rc config = 'lib/commands/marketplace_setup/current_config'
-  include 'theme/simple/admin/menu'
+  include 'theme/simple/admin/menu', section: 'setup'
   include 'theme/simple/marketplace_setup/index', object: config
 %}
