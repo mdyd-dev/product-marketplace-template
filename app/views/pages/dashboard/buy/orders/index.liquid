@@ -1,6 +1,7 @@
 {% liquid
   include 'lib/must_be_authenticated'
-  include 'lib/dashboard/orders', limit: 100, buyer: context.current_user.id
-  include 'theme/simple/dashboard/breadcrumbs', name: 'orders', total: context.exports.orders.total_entries, role: 'buyer'
-  include 'theme/simple/dashboard/orders/index', orders: context.exports.orders, role: 'buyer'
+  function_rc orders = 'lib/data/queries/orders/search', limit: 100, buyer: context.current_user.id
+
+  include 'theme/simple/dashboard/breadcrumbs', name: 'orders', total_entries: orders.total_entries, role: 'buyer'
+  include 'theme/simple/dashboard/orders/index', orders: orders, role: 'buyer'
 %}

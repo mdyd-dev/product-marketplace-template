@@ -1,5 +1,8 @@
 {% liquid
   include 'lib/must_be_authenticated'
-  include 'lib/dashboard/items', limit: 100, seller: context.current_user.id
-  include 'theme/simple/dashboard/items/index', items: context.exports.items, role: 'seller'
+
+  function_rc items = 'lib/data/queries/items/search', limit: 100, owner: context.current_user.id
+
+  include 'theme/simple/dashboard/breadcrumbs', name: 'items', total_entries: items.total_entries, role: 'seller'
+  include 'theme/simple/dashboard/items/index', items: items, role: 'seller'
 %}
