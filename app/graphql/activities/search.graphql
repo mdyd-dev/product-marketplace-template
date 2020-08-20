@@ -1,5 +1,5 @@
-query ac($feed_id: ID!, $feed: String!) {
-  activities: streams(feed_id: $feed_id, feed_type: $feed){
+query ac($feed_id: ID!, $feed: String!, $limit: Int = 100) {
+  activities: streams(feed_id: $feed_id, feed_type: $feed per_page: $limit){
     total_entries
     results {
       payload

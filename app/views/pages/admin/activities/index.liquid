@@ -1,0 +1,9 @@
+{% liquid
+  include 'lib/must_be_authenticated'
+  include 'lib/must_be_superadmin'
+
+  function_rc list = 'lib/data/queries/activities/search', feed: 'system', feed_id: '1', limit: 1000
+
+  include 'theme/simple/admin/menu', section: 'activities'
+  include 'theme/simple/admin/activities/index', list: list, section: 'activities'
+%}

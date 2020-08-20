@@ -1,4 +1,13 @@
 en:
+  admin:
+    metric:
+      total_revenue: Total Revenue
+      total_users: Total Users
+      new_users: New Users
+      total_orders: Total Orders
+      new_orders: New Order
+      total_items: Total Items
+      new_items: New Items
   app:
     title: MVP Marketplace
 
@@ -30,6 +39,17 @@ en:
         buyer: Buyer
         total: Total
 
+    activities:
+      list: Activities
+      new: new
+      attr:
+        id: ID
+        created_at: Created at
+        object: Object
+        target: Target
+        actor: Actor
+        type: Type
+
     users:
       new: new user
       list: Users
@@ -51,9 +71,6 @@ en:
     categories:
       list: Categories
       new: new category
-
-    activities:
-      list: Activities
 
     payments:
       account:

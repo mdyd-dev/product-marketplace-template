@@ -1,0 +1,24 @@
+{% parse_json metrics %}
+[
+  {"name": "total_revenue", "value": "$3249"},
+  {"name": "total_users", "value": "3249"},
+  {"name": "new_users", "value": "+4%"},
+  {"name": "total_items", "value": "3249"},
+  {"name": "new_items", "value": "+1%"},
+  {"name": "total_orders", "value": "3249"},
+  {"name": "new_orders", "value": "+2%"}
+]
+{% endparse_json %}
+
+<div class="flex items-center justify-center flex-wrap">
+  {% for metric in metrics %}
+    <div class="p-8 m-2 flex-row border">
+      <div class="text-2xl justify-center">
+        {% print 'admin.metric.' | append: metric.name | t %}
+      </div>
+      <div class="text-xl justify-center">
+        {% print metric.value %}
+      </div>
+    </div>
+  {% endfor %}
+</div>

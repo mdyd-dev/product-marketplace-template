@@ -3,7 +3,7 @@
     <h2 class="mb-6 text-2xl">{% echo 'app.' | append: section | append: '.list' | t %} ({% print list.total_entries %})</h2>
   </div>
 
-  <div class="flex">
+  <div class="flex border-b">
     <div class="flex-1 text-xl">
       {% print 'app.users.attr.id' | t %}
     </div>
@@ -17,7 +17,7 @@
 
   <div class="">
   {% for record in list.results %}
-    <div class="flex">
+    <div class="flex p-2">
       <div class="flex-1 ">
         {% print record.id %}
       </div>

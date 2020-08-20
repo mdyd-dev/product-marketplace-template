@@ -1,0 +1,44 @@
+<div class="w-full">
+  <div class="">
+    <h2 class="mb-6 text-2xl">{% echo 'app.' | append: section | append: '.list' | t %} ({% print list.total_entries %})</h2>
+  </div>
+  <div class="flex border-b">
+    <div class="flex-1 text-xl ">
+      {% print 'app.activities.attr.created_at' | t %}
+    </div>
+    <div class="flex-1 text-xl ">
+      {% print 'app.activities.attr.type' | t %}
+    </div>
+    <div class="flex-1 text-xl ">
+      {% print 'app.activities.attr.actor' | t %}
+    </div>
+    <div class="flex-1 text-xl ">
+      {% print 'app.activities.attr.object' | t %}
+    </div>
+    <div class="flex-1 text-xl ">
+      {% print 'app.activities.attr.target' | t %}
+    </div>
+  </div>
+
+  <div class="">
+  {% for record in list.results %}
+    <div class="flex p-2">
+      <div class="flex-1 ">
+        {% print record.payload.date %}
+      </div>
+      <div class="flex-1 ">
+        {% print record.payload.type %}
+      </div>
+      <div class="flex-1 ">
+        {% print record.payload.actor.id %}
+      </div>
+      <div class="flex-1 ">
+        {% print record.payload.object.id %}
+      </div>
+      <div class="flex-1 ">
+        {% print record.payload.target.id %}
+      </div>
+    </div>
+  {% endfor %}
+
+</div>
