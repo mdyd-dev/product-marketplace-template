@@ -148,6 +148,15 @@ categories can be adjusted by:
 
 ## TESTS
 
+### e2e tests
+
+Testcafe tests are located in `test/` directory.
+
+``` 
+  testcafe "chromium:headless" test --skip-js-errors
+```
+
+### unit tests
 
 ## Use real US address like:
 
