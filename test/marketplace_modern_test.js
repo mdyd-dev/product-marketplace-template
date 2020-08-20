@@ -11,8 +11,8 @@ const nameField = '#name';
 const descriptionField = '#description';
 const tagsField = '#tags';
 const priceField = '#price';
-const editURL = '/items/edit?id='
-const NewEmail = faker.internet.email();
+const editURL = '/items/edit?id=';
+const NewEmail = faker.internet.email().toLowerCase();
 const NewPassword = faker.internet.password();
 const logInBtn = Selector('button').withText('Log in');
 const item = {
@@ -71,23 +71,33 @@ test(`Logging attempt with wrong data`, async (t) => {
 });
 
 test(`Login Test`, async (t) => {
+  const loginConfirmation = 'Logged in';
   await t
     .click(Selector('header').find('a').withText('Log in'))
     .click(Selector('main').find('p').withText('Register'))
     .typeText(emailInput, NewEmail)
     .typeText(passInput, NewPassword)
     .click(Selector('button').withText('Sign Up'));
+  await t
+    .expect(Selector('main').withText(loginConfirmation).exists)
+    .ok('message ' + loginConfirmation + " doesn't exists")
+    .click(Selector('header').find('a').withText('Dashboard'))
+    .click(Selector('a').withText('Profile'))
+    await t.expect(Selector('main').textContent)
+    .contains(NewEmail)
+    .click(Selector('a').withText('List your item'))
 });
 
 test('Item listing', async (t) => {
-  await t
 
+    await t
     //listing the item for sale
+    await t
     .click(Selector('a').withText('List your item'))
     .typeText(emailInput, NewEmail)
     .typeText(passInput, NewPassword)
     .click(logInBtn)
-    .click(Selector('a').withText('List your item'))
+    await t.click(Selector('a').withText('List your item'))
     .typeText(Selector(nameField), item.name)
     .typeText(descriptionField, item.description)
     .typeText(tagsField, item.tags)
@@ -156,7 +166,7 @@ test('Edit item', async (t) => {
     .click(Selector('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
     //Buying item, logging off from buyer account
-    .click(Selector('button').withText('Buy'))
+    .click(Selector('button').withText('Buy'));
   await t
     //.click(Selector('main').find('button').withText('Checkout'))
     .click(Selector('header').find('a').withText('Dashboard'))
@@ -181,22 +191,22 @@ test('Delete item test', async (t) => {
     .click(Selector('button').withText('Log out'));
 });
 
-
 test('Breakin-in test, edition by none user', async (t) => {
   const notAuthorizedUser = 'Permission denied';
-  await t.click(Selector('header').find('a').withText('Log in'))
-  .typeText(emailInput, 'user@email.com')
-  .typeText(passInput, 'password')
-  .click(logInBtn)
-  .typeText('input[name="k"]', 'Watch')
-  .click(Selector('main').find('button').withText('Search'))
-  .click(Selector('main').find('h2 a').withText('Watch'))
   await t
-  var itemEditUrl = await getURL()
-  var itemEditUrl = itemEditUrl.split('-')
-  var editItemId = itemEditUrl[itemEditUrl.length -1]
+    .click(Selector('header').find('a').withText('Log in'))
+    .typeText(emailInput, 'user@email.com')
+    .typeText(passInput, 'password')
+    .click(logInBtn)
+    .typeText('input[name="k"]', 'Watch')
+    .click(Selector('main').find('button').withText('Search'))
+    .click(Selector('main').find('h2 a').withText('Watch'));
+  await t;
+  var itemEditUrl = await getURL();
+  var itemEditUrl = itemEditUrl.split('-');
+  var editItemId = itemEditUrl[itemEditUrl.length - 1];
+  await t.navigateTo(editURL + editItemId);
   await t
-  .navigateTo(editURL + editItemId)
-  await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok("message 'Permission denied' doesn't exists")
-
+    .expect(Selector('div').withText(notAuthorizedUser).exists)
+    .ok('message ' + notAuthorizedUser + " doesn't exists");
 });
