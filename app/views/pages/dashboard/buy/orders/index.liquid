@@ -1,4 +1,5 @@
 {% liquid
+  include 'lib/must_be_authenticated'
   include 'lib/dashboard/orders', limit: 100, buyer: context.current_user.id
   include 'theme/simple/dashboard/orders/index', orders: context.exports.orders, role: 'buyer'
 %}

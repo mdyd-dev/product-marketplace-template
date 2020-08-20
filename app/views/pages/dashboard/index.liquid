@@ -1,4 +1,5 @@
 {% liquid
+  include 'lib/must_be_authenticated'
   include 'theme/simple/dashboard/index'
   include 'lib/commands/events/create', type: 'page_visited', actor_id: context.current_user.id, object_id: 'dashboard'
 %}

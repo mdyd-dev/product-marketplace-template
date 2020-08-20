@@ -1,4 +1,5 @@
 {% liquid
+  include 'lib/must_be_authenticated'
   include 'lib/dashboard/items', limit: 100, seller: context.current_user.id
   include 'theme/simple/dashboard/items/index', items: context.exports.items, role: 'seller'
 %}

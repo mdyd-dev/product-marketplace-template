@@ -148,6 +148,8 @@ categories can be adjusted by:
 
 ```
 722 Laurel Ave
-Burlingame, CA 94010
+Burlingame
+CA 
+94010
 USA
 ```
