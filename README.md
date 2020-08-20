@@ -44,7 +44,7 @@ pos-cli deploy <YOUR_ENV_NAME>
 - open web browser with your instance URL where you will be provided with post-install steps
 
 
-## populate database with sample data 
+## populate with sample data 
 
 ``` sh
 pos-cli data import <YOUR_ENV_NAME> --path=seed/data.zip --zip
@@ -87,11 +87,6 @@ pos-cli data import <YOUR_ENV_NAME> --path=seed/data.zip --zip
 1. Run sync `pos-cli sync <YOUR_ENV_NAME>`
 2. Edit your marketplace name in file `app/translations/en.yml`, key: `en.app.title`
 3. See changes on your website
-
-## seed 
-
-    pos-cli data clean <env> --auto-confirm
-    pos-cli data import <env> --path=data.zip --zip
 
 ## platformOS project
 
@@ -158,7 +153,9 @@ Testcafe tests are located in `test/` directory.
 
 ### unit tests
 
-## Use real US address like:
+## Stripe
+
+Use real US address like:
 
 ```
 722 Laurel Ave
