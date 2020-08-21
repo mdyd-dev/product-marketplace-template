@@ -1,0 +1,25 @@
+query models($id: ID, $limit: Int = 20, $date: String) {
+  models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      model_schema_name: { value: "metric" }
+      created_at: { lte: $date }
+    }
+    sort: [
+      { created_at: { order: DESC } }
+    ]
+  ){
+    total_entries
+
+    results {
+      id
+      created_at
+      name: property(name: "name")
+      income: property_int(name: "income")
+      users: property_int(name: "users")
+      orders: property_int(name: "orders")
+      items: property_int(name: "items")
+    }
+  }
+}

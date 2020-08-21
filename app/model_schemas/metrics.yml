@@ -1,0 +1,12 @@
+---
+name: metric
+properties:
+  - name: name
+  - name: income
+    type: integer
+  - name: users
+    type: integer
+  - name: orders
+    type: integer
+  - name: items
+    type: integer

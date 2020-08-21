@@ -1,0 +1,14 @@
+{% liquid
+  graphql r = 'metrics/create', args: object
+
+  if r.errors
+    log r.errors, type: 'errors.graphql.invalid'
+    hash_assign object['errors'] = r.errors
+    hash_assign object['valid'] = false
+  else
+    assign object = r.model_create
+    hash_assign object['valid'] = true
+  endif
+
+  return_rc object
+%}

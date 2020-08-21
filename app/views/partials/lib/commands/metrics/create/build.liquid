@@ -1,0 +1,17 @@
+{% parse_json object %}
+{
+  "name": {{ name | json }},
+  "income": {{ income }},
+
+  "users": {{ users }},
+  "new_users": 0,
+
+  "orders": {{ orders }},
+  "new_orders": 0,
+
+  "items": {{ items }},
+  "new_items":  0
+}
+{% endparse_json %}
+
+{% return_rc object %}

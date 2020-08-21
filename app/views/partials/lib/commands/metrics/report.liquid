@@ -1,0 +1,13 @@
+{% parse_json metrics %}
+[
+  {"period": {{ today.name | json }}, "name": "income", "value": {{ today.income }}, "delta": {{ today.income | minus: yesterday.income }} },
+  {"period": {{ today.name | json }}, "name": "users", "value": {{ today.users }}, "delta": {{ today.users | minus: yesterday.users }} },
+  {"period": {{ today.name | json }}, "name": "items", "value": {{ today.items }}, "delta": {{ today.items | minus: yesterday.items }} },
+  {"period": {{ today.name | json }}, "name": "orders", "value": {{ today.orders }}, "delta": {{ today.orders | minus: yesterday.orders }} }
+]
+{% endparse_json %}
+
+
+{% liquid
+  return_rc metrics
+%}

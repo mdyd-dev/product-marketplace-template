@@ -1,8 +1,25 @@
-hello hello
-{{ context.constants.company_info }}
+{% comment %}
+{% endcomment %}
 
-{% log context.constants.company_info %}
-{% background 'test' %}
-  {% log context.constants.company_info %}
-{% endbackground %}
+{% liquid
+  assign income = 0
+  function_rc orders = 'lib/data/queries/orders/search', limit: 100
 
+  for order in orders.results
+    if order.status.name == 'app.order_statuses.paid'
+      assign income = income | plus: order.total
+    endif
+  endfor
+
+  function_rc items = 'lib/data/queries/items/search', limit: 1
+  function_rc users = 'lib/data/queries/users/search', limit: 1
+
+  function_rc report = 'lib/commands/metrics/create', name: 'total', items: items.total_entries, users: users.total_entries, orders: orders.total_entries, income: income
+
+  function_rc today = 'lib/data/queries/metrics/find', limit: 1, date: 'today'
+  function_rc yesterday = 'lib/data/queries/metrics/find', limit: 1, date: 'yesterday'
+
+  function_rc report = 'lib/commands/metrics/report', today: today, yesterday: yesterday
+
+  echo report
+%}

@@ -1,0 +1,22 @@
+mutation create_item($name: String!, $income: Int!, $users: Int!, $orders: Int!, $items: Int!) {
+  model_create(
+    model: {
+      model_schema_name: "metric"
+      properties: [
+        { name: "name" value: $name }
+        { name: "income" value_int: $income }
+        { name: "users" value_int: $users }
+        { name: "orders" value_int: $orders }
+        { name: "items" value_int: $items }
+      ]
+    }
+  ){
+    id
+    created_at
+    name: property(name: "name")
+    income: property_int(name: "income")
+    users: property_int(name: "users")
+    orders: property_int(name: "orders")
+    items: property_int(name: "items")
+  }
+}
