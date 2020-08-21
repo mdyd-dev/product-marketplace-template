@@ -1,6 +1,13 @@
+{% comment %}
+  Define email addresses of users who should have Admin access. Use comma to separate multiple users, for example
+
+    constant_set(name: "superadmins", value: "admin@example.com,admin2@example.com")
+
+{% endcomment %}
+
 {% graphql r %}
 mutation set_constants {
-  superadmins: constant_set(name: "superadmins", value: "godot@tlen.pl,piotr@near-me.com,admin@example.com"){
+  superadmins: constant_set(name: "superadmins", value: "admin@example.com"){
     name
     value
   }
