@@ -12,6 +12,9 @@ module.exports = {
   purge: {
     content: ['app/**/*.liquid', './src/js/**/*.js'],
   },
+  future: {
+    removeDeprecatedGapUtilities: true
+  },
   theme: {
     container: {
       center: true,
