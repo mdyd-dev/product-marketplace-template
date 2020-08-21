@@ -1,0 +1,9 @@
+---
+method: post
+---
+{% liquid
+
+  include 'lib/commands/reviews/delete', id: context.params.id
+
+  include 'redirect_to', url: context.params.redirect_url, notice: ''
+%}

@@ -60,6 +60,13 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
           versions
         }
       }
+
+      reviews: related_models(model_schema_name: "review", join_on_property: "uuid", foreign_property: "item_uuid") {
+        id
+        owner: property(name: "owner")
+        rating: property(name: "rating")
+        comment: property(name: "comment")
+      }
     }
   }
 }

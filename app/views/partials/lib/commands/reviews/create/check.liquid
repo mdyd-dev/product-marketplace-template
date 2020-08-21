@@ -1,0 +1,8 @@
+{% liquid
+  assign c = '{ "errors": {}, "valid": true }' | parse_json
+
+  assign object = object | add_hash_key: 'valid', c.valid
+  assign object = object | add_hash_key: 'errors', c.errors
+
+  export object
+%}

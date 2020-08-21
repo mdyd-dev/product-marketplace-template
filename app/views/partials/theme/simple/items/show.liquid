@@ -1,3 +1,18 @@
+{% liquid
+  assign product_rating = 0
+  assign product_point = 0
+  if item.reviews.size 
+    for review in item.reviews
+      assign product_point = product_point | plus:review.rating
+    endfor
+
+    assign product_rating = product_point | divided_by:item.reviews.size
+  endif
+  
+  function_rc item_url = 'link_to', item: item  
+%}
+
+
 {% content_for item_metatags %}
   {% include 'theme/simple/items/metatags', item: item %}
 {% endcontent_for %}
@@ -69,6 +84,13 @@
         </form>
       </div>
 
+      <div class="flex flex-wrap mb-4">
+        <div class="rating">
+          <div class="rating-point" rel={{ product_rating }}></div>
+        </div>
+        <span class="rating-score">{{ product_rating | round: 2 }}</span>
+      </div>
+
         {%- if item.owner.id == context.current_user.id and item.orders.size < 1 %}
         <p class="py-4 mt-4 border-t border-blue-300">Item Administration</p>
         <span class="flex">
@@ -88,3 +110,47 @@
     </div>
   </div>
 </div>
+
+
+<div class="container reviews">
+  <p class="text-2xl text-gray-900 ">Reviews</p>
+  <div class="recent-reviews">
+    {% for review in item.reviews %}
+      <div class="recent-review">
+        <div class="flex flex-wrap mb-4">
+          <div class="rating">
+            <div class="rating-point" rel={{ review.rating }}></div>
+          </div>
+          <span class="rating-score">{{ review.rating | round: 2 }}</span>
+        </div>
+        <p><b>{{ review.owner}}</b> : {{ review.comment }}</p>
+      </div>
+    {% endfor %}
+  </div>
+  
+  {%- if context.current_user.id %}
+    <form action="/reviews/create" method="post" class="form-review" >
+      <p class="title text-2xl text-gray-900 ">Add New Review</p>    
+      {% include 'authenticity_token' %}
+      <input type="hidden" name="item[id]" value="{{ item.id }}">
+      <input type="hidden" name="item[uuid]" value="{{ item.uuid }}">
+      <input type="hidden" name="item[owner]" value="{{ context.current_user.email }}">
+      <input type="hidden" name="item[url]" value="{{ item_url }}">
+      <input type="hidden" class="rating-value" name="item[rating]" value="0">
+      <div class="mt-3">
+        <div class="rating variable">
+          <div class="rating-point"></div>
+        </div>
+        <label class="hidden" for="comment">Comment</label>
+        <textarea class="w-full form-input" type="text" id="comment" name="item[comment]" rows="3"
+          required></textarea>
+      </div>
+      <div class="text-right">
+        <button id="addreview" class="button">Add Review</button>
+      </div>
+    </form>
+  {%- endif %}
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ 'js/custom.js' | asset_url }}"></script>

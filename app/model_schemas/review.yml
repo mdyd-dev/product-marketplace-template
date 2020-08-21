@@ -1,0 +1,15 @@
+---
+name: review
+properties:
+  - name: uuid
+  - name: item_id
+    type: string
+  - name: owner
+    type: string
+  - name: rating
+    type: string
+  - name: comment
+    type: string
+  - name: item_uuid
+    type: string
+    belongs_to: item

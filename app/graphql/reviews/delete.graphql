@@ -1,0 +1,5 @@
+mutation delete_review($id: ID!) {
+  model_delete(
+    id: $id
+  ){ id }
+}
