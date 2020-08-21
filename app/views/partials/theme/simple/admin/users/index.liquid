@@ -1,29 +1,19 @@
-<div class="w-full">
-  <div class="flex border-b">
-    <div class="flex-1 text-xl">
-      {% print 'app.users.attr.id' | t %}
-    </div>
-    <div class="flex-1 text-xl ">
-      {% print 'app.users.attr.email' | t %}
-    </div>
-    <div class="flex-1 text-xl ">
-      {% print 'app.users.attr.created_at' | t %}
-    </div>
-  </div>
+<table class="table w-full">
+  <thead>
+    <tr>
+      <th class="w-8 text-left">{{ 'app.users.attr.id' | t }}</th>
+      <th class="text-left">{{ 'app.users.attr.email' | t }}</th>
+      <th class="text-left">{{ 'app.users.attr.created_at' | t }}</th>
+    </tr>
+  </thead>
 
-  <div class="">
-  {% for record in list.results %}
-    <div class="flex p-2">
-      <div class="flex-1 ">
-        {% print record.id %}
-      </div>
-      <div class="flex-1 ">
-        {% print record.email %}
-      </div>
-      <div class="flex-1 ">
-        {% print record.created_at | l %}
-      </div>
-    </div>
-  {% endfor %}
-
-</div>
+  <tbody>
+    {% for record in list.results %}
+      <tr>
+        <td>{{ record.id }}</td>
+        <td>{{ record.email }}</td>
+        <td>{{ record.created_at | l }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
