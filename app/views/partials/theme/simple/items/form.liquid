@@ -58,14 +58,16 @@
       {% endif %}
     </div>
 
+
+    {% comment %}
     <div class="mt-3">
-      <!-- TODO: Add instructions. P2: create multiselect control -->
       <label class="block" for="tags">Tags</label>
       <input class="w-full form-input" type="text" id="tags" name="item[tags]" value="{{ item.tags | join: ',' }}" />
       {% if item.errors.tags %}
       <span class="text-red-800">{{ item.errors.tags }}</span>
       {% endif %}
     </div>
+    {% endcomment %}
 
     <div class="mt-3">
       <label class="block" for="price">Price ($)</label>

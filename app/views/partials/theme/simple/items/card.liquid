@@ -17,7 +17,9 @@
           {{ 'categories.' | append: item.category | t }}
         </div>
       {% endif %}
+      {% comment %}
       {{ item.tags | join: ", " }}
+      {% endcomment %}
     </h3>
 
     <div class="flex justify-between">
