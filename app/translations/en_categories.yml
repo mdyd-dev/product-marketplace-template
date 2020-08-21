@@ -1,25 +1,357 @@
 ---
 en:
   categories:
+    beauty_and_personal_care: Beauty and Personal Care
+    beauty_and_personal_care/makeup: Makeup
+    beauty_and_personal_care/makeup/vanity_boxes: Vanity Boxes
+    beauty_and_personal_care/makeup/vanity_boxes/ke_vanity_boxes: KE Vanity Boxes
+    beauty_and_personal_care/makeup/vanity_boxes/ke_vanity_boxes/ke_gift_box_stor_jewellary_vanity_jewellery: KE
+      GIFT BOX STOR JEWELLARY Vanity Jewellery (BLUE)
+    home_decor_n_festive_needs: Home Decor & Festive Needs
+    home_decor_n_festive_needs/table_decor_n_handicrafts: Table Decor & Handicrafts
+    home_decor_n_festive_needs/table_decor_n_handicrafts/showpieces: Showpieces
+    home_decor_n_festive_needs/table_decor_n_handicrafts/showpieces/religious_idols: Religious Idols
+    home_decor_n_festive_needs/table_decor_n_handicrafts/showpieces/religious_idols/divine_gifts_n_artificial_jewellery_religious_idols: Divine Gifts & Artificial Jewellery Religious Idols
     jewellery: Jewellery
     jewellery/accessories: Accessories
     jewellery/accessories/brooches: Brooches
+    jewellery/accessories/brooches/anahi_saree_pin_brooch: ANAHI SAREE PIN Brooch
+      (Multicolor)
+    jewellery/accessories/brooches/anuradha_art_antique_golden_polished_brooch: Anuradha
+      Art Antique Golden Polished Brooch (Gold)
+    jewellery/accessories/brooches/anuradha_art_chabi_challa_brooch: Anuradha Art
+      Chabi Challa Brooch (Pink)
+    jewellery/accessories/brooches/anuradha_art_designer_brooch: Anuradha Art Designer
+      Brooch (Gold, Green)
+    jewellery/accessories/brooches/anuradha_art_silver_polished_brooch: Anuradha Art
+      Silver Polished Brooch (Silver)
+    jewellery/accessories/brooches/anuradha_art_stylish_designer_brooch: Anuradha
+      Art Stylish Designer Brooch (Gold)
+    jewellery/accessories/brooches/avaron_projekt_aviator_brooch: Avaron Projekt Aviator
+      Brooch (Black)
+    jewellery/accessories/brooches/avaron_projekt_bunch_flower_brooch: Avaron Projekt
+      Bunch Flower Brooch (Green)
+    jewellery/accessories/brooches/avaron_projekt_clock_brooch: Avaron projekt Clock
+      Brooch (Black, Gold)
+    jewellery/accessories/brooches/avaron_projekt_moustache_brooch: Avaron Projekt
+      Moustache Brooch (Green)
+    jewellery/accessories/brooches/avaron_projekt_ship_with_swarovski_brooch: Avaron
+      Projekt Ship With Swarovski Brooch (White)
+    jewellery/accessories/brooches/b_r_trading_ayra_jewel_brooch: B R TRADING AYRA
+      JEWEL Brooch (Multicolor)
+    jewellery/accessories/brooches/fashion_point_blue_crystal_brooch: Fashion Point
+      Blue crystal Brooch (Blue, Silver)
+    jewellery/accessories/brooches/fashion_point_ganesha_design_brooch: Fashion Point
+      Ganesha Brooch (Multicolor)
+    jewellery/accessories/brooches/gurjari_oxidiesd_kurta_button_brooch_brooch: Brooch (Black)
+    jewellery/accessories/brooches/hbs_saree_pin_animal_brooch: hbs saree pin animal
+      Brooch (Gold)
+    jewellery/accessories/brooches/juhi_creations_gw2_brooch: JUHI CREATIONS GW2 Brooch
+      (Gold, White)
+    jewellery/accessories/brooches/mentiezi_red_flower_brooch: Mentiezi Red Flower
+      Brooch (Gold, Red)
+    jewellery/accessories/brooches/misshruts_an_emerald_brooch_brooch: An
+      Emerald Brooch Brooch (Gold, Green)
+    jewellery/accessories/brooches/mivera_brooch: Mivera Brooch (Pink)
+    jewellery/accessories/brooches/remix_yellow-pin_brooch: Remix Yellow-Pin Brooch
+      (Yellow)
+    jewellery/accessories/brooches/ruvee_marwari_style_brooch: Ruvee Marwari Style
+      Brooch (Red)
+    jewellery/accessories/brooches/ruvee_marwari_tika_brooch: Ruvee Marwari Tika Brooch
+      (Multicolor)
+    jewellery/accessories/brooches/samaa_s-0003_brooch: Samaa S-0003 Brooch (Blue)
+    jewellery/accessories/brooches/scion_floral_saree_pin_quilling_brooch: Scion Floral
+      Saree Pin Quilling Brooch (Brown)
+    jewellery/accessories/brooches/sharp_n_style_pink_rose_brouch_brooch: Pink Rose Brouch Brooch (Pink)
+    jewellery/accessories/brooches/shihibas_belly_button_piercing_brooch: Shihibas
+      Belly Button Piercing Brooch (Platinum)
+    jewellery/accessories/brooches/silver_shoppee_my_love_brooch: Silver Shoppee My
+      love Brooch (Gold, Green, Red)
+    jewellery/accessories/brooches/tangerine_crystal_brooch: Tangerine Crystal Brooch
+      (Silver)
+    jewellery/accessories/brooches/tangerine_flower_brooch: Tangerine Flower Brooch
+      (Green, Gold)
+    jewellery/accessories/brooches/variation_diamond_flowers_brooch: Variation Diamond
+      Flowers Brooch (White)
+    jewellery/accessories/brooches/wi_retail_eagle_brooch: WI Retail Eagle Brooch
+      (Gold)
+    jewellery/accessories/brooches/wi_retail_emblem_brooch: Wi Retail Emblem Brooch
+      (Multicolor)
+    jewellery/accessories/brooches/wi_retail_golden_deer_brooch: Wi Retail Golden
+      Deer Brooch (Gold)
+    jewellery/accessories/brooches/wi_retail_mary_brooch: WI Retail Mary Brooch (Black)
+    jewellery/accessories/cufflinks_n_tie_pins: Cufflinks & Tie Pins
+    jewellery/accessories/cufflinks_n_tie_pins/impala_alloy_cufflink: Impala Alloy
+      Cufflink (White)
     jewellery/anklets: Anklets
+    jewellery/anklets/wise_pebble_stylish_alloy_anklet: Wise Pebble Stylish Alloy
+      Anklet
     jewellery/artificial_jewellery: Artificial Jewellery
+    jewellery/artificial_jewellery/chickraft_wood_bangle: Chickraft Wood Bangle
+    jewellery/artificial_jewellery/pout_brass_bangle: Pout Brass Bangle
     jewellery/earrings: Earrings
     jewellery/hair_accessories: Hair Accessories
+    jewellery/hair_accessories/anuradha_art_zbf-263_hair_clip: Anuradha Art ZBF-263
+      Hair Clip (Blue)
     jewellery/jewellery_sets: Jewellery Sets
+    jewellery/jewellery_sets/archi_collection_alloy_jewel_set: Archi Collection Alloy
+      Jewel Set (White)
+    jewellery/jewellery_sets/muchmore_alloy_jewel_set: MUCHMORE Alloy Jewel Set (Pink)
+    jewellery/jewellery_sets/taraash_sterling_silver_jewel_set: Taraash Sterling Silver
+      Jewel Set (Multicolor)
+    jewellery/jewellery_sets/woap_alloy_jewel_set: WOAP Alloy Jewel Set (Blue)
     jewellery/mangalsutras_n_tanmaniyas: Mangalsutras & Tanmaniyas
+    jewellery/mangalsutras_n_tanmaniyas/decon_alloy_mangalsutra: Decon Alloy Mangalsutra
+    jewellery/mangalsutras_n_tanmaniyas/decon_metal_mangalsutra: Decon Metal Mangalsutra
+    jewellery/mangalsutras_n_tanmaniyas/jewelfox_gold_tanmaniya: JewelFox Gold Tanmaniya
+    jewellery/mangalsutras_n_tanmaniyas/knp_enterprise_audi_style_alloy_mangalsutra: Audi Style Alloy Mangalsutra
+    jewellery/mangalsutras_n_tanmaniyas/parinaaz_alloy_mangalsutra: Parinaaz Alloy
+      Mangalsutra
+    jewellery/mangalsutras_n_tanmaniyas/spangel_fashion_audi_style_alloy_mangalsutra: Spangel
+      Fashion Audi Style Alloy Mangalsutra
     jewellery/necklaces_n_chains: Necklaces & Chains
     jewellery/necklaces_n_chains/chains: Chains
+    jewellery/necklaces_n_chains/chains/ayesha_metal_chain: AYESHA Metal Chain
+    jewellery/necklaces_n_chains/chains/bajya_apna_yellow_gold_plated_brass_chain: Bajya
+      Apna Yellow Gold Plated Brass Chain
+    jewellery/necklaces_n_chains/chains/bajya_attractive_24k_yellow_gold_plated_brass_chain: Bajya
+      Attractive 24K Yellow Gold Plated Brass Chain
+    jewellery/necklaces_n_chains/chains/chkokko_alloy_chain: CHKOKKO Alloy Chain
+    jewellery/necklaces_n_chains/chains/fashion_craft_rudraksh_mala_alloy_chain: Fashion
+      Craft Rudraksh Mala Alloy Chain
+    jewellery/necklaces_n_chains/chains/gb_jewellery_gold_plated_chains_brass_chain: GB
+      Jewellery Gold Plated Chains Brass Chain
+    jewellery/necklaces_n_chains/chains/magic_22k_yellow_gold_plated_brass_chain: Magic
+      22K Yellow Gold Plated Brass Chain
     jewellery/necklaces_n_chains/necklaces: Necklaces
+    jewellery/necklaces_n_chains/necklaces/chkokko_chains_alloy_necklace: CHKOKKO
+      Chains Alloy Necklace
+    jewellery/necklaces_n_chains/necklaces/dgold_beads_stone_necklace: Beads
+      Stone Necklace
+    jewellery/necklaces_n_chains/necklaces/dgold_citrine_stone_necklace: Citrine
+      Stone Necklace
+    jewellery/necklaces_n_chains/necklaces/dgold_garnet_stone_necklace: Garnet
+      Stone Necklace
+    jewellery/necklaces_n_chains/necklaces/dgold_onyx_stone_necklace_set: Onyx
+      Stone Necklace Set
+    jewellery/necklaces_n_chains/necklaces/dgold_quartz_stone_necklace: Quartz
+      Stone Necklace
+    jewellery/necklaces_n_chains/necklaces/dgold_spinel_stone_necklace: Spinel
+      Stone Necklace
+    jewellery/necklaces_n_chains/necklaces/imagica_alloy_necklace: Imagica Alloy Necklace
+    jewellery/necklaces_n_chains/necklaces/imagica_emerald_stone_necklace: Imagica
+      Emerald Stone Necklace
+    jewellery/necklaces_n_chains/necklaces/jewlot_brass_necklace: Jewlot Brass Necklace
+    jewellery/necklaces_n_chains/necklaces/shopernow_cocktail_designer_alloy_necklace: Shopernow
+      Cocktail Designer Alloy Necklace
+    jewellery/necklaces_n_chains/necklaces/shopernow_intertwined_alloy_necklace: Shopernow
+      Intertwined Alloy Necklace
+    jewellery/necklaces_n_chains/necklaces/shopernow_medallions_alloy_necklace: Shopernow
+      Medallions Alloy Necklace
+    jewellery/necklaces_n_chains/necklaces/voril_fashion_yellow_gold_plated_plastic_necklace: Voril
+      Fashion Yellow Gold Plated Plastic Necklace
     jewellery/nose_rings_n_studs: Nose Rings & Studs
     jewellery/pendants_n_lockets: Pendants & Lockets
+    jewellery/pendants_n_lockets/aria_rhodium_sterling_silver_pendant: Aria Rhodium
+      Sterling Silver Pendant
+    jewellery/pendants_n_lockets/gehna_yellow_gold_zircon_silver_pendant: Gehna Yellow
+      Gold Zircon Silver Pendant
+    jewellery/pendants_n_lockets/inaya_yellow_gold_nak_brass_pendant_set: INAYA Yellow
+      Gold NAK Brass Pendant Set
+    jewellery/pendants_n_lockets/rosesnribbons_rhodium_garnet_sterling_silver: RosesNRibbons
+      Rhodium Garnet Sterling Silver
+    jewellery/pendants_n_lockets/rosesnribbons_rhodium_sterling_silver: RosesNRibbons
+      Rhodium Sterling Silver
+    jewellery/pendants_n_lockets/sanaa_creations_alloy: Sanaa Creations Alloy
+    jewellery/pendants_n_lockets/silvesto_india_stone_pendant: Silvesto India Stone
+      Pendant
+    jewellery/pendants_n_lockets/vastughar_5_mukhi_rudraksha_wood: VASTUGHAR 5 Mukhi
+      Rudraksha Wood
+    jewellery/pendants_n_lockets/yellow_chimes_butterfly_fairy_alloy: YELLOW CHIMES
+      Butterfly Fairy Alloy
     jewellery/precious_jewellery: Precious Jewellery
+    jewellery/precious_jewellery/classyworld_brass_cufflink: classyworld Brass Cufflink
+      (Silver-01)
     jewellery/rings: Rings
+    jewellery/rings/diwine_jewels_silver_zircon_rhodium_na_k_ring: Silver
+      Zircon Rhodium NA K Ring
+    jewellery/rings/frabjous_sterling_silver_toe_ring_set: Frabjous Sterling Silver
+      Toe Ring Set
+    jewellery/rings/rasav_jewels_yellow_gold_diamond_18_k_ring: Rasav Jewels Yellow
+      Gold Diamond 18 K Ring
+    jewellery/rings/sanaa_creations_alloy_ring: Sanaa Creations Alloy Ring
+    jewellery/rings/silvesto_india_stone_pearl_silver_ring: Silvesto India Stone Pearl
+      Silver Ring
     watches: Watches
     watches/clocks: Clocks
     watches/clocks/table_clocks: Table Clocks
+    watches/clocks/table_clocks/like_table_clocks: Like Table Clocks
+    watches/clocks/table_clocks/like_table_clocks/like_analog_purple_clock: Like Analog
+      Purple Clock
     watches/watch_accessories: Watch Accessories
     watches/watch_accessories/wrist_bands: Wrist Bands
+    watches/watch_accessories/wrist_bands/sushito_wrist_bands: Sushito Wrist Bands
+    watches/watch_accessories/wrist_bands/sushito_wrist_bands/sushito_men: Sushito
+      Men (Multicolour, Pack of 1)
     watches/wrist_watches: Wrist Watches
+    watches/wrist_watches/3wish_wrist_watches: 3wish Wrist Watches
+    watches/wrist_watches/a_avon_wrist_watches: A Avon Wrist Watches
+    watches/wrist_watches/adino_wrist_watches: Adino Wrist Watches
+    watches/wrist_watches/adino_wrist_watches/adino_adf04_analog_watch__-_for_girls: Adino
+      ADF04 Analog Watch  - For Girls
+    watches/wrist_watches/alfajr_wrist_watches: Alfajr Wrist Watches
+    watches/wrist_watches/aries_gold_wrist_watches: Aries Gold Wrist Watches
+    watches/wrist_watches/breitling_wrist_watches: Breitling Wrist Watches
+    watches/wrist_watches/britex_wrist_watches: Britex Wrist Watches
+    watches/wrist_watches/calibro_wrist_watches: Calibro Wrist Watches
+    watches/wrist_watches/camerii_wrist_watches: Camerii Wrist Watches
+    watches/wrist_watches/carlos_wrist_watches: Carlos Wrist Watches
+    watches/wrist_watches/carlos_wrist_watches/carlos_cr-7026458_analog_watch__-_for_girls: Carlos
+      CR-7026458 Analog Watch  - For Girls
+    watches/wrist_watches/carlos_wrist_watches/carlos_cr-702741_analog_watch__-_for_girls: Carlos
+      CR-702741 Analog Watch  - For Girls
+    watches/wrist_watches/carlos_wrist_watches/carlos_cr-7029965_analog_watch__-_for_girls: Carlos
+      CR-7029965 Analog Watch  - For Girls
+    watches/wrist_watches/cartier_wrist_watches: Cartier Wrist Watches
+    watches/wrist_watches/casela_wrist_watches: Casela Wrist Watches
+    watches/wrist_watches/cb_fashion_wrist_watches: CB Fashion Wrist Watches
+    watches/wrist_watches/chappin_n_nellson_wrist_watches: Chappin & Nellson Wrist
+      Watches
+    watches/wrist_watches/cobra_paris_wrist_watches: Cobra Paris Wrist Watches
+    watches/wrist_watches/colat_wrist_watches: Colat Wrist Watches
+    watches/wrist_watches/costa_swiss_wrist_watches: Costa Swiss Wrist Watches
+    watches/wrist_watches/desire_wrist_watches: Desire Wrist Watches
+    watches/wrist_watches/desire_wrist_watches/desire_pt-358_analog_watch__-_for_men: Desire
+      PT-358 Analog Watch  - For Men
+    watches/wrist_watches/desire_wrist_watches/desire_pt-362_analog_watch__-_for_men: Desire
+      PT-362 Analog Watch  - For Men
+    watches/wrist_watches/desire_wrist_watches/desire_pt-378_analog_watch__-_for_women: Desire
+      PT-378 Analog Watch  - For Women
+    watches/wrist_watches/disney_wrist_watches: Disney Wrist Watches
+    watches/wrist_watches/dsigner_wrist_watches: D'Signer Wrist Watches
+    watches/wrist_watches/elantra_wrist_watches: Elantra Wrist Watches
+    watches/wrist_watches/eleganzza_wrist_watches: Eleganzza Wrist Watches
+    watches/wrist_watches/escort_wrist_watches: Escort Wrist Watches
+    watches/wrist_watches/esidon_wrist_watches: ESIDON Wrist Watches
+    watches/wrist_watches/esidon_wrist_watches/esidon_akada04_analog_watch__-_for_women: ESIDON
+      AKADA04 Analog Watch  - For Women
+    watches/wrist_watches/esidon_wrist_watches/esidon_akada06_analog_watch__-_for_women: ESIDON
+      AKADA06 Analog Watch  - For Women
+    watches/wrist_watches/esidon_wrist_watches/esidon_akada11_analog_watch__-_for_women: ESIDON
+      AKADA11 Analog Watch  - For Women
+    watches/wrist_watches/esidon_wrist_watches/esidon_akada14_analog_watch__-_for_women: ESIDON
+      AKADA14 Analog Watch  - For Women
+    watches/wrist_watches/estilo_wrist_watches: Estilo Wrist Watches
+    watches/wrist_watches/fastrack_wrist_watches: Fastrack Wrist Watches
+    watches/wrist_watches/felix_wrist_watches: Felix Wrist Watches
+    watches/wrist_watches/fighter_wrist_watches: Fighter Wrist Watches
+    watches/wrist_watches/figo_fashion_wrist_watches: Figo Fashion Wrist Watches
+    watches/wrist_watches/fimex_wrist_watches: Fimex Wrist Watches
+    watches/wrist_watches/fimex_wrist_watches/fimex_fx167_analog_watch__-_for_girls: Fimex
+      fx167 Analog Watch  - For Girls
+    watches/wrist_watches/firstrace_wrist_watches: Firstrace Wrist Watches
+    watches/wrist_watches/flippd_wrist_watches: Flippd Wrist Watches
+    watches/wrist_watches/fluid_wrist_watches: Fluid Wrist Watches
+    watches/wrist_watches/fnb_wrist_watches: FNB Wrist Watches
+    watches/wrist_watches/fnb_wrist_watches/fnb_fnb-0125_analog_watch__-_for_women: FNB
+      Fnb-0125 Analog Watch  - For Women
+    watches/wrist_watches/fogg_fashion_store_wrist_watches: Fogg Fashion Store Wrist
+      Watches
+    watches/wrist_watches/follow_me_wrist_watches: Follow Me Wrist Watches
+    watches/wrist_watches/forex_wrist_watches: Forex Wrist Watches
+    watches/wrist_watches/franck_bella_wrist_watches: Franck Bella Wrist Watches
+    watches/wrist_watches/geneva_wrist_watches: Geneva Wrist Watches
+    watches/wrist_watches/geonaute_wrist_watches: Geonaute Wrist Watches
+    watches/wrist_watches/gesture_wrist_watches: Gesture Wrist Watches
+    watches/wrist_watches/gift_island_wrist_watches: Gift Island Wrist Watches
+    watches/wrist_watches/global_nomad_wrist_watches: Global Nomad Wrist Watches
+    watches/wrist_watches/hala_wrist_watches: Hala Wrist Watches
+    watches/wrist_watches/hmt_wrist_watches: HMT Wrist Watches
+    watches/wrist_watches/hourglass_wrist_watches: Hourglass Wrist Watches
+    watches/wrist_watches/hpd_wrist_watches: HPD Wrist Watches
+    watches/wrist_watches/jack_klein_wrist_watches: Jack Klein Wrist Watches
+    watches/wrist_watches/jacques_farel_wrist_watches: Jacques Farel Wrist Watches
+    watches/wrist_watches/jazma_wrist_watches: Jazma Wrist Watches
+    watches/wrist_watches/klaus_kobec_wrist_watches: Klaus Kobec Wrist Watches
+    watches/wrist_watches/kms_wrist_watches: Kms Wrist Watches
+    watches/wrist_watches/kool_kidz_wrist_watches: Kool Kidz Wrist Watches
+    watches/wrist_watches/lamex_timewear_wrist_watches: Lamex Timewear Wrist Watches
+    watches/wrist_watches/lamex_wrist_watches: Lamex Wrist Watches
+    watches/wrist_watches/lenco_wrist_watches: Lenco Wrist Watches
+    watches/wrist_watches/like_wrist_watches: Like Wrist Watches
+    watches/wrist_watches/logues_wrist_watches: Logues Wrist Watches
+    watches/wrist_watches/lois_caron_wrist_watches: Lois Caron Wrist Watches
+    watches/wrist_watches/luba_wrist_watches: Luba Wrist Watches
+    watches/wrist_watches/marvel_wrist_watches: Marvel Wrist Watches
+    watches/wrist_watches/maserati_time_wrist_watches: Maserati Time Wrist Watches
+    watches/wrist_watches/maxima_wrist_watches: Maxima Wrist Watches
+    watches/wrist_watches/minuut_wrist_watches: Minuut Wrist Watches
+    watches/wrist_watches/neo_classic_wrist_watches: Neo Classic Wrist Watches
+    watches/wrist_watches/nexus_wrist_watches: Nexus Wrist Watches
+    watches/wrist_watches/noise_wrist_watches: Noise Wrist Watches
+    watches/wrist_watches/north_moon_wrist_watches: North Moon Wrist Watches
+    watches/wrist_watches/now_wrist_watches: Now Wrist Watches
+    watches/wrist_watches/olvin_wrist_watches: Olvin Wrist Watches
+    watches/wrist_watches/omax_wrist_watches: Omax Wrist Watches
+    watches/wrist_watches/omen_wrist_watches: Omen Wrist Watches
+    watches/wrist_watches/omen_wrist_watches/omen_om-5060_analog_watch__-_for_girls: Omen
+      Om-5060 Analog Watch  - For Girls
+    watches/wrist_watches/only_kidz_wrist_watches: Only Kidz Wrist Watches
+    watches/wrist_watches/oxter_wrist_watches: Oxter Wrist Watches
+    watches/wrist_watches/perucci_wrist_watches: Perucci Wrist Watches
+    watches/wrist_watches/petrol_wrist_watches: Petrol Wrist Watches
+    watches/wrist_watches/playboy_wrist_watches: Playboy Wrist Watches
+    watches/wrist_watches/positif_wrist_watches: Positif Wrist Watches
+    watches/wrist_watches/qnq_wrist_watches: Q&Q Wrist Watches
+    watches/wrist_watches/r.s_wrist_watches: R.S Wrist Watches
+    watches/wrist_watches/rana_watches_wrist_watches: Rana Watches Wrist Watches
+    watches/wrist_watches/relish_wrist_watches: Relish Wrist Watches
+    watches/wrist_watches/rich_club_wrist_watches: Rich Club Wrist Watches
+    watches/wrist_watches/ridas_wrist_watches: Ridas Wrist Watches
+    watches/wrist_watches/rochees_wrist_watches: Rochees Wrist Watches
+    watches/wrist_watches/rockstar_wrist_watches: Rockstar Wrist Watches
+    watches/wrist_watches/romex_wrist_watches: Romex Wrist Watches
+    watches/wrist_watches/rorlig_wrist_watches: Rorlig Wrist Watches
+    watches/wrist_watches/rrtc_wrist_watches: RRTC Wrist Watches
+    watches/wrist_watches/sale_funda_wrist_watches: Sale Funda Wrist Watches
+    watches/wrist_watches/scheffers_wrist_watches: Scheffer's Wrist Watches
+    watches/wrist_watches/sf_by_sonata_wrist_watches: SF by Sonata Wrist Watches
+    watches/wrist_watches/shoppingekart_wrist_watches: Shoppingekart Wrist Watches
+    watches/wrist_watches/sir_time_wrist_watches: Sir Time Wrist Watches
+    watches/wrist_watches/sitaram_wrist_watches: Sitaram Wrist Watches
+    watches/wrist_watches/sitaram_wrist_watches/sitaram_sre101_digital_watch__-_for_couple: Sitaram
+      SRE101 Digital Watch  - For Couple
+    watches/wrist_watches/skmei_wrist_watches: Skmei Wrist Watches
+    watches/wrist_watches/sonata_wrist_watches: Sonata Wrist Watches
+    watches/wrist_watches/srushti_art_jewelry_wrist_watches: Srushti Art Jewelry Wrist
+      Watches
+    watches/wrist_watches/stoln_wrist_watches: Stol'n Wrist Watches
+    watches/wrist_watches/stylisda_wrist_watches: Stylisda Wrist Watches
+    watches/wrist_watches/svm_wrist_watches: SVM Wrist Watches
+    watches/wrist_watches/swag_wrist_watches: Swag Wrist Watches
+    watches/wrist_watches/swiss_trend_wrist_watches: Swiss Trend Wrist Watches
+    watches/wrist_watches/swissfire_wrist_watches: SwissFire Wrist Watches
+    watches/wrist_watches/swisstyle_wrist_watches: Swisstyle Wrist Watches
+    watches/wrist_watches/t_star_wrist_watches: T STAR Wrist Watches
+    watches/wrist_watches/tag_heuer_wrist_watches: TAG Heuer Wrist Watches
+    watches/wrist_watches/timebre_wrist_watches: Timebre Wrist Watches
+    watches/wrist_watches/timer_wrist_watches: Timer Wrist Watches
+    watches/wrist_watches/times_wrist_watches: Times Wrist Watches
+    watches/wrist_watches/timewel_wrist_watches: Timewel Wrist Watches
+    watches/wrist_watches/timex_wrist_watches: Timex Wrist Watches
+    watches/wrist_watches/titan_wrist_watches: Titan Wrist Watches
+    watches/wrist_watches/v-luma_wrist_watches: V-Luma Wrist Watches
+    watches/wrist_watches/v-luma_wrist_watches/v-luma_w600_fashion_analog_watch__-_for_men: V-Luma
+      W600 Fashion Analog Watch  - For Men
+    watches/wrist_watches/v9_wrist_watches: V9 Wrist Watches
+    watches/wrist_watches/v9_wrist_watches/v9_metal_strap_analog_watch__-_for_men: V9
+      METAL STRAP Analog Watch  - For Men
+    watches/wrist_watches/vencer_stella_wrist_watches: Vencer Stella Wrist Watches
+    watches/wrist_watches/vizion_wrist_watches: Vizion Wrist Watches
+    watches/wrist_watches/xemex_wrist_watches: Xemex Wrist Watches
+    watches/wrist_watches/yepme_wrist_watches: Yepme Wrist Watches
+    watches/wrist_watches/yves_bertelin_wrist_watches: Yves Bertelin Wrist Watches
+    watches/wrist_watches/yves_bertelin_wrist_watches/yves_bertelin_ybscr557_analog_watch__-_for_women: Yves
+      Bertelin YBSCR557 Analog Watch  - For Women
+    watches/wrist_watches/zoop_wrist_watches: Zoop Wrist Watches
+    watches/wrist_watches/zoya-jq_wrist_watches: Zoya-JQ Wrist Watches

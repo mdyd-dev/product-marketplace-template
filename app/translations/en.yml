@@ -1,22 +1,4 @@
 en:
-  admin:
-    menu:
-      setup: Configuration
-      items: Items
-      activities: Activities
-      setup: Setup
-      categories: Categories
-      orders: Orders
-      users: Users
-      home: Home
-    metric:
-      total_revenue: Total Revenue
-      total_users: Total Users
-      new_users: New Users
-      total_orders: Total Orders
-      new_orders: New Order
-      total_items: Total Items
-      new_items: New Items
   app:
     title: MVP Marketplace
 
@@ -35,59 +17,24 @@ en:
     continue: Continue
 
     orders:
-      created: Order has been placed
       new: new order
       list: Orders
       payment_success: Payment success
-      status:
-        updated: Order status changed
-      attr:
-        id: ID
-        created_at: Created at
-        seller: Seller
-        buyer: Buyer
-        total: Total
-
-    activities:
-      list: Activities
-      new: new
-      attr:
-        id: ID
-        created_at: Created at
-        object: Object
-        target: Target
-        actor: Actor
-        type: Type
 
     users:
       new: new user
       list: Users
-      attr:
-        id: ID
-        created_at: Created at
-        email: Email
 
     items:
       list: Items
       new: new item
-      created: Item created
-      updated: Item updated
-      deleted: Item has been deleted successfully
-      ordered_times:
-        other: Ordered %{count} times
-        one: Ordered %{count} time
-      attr:
-        id: ID
-        name: Name
-        category: Category
-        created_at: CreatedAt
 
     categories:
       list: Categories
       new: new category
-      attr:
-        name: Category Name
-        key: Key
+
+    activities:
+      list: Activities
 
     payments:
       account:
@@ -106,7 +53,7 @@ en:
           pending_verification: pending verification
           check_details: You can check details of the verification process and manage account details in the
           there_is_a_problem: There is a problem with your bank account verification process.
-          go_to: Go to
+          go_to:  Go to
           to_find_more: to find out more.
           verification_status: "Verification status:"
           you_have_successfully_connected: You have successfully connected and verified your Stripe account.
@@ -134,7 +81,7 @@ en:
     checkout: Checkout
     mark-as-paid: Mark as paid
     pay: Pay
-    pay_online: Pay online
+    pay_with_money: Pay with money
     cancel: Cancel
     ship: Ship
 
@@ -165,7 +112,7 @@ en:
 
     item_statuses:
       sold: sold
-      none: "&nbsp;"
+      none: missing
 
     order_statuses:
       order_status: status
@@ -177,10 +124,9 @@ en:
 
     sessions:
       created: Logged in
-      destroyed: Logged out
 
     account:
-      created: Your account has been created
+      created: You account has been created
 
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself
@@ -200,7 +146,6 @@ en:
 
   lib:
     sort_options:
-      relevance: Relevance
       price_asc: Price (lowest first)
       price_desc: Price (highest first)
       name_asc: Name A-Z
@@ -231,4 +176,3 @@ en:
       trophy: Trophy
       wand: Wand
       woman: Woman
-  _version: pos_marketplaces-products-0.1

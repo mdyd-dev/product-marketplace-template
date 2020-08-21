@@ -1,10 +1,10 @@
 {% liquid
-  function_rc account = 'modules/stripe/lib/payments/account'
+  include 'modules/stripe/lib/payments/account'
 
-  if account.id
-    include 'theme/simple/payments/account/show', account: account
+  if context.exports.account.id
+    include 'theme/simple/payments/account/show', account: context.exports.account
   else
-    function_rc connect_url = 'modules/stripe/lib/account/connect_url'
-    include 'theme/simple/payments/account/new', connect_url: connect_url
+    include 'modules/stripe/lib/account/connect_url'
+    include 'theme/simple/payments/account/new', connect_url: context.exports.stripe.connect_url
   endif
 %}

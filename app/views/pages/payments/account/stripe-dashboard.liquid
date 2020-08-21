@@ -1,5 +1,6 @@
 {% liquid
-  function_rc account = 'modules/stripe/lib/payments/account'
+  include 'modules/stripe/lib/payments/account'
+  assign account = context.exports.account
 
   if account.id
     function_rc login_link_url = 'modules/stripe/lib/account/login_link/call', account: account

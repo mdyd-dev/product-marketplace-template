@@ -14,5 +14,3 @@ properties:
     type: integer
   - name: category
     type: string
-  - name: cover_photo_url
-    type: string

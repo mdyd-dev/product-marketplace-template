@@ -8,7 +8,7 @@
   assign item_uuid = item.uuid | default: uuid
 %}
 
-<div class="container flex flex-wrap items-center mx-auto">
+<div class="container flex flex-wrap mx-auto">
   <form action="/items/{{ path }}" method="post" class="w-full p-8 bg-gray-200 rounded-lg shadow-md md:w-1/2">
     {% include 'authenticity_token' %}
 
@@ -25,12 +25,7 @@
       <span class="text-red-800">{{ item.errors.name }}</span>
       {% endif %}
     </div>
-
-    <div class="mt-3">
-      <label class="block">Photos</label>
-      {% include 'theme/simple/items/uppy_area' %}
-    </div>
-
+    
     <div class="mt-3">
       <label class="block" for="category">Category</label>
       <select class="form-select" id="category" name="item[category]">
@@ -77,9 +72,38 @@
       {% endif %}
     </div>
 
+    <div class="mt-3">
+      <label class="block">Photos</label>
+      {% include 'theme/simple/items/uppy_area' %}
+    </div>
+
     <button class="mt-8 button" value="{{ path }}">Submit</button>
   </form>
 
+  <div class="container reviews dashboard">
+    <p class="text-2xl text-gray-900 ">Reviews</p>
+    <div class="recent-reviews">
+      {% for review in item.reviews %}
+        <div class="recent-review">
+          <div class="flex flex-wrap mb-4">
+            <div class="rating">
+              <div class="rating-point" rel={{ review.rating }}></div>
+            </div>
+            <span class="rating-score">{{ review.rating | round: 2 }}</span>
+          </div>
+          <p><b>{{ review.owner}}</b> : {{ review.comment }}</p>
+          <form action="/reviews/delete" method="post" class="form-delete-review" >
+            <input type="hidden" name="redirect_url" value="/items/edit?id={{ item.id }}">
+            <input type="hidden" name="id" value="{{ review.id }}">
+            <button class="delete-review" rel={{review.id}}>X</button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 
-{% include 'theme/simple/items/uppy_form', item_uuid: item_uuid, presigned_url: presigned_url, user_id: user.id %}
+{% include 'theme/simple/items/uppy_form', item_uuid: item_uuid %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ 'js/custom.js' | asset_url }}"></script>

@@ -1,0 +1,4 @@
+{% liquid
+  graphql users = 'users/search', limit: limit | fetch: 'users'
+  export users
+%}

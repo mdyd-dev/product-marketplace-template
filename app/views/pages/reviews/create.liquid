@@ -1,0 +1,26 @@
+---
+method: post
+---
+{% liquid
+  include 'lib/must_be_authenticated'
+
+  include 'lib/commands/reviews/create/build', object: context.params.item
+  include 'lib/commands/reviews/create/check', object: context.exports.object
+
+  if context.exports.object.valid
+    include 'lib/commands/reviews/create/execute', object: context.exports.object
+
+    if context.exports.object.valid
+      assign object = context.exports.object
+
+      include 'lib/commands/events/create', type: 'review_created', actor_id: context.current_user.id, object_id: context.exports.object.id
+
+      include 'redirect_to', url: context.params.item.url, notice: ''
+    endif
+  else
+    include 'lib/queries/categories'
+    include 'lib/queries/presigned_url'
+
+    include 'redirect_to', url: context.params.item.url, notice: ''
+  endif
+%}

@@ -4,23 +4,25 @@ method: post
 {% liquid
   include 'lib/must_be_authenticated'
 
-  function_rc object = 'lib/commands/items/create/build', object: context.params.item, owner: context.current_user.id
-  function_rc object = 'lib/commands/items/create/check', object: object
+  include 'lib/commands/items/create/build', object: context.params.item, owner: context.current_user.id
+  include 'lib/commands/items/create/check', object: context.exports.object
 
-  if object.valid
-    function_rc object = 'lib/commands/items/create/execute', object: object
+  if context.exports.object.valid
+    include 'lib/commands/items/create/execute', object: context.exports.object
 
-    if object.valid
-      include 'lib/commands/events/create', type: 'item_created', actor_id: context.current_user.id, object_id: object.id
+    if context.exports.object.valid
+      assign object = context.exports.object
+
+      include 'lib/commands/events/create', type: 'item_created', actor_id: context.current_user.id, object_id: context.exports.object.id
 
       function_rc url = 'link_to', item: object
       include 'redirect_to', url: url, notice: 'app.items.created'
     endif
   else
-    function_rc filters = 'lib/data/queries/search/filters', query: context.params
-    function_rc presigned_url = 'lib/data/queries/presigned_url'
+    include 'lib/queries/categories'
+    include 'lib/queries/presigned_url'
 
-    include 'theme/simple/items/new', item: object, lib: filters, presigned_url: presigned_url
+    include 'theme/simple/items/new', item: context.exports.object, lib: context.exports.lib
   endif
 %}
 

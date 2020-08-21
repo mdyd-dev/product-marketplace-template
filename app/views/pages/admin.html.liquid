@@ -2,6 +2,17 @@
   include 'lib/must_be_authenticated'
   include 'lib/must_be_superadmin'
 
-  include 'theme/simple/admin/menu', section: 'home'
-  include 'theme/simple/admin/recent', list: list, section: section
+  include 'lib/queries/users/search', limit: 10
+  include 'lib/queries/orders/search', limit: 10
+  include 'lib/queries/items/search', limit: 10
+  include 'lib/queries/activities/search', feed: "system", feed_id: "1"
+  include 'lib/queries/categories', limit: 10
+
+%}
+{% include 'theme/simple/admin/recent',
+     items: context.exports.items,
+     users: context.exports.users,
+     orders: context.exports.orders,
+     activities: context.exports.activities,
+     categories: context.exports.lib.categories
 %}

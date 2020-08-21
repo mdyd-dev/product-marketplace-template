@@ -1,15 +1,6 @@
 {% liquid
-  graphql r = 'users/create', args: object
+  graphql result = 'users/create', args: object
 
-  if r.errors
-    log r.errors, type: 'errors.graphql.invalid'
-
-    hash_assign object['valid'] = false
-    hash_assign object['errors'] = r.errors
-  else
-    assign object = r.user
-    hash_assign object['valid'] = true
-  endif
-
-  return_rc object
+  assign id = result | dig: 'user', 'id'
+  export id, namespace: 'object'
 %}

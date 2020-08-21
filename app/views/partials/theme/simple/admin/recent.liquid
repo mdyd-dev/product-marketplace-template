@@ -1,25 +1,52 @@
-{% parse_json metrics %}
-[
-  {"name": "total_revenue", "value": "$3249"},
-  {"name": "total_users", "value": "3249"},
-  {"name": "new_users", "value": "+4%"},
-  {"name": "total_items", "value": "3249"},
-  {"name": "new_items", "value": "+1%"},
-  {"name": "total_orders", "value": "3249"},
-  {"name": "new_orders", "value": "+2%"}
-]
-{% endparse_json %}
+<div class="w-full">
+  <h2 class="mb-3 text-lg font-medium text-gray-900 title-font">
+    <a href='/marketplace_setup'>
+      Marketplace Setup
+    </a>
+  </h2>
+</div>
+<div class="flex w-full">
+  <div class="w-3/4">
+    <h3 class="mb-3 text-lg font-medium text-gray-900 title-font">Recent items</h3>
+    <h2 class="mb-6 text-2xl">{% echo 'app.users.list' | t %}</h2>
+    <table class="table-auto w-full">
+      {% for user in users.results %}
+        <tr>
+          <td class="px-4 py-2 border-b">{% print user.id %}</td>
+          <td class="px-4 py-2 border-b">{% print user.email %}</td>
+          <td class="px-4 py-2 border-b">{% echo user.created_at | l %}</td>
+        </tr>
+      {% endfor %}
+    </table>
 
-<div class="flex items-center justify-center flex-wrap">
-  {% for metric in metrics %}
-    <div class="p-8 m-2 flex-row border">
-      <div class="text-2xl justify-center">
-        Fake
-        {% print 'admin.metric.' | append: metric.name | t %}
-      </div>
-      <div class="text-xl justify-center">
-        {% print metric.value %}
-      </div>
-    </div>
-  {% endfor %}
+    <h2 class="mb-6 text-2xl">{% echo 'app.items.list' | t %}</h2>
+    <table class="table-auto w-full">
+      {% for item in items.results %}
+        <tr>
+          <td class="px-4 py-2 border-b">{% print item.id %}</td>
+          <td class="px-4 py-2 border-b">{% echo item.created_at | l %}</td>
+          <td class="px-4 py-2 border-b">{% print item.name %}</td>
+          <td class="px-4 py-2 border-b">{% echo item.status.name  %}</td>
+          <td class="px-4 py-2 border-b">{% echo item.status.created_at  %}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <h2 class="mb-6 text-2xl">{% echo 'app.orders.list' | t %}</h2>
+    <table class="table-auto w-full">
+      {% for order in orders.results %}
+        <tr>
+          <td class="px-4 py-2 border-b">{% print order.id %}</td>
+          <td class="px-4 py-2 border-b">{% echo order.created_at | l %}</td>
+          <td class="px-4 py-2 border-b">{% print order.item_id %}</td>
+          <td class="px-4 py-2 border-b">{% echo order.status.name | default: 'missing' | t %}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    {% include 'theme/simple/admin/categories', list: categories %}
+  </div>
+  <div class="w-1/4">
+    {% include 'theme/simple/admin/activity_log', activities: activities %}
+  </div>
 </div>

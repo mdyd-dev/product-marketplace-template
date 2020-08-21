@@ -1,0 +1,8 @@
+<!--  background -->
+{% liquid
+  graphql result = 'reviews/delete', id: id
+
+  if result.errors
+  else
+  endif
+%}
