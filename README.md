@@ -32,7 +32,7 @@ pos-cli init --url https://github.com/mdyd-dev/marketplace-template-poc.git
 - build assets
 
 ```sh
-npm ci -S
+npm ci
 npm build
 ```
 

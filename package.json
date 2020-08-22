@@ -8,10 +8,9 @@
     "build:dev": "cross-env NODE_ENV=development npx webpack-cli",
     "test": "testcafe 'chromium:headless' test",
     "clean": "npx rimraf app/assets/{js,css}/*",
-    "postinstall": "npm run build",
     "deploy": "npm run build && CI=true pos-cli deploy",
     "predeploy": "npm run clean",
-    "ci:build": "docker run -it -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD:/app -w /app node:12-alpine npm ci -S && npm run build",
+    "ci:build": "docker run -it -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD:/app -w /app node:12-alpine npm ci && npm run build",
     "ci:test": "docker run -it -e MPKIT_URL=$MPKIT_URL -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD/test:/app -w /app platformos/testcafe \"testcafe 'chromium:headless --sandbox' --skip-js-errors /app\""
   },
   "devDependencies": {
@@ -44,10 +43,10 @@
     "fsevents": "^2.1.3"
   },
   "browserslist": "> 1% or last 2 years",
-  "name": "win-project-k8s-poc-mvp",
+  "name": "marketplace-template-poc",
   "version": "1.0.0",
-  "description": "eCommerece MVP POC Kubernetes Synergy",
-  "author": "SpaceX",
+  "description": "eCommerce MVP POC",
+  "author": "platformOS",
   "license": "ISC",
   "repository": "mdyd-dev/marketplace-template-poc",
   "dependencies": {
