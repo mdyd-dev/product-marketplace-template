@@ -5,7 +5,7 @@
         <div class="h-full border rounded shadow">
           <div class="flex items-center justify-between py-3 px-4 border-b">
             <h3 class="text-lg font-heading">
-              {% print 'admin.metric.name.'| append: metric.name | append: ".name" | t %}
+              {% print 'admin.metric.'| append: metric.name | append: ".name" | t %}
             </h3>
             <span class="py-1 px-3 text-sm text-white font-semibold bg-green-500 rounded-full">
               {% print 'admin.metric.period.'| append: metric.period | t %}
@@ -20,7 +20,7 @@
               {% endif %}
             </h3>
             <span>
-              {% print 'admin.metric.delta_name.' | append: metric.name | t %}
+              {% print 'admin.metric.' | append: metric.name | append: '.delta' | t %}
             </span>
             <span class="text-green-500">
               {% if metric.name == 'income' %}
@@ -33,7 +33,7 @@
         </div>
 
       <span class="text-xs">
-        {% print 'admin.metric.name.'| append: metric.name | append: ".description" | t %}
+        {% print 'admin.metric.'| append: metric.name | append: ".description" | t %}
       </span>
       </div>
     {% endfor %}
