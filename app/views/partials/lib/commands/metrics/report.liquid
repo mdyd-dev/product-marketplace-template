@@ -1,9 +1,29 @@
 {% parse_json metrics %}
 [
-  {"period": {{ today.name | json }}, "name": "income", "value": {{ today.income }}, "delta": {{ today.income | minus: yesterday.income }} },
-  {"period": {{ today.name | json }}, "name": "users", "value": {{ today.users }}, "delta": {{ today.users | minus: yesterday.users }} },
-  {"period": {{ today.name | json }}, "name": "items", "value": {{ today.items }}, "delta": {{ today.items | minus: yesterday.items }} },
-  {"period": {{ today.name | json }}, "name": "orders", "value": {{ today.orders }}, "delta": {{ today.orders | minus: yesterday.orders }} }
+  {
+    "period": {{ today.name | json }},
+    "name": "income",
+    "value": {{ today.income | times: 0.1 }},
+    "delta": {{ today.income | minus: yesterday.income | times: 0.1 }}
+  },
+  {
+    "period": {{ today.name | json }},
+    "name": "users",
+    "value": {{ today.users }},
+    "delta": {{ today.users | minus: yesterday.users }}
+  },
+  {
+    "period": {{ today.name | json }},
+    "name": "items",
+    "value": {{ today.items }},
+    "delta": {{ today.items | minus: yesterday.items }}
+  },
+  {
+    "period": {{ today.name | json }},
+    "name": "orders",
+    "value": {{ today.orders }},
+    "delta": {{ today.orders | minus: yesterday.orders }}
+  }
 ]
 {% endparse_json %}
 

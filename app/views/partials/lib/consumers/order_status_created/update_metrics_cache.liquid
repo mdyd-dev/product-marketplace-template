@@ -1,0 +1,7 @@
+{% liquid
+  function_rc order = 'lib/data/queries/orders/find', id: event.target.id
+
+  if order.status.name == 'app.order_statuses.paid'
+    function_rc report = 'lib/commands/metrics/create'
+  endif
+%}
