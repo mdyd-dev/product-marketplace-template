@@ -9,7 +9,7 @@ const emailInput = 'label #email';
 const passInput = 'label #password';
 const nameField = '#name';
 const descriptionField = '#description';
-const tagsField = '#tags';
+// const tagsField = '#tags';
 const priceField = '#price';
 const editURL = '/items/edit?id=';
 const NewEmail = faker.internet.email().toLowerCase();
@@ -19,7 +19,7 @@ const item = {
   name: faker.commerce.productName(),
   type: faker.commerce.productMaterial(),
   description: faker.commerce.productAdjective(),
-  tags: faker.commerce.product(),
+  // tags: faker.commerce.product(),
   price: '10000',
 };
 
@@ -33,7 +33,7 @@ const editedItem = {
   name: faker.commerce.productName(),
   type: faker.commerce.productMaterial(),
   description: faker.commerce.productAdjective(),
-  tags: faker.commerce.product(),
+  // tags: faker.commerce.product(),
   price: '10000',
 };
 const clearField = 'ctrl+a delete';
@@ -101,7 +101,7 @@ test('Item listing', async (t) => {
     await t.click(Selector('a').withText('List your item'))
     .typeText(Selector(nameField), item.name)
     .typeText(descriptionField, item.description)
-    .typeText(tagsField, item.tags)
+    // .typeText(tagsField, item.tags)
     .doubleClick(Selector(priceField))
     .pressKey(clearField)
     .typeText(priceField, item.price)
@@ -127,8 +127,8 @@ test('Edit item', async (t) => {
     //checks if all data is correct
     .expect(Selector('h1').withText(item.name).exists)
     .ok()
-    .expect(Selector('ul.tags li:nth-child(2)').innerText)
-    .eql(item.tags.toLowerCase(), 'check element text')
+    // .expect(Selector('ul.tags li:nth-child(2)').innerText)
+    // .eql(item.tags.toLowerCase(), 'check element text')
     .expect(Selector('div p').withText(item.description).exists)
     .ok()
     .expect(
@@ -147,9 +147,9 @@ test('Edit item', async (t) => {
     .doubleClick(descriptionField)
     .pressKey(clearField)
     .typeText(descriptionField, editedItem.description)
-    .doubleClick(tagsField)
-    .pressKey(clearField)
-    .typeText(tagsField, editedItem.tags)
+    // .doubleClick(tagsField)
+    // .pressKey(clearField)
+    // .typeText(tagsField, editedItem.tags)
     .doubleClick(priceField)
     .pressKey(clearField)
     .typeText(priceField, editedItem.price)
