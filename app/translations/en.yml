@@ -15,16 +15,22 @@ en:
         daily: Daily
         total: Total
       name: 
-        revenue: Revenue
-        income: Income
-        users: Users
-        orders: Orders
-        items: Items
-      delta_name:
-        income: New Income
-        users: New Users
-        orders: New Orders
-        items: New Items
+        income:
+          name: Income
+          description: Marketplace Owner income at 10% fee
+          delta: New Income
+        users:
+          name: Users
+          description: User account registration counter
+          delta: New Users
+        orders:
+          name: Orders
+          description: New order counter
+          delta: New Orders
+        items:
+          name: Items
+          description: Listings counter
+          delta: New Items
   app:
     title: MVP Marketplace
 
