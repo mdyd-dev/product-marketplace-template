@@ -5,7 +5,7 @@
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.item" | t }}</th>
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.items.attr.category" | t }}</th>
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.created_at" | t }}</th>
-        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.status" | t }}</th>
+        <!-- <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.status" | t }}</th> -->
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.dashboard-items.actions" | t }}</th>
       </tr>
     </thead>
@@ -21,12 +21,14 @@
           </td>
           <td class="px-4 py-2 border-b">{{ item.category }}</td>
           <td class="px-4 py-2 border-b">{{ item.created_at | l }}</td>
+          <!--
           <td class="px-4 py-2 border-b">
             {{ item.status.name | default: 'missing-state-invalid-order' | t }}
             {% if item.order_status.timestamp %}
             <br/><small>{{ item.order_status.timestamp | to_time | l }}</small>
             {% endif %}
           </td>
+          -->
           <td class="px-4 py-2 border-b">
             <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
             <form action="/items/delete" method="post" class="ml-2 inline"
