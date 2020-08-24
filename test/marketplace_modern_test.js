@@ -15,7 +15,7 @@ const priceField = '#price';
 const editURL = '/items/edit?id=';
 const NewEmail = faker.internet.email().toLowerCase();
 const NewPassword = faker.internet.password();
-const NewUsername = faker.internet.username();
+const NewUsername = faker.name.findName();
 const logInBtn = Selector('button').withText('Log in');
 const item = {
   name: faker.commerce.productName(),
