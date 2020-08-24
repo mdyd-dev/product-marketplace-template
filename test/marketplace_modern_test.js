@@ -10,7 +10,6 @@ const passInput = 'label #password';
 const usernameInput = 'label #username';
 const nameField = '#name';
 const descriptionField = '#description';
-// const tagsField = '#tags';
 const priceField = '#price';
 const editURL = '/items/edit?id=';
 const NewEmail = faker.internet.email().toLowerCase();
@@ -21,7 +20,6 @@ const item = {
   name: faker.commerce.productName(),
   type: faker.commerce.productMaterial(),
   description: faker.commerce.productAdjective(),
-  // tags: faker.commerce.product(),
   price: '10000',
 };
 
@@ -35,11 +33,37 @@ const editedItem = {
   name: faker.commerce.productName(),
   type: faker.commerce.productMaterial(),
   description: faker.commerce.productAdjective(),
-  // tags: faker.commerce.product(),
   price: '10000',
 };
 const clearField = 'ctrl+a delete';
 const mainPage = Selector('header').find('span').withText('MVP Marketplace');
+
+test(`Admin Panel test`, async (t) => {
+  await t
+    .click(Selector('header').find('a').withText('Log in'))
+    .typeText(emailInput, 'admin@example.com')
+    .typeText(passInput, 'password')
+    .click(logInBtn)
+    .click(Selector('header').find('a').withText('Admin'))
+    .click(Selector('h2 a').withText('Users'))
+    await t
+    const users = Selector('tbody').find('td')
+    await t.expect(users.count).gt(5)
+    .click(Selector('h2 a').withText('Items'))
+    await t
+    const smthg = Selector('div').find('.flex')
+    await t.expect(smthg.count).gt(5)
+    .click(Selector('h2 a').withText('Orders'))
+    const orders = Selector('tbody').find('tr')
+    await t.expect(orders.count).gt(1)
+    .click(Selector('h2 a').withText('Home'))
+    .click(Selector('h2 a').withText('Categories'))
+    const categories = Selector('div').find('.flex-1')
+    await t.expect(categories.count).gt(15)
+    .click(Selector('h2 a').withText('Activities'))
+    .click(Selector('h2 a').withText('Setup'))
+
+});
 
 test(`Logging attempt with empty data`, async (t) => {
   await t
@@ -105,13 +129,14 @@ test('Item listing', async (t) => {
     await t.click(Selector('a').withText('List your item'))
     .typeText(Selector(nameField), item.name)
     .typeText(descriptionField, item.description)
-    // .typeText(tagsField, item.tags)
+    // )
     .doubleClick(Selector(priceField))
     .pressKey(clearField)
     .typeText(priceField, item.price)
-    .click(Selector('button').withText('browse your computer'))
+    .click(Selector('button').withText('browse files'))
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
     .click(Selector('button').withText('Submit'))
+    await t.expect('img[src="_uploads_/testimage.png"]').ok()
     .click(mainPage);
 });
 
@@ -128,11 +153,10 @@ test('Edit item', async (t) => {
     .expect(Selector('main').withText(item.name).exists)
     .ok("'Item#name could not be found")
     .click(Selector('main').find('h2 a').withText(item.name))
+    await t.expect('img[src="_uploads_/testimage.png"]').ok()
     //checks if all data is correct
     .expect(Selector('h1').withText(item.name).exists)
     .ok()
-    // .expect(Selector('ul.tags li:nth-child(2)').innerText)
-    // .eql(item.tags.toLowerCase(), 'check element text')
     .expect(Selector('div p').withText(item.description).exists)
     .ok()
     .expect(
@@ -151,9 +175,6 @@ test('Edit item', async (t) => {
     .doubleClick(descriptionField)
     .pressKey(clearField)
     .typeText(descriptionField, editedItem.description)
-    // .doubleClick(tagsField)
-    // .pressKey(clearField)
-    // .typeText(tagsField, editedItem.tags)
     .doubleClick(priceField)
     .pressKey(clearField)
     .typeText(priceField, editedItem.price)
