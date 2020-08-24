@@ -189,7 +189,7 @@ test('Delete item test', async (t) => {
     .click(logInBtn)
     .click(Selector('header').find('a').withText('Dashboard'))
     .click(Selector('main').find('a').withText('Your items'))
-    .click(Selector('main').find('h2 a').withText(editedItem.name))
+    .click(Selector('main').find('a').withText(editedItem.name))
     //deleting exist item
     .setNativeDialogHandler(() => true)
     .click(Selector('button').withText('Delete'))
