@@ -7,6 +7,7 @@ fixture`Basic complete happy scenario`.page(process.env.MPKIT_URL);
 const getURL = ClientFunction(() => window.location.href);
 const emailInput = 'label #email';
 const passInput = 'label #password';
+const usernameInput = 'label #username';
 const nameField = '#name';
 const descriptionField = '#description';
 // const tagsField = '#tags';
@@ -14,6 +15,7 @@ const priceField = '#price';
 const editURL = '/items/edit?id=';
 const NewEmail = faker.internet.email().toLowerCase();
 const NewPassword = faker.internet.password();
+const NewUsername = faker.internet.username();
 const logInBtn = Selector('button').withText('Log in');
 const item = {
   name: faker.commerce.productName(),
@@ -55,6 +57,7 @@ test(`Registration attempt with taken data`, async (t) => {
     .click(Selector('p').withText('Register'))
     .typeText(emailInput, 'user@email.com')
     .typeText(passInput, 'password')
+    .typeText(usernameInput, 'username')
     .click(Selector('main').find('button').withText('Sign Up'))
     .expect(Selector('html').textContent)
     .contains('"already taken"');
@@ -78,6 +81,7 @@ test(`Login Test`, async (t) => {
     .click(Selector('main').find('p').withText('Register'))
     .typeText(emailInput, NewEmail)
     .typeText(passInput, NewPassword)
+    .typeText(usernameInput, NewUsername)
     .click(Selector('button').withText('Sign Up'));
   await t
     .expect(Selector('main').withText(signupConfirmation).exists)
