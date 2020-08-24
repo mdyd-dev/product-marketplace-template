@@ -46,9 +46,9 @@ test(`Logging attempt with empty data`, async (t) => {
     .click(Selector('header').find('a').withText('Log in'))
     .click(logInBtn)
     .expect(Selector('label').withText('E-mail').textContent)
-    .contains('"cannot be blank"')
+    .contains('cannot be blank')
     .expect(Selector('label').withText('Password').textContent)
-    .contains('"cannot be blank"');
+    .contains('cannot be blank');
 });
 
 test(`Registration attempt with taken data`, async (t) => {
