@@ -1,11 +1,47 @@
 {% if items.results.size > 0 %}
-  <div class="container mx-auto">
-    <div class="flex flex-wrap md:-mx-4 cards">
+  <table class="w-full table-auto">
+    <thead>
+      <tr>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.item" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.items.attr.category" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.created_at" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.status" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.dashboard-items.actions" | t }}</th>
+      </tr>
+    </thead>
+    <tbody>
       {% for item in items.results %}
-        {% include 'theme/simple/items/card', item: item %}
+        <tr>
+          <td class="px-4 py-2 border-b">
+            {% function_rc item_url = 'link_to', item: item %}
+            <a href="{{ item_url }}">
+              {% print item.name %}
+              <small> {% echo item.status.name | default: 'app.item_statuses.none' | t %}</small>
+            </a>
+          </td>
+          <td class="px-4 py-2 border-b">{{ item.category }}</td>
+          <td class="px-4 py-2 border-b">{{ item.created_at | l }}</td>
+          <td class="px-4 py-2 border-b">
+            {{ item.status.name | default: 'missing-state-invalid-order' | t }}
+            {% if item.order_status.timestamp %}
+            <br/><small>{{ item.order_status.timestamp | to_time | l }}</small>
+            {% endif %}
+          </td>
+          <td class="px-4 py-2 border-b">
+            <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
+            <form action="/items/delete" method="post" class="ml-2 inline"
+              onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }"
+            >
+              {% include 'authenticity_token' %}
+              <input type="hidden" name="id" value="{{ item.id }}">
+
+              <button id="deletebutton" class="button button-secondary">{{ 'app.delete' | t }}</button>
+            </form>
+          </td>
+        </tr>
       {% endfor %}
-    </div>
-  </div>
+    </tbody>
+  </table>
 {% else %}
   <p>You don't have any items yet.</p>
   <div class="flex mt-4">

@@ -169,6 +169,7 @@ en:
       sort_by: Sort by
 
     dashboard-items:
+      actions: Actions
       list-your-first-item: Add your first item
 
     marketplace_setup:

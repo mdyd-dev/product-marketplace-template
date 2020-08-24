@@ -60,7 +60,7 @@ test(`Registration attempt with taken data`, async (t) => {
     .typeText(usernameInput, 'username')
     .click(Selector('main').find('button').withText('Sign Up'))
     .expect(Selector('html').textContent)
-    .contains('"already taken"');
+    .contains('already taken');
 });
 
 test(`Logging attempt with wrong data`, async (t) => {
@@ -70,7 +70,7 @@ test(`Logging attempt with wrong data`, async (t) => {
     .typeText(passInput, 'wrongpassword')
     .click(logInBtn)
     .expect(Selector('html').textContent)
-    .contains('"Invalid email or password"');
+    .contains('Invalid email or password');
 });
 
 test(`Login Test`, async (t) => {
