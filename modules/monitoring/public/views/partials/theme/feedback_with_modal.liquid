@@ -1,20 +1,16 @@
-<div class="w-full h-full">
-    <div class="absolute bottom-0 right-0 mr-8 mb-32 ">
-        <div id="openBtn" class="bg-white rounded-lg shadow-md px-4 py-2 border-1 border-gray-400">
-          <a href="https://www.surveymonkey.com/r/JZLSJ7H" target="_blank">
-            Feedback survey
-            <svg class="inline w-6" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-                <path style="fill:#1B4145;" d="M337.455,133.897C433.857,133.897,512,195.96,512,272.518c0,54.665-39.846,101.933-97.729,124.502
-	c-4.038,26.225,3.938,53.969,23.951,74.174c-38.413,0-70.869-25.645-81.546-60.893c-6.313,0.549-12.724,0.84-19.221,0.84
-	c-96.396,0-174.545-62.064-174.545-138.622C162.909,195.96,241.06,133.897,337.455,133.897z"/>
-                <path style="fill:#FFD24D;" d="M174.545,40.806C78.143,40.806,0,102.87,0,179.427c0,54.665,39.846,101.933,97.729,124.502
-	c4.038,26.225-3.938,53.969-23.951,74.174c38.413,0,70.869-25.645,81.546-60.893c6.313,0.549,12.724,0.84,19.221,0.84
-	c96.396,0,174.545-62.064,174.545-138.622C349.091,102.87,270.94,40.806,174.545,40.806z"/>
-            </svg>
-          </a>
-        </div>
-    </div>
+<div class="absolute bottom-0 right-0 mb-8 mr-8">
+  <a href="https://www.surveymonkey.com/r/JZLSJ7H" target="_blank" id="openBtn" class="px-4 py-2 bg-white border-gray-400 rounded-lg shadow-md">
+    Feedback survey
+    <svg class="inline w-6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+        <path style="fill:#1B4145;" d="M337.455,133.897C433.857,133.897,512,195.96,512,272.518c0,54.665-39.846,101.933-97.729,124.502
+c-4.038,26.225,3.938,53.969,23.951,74.174c-38.413,0-70.869-25.645-81.546-60.893c-6.313,0.549-12.724,0.84-19.221,0.84
+c-96.396,0-174.545-62.064-174.545-138.622C162.909,195.96,241.06,133.897,337.455,133.897z"/>
+        <path style="fill:#FFD24D;" d="M174.545,40.806C78.143,40.806,0,102.87,0,179.427c0,54.665,39.846,101.933,97.729,124.502
+c4.038,26.225-3.938,53.969-23.951,74.174c38.413,0,70.869-25.645,81.546-60.893c6.313,0.549,12.724,0.84,19.221,0.84
+c96.396,0,174.545-62.064,174.545-138.622C349.091,102.87,270.94,40.806,174.545,40.806z"/>
+    </svg>
+  </a>
 </div>
 
 
@@ -26,10 +22,10 @@
 }
 </style>
 
-<div id="modal" class="modal-bg transition-opacity duration-500 opacity-0 pt-16 fixed w-full h-full left-0 z-10 overflow-auto">
-  <div class="modal-content relative m-auto bg-gray-100 w-4/5 shadow-lg">
-    <div class="p-4 bg-gray-700 text-white">
-      <span class="closeBtn float-right text-lg font-bold hover:text-gray-500 no-underline cursor-pointer">&times;</span>
+<div id="modal" class="fixed left-0 z-10 w-full h-full pt-16 overflow-auto transition-opacity duration-500 opacity-0 modal-bg">
+  <div class="relative w-4/5 m-auto bg-gray-100 shadow-lg modal-content">
+    <div class="p-4 text-white bg-gray-700">
+      <span class="float-right text-lg font-bold no-underline cursor-pointer closeBtn hover:text-gray-500">&times;</span>
       <h2>Tell us what you need</h2>
     </div>
     <div class="p-6">
@@ -44,6 +40,7 @@
   </div>
 </div>
 
+{% content_for custom_scripts %}
 <script>
 var modal = document.querySelector("#modal");
 var openBtn = document.querySelector("#openBtn");
@@ -70,3 +67,4 @@ window.onclick = function(event) {
 }
 </script>
 <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="bc7aee94-8959-4685-a1b1-4b1db1af97ce";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+{% endcontent_for %}
