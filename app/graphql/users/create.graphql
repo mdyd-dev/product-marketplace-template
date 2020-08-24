@@ -1,8 +1,9 @@
-mutation create_user($email: String, $password: String) {
+mutation create_user($email: String!, $password: String!, $username: String!) {
   user: user_create(
     user: {
       email: $email
       password: $password
+      properties: { name: "username", value: $username }
     }
   ){
     id
