@@ -4,25 +4,19 @@
   <label class="block mt-3" for="email">
     <span class="block">Username</span>
     <input name="user[username]" type="text" id="username" value="{{ object.username }}" class="w-full form-input" autofocus />
-    {% if object.errors.username %}
-      <span class="text-red-800">{{ object.errors.username }}</span>
-    {% endif %}
+    {% include 'theme/simple/field_error', errors: object.errors.username %}
   </label>
 
   <label class="block mt-3" for="email">
     <span class="block">E-mail</span>
     <input name="user[email]" type="email" id="email" value="{{ object.email }}" class="w-full form-input" autofocus />
-    {% if object.errors.email %}
-      <span class="text-red-800">{{ object.errors.email }}</span>
-    {% endif %}
+    {% include 'theme/simple/field_error', errors: object.errors.email %}
   </label>
 
   <label class="block mt-3" for="password">
     <span class="block">Password</span>
     <input name="user[password]" type="password" id="password" value="{{ object.password }}" class="w-full form-input" />
-    {% if object.errors.password %}
-      <span class="text-red-800">{{ object.errors.password }}</span>
-    {% endif %}
+    {% include 'theme/simple/field_error', errors: object.errors.password %}
   </label>
 
   <button class="mt-3 button">Sign Up</button>

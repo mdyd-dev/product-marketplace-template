@@ -26,9 +26,7 @@
         <label class="block mt-4" for="{{ key }}">
           <span class="block mb-1">{{ 'app.marketplace_setup.' | append: key | t }}</span>
           <input name="constants[{{ key }}]" type="text" id="{{ key }}" value="{{ object[key] }}" class="w-full form-input" />
-          {% if object.errors[key] %}
-            <span class="text-red-800">{{ object.errors[key] }}</span>
-          {% endif %}
+          {% include 'theme/simple/field_error', errors: object.errors[key] %}
         </label>
       {% endfor %}
 

@@ -21,9 +21,7 @@
       <label class="block" for="name">Name</label>
       <input class="w-2/3 form-input" type="text" id="name" name="item[name]" value="{{ item.name }}" autofocus required
         />
-      {% if item.errors.name %}
-      <span class="text-red-800">{{ item.errors.name }}</span>
-      {% endif %}
+      {% include 'theme/simple/field_error', errors: object.errors.name %}
     </div>
 
     <div class="mt-3">
@@ -43,9 +41,7 @@
         {% endfor %}
       </select>
 
-      {% if item.errors.category %}
-      <span class="text-red-800">{{ item.errors.category }}</span>
-      {% endif %}
+      {% include 'theme/simple/field_error', errors: object.errors.category %}
     </div>
 
     <div class="mt-3">
@@ -53,9 +49,7 @@
       <textarea class="w-full form-input" type="text" id="description" name="item[description]" rows="3"
         required>{{ item.description }}</textarea>
 
-      {% if item.errors.description %}
-      <span class="text-red-800">{{ item.errors.description }}</span>
-      {% endif %}
+      {% include 'theme/simple/field_error', errors: object.errors.description %}
     </div>
 
 
@@ -74,9 +68,7 @@
       <!-- TODO: Add currency prefix $[input]  -->
       <input class="w-32 form-input" type="number" id="price" name="item[price]"
         value="{{ item.price | default: 1000 | pricify_cents | replace_regex: '[\$\,]', '' }}" />
-      {% if item.errors.price %}
-      <span class="text-red-800">{{ item.errors.price }}</span>
-      {% endif %}
+      {% include 'theme/simple/field_error', errors: object.errors.price %}
     </div>
 
     <button class="mt-8 button" value="{{ path }}">Submit</button>
