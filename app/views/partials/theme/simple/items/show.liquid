@@ -86,7 +86,7 @@
 
       <div class="flex flex-wrap mb-4">
         <div class="rating">
-          <div class="rating-point" rel={{ product_rating }}></div>
+          <div class="rating-point" style="width: {{ product_rating | divided_by:5 | times:100 }}%"></div>
         </div>
         <span class="rating-score">{{ product_rating | round: 2 }}</span>
       </div>
@@ -119,7 +119,7 @@
       <div class="recent-review">
         <div class="flex flex-wrap mb-4">
           <div class="rating">
-            <div class="rating-point" rel={{ review.rating }}></div>
+            <div class="rating-point" style="width: {{ review.rating | divided_by:5 | times:100 }}%"></div>
           </div>
           <span class="rating-score">{{ review.rating | round: 2 }}</span>
         </div>
@@ -136,10 +136,10 @@
       <input type="hidden" name="item[uuid]" value="{{ item.uuid }}">
       <input type="hidden" name="item[owner]" value="{{ context.current_user.email }}">
       <input type="hidden" name="item[url]" value="{{ item_url }}">
-      <input type="hidden" class="rating-value" name="item[rating]" value="0">
+      <input type="hidden" id="rating-value" class="rating-value" name="item[rating]" value="0">
       <div class="mt-3">
-        <div class="rating variable">
-          <div class="rating-point"></div>
+        <div id="star-rating" class="rating variable">
+          <div id="star-rating-point" class="rating-point"></div>
         </div>
         <label class="hidden" for="comment">Comment</label>
         <textarea class="w-full form-input" type="text" id="comment" name="item[comment]" rows="3"
@@ -149,8 +149,14 @@
         <button id="addreview" class="button">Add Review</button>
       </div>
     </form>
+    <script>
+      document.getElementById("star-rating").addEventListener("click", setStarRating);
+
+      function setStarRating(e) {
+        var relX = e.pageX - document.getElementById("star-rating").offsetLeft;
+        document.getElementById("rating-value").value = relX / 130 * 5;
+        document.getElementById("star-rating-point").style.width = relX + "px";
+      }
+    </script>
   {%- endif %}
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="{{ 'js/custom.js' | asset_url }}"></script>

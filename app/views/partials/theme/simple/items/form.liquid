@@ -89,7 +89,7 @@
         <div class="recent-review">
           <div class="flex flex-wrap mb-4">
             <div class="rating">
-              <div class="rating-point" rel={{ review.rating }}></div>
+              <div class="rating-point" style="width: {{ review.rating | divided_by:5 | times:100 }}%"></div>
             </div>
             <span class="rating-score">{{ review.rating | round: 2 }}</span>
           </div>
@@ -106,7 +106,3 @@
 </div>
 
 {% include 'theme/simple/items/uppy_form', item_uuid: item_uuid, presigned_url: presigned_url, user_id: user.id %}
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="{{ 'js/custom.js' | asset_url }}"></script>
