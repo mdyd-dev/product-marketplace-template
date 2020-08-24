@@ -3,14 +3,4 @@
   <div class="">
     <span>{{ 'app.total_entries' | t }} {{ items.total_entries }}</span>
   </div>
-
-  <div class="ml-auto flex-row">
-    <label for="sort" class="text-right ">Sort by</label>
-    <select class="form-select" id="sort" name="sort">
-      <option value="" class="">{% print 'lib.sort_options.relevance' | t %}</option>
-      {% for s in filters.sort_options %}
-        <option value="{{ s[0] }}" {% if filters.query.sort == s[0] %}selected{% endif %}>{{ s[1] }}</option>
-      {% endfor %}
-    </select>
-  </div>
 </div>

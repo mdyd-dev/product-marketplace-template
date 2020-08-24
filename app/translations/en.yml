@@ -166,6 +166,7 @@ en:
       keywords: Keywords
       category: Category
       tags: Tags
+      sort_by: Sort by
 
     dashboard-items:
       list-your-first-item: Add your first item
