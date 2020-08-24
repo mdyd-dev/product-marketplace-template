@@ -7,13 +7,22 @@
       {% if item.photos.size > 1 %}
         <div class="relative glider-contain">
           <div class="overflow-x-hidden glider" glider>
-            {% for p in item.photos limit: 5%}
+            {% for p in item.photos limit: 5 %}
               <div><img alt="{{ item.name }}" src="{{ p.photo.versions.uncropped }}" class="object-cover w-full"></div>
             {% endfor %}
           </div>
 
-          <button role="button" aria-label="Previous" class="glider-prev">&nbsp;</button>
-          <button role="button" aria-label="Next" class="glider-next">&nbsp;</button>
+          <button role="button" aria-label="Previous" class="left-0 glider-prev">
+            <svg viewBox="0 0 16 16" class="w-full" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+            </svg>
+          </button>
+
+          <button role="button" aria-label="Next" class="right-0 glider-next">
+            <svg viewBox="0 0 16 16" class="w-10 h-10" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+          </button>
 
           <div role="tablist" class="py-4 glider-dots"></div>
         </div>

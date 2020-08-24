@@ -1,15 +1,15 @@
-.glider-prev, .glider-next {
-  @apply absolute top-0 w-16 h-full cursor-pointer !important;
+.glider-prev.disabled, .glider-next.disabled {
+  @apply cursor-default opacity-0 transition-none !important;
 }
 
-.glider-prev.disabled, .glider-next.disabled {
-  @apply cursor-default !important;
+.glider-prev, .glider-next {
+  @apply absolute top-0 flex items-center justify-center w-12 h-full text-white bg-black bg-opacity-50 cursor-pointer !important;
+  max-height: calc(100% - 1.5rem - 2px);
 }
 
 .glider-prev {
-  @apply left-0 !important;
+  left: 0 !important;
 }
-
 .glider-next {
-  @apply right-0 !important;
+  right: 0 !important;
 }
