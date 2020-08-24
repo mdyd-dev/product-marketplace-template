@@ -82,11 +82,11 @@
     <button class="mt-8 button" value="{{ path }}">Submit</button>
   </form>
 
-  <div class="container reviews dashboard">
+  <div class="container dashboard w-1/2 px-4">
     <p class="text-2xl text-gray-900 ">Reviews</p>
     <div class="recent-reviews">
       {% for review in item.reviews %}
-        <div class="recent-review">
+        <div class="relative py-2 border-t border-blue-300">
           <div class="flex flex-wrap mb-4">
             <div class="rating">
               <div class="rating-point" style="width: {{ review.rating | divided_by:5 | times:100 }}%"></div>
@@ -94,7 +94,7 @@
             <span class="rating-score">{{ review.rating | round: 2 }}</span>
           </div>
           <p><b>{{ review.owner}}</b> : {{ review.comment }}</p>
-          <form action="/reviews/delete" method="post" class="form-delete-review" >
+          <form action="/reviews/delete" method="post" class=".absolute strong" >
             <input type="hidden" name="redirect_url" value="/items/edit?id={{ item.id }}">
             <input type="hidden" name="id" value="{{ review.id }}">
             <button class="delete-review" rel={{review.id}}>X</button>
