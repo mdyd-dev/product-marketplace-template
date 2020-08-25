@@ -111,9 +111,9 @@ test(`Admin Panel test`, async (t) => {
     const orders = Selector('tbody').find('tr')
     await t.expect(orders.count).gt(1)
     .click(Selector('a').withText('Categories'))
-    .click(Selector('a').withText('Home'))
-    const categories = Selector('div').find('.flex-1')
+    const categories = Selector('tbody').find('tr')
     await t.expect(categories.count).gt(15)
+    .click(Selector('a').withText('Home'))
     .click(Selector('a').withText('Activities'))
     .click(Selector('a').withText('Setup'))
 
