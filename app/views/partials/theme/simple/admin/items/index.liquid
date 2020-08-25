@@ -1,31 +1,27 @@
-<div class="w-full text-xs">
-  <div class="flex border-b">
-    <div class="flex-1 my-2 px-2 text-xl ">
-      {% print 'app.items.attr.name' | t %}
-    </div>
-    <div class="flex-1 my-2 px-2 text-xl ">
-      {% print 'app.items.attr.category' | t %}
-    </div>
-    <div class="flex-1 my-2 px-2 text-xl ">
-      {% print 'app.items.attr.created_at' | t %}
-    </div>
-  </div>
+<table class="table w-full text-sm table-auto">
+  <thead>
+    <tr>
+      <th class="text-lg font-normal text-left">{{ 'app.items.attr.name' | t }}</th>
+      <th class="text-lg font-normal text-left">{{ 'app.items.attr.category' | t }}</th>
+      <th class="text-lg font-normal text-left">{{ 'app.items.attr.created_at' | t }}</th>
+    </tr>
+  </thead>
+  <tbody>
 
-  <div class="">
-  {% for record in list.results %}
-    <div class="flex">
-      <div class="flex-1 my-2 px-2 ">
-        <a href="/items/{% print record.id %}">
-          {% print record.name %}
-        </a>
-      </div>
-      <div class="flex-1 my-2 px-2 ">
-        {% print record.category %}
-      </div>
-      <div class="flex-1 my-2 px-2 ">
-        {% print record.created_at %}
-      </div>
-    </div>
-  {% endfor %}
-
-</div>
+    {% for record in list.results %}
+      <tr>
+        <td class="text-left">
+          <a href="/items/{{ record.id }}">
+            {{ record.name }}
+          </a>
+        </td>
+        <td class="text-left">
+          {{ record.category }}
+        </td>
+        <td class="text-left">
+          {{ record.created_at }}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

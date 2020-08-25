@@ -1,4 +1,4 @@
-<table class="table w-full">
+<table class="table w-1/2 max-w-full">
   <thead>
     <tr>
       <th class="w-8 text-left">{{ 'app.users.attr.id' | t }}</th>
@@ -7,7 +7,7 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="leading-8">
     {% for record in list.results %}
       <tr>
         <td>{{ record.id }}</td>

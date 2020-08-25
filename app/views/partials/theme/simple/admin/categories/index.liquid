@@ -1,25 +1,25 @@
-<div class="w-full">
-  <div class="flex border-b">
-    <div class="flex-1 text-xl ">
-      {% print 'app.categories.attr.key' | t %}
-    </div>
-    <div class="flex-1 text-xl">
-      {% print 'app.categories.attr.name' | t %}
-    </div>
-  </div>
+<table class="table w-full text-sm table-auto">
+  <thead>
+    <tr>
+      <th class="text-lg font-normal text-left">{{ 'app.categories.attr.key' | t }}</th>
+      <th class="text-lg font-normal text-left">{{ 'app.categories.attr.name' | t }}</th>
+    </tr>
+  </thead>
+  <tbody>
 
-  <div class="">
-  {% for record in list %}
-    <div class="flex p-2">
-      <div class="flex-1 ">
-        {% print record %}
-      </div>
-      <div class="flex-1 ">
-        <a href="/c/{{record}}">
-        {% print 'categories.' | append: record | t %}
-        </a>
-      </div>
-    </div>
-  {% endfor %}
+    {% for record in list %}
+      <tr>
+        <td class="text-left">
+          {{ record }}
+        </td>
+        <td class="text-left">
+          <a href="/c/{{ record }}">
+            {{ 'categories.' | append: record | t }}
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
-</div>
+

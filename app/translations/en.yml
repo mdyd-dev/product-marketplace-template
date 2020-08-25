@@ -16,20 +16,20 @@ en:
         total: Total
       income:
         name: Income
-        description: Marketplace Owner income at 10% fee
-        delta: New Income
+        description: "Marketplace Owner fee is set to 10%"
+        delta: Since yesterday
       users:
         name: Users
         description: User account registration counter
-        delta: New Users
+        delta: Since yesterday
       orders:
         name: Orders
         description: New order counter
-        delta: New Orders
+        delta: Since yesterday
       items:
         name: Items
         description: Listings counter
-        delta: New Items
+        delta: Since yesterday
   app:
     title: MVP Marketplace
 

@@ -1,41 +1,42 @@
-<div class="w-full">
-  <div class="flex border-b">
-    <div class="flex-1 text-xl ">
-      {% print 'app.activities.attr.created_at' | t %}
-    </div>
-    <div class="flex-1 text-xl ">
-      {% print 'app.activities.attr.type' | t %}
-    </div>
-    <div class="flex-1 text-xl ">
-      {% print 'app.activities.attr.actor' | t %}
-    </div>
-    <div class="flex-1 text-xl ">
-      {% print 'app.activities.attr.object' | t %}
-    </div>
-    <div class="flex-1 text-xl ">
-      {% print 'app.activities.attr.target' | t %}
-    </div>
-  </div>
-
-  <div class="">
-  {% for record in list.results %}
-    <div class="flex p-2">
-      <div class="flex-1 ">
-        {% print record.payload.date %}
-      </div>
-      <div class="flex-1 ">
-        {% print record.payload.type %}
-      </div>
-      <div class="flex-1 ">
-        {% print record.payload.actor.id %}
-      </div>
-      <div class="flex-1 ">
-        {% print record.payload.object.id %}
-      </div>
-      <div class="flex-1 ">
-        {% print record.payload.target.id %}
-      </div>
-    </div>
-  {% endfor %}
-
-</div>
+<table class="table w-full text-sm table-auto">
+  <thead>
+    <tr>
+      <th class="text-lg font-normal text-left">
+        {{ 'app.activities.attr.created_at' | t }}
+      </th>
+      <th class="text-lg font-normal text-left">
+        {{ 'app.activities.attr.type' | t }}
+      </th>
+      <th class="text-lg font-normal text-left">
+        {{ 'app.activities.attr.actor' | t }}
+      </th>
+      <th class="text-lg font-normal text-left">
+        {{ 'app.activities.attr.object' | t }}
+      </th>
+      <th class="text-lg font-normal text-left">
+        {{ 'app.activities.attr.target' | t }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for record in list.results %}
+      <tr>
+        <td class="text-left">
+          {{ record.payload.date }}
+        </td>
+        <td class="text-left">
+          {{ record.payload.type }}
+        </td>
+        <td class="text-left">
+          {{ record.payload.actor.id }}
+        </td>
+        <td class="text-left">
+          {{ record.payload.object.id }}
+        </td>
+        <td class="text-left">
+          {{ record.payload.target.id }}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

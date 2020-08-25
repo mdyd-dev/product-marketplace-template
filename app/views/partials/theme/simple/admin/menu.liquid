@@ -1,11 +1,41 @@
+{% assign s = section %}
+
 <div class="w-full">
-  <h2 class="mb-3 text-lg font-medium text-gray-900 title-font">
-    <a class="mr-2 px-3 {% if section == 'home' %}bg-gray-300{% endif %}" href='/admin'>{% print 'admin.menu.home' | t %}</a>
-    <a class="mr-2 px-3 {% if section == 'users' %}bg-gray-300{% endif %}" href='/admin/users'>{% print 'admin.menu.users' | t %}</a>
-    <a class="mr-2 px-3 {% if section == 'orders' %}bg-gray-300{% endif %}" href='/admin/orders'>{% print 'admin.menu.orders' | t %}</a>
-    <a class="mr-2 px-3 {% if section == 'items' %}bg-gray-300{% endif %}" href='/admin/items'>{% print 'admin.menu.items' | t %}</a>
-    <a class="mr-2 px-3 {% if section == 'categories' %}bg-gray-300{% endif %}" href='/admin/categories'>{% print 'admin.menu.categories' | t %}</a>
-    <a class="mr-2 px-3 {% if section == 'activities' %}bg-gray-300{% endif %}" href='/admin/activities'>{% print 'admin.menu.activities' | t %}</a>
-    <a class="mr-2 px-3 {% if section == 'setup' %}bg-gray-300{% endif %}" href='/marketplace_setup'>{% print 'admin.menu.setup' | t %}</a>
-  </h2>
+  <ul class="flex mb-5 text-lg text-gray-900">
+    <li>
+      <a class="mr-2 px-3 py-2 {% if s == 'home' %}bg-gray-200{% endif %}" href='/admin'>
+        {{ 'admin.menu.home' | t }}
+      </a>
+    </li>
+    <li>
+      <a class="mr-2 px-3 py-2 {% if s == 'users' %}bg-gray-200{% endif %}" href='/admin/users'>
+        {{ 'admin.menu.users' | t }}
+      </a>
+    </li>
+    <li>
+      <a class="mr-2 px-3 py-2 {% if s == 'orders' %}bg-gray-200{% endif %}" href='/admin/orders'>
+        {{ 'admin.menu.orders' | t }}
+      </a>
+    </li>
+    <li>
+      <a class="mr-2 px-3 py-2 {% if s == 'items' %}bg-gray-200{% endif %}" href='/admin/items'>
+        {{ 'admin.menu.items' | t }}
+      </a>
+    </li>
+    <li>
+      <a class="mr-2 px-3 py-2 {% if s == 'categories' %}bg-gray-200{% endif %}" href='/admin/categories'>
+        {{ 'admin.menu.categories' | t }}
+      </a>
+    </li>
+    <li>
+      <a class="mr-2 px-3 py-2 {% if s == 'activities' %}bg-gray-200{% endif %}" href='/admin/activities'>
+        {{ 'admin.menu.activities' | t }}
+      </a>
+    </li>
+    <li>
+      <a class="mr-2 px-3 py-2 {% if s == 'setup' %}bg-gray-200{% endif %}" href='/marketplace_setup'>
+        {{ 'admin.menu.setup' | t }}
+      </a>
+    </li>
+  </ul>
 </div>
