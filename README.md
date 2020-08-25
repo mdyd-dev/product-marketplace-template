@@ -23,7 +23,8 @@ Go to https://partners.platformos.com/instances/new
 3. [Add Instance to pos-cli](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-3-add-instance-to-pos-cli)
 
 ``` sh
-mkdir marketplace; cd marketplace/
+mkdir marketplace
+cd marketplace
 pos-cli env add <YOUR_ENV_NAME> --email <YOUR_EMAIL> --url <YOUR_INSTANCE_URL>
 ```
 
