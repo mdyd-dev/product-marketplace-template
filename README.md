@@ -147,7 +147,7 @@ To ensure frontend is maintanable and easy to change, we follow couple of import
 
 - location: app/views/partials/lib/consumers
 
-## categories
+## Categories
 
 categories can be adjusted by:
 - editing: https://github.com/mdyd-dev/marketplace-template-poc/blob/master/app/views/partials/lib/queries/raw_category_list.liquid
