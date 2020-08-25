@@ -146,7 +146,7 @@ To ensure frontend is maintanable and easy to change, we follow couple of import
 
 ### consumers
 
-- location: app/views/partials/lib/consumers
+- location: `app/views/partials/lib/consumers`
 
 ## Categories
 
