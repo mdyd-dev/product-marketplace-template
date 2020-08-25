@@ -94,7 +94,7 @@
             <span class="rating-score">{{ review.rating | round: 2 }}</span>
           </div>
           <p><b>{{ review.owner}}</b> : {{ review.comment }}</p>
-          <form action="/reviews/delete" method="post" class=".absolute strong" >
+          <form action="/reviews/delete" method="post" class="strong" >
             <input type="hidden" name="redirect_url" value="/items/edit?id={{ item.id }}">
             <input type="hidden" name="id" value="{{ review.id }}">
             <button class="delete-review" rel={{review.id}}>X</button>
