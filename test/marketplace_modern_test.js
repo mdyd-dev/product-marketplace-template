@@ -1,9 +1,69 @@
 import { Selector } from 'testcafe';
 import faker from 'faker';
 import { ClientFunction } from 'testcafe';
+import { Role } from 'testcafe';
+import ItemShowPage from './pages/itemshow';
+import ItemShowEdit from './pages/itemedit';
 
 fixture`Basic complete happy scenario`.page(process.env.MPKIT_URL);
 
+const buyerRegister = Role(process.env.MPKIT_LOGURL, async t => {
+    await t
+      .click(Selector('main').find('p').withText('Register'))
+      .typeText(emailInput, 'johnsmith@email.com')
+      .typeText(passInput, 'password')
+      .typeText(usernameInput, 'johnsmith')
+      .click(Selector('button').withText('Sign Up'));
+});
+
+const buyerLogging = Role(process.env.MPKIT_LOGURL, async t => {
+  await t
+    .typeText(emailInput, 'johnsmith@email.com')
+    .typeText(passInput, 'password')
+    .click(logInBtn)
+    .expect(Selector('main').withText(loginConfirmation).exists)
+    .ok('message ' + loginConfirmation + " doesn't exists")
+});
+
+const userRegister = Role(process.env.MPKIT_LOGURL, async t => {
+    await t
+      .click(Selector('main').find('p').withText('Register'))
+      .typeText(emailInput, 'user@email.com')
+      .typeText(passInput, 'password')
+      .typeText(usernameInput, 'arnold01')
+      .click(Selector('button').withText('Sign Up'))
+});
+
+const userLogging = Role(process.env.MPKIT_LOGURL, async t => {
+      await t
+      .typeText(emailInput, 'user@email.com')
+      .typeText(passInput, 'password')
+      .click(logInBtn)
+      .expect(Selector('main').withText(loginConfirmation).exists)
+      .ok('message ' + loginConfirmation + " doesn't exists");
+});
+
+const sellerRegister = Role(process.env.MPKIT_LOGURL, async t => {
+      await t.click(Selector('main').find('p').withText('Register'))
+      .typeText(emailInput, NewEmail)
+      .typeText(passInput, NewPassword)
+      .typeText(usernameInput, NewUsername)
+      .click(Selector('button').withText('Sign Up'))
+      .expect(Selector('main').withText(signupConfirmation).exists)
+      .ok('message ' + signupConfirmation + " doesn't exists");
+});
+
+const sellerLogging = Role(process.env.MPKIT_LOGURL, async t => {
+      await t
+      .typeText(emailInput, NewEmail)
+      .typeText(passInput, NewPassword)
+      .click(logInBtn)
+      .expect(Selector('main').withText(loginConfirmation).exists)
+      .ok('message ' + loginConfirmation + " doesn't exists");
+});
+
+const signupConfirmation = 'Your account has been created';
+const loginConfirmation = 'Logged in'
 const getURL = ClientFunction(() => window.location.href);
 const emailInput = 'label #email';
 const passInput = 'label #password';
@@ -23,17 +83,11 @@ const item = {
   price: '10000',
 };
 
-const cheatedPrice = {
-  price: '10',
-};
-
-const buyer = { email: 'JohnSmith@email.com', password: 'password' };
-
 const editedItem = {
   name: faker.commerce.productName(),
   type: faker.commerce.productMaterial(),
   description: faker.commerce.productAdjective(),
-  price: '10000',
+  price: '5000',
 };
 const clearField = 'ctrl+a delete';
 const mainPage = Selector('header').find('span').withText('MVP Marketplace');
@@ -45,28 +99,30 @@ test(`Admin Panel test`, async (t) => {
     .typeText(passInput, 'password')
     .click(logInBtn)
     .click(Selector('header').find('a').withText('Admin'))
-    .click(Selector('h2 a').withText('Users'))
+    .click(Selector('a').withText('Users'))
     await t
     const users = Selector('tbody').find('td')
     await t.expect(users.count).gt(5)
-    .click(Selector('h2 a').withText('Items'))
+    .click(Selector('a').withText('Items'))
     await t
     const smthg = Selector('div').find('.flex')
     await t.expect(smthg.count).gt(5)
-    .click(Selector('h2 a').withText('Orders'))
+    .click(Selector('a').withText('Orders'))
     const orders = Selector('tbody').find('tr')
     await t.expect(orders.count).gt(1)
-    .click(Selector('h2 a').withText('Home'))
-    .click(Selector('h2 a').withText('Categories'))
+    .click(Selector('a').withText('Categories'))
+    .click(Selector('a').withText('Home'))
     const categories = Selector('div').find('.flex-1')
     await t.expect(categories.count).gt(15)
-    .click(Selector('h2 a').withText('Activities'))
-    .click(Selector('h2 a').withText('Setup'))
+    .click(Selector('a').withText('Activities'))
+    .click(Selector('a').withText('Setup'))
 
 });
 
 test(`Logging attempt with empty data`, async (t) => {
   await t
+    .useRole(buyerRegister)
+    .useRole(userRegister)
     .click(Selector('header').find('a').withText('Log in'))
     .click(logInBtn)
     .expect(Selector('label').withText('E-mail').textContent)
@@ -78,11 +134,11 @@ test(`Logging attempt with empty data`, async (t) => {
 test(`Registration attempt with taken data`, async (t) => {
   await t
     .click(Selector('header').find('a').withText('Log in'))
-    .click(Selector('p').withText('Register'))
+    .click(Selector('main').find('p').withText('Register'))
     .typeText(emailInput, 'user@email.com')
-    .typeText(passInput, 'password')
-    .typeText(usernameInput, 'username')
-    .click(Selector('main').find('button').withText('Sign Up'))
+    .typeText(passInput, NewPassword)
+    .typeText(usernameInput, 'arnold01')
+    .click(Selector('button').withText('Sign Up'))
     .expect(Selector('html').textContent)
     .contains('already taken');
 });
@@ -97,75 +153,51 @@ test(`Logging attempt with wrong data`, async (t) => {
     .contains('Invalid email or password');
 });
 
-test(`Login Test`, async (t) => {
-  const loginConfirmation = 'Logged in';
-  const signupConfirmation = 'Your account has been created';
+test(`Register Test`, async (t) => {
   await t
-    .click(Selector('header').find('a').withText('Log in'))
-    .click(Selector('main').find('p').withText('Register'))
-    .typeText(emailInput, NewEmail)
-    .typeText(passInput, NewPassword)
-    .typeText(usernameInput, NewUsername)
-    .click(Selector('button').withText('Sign Up'));
-  await t
-    .expect(Selector('main').withText(signupConfirmation).exists)
-    .ok('message ' + signupConfirmation + " doesn't exists")
+    .useRole(sellerRegister)
     .click(Selector('header').find('a').withText('Dashboard'))
     .click(Selector('a').withText('Profile'))
     await t.expect(Selector('main').textContent)
     .contains(NewEmail)
-    .click(Selector('a').withText('List your item'))
 });
 
 test('Item listing', async (t) => {
 
-    await t
-    //listing the item for sale
-    await t
-    .click(Selector('a').withText('List your item'))
-    .typeText(emailInput, NewEmail)
-    .typeText(passInput, NewPassword)
-    .click(logInBtn)
-    await t.click(Selector('a').withText('List your item'))
-    .typeText(Selector(nameField), item.name)
-    .typeText(descriptionField, item.description)
-    // )
-    .doubleClick(Selector(priceField))
-    .pressKey(clearField)
-    .typeText(priceField, item.price)
-    .click(Selector('button').withText('browse files'))
-    .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
-    .click(Selector('button').withText('Submit'))
-    await t.expect('img[src="_uploads_/testimage.png"]').ok()
-    .click(mainPage);
+  //listing the item for sale
+  await t.useRole(sellerLogging)
+  await t.click(Selector('a').withText('List your item'))
+  .typeText(Selector(nameField), item.name)
+  .typeText(descriptionField, item.description)
+  .doubleClick(Selector(priceField))
+  .pressKey(clearField)
+  .typeText(priceField, item.price)
+  .click(Selector('button').withText('browse your computer'))
+  .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
+  .click(Selector('button').withText('Submit'))
+  await t.expect('img[src="_uploads_/testimage.png"]').ok()
+  .click(mainPage);
 });
 
 test('Edit item', async (t) => {
-  await t
 
+  await t
     //searching item by its name
-    .click(Selector('header').find('a').withText('Log in'))
-    .typeText(emailInput, NewEmail)
-    .typeText(passInput, NewPassword)
-    .click(logInBtn)
+    .useRole(sellerLogging)
     .typeText('input[name="k"]', item.name)
     .click(Selector('main').find('button').withText('Search'))
     .expect(Selector('main').withText(item.name).exists)
     .ok("'Item#name could not be found")
     .click(Selector('main').find('h2 a').withText(item.name))
+    const page = new ItemShowPage(item)
     await t.expect('img[src="_uploads_/testimage.png"]').ok()
     //checks if all data is correct
-    .expect(Selector('h1').withText(item.name).exists)
+    .expect(page.name.exists)
     .ok()
-    .expect(Selector('div p').withText(item.description).exists)
+    .expect(page.description.exists)
     .ok()
-    .expect(
-      Selector('div span').withText(
-        (10000).toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 })
-      ).innerText
-    )
-    .eql('$10,000', 'check element text');
-  await t.click(Selector('main').find('a').withText('Edit'));
+    .expect(page.price.innerText).eql('$10,000', 'check element text');
+  await t.click(page.editbutton);
   //change of item information
 
   await t
@@ -179,15 +211,16 @@ test('Edit item', async (t) => {
     .pressKey(clearField)
     .typeText(priceField, editedItem.price)
     .click(Selector('button').withText('Submit'))
-    .expect(Selector('h1').withText(editedItem.name).exists)
+    const editpage = new ItemShowEdit(editedItem)
+    await t.expect(editpage.name.exists)
     .ok()
+    .expect(editpage.description.exists)
+    .ok()
+    .expect(editpage.price.innerText).eql('$5,000', 'check element text')
     .click(Selector('span').withText('MVP Marketplace'))
     .click(Selector('header').find('button').withText('Log out')) //Logging out from seller account
     //logging at buyer account and checks if seller item after edit exists
-    .click(Selector('header').find('a').withText('Log in'))
-    .typeText(emailInput, buyer.email)
-    .typeText(passInput, buyer.password)
-    .click(logInBtn)
+    .useRole(buyerLogging)
     .typeText('input[name="k"]', editedItem.name)
     .click(Selector('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText(editedItem.name))
@@ -204,10 +237,7 @@ test('Edit item', async (t) => {
 test('Delete item test', async (t) => {
   await t
     //checks if bought item still exists at auctions
-    .click(Selector('header').find('a').withText('Log in'))
-    .typeText(emailInput, NewEmail)
-    .typeText(passInput, NewPassword)
-    .click(logInBtn)
+    .useRole(sellerLogging)
     .click(Selector('header').find('a').withText('Dashboard'))
     .click(Selector('main').find('a').withText('Your items'))
     .click(Selector('main').find('a').withText(editedItem.name))
@@ -220,10 +250,7 @@ test('Delete item test', async (t) => {
 test('Breakin-in test, edition by none user', async (t) => {
   const notAuthorizedUser = 'Permission denied';
   await t
-    .click(Selector('header').find('a').withText('Log in'))
-    .typeText(emailInput, 'user@email.com')
-    .typeText(passInput, 'password')
-    .click(logInBtn)
+    .useRole(userLogging)
     .typeText('input[name="k"]', 'Watch')
     .click(Selector('main').find('button').withText('Search'))
     .click(Selector('main').find('h2 a').withText('Watch'));
