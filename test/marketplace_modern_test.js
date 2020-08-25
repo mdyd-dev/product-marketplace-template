@@ -7,7 +7,7 @@ import ItemShowEdit from './pages/itemedit';
 
 fixture`Basic complete happy scenario`.page(process.env.MPKIT_URL);
 
-const buyerRegister = Role(process.env.MPKIT_LOGURL, async t => {
+const buyerRegister = Role(process.env.MPKIT_URL + "sessions/new", async t => {
     await t
       .click(Selector('main').find('p').withText('Register'))
       .typeText(emailInput, 'johnsmith@email.com')
@@ -16,7 +16,7 @@ const buyerRegister = Role(process.env.MPKIT_LOGURL, async t => {
       .click(Selector('button').withText('Sign Up'));
 });
 
-const buyerLogging = Role(process.env.MPKIT_LOGURL, async t => {
+const buyerLogging = Role(process.env.MPKIT_URL + "sessions/new", async t => {
   await t
     .typeText(emailInput, 'johnsmith@email.com')
     .typeText(passInput, 'password')
@@ -25,7 +25,7 @@ const buyerLogging = Role(process.env.MPKIT_LOGURL, async t => {
     .ok('message ' + loginConfirmation + " doesn't exists")
 });
 
-const userRegister = Role(process.env.MPKIT_LOGURL, async t => {
+const userRegister = Role(process.env.MPKIT_URL + "sessions/new", async t => {
     await t
       .click(Selector('main').find('p').withText('Register'))
       .typeText(emailInput, 'user@email.com')
@@ -34,7 +34,7 @@ const userRegister = Role(process.env.MPKIT_LOGURL, async t => {
       .click(Selector('button').withText('Sign Up'))
 });
 
-const userLogging = Role(process.env.MPKIT_LOGURL, async t => {
+const userLogging = Role(process.env.MPKIT_URL + "sessions/new", async t => {
       await t
       .typeText(emailInput, 'user@email.com')
       .typeText(passInput, 'password')
@@ -43,7 +43,7 @@ const userLogging = Role(process.env.MPKIT_LOGURL, async t => {
       .ok('message ' + loginConfirmation + " doesn't exists");
 });
 
-const sellerRegister = Role(process.env.MPKIT_LOGURL, async t => {
+const sellerRegister = Role(process.env.MPKIT_URL + "sessions/new", async t => {
       await t.click(Selector('main').find('p').withText('Register'))
       .typeText(emailInput, NewEmail)
       .typeText(passInput, NewPassword)
@@ -53,7 +53,7 @@ const sellerRegister = Role(process.env.MPKIT_LOGURL, async t => {
       .ok('message ' + signupConfirmation + " doesn't exists");
 });
 
-const sellerLogging = Role(process.env.MPKIT_LOGURL, async t => {
+const sellerLogging = Role(process.env.MPKIT_URL + "sessions/new", async t => {
       await t
       .typeText(emailInput, NewEmail)
       .typeText(passInput, NewPassword)
