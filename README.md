@@ -125,7 +125,7 @@ Command is our concept to encapsulate business rules. By following our recommend
 
 ## Data queries
 
-- location: /app/views/partials/lib/data/queries
+- location: `app/views/partials/lib/data/queries`
 - generaly these are wrappers on graphql queries
 
 ## Presentation views - HTML / JSON
