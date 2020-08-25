@@ -18,7 +18,7 @@ npm install -g @platformos/pos-cli
 
 2. [Create Instance](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-2-create-instance) 
 
-https://partners.platformos.com/instances/new
+Go to https://partners.platformos.com/instances/new
 
 3. [Add Instance to pos-cli](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-3-add-instance-to-pos-cli)
 
