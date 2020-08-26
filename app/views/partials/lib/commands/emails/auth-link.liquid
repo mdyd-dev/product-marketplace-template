@@ -19,7 +19,7 @@ metadata:
 {% endparse_json %}
 
 {% liquid
-  include 'lib/commands/emails/send', template: 'passwords/reset', object: object
+  function_rc object = 'lib/commands/emails/send', template: 'passwords/reset', object: object
 %}
 
 {% return_rc object %}

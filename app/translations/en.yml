@@ -152,6 +152,10 @@ en:
     cancel: Cancel
     ship: Ship
 
+    passwords:
+      edit: Change password
+      updated: Your new password has been set successfully.
+
     emails:
       passwords:
         reset:
