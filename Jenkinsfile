@@ -18,7 +18,6 @@ pipeline {
       agent { docker {image 'node:12-alpine'; args '-u root' } }
       when { expression { env.BRANCH_NAME != 'master' } }
       steps {
-        sh 'env'
         sh 'npm ci'
         sh 'npm run build'
       }
@@ -34,7 +33,9 @@ pipeline {
       }
       agent { docker { image 'platformos/pos-cli' } }
       steps {
+        sh 'pos-cli data clean --auto-confirm --include-schema'
         sh 'pos-cli deploy'
+        sh 'pos-cli data import --path=./seed/data.zip --zip'
       }
     }
 
