@@ -8,5 +8,6 @@ export default class ItemShowPage {
       (10000).toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 })
     )
     this.editbutton = Selector('main').find('a').withText('Edit')
+    this.buyBtn = Selector('button').withText('Buy')
   }
 }
