@@ -18,7 +18,7 @@ properties:
             format: jpeg
             quality: 80
           resize:
-            width: 640
-            height: 480
+            width: 406
+            height: 256
             fit: inside
             without_enlargement: true
