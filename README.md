@@ -1,47 +1,53 @@
 # Product Marketplace MVP
 
-Backbone for a marketplace like project to be deployed on platformOS.com
+Backbone for a marketplace-like project to be deployed on platformOS.com
 
-# status
+# Status
 
-It is still in active development and some concepts are being validated and might change
+Still in active development and some concepts are being validated and might change.
 
-# installation
+# Installation
 
-- install [pos-cli](https://documentation.platformos.com/get-started/hello-world/install-pos-cli)
+This is a cheat sheet for installing the Product Marketplace Template. For complete installation instructions visit [Get Started: pOS Marketplace Template](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template). 
+
+1. [Install the pos-cli](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-1-install-the-pos-cli)
 
 ```sh
 npm install -g @platformos/pos-cli
 ```
 
-- create instance https://partners.platformos.com/instances/new
+2. [Create Instance](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-2-create-instance) 
 
-- add instance to pos-cli
+Go to https://partners.platformos.com/instances/new
+
+3. [Add Instance to pos-cli](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-3-add-instance-to-pos-cli)
 
 ``` sh
-mkdir marketplace; cd marketplace/
+mkdir marketplace
+cd marketplace
 pos-cli env add <YOUR_ENV_NAME> --email <YOUR_EMAIL> --url <YOUR_INSTANCE_URL>
 ```
 
-- clone the repository
+4. [Clone the repository](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-4-clone-the-repository)
 
 ``` sh
-pos-cli init --url https://github.com/mdyd-dev/marketplace-template-poc.git
+pos-cli init --url https://github.com/mdyd-dev/product-marketplace-template.git
 ```
 
-- build assets
+5. [Build assets](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-5-build-assets)
 
 ```sh
-npm ci
-npm build
+npm install
+npm run build
 ```
 
-- deploy
+6. [Deploy](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-6-deploy)
 
 ```sh
 pos-cli deploy <YOUR_ENV_NAME>
 ```
-- open web browser with your instance URL where you will be provided with post-install steps
+
+Open your web browser with your Instance URL where you will be provided with post-install steps.
 
 
 ## Seed sample data
@@ -50,14 +56,15 @@ pos-cli deploy <YOUR_ENV_NAME>
 pos-cli data import <YOUR_ENV_NAME> --path=seed/data.zip --zip
 ```
 
-# setup
+# Setup
 
-- To access the admin panel, register with email address: `admin@example.com`
-- Enter `Admin` section from main menu and go to `Marketplace Setup` section
-- Admins are identified based on email addresses defined in Constant `superadmins` - see `app/migrations/20200811133711_set_superadmins.liquid`
+- To access the admin panel of your marketplace register a user with this email address: `admin@example.com`
+- Enter the `Admin` section from main menu and go to the `Marketplace Setup` section. 
+- Admins are identified based on email addresses defined in the Constant `superadmins` - see `app/migrations/20200811133711_set_superadmins.liquid`
 
+See our [Get Started documentation for Setting Up Stripe Connect](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-7-set-up-your-marketplace). 
 
-# benefits and features
+# Benefits and features
 
 - as a customer I can search for an item by name, description
 - as a customer I can search for an item by tag
@@ -83,7 +90,7 @@ pos-cli data import <YOUR_ENV_NAME> --path=seed/data.zip --zip
 
 # Development guidelines
 
-## first changes
+## First changes
 
 1. Run sync `pos-cli sync <YOUR_ENV_NAME>`
 2. Edit your marketplace name in file `app/translations/en.yml`, key: `en.app.title`
@@ -94,14 +101,14 @@ pos-cli data import <YOUR_ENV_NAME> --path=seed/data.zip --zip
 - We assume you have basic understanding of platformOS
 - Otherwise we recommend https://documentation.platformos.com first
 
-## general rules
+## General rules
 
 Business logic and presentation logic are separated and should not interfere with each other, meaning:
 
 - no HTML tags in business logic
 - no data queries in presentation layer
 
-## commands / business logic
+## Commands / business logic
 
 Command is our concept to encapsulate business rules. By following our recommendation, you will improve the consistency of your code, so it will be easy to onboard new developers to the project and easier to take over existing projects. We are using the same pattern for all of our templates. The advantage of using this architecture is that it will be easy to re-use the command - you will be able to execute it both in a live web request, as well as a background job. It will also be easy to copy it across different projects.
 
@@ -117,12 +124,12 @@ Command is our concept to encapsulate business rules. By following our recommend
 - commands are designed to be easily executed as background job [heavy commands - external API call, expensive operations computations, reports]
 - each command might produce an event
 
-## data queries
+## Data queries
 
-- location: /app/views/partials/lib/data/queries
+- location: `app/views/partials/lib/data/queries`
 - generaly these are wrappers on graphql queries
 
-## presentation views - HTML / JSON
+## Presentation views - HTML / JSON
 
 To ensure frontend is maintanable and easy to change, we follow couple of important rules. First of all, all our frontend code is inside `theme` directory. Those file should not know about existence of any other file outside of theme. All data that are needed for the frontend should be explicitly provided to them - there shouldn't be any GraphQL queries inside theme. If you need extra data that are not provided by default, we suggest to make all GraphQL queries inside a page (which you can treat as a Controller in MVC architecture) and explicitly provide the result of this query to the partial.
 
@@ -139,12 +146,12 @@ To ensure frontend is maintanable and easy to change, we follow couple of import
 
 ### consumers
 
-- location: app/views/partials/lib/consumers
+- location: `app/views/partials/lib/consumers`
 
-## categories
+## Categories
 
 categories can be adjusted by:
-- edit: https://github.com/mdyd-dev/marketplace-template-poc/blob/master/app/views/partials/lib/queries/raw_category_list.liquid
+- editing: https://github.com/mdyd-dev/marketplace-template-poc/blob/master/app/views/partials/lib/queries/raw_category_list.liquid
 - adding a translation to the `app/translations/en_categies.liquid` file
 
 ## TESTS
