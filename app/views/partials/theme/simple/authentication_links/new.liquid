@@ -11,9 +11,7 @@
         <label class="block mt-3" for="email">
           <span class="block">{% print 'app.users.attr.email' | t %}</span>
           <input name="authentication_link[email]" type="text" id="email" value="{{ object.email }}" class="w-full form-input" autofocus />
-          {% if object.errors.email %}
-            <span class="text-red-800">{{ object.errors.email }}</span>
-          {% endif %}
+          {% include 'theme/simple/field_error', errors: object.errors.email %}
         </label>
 
         <button class="mt-3 button">{% print 'app.account.reset_password.send_link' | t %}</button>
