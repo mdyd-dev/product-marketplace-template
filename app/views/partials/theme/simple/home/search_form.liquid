@@ -26,9 +26,9 @@
   <div class="w-full my-6 md:my-0 md:mx-6 md:w-auto">
     <label for="sort" class="block mb-1 capitalize">{{ 'app.search.sort_by' | t }}</label>
     <select class="w-full form-select" id="sort" name="sort">
-      <option value="" class="">{% print 'lib.sort_options.relevance' | t %}</option>
+      {% sort = filters.query.sort | default: 'relevance' %}
       {% for s in filters.sort_options %}
-        <option value="{{ s[0] }}" {% if filters.query.sort == s[0] %}selected{% endif %}>{{ s[1] }}</option>
+        <option value="{{ s[0] }}" {% if sort == s[0] %}selected{% endif %}>{{ s[1] }}</option>
       {% endfor %}
     </select>
   </div>
