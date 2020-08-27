@@ -26,8 +26,8 @@ pipeline {
     stage('Deploy PR') {
       when { expression { env.BRANCH_NAME != 'master' } }
       environment {
-        MPKIT_TOKEN = credentials('POS_TOKEN')
-        MPKIT_EMAIL = "darek+ci@near-me.com"
+        MPKIT_TOKEN = credentials('MPKIT_TOKEN')
+        MPKIT_EMAIL = credentials('MPKIT_EMAIL')
         MPKIT_URL = "${pr_url}"
         CI = true
       }
@@ -67,8 +67,8 @@ pipeline {
     stage('Deploy QA') {
       when { branch 'master' }
       environment {
-        MPKIT_TOKEN = credentials('POS_TOKEN')
-        MPKIT_EMAIL = "darek+ci@near-me.com"
+        MPKIT_TOKEN = credentials('MPKIT_TOKEN')
+        MPKIT_EMAIL = credentials('MPKIT_EMAIL')
         MPKIT_URL = "${qa_url}"
         CI = true
       }
@@ -94,8 +94,8 @@ pipeline {
     stage('Deploy LIVE') {
       when { branch 'master' }
       environment {
-        MPKIT_TOKEN = credentials('POS_TOKEN')
-        MPKIT_EMAIL = "darek+ci@near-me.com"
+        MPKIT_TOKEN = credentials('MPKIT_TOKEN')
+        MPKIT_EMAIL = credentials('MPKIT_EMAIL')
         MPKIT_URL = "${live_url}"
         CI = true
       }
