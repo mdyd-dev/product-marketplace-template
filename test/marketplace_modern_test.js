@@ -10,10 +10,12 @@ import NewItemForm from './pages/newitem';
 import TopMenuBtns from './pages/topmenu';
 import ItemSearch from './pages/itemsearch';
 
-fixture`Basic complete happy scenario`.page(process.env.MPKIT_URL);
+fixture`Basic complete happy scenario`.page('https://damcikinstance.staging.oregon.platform-os.com/');
+//fixture`Basic complete happy scenario`.page(process.env.MPKIT_URL);
 
 const signupConfirmation = 'Your account has been created';
 const loginConfirmation = 'Logged in';
+const resetConfirmation = 'Please check your email.';
 const notAuthorizedUser = 'Permission denied';
 const getURL = ClientFunction(() => window.location.href);
 const editURL = '/items/edit?id=';
@@ -100,6 +102,16 @@ test(`Register admin`, async (t) => {
     .typeText(newSessionForm.passInput, 'password')
     .typeText(newSessionForm.usernameInput, 'admin')
     .click(newSessionForm.signUpBtn)
+});
+
+test(`Reset Password test`, async (t) => {
+  await t
+    .click(topMenu.logInBtn)
+    .click(newSessionForm.resetBtn)
+    .typeText(newSessionForm.emailInput, NewEmail)
+    .click(newSessionForm.resetSubmitBtn)
+    .expect(Selector('main').withText(resetConfirmation).exists)
+    .ok('message ' + resetConfirmation + " doesn't exists")
 });
 
 test(`Logging attempt with empty data`, async (t) => {
