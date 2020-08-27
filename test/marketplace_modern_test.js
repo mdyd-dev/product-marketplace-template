@@ -102,6 +102,38 @@ test(`Register admin`, async (t) => {
     .click(newSessionForm.signUpBtn)
 });
 
+test(`Logging attempt with empty data`, async (t) => {
+  await t
+    .click(topMenu.logInBtn)
+    .click(newSessionForm.logInBtn)
+    .expect(Selector('label').withText('E-mail').textContent)
+    .contains('cannot be blank')
+    .expect(Selector('label').withText('Password').textContent)
+    .contains('cannot be blank');
+});
+
+test(`Registration attempt with taken data`, async (t) => {
+  await t
+    .click(topMenu.logInBtn)
+    .click(newSessionForm.regBtn)
+    .typeText(newSessionForm.emailInput, 'admin@email.com')
+    .typeText(newSessionForm.passInput, 'password')
+    .typeText(newSessionForm.usernameInput, 'arnold01')
+    .click(newSessionForm.signUpBtn)
+    .expect(Selector('html').textContent)
+    .contains('already taken');
+});
+
+test(`Logging attempt with wrong data`, async (t) => {
+  await t
+    .click(topMenu.logInBtn)
+    .typeText(newSessionForm.emailInput, 'admin@email.com')
+    .typeText(newSessionForm.passInput, 'wrongpassword')
+    .click(newSessionForm.logInBtn)
+    .expect(Selector('html').textContent)
+    .contains('Invalid email or password');
+});
+
 test('Item listing', async (t) => {
   //listing the item for sale
   await t.useRole(sellerRole);
