@@ -116,7 +116,7 @@ test(`Registration attempt with taken data`, async (t) => {
   await t
     .click(topMenu.logInBtn)
     .click(newSessionForm.regBtn)
-    .typeText(newSessionForm.emailInput, 'admin@email.com')
+    .typeText(newSessionForm.emailInput, 'admin@example.com')
     .typeText(newSessionForm.passInput, 'password')
     .typeText(newSessionForm.usernameInput, 'arnold01')
     .click(newSessionForm.signUpBtn)
