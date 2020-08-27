@@ -22,7 +22,7 @@ test(`Logging attempt with empty data`, async (t) => {
     await t
       .click(topMenu.logInBtn)
       .click(newSessionForm.regBtn)
-      .typeText(newSessionForm.emailInput, 'user@email.com')
+      .typeText(newSessionForm.emailInput, 'admin@email.com')
       .typeText(newSessionForm.passInput, 'password')
       .typeText(newSessionForm.usernameInput, 'arnold01')
       .click(newSessionForm.signUpBtn)
@@ -33,7 +33,7 @@ test(`Logging attempt with empty data`, async (t) => {
   test(`Logging attempt with wrong data`, async (t) => {
     await t
       .click(topMenu.logInBtn)
-      .typeText(newSessionForm.emailInput, 'user@email.com')
+      .typeText(newSessionForm.emailInput, 'admin@email.com')
       .typeText(newSessionForm.passInput, 'wrongpassword')
       .click(newSessionForm.logInBtn)
       .expect(Selector('html').textContent)

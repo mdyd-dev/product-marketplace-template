@@ -235,7 +235,7 @@ test(`Admin Panel test`, async (t) => {
   const itemTable = Selector('div').find('.flex');
   await t.expect(itemTable.count).gt(5).click(adminPage.orders);
   const orderTable = Selector('tbody').find('tr');
-  await t.expect(orderTable.count).gt(1).click(adminPage.categories);
+  await t.expect(orderTable.count).gt(0).click(adminPage.categories);
   const categoriesTable = Selector('tbody').find('tr');
   await t.expect(categoriesTable.count).gt(15).click(adminPage.home).click(adminPage.activities).click(adminPage.setup);
 });
