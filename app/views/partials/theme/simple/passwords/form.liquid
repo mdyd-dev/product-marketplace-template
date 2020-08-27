@@ -1,0 +1,21 @@
+<form action="/passwords" method="post">
+  {% include 'authenticity_token' %}
+
+  <label class="block mt-3" for="password">
+    <span class="block">Password</span>
+    <input name="password[password]" type="password" id="password" class="w-full form-input" value="{{object.password}}"/>
+    {% if object.errors.password %}
+      <span class="text-red-800">{{ object.errors.password }}</span>
+    {% endif %}
+  </label>
+
+  <label class="block mt-3" for="password_confirmation">
+    <span class="block">Password Confirmation</span>
+    <input name="password[password_confirmation]" type="password" id="password" class="w-full form-input" value="{{object.password_confirmation}}" />
+    {% if object.errors.password_confirmation %}
+      <span class="text-red-800">{{ object.errors.password_confirmation }}</span>
+    {% endif %}
+  </label>
+
+  <button class="mt-3 button">Update Password</button>
+</form>

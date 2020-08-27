@@ -1,9 +1,9 @@
-query users($id: ID, $email: String, $limit: Int = 1){
+query users($id: ID, $email: String, $limit: Int = 1, $valid_for: Int = 1, $with_token: Boolean = false){
   users(
     per_page: $limit
     filter: {
       email: { value: $email }
-      id: { value: $id }
+      id:    { value: $id }
     }
     sort: [{ id: { order: ASC } }]
   ){
@@ -12,6 +12,7 @@ query users($id: ID, $email: String, $limit: Int = 1){
       id
       email
       created_at
+      token: temporary_token(valid_for: $valid_for) @include(if: $with_token)
     }
   }
 }

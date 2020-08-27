@@ -1,5 +1,9 @@
 {% liquid
-  graphql r  = 'users/search', id: id, limit: 1
+  if id == blank and email == blank
+    return_rc null
+  endif
+
+  graphql r  = 'users/search', id: id, email: email, limit: 1, with_token: with_token
 
   return_rc r.users.results.first
 %}

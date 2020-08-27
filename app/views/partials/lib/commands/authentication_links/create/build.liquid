@@ -1,0 +1,16 @@
+{% liquid
+  function_rc user = 'lib/data/queries/users/find', email: email, with_token: true, valid_for: 5
+%}
+
+{% parse_json object %}
+{
+  "email": "{{ user.email }}",
+  "id":    "{{ user.id }}",
+  "token": "{{ user.token }}",
+  "host":  "{{ host }}"
+}
+{% endparse_json %}
+
+{% liquid
+  return_rc object
+%}

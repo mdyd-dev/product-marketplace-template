@@ -1,0 +1,16 @@
+{% liquid
+  if token == blank or email == blank
+    include 'redirect_to', url: '/sessions/new', error: 'app.errors.unauthenticated'
+  endif
+
+  function_rc user = 'lib/data/queries/users/find', email: email
+  assign authenticated = token | is_token_valid: user.id
+
+  if authenticated
+    session reset_password_session_user_id = user.id
+
+    redirect_to '/passwords/new'
+  else
+    include 'redirect_to', url: '/sessions/new', error: 'app.errors.users.token_invalid'
+  endif
+%}

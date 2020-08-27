@@ -1,0 +1,6 @@
+---
+to: "{{ data.to }}"
+from: '{{ data.from }}'
+subject: "{{ data.subject }}"
+---
+{% include 'theme/simple/emails/passwords/reset', data: data %}

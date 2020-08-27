@@ -1,0 +1,18 @@
+---
+metadata:
+  type: command
+  returning: string
+  parameters:
+    - name: email
+    - name: host
+---
+{% liquid
+  function_rc object = 'lib/commands/authentication_links/create/build', user: user, host: host
+  function_rc object = 'lib/commands/authentication_links/create/check', object: object
+
+  if object.valid
+    function_rc object = 'lib/commands/authentication_links/create/execute', object: object
+  endif
+
+  return_rc object
+%}
