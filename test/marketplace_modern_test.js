@@ -9,12 +9,14 @@ import NewSessionForm from './pages/newsession';
 import NewItemForm from './pages/newitem';
 import TopMenuBtns from './pages/topmenu';
 import ItemSearch from './pages/itemsearch';
+import ResetPasswordForm from './pages/resetpasswordform';
 
 fixture`Basic complete happy scenario`.page(process.env.MPKIT_URL);
 
 const signupConfirmation = 'Your account has been created';
 const loginConfirmation = 'Logged in';
 const notAuthorizedUser = 'Permission denied';
+const resetConfirmation = 'Please check your email.';
 const getURL = ClientFunction(() => window.location.href);
 const editURL = '/items/edit?id=';
 const NewEmail = faker.internet.email().toLowerCase();
@@ -41,6 +43,7 @@ const editPage = new ItemShowEdit(editedItem);
 const newItemForm = new NewItemForm();
 const topMenu = new TopMenuBtns();
 const itemSearch = new ItemSearch(item);
+const resetPassword = new ResetPasswordForm();
 const clearField = 'ctrl+a delete';
 
 const buyerRole = Role(process.env.MPKIT_URL + 'sessions/new', async (t) => {
@@ -79,7 +82,7 @@ test(`Register seller`, async (t) => {
     .typeText(newSessionForm.usernameInput, NewUsername)
     .click(newSessionForm.signUpBtn)
     .expect(Selector('main').withText(signupConfirmation).exists)
-    .ok('message ' + signupConfirmation + " doesn't exists")
+    .ok('message ' + signupConfirmation + " doesn't exists");
 });
 
 test(`Register buyer`, async (t) => {
@@ -99,7 +102,7 @@ test(`Register admin`, async (t) => {
     .typeText(newSessionForm.emailInput, 'admin@example.com')
     .typeText(newSessionForm.passInput, 'password')
     .typeText(newSessionForm.usernameInput, 'admin')
-    .click(newSessionForm.signUpBtn)
+    .click(newSessionForm.signUpBtn);
 });
 
 test(`Logging attempt with empty data`, async (t) => {
@@ -134,10 +137,20 @@ test(`Logging attempt with wrong data`, async (t) => {
     .contains('Invalid email or password');
 });
 
+test(`Reset Password test`, async (t) => {
+  await t
+    .click(topMenu.logInBtn)
+    .click(newSessionForm.resetBtn)
+    .typeText(newSessionForm.emailInput, NewEmail)
+    .click(resetPassword.submit)
+    .expect(Selector('main').withText(resetConfirmation).exists)
+    .ok('message ' + resetConfirmation + " doesn't exists");
+});
+
 test('Item listing', async (t) => {
   //listing the item for sale
-  await t.useRole(sellerRole);
   await t
+    .useRole(sellerRole)
     .click(topMenu.listItemBtn)
     .typeText(newItemForm.nameField, item.name)
     .typeText(newItemForm.descField, item.description)
@@ -194,19 +207,16 @@ test('Edit item', async (t) => {
     .click(topMenu.logoBtn)
     //Logging out from seller account
     .click(topMenu.logOutBtn)
-    //logging at buyer account and checks if seller item after edit exists
     .useRole(buyerRole)
     .typeText(itemSearch.searchField, editedItem.name)
     .click(itemSearch.searchBtn)
     .click(editPage.itemLink)
-    //Checks if buy button works correctly
     .click(page.buyBtn)
     .click(topMenu.logOutBtn);
 });
 
-test('Delete item test', async (t) => {
+test('Delete item', async (t) => {
   await t
-    //checks if bought item still exists at auctions
     .useRole(sellerRole)
     .click(topMenu.dashboardBtn)
     .click(Selector('main').find('a').withText('Your items'))
@@ -216,9 +226,9 @@ test('Delete item test', async (t) => {
     .click(topMenu.logOutBtn);
 });
 
-test('Sell test', async (t) => {
-  await t.useRole(sellerRole);
+test('Sell item', async (t) => {
   await t
+    .useRole(sellerRole)
     .click(topMenu.listItemBtn)
     .typeText(newItemForm.nameField, item.name)
     .typeText(newItemForm.descField, item.description)
@@ -227,8 +237,7 @@ test('Sell test', async (t) => {
     .typeText(newItemForm.priceField, item.price)
     .click(newItemForm.browseBtn)
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), ['_uploads_/testimage.png'])
-    .click(newItemForm.submitBtn);
-  await t
+    .click(newItemForm.submitBtn)
     .expect('img[src="_uploads_/testimage.png"]')
     .ok()
     .click(topMenu.logOutBtn)
@@ -257,10 +266,7 @@ test('Payout check', async (t) => {
 });
 
 test(`Admin Panel test`, async (t) => {
-  await t
-    .click(topMenu.logInBtn)
-    .useRole(adminRole)
-    .click(topMenu.adminBtn);
+  await t.click(topMenu.logInBtn).useRole(adminRole).click(topMenu.adminBtn);
   await t.click(adminPage.users);
   const userTable = Selector('tbody').find('td');
   await t.expect(userTable.count).gt(5).click(adminPage.items);
@@ -278,12 +284,11 @@ test('Breakin-in test, edition by none user', async (t) => {
     .typeText(itemSearch.searchField, 'Watch')
     .click(itemSearch.searchBtn)
     .click(Selector('a').withText('Watch'));
-  await t;
   var itemEditUrl = await getURL();
   var itemEditUrl = itemEditUrl.split('-');
   var editItemId = itemEditUrl[itemEditUrl.length - 1];
-  await t.navigateTo(editURL + editItemId);
   await t
+    .navigateTo(editURL + editItemId)
     .expect(Selector('div').withText(notAuthorizedUser).exists)
     .ok('message ' + notAuthorizedUser + " doesn't exists");
 });
