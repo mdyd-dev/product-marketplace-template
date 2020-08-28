@@ -9,8 +9,8 @@
     include 'lib/register_error', contract: c, field_name: 'host', key: 'app.errors.blank'
   endif
 
-  if object.id == blank
-    include 'lib/register_error', contract: c, field_name: 'id', key: 'app.errors.blank'
+  if object.token == blank
+    include 'lib/register_error', contract: c, field_name: 'token', key: 'app.errors.blank'
   endif
 
   hash_assign object['valid'] = c.valid
