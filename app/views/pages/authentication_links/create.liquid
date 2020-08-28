@@ -15,7 +15,9 @@ method: post
       log email.errors, type: 'showme'
       include 'redirect_to', url: '/', notice: 'app.errors.something-went-wrong'
     endif
-
+  elsif object.token == blank
+    log object, type: 'reset-password-user-not-found'
+    include 'redirect_to', url: '/', notice: 'app.authentication_links.created'
   else
     include 'theme/simple/authentication_links/new', object: object
   endif
