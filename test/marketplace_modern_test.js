@@ -10,16 +10,16 @@ import NewItemForm from './pages/newitem';
 import TopMenuBtns from './pages/topmenu';
 import ItemSearch from './pages/itemsearch';
 
-fixture`Basic complete happy scenario`.page(process.env.MPKIT_URL);
+fixture`Basic complete happy scenario`.page('https://damcikinstance.staging.oregon.platform-os.com/');
 
 const signupConfirmation = 'Your account has been created';
 const loginConfirmation = 'Logged in';
 const notAuthorizedUser = 'Permission denied';
 const getURL = ClientFunction(() => window.location.href);
 const editURL = '/items/edit?id=';
-const NewEmail = faker.internet.email().toLowerCase();
-const NewPassword = faker.internet.password();
-const NewUsername = faker.name.findName();
+const newEmail = faker.internet.email().toLowerCase();
+const newPassword = faker.internet.password();
+const newUsername = faker.name.findName();
 const item = {
   name: faker.commerce.productName(),
   type: faker.commerce.productMaterial(),
@@ -54,8 +54,8 @@ const buyerRole = Role(process.env.MPKIT_URL + 'sessions/new', async (t) => {
 
 const sellerRole = Role(process.env.MPKIT_URL + 'sessions/new', async (t) => {
   await t
-    .typeText(newSessionForm.emailInput, NewEmail)
-    .typeText(newSessionForm.passInput, NewPassword)
+    .typeText(newSessionForm.emailInput, newEmail)
+    .typeText(newSessionForm.passInput, '12345')
     .click(newSessionForm.logInBtn)
     .expect(Selector('main').withText(loginConfirmation).exists)
     .ok('message ' + loginConfirmation + " doesn't exists");
@@ -74,9 +74,9 @@ test(`Register seller`, async (t) => {
   await t
     .click(topMenu.logInBtn)
     .click(newSessionForm.regBtn)
-    .typeText(newSessionForm.emailInput, NewEmail)
-    .typeText(newSessionForm.passInput, NewPassword)
-    .typeText(newSessionForm.usernameInput, NewUsername)
+    .typeText(newSessionForm.emailInput, newEmail)
+    .typeText(newSessionForm.passInput, '12345')
+    .typeText(newSessionForm.usernameInput, newUsername)
     .click(newSessionForm.signUpBtn)
     .expect(Selector('main').withText(signupConfirmation).exists)
     .ok('message ' + signupConfirmation + " doesn't exists")
@@ -87,7 +87,7 @@ test(`Register buyer`, async (t) => {
     .click(topMenu.logInBtn)
     .click(newSessionForm.regBtn)
     .typeText(newSessionForm.emailInput, 'johnsmith@email.com')
-    .typeText(newSessionForm.passInput, 'password')
+    .typeText(newSessionForm.passInput, 'thispassword')
     .typeText(newSessionForm.usernameInput, 'johnsmith')
     .click(newSessionForm.signUpBtn);
 });
@@ -168,7 +168,20 @@ test('Edit item', async (t) => {
     .expect(page.description.exists)
     .ok()
     .expect(page.price.innerText)
-    .eql('$10,000', 'check element text');
+    .eql('$10,000', 'check element text')
+    .click(topMenu.dashboardBtn)
+    .click(Selector('a').withText('Your list'))
+    .expect(itemSearch.itemAhref.exists)
+    .ok("'Item#name could not be found")
+    .typeText(itemSearch.searchField, item.name)
+    .click(itemSearch.searchBtn)
+    .click(itemSearch.itemLink)
+    .click(Selector('a').withText('Search this user items'))
+    .expect(Selector('p').withText('You are now on user@email.com list').exists)
+    .ok()
+    .expect(itemSearch.itemAhref.exists)
+    .ok("'Item#name could not be found")
+    .click(itemSearch.itemLink)
 
   //change of item information
   await t
