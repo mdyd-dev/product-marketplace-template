@@ -1,0 +1,5 @@
+<form action="/u/{{ user_id }}" name="search">
+  {% include 'theme/simple/home/search_form', query: search.query, filters: filters %}
+  <p>You are now on <b>{{ user.email }}</b> list</p>
+  {% include 'theme/simple/items/index', items: items, items.owner.email %}
+</form>
