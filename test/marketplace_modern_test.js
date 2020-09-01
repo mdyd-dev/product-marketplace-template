@@ -9,8 +9,11 @@ import NewSessionForm from './pages/newsession';
 import NewItemForm from './pages/newitem';
 import TopMenuBtns from './pages/topmenu';
 import ItemSearch from './pages/itemsearch';
+const myUrl = 'https://damcikinstance.staging.oregon.platform-os.com/'
 
-fixture`Basic complete happy scenario`.page('https://damcikinstance.staging.oregon.platform-os.com/');
+fixture`Basic complete happy scenario`.page(myUrl);
+
+
 
 const signupConfirmation = 'Your account has been created';
 const loginConfirmation = 'Logged in';
@@ -43,7 +46,7 @@ const topMenu = new TopMenuBtns();
 const itemSearch = new ItemSearch(item);
 const clearField = 'ctrl+a delete';
 
-const buyerRole = Role(process.env.MPKIT_URL + 'sessions/new', async (t) => {
+const buyerRole = Role(myUrl + 'sessions/new', async (t) => {
   await t
     .typeText(newSessionForm.emailInput, 'johnsmith@email.com')
     .typeText(newSessionForm.passInput, 'password')
@@ -52,16 +55,16 @@ const buyerRole = Role(process.env.MPKIT_URL + 'sessions/new', async (t) => {
     .ok('message ' + loginConfirmation + " doesn't exists");
 });
 
-const sellerRole = Role(process.env.MPKIT_URL + 'sessions/new', async (t) => {
+const sellerRole = Role(myUrl + 'sessions/new', async (t) => {
   await t
     .typeText(newSessionForm.emailInput, newEmail)
-    .typeText(newSessionForm.passInput, '12345')
+    .typeText(newSessionForm.passInput, newPassword)
     .click(newSessionForm.logInBtn)
     .expect(Selector('main').withText(loginConfirmation).exists)
     .ok('message ' + loginConfirmation + " doesn't exists");
 });
 
-const adminRole = Role(process.env.MPKIT_URL + 'sessions/new', async (t) => {
+const adminRole = Role(myUrl + 'sessions/new', async (t) => {
   await t
     .typeText(newSessionForm.emailInput, 'admin@example.com')
     .typeText(newSessionForm.passInput, 'password')
@@ -75,8 +78,8 @@ test(`Register seller`, async (t) => {
     .click(topMenu.logInBtn)
     .click(newSessionForm.regBtn)
     .typeText(newSessionForm.emailInput, newEmail)
-    .typeText(newSessionForm.passInput, '12345')
-    .typeText(newSessionForm.usernameInput, newUsername)
+    await t.typeText(newSessionForm.passInput, newPassword)
+    await t.typeText(newSessionForm.usernameInput, newUsername)
     .click(newSessionForm.signUpBtn)
     .expect(Selector('main').withText(signupConfirmation).exists)
     .ok('message ' + signupConfirmation + " doesn't exists")
@@ -87,7 +90,7 @@ test(`Register buyer`, async (t) => {
     .click(topMenu.logInBtn)
     .click(newSessionForm.regBtn)
     .typeText(newSessionForm.emailInput, 'johnsmith@email.com')
-    .typeText(newSessionForm.passInput, 'thispassword')
+    .typeText(newSessionForm.passInput, 'password')
     .typeText(newSessionForm.usernameInput, 'johnsmith')
     .click(newSessionForm.signUpBtn);
 });
@@ -136,7 +139,7 @@ test(`Logging attempt with wrong data`, async (t) => {
 
 test('Item listing', async (t) => {
   //listing the item for sale
-  await t.useRole(sellerRole);
+  await t.useRole(sellerRole)
   await t
     .click(topMenu.listItemBtn)
     .typeText(newItemForm.nameField, item.name)
@@ -177,7 +180,7 @@ test('Edit item', async (t) => {
     .click(itemSearch.searchBtn)
     .click(itemSearch.itemLink)
     .click(Selector('a').withText('Search this user items'))
-    .expect(Selector('p').withText('You are now on user@email.com list').exists)
+    .expect(Selector('p').withText('You are now on '+newEmail+' list').exists)
     .ok()
     .expect(itemSearch.itemAhref.exists)
     .ok("'Item#name could not be found")
