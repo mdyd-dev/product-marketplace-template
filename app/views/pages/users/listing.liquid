@@ -5,8 +5,6 @@ slug: u
   function_rc query = 'lib/data/queries/items/search/build', query: context.params, limit: 50, owner: context.params.slug2
   function_rc items = 'lib/data/queries/items/search/execute', query: query
   function_rc user = 'lib/data/queries/users/find', id: context.params.slug2
-
   function_rc filters = 'lib/data/queries/search/filters', query: context.params
-
   include 'theme/simple/users/listing', items: items, filters: filters, user: user
 %}
