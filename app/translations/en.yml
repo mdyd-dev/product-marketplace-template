@@ -43,8 +43,12 @@ en:
     login: Log in
     logout: Log out %{user}
 
+
     order: Order
     your-orders: Your orders
+    your-list: Your list
+    self-list: You are now on <b class="font-semibold">your</b> list
+    user-list: You are now on <b class="font-semibold">%{name}'s</b> list
     back: Back
     continue: Continue
 
@@ -80,8 +84,12 @@ en:
         id: ID
         created_at: Created at
         email: Email
+        list_id: List ID
 
     items:
+      self-list: You are now on <span class="font-semibold">your</span> list
+      user-list: You are now on <span class="font-semibold">%{name}'s</span> list (%{email})
+      yours: Your list
       list: Items
       new: new item
       created: Item created

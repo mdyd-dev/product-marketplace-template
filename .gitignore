@@ -5,3 +5,5 @@ tmp/
 .DS_Store
 app/assets/css/*.css
 app/assets/js/*.js
+test/pictures/
+test/reports/video/

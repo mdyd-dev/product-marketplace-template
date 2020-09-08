@@ -1,0 +1,9 @@
+<form action="/u/{{ user_id }}" name="search">
+  {% include 'theme/simple/home/search_form', query: search.query, filters: filters %}
+  {% if current_user.email contains user.email %}
+  <p>{{ 'app.items.self-list' | t }}</p>
+  {% else %}
+  <p>{{ 'app.items.user-list' | t: name: user.username, email: user.email }}</p>
+  {% endif %}
+  {% include 'theme/simple/items/index', items: items, items.owner.email %}
+</form>
