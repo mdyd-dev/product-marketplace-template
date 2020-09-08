@@ -1,0 +1,10 @@
+{%  liquid
+  function_rc object = 'lib/commands/items/create/build', object: context.params.item, owner: context.current_user.id
+  function_rc object = 'lib/commands/items/create/check', object: object
+
+  if object.valid
+    function_rc object = 'lib/commands/items/create/execute', object: object
+  endif
+
+  return_rc object
+%}

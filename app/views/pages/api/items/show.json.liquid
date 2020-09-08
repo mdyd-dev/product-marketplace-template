@@ -1,0 +1,15 @@
+{% liquid
+  assign id = context.params.id | split: '-' | last
+
+  function_rc item = 'lib/data/queries/items/find', id: id
+
+  unless item.id
+    render 'theme/simple/404', status: 404
+    break
+  endunless
+
+  assign response = '{}' | parse_json
+  hash_assign response['item'] = item
+
+  include 'theme/json/items/index', response: response
+%}

@@ -1,4 +1,12 @@
 {% liquid
-  include 'lib/items/index'
-  include 'theme/json/home/index', items: context.exports.items
+  function_rc query = 'lib/data/queries/items/search/build', query: context.params, limit: 50
+  function_rc items = 'lib/data/queries/items/search/execute', query: query
+
+  function_rc filters = 'lib/data/queries/search/filters', query: context.params
+
+  assign response = '{}' | parse_json
+  hash_assign response['items'] = items
+  hash_assign response['filters'] = filters
+
+  include 'theme/json/items/index', response: response
 %}
