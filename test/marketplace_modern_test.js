@@ -1,4 +1,5 @@
-import { Selector, ClientFunction, Role } from 'testcafe'
+import { Selector, ClientFunction } from 'testcafe'
+import { buyerRole, sellerRole, adminRole } from './roles'
 import faker from 'faker'
 import ItemShowPage from './pages/itemshow'
 import ItemShowEdit from './pages/itemedit'
@@ -7,6 +8,7 @@ import NewSessionForm from './pages/newsession'
 import NewItemForm from './pages/newitem'
 import TopMenuBtns from './pages/topmenu'
 import ItemSearch from './pages/itemsearch'
+import { newEmail, newPassword } from './roles'
 
 const myUrl = 'https://damcikinstance.staging.oregon.platform-os.com/'
 const myLogUrl = myUrl + 'sessions/new'
@@ -14,12 +16,10 @@ const myLogUrl = myUrl + 'sessions/new'
 fixture`Register scenario`.page(myLogUrl)
 
 const signupConfirmation = 'Your account has been created'
-const loginConfirmation = 'Logged in'
 const notAuthorizedUser = 'Permission denied'
 const getURL = ClientFunction(() => window.location.href)
 const editURL = '/items/edit?id='
-const newEmail = faker.internet.email().toLowerCase()
-const newPassword = faker.internet.password()
+
 const newUsername = faker.name.findName()
 const item = {
   name: faker.commerce.productName(),
@@ -44,7 +44,7 @@ const topMenu = new TopMenuBtns()
 const itemSearch = new ItemSearch(item)
 const clearField = 'ctrl+a delete'
 
-const buyerRole = Role(myUrl + 'sessions/new', async (t) => {
+/*const buyerRole = Role(myUrl + 'sessions/new', async (t) => {
   await t
     .typeText(newSessionForm.emailInput, 'johnsmith@email.com')
     .typeText(newSessionForm.passInput, 'password')
@@ -66,7 +66,7 @@ const adminRole = Role(myUrl + 'sessions/new', async (t) => {
     .typeText(newSessionForm.passInput, 'password')
     .click(newSessionForm.logInBtn)
   await t.expect(Selector('main').withText(loginConfirmation).exists).ok('message ' + loginConfirmation + " doesn't exists")
-})
+})*/
 
 test(`Register seller`, async (t) => {
   await t
@@ -97,7 +97,7 @@ test(`Register admin`, async (t) => {
     .click(newSessionForm.signUpBtn)
 })
 
-fixture`Empty/bad data scenario`.page(myLogUrl)
+//fixture`Empty/bad data scenario`.page(myLogUrl)
 
 test(`Logging attempt with empty data`, async (t) => {
   await t
@@ -127,7 +127,7 @@ test(`Logging attempt with wrong data`, async (t) => {
   await t.expect(Selector('html').textContent).contains('Invalid email or password')
 })
 
-fixture`Item list/edit/trade scenario`.page(myUrl)
+//fixture`Item list/edit/trade scenario`.page(myUrl)
 
 test('Item listing', async (t) => {
   //listing the item for sale
@@ -147,12 +147,12 @@ test('Item listing', async (t) => {
   await t
     .expect('img[src="_uploads_/testimage.png"]')
     .ok()
-    .click(topMenu.logoBtn)
 })
 
 test('Edit item', async (t) => {
   await t
     //searching item by its name
+    .click(topMenu.logoBtn)
     .useRole(sellerRole)
     .typeText(itemSearch.searchField, item.name)
     .click(itemSearch.searchBtn)
@@ -170,7 +170,7 @@ test('Edit item', async (t) => {
     .typeText(itemSearch.searchField, item.name)
     .click(itemSearch.searchBtn)
     .click(itemSearch.itemLink)
-    .click(Selector('a').withText('Search this user items'))
+    .click(Selector('a').withText('By '+newEmail))
   await t.expect(Selector('p').withText('You are now on your list').exists).ok()
   await t.expect(itemSearch.itemAhref.exists).ok("'Item#name could not be found")
     .click(itemSearch.itemLink)
@@ -255,7 +255,7 @@ test('Payout check', async (t) => {
   await t.expect(Selector('tbody').find('td').withText('paid').exists).ok("message 'paid' doesn't exists")
 })
 
-fixture`Other`.page(myUrl)
+//fixture`Other`.page(myUrl)
 
 test(`Admin Panel test`, async (t) => {
   await t.useRole(adminRole)
@@ -280,6 +280,7 @@ test(`Admin Panel test`, async (t) => {
 test('Breakin-in test, edition by none user', async (t) => {
   await t
     .useRole(buyerRole)
+    .click(topMenu.logoBtn)
     .typeText(itemSearch.searchField, 'Watch')
     .click(itemSearch.searchBtn)
     .click(Selector('a').withText('Watch'))
