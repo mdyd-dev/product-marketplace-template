@@ -31,7 +31,7 @@ en:
         description: Listings counter
         delta: Since yesterday
   app:
-    title: Damcik instance MVP Marketplace
+    title: MVP Marketplace
     support_email: "support@getmarkeplace.co"
 
     total_entries: "Total items:"
