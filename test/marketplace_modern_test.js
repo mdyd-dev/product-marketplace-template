@@ -11,9 +11,8 @@ import ItemSearch from './pages/itemsearch'
 import { newEmail, newPassword } from './roles'
 
 const myUrl = 'https://damcikinstance.staging.oregon.platform-os.com/'
-const myLogUrl = myUrl + 'sessions/new'
 
-fixture`Register scenario`.page(myLogUrl)
+fixture`Happy scenario`.page(myUrl + 'sessions/new')
 
 const signupConfirmation = 'Your account has been created'
 const notAuthorizedUser = 'Permission denied'
@@ -44,30 +43,6 @@ const topMenu = new TopMenuBtns()
 const itemSearch = new ItemSearch(item)
 const clearField = 'ctrl+a delete'
 
-/*const buyerRole = Role(myUrl + 'sessions/new', async (t) => {
-  await t
-    .typeText(newSessionForm.emailInput, 'johnsmith@email.com')
-    .typeText(newSessionForm.passInput, 'password')
-    .click(newSessionForm.logInBtn)
-  await t.expect(Selector('main').withText(loginConfirmation).exists).ok('message ' + loginConfirmation + " doesn't exists")
-})
-
-const sellerRole = Role(myUrl + 'sessions/new', async (t) => {
-  await t
-    .typeText(newSessionForm.emailInput, newEmail)
-    .typeText(newSessionForm.passInput, newPassword)
-    .click(newSessionForm.logInBtn)
-  await t.expect(Selector('main').withText(loginConfirmation).exists).ok('message ' + loginConfirmation + " doesn't exists")
-})
-
-const adminRole = Role(myUrl + 'sessions/new', async (t) => {
-  await t
-    .typeText(newSessionForm.emailInput, 'admin@example.com')
-    .typeText(newSessionForm.passInput, 'password')
-    .click(newSessionForm.logInBtn)
-  await t.expect(Selector('main').withText(loginConfirmation).exists).ok('message ' + loginConfirmation + " doesn't exists")
-})*/
-
 test(`Register seller`, async (t) => {
   await t
     .click(newSessionForm.regBtn)
@@ -97,11 +72,8 @@ test(`Register admin`, async (t) => {
     .click(newSessionForm.signUpBtn)
 })
 
-//fixture`Empty/bad data scenario`.page(myLogUrl)
-
 test(`Logging attempt with empty data`, async (t) => {
   await t
-    //.click(topMenu.logInBtn)
     .click(newSessionForm.logInBtn)
   await t.expect(Selector('label').withText('E-mail').textContent).contains('cannot be blank')
   await t.expect(Selector('label').withText('Password').textContent).contains('cannot be blank')
@@ -109,7 +81,6 @@ test(`Logging attempt with empty data`, async (t) => {
 
 test(`Registration attempt with taken data`, async (t) => {
   await t
-    //.click(topMenu.logInBtn)
     .click(newSessionForm.regBtn)
     .typeText(newSessionForm.emailInput, 'admin@example.com')
     .typeText(newSessionForm.passInput, 'password')
@@ -120,14 +91,11 @@ test(`Registration attempt with taken data`, async (t) => {
 
 test(`Logging attempt with wrong data`, async (t) => {
   await t
-    //.click(topMenu.logInBtn)
     .typeText(newSessionForm.emailInput, 'admin@email.com')
     .typeText(newSessionForm.passInput, 'wrongpassword')
     .click(newSessionForm.logInBtn)
   await t.expect(Selector('html').textContent).contains('Invalid email or password')
 })
-
-//fixture`Item list/edit/trade scenario`.page(myUrl)
 
 test('Item listing', async (t) => {
   //listing the item for sale
@@ -254,8 +222,6 @@ test('Payout check', async (t) => {
     .click(Selector('a').withText('Your orders').nth(0))
   await t.expect(Selector('tbody').find('td').withText('paid').exists).ok("message 'paid' doesn't exists")
 })
-
-//fixture`Other`.page(myUrl)
 
 test(`Admin Panel test`, async (t) => {
   await t.useRole(adminRole)
