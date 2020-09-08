@@ -10,8 +10,12 @@
   </div>
 
   <div class="mr-10">
-    <p>Email: <b>{{ user.email }}</b></p>
+    <p>User ID: <b class="font-mono">{{ user.id }}</b></p>
+    <p>Username: <b class="font-mono">{{ users.username }}</b></p>
+    <p>Email: <b class="font-mono">{{ user.email }}</b></p>
     <p>Password: <b class="font-mono">******</b></p>
+    <p><a href="/u/{{ current_user.id }}">{{ 'app.items.yours' | t }}</a></p>
+
   </div>
 
   <!--

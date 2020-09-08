@@ -2,9 +2,9 @@
 slug: u
 ---
 {% liquid
-  function_rc query = 'lib/data/queries/items/search/build', query: context.params, limit: 50, owner: context.params.slug2
-  function_rc items = 'lib/data/queries/items/search/execute', query: query
-  function_rc user = 'lib/data/queries/users/find', id: context.params.slug2
+  assign user_id = context.params.slug2 | default: context.current_user.id
+  function_rc items = 'lib/data/queries/items/search', query: context.params, limit: 50, owner: user_id
+  function_rc user = 'lib/data/queries/users/find', id: user_id
   function_rc filters = 'lib/data/queries/search/filters', query: context.params
   include 'theme/simple/users/listing', items: items, filters: filters, user: user
 %}

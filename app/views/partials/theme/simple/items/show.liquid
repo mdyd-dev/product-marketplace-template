@@ -34,8 +34,7 @@
 
     <div class="w-full mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
       <h2 class="text-sm tracking-widest ">
-        {% include 'theme/simple/business_card', user: item.owner.email %}
-        <span><a href="/u/{{ item.owner.id }}">Search this user items</a></span>
+        <a href="/u/{{ item.owner.id }}">{% include 'theme/simple/business_card', user: item.owner.email %}</a>
       </h2>
 
       <h1 class="mb-1 text-2xl">
@@ -45,7 +44,7 @@
       <div class="flex flex-wrap mb-4">
         <ul class="flex w-full categories">
           <li><span class="font-semibold">category: </span></li>
-          <li class="ml-2">{{ 'categories.' | append: item.category | t }}</li>
+          <li class="ml-2"><a href="/s?k=&category={{ item.category }}">{{ 'categories.' | append: item.category | t }}</a></li>
         </ul>
       </div>
 

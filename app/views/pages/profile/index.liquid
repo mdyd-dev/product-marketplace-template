@@ -1,6 +1,7 @@
 ---
 slug: profile
 ---
-{% liquid
-  include 'theme/simple/profile/show', user: context.current_user
+{%liquid
+  function_rc user = 'lib/data/queries/users/find', id: context.current_user.id
+  include 'theme/simple/profile/show', user: user
 %}
