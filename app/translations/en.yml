@@ -31,7 +31,7 @@ en:
         description: Listings counter
         delta: Since yesterday
   app:
-    title: MVP Marketplace
+    title: Damcik instance MVP Marketplace
     support_email: "support@getmarkeplace.co"
 
     total_entries: "Total items:"
@@ -43,9 +43,12 @@ en:
     login: Log in
     logout: Log out %{user}
 
+
     order: Order
     your-orders: Your orders
     your-list: Your list
+    self-list: You are now on <b class="font-semibold">your</b> list
+    user-list: You are now on <b class="font-semibold">%{name}'s</b> list
     back: Back
     continue: Continue
 
@@ -81,6 +84,7 @@ en:
         id: ID
         created_at: Created at
         email: Email
+        list_id: List ID
 
     items:
       list: Items

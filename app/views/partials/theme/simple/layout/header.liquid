@@ -10,11 +10,6 @@
     </a>
 
     <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto">
-    <span class="mr-10">
-        {% if current_user.id > '1' %}
-        <p>Logged as <b>{{ current_user.email }}</b></p>
-        {% endif %}
-      </span>
       <a href="/items/new" class="mr-5 hover:text-gray-900">{{ 'app.list-your-item' | t }}</a>
 
       {% if context.current_user.id  %}

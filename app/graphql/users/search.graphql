@@ -12,6 +12,7 @@ query users($id: ID, $email: String, $limit: Int = 1, $valid_for: Int = 1, $with
       id
       email
       created_at
+      username: property(name: "username")
       token: temporary_token(valid_for: $valid_for) @include(if: $with_token)
     }
   }

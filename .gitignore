@@ -6,3 +6,4 @@ tmp/
 app/assets/css/*.css
 app/assets/js/*.js
 test/pictures/
+test/reports/video/

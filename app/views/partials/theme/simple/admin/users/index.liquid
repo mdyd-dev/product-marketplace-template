@@ -4,7 +4,7 @@
       <th class="w-8 text-left">{{ 'app.users.attr.id' | t }}</th>
       <th class="text-left">{{ 'app.users.attr.email' | t }}</th>
       <th class="text-left">{{ 'app.users.attr.created_at' | t }}</th>
-      <th class ="text-left">List</th>
+      <th class ="text-left">{{ 'app.users.attr.list' | t }}</th>
     </tr>
   </thead>
 
@@ -17,7 +17,7 @@
         <td>
           <a href="/u/{{ record.id }}">
           <button class="mt button button-sm mt-2">
-          ID {{ record.id }} list
+          {{ 'app.items.list' | t }}
           </button>
           </a>
         </td>
