@@ -12,5 +12,7 @@ slug: items
     break
   endunless
 
-  include 'theme/simple/items/show', item: item
+  function_rc current_user = 'lib/data/queries/users/find', id: context.current_user.id
+
+  include 'theme/simple/items/show', item: item, current_user: current_user
 %}

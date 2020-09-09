@@ -16,6 +16,8 @@
     <p>Password: <b class="font-mono">******</b></p>
     <p><a href="/u/{{ current_user.id }}">{{ 'app.items.yours' | t }}</a></p>
 
+    {{ user.followed_users }}
+
   </div>
 
   <!--

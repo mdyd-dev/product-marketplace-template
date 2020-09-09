@@ -1,0 +1,9 @@
+mutation toggle(
+  $id: ID!
+  $properties: [CustomAttributeInputType]
+) {
+  user_update(user: {properties: $properties}, id: $id) {
+    id
+    followed_user_ids: property(name: "followed_user_ids")
+  }
+}
