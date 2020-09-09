@@ -14,6 +14,7 @@
         <td>{{ record.id }}</td>
         <td>{{ record.email }}</td>
         <td>{{ record.created_at | l }}</td>
+        <td>{{ record.followed_user_ids | json }}</td>
         <td>
           <a href="/u/{{ record.id }}">
           <button class="mt button button-sm mt-2">

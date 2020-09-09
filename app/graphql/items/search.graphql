@@ -35,6 +35,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
       owner: related_user(join_on_property: "owner", foreign_property: "id") {
         id
         email
+        username: property(name: "username")
       }
 
       status: related_model(join_on_property: "id", foreign_property: "item_id", model_schema_name: "item_status") {

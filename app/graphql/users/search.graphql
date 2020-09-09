@@ -14,6 +14,11 @@ query users($id: ID, $email: String, $limit: Int = 1, $valid_for: Int = 1, $with
       created_at
       username: property(name: "username")
       token: temporary_token(valid_for: $valid_for) @include(if: $with_token)
+      followed_user_ids: property_array(name: "followed_user_ids")
+
+      followed_users: related_users(foreign_property: "id" join_on_property: "followed_user_ids"){
+        email
+      }
     }
   }
 }

@@ -1,4 +1,6 @@
 properties:
+  - name: followed_user_ids
+    type: array
   - name: username
   - name: photo
     type: upload

@@ -34,7 +34,8 @@
 
     <div class="w-full mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
       <h2 class="text-sm tracking-widest ">
-        <a href="/u/{{ item.owner.id }}">{% include 'theme/simple/business_card', user: item.owner.email %}</a>
+        {% include 'theme/simple/business_card', user: item.owner %}
+        <a href="/u/{{ item.owner.id }}">{% print 'app.items.by_user' | t %}</a>
       </h2>
 
       <h1 class="mb-1 text-2xl">
@@ -96,3 +97,5 @@
     </div>
   </div>
 </div>
+
+{% include 'theme/simple/items/follow.js' %}
