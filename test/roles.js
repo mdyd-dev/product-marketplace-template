@@ -9,7 +9,7 @@ const loginConfirmation = 'Logged in'
 export const newEmail = faker.internet.email().toLowerCase()
 export const newPassword = faker.internet.password()
 
-const myUrl = 'https://damcikinstance.staging.oregon.platform-os.com/'
+const myUrl = process.env.MPKIT_URL
 
 export const buyerRole = Role(myUrl, async (t) => {
   await t
