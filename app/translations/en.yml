@@ -82,7 +82,7 @@ en:
         page_visited: visited <a href="%{obj}">%{obj}</a> page
         item_created: created an <a href="/items/%{obj}">%{obj} item</a>
         order_status_created: changed status of the [%{target_id}] order to <span class="font-semibold">%{status}</span>
-        order_created: created an [%{object_id}] order for <a href="/items/%{target_id}">%{target}</a> item
+        order_created: created an [%{object_id}] order for <a href="/items/%{target_id}">%{target}</a> item <img src="%{url}" />
         account_created: created an account.
 
     users:
