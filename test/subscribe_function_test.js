@@ -64,6 +64,7 @@ test('Item listing', async (t) => {
       '_uploads_/testimage.png',
     ])
     .click(newItemForm.submitBtn)
+    .expect(Selector('button').withAttribute('data-follow-user').exists).notOk("self follow is allowed")
 })
 
 test('Follow seller', async (t) => {
