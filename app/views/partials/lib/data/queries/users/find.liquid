@@ -3,7 +3,7 @@
     return_rc null
   endif
 
-  graphql r  = 'users/search', id: id, email: email, limit: 1, with_token: with_token
+  graphql r  = 'users/search', id: id, email: email, limit: 1, with_token: with_token, with_followed: with_followed
 
   return_rc r.users.results.first
 %}

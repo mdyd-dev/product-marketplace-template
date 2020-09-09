@@ -1,19 +1,14 @@
-{% parse_json object %}
+{% parse_json obj %}
   {
     "type": {{ type | json }},
-    "object": {
-      "id": {{ object_id | json }}
-    },
-    "actor": {
-      "id": {{ actor_id | json }}
-    },
-    "target": {
-      "id": {{ target_id | json }}
-    },
     "date": {{ 'now' | to_time | json }}
   }
 {%  endparse_json %}
 
 {% liquid
-  return_rc object
+  hash_assign obj['actor'] = actor
+  hash_assign obj['object'] = object
+  hash_assign obj['target'] = target
+
+  return_rc obj
 %}

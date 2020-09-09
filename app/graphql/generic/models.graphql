@@ -1,0 +1,16 @@
+query search($id: ID, $limit: Int = 20) {
+  models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      deleted_at: { exists: false }
+    })
+  {
+    total_entries
+    results {
+      type: model_schema_name
+      id
+      properties
+    }
+  }
+}

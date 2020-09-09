@@ -48,7 +48,7 @@ en:
     your-orders: Your orders
     your-list: Your list
     self-list: You are now on <b class="font-semibold">your</b> list
-    user-list: You are now on <b class="font-semibold">%{name}'s</b> list
+    user-list: "You are now on <b class=\"font-semibold\">%{name}'s</b> list"
     back: Back
     continue: Continue
 
@@ -77,13 +77,13 @@ en:
         actor: Actor
         type: Type
       types:
-        user_followed_user: "User %{actor} started following user %{target}"
-        user_unfollowed_user: User %{actor} stoped following user %{target}
-        page_visited: User %{actor} visited <a href="/%{obj}">%{obj} page</a>
-        item_created: User %{actor} created an <a href="/items/%{obj}">%{obj} item</a>
-        order_status_created: User %{actor} updated status %{obj} on the %{target} order
-        order_created: User %{actor} created an %{obj} order for <a href="/items/%{target}">%{target} item</a>
-        account_created: User %{actor} created an account.
+        user_followed_user: "started following user %{target}"
+        user_unfollowed_user: stoped following user %{target}
+        page_visited: visited <a href="%{obj}">%{obj}</a> page
+        item_created: created an <a href="/items/%{obj}">%{obj} item</a>
+        order_status_created: changed status of the [%{target_id}] order to <span class="font-semibold">%{status}</span>
+        order_created: created an [%{object_id}] order for <a href="/items/%{target_id}">%{target}</a> item
+        account_created: created an account.
 
     users:
       new: new user

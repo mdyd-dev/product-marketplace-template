@@ -1,3 +1,19 @@
-<div class="flex w-full justify-between bg-white mb-2 p-4">
-  {% render 'theme/simple/activities/user_followed_user', payload: activity.payload %}
+<div class="w-1/2 bg-white mb-2 p-4 m-auto">
+  <div class="w-full font-semibold">
+    {% render 'theme/simple/business_card', user: activity.payload.actor, current_user: current_user %}
+  </div>
+  <div class="text-xs w-full"> {% print activity.payload.date  %} </div>
+  <div class="text-normal w-2/3 p-4 mt-3">
+    {% if activity.payload.type contains 'follow' %}
+      {% render 'theme/simple/activities/user_activity', payload: activity.payload %}
+    {% elsif activity.payload.type contains 'visit' %}
+      {% render 'theme/simple/activities/visit', payload: activity.payload %}
+    {% elsif activity.payload.type contains 'account' %}
+      {% render 'theme/simple/activities/user_activity', payload: activity.payload %}
+    {% elsif activity.payload.type contains 'order_status' %}
+      {% render 'theme/simple/activities/order_status', payload: activity.payload %}
+    {% elsif activity.payload.type contains 'order' %}
+      {% render 'theme/simple/activities/order_created', payload: activity.payload %}
+    {% endif %}
+  </div>
 </div>

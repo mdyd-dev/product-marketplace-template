@@ -8,7 +8,8 @@
 
   function_rc list = 'lib/data/queries/activities/search', feed: feed_name, feed_id: feed_id, limit: 100
   function_rc users = 'lib/data/queries/users/search', limit: 10
+  function_rc current_user = 'lib/data/queries/users/find', id: context.current_user.id
 
   include 'theme/simple/admin/menu', section: 'activities'
-  include 'theme/simple/admin/activities/index', list: list, section: 'activities', users: users
+  include 'theme/simple/admin/activities/index', list: list, section: 'activities', users: users, current_user: current_user
 %}
