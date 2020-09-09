@@ -76,6 +76,14 @@ en:
         target: Target
         actor: Actor
         type: Type
+      types:
+        user_followed_user: "User %{actor} started following user %{target}"
+        user_unfollowed_user: User %{actor} stoped following user %{target}
+        page_visited: User %{actor} visited <a href="/%{obj}">%{obj} page</a>
+        item_created: User %{actor} created an <a href="/items/%{obj}">%{obj} item</a>
+        order_status_created: User %{actor} updated status %{obj} on the %{target} order
+        order_created: User %{actor} created an %{obj} order for <a href="/items/%{target}">%{target} item</a>
+        account_created: User %{actor} created an account.
 
     users:
       new: new user
