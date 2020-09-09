@@ -1,42 +1,18 @@
-<table class="table w-full text-sm table-auto">
-  <thead>
-    <tr>
-      <th class="text-lg font-normal text-left">
-        {{ 'app.activities.attr.created_at' | t }}
-      </th>
-      <th class="text-lg font-normal text-left">
-        {{ 'app.activities.attr.type' | t }}
-      </th>
-      <th class="text-lg font-normal text-left">
-        {{ 'app.activities.attr.actor' | t }}
-      </th>
-      <th class="text-lg font-normal text-left">
-        {{ 'app.activities.attr.object' | t }}
-      </th>
-      <th class="text-lg font-normal text-left">
-        {{ 'app.activities.attr.target' | t }}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for record in list.results %}
-      <tr>
-        <td class="text-left">
-          {{ record.payload.date }}
-        </td>
-        <td class="text-left">
-          {{ record.payload.type }}
-        </td>
-        <td class="text-left">
-          {{ record.payload.actor.id }}
-        </td>
-        <td class="text-left">
-          {{ record.payload.object.id }}
-        </td>
-        <td class="text-left">
-          {{ record.payload.target.id }}
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="w-full bg-gray-200 p-3">
+  <form action="" class="flex w-full flex-rows justify-between">
+    <select name="feed" class="w-5/6 form-input text-xl">
+      <option value="system.1">audit all events</option>
+      {% for user in users.results %}
+        {% assign feed = "user." | append: user.id %}
+        <option value="{{feed}}" {% if params.feed == feed %}selected{% endif %}>user: {{user.username}}</option>
+      {% endfor %}
+    </select>
+    <input type="submit" class="w-1/6 form-input" value="GO">
+  </form>
+</div>
+
+<div class="w-full bg-gray-200 p-3">
+  {% for record in list.results %}
+    {% render 'theme/simple/activities/show', activity: record %}
+  {% endfor %}
+</div>

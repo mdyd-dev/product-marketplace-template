@@ -7,5 +7,11 @@ method: post
 
   function_rc object = 'lib/commands/users/followers/toggle', params: context.params, current_user_id: context.current_user.id
 
+  if object.valid
+  log object, type: 'showme'
+    assign event_type = 'user_' | append: context.params.action_name | append: 'ed_user'
+    include 'lib/commands/events/create', type: event_type, actor_id: context.current_user.id, target_id: context.params.user_id
+  endif
+
   render 'theme/json/items/index', response: object
 %}

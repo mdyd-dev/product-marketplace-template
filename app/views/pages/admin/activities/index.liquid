@@ -2,8 +2,13 @@
   include 'lib/must_be_authenticated'
   include 'lib/must_be_superadmin'
 
-  function_rc list = 'lib/data/queries/activities/search', feed: 'system', feed_id: '1', limit: 1000
+  assign feed = context.params.feed | split: '.'
+  assign feed_name = feed[0]| default: 'system'
+  assign feed_id = feed[1] | default: '1'
+
+  function_rc list = 'lib/data/queries/activities/search', feed: feed_name, feed_id: feed_id, limit: 100
+  function_rc users = 'lib/data/queries/users/search', limit: 10
 
   include 'theme/simple/admin/menu', section: 'activities'
-  include 'theme/simple/admin/activities/index', list: list, section: 'activities'
+  include 'theme/simple/admin/activities/index', list: list, section: 'activities', users: users
 %}
