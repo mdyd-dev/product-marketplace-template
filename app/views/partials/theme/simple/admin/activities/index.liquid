@@ -13,6 +13,8 @@
 
 <div class="w-full bg-gray-200 p-3">
   {% for record in list.results %}
-    {% render 'theme/simple/activities/show', activity: record %}
+    {% render 'theme/simple/activities/show', activity: record, current_user: current_user %}
   {% endfor %}
 </div>
+
+{% include 'theme/simple/items/follow.js' %}

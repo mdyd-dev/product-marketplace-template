@@ -1,0 +1,10 @@
+{% liquid
+  graphql r = 'generic/models', id: id, limit: 1
+
+  if r.errors
+    log r, type: 'showme'
+    break
+  endif
+
+  return_rc r.models.results.first 
+%}

@@ -1,7 +1,19 @@
-{% background "bg-task-name", type: type, object_id: object_id, actor_id: actor_id, target_id: target_id %}
+{% background "bg-task-name", type: type, object_id: object_id, actor_id: actor_id, target_id: target_id, object: object %}
 
 {% liquid
-  function_rc object = 'lib/commands/events/create/build', type: type, actor_id: actor_id, object_id: object_id, target_id: target_id
+  function_rc actor = 'lib/data/queries/users/find', id: actor_id, with_token: false, with_followed: false
+
+  unless object
+    function_rc object = 'lib/data/queries/models/find', id: object_id
+  endunless
+
+  if type contains 'followed_user'
+    function_rc target = 'lib/data/queries/users/find', id: target_id, with_token: false, with_followed: false
+  else
+    function_rc target = 'lib/data/queries/models/find', id: target_id
+  endif
+
+  function_rc object = 'lib/commands/events/create/build', type: type, actor: actor, object: object, target: target
   function_rc object = 'lib/commands/events/create/check', object: object
 
   if object.valid
@@ -11,7 +23,7 @@
       include 'lib/commands/events/broadcast/execute', object: object
     endif
   else
-    log object, type: 'errors.events.invalid'
+    log object, type: 'errors.events.invalid showme'
   endif
 %}
 
