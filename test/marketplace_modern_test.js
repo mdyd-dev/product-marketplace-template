@@ -12,7 +12,7 @@ import { newEmail, newPassword } from './roles'
 
 const myUrl = process.env.MPKIT_URL
 
-fixture`Happy scenario`.page(myUrl + 'sessions/new')
+fixture`Register scenario`.page(myUrl + 'sessions/new')
 
 const signupConfirmation = 'Your account has been created'
 const notAuthorizedUser = 'Permission denied'
@@ -72,8 +72,11 @@ test(`Register admin`, async (t) => {
     .click(newSessionForm.signUpBtn)
 })
 
+fixture`Wrong data scenario`.page(myUrl+ 'sessions/new')
+
 test(`Logging attempt with empty data`, async (t) => {
   await t
+    .click(topMenu.logInBtn)
     .click(newSessionForm.logInBtn)
   await t.expect(Selector('label').withText('E-mail').textContent).contains('cannot be blank')
   await t.expect(Selector('label').withText('Password').textContent).contains('cannot be blank')
@@ -97,6 +100,8 @@ test(`Logging attempt with wrong data`, async (t) => {
   await t.expect(Selector('html').textContent).contains('Invalid email or password')
 })
 
+fixture`Trade scenario`.page(myUrl)// + 'sessions/new')
+
 test('Item listing', async (t) => {
   //listing the item for sale
   await t.useRole(sellerRole)
@@ -104,7 +109,8 @@ test('Item listing', async (t) => {
     .click(topMenu.listItemBtn)
     .typeText(newItemForm.nameField, item.name)
     .typeText(newItemForm.descField, item.description)
-    .doubleClick(newItemForm.priceField)
+    await t.debug()
+    .click(newItemForm.priceField)
     .pressKey(clearField)
     .typeText(newItemForm.priceField, item.price)
     .click(newItemForm.browseBtn)
@@ -112,35 +118,30 @@ test('Item listing', async (t) => {
       '_uploads_/testimage.png',
     ])
     .click(newItemForm.submitBtn)
-  await t
-    .expect('img[src="_uploads_/testimage.png"]')
-    .ok()
 })
 
 test('Edit item', async (t) => {
   await t
     //searching item by its name
-    .click(topMenu.logoBtn)
     .useRole(sellerRole)
     .typeText(itemSearch.searchField, item.name)
     .click(itemSearch.searchBtn)
     .expect(itemSearch.itemAhref.exists)
     .ok("'Item#name could not be found")
     .click(itemSearch.itemLink)
-  await t.expect('img[src="_uploads_/testimage.png"]').ok()
     //checks if all data is correct
   await t.expect(page.name.exists).ok()
   await t.expect(page.description.exists).ok()
   await t.expect(page.price.innerText).eql('$10,000', 'check element text')
+  await t.expect('img[src="_uploads_/testimage.png"]').ok()
     .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Your list'))
+  await t.expect(Selector('p').withText('You are now on your list').exists).ok()
   await t.expect(itemSearch.itemAhref.exists).ok("'Item#name could not be found")
     .typeText(itemSearch.searchField, item.name)
     .click(itemSearch.searchBtn)
     .click(itemSearch.itemLink)
     .click(Selector('a').withText('By '+newEmail))
-  await t.expect(Selector('p').withText('You are now on your list').exists).ok()
-  await t.expect(itemSearch.itemAhref.exists).ok("'Item#name could not be found")
     .click(itemSearch.itemLink)
 
 
@@ -161,22 +162,17 @@ test('Edit item', async (t) => {
   await t.expect(editPage.name.exists).ok()
   await t.expect(editPage.description.exists).ok()
   await t.expect(editPage.price.innerText).eql('$5,000', 'check element text')
-    .click(topMenu.logoBtn)
-    //Logging out from seller account
     .click(topMenu.logOutBtn)
-    //logging at buyer account and checks if seller item after edit exists
+    //logging at buyer account and checks if seller item after edit exists then buying item
     .useRole(buyerRole)
     .typeText(itemSearch.searchField, editedItem.name)
     .click(itemSearch.searchBtn)
     .click(editPage.itemLink)
-    //Checks if buy button works correctly
     .click(page.buyBtn)
-    .click(topMenu.logOutBtn)
 })
 
 test('Delete item test', async (t) => {
   await t
-    //checks if bought item still exists at auctions
     .useRole(sellerRole)
     .click(topMenu.dashboardBtn)
     .click(Selector('main').find('a').withText('Your items'))
@@ -222,6 +218,8 @@ test('Payout check', async (t) => {
     .click(Selector('a').withText('Your orders').nth(0))
   await t.expect(Selector('tbody').find('td').withText('paid').exists).ok("message 'paid' doesn't exists")
 })
+
+fixture`Other`.page(myUrl)// + 'sessions/new')
 
 test(`Admin Panel test`, async (t) => {
   await t.useRole(adminRole)
