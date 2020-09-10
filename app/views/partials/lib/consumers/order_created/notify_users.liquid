@@ -13,7 +13,7 @@
 {% liquid
   assign ids = '[]' | parse_json | add_to_array: event.actor.id
 
-  function_rc audience = 'lib/data/queries/activities/audience', id: event.actor.id
+  function_rc audience = 'lib/data/queries/activities/audience', ids: ids
 
   render 'lib/commands/activities/publish', uuid: event.uuid, type: "user", ids: audience
   render 'lib/commands/activities/publish', uuid: event.uuid, type: "user", ids: ids

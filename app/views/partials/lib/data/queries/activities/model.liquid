@@ -7,19 +7,22 @@
   graphql r = 'activities/model', id: id, limit: 1
 
   if r.errors
-    log r, type: 'showme'
+    log r, type: 'showme query activities/model'
     break
   endif
 
   assign model = r.models.results.first
 
-  graphql r = 'activities/photo', uuid: model.uuid
+  assign uuid = model.uuid | default: 'no-uuid-this-is-fake-report-and-add'
 
-  log r, type: 'showme'
+  graphql r = 'activities/photo', uuid: uuid
+
+  if r.errors
+    log r, type: 'showme activities/photo query'
+    break
+  endif
 
   hash_assign model['photos'] = r.models.results
-
-  log model, type: 'showme'
 
   return_rc model
 %}
