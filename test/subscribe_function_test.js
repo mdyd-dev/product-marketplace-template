@@ -64,7 +64,7 @@ test('Item listing', async (t) => {
       '_uploads_/testimage.png',
     ])
     .click(newItemForm.submitBtn)
-    .expect(Selector('button').withAttribute('data-follow-user').exists).notOk("self follow is allowed")
+    .expect(Selector('button').withAttribute('data-follow-user').exists).notOk()
 })
 
 test('Follow seller', async (t) => {
@@ -77,7 +77,7 @@ test('Follow seller', async (t) => {
     .ok("'Item#name could not be found")
     .click(itemSearch.itemLink)
     .click(Selector('button').withAttribute('data-follow-user'))
-    .expect(Selector('.following').exists).ok("button with class '.following' doesn't exists")
+    .expect(Selector('.following').exists).ok("button with class '.following' doesn't exists") // expect true
     .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Profile'))
     .expect(Selector('div').withText(newEmail).exists).ok("Followed list not shown")
@@ -89,5 +89,5 @@ test('Following user as not logged user', async (t) => {
     .typeText(itemSearch.searchField, item.name)
     .click(itemSearch.searchBtn)
     .click(itemSearch.itemLink)
-    .expect(Selector('button').withAttribute('data-follow-user').exists).notOk("subscribe someone as not logged user is allowed")
+    .expect(Selector('button').withAttribute('data-follow-user').exists).notOk()
 })
