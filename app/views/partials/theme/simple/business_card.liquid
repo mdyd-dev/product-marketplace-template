@@ -3,7 +3,8 @@
 <div class="flex">
   <span class="business_card mr-2">by {% print name %}</span>
 
-  {% if current_user %}
+  {% assign user_id = user.id | append: '' %}
+  {% if current_user or current_user != user_id %}
     {% render 'theme/simple/follow_button', current_user: current_user, user: user %}
   {% endif %}
 </div>
