@@ -12,12 +12,7 @@ import { newEmail, newPassword, newUsername } from './roles'
 
 const myUrl = process.env.MPKIT_URL
 
-fixture`Register scenario`.page(myUrl + 'sessions/new')
 
-const signupConfirmation = 'Your account has been created'
-const notAuthorizedUser = 'Permission denied'
-const getURL = ClientFunction(() => window.location.href)
-const editURL = '/items/edit?id='
 
 const item = {
   name: faker.commerce.productName(),
@@ -41,6 +36,12 @@ const newItemForm = new NewItemForm()
 const topMenu = new TopMenuBtns()
 const itemSearch = new ItemSearch(item)
 const clearField = 'ctrl+a delete'
+const signupConfirmation = 'Your account has been created'
+const notAuthorizedUser = 'Permission denied'
+const getURL = ClientFunction(() => window.location.href)
+const editURL = '/items/edit?id='
+
+fixture`Register scenario`.page(myUrl + 'sessions/new')
 
 test(`Register admin`, async (t) => {
   await t
@@ -100,7 +101,7 @@ test(`Logging attempt with wrong data`, async (t) => {
 
 fixture`Trade scenario`.page(myUrl)
 
-test('Item listing', async (t) => {
+test('New Item', async (t) => {
   //listing the item for sale
   await t.useRole(sellerRole)
   await t
@@ -117,7 +118,7 @@ test('Item listing', async (t) => {
     .click(newItemForm.submitBtn)
 })
 
-test('Edit item', async (t) => {
+test('Editing item and search', async (t) => {
   await t
     //searching item by its name
     .useRole(sellerRole)
@@ -171,7 +172,7 @@ test('Edit item', async (t) => {
     .click(itemShow.buyBtn)
 })
 
-test('Delete item test', async (t) => {
+test('Deleting item', async (t) => {
   await t
     .useRole(sellerRole)
     .click(topMenu.dashboardBtn)
@@ -181,7 +182,7 @@ test('Delete item test', async (t) => {
     .click(topMenu.logOutBtn)
 })
 
-test('Sell test', async (t) => {
+test('Creating new item for sell', async (t) => {
   await t.useRole(sellerRole)
     await t.click(topMenu.listItemBtn)
     .typeText(newItemForm.nameField, item.name)
@@ -196,6 +197,10 @@ test('Sell test', async (t) => {
     .click(newItemForm.submitBtn)
   await t.expect('img[src="_uploads_/testimage.png"]').ok()
     .click(topMenu.logOutBtn)
+})
+
+test('Orders check and item checkout as buyer', async (t) => {
+    await t
     .useRole(buyerRole)
     .typeText(itemSearch.searchField, item.name)
     .click(itemSearch.searchBtn)
@@ -209,6 +214,7 @@ test('Sell test', async (t) => {
   await t.expect(Selector('div').withText('Ordered').exists).ok("message 'Ordered x times' doesn't exists")
     .click(topMenu.logOutBtn)
 })
+
 
 test('Payout check', async (t) => {
   await t
