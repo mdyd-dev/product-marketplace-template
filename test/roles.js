@@ -8,6 +8,8 @@ const newSessionForm = new NewSessionForm()
 const loginConfirmation = 'Logged in'
 export const newEmail = faker.internet.email().toLowerCase()
 export const newPassword = faker.internet.password()
+export const newUsername = faker.name.findName()
+
 
 const myUrl = process.env.MPKIT_URL
 

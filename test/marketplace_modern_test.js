@@ -8,7 +8,7 @@ import NewSessionForm from './pages/newsession'
 import NewItemForm from './pages/newitem'
 import TopMenuBtns from './pages/topmenu'
 import ItemSearch from './pages/itemsearch'
-import { newEmail, newPassword } from './roles'
+import { newEmail, newPassword, newUsername } from './roles'
 
 const myUrl = process.env.MPKIT_URL
 
@@ -19,7 +19,6 @@ const notAuthorizedUser = 'Permission denied'
 const getURL = ClientFunction(() => window.location.href)
 const editURL = '/items/edit?id='
 
-const newUsername = faker.name.findName()
 const item = {
   name: faker.commerce.productName(),
   type: faker.commerce.productMaterial(),
@@ -36,13 +35,21 @@ const editedItem = {
 
 const adminPage = new AdminPanel()
 const newSessionForm = new NewSessionForm()
-const page = new ItemShowPage(item)
+const itemShow = new ItemShowPage(item)
 const editPage = new ItemShowEdit(editedItem)
 const newItemForm = new NewItemForm()
 const topMenu = new TopMenuBtns()
 const itemSearch = new ItemSearch(item)
 const clearField = 'ctrl+a delete'
 
+test(`Register admin`, async (t) => {
+  await t
+    .click(newSessionForm.regBtn)
+    .typeText(newSessionForm.emailInput, 'admin@example.com')
+    .typeText(newSessionForm.passInput, 'password')
+    .typeText(newSessionForm.usernameInput, 'admin')
+    .click(newSessionForm.signUpBtn)
+})
 
 test(`Register seller`, async (t) => {
   await t
@@ -60,15 +67,6 @@ test(`Register buyer`, async (t) => {
     .typeText(newSessionForm.emailInput, 'johnsmith@email.com')
     .typeText(newSessionForm.passInput, 'password')
     .typeText(newSessionForm.usernameInput, 'johnsmith')
-    .click(newSessionForm.signUpBtn)
-})
-
-test(`Register admin`, async (t) => {
-  await t
-    .click(newSessionForm.regBtn)
-    .typeText(newSessionForm.emailInput, 'admin@example.com')
-    .typeText(newSessionForm.passInput, 'password')
-    .typeText(newSessionForm.usernameInput, 'admin')
     .click(newSessionForm.signUpBtn)
 })
 
@@ -129,9 +127,9 @@ test('Edit item', async (t) => {
     .ok("'Item#name could not be found")
     .click(itemSearch.itemLink)
     //checks if all data is correct
-  await t.expect(page.name.exists).ok()
-  await t.expect(page.description.exists).ok()
-  await t.expect(page.price.innerText).eql('$10,000', 'check element text')
+  await t.expect(itemShow.name.exists).ok()
+  await t.expect(itemShow.description.exists).ok()
+  await t.expect(itemShow.price.innerText).eql('$10,000', 'check element text')
   await t.expect('img[src="_uploads_/testimage.png"]').ok()
     .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Profile'))
@@ -149,7 +147,7 @@ test('Edit item', async (t) => {
 
   //change of item information
   await t
-    .click(page.editbutton)
+    .click(itemShow.editbutton)
     .doubleClick(newItemForm.nameField)
     .pressKey(clearField)
     .typeText(newItemForm.nameField, editedItem.name)
@@ -169,8 +167,9 @@ test('Edit item', async (t) => {
     .useRole(buyerRole)
     .typeText(itemSearch.searchField, editedItem.name)
     .click(itemSearch.searchBtn)
-    .click(editPage.itemLink)
-    .click(page.buyBtn)
+    Selector('a').withText(editedItem.name)
+    .click(Selector('main').find('a').withText('Your items'))
+    .click(itemShow.buyBtn)
 })
 
 test('Delete item test', async (t) => {
@@ -178,7 +177,6 @@ test('Delete item test', async (t) => {
     .useRole(sellerRole)
     .click(topMenu.dashboardBtn)
     .click(Selector('main').find('a').withText('Your items'))
-    .click(editPage.itemLink)
     .setNativeDialogHandler(() => true)
     .click(editPage.deleteBtn)
     .click(topMenu.logOutBtn)
@@ -203,7 +201,7 @@ test('Sell test', async (t) => {
     .typeText(itemSearch.searchField, item.name)
     .click(itemSearch.searchBtn)
     .click(itemSearch.itemLink)
-    .click(page.buyBtn)
+    .click(itemShow.buyBtn)
     .click(Selector('button').withText('Checkout'))
     .click(Selector('button').withText('Pay'))
     .click(topMenu.dashboardBtn)

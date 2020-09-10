@@ -1,7 +1,6 @@
 import { Selector } from 'testcafe'
 import { buyerRole, sellerRole, newEmail, newPassword } from './roles'
 import faker from 'faker'
-import ItemShowPage from './pages/itemshow'
 import NewSessionForm from './pages/newsession'
 import NewItemForm from './pages/newitem'
 import TopMenuBtns from './pages/topmenu'
@@ -21,7 +20,6 @@ const clearField = 'ctrl+a delete'
 
 
 const newSessionForm = new NewSessionForm()
-const page = new ItemShowPage(item)
 const newItemForm = new NewItemForm()
 const topMenu = new TopMenuBtns()
 const itemSearch = new ItemSearch(item)
