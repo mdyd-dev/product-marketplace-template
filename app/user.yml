@@ -23,3 +23,12 @@ properties:
             height: 256
             fit: inside
             without_enlargement: true
+        - name: tiny
+          output:
+            format: jpeg
+            quality: 80
+          resize:
+            width: 50
+            height: 50
+            fit: inside
+            without_enlargement: true

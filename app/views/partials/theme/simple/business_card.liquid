@@ -1,8 +1,9 @@
-{% assign name = user.username | default: 'Unknown' %}
+{% liquid
+  assign name = user.username | default: 'Unknown'
+%}
 
 <div class="flex">
-  <span class="business_card mr-2">by {% print name %}</span>
-
+  <span class="business_card mr-2">{% print name %}</span>
   {% if current_user and current_user.id != user.id %}
     {% render 'theme/simple/follow_button', current_user: current_user, user: user %}
   {% endif %}

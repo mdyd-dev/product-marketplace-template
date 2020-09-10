@@ -1,5 +1,6 @@
 {% liquid
   if id == blank
+    log 'looking for model without ID', type: 'showme'
     return_rc null
   endif
 
