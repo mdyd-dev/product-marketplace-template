@@ -44,9 +44,9 @@ test(`Register buyer`, async (t) => {
     .click(newSessionForm.signUpBtn)
 })
 
-fixture`Item listing`.page(myUrl)
+fixture`Item listing then self follow attempt`.page(myUrl)
 
-test('Item listing', async (t) => {
+test('Creating item then self follow attempt', async (t) => {
   //listing the item for sale
   await t.click(topMenu.logoBtn)
   await t.useRole(sellerRole)
@@ -62,6 +62,7 @@ test('Item listing', async (t) => {
       '_uploads_/testimage.png',
     ])
     .click(newItemForm.submitBtn)
+    // self follow attempt
     .expect(Selector('button').withAttribute('data-follow-user').exists).notOk()
 })
 
@@ -75,7 +76,7 @@ test('Follow seller', async (t) => {
     .ok("'Item#name could not be found")
     .click(itemSearch.itemLink)
     .click(Selector('button').withAttribute('data-follow-user'))
-    .expect(Selector('.following').exists).ok("button with class '.following' doesn't exists") // expect true
+    .expect(Selector('.following').exists).ok("button with class '.following' doesn't exists")
     .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Profile'))
     .expect(Selector('div').withText(newEmail).exists).ok("Followed list not shown")
