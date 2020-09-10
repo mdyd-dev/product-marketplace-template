@@ -3,6 +3,7 @@
   <form action="" class="flex w-full flex-rows justify-between">
     <select name="feed" class="w-5/6 form-input text-xl">
       <option value="system.1">audit all events</option>
+      <option value="user.50">john lee hooker</option>
       {% for user in users.results %}
         {% assign feed = "user." | append: user.id %}
         <option value="{{feed}}" {% if params.feed == feed %}selected{% endif %}>user: {{user.username}}</option>
@@ -11,11 +12,11 @@
     <input type="submit" class="w-1/6 form-input" value="GO">
   </form>
 
-<div class="grid grid-cols-1 gap-6 my-6">
-  {% for record in list.results %}
-    {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_user: current_user %}
-  {% endfor %}
-</div>
+  <div class="grid grid-cols-1 gap-6 my-6">
+    {% for record in list.results %}
+      {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_user: current_user %}
+    {% endfor %}
+  </div>
 
 </div>
 

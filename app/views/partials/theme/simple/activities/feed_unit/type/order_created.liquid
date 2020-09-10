@@ -1,9 +1,5 @@
 {% print payload.type | t: actor: payload.actor.username,
      object_id: payload.object.id,
-     target: payload.target.properties.name,
+     target: payload.target.name,
      target_id: payload.target.id,
      scope: 'app.activities.types'  %}
-
-<div class="w-full p-4">
-  <img class="text-center m-auto" src="{{payload.target.properties.cover_photo_url}}" />
-</div>

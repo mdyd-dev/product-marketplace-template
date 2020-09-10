@@ -1,0 +1,20 @@
+{% comment %}
+  what we do:
+
+  this is user_followed_user event
+
+  actor: following
+  target: follower
+{% endcomment %}
+
+{% liquid
+  assign ids = '[]' | parse_json | add_to_array: event.actor.id | add_to_array: event.target.id
+
+  function_rc audience = 'lib/data/queries/activities/audience', id: event.actor.id
+
+  log audience, type: 'showme'
+
+  render 'lib/commands/activities/publish', uuid: event.uuid, type: "user", ids: audience
+%}
+
+  render 'lib/commands/activities/publish', uuid: event.uuid, type: "user", ids: ids
