@@ -1,0 +1,32 @@
+{% assign type = payload.type %}
+
+<div class="mx-auto px-4 py-4 bg-white shadow-md rounded-lg w-full">
+
+  {% render 'theme/simple/activities/feed_unit/header', name: payload.actor.username, photo: payload.actor.photo.versions.tiny, date: payload.date %}
+
+  {% if payload.object.photo.versions.small %}
+    <div class="mt-2">
+      <img class="object-cover w-full rounded-lg" src="{{payload.object.photo.versions.small}}" alt="{{payload.object.name}}">
+    </div>
+  {% endif %}
+
+  <div class="py-2">
+    <p class="leading-snug">
+      {% if type contains 'follow' %}
+        {% render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload %}
+      {% elsif type contains 'visit' %}
+        {% render 'theme/simple/activities/feed_unit/type/visit', payload: payload %}
+      {% elsif type contains 'account' %}
+        {% render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload %}
+      {% elsif type contains 'order_status' %}
+        {% render 'theme/simple/activities/feed_unit/type/order_status', payload: payload %}
+      {% elsif type contains 'order' %}
+        {% render 'theme/simple/activities/feed_unit/type/order_created', payload: payload %}
+      {% elsif type contains 'item_created' %}
+        {% render 'theme/simple/activities/feed_unit/type/item_created', payload: payload %}
+      {% endif %}
+    </p>
+  </div>
+
+  <div class="text-xs bg-gray-100">{% print payload.type %}</div>
+</div>

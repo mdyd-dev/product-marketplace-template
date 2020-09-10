@@ -1,32 +1,37 @@
 {% background "bg-task-name", type: type, object_id: object_id, actor_id: actor_id, target_id: target_id, object: object %}
 
 {% liquid
-  function_rc actor = 'lib/data/queries/users/find', id: actor_id, with_token: false, with_followed: false
+  function_rc actor = 'lib/data/queries/activities/user', id: actor_id
+%}
 
-  if object
-    function_rc object = 'lib/data/queries/models/find', id: object.id
-  else
-    function_rc object = 'lib/data/queries/models/find', id: object_id
+{% liquid
+  if object_id
+    function_rc object = 'lib/data/queries/activities/model', id: object_id
   endif
+%}
 
-  assign TODO = 'refactor'
+{% comment %}'REFACTOR: find a better way of detecting type of target object', type: 'TODO'{% endcomment %}'
+
+{% liquid
   if type contains 'followed_user'
-    function_rc target = 'lib/data/queries/users/find', id: target_id, with_token: false, with_followed: false
+    function_rc target = 'lib/data/queries/activities/user', id: target_id
   else
-    function_rc target = 'lib/data/queries/models/find', id: target_id
+    function_rc target = 'lib/data/queries/activities/model', id: target_id
   endif
+%}
 
-  function_rc object = 'lib/commands/events/create/build', type: type, actor: actor, object: object, target: target
-  function_rc object = 'lib/commands/events/create/check', object: object
+{% liquid
+  function_rc event = 'lib/commands/events/create/build', type: type, actor: actor, object: object, target: target
+  function_rc event = 'lib/commands/events/create/check', object: event
 
-  if object.valid
-    function_rc object = 'lib/commands/events/create/execute', object: object
+  if event.valid
+    function_rc event = 'lib/commands/events/create/execute', object: event
 
     if object.valid
-      include 'lib/commands/events/broadcast/execute', object: object
+      include 'lib/commands/events/broadcast/execute', object: event
     endif
   else
-    log object, type: 'errors.events.invalid showme'
+    log event, type: 'errors.events.invalid showme'
   endif
 %}
 

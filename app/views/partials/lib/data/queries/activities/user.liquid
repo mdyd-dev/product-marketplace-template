@@ -1,0 +1,9 @@
+{% liquid
+  if id == blank
+    return_rc null
+  endif
+
+  graphql r  = 'activities/user', id: id
+
+  return_rc r.users.results.first
+%}

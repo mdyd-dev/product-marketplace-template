@@ -1,0 +1,15 @@
+<div class="py-2 flex flex-row items-center justify-between">
+  <div class="flex flex-row items-center">
+    <a href="#" class="flex flex-row items-center focus:outline-none focus:shadow-outline rounded-lg">
+      {% if photo %}
+        <img class="rounded-full h-8 w-8 object-cover" src="{% print photo %}" alt="">
+      {% else %}
+        {% render 'theme/simple/activities/feed_unit/default_photo' %}
+      {% endif %}
+      <p class="ml-2 text-base font-medium">{% print name %}</p>
+    </a>
+  </div>
+  <div class="flex flex-row items-center">
+    <p class="text-xs font-semibold text-gray-500">{% print date %}</p>
+  </div>
+</div>
