@@ -1,10 +1,10 @@
 {% liquid
-  if id == blank
-    log 'looking for model without ID', type: 'showme'
+  if ids == empty
+    log 'looking for audience for user and no ID passed', type: 'showme'
     return_rc null
   endif
 
-  graphql r = 'activities/audience', id: id, limit: 1000
+  graphql r = 'activities/audience', id: ids, limit: 1000
 
   if r.errors
     log r, type: 'showme'

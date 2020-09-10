@@ -10,6 +10,4 @@ query audience($id: [String!] $limit: Int = 500)
       id
     }
   }
-
-
 }
