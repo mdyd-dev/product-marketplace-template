@@ -4,12 +4,22 @@
     return_rc null
   endif
 
-  graphql r = 'generic/models', id: id, limit: 1
+  graphql r = 'activities/model', id: id, limit: 1
 
   if r.errors
     log r, type: 'showme'
     break
   endif
 
-  return_rc r.models.results.first 
+  assign model = r.models.results.first
+
+  graphql r = 'activities/photo', uuid: model.uuid
+
+  log r, type: 'showme'
+
+  hash_assign model['photos'] = r.models.results
+
+  log model, type: 'showme'
+
+  return_rc model
 %}

@@ -1,4 +1,4 @@
-query search($id: ID, $limit: Int = 20) {
+query search($id: ID, $limit: Int = 1) {
   models(
     per_page: $limit
     filter: {
@@ -10,7 +10,9 @@ query search($id: ID, $limit: Int = 20) {
     results {
       type: model_schema_name
       id
-      properties
+      name: property(name: "name")
+      uuid: property(name: "uuid")
+      description: property(name: "description")
     }
   }
 }
