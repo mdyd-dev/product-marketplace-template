@@ -1,0 +1,15 @@
+query model($uuid: String!) {
+  models(per_page: 3
+    filter: {
+      properties: [
+        { name: "item_uuid" value: $uuid }
+      ]
+      model_schema_name: { value: "item_photo"}
+    } ){
+    results {
+      url: property_upload(name: "photo") {
+        versions(names: "small")
+      }
+    }
+  }
+}

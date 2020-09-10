@@ -27,7 +27,7 @@
   if event.valid
     function_rc event = 'lib/commands/events/create/execute', object: event
 
-    if object.valid
+    if event.valid
       include 'lib/commands/events/broadcast/execute', object: event
     endif
   else
