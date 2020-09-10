@@ -1,0 +1,6 @@
+{% liquid
+  include 'lib/must_be_authenticated'
+
+  function_rc user = 'lib/data/queries/users/find', id: context.current_user.id
+  include 'theme/simple/profile/show', user: user, tab: 'groups'
+%}

@@ -4,14 +4,21 @@
   </h1>
 </div>
 <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
-  <div class="w-full md:w-1/3 px-4 mb-4 md:mb-0">
+  <div class="w-full md:w-1/4 px-4 mb-4 md:mb-0">
     {% include 'theme/simple/profile/card', user: user %}
     {% include 'theme/simple/profile/manage', user: user %}
   </div>
-  <div class="w-full md:w-2/3 px-4 mb-4 md:mb-0">
-    {% include 'theme/simple/profile/nav' %}
-    {% include 'theme/simple/profile/activity_new' %}
-    {% include 'theme/simple/profile/activity' %}
+  <div class="w-full md:w-3/4 px-4 mb-4 md:mb-0">
+    {% liquid
+      include 'theme/simple/profile/nav', tab: tab
+      if tab == blank
+        include 'theme/simple/profile/activity_new'
+        include 'theme/simple/profile/activity'
+      else
+        assign file = 'theme/simple/profile/' | append: tab
+        include file
+      endif
+    %}
   </div>
 </div>
 
