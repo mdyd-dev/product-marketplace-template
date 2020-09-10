@@ -3,10 +3,13 @@
 {% liquid
   function_rc actor = 'lib/data/queries/users/find', id: actor_id, with_token: false, with_followed: false
 
-  unless object
+  if object
+    function_rc object = 'lib/data/queries/models/find', id: object.id
+  else
     function_rc object = 'lib/data/queries/models/find', id: object_id
-  endunless
+  endif
 
+  assign TODO = 'refactor'
   if type contains 'followed_user'
     function_rc target = 'lib/data/queries/users/find', id: target_id, with_token: false, with_followed: false
   else
