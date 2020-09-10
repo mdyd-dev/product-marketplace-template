@@ -46,7 +46,6 @@ en:
 
     order: Order
     your-orders: Your orders
-    your-list: Your list
     self-list: You are now on <b class="font-semibold">your</b> list
     user-list: "You are now on <b class=\"font-semibold\">%{name}'s</b> list"
     back: Back
