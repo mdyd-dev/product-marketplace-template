@@ -1,0 +1,20 @@
+{% liquid
+  if id == blank
+    log 'looking for model without ID', type: 'showme'
+    return_rc null
+  endif
+
+  graphql r = 'activities/audience', id: id, limit: 1000
+
+  if r.errors
+    log r, type: 'showme'
+    break
+  endif
+
+  assign ids = r.users.results | map: 'id'
+
+  log r, type: 'showme'
+  log ids, type: 'showme'
+
+  return_rc ids
+%}

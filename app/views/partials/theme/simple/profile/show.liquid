@@ -12,8 +12,8 @@
     {% liquid
       include 'theme/simple/profile/nav', tab: tab
       if tab == blank
-        include 'theme/simple/profile/activity_new'
-        include 'theme/simple/profile/activity'
+        render 'theme/simple/profile/activity_new'
+        render 'theme/simple/profile/activity', activities: activities
       else
         assign file = 'theme/simple/profile/' | append: tab
         include file

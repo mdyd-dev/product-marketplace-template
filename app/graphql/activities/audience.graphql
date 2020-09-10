@@ -1,0 +1,15 @@
+query audience($id: [String!] $limit: Int = 500)
+{
+  users(
+    per_page: $limit,
+    filter: {
+      properties: [
+        {name: "followed_user_ids" array_contains: $id }
+      ]}) {
+    results {
+      id
+    }
+  }
+
+
+}

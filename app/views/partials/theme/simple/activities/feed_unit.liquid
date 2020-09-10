@@ -2,13 +2,8 @@
 
 <div class="mx-auto px-4 py-4 bg-white shadow-md rounded-lg w-full">
 
+  {{ payload.actor.id  }}
   {% render 'theme/simple/activities/feed_unit/header', name: payload.actor.username, photo: payload.actor.photo.versions.tiny, date: payload.date %}
-
-  {% if payload.object.photos.size > 0 %}
-    <div class="mt-2">
-      <img class="object-cover w-9 m-auto rounded-lg" src="{% print payload.object.photos.first.url.versions.small %}" alt="{{payload.object.name}}">
-    </div>
-  {% endif %}
 
   <div class="py-2">
     <p class="leading-snug">
@@ -28,6 +23,16 @@
       {% endif %}
     </p>
   </div>
+
+  {% if payload.object.photos.size > 0 %}
+    <div class="mt-2">
+      <img class="object-cover w-9 m-auto rounded-lg" src="{% print payload.object.photos.first.url.versions.small %}" alt="{{payload.object.name}}">
+    </div>
+  {% elsif payload.target.photos.size > 0 %}
+    <div class="mt-2">
+      <img class="object-cover w-9 m-auto rounded-lg" src="{% print payload.target.photos.first.url.versions.small %}" alt="{{payload.target.name}}">
+    </div>
+  {% endif %}
 
   <div class="text-xs bg-gray-100">{% print payload.type %}</div>
 </div>

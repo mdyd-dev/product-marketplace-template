@@ -4,7 +4,8 @@ slug: profile
 {% liquid
   include 'lib/must_be_authenticated'
 
-  assign user_id = context.current_user.id
-  function_rc user = 'lib/data/queries/users/find', id: user_id
-  include 'theme/simple/profile/show', user: user
+  function_rc user = 'lib/data/queries/users/find', id: context.current_user.id
+  function_rc list = 'lib/data/queries/activities/search', feed: 'user', feed_id: user.id, limit: 100
+
+  include 'theme/simple/profile/show', user: user, activities: list
 %}
