@@ -1,0 +1,6 @@
+mutation presign($photo_name: String = "avatar") {
+  presigned: property_upload_presigned_url(user: true, property_name: $photo_name) {
+    upload_url
+    upload_url_payload
+  }
+}

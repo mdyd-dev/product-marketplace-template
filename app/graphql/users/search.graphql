@@ -13,11 +13,17 @@ query users($id: ID, $email: String, $limit: Int = 1, $valid_for: Int = 1, $with
       email
       created_at
       username: property(name: "username")
+      first_name: property(name: "first_name")
+      last_name: property(name: "last_name")
       token: temporary_token(valid_for: $valid_for) @include(if: $with_token)
       followed_user_ids: property_array(name: "followed_user_ids") @include(if: $with_followed)
 
       followed_users: related_users(foreign_property: "id" join_on_property: "followed_user_ids") @include(if: $with_followed) {
         email
+      }
+      avatar: property_upload(name: "avatar") {
+        url
+        versions
       }
     }
   }

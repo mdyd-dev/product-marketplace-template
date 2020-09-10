@@ -1,8 +1,15 @@
 import '../css/app.css';
 
-const uppy = document.querySelector('[data-s3-uppy]');
-if (uppy) {
+const uppyItemPhotos = document.querySelector('[data-s3-uppy-item]');
+if (uppyItemPhotos) {
   import(/* webpackChunkName: "image-upload" */ './image-upload.js').then(() => {
+    console.log('Image upload module loaded.');
+  });
+}
+
+const uppyProfile = document.querySelector('[data-s3-uppy-profile]');
+if (uppyProfile) {
+  import(/* webpackChunkName: "profile-image-upload" */ './profile-image-upload.js').then(() => {
     console.log('Image upload module loaded.');
   });
 }

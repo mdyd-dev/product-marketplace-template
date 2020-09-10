@@ -1,0 +1,12 @@
+mutation users_photos_create($direct_url: String!, $user_id: ID!, $photo_name: String!) {
+  object: user_update(
+    id: $user_id
+    user: {
+      properties: [
+        { name: $photo_name, value: $direct_url }
+      ]
+    }
+  ) {
+    id
+  }
+}
