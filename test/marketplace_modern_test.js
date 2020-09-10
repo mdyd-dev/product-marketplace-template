@@ -167,8 +167,7 @@ test('Edit item', async (t) => {
     .useRole(buyerRole)
     .typeText(itemSearch.searchField, editedItem.name)
     .click(itemSearch.searchBtn)
-    Selector('a').withText(editedItem.name)
-    .click(Selector('main').find('a').withText('Your items'))
+    .click(Selector('a').withText(editedItem.name))
     .click(itemShow.buyBtn)
 })
 
