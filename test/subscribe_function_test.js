@@ -81,10 +81,11 @@ test('Follow seller', async (t) => {
     .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Profile'))
     .expect(Selector('div').withText(newEmail).exists).ok("Followed list not shown")
+    .click(topMenu.logOutBtn)
 })
 
 
-test('Following user as not logged user', async (t) => {
+test('Following user as guest', async (t) => {
   await t
     .typeText(itemSearch.searchField, item.name)
     .click(itemSearch.searchBtn)

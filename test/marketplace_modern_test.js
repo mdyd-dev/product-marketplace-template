@@ -43,14 +43,6 @@ const topMenu = new TopMenuBtns()
 const itemSearch = new ItemSearch(item)
 const clearField = 'ctrl+a delete'
 
-test(`Register admin`, async (t) => {
-  await t
-    .click(newSessionForm.regBtn)
-    .typeText(newSessionForm.emailInput, 'admin@example.com')
-    .typeText(newSessionForm.passInput, 'password')
-    .typeText(newSessionForm.usernameInput, 'admin')
-    .click(newSessionForm.signUpBtn)
-})
 
 test(`Register seller`, async (t) => {
   await t
@@ -68,6 +60,15 @@ test(`Register buyer`, async (t) => {
     .typeText(newSessionForm.emailInput, 'johnsmith@email.com')
     .typeText(newSessionForm.passInput, 'password')
     .typeText(newSessionForm.usernameInput, 'johnsmith')
+    .click(newSessionForm.signUpBtn)
+})
+
+test(`Register admin`, async (t) => {
+  await t
+    .click(newSessionForm.regBtn)
+    .typeText(newSessionForm.emailInput, 'admin@example.com')
+    .typeText(newSessionForm.passInput, 'password')
+    .typeText(newSessionForm.usernameInput, 'admin')
     .click(newSessionForm.signUpBtn)
 })
 
@@ -134,12 +135,16 @@ test('Edit item', async (t) => {
   await t.expect('img[src="_uploads_/testimage.png"]').ok()
     .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Your list'))
+    .debug()
   await t.expect(Selector('p').withText('You are now on your list').exists).ok()
-  await t.expect(itemSearch.itemAhref.exists).ok("'Item#name could not be found")
-    .typeText(itemSearch.searchField, item.name)
+    .click(Selector('#sort'))
+    .click(Selector('option').withText('The Most Recent'))
     .click(itemSearch.searchBtn)
+  await t.expect(itemSearch.itemAhref.exists).ok("'Item#name could not be found")
     .click(itemSearch.itemLink)
     .click(Selector('a').withText("Browse this user's items"))
+    .typeText(itemSearch.searchField, item.name)
+    .click(itemSearch.searchBtn)
     .click(itemSearch.itemLink)
 
   //change of item information
