@@ -1,2 +1,7 @@
-upload photo
-edit name
+{% liquid
+  assign user_id = context.current_user.id
+  function_rc user = 'lib/data/queries/users/find', id: user_id
+  graphql presigned_url = 'users/photos/presign' | dig: 'presigned'
+
+  include 'theme/simple/profile/edit', object: user, presigned_url: presigned_url
+%}

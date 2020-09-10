@@ -8,13 +8,15 @@ import '@uppy/core/dist/style.min.css';
 import '@uppy/dashboard/dist/style.min.css';
 import '@uppy/webcam/dist/style.min.css';
 
-const _form = document.querySelector('[data-s3-uppy-item="form"]');
+import apiFetch from './apiFetch'
+
+const _form = document.querySelector('[data-s3-uppy-profile="form"]');
 
 const uppy = Uppy({
   autoProceed: true,
   restrictions: {
     maxFileSize: 2097152, // Limit size to 2 MB on the javascript side
-    maxNumberOfFiles: 3,
+    maxNumberOfFiles: 1,
     allowedFileTypes: ['image/png', 'image/jpeg', 'image/webp'],
   },
 })
@@ -23,9 +25,9 @@ const uppy = Uppy({
     replaceTargetContent: true,
     showProgressDetails: true,
     target: '#drag-drop-area',
-    note: 'Images only, up to 3 files, 2MB each',
+    note: 'Image up to 2MB',
     width: '100%',
-    height: 403,
+    height: 250,
     proudlyDisplayPoweredByUppy: false,
     locale: {
       strings: {
@@ -65,17 +67,8 @@ uppy.on('complete', ({ failed, successful }) => {
 });
 
 const createImage = (imageUrl) => {
-  // Get logged in user id
-  const userId = _form.dataset.s3UppyUserId;
-  const itemUuid = _form.dataset.itemUuid;
-
   // Create model for this user with s3 image url
-  return fetch('/api/items/photos', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify({ photo: { direct_url: imageUrl, user_id: userId, item_uuid: itemUuid } }),
-  }).then((response) => response.json());
+  return apiFetch('/api/users/photos', {
+    data: { photo: { direct_url: imageUrl, photo_name: 'avatar' } },
+  });
 };
