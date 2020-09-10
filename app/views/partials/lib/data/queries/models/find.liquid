@@ -1,4 +1,8 @@
 {% liquid
+  if id == blank
+    return_rc null
+  endif
+
   graphql r = 'generic/models', id: id, limit: 1
 
   if r.errors
