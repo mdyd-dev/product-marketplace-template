@@ -4,7 +4,7 @@
   <span class="business_card mr-2">by {% print name %}</span>
 
   {% assign user_id = user.id | append: '' %}
-  {% if current_user or current_user != user_id %}
+  {% if current_user and current_user != user_id %}
     {% render 'theme/simple/follow_button', current_user: current_user, user: user %}
   {% endif %}
 </div>
