@@ -43,6 +43,15 @@ const topMenu = new TopMenuBtns()
 const itemSearch = new ItemSearch(item)
 const clearField = 'ctrl+a delete'
 
+test(`Register admin`, async (t) => {
+  await t
+    .click(newSessionForm.regBtn)
+    .typeText(newSessionForm.emailInput, 'admin@example.com')
+    .typeText(newSessionForm.passInput, 'password')
+    .typeText(newSessionForm.usernameInput, 'admin')
+    .click(newSessionForm.signUpBtn)
+})
+
 test(`Register seller`, async (t) => {
   await t
     .click(newSessionForm.regBtn)
@@ -59,16 +68,6 @@ test(`Register buyer`, async (t) => {
     .typeText(newSessionForm.emailInput, 'johnsmith@email.com')
     .typeText(newSessionForm.passInput, 'password')
     .typeText(newSessionForm.usernameInput, 'johnsmith')
-    .click(newSessionForm.signUpBtn)
-})
-
-test(`Register admin`, async (t) => {
-  await t
-    .click(topMenu.logInBtn)
-    .click(newSessionForm.regBtn)
-    .typeText(newSessionForm.emailInput, 'admin@example.com')
-    .typeText(newSessionForm.passInput, 'password')
-    .typeText(newSessionForm.usernameInput, 'admin')
     .click(newSessionForm.signUpBtn)
 })
 
@@ -100,7 +99,7 @@ test(`Logging attempt with wrong data`, async (t) => {
   await t.expect(Selector('html').textContent).contains('Invalid email or password')
 })
 
-fixture`Trade scenario`.page(myUrl)// + 'sessions/new')
+fixture`Trade scenario`.page(myUrl)
 
 test('Item listing', async (t) => {
   //listing the item for sale
@@ -109,7 +108,6 @@ test('Item listing', async (t) => {
     .click(topMenu.listItemBtn)
     .typeText(newItemForm.nameField, item.name)
     .typeText(newItemForm.descField, item.description)
-    await t.debug()
     .click(newItemForm.priceField)
     .pressKey(clearField)
     .typeText(newItemForm.priceField, item.price)
@@ -143,7 +141,6 @@ test('Edit item', async (t) => {
     .click(itemSearch.itemLink)
     .click(Selector('a').withText("Browse this user's items"))
     .click(itemSearch.itemLink)
-
 
   //change of item information
   await t
@@ -219,7 +216,7 @@ test('Payout check', async (t) => {
   await t.expect(Selector('tbody').find('td').withText('paid').exists).ok("message 'paid' doesn't exists")
 })
 
-fixture`Other`.page(myUrl)// + 'sessions/new')
+fixture`Other`.page(myUrl)
 
 test(`Admin Panel test`, async (t) => {
   await t.useRole(adminRole)
