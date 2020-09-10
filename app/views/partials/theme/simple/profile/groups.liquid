@@ -1,0 +1,12 @@
+<section class="text-gray-700 body-font">
+  <div class="container md:px-5 md:py-5 mx-auto">
+    <div class="flex flex-wrap -m-4">
+      {% liquid
+        assign groups = '[{"name": "Top guns"}, {"name": "Green activities"}, {"name": "Cats"}, {"name": "Dogs"}, {"name": "Hamsters"}]' | parse_json
+        for group in groups
+          include 'theme/simple/profile/group_card', group: group
+        endfor
+      %}
+    </div>
+  </div>
+</section>
