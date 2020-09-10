@@ -141,7 +141,7 @@ test('Edit item', async (t) => {
     .typeText(itemSearch.searchField, item.name)
     .click(itemSearch.searchBtn)
     .click(itemSearch.itemLink)
-    .click(Selector('a').withText('By '+newEmail))
+    .click(Selector('a').withText("Search this user's items"))
     .click(itemSearch.itemLink)
 
 
