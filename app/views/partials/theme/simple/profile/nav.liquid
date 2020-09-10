@@ -1,0 +1,16 @@
+<div class="bg-white mb-5">
+  <nav class="flex flex-col sm:flex-row">
+    <a href="/profile/{{ user.username }}/" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500">
+      Activity
+    </a>
+    <a href="/profile/{{ user.username }}/groups" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
+      Groups
+    </a>
+    <a href="/profile/{{ user.username }}/following" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
+      Following
+    </a>
+    <a href="/profile/{{ user.username }}/followers" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
+      Followers
+    </a>
+  </nav>
+</div>

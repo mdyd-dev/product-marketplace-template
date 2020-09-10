@@ -1,0 +1,15 @@
+<div class="flex items-start max-w-xl">
+  <div class="mr-10">
+    <img src="{{ user.avatar.versions.small }}" alt="" class="w-32 h-32 mx-auto rounded-full shadow-md md:mx-0">
+  </div>
+
+  <div class="mr-10">
+    <p>Username: <b class="font-mono">{{ user.username }}</b></p>
+    <p>First name: <b class="font-mono">{{ user.first_name }}</b></p>
+    <p>Last name: <b class="font-mono">{{ user.last_name }}</b></p>
+    <p><a href="/u/{{ user.id }}">{{ 'app.items.yours' | t }}</a></p>
+
+    {{ user.followed_users }}
+  </div>
+
+</div>

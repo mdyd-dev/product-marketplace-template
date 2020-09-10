@@ -1,0 +1,20 @@
+
+<section class="mt-4 pt-4 border-t">
+  <header class="md:flex md:justify-between mb-2">
+    <h4 class="font-bold text-black text-lg  md:mr-6">Account</h4>
+
+    <a href="/profile/edit" class="text-sm button">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 383.95 383.95" class="w-3 mr-1"><path d="M0 303.95v80h80l236.05-236.06-80-80zM377.7 56.05L327.9 6.24a21.37 21.37 0 00-30.2 0l-39.03 39.04 80 80 39.04-39.04a21.37 21.37 0 000-30.19z" fill="currentColor" /></svg>
+      Edit <span class="sr-only">name and avatar</span>
+    </a>
+    <!--
+      <div class="md:ml-auto">
+        <a class="link" href="/profile/password">Change password</a>
+      </div>
+    -->
+  </header>
+
+  <p>User ID: <b class="font-mono">{{ user.id }}</b></p>
+  <p>Email: <b class="font-mono">{{ user.email }}</b></p>
+  <p>Password: <b class="font-mono">******</b></p>
+</section>
