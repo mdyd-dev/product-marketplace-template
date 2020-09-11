@@ -1,10 +1,10 @@
 import { Selector } from 'testcafe';
 
 export default class ItemSearch {
-  constructor(item) {
+  constructor(item, editedItem) {
     this.searchField = Selector('#k')
     this.searchBtn = Selector('button').withText('Search')
-    this.itemAhref = Selector('main').withText(item.name)
     this.itemLink = Selector('a').withText(item.name)
+    this.editedItemLink = Selector('div').find('a').withText(editedItem.name)
   }
 }

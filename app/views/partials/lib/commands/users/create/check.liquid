@@ -16,6 +16,11 @@
 
   if object.username == blank
     include 'lib/register_error', contract: c, field_name: 'username', key: 'app.errors.blank'
+  else
+    function_rc users = 'lib/data/queries/users/search', username: object.username, limit: 1
+    if users.total_entries > 0
+      include 'lib/register_error', contract: c, field_name: 'username', key: 'app.errors.taken'
+    endif
   endif
 
   hash_assign object['valid'] = c.valid
