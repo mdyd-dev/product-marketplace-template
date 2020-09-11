@@ -11,11 +11,17 @@
 {% endcomment %}
 
 {% liquid
-  assign ids = '[]' | parse_json | add_to_array: event.actor.id
+  function_rc rules = 'lib/data/queries/activities/rules', type: event.type
 
-  function_rc audience = 'lib/data/queries/activities/audience', id: event.actor.id
+  log rules, type: 'showme'
 
-  render 'lib/commands/activities/publish', uuid: event.uuid, type: "user", ids: audience
-  render 'lib/commands/activities/publish', uuid: event.uuid, type: "user", ids: ids
+  if rules
+    assign ids = '[]' | parse_json | add_to_array: event.actor.id
+
+    function_rc audience = 'lib/data/queries/activities/audience', id: event.actor.id
+
+    render 'lib/commands/activities/publish', uuid: event.uuid, type: "user", ids: audience
+    render 'lib/commands/activities/publish', uuid: event.uuid, type: "user", ids: ids
+  endif
 %}
 
