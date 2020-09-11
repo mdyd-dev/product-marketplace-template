@@ -11,6 +11,7 @@
   <div class="w-full md:w-3/4 px-4 mb-4 md:mb-0">
     {% liquid
       include 'theme/simple/profile/nav', tab: tab
+
       if tab == blank
         render 'theme/simple/profile/activity_new'
         render 'theme/simple/profile/activity', activities: activities
