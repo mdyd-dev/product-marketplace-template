@@ -1,8 +1,6 @@
 {% assign type = payload.type %}
 
 <div class="mx-auto px-4 py-4 bg-white shadow-md rounded-lg w-full">
-
-  {{ payload.actor.id  }}
   {% render 'theme/simple/activities/feed_unit/header', name: payload.actor.username, photo: payload.actor.photo.versions.tiny, date: payload.date %}
 
   <div class="py-2">
