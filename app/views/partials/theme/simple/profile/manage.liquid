@@ -17,4 +17,9 @@
   <p>User ID: <b class="font-mono">{{ user.id }}</b></p>
   <p>Email: <b class="font-mono">{{ user.email }}</b></p>
   <p>Password: <b class="font-mono">******</b></p>
+
+
+  <p><a href="/u/{{ user.id }}">{{ 'app.items.yours' | t }}</a></p>
+
+  {{ user.followed_users | join }}
 </section>

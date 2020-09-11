@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 gap-6 my-6">
+<div class="grid grid-cols-1 gap-6 my-6 md:px-5 md:py-5">
   {% for record in activities.results %}
     {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_user: current_user %}
   {% endfor %}
