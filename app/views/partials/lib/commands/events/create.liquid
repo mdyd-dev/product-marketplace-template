@@ -1,7 +1,7 @@
 {% background "bg-task-name", type: type, object_id: object_id, actor_id: actor_id, target_id: target_id, object: object %}
 
 {% liquid
-  function_rc actor = 'lib/data/queries/activities/user', id: actor_id
+  function_rc actor = 'lib/data/queries/activities/users/find', id: actor_id
 %}
 
 {% liquid
@@ -14,7 +14,7 @@
 
 {% liquid
   if type contains 'followed_user'
-    function_rc target = 'lib/data/queries/activities/user', id: target_id
+    function_rc target = 'lib/data/queries/activities/users/find', id: target_id
   else
     function_rc target = 'lib/data/queries/activities/model', id: target_id
   endif

@@ -6,7 +6,11 @@
       {% else %}
         {% render 'theme/simple/activities/feed_unit/default_photo' %}
       {% endif %}
-      <p class="ml-2 text-base font-medium">{% print name %}</p>
+      <p class="ml-2 text-base font-medium">
+        <a href="/profile/{{name}}">
+          {% print name %}
+        </a>
+      </p>
     </a>
   </div>
   <div class="flex flex-row items-center">
