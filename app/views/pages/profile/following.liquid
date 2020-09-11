@@ -1,7 +1,10 @@
 {% liquid
-  include 'lib/must_be_authenticated'
+  function_rc user = 'lib/data/queries/users/find', username: context.params.slug3
+  unless user.id
+    render 'theme/simple/404', status: 404
+    break
+  endunless
 
-  function_rc user = 'lib/data/queries/users/find', id: context.current_user.id
   function_rc users = 'lib/data/queries/users/search', limit: 20
   include 'theme/simple/profile/show', tab: 'following', user: user, users: users
 %}
