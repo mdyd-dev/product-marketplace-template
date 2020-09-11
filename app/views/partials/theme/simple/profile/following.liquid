@@ -1,0 +1,11 @@
+<section class="text-gray-700 body-font">
+  <div class="container md:px-5 md:py-5 mx-auto">
+    <div class="flex flex-wrap -m-4">
+      {% liquid
+        for user in users.results
+          include 'theme/simple/profile/user_card', user: user
+        endfor
+      %}
+    </div>
+  </div>
+</section>
