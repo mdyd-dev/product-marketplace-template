@@ -5,6 +5,7 @@
     break
   endunless
 
+  function_rc current_user = 'lib/data/queries/users/find', id: context.current_user.id
   function_rc users = 'lib/data/queries/users/search', limit: 20
-  include 'theme/simple/profile/show', tab: 'following', user: user, users: users
+  include 'theme/simple/profile/show', tab: 'following', user: user, users: users, current_user: current_user
 %}

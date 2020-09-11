@@ -2,14 +2,14 @@
 
 {% liquid
   if current_user.followed_user_ids contains user_id
-  assign following = true
+    assign following = true
   else
-  assign following = false
+    assign following = false
   endif
 %}
 
 <button href="#" class="{% if following %} following{% endif %}"
-  alt="follow/unfollow"
+  title="follow/unfollow"
   data-follow-user="{% print user.id %}">
 
   <span class="button button-sm button follow">
