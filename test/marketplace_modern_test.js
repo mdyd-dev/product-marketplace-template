@@ -1,18 +1,18 @@
 import { Selector, ClientFunction } from 'testcafe'
-import { buyerRole, sellerRole, adminRole } from './roles'
+import { buyerRole, sellerRole, adminRole, newEmail, newPassword } from './roles'
 import faker from 'faker'
-import ItemShowPage from './pages/itemshow'
-import ItemShowEdit from './pages/itemedit'
-import AdminPanel from './pages/adminp'
 import NewSessionForm from './pages/newsession'
 import NewItemForm from './pages/newitem'
-import TopMenuBtns from './pages/topmenu'
+import ItemShowPage from './pages/itemshow'
+import ItemShowEdit from './pages/itemedit'
 import ItemSearch from './pages/itemsearch'
+import AdminPanel from './pages/adminp'
+import TopMenuBtns from './pages/topmenu'
 import { newEmail, newPassword, newUsername } from './roles'
 
 const myUrl = process.env.MPKIT_URL
-
-
+const getURL = ClientFunction(() => window.location.href)
+const editURL = '/items/edit?id='
 
 const item = {
   name: faker.commerce.productName(),
@@ -28,18 +28,21 @@ const editedItem = {
   price: '5000',
 }
 
+const newUsername = faker.name.findName()
+
 const adminPage = new AdminPanel()
 const newSessionForm = new NewSessionForm()
 const itemShow = new ItemShowPage(item)
 const editPage = new ItemShowEdit(editedItem)
 const newItemForm = new NewItemForm()
 const topMenu = new TopMenuBtns()
-const itemSearch = new ItemSearch(item)
-const clearField = 'ctrl+a delete'
+const itemSearch = new ItemSearch(item, editedItem)
+
 const signupConfirmation = 'Your account has been created'
 const notAuthorizedUser = 'Permission denied'
-const getURL = ClientFunction(() => window.location.href)
-const editURL = '/items/edit?id='
+const clearField = 'ctrl+a delete'
+
+
 
 fixture`Register scenario`.page(myUrl + 'sessions/new')
 
@@ -86,12 +89,13 @@ test(`Registration attempt with taken data`, async (t) => {
     .click(newSessionForm.regBtn)
     .typeText(newSessionForm.emailInput, 'admin@example.com')
     .typeText(newSessionForm.passInput, 'password')
-    .typeText(newSessionForm.usernameInput, 'arnold01')
+    .typeText(newSessionForm.usernameInput, 'johnsmith')
     .click(newSessionForm.signUpBtn)
-  await t.expect(Selector('html').textContent).contains('already taken')
+    .expect(Selector('label[for="username"]').textContent).contains('already taken')
+    .expect(Selector('label[for="email"]').textContent).contains('already taken')
 })
 
-test(`Logging attempt with wrong data`, async (t) => {
+test(`Logging attempt with wrong password`, async (t) => {
   await t
     .typeText(newSessionForm.emailInput, 'admin@email.com')
     .typeText(newSessionForm.passInput, 'wrongpassword')
@@ -101,11 +105,9 @@ test(`Logging attempt with wrong data`, async (t) => {
 
 fixture`Trade scenario`.page(myUrl)
 
-test('New Item', async (t) => {
-  //listing the item for sale
-  await t.useRole(sellerRole)
-  await t
-    .click(topMenu.listItemBtn)
+test('Creating item then self follow try', async (t) => {
+    await t.useRole(sellerRole)
+    await t.click(topMenu.listItemBtn)
     .typeText(newItemForm.nameField, item.name)
     .typeText(newItemForm.descField, item.description)
     .click(newItemForm.priceField)
@@ -116,32 +118,28 @@ test('New Item', async (t) => {
       '_uploads_/testimage.png',
     ])
     .click(newItemForm.submitBtn)
+    //checks if all data is correct
+    await t.expect(itemShow.name.exists).ok()
+    await t.expect(itemShow.description.exists).ok()
+    await t.expect(itemShow.price.innerText).eql('$10,000', 'check element text')
+    await t.expect('img[src="_uploads_/testimage.png"]').ok()
+    // add self follow here
 })
 
 test('Editing item and search', async (t) => {
   await t
-    //searching item by its name
+    //item search
     .useRole(sellerRole)
-    .typeText(itemSearch.searchField, item.name)
-    .click(itemSearch.searchBtn)
-    .expect(itemSearch.itemAhref.exists)
-    .ok("'Item#name could not be found")
-    .click(itemSearch.itemLink)
-    //checks if all data is correct
-  await t.expect(itemShow.name.exists).ok()
-  await t.expect(itemShow.description.exists).ok()
-  await t.expect(itemShow.price.innerText).eql('$10,000', 'check element text')
-  await t.expect('img[src="_uploads_/testimage.png"]').ok()
     .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Profile'))
-    .click(Selector('a').withText('Your list'))
+    .click(Selector('a').withText('Your list'))  // goes on your list from profile view
   await t.expect(Selector('p').withText('You are now on your list').exists).ok()
     .click(Selector('#sort'))
     .click(Selector('option').withText('The Most Recent'))
     .click(itemSearch.searchBtn)
-  await t.expect(itemSearch.itemAhref.exists).ok("'Item#name could not be found")
+  await t.expect(itemSearch.itemLink.exists).ok("'Item#name could not be found")
     .click(itemSearch.itemLink)
-    .click(Selector('a').withText("Browse this user's items"))
+    .click(Selector('a').withText("Browse this user's items")) // goes on your list from item show
     .typeText(itemSearch.searchField, item.name)
     .click(itemSearch.searchBtn)
     .click(itemSearch.itemLink)
@@ -159,17 +157,9 @@ test('Editing item and search', async (t) => {
     .pressKey(clearField)
     .typeText(newItemForm.priceField, editedItem.price)
     .click(newItemForm.submitBtn)
-
-  await t.expect(editPage.name.exists).ok()
-  await t.expect(editPage.description.exists).ok()
-  await t.expect(editPage.price.innerText).eql('$5,000', 'check element text')
-    .click(topMenu.logOutBtn)
-    //logging at buyer account and checks if seller item after edit exists then buying item
-    .useRole(buyerRole)
-    .typeText(itemSearch.searchField, editedItem.name)
-    .click(itemSearch.searchBtn)
-    .click(Selector('a').withText(editedItem.name))
-    .click(itemShow.buyBtn)
+    await t.expect(editPage.name.exists).ok()
+    await t.expect(editPage.description.exists).ok()
+    await t.expect(editPage.price.innerText).eql('$5,000', 'check element text')
 })
 
 test('Deleting item', async (t) => {
@@ -179,45 +169,40 @@ test('Deleting item', async (t) => {
     .click(Selector('main').find('a').withText('Your items'))
     .setNativeDialogHandler(() => true)
     .click(editPage.deleteBtn)
-    .click(topMenu.logOutBtn)
+    // there is a need to check if the list is empty ??  at: selling -> your orders
 })
 
 test('Creating new item for sell', async (t) => {
-  await t.useRole(sellerRole)
+    await t.useRole(sellerRole)
     await t.click(topMenu.listItemBtn)
     .typeText(newItemForm.nameField, item.name)
     .typeText(newItemForm.descField, item.description)
     .doubleClick(newItemForm.priceField)
     .pressKey(clearField)
     .typeText(newItemForm.priceField, item.price)
-    .click(newItemForm.browseBtn)
-    .setFilesToUpload(Selector('main').find('[name="files[]"]'), [
-      '_uploads_/testimage.png',
-    ])
     .click(newItemForm.submitBtn)
-  await t.expect('img[src="_uploads_/testimage.png"]').ok()
-    .click(topMenu.logOutBtn)
 })
 
-test('Orders check and item checkout as buyer', async (t) => {
+test('Buying an item and following the seller', async (t) => {
     await t
     .useRole(buyerRole)
     .typeText(itemSearch.searchField, item.name)
     .click(itemSearch.searchBtn)
+    .expect(itemSearch.itemLink.exists).ok("'Item#name could not be found")
     .click(itemSearch.itemLink)
+    .click(Selector('button').withAttribute('data-follow-user'))
+    .expect(Selector('.following').exists).ok("button with class '.following' doesn't exists")
     .click(itemShow.buyBtn)
     .click(Selector('button').withText('Checkout'))
     .click(Selector('button').withText('Pay'))
     .click(topMenu.dashboardBtn)
+    .click(Selector('a').withText('Profile'))
+    .expect(Selector('div').withText(newEmail).exists).ok("Followed list not shown")
+    .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Your orders').nth(1))
     .click(Selector('a').withText(item.name))
   await t.expect(Selector('div').withText('Ordered').exists).ok("message 'Ordered x times' doesn't exists")
-    .click(topMenu.logOutBtn)
-})
-
-
-test('Payout check', async (t) => {
-  await t
+    // the seller checks that the item shows as paid
     .useRole(sellerRole)
     .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Your orders').nth(0))
@@ -247,16 +232,14 @@ test(`Admin Panel test`, async (t) => {
 })
 
 test('Breakin-in test, edition by none user', async (t) => {
-  await t
-    .useRole(buyerRole)
-    .click(topMenu.logoBtn)
+    await t.useRole(buyerRole)
     .typeText(itemSearch.searchField, 'Watch')
     .click(itemSearch.searchBtn)
     .click(Selector('a').withText('Watch'))
-  await t
-  var itemEditUrl = await getURL()
-  var itemEditUrl = itemEditUrl.split('-')
-  var editItemId = itemEditUrl[itemEditUrl.length - 1]
-  await t.navigateTo(editURL + editItemId)
-  await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok('message ' + notAuthorizedUser + " doesn't exists")
+    await t
+    var itemEditUrl = await getURL()
+    var itemEditUrl = itemEditUrl.split('-')
+    var editItemId = itemEditUrl[itemEditUrl.length - 1]
+    await t.navigateTo(editURL + editItemId)
+    await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok('message ' + notAuthorizedUser + " doesn't exists")
 })

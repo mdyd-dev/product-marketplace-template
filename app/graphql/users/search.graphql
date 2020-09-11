@@ -1,10 +1,19 @@
-query users($id: ID, $email: String, $username: String, $limit: Int = 1, $valid_for: Int = 1, $with_token: Boolean = false, $with_followed: Boolean = null){
+query users(
+  $id: ID,
+  $email: String,
+  $username: String,
+  $limit: Int = 1,
+  $valid_for: Int = 1,
+  $with_token: Boolean = false,
+  $with_followed: Boolean = null){
   users(
     per_page: $limit
     filter: {
       email: { value: $email }
       id:    { value: $id }
-      properties: { name: "username", value: $username }
+      properties: [
+        { name: "username", value: $username }
+      ]
     }
     sort: [{ id: { order: ASC } }]
   ){
