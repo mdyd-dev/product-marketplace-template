@@ -2,10 +2,12 @@
 slug: profile
 ---
 {% liquid
-  include 'lib/must_be_authenticated'
+  function_rc user = 'lib/data/queries/users/find', username: context.params.slug2
+  unless user.id
+    render 'theme/simple/404', status: 404
+    break
+  endunless
 
-  function_rc user = 'lib/data/queries/users/find', id: context.current_user.id
   function_rc list = 'lib/data/queries/activities/search', feed: 'user', feed_id: user.id, limit: 100
-
   include 'theme/simple/profile/show', user: user, activities: list
 %}

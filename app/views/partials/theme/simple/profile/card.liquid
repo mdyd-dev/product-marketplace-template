@@ -1,6 +1,12 @@
 <div class="flex flex-col">
   <div class="mr-10">
-    <img src="{{ user.avatar.versions.small }}" alt="" class="w-64 h-64 mx-auto rounded-full shadow-md md:mx-0">
+    {% liquid
+      assign img_url = user.avatar.versions.small
+      unless img_url
+        assign img_url = 'images/user.svg' | asset_url
+      endunless
+    %}
+    <img src="{{ img_url }}" alt="" class="w-64 h-64 mx-auto rounded-full object-cover object-center shadow-md md:mx-0 text-gray-400">
   </div>
 
   <div class="mr-10">
