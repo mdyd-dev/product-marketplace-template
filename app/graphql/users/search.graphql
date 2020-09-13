@@ -1,5 +1,6 @@
 query users(
   $id: ID,
+  $ids: [ID!],
   $email: String,
   $username: String,
   $limit: Int = 1,
@@ -10,7 +11,7 @@ query users(
     per_page: $limit
     filter: {
       email: { value: $email }
-      id:    { value: $id }
+      id:    { value: $id value_in: $ids }
       properties: [
         { name: "username", value: $username }
       ]
