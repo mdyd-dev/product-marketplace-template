@@ -1,4 +1,5 @@
 {% liquid
-  graphql r = 'users/search', limit: limit, username: username
+  graphql r = 'users/search', limit: limit, username: username, ids: ids
+
   return_rc r.users
 %}

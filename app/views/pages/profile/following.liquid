@@ -6,6 +6,6 @@
   endunless
 
   function_rc current_user = 'lib/data/queries/users/find', id: context.current_user.id
-  function_rc users = 'lib/data/queries/users/search', limit: 20
+  function_rc users = 'lib/data/queries/users/search', limit: 20, ids: current_user.followed_user_ids
   include 'theme/simple/profile/show', tab: 'following', user: user, users: users, current_user: current_user
 %}
