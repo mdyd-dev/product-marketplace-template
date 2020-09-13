@@ -97,7 +97,7 @@ en:
       by_user: Browse this user's items
       self-list: You are now on <span class="font-semibold">your</span> list
       user-list: You are now on <span class="font-semibold">%{name}'s</span> list (%{email})
-      yours: Your list
+      yours: Your items
       list: Items
       new: new item
       created: Item created

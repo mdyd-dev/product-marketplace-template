@@ -1,22 +1,17 @@
 {% comment %}
-  what we do:
-
-  this is user_followed_user event
-
-  actor: following
-  target: follower
-
-  TODO private public feed
-
+  actor:private
+  target:audience
+  object:private
 {% endcomment %}
 
 {% liquid
-  assign ids = '[]' | parse_json | add_to_array: event.actor.id
+  function_rc audience = 'lib/data/queries/activities/items/audience', id: event.target.id
+  log audience, type: 'aud showme'
+  render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-private", ids: audience
 
-  function_rc audience = 'lib/data/queries/activities/audience', ids: ids
-
-  render 'lib/commands/activities/publish', uuid: event.uuid, type: "user", ids: audience
-  render 'lib/commands/activities/publish', uuid: event.uuid, type: "user", ids: ids
+  render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-private", ids: event.actor.id
 %}
 
+{% comment %} system:audit {% endcomment %}
 {% include 'lib/commands/activities/publish', uuid: event.uuid, type: "system", ids: "1" %}
+

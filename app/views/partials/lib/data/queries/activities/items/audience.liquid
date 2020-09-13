@@ -4,14 +4,14 @@
     return_rc null
   endif
 
-  graphql r = 'activities/users/audience', id: id, limit: 1000
+  graphql r = 'activities/items/audience', id: id, limit: 10000
 
   if r.errors
     log r, type: 'showme'
     break
   endif
 
-  assign ids = r.users.results | map: 'id'
+  assign ids = r.models.results | map: 'owner' | map: 'id'
 
   return_rc ids
 %}
