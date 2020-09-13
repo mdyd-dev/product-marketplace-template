@@ -10,16 +10,13 @@ slug: profile
 
   function_rc current_user = 'lib/data/queries/users/find', id: context.current_user.id
 
-  assign private_feed = false
-  if current_user.id == user.id
-    assign private_feed = true
-  endif
-
-  if private_feed
-    function_rc list = 'lib/data/queries/activities/search', feed: 'user-private', feed_id: user.id, limit: 100
+  if context.params.private
+  function_rc list = 'lib/data/queries/activities/search', feed: 'user-private', feed_id: user.id, limit: 100
   else
-    function_rc list = 'lib/data/queries/activities/search', feed: 'user-public', feed_id: user.id, limit: 100
+  function_rc list = 'lib/data/queries/activities/search', feed: 'user-public', feed_id: user.id, limit: 100
   endif
 
-  include 'theme/simple/profile/show', user: user, activities: list, current_user: current_user, private_feed: private_feed
+
+
+  include 'theme/simple/profile/show', user: user, activities: list, current_user: current_user
 %}

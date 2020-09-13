@@ -4,6 +4,9 @@
     <a href="/profile/{{user.username}}" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == blank %}{{ active_class }}{% endif %}">
       Activity
     </a>
+    <a href="/profile/{{user.username}}?private=true" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == blank %}{{ active_class }}{% endif %}">
+      Private
+    </a>
     <a href="/profile/groups/{{user.username}}" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'groups' %}{{ active_class }}{% endif %}">
       Groups
     </a>
