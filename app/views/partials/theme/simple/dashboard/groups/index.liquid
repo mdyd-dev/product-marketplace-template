@@ -1,7 +1,7 @@
 <div class="w-full mx-auto">
   <div class="mb-5 text-right">
     <a href="/dashboard/groups/new" class="button">
-      Add Group
+      {{ 'app.groups.add' | t }}
     </a>
   </div>
   <div class="bg-white shadow-md rounded my-6">
@@ -24,6 +24,7 @@
           <tr class="hover:bg-grey-lighter">
             <td class="py-4 px-6 border-b border-grey-light">
               <a href="/groups/{{group.id}}">
+                <img src="{{group.main_photo.photo.versions.small}}" />
                 {{ group.name }}
               </a>
             </td>
@@ -31,7 +32,9 @@
               {{ group.summary }}
             </td>
             <td class="py-4 px-6 border-b border-grey-light">
-              <a href="/dashboard/groups/edit?id={{ group.id }}" class="button button-inline">Edit</a>
+              <a href="/dashboard/groups/edit?id={{ group.id }}" class="button button-inline">
+                Edit
+              </a>
               <form action="/dashboard/groups" method="post" class="ml-2 inline" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
                 {% include 'authenticity_token' %}
                 <input type="hidden" name="id" value="{{ item.id }}">

@@ -13,7 +13,7 @@
     <input type="hidden" name="_method" value="{{method}}" />
 
     {% if object.id %}
-    <input type="hidden" name="group[id]" value="{{ object.id }}" />
+      <input type="hidden" name="group[id]" value="{{ object.id }}" />
     {% endif %}
     <input type="hidden" name="group[uuid]" value="{{ group_uuid }}" />
 
@@ -30,22 +30,19 @@
     </div>
 
     <div class="mt-3">
-      <label class="block">Photos</label>
+      <label class="block">Main Photo</label>
       {% include 'theme/simple/photos/uppy_area' %}
     </div>
 
     <div class="mt-3">
       <label class="block" for="description">Description</label>
-      <textarea class="w-full form-input" type="text" id="description" name="group[description]" rows="3" required>
-        {{ object.description }}
-      </textarea>
+      <textarea class="w-full form-input" type="text" id="description" name="group[description]" rows="3" required>{{ object.description }}</textarea>
 
       {% include 'theme/simple/field_error', errors: object.errors.description %}
     </div>
 
     <button class="mt-8 button">Submit</button>
   </form>
-
 </div>
 
-{% include 'theme/simple/photos/uppy_form', group_uuid: group_uuid, presigned_url: presigned_url, user_id: user.id %}
+{% include 'theme/simple/photos/uppy_form', object_uuid: group_uuid, presigned_url: presigned_url, user_id: user.id, photo_type: 'main' %}

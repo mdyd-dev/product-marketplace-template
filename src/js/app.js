@@ -7,6 +7,13 @@ if (uppyItemPhotos) {
   });
 }
 
+const uppyPhotos = document.querySelector('[data-s3-uppy-photo]');
+if (uppyPhotos) {
+  import(/* webpackChunkName: "photo-image-upload" */ './photo-image-upload.js').then(() => {
+    console.log('Image upload module loaded.');
+  });
+}
+
 const uppyProfile = document.querySelector('[data-s3-uppy-profile]');
 if (uppyProfile) {
   import(/* webpackChunkName: "profile-image-upload" */ './profile-image-upload.js').then(() => {
