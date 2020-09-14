@@ -140,6 +140,8 @@ To ensure frontend is maintanable and easy to change, we follow couple of import
 
 ## events
 
+### general
+
 - each command produces an event
 - example: when users logs in the system produces `user_session_created` event ` { actor: { id: LOGGED_USER_ID } }`
 - then the event can be asynchronously consumed by a consumer
@@ -147,6 +149,27 @@ To ensure frontend is maintanable and easy to change, we follow couple of import
 ### consumers
 
 - location: `app/views/partials/lib/consumers`
+
+## social media / community
+
+### following 
+
+- user can follow user 
+- TDB user can follow topic / category / item / any
+
+### activity feeds
+
+- activity record after creation can be published to specific feeds:
+
+  - user-public
+    stream of activities accesible to everyone
+  
+  - user-private
+    private activities stream visible only to related user
+  
+  - custom-audit [id:1]
+    all activities - visible 
+
 
 ## Categories
 
