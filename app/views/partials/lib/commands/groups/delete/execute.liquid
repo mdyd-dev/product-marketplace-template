@@ -1,0 +1,13 @@
+<!--  background -->
+{% liquid
+  graphql r = 'items/delete', id: object.id
+
+  if r.errors
+    hash_assign object['valid'] = false
+    hash_assign object['errors'] = r.errors
+  else
+    hash_assign object['valid'] = true
+  endif
+
+  return_rc object
+%}

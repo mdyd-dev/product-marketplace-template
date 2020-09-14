@@ -1,0 +1,14 @@
+{% parse_json object %}
+  {
+    "id":          {{ object.id | json }},
+    "name":        {{ object.name | json }},
+    "tags":        {{ object.tags | downcase | split: ',' | uniq }},
+    "description": {{ object.description | default: "" | json }},
+    "category":    {{ object.category | default: "" | json }},
+    "price":       {{ object.price | plus: 0 | times: 100 | to_positive_integer: 1 }}
+  }
+{% endparse_json %}
+
+{% liquid
+  return_rc object
+%}

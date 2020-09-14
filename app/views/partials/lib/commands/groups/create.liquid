@@ -1,0 +1,11 @@
+{%  liquid
+  function object = 'lib/commands/groups/create/build', object: context.params.group, owner_id: context.current_user.id
+  echo object
+  function object = 'lib/commands/groups/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'groups/create' object: object
+  endif
+
+  return object
+%}

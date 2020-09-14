@@ -50,6 +50,7 @@ en:
     user-list: "You are now on <b class=\"font-semibold\">%{name}'s</b> list"
     back: Back
     continue: Continue
+    community: Community
 
     orders:
       created: Order has been placed
@@ -64,6 +65,13 @@ en:
         seller: Seller
         buyer: Buyer
         total: Total
+
+    groups:
+      list: Groups
+      group: Group
+      name: Name
+      summary: Summary
+      actions: Actions
 
     activities:
       list: Activities
@@ -180,9 +188,13 @@ en:
       selling: Selling
       buying: Buying
       settings: Settings
+      community: Community
       bank_account: Bank Account
       credit_cards: Credit Cards
       profile: Profile
+      your-profile: Your Profile
+      your-groups: Your Groups
+
 
     search:
       all_categories: All categories

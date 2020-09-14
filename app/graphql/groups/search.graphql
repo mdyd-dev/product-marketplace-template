@@ -1,0 +1,25 @@
+query search($id: ID, $limit: Int = 20, $name: String) {
+  groups: models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      model_schema_name: { value: "group" }
+      properties: [
+        { name: "name" value: $name }
+      ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+      created_at
+
+      name: property(name: "name")
+      summary: property(name: "summary")
+      description: property(name: "description")
+    }
+  }
+}

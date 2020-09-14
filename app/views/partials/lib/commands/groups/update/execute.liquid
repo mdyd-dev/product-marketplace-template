@@ -1,0 +1,15 @@
+<!-- push to background -->
+{% liquid
+  graphql r = 'items/update', args: object
+
+  if r.errors
+    log r.errors, type: 'errors.graphql.invalid'
+    hash_assign object['valid'] = false
+    hash_assign object['errors'] = r.errors
+  else
+    assign object = r.model_update
+    hash_assign object['valid'] = true
+  endif
+
+  return_rc object
+%}
