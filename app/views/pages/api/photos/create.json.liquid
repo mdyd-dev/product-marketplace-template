@@ -1,0 +1,8 @@
+---
+slug: api/photos
+method: post
+---
+{% liquid
+  function_rc object = 'lib/commands/photos/create', object: context.params.photo
+  include 'theme/json/shared/show', object: object
+%}
