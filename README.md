@@ -159,17 +159,38 @@ To ensure frontend is maintanable and easy to change, we follow couple of import
 
 ### activity feeds
 
-- activity record after creation can be published to specific feeds:
+- activity record after creation can be published to the following feeds:
 
   - user-public
     stream of activities accesible to everyone
   
   - user-private
     private activities stream visible only to related user
+    
+  - user-audience
+    private streams of users which follows the user
   
   - custom-audit [id:1]
     all activities - visible 
+    
+### activities
 
+- user_followed_user 
+  actor = follower, target = followed
+  - target:private
+  - actor:public
+  - actor:audience
+
+- user_created_item
+  actor = owner, audience = followers
+  - actor:private
+  - actor:public
+  - actor:audience
+  
+- user_created_order
+  actor = customer, audience = item's owner
+  - actor:private
+  - target:audience
 
 ## Categories
 
