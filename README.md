@@ -150,7 +150,7 @@ To ensure frontend is maintanable and easy to change, we follow couple of import
 
 - location: `app/views/partials/lib/consumers`
 
-## social media / community
+## Social Media / Community
 
 ### following 
 
@@ -170,8 +170,11 @@ To ensure frontend is maintanable and easy to change, we follow couple of import
   - user-audience
     private streams of users which follows the user
   
-  - custom-audit [id:1]
+  - custom-audit [1]
     all activities - visible 
+
+  - custom-items [2]
+    created items
     
 ### activities
 
