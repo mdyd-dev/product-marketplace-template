@@ -1,0 +1,16 @@
+mutation create_group($name: String!, $description: String, $summary: String!, $owner_id: String!, $uuid: String!) {
+  model_create(
+    model: {
+      model_schema_name: "group"
+      properties: [
+        { name: "uuid" value: $uuid }
+        { name: "name" value: $name }
+        { name: "summary" value: $summary }
+        { name: "description" value: $description }
+        { name: "owner_id" value: $owner_id }
+      ]
+    }
+  ){
+    id properties
+  }
+}

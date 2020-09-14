@@ -1,0 +1,49 @@
+<div class="w-full mx-auto">
+  <div class="mb-5 text-right">
+    <a href="/dashboard/groups/new" class="button">
+      Add Group
+    </a>
+  </div>
+  <div class="bg-white shadow-md rounded my-6">
+    <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
+      <thead>
+        <tr>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            {{ "app.groups.name" | t }}
+          </th>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            {{ "app.groups.summary" | t }}
+          </th>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            {{ "app.groups.actions" | t }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for group in groups.results %}
+          <tr class="hover:bg-grey-lighter">
+            <td class="py-4 px-6 border-b border-grey-light">
+              <a href="/groups/{{group.id}}">
+                {{ group.name }}
+              </a>
+            </td>
+            <td class="py-4 px-6 border-b border-grey-light">
+              {{ group.summary }}
+            </td>
+            <td class="py-4 px-6 border-b border-grey-light">
+              <a href="/dashboard/groups/edit?id={{ group.id }}" class="button button-inline">Edit</a>
+              <form action="/dashboard/groups" method="post" class="ml-2 inline" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
+                {% include 'authenticity_token' %}
+                <input type="hidden" name="id" value="{{ item.id }}">
+
+                <button id="deletebutton" class="button button-secondary button-inline">{{ 'app.delete' | t }}</button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          {% include 'theme/simple/dashboard/groups/empty_state' %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>

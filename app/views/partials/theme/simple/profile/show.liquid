@@ -5,7 +5,7 @@
       if user != blank and user.id == current_user.id
         include 'theme/simple/profile/profile_actions_owner', user: user
       elsif current_user != blank
-        render 'theme/simple/follow_button', current_user: current_user, user: user
+        render 'theme/simple/follow_button', current_user: current_user, user: user, big: true
       endif
     %}
   </div>
