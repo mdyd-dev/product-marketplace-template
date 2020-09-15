@@ -31,6 +31,8 @@ en:
         description: Listings counter
         delta: Since yesterday
   app:
+    feed:
+      title: Feed
     title: MVP Marketplace
     support_email: "support@getmarkeplace.co"
 
@@ -108,7 +110,7 @@ en:
       by_user: Browse this user's items
       self-list: You are now on <span class="font-semibold">your</span> list
       user-list: You are now on <span class="font-semibold">%{name}'s</span> list (%{email})
-      yours: Your items
+      yours: User's items
       list: Items
       new: new item
       created: Item created
