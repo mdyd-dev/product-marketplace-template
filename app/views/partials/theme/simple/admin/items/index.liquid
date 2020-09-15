@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th class="text-lg font-normal text-left">{{ 'app.items.attr.name' | t }}</th>
+      <th class="text-lg font-normal text-left">{{ 'app.items.attr.owner' | t }}</th>
       <th class="text-lg font-normal text-left">{{ 'app.items.attr.category' | t }}</th>
       <th class="text-lg font-normal text-left">{{ 'app.items.attr.created_at' | t }}</th>
     </tr>
@@ -13,6 +14,11 @@
         <td class="text-left">
           <a href="/items/{{ record.id }}">
             {{ record.name }}
+          </a>
+        </td>
+        <td class="text-left">
+          <a href="/users/{{ record.owner.slug }}">
+            {{ record.owner }}
           </a>
         </td>
         <td class="text-left">
