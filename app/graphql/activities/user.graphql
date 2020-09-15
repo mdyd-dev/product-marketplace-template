@@ -19,6 +19,7 @@ fragment user on User {
   email
   name: property(name: "username")
   username: property(name: "username")
+  slug: property(name: "slug")
   photo: property_upload(name: "avatar") {
     versions(names: ["tiny", "small"])
   }
