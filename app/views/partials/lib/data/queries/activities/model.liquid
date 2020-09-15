@@ -14,15 +14,14 @@
   assign model = r.models.results.first
 
   assign uuid = model.uuid | default: 'no-uuid-this-is-fake-report-and-add'
-
   graphql r = 'activities/photo', uuid: uuid
-
   if r.errors
     log r, type: 'showme activities/photo query'
     break
   endif
 
   hash_assign model['photos'] = r.models.results
+  hash_assign model['url'] = "/items/" | append: model.name | append: '-' | append: model.id | slugify
 
   return_rc model
 %}

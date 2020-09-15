@@ -10,18 +10,11 @@
     %}
   </div>
   <div class="w-full md:w-3/4 px-4 mb-4 md:mb-0">
-    {% render 'theme/simple/profile/nav', tab: tab, user: user %}
-
     {% liquid
-      if tab == blank
-        if user != blank and user.id == current_user.id
-          render 'theme/simple/profile/activity_new'
-        endif
-        render 'theme/simple/profile/activity', activities: activities
-      else
-        assign file = 'theme/simple/profile/' | append: tab
-        include file, list: list
-      endif
+      render 'theme/simple/profile/nav', tab: section, user: user
+
+      assign file = 'theme/simple/profile/sections/' | append: section
+      include file, list: list
     %}
   </div>
 </div>

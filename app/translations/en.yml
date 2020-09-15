@@ -85,8 +85,8 @@ en:
         actor: Actor
         type: Type
       types:
-        user_followed_user: "started following user %{target}"
-        user_unfollowed_user: stopped following user %{target}
+        user_followed_user: "started following user <a href=\"%{url}\">%{target}</a>"
+        user_unfollowed_user: "stopped following user <a href=\"%{url}\">%{target}</a>"
         page_visited: visited <a href="%{obj}">%{obj}</a> page
         order_status_created: changed status of the [%{target_id}] order to <span class="font-semibold">%{status}</span>
         order_created: placed an [%{object_id}] order for <a href="/items/%{target_id}">%{target}</a> item

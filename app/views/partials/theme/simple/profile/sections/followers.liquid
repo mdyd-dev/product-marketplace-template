@@ -2,8 +2,8 @@
   <div class="container md:px-5 md:py-5 mx-auto">
     <div class="flex flex-wrap -m-4">
       {% liquid
-        for user in users.results
-          include 'theme/simple/profile/user_card', user: user
+        for user in list.results
+          render 'theme/simple/profile/user_card', user: user, current_user: current_user
         endfor
       %}
     </div>

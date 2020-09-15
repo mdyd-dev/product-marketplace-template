@@ -1,13 +1,13 @@
   <nav class="flex justify-between sm:flex-row bg-white mb-5">
     <div class="flex">
       {% assign active_class = 'text-blue-500 border-b-2 font-medium border-blue-500'  %}
-      <a href="/groups/{{user.username}}" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'activity' %}{{ active_class }}{% endif %}">
+      <a href="/groups/{{user.slug}}" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'activity' %}{{ active_class }}{% endif %}">
         Activity
       </a>
-      <a href="/groups/about/{{user.username}}" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'about' %}{{ active_class }}{% endif %}">
+      <a href="/groups/about/{{user.slug}}" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'about' %}{{ active_class }}{% endif %}">
         About
       </a>
-      <a href="/groups/members/{{user.username}}" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'members' %}{{ active_class }}{% endif %}">
+      <a href="/groups/members/{{user.slug}}" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'members' %}{{ active_class }}{% endif %}">
         Members
       </a>
     </div>

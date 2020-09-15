@@ -5,5 +5,9 @@
 
   graphql r  = 'activities/user', id: id
 
-  return_rc r.users.results.first
+  assign user = r.users.results.first
+
+  hash_assign user['url'] = "/profile/" | append: user.slug
+
+  return_rc user
 %}
