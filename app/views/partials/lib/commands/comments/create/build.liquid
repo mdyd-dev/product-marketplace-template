@@ -1,0 +1,14 @@
+{% parse_json object %}
+  {
+    "id":          {{ object.id | json }},
+    "creator_id":    {{ creator_id | json }},
+    "uuid":        {{ object.uuid | json }}
+    "commentable_uuid":        {{ object.commentable_uuid | json }}
+    "body":     {{ object.body | json }},
+    "title": {{ object.title | json }},
+  }
+{% endparse_json %}
+
+{% liquid
+  return_rc object
+%}

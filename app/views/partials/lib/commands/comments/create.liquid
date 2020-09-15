@@ -1,0 +1,11 @@
+{%  liquid
+  function object = 'lib/commands/comments/create/build', object: context.params.comment, owner_id: context.current_user.id
+  echo object
+  function object = 'lib/commands/comments/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'comments/create' object: object
+  endif
+
+  return object
+%}
