@@ -7,12 +7,6 @@
   </head>
 
   <body class="font-sans antialiased leading-normal text-gray-700">
-
-    <div class="fixed left-0 top-0 bg-gray-300 p-3 text-xs">
-      {%- for i in current_user -%}
-        <pre>{{ i[0] }}: {{ i[1] }}</pre>
-      {%- endfor -%}
-    </div>
     {% include 'theme/simple/layout/main', current_user_id: context.current_user.id %}
     {% yield 'custom_scripts' %}
   </body>
