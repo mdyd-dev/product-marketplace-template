@@ -1,0 +1,8 @@
+---
+slug: api/comments
+method: post
+---
+{% liquid
+  function_rc object = 'lib/commands/comments/create', object: context.params.comment
+  include 'theme/json/shared/show', object: object
+%}
