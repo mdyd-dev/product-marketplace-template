@@ -13,7 +13,7 @@ method: post
     if object.valid
       include 'lib/commands/events/create', type: 'item_created', actor_id: context.current_user.id, object_id: object.id
 
-      function_rc url = 'link_to', item: object
+      function_rc url = 'link_to', path: '/items/', item: object
       include 'redirect_to', url: url, notice: 'app.items.created'
     endif
   else

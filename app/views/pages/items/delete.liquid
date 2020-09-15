@@ -12,7 +12,7 @@ method: post
   else
     assign error = object.errors.base[0]
 
-    function_rc item_url = 'link_to', item: item
+    function_rc item_url = 'link_to', path: '/items/', item: item
     include 'redirect_to', url: item_url, error: error
   endif
 %}

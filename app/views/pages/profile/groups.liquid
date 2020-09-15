@@ -7,5 +7,7 @@
     break
   endunless
 
-  include 'theme/simple/profile/show', user: user, tab: 'groups'
+  function groups = 'lib/data/queries/groups/search', limit: 20
+
+  include 'theme/simple/profile/show', user: user, tab: 'groups', list: groups
 %}

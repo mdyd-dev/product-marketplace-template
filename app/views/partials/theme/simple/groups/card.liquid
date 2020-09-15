@@ -1,10 +1,16 @@
+{% function_rc group_url = 'link_to', path: '/groups/', item: group %}
 <div class="p-4 md:w-1/3">
   <div class="h-full border-2 border-gray-200 rounded-lg overflow-hidden">
-    <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
+    <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{ group.main_photo.photo.versions.small | default: 'https://dummyimage.com/720x400' }}" alt="blog">
+
     <div class="p-6">
       <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">GROUP</h2>
-      <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ group.name }}</h1>
-      <p class="leading-relaxed mb-3">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+      <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
+        <a href="{{group_url}}">
+          {{ group.name }}
+        </a>
+      </h1>
+      <p class="leading-relaxed mb-3">{{group.summary}}</p>
       <div class="flex items-center flex-wrap ">
         <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
           Join

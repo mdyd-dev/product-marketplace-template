@@ -1,5 +1,5 @@
 {% liquid
-  graphql r  = 'groups/search', id: id, limit: 1
+  graphql r  = 'groups/search', id: id, limit: 1, with_owner: with_owner
 
   return r.groups.results.first
 %}

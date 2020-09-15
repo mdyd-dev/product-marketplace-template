@@ -1,0 +1,19 @@
+<div>
+  <div class="bg-gray-600 text-center p-16">
+    <h1 class="text-3xl font-medium text-white">
+      {{group.name}}
+    </h1>
+    <h2 class="text-xl font-medium text-white">
+      {{group.summary}}
+    </h2>
+  </div>
+  {% render 'theme/simple/groups/nav', tab: tab %}
+
+  <div class="bg-white">
+
+    {% liquid
+      assign file = 'theme/simple/groups/' | append: tab
+      include file, list: list
+    %}
+  </div>
+</div>

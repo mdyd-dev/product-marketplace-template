@@ -1,0 +1,18 @@
+---
+slug: groups
+---
+
+{% liquid
+  assign id = context.params.slug2 | split: '-' | last
+
+  function_rc group = 'lib/data/queries/groups/find', id: id, with_owner: true
+
+  unless group.id
+    render 'theme/simple/404', status: 404
+    break
+  endunless
+
+  function_rc current_user = 'lib/data/queries/users/find', id: context.current_user.id
+
+  include 'theme/simple/groups/show', group: group, current_user: current_user, tab: 'activity'
+%}
