@@ -20,7 +20,7 @@
         render 'theme/simple/profile/activity', activities: activities
       else
         assign file = 'theme/simple/profile/' | append: tab
-        include file
+        include file, list: list
       endif
     %}
   </div>

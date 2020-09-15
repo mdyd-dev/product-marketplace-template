@@ -1,0 +1,21 @@
+<div>
+  <div class="p-5">
+    <img class="h-64 w-full object-cover object-center" src="{{ group.main_photo.photo.versions.uncropped | default: 'https://dummyimage.com/720x400' }}" alt="blog">
+  </div>
+  <h1 class="text-2xl font-medium text-gray-700 mb-10">
+    {{group.name}}
+  </h1>
+
+  <div class="m-y-5 flex">
+    <img class="h-16 h-16 mr-5" src="{{  group.owner.avatar.versions.small | default: 'https://dummyimage.com/100x100' }}" />
+    {{ group.owner.first_name }} {{ group.owner.last_name }}, Owner
+  </div>
+
+  <div class="mt-10">
+    Description
+
+    <p class="mt-5 text-lg">
+      {{ group.description }}
+    </p>
+  </div>
+</div>

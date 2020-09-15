@@ -13,7 +13,7 @@
       {% for item in items.results %}
         <tr>
           <td class="px-4 py-2 border-b">
-            {% function_rc item_url = 'link_to', item: item %}
+            {% function_rc item_url = 'link_to', path: '/items/', item: item %}
             <a href="{{ item_url }}">
               {% print item.name %}
               <small> {% echo item.status.name | default: 'app.item_statuses.none' | t %}</small>
