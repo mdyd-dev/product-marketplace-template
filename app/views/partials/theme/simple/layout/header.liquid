@@ -10,6 +10,10 @@
     </a>
 
     <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto">
+      {% if context.current_user.id  %}
+      <a href="/feed" class="mr-5 hover:text-gray-900">{{ 'app.feed.title' | t }}</a>
+      {% endif %}
+
       <a href="/items/new" class="mr-5 hover:text-gray-900">{{ 'app.list-your-item' | t }}</a>
 
       {% if context.current_user.id  %}

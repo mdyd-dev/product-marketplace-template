@@ -35,6 +35,8 @@ query users(
       followed_user_ids: property_array(name: "followed_user_ids") @include(if: $with_followed)
 
       followed_users: related_users(foreign_property: "id" join_on_property: "followed_user_ids") @include(if: $with_followed) {
+        id
+        slug: property(name: "slug")
         email
       }
       avatar: property_upload(name: "avatar") {

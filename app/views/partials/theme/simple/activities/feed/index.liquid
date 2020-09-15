@@ -1,0 +1,17 @@
+<div class="text-xs p-2">
+  {% print current_user.username %}'s Private Activity Feed
+</div>
+
+
+<div class="w-full bg-gray-200 p-3">
+    {% render 'theme/simple/profile/activity_new' %}
+  <div class="grid grid-cols-1 gap-6 my-6">
+
+    {% for record in list.results %}
+      {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_user: current_user %}
+    {% endfor %}
+  </div>
+
+</div>
+
+{% render 'theme/simple/items/follow.js' %}

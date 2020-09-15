@@ -16,6 +16,7 @@
       </div>
       <div class="text-xl text-grey-dark font-light">
         {{ user.username  }}
+        {% if current_user.id == user.id %}[you]{% endif %}
       </div>
     </div>
   </div>

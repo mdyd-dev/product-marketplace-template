@@ -13,10 +13,8 @@
     -->
   </header>
 
-  <p>User ID: <b class="font-mono">{{ user.id }}</b></p>
-  <p>Email: <b class="font-mono">{{ user.email }}</b></p>
-  <p>Password: <b class="font-mono">******</b></p>
-
+  <p>User ID: <div class="font-mono">{{ user.id }}</div></p>
+  <p>Email: <div class="font-mono">{{ user.email }}</div></p>
 
   <p><a href="/u/{{ user.id }}">{{ 'app.items.yours' | t }}</a></p>
 </section>
