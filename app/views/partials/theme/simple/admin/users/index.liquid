@@ -1,19 +1,22 @@
 <table class="table w-full max-w-full">
   <thead>
     <tr>
-      <th class="w-8 text-left">{{ 'app.users.attr.id' | t }}</th>
-      <th class="w-8 text-left">{{ 'app.users.attr.slug' | t }}</th>
+      <th class="text-left">{{ 'app.users.attr.slug' | t }}</th>
       <th class="text-left">{{ 'app.users.attr.email' | t }}</th>
       <th class="text-left">{{ 'app.users.attr.created_at' | t }}</th>
-      <th class ="text-left">{{ 'app.users.attr.list' | t }}</th>
+      <th class ="text-left">{{ 'app.users.attr.followers' | t }}</th>
     </tr>
   </thead>
 
   <tbody class="leading-8">
     {% for record in list.results %}
       <tr>
-        <td>{{ record.id }}</td>
-        <td>{{ record.slug }}</td>
+        <td>
+          <a href="/profile/{% print record.slug %}">{{ record.username }}</a>
+          <div class="text-xs">
+            slug: {{ record.slug }} id: {{ record.id }} uuid: {{ record.uuid }}
+          </div>
+        </td>
         <td>{{ record.email }}</td>
         <td>{{ record.created_at | l }}</td>
         <td>{{ record.followed_user_ids | json }}</td>
