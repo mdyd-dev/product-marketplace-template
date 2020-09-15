@@ -14,6 +14,7 @@ const myUrl = process.env.MPKIT_URL
 const getURL = ClientFunction(() => window.location.href)
 const editURL = '/items/edit?id='
 
+
 const item = {
   name: faker.commerce.productName(),
   type: faker.commerce.productMaterial(),
@@ -28,7 +29,8 @@ const editedItem = {
   price: '5000',
 }
 
-const newUsername = faker.name.findName()
+const newUsername = faker.name.firstName().toLowerCase()
+
 
 const adminPage = new AdminPanel()
 const newSessionForm = new NewSessionForm()
@@ -41,14 +43,14 @@ const itemSearch = new ItemSearch(item, editedItem)
 const signupConfirmation = 'Your account has been created'
 const notAuthorizedUser = 'Permission denied'
 const clearField = 'ctrl+a delete'
-const slugify = newEmail
+
 
 
 
 fixture`Happy path`.page(myUrl + 'sessions/new')
 
 test(`Register admin`, async (t) => {
-  await t
+    await t
     .click(newSessionForm.regBtn)
     .typeText(newSessionForm.emailInput, 'admin@example.com')
     .typeText(newSessionForm.passInput, 'password')
@@ -124,7 +126,6 @@ test('Editing item and search', async (t) => {
     .click(Selector('a').withText('Profile'))
     const sellerProfilePage = ClientFunction(() => document.location.href)
     await t.expect(sellerProfilePage()).contains(myUrl+'profile/' + newUsername)
-    console.log(profileUrl)
     .click(Selector('a').withText('Your items'))  // goes on your list from profile view
   await t.expect(Selector('p').withText('You are now on your list').exists).ok()
     .click(Selector('#sort'))
@@ -189,7 +190,7 @@ test('Buying an item and following the seller', async (t) => {
     .click(Selector('button').withText('Checkout'))
     .click(Selector('button').withText('Pay'))
     .click(topMenu.dashboardBtn)
-    .click(Selector('a').withText('Profile'))
+    .click(Selector('a').withText('Your Profile'))
     .expect(Selector('a').withText('johnsmith').exists).ok("Followed list not shown")
     .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Your orders').nth(1))
@@ -204,12 +205,12 @@ test('Buying an item and following the seller', async (t) => {
 
 
 test(`Admin Panel test`, async (t) => {
-  await t.useRole(adminRole)
+  await t
+    .useRole(adminRole)
     .click(topMenu.adminBtn)
   await t.click(adminPage.users)
   const userTable = Selector('tbody').find('td')
-  await t.debug()
-  await t.expect(userTable.count).gt(5)
+  await t.expect(userTable.count).gte(3)
     .click(adminPage.items)
   const itemTable = Selector('div').find('.flex')
   await t.expect(itemTable.count).gt(5)
@@ -217,8 +218,8 @@ test(`Admin Panel test`, async (t) => {
   const orderTable = Selector('tbody').find('tr')
   await t.expect(orderTable.count).gt(0)
     .click(adminPage.categories)
-  const categoriesTable = Selector('tbody').find('tr')
-  await t.expect(categoriesTable.count).gt(15)
+  const categoriesTable = Selector('tbody').find('tr').count
+  await t.expect(categoriesTable).gt(15)
     .click(adminPage.home)
     .click(adminPage.activities)
     .click(adminPage.setup)
