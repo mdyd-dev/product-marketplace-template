@@ -21,6 +21,10 @@
     if users.total_entries > 0
       include 'lib/register_error', contract: c, field_name: 'username', key: 'app.errors.taken'
     endif
+    function_rc users = 'lib/data/queries/users/search', slug: object.slug, limit: 1
+    if users.total_entries > 0
+      include 'lib/register_error', contract: c, field_name: 'username', key: 'app.errors.taken'
+    endif
   endif
 
   hash_assign object['valid'] = c.valid

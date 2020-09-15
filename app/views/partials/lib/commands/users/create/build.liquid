@@ -3,6 +3,7 @@
     "email":       {{ object.email | json }},
     "password":    {{ object.password | json }},
     "username":    {{ object.username | json }},
+    "slug":        {{ object.username | slugify | json }},
     "remember_me": true
   }
 {% endparse_json %}

@@ -41,10 +41,11 @@ const itemSearch = new ItemSearch(item, editedItem)
 const signupConfirmation = 'Your account has been created'
 const notAuthorizedUser = 'Permission denied'
 const clearField = 'ctrl+a delete'
+const slugify = newEmail
 
 
 
-fixture`Register scenario`.page(myUrl + 'sessions/new')
+fixture`Happy path`.page(myUrl + 'sessions/new')
 
 test(`Register admin`, async (t) => {
   await t
@@ -74,18 +75,15 @@ test(`Register buyer`, async (t) => {
     .click(newSessionForm.signUpBtn)
 })
 
-fixture`Wrong data scenario`.page(myUrl+ 'sessions/new')
-
-test(`Logging attempt with empty data`, async (t) => {
+test(`Trying to register with taken data and log in with wrong data`, async (t) => {
   await t
-    .click(topMenu.logInBtn)
     .click(newSessionForm.logInBtn)
-  await t.expect(Selector('label').withText('E-mail').textContent).contains('cannot be blank')
-  await t.expect(Selector('label').withText('Password').textContent).contains('cannot be blank')
-})
-
-test(`Registration attempt with taken data`, async (t) => {
-  await t
+    .expect(Selector('label').withText('E-mail').textContent).contains('cannot be blank')
+    .expect(Selector('label').withText('Password').textContent).contains('cannot be blank')
+    .typeText(newSessionForm.emailInput, 'admin@email.com')
+    .typeText(newSessionForm.passInput, 'wrongpassword')
+    .click(newSessionForm.logInBtn)
+    .expect(Selector('html').textContent).contains('Invalid email or password')
     .click(newSessionForm.regBtn)
     .typeText(newSessionForm.emailInput, 'admin@example.com')
     .typeText(newSessionForm.passInput, 'password')
@@ -95,15 +93,7 @@ test(`Registration attempt with taken data`, async (t) => {
     .expect(Selector('label[for="email"]').textContent).contains('already taken')
 })
 
-test(`Logging attempt with wrong password`, async (t) => {
-  await t
-    .typeText(newSessionForm.emailInput, 'admin@email.com')
-    .typeText(newSessionForm.passInput, 'wrongpassword')
-    .click(newSessionForm.logInBtn)
-  await t.expect(Selector('html').textContent).contains('Invalid email or password')
-})
-
-fixture`Trade scenario`.page(myUrl)
+fixture`Happy path`.page(myUrl)
 
 test('Creating item then self follow try', async (t) => {
     await t.useRole(sellerRole)
@@ -123,7 +113,7 @@ test('Creating item then self follow try', async (t) => {
     await t.expect(itemShow.description.exists).ok()
     await t.expect(itemShow.price.innerText).eql('$10,000', 'check element text')
     await t.expect('img[src="_uploads_/testimage.png"]').ok()
-    // add self follow here
+    .expect(Selector('button').withAttribute('data-follow-user').exists).notOk()
 })
 
 test('Editing item and search', async (t) => {
@@ -132,7 +122,10 @@ test('Editing item and search', async (t) => {
     .useRole(sellerRole)
     .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Profile'))
-    .click(Selector('a').withText('Your list'))  // goes on your list from profile view
+    const sellerProfilePage = ClientFunction(() => document.location.href)
+    await t.expect(sellerProfilePage()).contains(myUrl+'profile/' + newUsername)
+    console.log(profileUrl)
+    .click(Selector('a').withText('Your items'))  // goes on your list from profile view
   await t.expect(Selector('p').withText('You are now on your list').exists).ok()
     .click(Selector('#sort'))
     .click(Selector('option').withText('The Most Recent'))
@@ -209,13 +202,13 @@ test('Buying an item and following the seller', async (t) => {
   await t.expect(Selector('tbody').find('td').withText('paid').exists).ok("message 'paid' doesn't exists")
 })
 
-fixture`Other`.page(myUrl)
 
 test(`Admin Panel test`, async (t) => {
   await t.useRole(adminRole)
     .click(topMenu.adminBtn)
   await t.click(adminPage.users)
   const userTable = Selector('tbody').find('td')
+  await t.debug()
   await t.expect(userTable.count).gt(5)
     .click(adminPage.items)
   const itemTable = Selector('div').find('.flex')

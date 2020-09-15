@@ -9,7 +9,7 @@
     <img class="md:h-48 md:w-48 h-24 w-24 object-cover object-center rounded-full shadow-md mx-auto" src="{{ img_url }}" alt="blog">
     <div class="p-6">
       <h2 class="text-gray-900 title-font font-medium mb-1">
-        <a href="/profile/{{user.username}}">
+        <a href="/profile/{{user.slug}}">
           {{ user.first_name | append: user.last_name | default: user.username }}
         </a>
       </h2>
