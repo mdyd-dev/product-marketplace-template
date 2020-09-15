@@ -155,7 +155,7 @@ To ensure frontend is maintanable and easy to change, we follow couple of import
 ### following 
 
 - user can follow user 
-- TDB user can follow topic / category / item / any
+- TDB user can follow anything, category [topic] / item
 
 ### activity feeds
 

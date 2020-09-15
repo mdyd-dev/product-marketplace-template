@@ -1,0 +1,11 @@
+---
+name: relationship
+properties:
+  - name: name
+  - name: left_uuid
+  - name: right_uuid
+
+  - name: left_activated_at
+    type: datetime
+  - name: right_activated_at
+    type: datetime
