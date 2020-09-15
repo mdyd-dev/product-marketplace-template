@@ -4,7 +4,6 @@
       <th class="text-left">{{ 'app.users.attr.slug' | t }}</th>
       <th class="text-left">{{ 'app.users.attr.email' | t }}</th>
       <th class="text-left">{{ 'app.users.attr.created_at' | t }}</th>
-      <th class ="text-left">{{ 'app.users.attr.followers' | t }}</th>
     </tr>
   </thead>
 
@@ -19,7 +18,6 @@
         </td>
         <td>{{ record.email }}</td>
         <td>{{ record.created_at | l }}</td>
-        <td>{{ record.followed_user_ids | json }}</td>
         <td>
           <a href="/u/{{ record.id }}">
           <button class="mt button button-sm mt-2">

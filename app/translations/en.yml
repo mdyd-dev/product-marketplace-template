@@ -31,6 +31,11 @@ en:
         description: Listings counter
         delta: Since yesterday
   app:
+    relationships:
+      type:
+        - followship
+        - membership
+        - collaboration
     feed:
       title: Feed
     title: MVP Marketplace

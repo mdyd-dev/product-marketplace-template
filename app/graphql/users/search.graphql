@@ -7,7 +7,6 @@ query users(
   $limit: Int = 1,
   $valid_for: Int = 1,
   $with_token: Boolean = false,
-  $with_followed: Boolean = null
   $sort_order: SortOrderEnum = ASC){
   users(
     per_page: $limit
@@ -32,13 +31,7 @@ query users(
       first_name: property(name: "first_name")
       last_name: property(name: "last_name")
       token: temporary_token(valid_for: $valid_for) @include(if: $with_token)
-      followed_user_ids: property_array(name: "followed_user_ids") @include(if: $with_followed)
 
-      followed_users: related_users(foreign_property: "id" join_on_property: "followed_user_ids") @include(if: $with_followed) {
-        id
-        slug: property(name: "slug")
-        email
-      }
       avatar: property_upload(name: "avatar") {
         url
         versions

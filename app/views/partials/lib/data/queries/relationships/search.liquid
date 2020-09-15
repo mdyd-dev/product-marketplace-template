@@ -1,0 +1,5 @@
+{% liquid
+  graphql r = 'relationships/search', limit: limit, name: name, l_uuid: l_uuid, r_uuid: r_uuid
+
+  return r.models
+%}

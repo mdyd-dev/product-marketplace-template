@@ -7,9 +7,6 @@ query user($id: ID!) {
   ) {
     results {
       ...user
-      followed_users: related_users(foreign_property: "id", join_on_property: "followed_user_ids") {
-        ...user
-      }
     }
   }
 }

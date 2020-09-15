@@ -1,0 +1,16 @@
+mutation create($name: String!, $l_activated_at: String!, $r_activated_at: String, $l_uuid: String!, $r_uuid: String!) {
+  model_create(
+    model: {
+      model_schema_name: "relationship"
+      properties: [
+        { name: "name" value: $name }
+        { name: "l_uuid" value: $l_uuid }
+        { name: "r_uuid" value: $r_uuid }
+        { name: "l_activated_at" value: $l_activated_at }
+        { name: "r_activated_at" value: $r_activated_at }
+      ]
+    }
+  ){
+    id properties
+  }
+}

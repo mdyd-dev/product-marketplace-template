@@ -1,0 +1,59 @@
+query models($model: [String!] = "group" $name: String! $r_uuid: String $l_uuid: String $limit: Int!){
+  models(
+    per_page: $limit
+    filter: {
+      properties: [
+        { name: "name" value: $name }
+        { name: "r_uuid" value: $r_uuid }
+        { name: "l_uuid" value: $l_uuid }
+      ]
+    }
+  ){
+    total_entries
+    results {
+      id
+      created_at
+      name: property(name: "name")
+      r_uuid: property(name: "r_uuid")
+      l_uuid: property(name: "l_uuid")
+      r_activated_at: property(name: "r_activated_at")
+      l_activated_at: property(name: "l_activated_at")
+
+      lu: related_user(foreign_property: "uuid" join_on_property: "l_uuid"){
+        ...user
+      }
+      ru: related_user(foreign_property: "uuid" join_on_property: "r_uuid"){
+        ...user
+      }
+      lm: related_model(foreign_property: "uuid" join_on_property: "l_uuid" model_schema_name: $model){
+        ...model
+      }
+      rm: related_model(foreign_property: "uuid" join_on_property: "r_uuid" model_schema_name: $model){
+        ...model
+      }
+    }
+  }
+}
+
+fragment model on Model {
+  id
+  name: property(name: "username")
+  username: property(name: "username")
+  slug: property(name: "slug")
+  uuid: property(name: "uuid")
+  photo: property_upload(name: "avatar") {
+    versions(names: ["tiny", "small"])
+  }
+}
+
+fragment user on User {
+  id
+  email
+  name: property(name: "username")
+  username: property(name: "username")
+  slug: property(name: "slug")
+  uuid: property(name: "uuid")
+  photo: property_upload(name: "avatar") {
+    versions(names: ["tiny", "small"])
+  }
+}
