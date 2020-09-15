@@ -2,7 +2,6 @@
 slug: profile
 ---
 {% liquid
-  echo context.params
   function_rc user = 'lib/data/queries/users/find', slug: context.params.slug2 | slugify
   unless user.id
     render 'theme/simple/404', status: 404

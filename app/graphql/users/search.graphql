@@ -27,6 +27,7 @@ query users(
       email
       created_at
       username: property(name: "username")
+      uuid: property(name: "uuid")
       slug: property(name: "slug")
       first_name: property(name: "first_name")
       last_name: property(name: "last_name")
