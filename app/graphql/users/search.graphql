@@ -3,20 +3,23 @@ query users(
   $ids: [ID!],
   $email: String,
   $username: String,
+  $slug: String,
   $limit: Int = 1,
   $valid_for: Int = 1,
   $with_token: Boolean = false,
-  $with_followed: Boolean = null){
+  $with_followed: Boolean = null
+  $sort_order: SortOrderEnum = ASC){
   users(
     per_page: $limit
     filter: {
       email: { value: $email }
       id:    { value: $id value_in: $ids }
       properties: [
-        { name: "username", value: $username }
+        { name: "username", value: $username },
+        { name: "slug", value: $slug }
       ]
     }
-    sort: [{ id: { order: ASC } }]
+    sort: [{ id: { order: $sort_order  } }]
   ){
     total_entries
     results {
@@ -24,6 +27,7 @@ query users(
       email
       created_at
       username: property(name: "username")
+      slug: property(name: "slug")
       first_name: property(name: "first_name")
       last_name: property(name: "last_name")
       token: temporary_token(valid_for: $valid_for) @include(if: $with_token)

@@ -101,6 +101,7 @@ en:
         created_at: Created at
         email: Email
         list_id: List ID
+        slug: slug
 
     items:
       by_user: Browse this user's items

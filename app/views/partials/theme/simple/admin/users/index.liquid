@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th class="w-8 text-left">{{ 'app.users.attr.id' | t }}</th>
+      <th class="w-8 text-left">{{ 'app.users.attr.slug' | t }}</th>
       <th class="text-left">{{ 'app.users.attr.email' | t }}</th>
       <th class="text-left">{{ 'app.users.attr.created_at' | t }}</th>
       <th class ="text-left">{{ 'app.users.attr.list' | t }}</th>
@@ -12,6 +13,7 @@
     {% for record in list.results %}
       <tr>
         <td>{{ record.id }}</td>
+        <td>{{ record.slug }}</td>
         <td>{{ record.email }}</td>
         <td>{{ record.created_at | l }}</td>
         <td>{{ record.followed_user_ids | json }}</td>
