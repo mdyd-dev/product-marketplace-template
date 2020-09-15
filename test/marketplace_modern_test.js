@@ -190,7 +190,7 @@ test('Buying an item and following the seller', async (t) => {
     .click(Selector('button').withText('Pay'))
     .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Profile'))
-    .expect(Selector('div').withText(newEmail).exists).ok("Followed list not shown")
+    .expect(Selector('a').withText('johnsmith').exists).ok("Followed list not shown")
     .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Your orders').nth(1))
     .click(Selector('a').withText(item.name))
