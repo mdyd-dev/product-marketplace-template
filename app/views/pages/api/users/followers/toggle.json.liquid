@@ -5,10 +5,26 @@ method: post
 {% liquid
   include 'lib/must_be_authenticated'
 
-  function_rc object = 'lib/commands/users/followers/toggle', params: context.params, current_user_id: context.current_user.id
+  assign now = 'now' | to_time
+
+  function follower = 'lib/data/queries/users/find', id: context.current_user.id
+  function followed = 'lib/data/queries/users/find', id: context.params.user_id
+
+  if context.params.action_name == 'follow'
+    assign event_type = 'user_followed_user'
+    function_rc object = 'lib/commands/relationships/create', name: 'followship', l_uuid: follower.uuid, r_uuid: followed.uuid, l_at: now, r_at: now
+  endif
+
+  if params.action_name == 'unfollow'
+    assign event_type = 'user_unfollowed_user'
+    function relation = 'lib/data/queries/relationships/find', name: 'followship', l_uuid: follower.uuid, r_uuid: followed.uuid
+
+    if relation
+      function_rc object = 'lib/commands/relationships/delete', object: relation
+    endif
+  endif
 
   if object.valid
-    assign event_type = 'user_' | append: context.params.action_name | append: 'ed_user'
     include 'lib/commands/events/create', type: event_type, actor_id: context.current_user.id, target_id: context.params.user_id
   endif
 
