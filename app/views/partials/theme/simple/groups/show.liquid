@@ -9,11 +9,10 @@
   </div>
   {% render 'theme/simple/groups/nav', tab: tab %}
 
-  <div class="bg-white">
-
+  <div>
     {% liquid
       assign file = 'theme/simple/groups/' | append: tab
-      include file, list: list
+      include file, list: list, group: group
     %}
   </div>
 </div>

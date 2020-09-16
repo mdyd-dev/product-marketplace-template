@@ -17,6 +17,7 @@ query search($id: ID, $limit: Int = 20, $name: String, $with_owner: Boolean = fa
       id
       created_at
 
+      uuid: property(name: "uuid")
       name: property(name: "name")
       summary: property(name: "summary")
       description: property(name: "description")
