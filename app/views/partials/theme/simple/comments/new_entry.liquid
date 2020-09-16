@@ -4,6 +4,7 @@
     assign uuid = '' | uuid
   %}
   <input type="hidden" name="comment[commentable_uuid]" value="{{commentable.uuid}}" />
+  <input type="hidden" name="comment[commentable_type]" value="{{commentable_type}}" />
   <input type="hidden" name="comment[uuid]" value="{{uuid}}" />
   <input type="hidden" name="return_to" value="{{context.location.pathname}}" />
   <div class="bg-white shadow rounded-lg p-5 mx-5">

@@ -1,4 +1,4 @@
-query search($id: ID, $limit: Int = 20, $name: String, $with_owner: Boolean = false) {
+query search($id: ID, $limit: Int = 20, $name: String, $owner_id: String, $with_owner: Boolean = false) {
   groups: models(
     per_page: $limit
     filter: {
@@ -6,6 +6,7 @@ query search($id: ID, $limit: Int = 20, $name: String, $with_owner: Boolean = fa
       model_schema_name: { value: "group" }
       properties: [
         { name: "name" value: $name }
+        { name: "owner_id" value: $owner_id }
       ]
     }
     sort: [

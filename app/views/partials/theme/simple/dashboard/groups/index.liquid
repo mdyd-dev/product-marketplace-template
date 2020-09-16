@@ -5,55 +5,57 @@
     </a>
   </div>
   <div class="bg-white shadow-md rounded my-6">
-    <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
-      <thead>
-        <tr>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-            {{ "app.groups.picture" | t }}
-          </th>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-            {{ "app.groups.name" | t }}
-          </th>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-            {{ "app.groups.summary" | t }}
-          </th>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-            {{ "app.groups.actions" | t }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for group in groups.results %}
-          <tr class="hover:bg-grey-lighter">
-            <td class="py-4 px-6 border-b border-grey-light">
-              <a href="/groups/{{group.id}}">
-                <img src="{{group.main_photo.photo.versions.small | default: 'https://dummyimage.com/100x100' }}" class="h-32 w-32 object-cover object-center" />
-              </a>
-            </td>
-            <td class="py-4 px-6 border-b border-grey-light">
-              <a href="/groups/{{group.id}}">
-                {{ group.name }}
-              </a>
-            </td>
-            <td class="py-4 px-6 border-b border-grey-light">
-              {{ group.summary }}
-            </td>
-            <td class="py-4 px-6 border-b border-grey-light">
-              <a href="/dashboard/groups/edit?id={{ group.id }}" class="button button-inline">
-                Edit
-              </a>
-              <form action="/dashboard/groups" method="post" class="ml-2 inline" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
-                {% include 'authenticity_token' %}
-                <input type="hidden" name="id" value="{{ item.id }}">
-
-                <button id="deletebutton" class="button button-secondary button-inline">{{ 'app.delete' | t }}</button>
-              </form>
-            </td>
+    {% if groups.results.size > 0 %}
+      <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
+        <thead>
+          <tr>
+            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+              {{ "app.groups.picture" | t }}
+            </th>
+            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+              {{ "app.groups.name" | t }}
+            </th>
+            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+              {{ "app.groups.summary" | t }}
+            </th>
+            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+              {{ "app.groups.actions" | t }}
+            </th>
           </tr>
-        {% else %}
-          {% include 'theme/simple/dashboard/groups/empty_state' %}
-        {% endfor %}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {% for group in groups.results %}
+            <tr class="hover:bg-grey-lighter">
+              <td class="py-4 px-6 border-b border-grey-light">
+                <a href="/groups/{{group.id}}">
+                  <img src="{{group.main_photo.photo.versions.small | default: 'https://dummyimage.com/100x100' }}" class="h-32 w-32 object-cover object-center" />
+                </a>
+              </td>
+              <td class="py-4 px-6 border-b border-grey-light">
+                <a href="/groups/{{group.id}}">
+                  {{ group.name }}
+                </a>
+              </td>
+              <td class="py-4 px-6 border-b border-grey-light">
+                {{ group.summary }}
+              </td>
+              <td class="py-4 px-6 border-b border-grey-light">
+                <a href="/dashboard/groups/edit?id={{ group.id }}" class="button button-inline">
+                  Edit
+                </a>
+                <form action="/dashboard/groups" method="post" class="ml-2 inline" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
+                  {% include 'authenticity_token' %}
+                  <input type="hidden" name="id" value="{{ item.id }}">
+
+                  <button id="deletebutton" class="button button-secondary button-inline">{{ 'app.delete' | t }}</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      {% include 'theme/simple/dashboard/groups/empty_state' %}
+    {% endif %}
   </div>
 </div>
