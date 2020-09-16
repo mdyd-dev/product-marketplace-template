@@ -42,9 +42,6 @@ const itemSearch = new ItemSearch(item, editedItem)
 
 const signupConfirmation = 'Your account has been created'
 const notAuthorizedUser = 'Permission denied'
-const clearField = 'ctrl+a delete'
-
-
 
 
 fixture`Happy path`.page(myUrl + 'sessions/new')
@@ -102,9 +99,7 @@ test('Creating item then self follow try', async (t) => {
     await t.click(topMenu.listItemBtn)
     .typeText(newItemForm.nameField, item.name)
     .typeText(newItemForm.descField, item.description)
-    .click(newItemForm.priceField)
-    .pressKey(clearField)
-    .typeText(newItemForm.priceField, item.price)
+    .typeText(newItemForm.priceField, item.price, { replace: true })
     .click(newItemForm.browseBtn)
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), [
       '_uploads_/testimage.png',
@@ -125,31 +120,21 @@ test('Editing item and search', async (t) => {
     .click(topMenu.dashboardBtn)
     .click(Selector('a').withText('Profile'))
     const sellerProfilePage = ClientFunction(() => document.location.href)
-    await t.expect(sellerProfilePage()).contains(myUrl+'profile/' + newUsername)
-    .click(Selector('a').withText('User\'s items'))  // goes on your list from profile view
-  await t.expect(Selector('p').withText('You are now on your list').exists).ok()
+    await t.expect(sellerProfilePage()).contains(myUrl+'profile/' + newUsername) // checks if href contains slugified username
+    .click(Selector('a').withText('Your items'))  // goes on your list from profile view
+    await t.expect(Selector('p').withText('You are now on your list').exists).ok()
     .click(Selector('#sort'))
     .click(Selector('option').withText('The Most Recent'))
     .click(itemSearch.searchBtn)
-  await t.expect(itemSearch.itemLink.exists).ok("'Item#name could not be found")
     .click(itemSearch.itemLink)
     .click(Selector('a').withText("Browse this user's items")) // goes on your list from item show
-    .typeText(itemSearch.searchField, item.name)
-    .click(itemSearch.searchBtn)
     .click(itemSearch.itemLink)
 
   //change of item information
-  await t
-    .click(itemShow.editbutton)
-    .doubleClick(newItemForm.nameField)
-    .pressKey(clearField)
-    .typeText(newItemForm.nameField, editedItem.name)
-    .doubleClick(newItemForm.descField)
-    .pressKey(clearField)
-    .typeText(newItemForm.descField, editedItem.description)
-    .doubleClick(newItemForm.priceField)
-    .pressKey(clearField)
-    .typeText(newItemForm.priceField, editedItem.price)
+  await t.click(itemShow.editbutton)
+    .typeText(newItemForm.nameField, editedItem.name, { replace: true })
+    .typeText(newItemForm.descField, editedItem.description, { replace: true })
+    .typeText(newItemForm.priceField, editedItem.price, { replace: true })
     .click(newItemForm.submitBtn)
     await t.expect(editPage.name.exists).ok()
     await t.expect(editPage.description.exists).ok()
@@ -171,9 +156,7 @@ test('Creating new item for sell', async (t) => {
     await t.click(topMenu.listItemBtn)
     .typeText(newItemForm.nameField, item.name)
     .typeText(newItemForm.descField, item.description)
-    .doubleClick(newItemForm.priceField)
-    .pressKey(clearField)
-    .typeText(newItemForm.priceField, item.price)
+    .typeText(newItemForm.priceField, item.price, { replace: true })
     .click(newItemForm.submitBtn)
 })
 
@@ -211,19 +194,18 @@ test(`Admin Panel test`, async (t) => {
   await t.click(adminPage.users)
   const userTable = Selector('tbody').find('td')
   await t.expect(userTable.count).gte(3)
-    .click(adminPage.items)
-  const itemTable = Selector('div').find('.flex')
-  await t.expect(itemTable.count).gt(5)
-    .click(adminPage.orders)
+  .click(adminPage.orders)
   const orderTable = Selector('tbody').find('tr')
   await t.expect(orderTable.count).gt(0)
-    .click(adminPage.categories)
+  .click(adminPage.items)
+  const itemTable = Selector('div').find('.flex')
+  await t.expect(itemTable.count).gt(5)
+  .click(adminPage.categories)
   const categoriesTable = Selector('tbody').find('tr').count
   await t.expect(categoriesTable).gt(15)
-    .click(adminPage.home)
     .click(adminPage.activities)
     .click(adminPage.setup)
-})
+  })
 
 test('Breakin-in test, edition by none user', async (t) => {
     await t.useRole(buyerRole)
