@@ -1,6 +1,6 @@
 {% liquid
   if current_user.id
-    include 'theme/simple/comments/new_entry', commentable: group, placeholder: "What's new?"
+    include 'theme/simple/comments/new_entry', commentable: group, commentable_type: 'group', placeholder: "What's new?"
   endif
 %}
 
