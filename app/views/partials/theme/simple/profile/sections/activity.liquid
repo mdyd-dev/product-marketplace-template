@@ -1,6 +1,6 @@
 {% liquid
   if user != blank and user.id == current_user.id
-    render 'theme/simple/profile/activity_new'
+    include 'theme/simple/profile/activity_new', user: user
   endif
 %}
 

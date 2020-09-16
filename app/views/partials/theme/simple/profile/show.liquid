@@ -1,19 +1,10 @@
-<pre>
-uuid  {% echo current_user.uuid %}
-</pre>
-<pre>
-lu {% echo list.results[0].lu.uuid %}
-</pre>
-<pre>
-ru {% echo list.results[0].ru.uuid %}
-</pre>
 <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
   <div class="w-full md:w-1/4 px-4 mb-4 md:mb-0">
     {% liquid
       include 'theme/simple/profile/card', user: user, current_user: current_user
 
       if user != blank and user.id == current_user.id
-        include 'theme/simple/profile/profile_actions_owner', user: user
+        include 'theme/simple/profile/owner_actions', user: user
       elsif current_user != blank
         render 'theme/simple/follow_button', current_user: current_user, user: user, big: true
       endif
@@ -24,7 +15,7 @@ ru {% echo list.results[0].ru.uuid %}
       render 'theme/simple/profile/nav', tab: section, user: user
 
       assign file = 'theme/simple/profile/sections/' | append: section
-      include file, list: list
+      include file, list: list, user: user
     %}
   </div>
 </div>

@@ -18,6 +18,8 @@
       {% elsif type contains 'item_created' %}
         {% render 'theme/simple/activities/feed_unit/type/item_created', payload: payload %}
         <div class="text-xs"> {{ payload.object.description }} </div>
+      {% elsif type contains 'comment_created' %}
+        {% render 'theme/simple/activities/feed_unit/type/comment_created', payload: payload %}
       {% endif %}
     </p>
   </div>

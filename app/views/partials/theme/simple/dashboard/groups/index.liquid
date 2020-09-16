@@ -9,6 +9,9 @@
       <thead>
         <tr>
           <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            {{ "app.groups.picture" | t }}
+          </th>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
             {{ "app.groups.name" | t }}
           </th>
           <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
@@ -24,7 +27,11 @@
           <tr class="hover:bg-grey-lighter">
             <td class="py-4 px-6 border-b border-grey-light">
               <a href="/groups/{{group.id}}">
-                <img src="{{group.main_photo.photo.versions.small}}" />
+                <img src="{{group.main_photo.photo.versions.small | default: 'https://dummyimage.com/100x100' }}" class="h-32 w-32 object-cover object-center" />
+              </a>
+            </td>
+            <td class="py-4 px-6 border-b border-grey-light">
+              <a href="/groups/{{group.id}}">
                 {{ group.name }}
               </a>
             </td>

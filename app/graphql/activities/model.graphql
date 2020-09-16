@@ -13,6 +13,7 @@ query search($id: ID, $limit: Int = 1) {
       name: property(name: "name")
       uuid: property(name: "uuid")
       description: property(name: "description")
+      body: property(name: "body")
     }
   }
 }

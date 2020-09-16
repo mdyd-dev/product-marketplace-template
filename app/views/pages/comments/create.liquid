@@ -1,15 +1,13 @@
 ---
-slug: api/comments
+slug: comments
 method: post
 ---
 {% liquid
-  comment
-  include 'lib/must_be_authenticated_api'
-  endcomment
+  include 'lib/must_be_authenticated'
 
   function object = 'lib/commands/comments/create', object: context.params.comment
   if object.valid
     include 'lib/commands/events/create', type: 'comment_created', actor_id: context.current_user.id, object_id: object.id
+    redirect_to context.params.return_to
   endif
-  include 'theme/json/shared/show', object: object
 %}
