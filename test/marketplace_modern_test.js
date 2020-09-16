@@ -44,20 +44,18 @@ const signupConfirmation = 'Your account has been created'
 const notAuthorizedUser = 'Permission denied'
 
 
-fixture`Happy path`.page(myUrl + 'sessions/new')
+fixture`Happy path`.page(myUrl)
 
-test(`Register admin`, async (t) => {
+test.page(myUrl + '/sign-up')(`Register admin`, async (t) => {
     await t
-    .click(newSessionForm.regBtn)
     .typeText(newSessionForm.emailInput, 'admin@example.com')
     .typeText(newSessionForm.passInput, 'password')
     .typeText(newSessionForm.usernameInput, 'admin')
     .click(newSessionForm.signUpBtn)
 })
 
-test(`Register seller`, async (t) => {
+test.page(myUrl + '/sign-up')(`Register seller`, async (t) => {
   await t
-    .click(newSessionForm.regBtn)
     .typeText(newSessionForm.emailInput, newEmail)
     .typeText(newSessionForm.passInput, newPassword)
     .typeText(newSessionForm.usernameInput, newUsername)
@@ -65,31 +63,30 @@ test(`Register seller`, async (t) => {
   await t.expect(Selector('main').withText(signupConfirmation).exists).ok('message ' + signupConfirmation + " doesn't exists")
 })
 
-test(`Register buyer`, async (t) => {
+test.page(myUrl + '/sign-up')(`Register buyer`, async (t) => {
   await t
-    .click(newSessionForm.regBtn)
     .typeText(newSessionForm.emailInput, 'johnsmith@email.com')
     .typeText(newSessionForm.passInput, 'password')
     .typeText(newSessionForm.usernameInput, 'johnsmith')
     .click(newSessionForm.signUpBtn)
 })
 
-test(`Trying to register with taken data and log in with wrong data`, async (t) => {
+test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log in with wrong data`, async (t) => {
   await t
     .click(newSessionForm.logInBtn)
-    .expect(Selector('label').withText('E-mail').textContent).contains('cannot be blank')
-    .expect(Selector('label').withText('Password').textContent).contains('cannot be blank')
+    .expect(newSessionForm.emailLabel.textContent).contains('cannot be blank')
+    .expect(newSessionForm.passwordLabel.textContent).contains('cannot be blank')
     .typeText(newSessionForm.emailInput, 'admin@email.com')
     .typeText(newSessionForm.passInput, 'wrongpassword')
     .click(newSessionForm.logInBtn)
-    .expect(Selector('html').textContent).contains('Invalid email or password')
+    .expect(newSessionForm.emailLabel.textContent).contains('Invalid email or password')
     .click(newSessionForm.regBtn)
     .typeText(newSessionForm.emailInput, 'admin@example.com')
     .typeText(newSessionForm.passInput, 'password')
     .typeText(newSessionForm.usernameInput, 'johnsmith')
     .click(newSessionForm.signUpBtn)
-    .expect(Selector('label[for="username"]').textContent).contains('already taken')
-    .expect(Selector('label[for="email"]').textContent).contains('already taken')
+    .expect(newSessionForm.usernameLabel.textContent).contains('already taken')
+    .expect(newSessionForm.emailLabel.textContent).contains('already taken')
 })
 
 fixture`Happy path`.page(myUrl)
