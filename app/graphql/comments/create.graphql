@@ -1,0 +1,16 @@
+mutation create_comment($uuid: String!, $creator_id: String, $commentable_uuid: String!, $body: String!, $title: String) {
+  model_create(
+    model: {
+      model_schema_name: "comment"
+      properties: [
+        { name: "uuid" value: $uuid }
+        { name: "creator_id" value: $creator_id }
+        { name: "commentable_uuid" value: $commentable_uuid }
+        { name: "body" value: $body }
+        { name: "title" value: $title }
+      ]
+    }
+  ){
+    id properties
+  }
+}
