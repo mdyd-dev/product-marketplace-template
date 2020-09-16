@@ -9,5 +9,7 @@ export default class ItemShowPage {
     )
     this.editbutton = Selector('main').find('a').withText('Edit')
     this.buyBtn = Selector('button').withText('Buy')
+    this.followButton = Selector('button').withAttribute('data-follow-user')
+    this.alreadyFollowedButton = Selector('.following')
   }
 }
