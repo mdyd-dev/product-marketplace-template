@@ -13,6 +13,7 @@ slug: groups
   endunless
 
   function_rc current_user = 'lib/data/queries/users/find', id: context.current_user.id
+  function list = 'lib/data/queries/activities/search', feed: 'group', feed_id: current_user.id, limit: 100
 
-  include 'theme/simple/groups/show', group: group, current_user: current_user, tab: 'activity'
+  include 'theme/simple/groups/show', group: group, current_user: current_user, tab: 'activity', list: list
 %}
