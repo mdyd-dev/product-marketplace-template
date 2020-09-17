@@ -2,17 +2,13 @@
 method: post
 ---
 {% liquid
-  function_rc object = 'lib/commands/sessions/create/build', object: context.params.user
-  function_rc object = 'lib/commands/sessions/create/check', object: object
+  function_rc object = 'lib/commands/sessions/create', object: context.params.user
 
   if object.valid
-    function_rc object = 'lib/commands/sessions/create/execute', object: object
+    function user = 'lib/data/queries/users/find', id: context.current_user.id
+    session user_profile_uuid = user.profile.uuid
 
-    if object.valid
-      include 'redirect_to', url: '/', notice: 'app.sessions.created'
-    else
-      include 'theme/simple/sessions/new', object: object
-    endif
+    include 'redirect_to', url: '/', notice: 'app.sessions.created'
   else
     include 'theme/simple/sessions/new', object: object
   endif

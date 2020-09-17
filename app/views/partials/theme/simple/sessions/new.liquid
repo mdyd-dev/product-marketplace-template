@@ -5,18 +5,18 @@
 
   <div class="w-full p-8 mx-auto mt-10 bg-gray-200 rounded-lg shadow-md lg:w-2/6 md:w-1/2 md:mt-0">
     <form action="/sessions/create" method="post">
-      {% include 'authenticity_token' %}
+      {% render 'authenticity_token', context: context %}
 
       <label class="block mt-3" for="email">
         <span class="block">E-mail</span>
         <input name="user[email]" type="email" id="email" value="{{ object.email }}" class="w-full form-input" autofocus />
-        {% include 'theme/simple/field_error', errors: object.errors.email %}
+        {% render 'theme/simple/field_error', errors: object.errors.email %}
       </label>
 
       <label class="block mt-3" for="password">
         <span class="block">Password</span>
         <input name="user[password]" type="password" id="password" value="{{ object.password }}" class="w-full form-input" />
-        {% include 'theme/simple/field_error', errors: object.errors.password %}
+        {% render 'theme/simple/field_error', errors: object.errors.password %}
       </label>
 
       <button class="mt-3 button">Log in</button>

@@ -112,6 +112,7 @@ en:
         list_id: List ID
         slug: slug
         followers: Followers
+        profile: Profile
 
     items:
       by_user: Browse this user's items
@@ -207,6 +208,8 @@ en:
       your-profile: Your Profile
       your-groups: Your Groups
 
+    profiles:
+      edit: Profile Edit
 
     search:
       all_categories: All categories

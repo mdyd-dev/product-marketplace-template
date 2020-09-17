@@ -1,9 +1,9 @@
 {% liquid
   if id == blank and email == blank and slug == blank
-    return_rc null
+    return null
   endif
 
   graphql r  = 'users/search', id: id, email: email, limit: 1, with_token: with_token, with_followed: with_followed, slug: slug
 
-  return_rc r.users.results.first
+  return r.users.results.first
 %}

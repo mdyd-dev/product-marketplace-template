@@ -1,7 +1,6 @@
 {% liquid
   if id == blank
-    log 'looking for model without ID', type: 'showme'
-    return_rc null
+    return null
   endif
 
   graphql r = 'activities/model', id: id, limit: 1
@@ -12,16 +11,19 @@
   endif
 
   assign model = r.models.results.first
+  unless model
+    return null
+  endunless
 
   assign uuid = model.uuid | default: 'no-uuid-this-is-fake-report-and-add'
-  graphql r = 'activities/photo', uuid: uuid
-  if r.errors
-    log r, type: 'showme activities/photo query'
+  graphql ri = 'activities/photo', uuid: uuid
+  if ri.errors
+    log ri, type: 'showme activities/photo query'
     break
   endif
 
-  hash_assign model['photos'] = r.models.results
+  hash_assign model['photos'] = ri.models.results
   hash_assign model['url'] = "/items/" | append: model.name | append: '-' | append: model.id | slugify
 
-  return_rc model
+  return model
 %}

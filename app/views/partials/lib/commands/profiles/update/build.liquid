@@ -1,0 +1,12 @@
+{% parse_json object %}
+  {
+    "id":          {{ profile.id }},
+    "name":        {{ object.name | json }},
+    "first_name":  {{ object.first_name | json }},
+    "last_name":   {{ object.last_name | json }}
+  }
+{% endparse_json %}
+
+{% liquid
+  return_rc object
+%}

@@ -1,0 +1,28 @@
+{% liquid
+  assign name = object.name
+  for i in (1..20)
+    assign slug = name | slugify
+
+    function profiles = 'lib/data/queries/profiles/search', slug: slug, limit: 1
+    if profiles.total_entries == 0
+      break
+    endif
+    assign salt = '' | uuid | split: '-'
+    assign name = object.name | append: '-' | append: salt[1]
+  endfor
+%}
+
+{% parse_json object %}
+  {
+    "name":      {{ object.name | json }},
+    "user_uuid": {{ user.uuid | json }},
+    "uuid":      {{ user.uuid | json }},
+    "slug":      {{ slug | json }},
+    "first_name": {{ object.first_name | json }},
+    "last_name": {{ object.last_name | json }}
+  }
+{% endparse_json %}
+
+{% liquid
+  return_rc object
+%}

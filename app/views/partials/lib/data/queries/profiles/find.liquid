@@ -1,0 +1,8 @@
+{% liquid
+  if uuid == blank and slug == blank
+    return null
+  endif
+  graphql r  = 'profiles/search', limit: 1, uuid: uuid, slug: slug
+
+  return r.models.results.first
+%}

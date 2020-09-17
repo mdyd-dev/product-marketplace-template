@@ -1,0 +1,10 @@
+{% liquid
+  function object = 'lib/commands/sessions/create/build', object: context.params.user
+  function object = 'lib/commands/sessions/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/sessions/create/execute', object: object
+  endif
+
+  return object
+%}
