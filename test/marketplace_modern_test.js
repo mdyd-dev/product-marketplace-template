@@ -8,11 +8,7 @@ import ItemShowEdit from './pages/itemedit'
 import ItemSearch from './pages/itemsearch'
 import AdminPanel from './pages/adminp'
 import TopMenuBtns from './pages/topmenu'
-
-const myUrl = process.env.MPKIT_URL
-const getURL = ClientFunction(() => window.location.href)
-const editURL = '/items/edit?id='
-
+import DashboardPage from './pages/dashboard'
 
 const item = {
   name: faker.commerce.productName(),
@@ -29,8 +25,12 @@ const editedItem = {
 }
 
 const newUsername = faker.name.firstName().toLowerCase()
-
-
+const myUrl = process.env.MPKIT_URL
+const getURL = ClientFunction(() => window.location.href)
+const editURL = '/items/edit?id='
+const signupConfirmation = 'Your account has been created'
+const notAuthorizedUser = 'Permission denied'
+//pages
 const adminPage = new AdminPanel()
 const newSessionForm = new NewSessionForm()
 const itemShow = new ItemShowPage(item)
@@ -38,12 +38,10 @@ const editPage = new ItemShowEdit(editedItem)
 const newItemForm = new NewItemForm()
 const topMenu = new TopMenuBtns()
 const itemSearch = new ItemSearch(item, editedItem)
-
-const signupConfirmation = 'Your account has been created'
-const notAuthorizedUser = 'Permission denied'
+const dashboard = new DashboardPage()
 
 
-fixture`Happy path scenario`.page(myUrl)
+  fixture`Happy path scenario`.page(myUrl)
 
 test.page(myUrl + '/sign-up')(`Register admin`, async (t) => {
     await t
@@ -54,14 +52,16 @@ test.page(myUrl + '/sign-up')(`Register admin`, async (t) => {
     .click(newSessionForm.signUpBtn)
 })
 
+
 test.page(myUrl + '/sign-up')(`Register seller`, async (t) => {
   await t
     .typeText(newSessionForm.emailInput, newEmail)
     .typeText(newSessionForm.passInput, newPassword)
     .typeText(newSessionForm.usernameInput, newUsername)
     .click(newSessionForm.signUpBtn)
-  await t.expect(Selector('main').withText(signupConfirmation).exists).ok('message ' + signupConfirmation + " doesn't exists")
+  await t.expect(Selector('main').withText(signupConfirmation).exists).ok()
 })
+
 
 test.page(myUrl + '/sign-up')(`Register buyer`, async (t) => {
   await t
@@ -70,6 +70,7 @@ test.page(myUrl + '/sign-up')(`Register buyer`, async (t) => {
     .typeText(newSessionForm.usernameInput, 'johnsmith')
     .click(newSessionForm.signUpBtn)
 })
+
 
 test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log in with wrong data`, async (t) => {
   await t
@@ -88,6 +89,7 @@ test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log i
     .expect(newSessionForm.usernameLabel.textContent).contains('already taken')
     .expect(newSessionForm.emailLabel.textContent).contains('already taken')
 })
+
 
 test('Creating item then self follow try', async (t) => {
     await t.useRole(sellerRole)
@@ -108,17 +110,18 @@ test('Creating item then self follow try', async (t) => {
     .expect(Selector('button').withAttribute('data-follow-user').exists).notOk()
 })
 
+
 test('Editing item and search', async (t) => {
   await t
     //item search
     .useRole(sellerRole)
     .click(topMenu.dashboardBtn)
-    .click(Selector('a').withText('Profile'))
+    .click(dashboard.goProfile)
     const sellerProfilePage = ClientFunction(() => document.location.href)
     await t.expect(sellerProfilePage()).contains(myUrl+'profile/' + newUsername) // checks if href contains slugified username
     .click(Selector('a').withText("User's items"))  // goes on your list from profile view
     await t.expect(Selector('p').withText('You are now on your list').exists).ok()
-    .click(Selector('#sort'))
+    .click(itemSearch.sortButton)
     .click(Selector('option').withText('The Most Recent'))
     .click(itemSearch.searchBtn)
     .click(itemSearch.itemLink)
@@ -136,14 +139,16 @@ test('Editing item and search', async (t) => {
     await t.expect(editPage.price.innerText).eql('$5,000', 'check element text')
 })
 
+
 test('Deleting item', async (t) => {
   await t
     .useRole(sellerRole)
     .click(topMenu.dashboardBtn)
-    .click(Selector('main').find('a').withText('Your items'))
+    .click(dashboard.goYourItems)
     .setNativeDialogHandler(() => true)
     .click(editPage.deleteBtn)
 })
+
 
 test('Creating new item for sell', async (t) => {
     await t.useRole(sellerRole)
@@ -153,6 +158,7 @@ test('Creating new item for sell', async (t) => {
     .typeText(newItemForm.priceField, item.price, { replace: true })
     .click(newItemForm.submitBtn)
 })
+
 
 test('Buying an item and following the seller', async (t) => {
     await t
@@ -167,15 +173,16 @@ test('Buying an item and following the seller', async (t) => {
     .click(Selector('button').withText('Checkout'))
     .click(Selector('button').withText('Pay'))
     .click(topMenu.dashboardBtn)
-    .click(Selector('a').withText('Your Profile'))
+    .click(dashboard.goProfile)
     .expect(Selector('a').withText('johnsmith').exists).ok("Followed list not shown")
     .click(topMenu.dashboardBtn)
-    .click(Selector('a').withText('Your orders').nth(1))
+    .click(dashboard.yourBuyingOrders)
     .click(Selector('a').withText(item.name))
   await t.expect(Selector('div').withText('Ordered').exists).ok()
     .useRole(sellerRole) // seller checks if his order shown as paid
     .click(topMenu.dashboardBtn)
-    .click(Selector('a').withText('Your orders').nth(0))
+    .click(dashboard.yourSellingOrders)
+    // expect here
 })
 
 
@@ -184,20 +191,21 @@ test(`Admin Panel test`, async (t) => {
     .useRole(adminRole)
     .click(topMenu.adminBtn)
     .click(adminPage.users)
-  const userTableRow = Selector('tbody').find('tr')
-  await t.expect(userTableRow.count).gte(3)
+  const usersTableRow = Selector('tbody').find('tr')
+  await t.expect(usersTableRow.count).gte(3)
     .click(adminPage.orders)
-  const orderTableRow = Selector('tbody').find('tr')
-  await t.expect(orderTableRow.count).gte(1)
+  const ordersTableRow = Selector('tbody').find('tr')
+  await t.expect(ordersTableRow.count).gte(1)
     .click(adminPage.items)
-  const itemTableRow = Selector('tbody').find('tr')
-  await t.expect(itemTableRow.count).gt(5)
+  const itemsTableRow = Selector('tbody').find('tr')
+  await t.expect(itemsTableRow.count).gt(5)
     .click(adminPage.categories)
   const categoriesTableRow = Selector('tbody').find('tr')
   await t.expect(categoriesTableRow.count).gt(5)
     .click(adminPage.activities)
     .click(adminPage.setup)
   })
+
 
 test('Breakin-in test, edition by none user', async (t) => {
     await t.useRole(buyerRole)
