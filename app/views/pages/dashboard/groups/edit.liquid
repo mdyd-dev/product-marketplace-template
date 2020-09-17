@@ -1,8 +1,8 @@
 {% liquid
   include 'lib/must_be_authenticated'
 
-  function_rc presigned_url = 'lib/data/queries/presigned_url'
+  function group = 'lib/data/queries/groups/find', id: context.params.id, owner_id: context.current_user.id
 
   include 'theme/simple/dashboard/breadcrumbs', name: 'groups', total_entries: groups.total_entries, role: 'community'
-  include 'theme/simple/dashboard/groups/edit', presigned_url: presigned_url, user: context.current_user
+  include 'theme/simple/dashboard/groups/edit', user: context.current_user, object: group
 %}

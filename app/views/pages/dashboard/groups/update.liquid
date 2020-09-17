@@ -1,0 +1,15 @@
+---
+slug: dashboard/groups
+method: put
+---
+{% liquid
+  include 'lib/must_be_authenticated'
+
+  function object = 'lib/commands/call', object: context.params.group, command: 'groups/update', selection: 'model_update'
+  if object.valid
+    include 'redirect_to', url: '/dashboard/groups?a=b'
+  else
+    graphql presigned_url = 'users/photos/presign' | dig: 'presigned'
+    include 'theme/simple/dashboard/groups/edit', object: group, presigned_url: presigned_url
+  endif
+%}

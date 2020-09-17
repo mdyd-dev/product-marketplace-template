@@ -1,0 +1,15 @@
+mutation create_group($id: ID!, $name: String!, $description: String, $summary: String!) {
+  model_update(
+    id: $id
+    model: {
+      model_schema_name: "group"
+      properties: [
+        { name: "name" value: $name }
+        { name: "summary" value: $summary }
+        { name: "description" value: $description }
+      ]
+    }
+  ){
+    id properties
+  }
+}
