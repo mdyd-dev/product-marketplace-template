@@ -1,13 +1,16 @@
 {% liquid
-  echo "calling command " | append: command
+  log command, type: 'command'
 
-  assign path = 'lib/commands/' | append: command | append: '/build'
-  include path,
+  assign build_path = 'lib/commands/' | append: command | append: '/build'
+  function object = build_path, object: object
 
-  assign path = 'lib/commands/' | append: command | append: '/check'
-  include path
 
-  assign path = 'lib/commands/' | append: command | append: '/execute'
-  include path
+  assign check_path = 'lib/commands/' | append: command | append: '/check'
+  function object = check_path, object: object
 
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: command, object: object, selection: selection
+  endif
+
+  return object
 %}
