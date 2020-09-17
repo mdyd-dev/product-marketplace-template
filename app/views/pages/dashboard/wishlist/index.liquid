@@ -1,0 +1,7 @@
+{% liquid
+    include 'lib/must_be_authenticated'
+    function_rc wishlist = 'lib/data/queries/wishlist/search', limit: 100, potential_buyer: context.current_user.id
+  
+    include 'theme/simple/dashboard/breadcrumbs', name: 'wishlist', total_entries: wishlist.total_entries
+    include 'theme/simple/dashboard/wishlist/index', wishlist: wishlist 
+  %}

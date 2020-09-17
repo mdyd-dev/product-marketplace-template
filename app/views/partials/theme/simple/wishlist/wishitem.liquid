@@ -1,0 +1,11 @@
+{% liquid   
+  assign wishlist_button_title = 'app.wishlist.add_to_wishlist' | t 
+ %}
+<form action="/wishitems/create" method="post" id="form-wishitem-{{ item.id }}" class="ml-auto ">
+ {% include 'authenticity_token' %} 
+  <input type="hidden" name="item_id" value="{{ item.id }}"/> 
+  <button class="button" id="wish-button-{{ item.id }}" title="{{ wishlist_button_title }}">
+    {{ wishlist_button_title }}
+  </button>
+</form>    
+  

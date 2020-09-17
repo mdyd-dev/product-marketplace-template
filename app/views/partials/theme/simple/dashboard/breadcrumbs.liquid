@@ -1,6 +1,6 @@
 <h1 class="mb-6 text-2xl">
   <a href="/dashboard">{{ 'app.dashboard' | t }}</a>
-  / {{ 'app.' | append: role | t }}
+  {% if role %}/ {{ 'app.' | append: role | t }}{%- endif %}  
   / {{ 'app.' | append: name | append: '.list' | t }}
 
   {% if total_entries > 0 -%}({{ total_entries  }}){%- endif %}

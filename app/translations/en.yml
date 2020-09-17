@@ -66,6 +66,15 @@ en:
         buyer: Buyer
         total: Total
 
+    your-wishlist: Your wishlist    
+
+    wishlist:
+      item_created: Item has been added to wishlist 
+      item_failed_adding: Error adding item to wishlist      
+      item_deleted: Item has been deleted from wishlist
+      add_to_wishlist: Add to wishlist
+      list: Wishlist 
+
     activities:
       list: Activities
       new: new
@@ -144,6 +153,7 @@ en:
     item_id: Item ID
     created_at: Created at
     buyer: Buyer
+    potential_buyer: Who wants to buy
     seller: Seller
     status: Status
     paid_at: Paid at
@@ -171,6 +181,7 @@ en:
     p-dashboard:
       selling: Selling
       buying: Buying
+      wishlist: Wishlist
       settings: Settings
       bank_account: Bank Account
       credit_cards: Credit Cards
@@ -221,6 +232,8 @@ en:
 
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself
+      cannot_add_your_items_to_wishlist: You cannot add your items to wishlist
+      item_already_in_wishlist: Item is already in your wishlist
       blank: cannot be blank
       too_little: "has to be equal or greater than %{value}"
       too_much: "has to be equal or smaller than %{value}"

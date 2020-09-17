@@ -1,0 +1,6 @@
+{% liquid  
+    function_rc wishlist = 'lib/data/queries/wishlist/search', limit: 100, item_id: event.object.id    
+    for wishitem in wishlist.results
+      function_rc res = 'lib/commands/wishlist/delete', item: wishitem 
+    endfor    
+%}
