@@ -3,8 +3,6 @@
 
   graphql r = mutation_name, args: object
 
-  log r, type: 'showme'
-
   if r.errors
     log r.errors, type: 'errors.graphql.invalid showme'
 

@@ -1,9 +1,9 @@
 {% liquid
-  function_rc object = 'lib/commands/items/delete/build', item: item
-  function_rc object = 'lib/commands/items/delete/check',  object: object
+  function_rc object = 'lib/commands/groups/delete/build', group: group
+  function_rc object = 'lib/commands/groups/delete/check',  object: object
 
   if object.valid
-    function_rc object = 'lib/commands/items/delete/execute', object: object
+    function_rc object = 'lib/commands/execute', mutation_name: 'groups/delete', selection: 'model_delete', object: object
   endif
 
   return_rc object
