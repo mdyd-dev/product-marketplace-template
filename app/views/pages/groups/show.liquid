@@ -1,10 +1,10 @@
 ---
 slug: groups
 ---
-
 {% liquid
-  assign id = context.params.slug2 | split: '-' | last
+  include 'lib/must_be_authenticated'
 
+  assign id = context.params.slug2 | split: '-' | last
   function_rc group = 'lib/data/queries/groups/find', id: id, with_owner: true
 
   unless group.id
@@ -12,8 +12,9 @@ slug: groups
     break
   endunless
 
-  function_rc current_user = 'lib/data/queries/users/find', id: context.current_user.id
+  function presigned_url = 'lib/data/queries/presigned_url'
+  function current_user = 'lib/data/queries/users/find', id: context.current_user.id
   function list = 'lib/data/queries/activities/search', feed: 'group', feed_id: current_user.id, limit: 100
 
-  include 'theme/simple/groups/show', group: group, current_user: current_user, tab: 'activity', list: list
+  include 'theme/simple/groups/show', group: group, current_user: current_user, tab: 'activity', list: list, presigned_url: presigned_url
 %}
