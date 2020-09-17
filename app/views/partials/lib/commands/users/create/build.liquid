@@ -2,13 +2,11 @@
   {
     "email":       {{ object.email | json }},
     "password":    {{ object.password | json }},
-    "username":    {{ object.username | json }},
-    "uuid":        {{ '' | uuid | json }},
-    "slug":        {{ object.username | slugify | json }},
-    "remember_me": true
+    "remember_me": true,
+    "uuid":        {{ '' | uuid | json }}
   }
 {% endparse_json %}
 
 {% liquid
-  return_rc object
+  return object
 %}

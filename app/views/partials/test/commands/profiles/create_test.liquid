@@ -1,0 +1,40 @@
+{% comment %}PARTIAL INPUT{% endcomment %}
+{% parse_json user %}
+  {
+    "uuid": {{ "" | uuid | json }},
+    "id":  "1"
+  }
+{% endparse_json %}
+
+{% parse_json profile %}
+  {
+    "name": "name"
+  }
+{% endparse_json %}
+
+{% comment %}LOAD TESTED PARTIAL/FUNCTION{% endcomment %}
+{% function profile = 'lib/commands/profiles/create', object: profile, user: user %}
+
+{% liquid
+  if profile.valid == false
+    include 'test/register_error', contract: contract, field_name: 'contract', key: profile.errors
+  endif
+
+  log profile, type: 'showme'
+
+  if profile.name == blank
+    include 'test/register_error', contract: contract, field_name: 'object.name', key: 'app.test.should.not.be_blank'
+  endif
+
+  if profile.slug == blank
+    include 'test/register_error', contract: contract, field_name: 'object.slug', key: 'app.test.should.not.be_blank'
+  endif
+
+  if profile.uuid == blank
+    include 'test/register_error', contract: contract, field_name: 'object.uuid', key: 'app.test.should.not.be_blank'
+  endif
+
+  if profile.errors.size == 0
+    include 'test/register_error', contract: contract, field_name: 'contact.errors', key: 'app.test.should.be_empty'
+  endif
+%}

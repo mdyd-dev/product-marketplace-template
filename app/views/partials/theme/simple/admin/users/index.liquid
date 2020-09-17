@@ -1,30 +1,38 @@
 <table class="table w-full max-w-full">
   <thead>
     <tr>
-      <th class="text-left">{{ 'app.users.attr.slug' | t }}</th>
       <th class="text-left">{{ 'app.users.attr.email' | t }}</th>
       <th class="text-left">{{ 'app.users.attr.created_at' | t }}</th>
+      <th class="text-left">{{ 'app.users.attr.profile' | t }}</th>
     </tr>
   </thead>
 
   <tbody class="leading-8">
     {% for record in list.results %}
-      <tr>
-        <td>
-          <a href="/profile/{% print record.slug %}">{{ record.username }}</a>
-          <div class="text-xs">
-            slug: {{ record.slug }} id: {{ record.id }} uuid: {{ record.uuid }}
-          </div>
-        </td>
-        <td>{{ record.email }}</td>
+      <tr class="border">
+        <td class="p-2">{{ record.email }}</td>
         <td>{{ record.created_at | l }}</td>
-        <td>
-          <a href="/u/{{ record.id }}">
-          <button class="mt button button-sm mt-2">
-          {{ 'app.items.list' | t }}
-          </button>
-          </a>
-        </td>
+        {% if record.profile %}
+          <td>
+            <a href="/profile/{% print record.profile.slug %}">{{ record.profile.name }}</a>
+            <div class="text-xs">
+              slug: {{ record.profile.slug }} id: {{ record.profile.id }} uuid: {{ record.profile.uuid }}
+            </div>
+          </td>
+          <td>
+            <a href="/u/{{ record.profile.slug }}">
+              <button class="mt button button-sm mt-2">
+                {{ 'app.items.list' | t }}
+              </button>
+            </a>
+          </td>
+        {% else %}
+          <td colspan=2>
+            <div class="text-xs">
+              missing profile
+            </div>
+          </td>
+        {% endif %}
       </tr>
     {% endfor %}
   </tbody>

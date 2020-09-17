@@ -12,18 +12,20 @@ slug: profile
     assign query = context.location.pathname | extract_url_params: template
   endunless
 
-  function user = 'lib/data/queries/users/find', slug: query.slug
+  function profile = 'lib/data/queries/profiles/find', slug: query.slug
 
-  unless user.id
+  unless profile.uuid
     render 'theme/simple/404', status: 404
     break
   endunless
 
+  echo profile
+
   assign section = query.section | default: 'activity'
-  assign user_uuid = user.uuid | default: 'there-should-be'
+  assign user_uuid = profile.uuid | default: 'there-should-be'
 
   if section == 'activity'
-    function list = 'lib/data/queries/activities/search', feed: 'user-public', feed_id: user.id, limit: 100
+    function list = 'lib/data/queries/activities/search', feed: 'user-public', feed_id: profile.id, limit: 100
     function presigned_url = 'lib/data/queries/presigned_url'
   elsif section == 'groups'
     function list = 'lib/data/queries/relationships/search', limit: 20, name: 'membership', l_uuid: user_uuid
@@ -33,5 +35,5 @@ slug: profile
     function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', r_uuid: user_uuid
   endif
 
-  include 'theme/simple/profile/show', section: section, user: user, list: list, current_user: current_user, presigned_url: presigned_url
+  render 'theme/simple/profile/show', section: section, user: profile, list: list, current_user: current_user
 %}

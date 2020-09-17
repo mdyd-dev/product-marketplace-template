@@ -32,9 +32,12 @@ query users(
       last_name: property(name: "last_name")
       token: temporary_token(valid_for: $valid_for) @include(if: $with_token)
 
-      avatar: property_upload(name: "avatar") {
-        url
-        versions
+      profile: related_model(model_schema_name: "profile" join_on_property: "uuid" foreign_property: "uuid"){
+        name: property(name: "name")
+        uuid: property(name: "uuid")
+        slug: property(name: "slug")
+        created_at
+        id
       }
     }
   }

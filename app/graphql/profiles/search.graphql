@@ -1,0 +1,36 @@
+query search($id: ID, $limit: Int = 20, $user_uuid: String, $uuid: String $slug: String, $name: String) {
+  models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      model_schema_name: { value: "profile" }
+      properties: [
+        { name: "user_uuid" value: $user_uuid }
+        { name: "uuid" value: $uuid }
+        { name: "slug" value: $slug }
+        { name: "name" value: $name }
+      ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+      created_at
+
+      uuid: property(name: "uuid")
+      user_uuid: property(name: "user_uuid")
+      slug: property(name: "slug")
+      name: property(name: "name")
+      first_name: property(name: "first_name")
+      last_name: property(name: "last_name")
+
+      user: related_user(join_on_property: "uuid", foreign_property: "uuid") {
+        id
+        email
+      }
+    }
+  }
+}

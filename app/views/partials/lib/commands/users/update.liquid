@@ -1,5 +1,5 @@
 {% liquid
-  function_rc object = 'lib/commands/users/update/build', object: context.params.user
+  function_rc object = 'lib/commands/users/update/build', object: params, user: user
   function_rc object = 'lib/commands/users/update/check', object: object
 
   if object.valid

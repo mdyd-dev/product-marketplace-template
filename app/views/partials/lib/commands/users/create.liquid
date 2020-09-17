@@ -1,0 +1,12 @@
+{% liquid
+
+  function object = 'lib/commands/users/create/build', object: object
+  function object = 'lib/commands/users/create/check', object: object
+
+  if object.valid
+    function user = 'lib/commands/execute', object: object, mutation_name: 'users/create', selection: 'user_create'
+    return user
+  else
+    return object
+  endif
+%}

@@ -1,7 +1,6 @@
 {% liquid
   if id == empty
-    log 'looking for audience for user and no ID passed', type: 'showme'
-    return_rc null
+    return null
   endif
 
   graphql r = 'activities/users/audience', id: id, limit: 1000
@@ -13,5 +12,5 @@
 
   assign ids = r.users.results | map: 'id'
 
-  return_rc ids
+  return ids
 %}

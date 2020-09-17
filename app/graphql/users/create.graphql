@@ -1,14 +1,14 @@
-mutation create_user($email: String!, $password: String!, $username: String!, $slug: String!) {
-  user: user_create(
+mutation create_user($email: String!, $password: String! $uuid: String!) {
+  user_create(
     user: {
       email: $email
       password: $password
       properties: [
-        { name: "username", value: $username },
-        { name: "slug", value: $slug }
+        { name: "uuid", value: $uuid }
       ]
     }
   ){
     id
+    uuid: property(name: "uuid")
   }
 }

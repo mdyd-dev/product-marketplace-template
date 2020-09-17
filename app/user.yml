@@ -1,9 +1,5 @@
 properties:
   - name: uuid
-  - name: username
-  - name: first_name
-  - name: last_name
-  - name: slug
   - name: avatar
     type: upload
     options:

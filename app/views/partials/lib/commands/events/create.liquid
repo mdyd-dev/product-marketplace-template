@@ -1,26 +1,31 @@
-{% background "bg-task-name", type: type, object_id: object_id, actor_id: actor_id, target_id: target_id, object: object %}
+{% background "bg-task-name", type: type, object_id: object_id, actor_id: actor_id, target_id: target_id, object: object, delay: "0.02" %}
 
   {% liquid
-    function_rc actor = 'lib/data/queries/activities/users/find', id: actor_id
+    for i in (0..10)
+      function actor  = 'lib/data/queries/activities/model', id: actor_id
+      if actor
+        break
+       endif
+    else
+      unless actor
+        log 'actor could not be found', type: 'ERROR showme'
+      endunless
+    endfor
+    function target = 'lib/data/queries/activities/model', id: target_id
 
     if object_id
-      function_rc object = 'lib/data/queries/activities/model', id: object_id
+      function object = 'lib/data/queries/activities/model', id: object_id
     endif
 
     comment
       'REFACTOR: find a better way of detecting type of target object', type: 'TODO'
     endcomment
-    if type contains 'followed_user'
-      function_rc target = 'lib/data/queries/activities/users/find', id: target_id
-    else
-      function_rc target = 'lib/data/queries/activities/model', id: target_id
-    endif
 
-    function_rc event = 'lib/commands/events/create/build', type: type, actor: actor, object: object, target: target
-    function_rc event = 'lib/commands/events/create/check', object: event
+    function event = 'lib/commands/events/create/build', type: type, actor: actor, object: object, target: target
+    function event = 'lib/commands/events/create/check', object: event
 
     if event.valid
-      function_rc event = 'lib/commands/events/create/execute', object: event
+      function event = 'lib/commands/events/create/execute', object: event
 
       if event.valid
         include 'lib/commands/events/broadcast/execute', object: event

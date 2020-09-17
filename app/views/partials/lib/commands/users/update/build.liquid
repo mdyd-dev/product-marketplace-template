@@ -1,8 +1,12 @@
+{% liquid
+  if user.uuid == blank
+    hash_assign user['uuid'] = '' | uuid
+  endif
+%}
 {% parse_json object %}
   {
-    "id": {{ context.current_user.id }},
-    "first_name":    {{ object.first_name | json }},
-    "last_name":    {{ object.last_name | json }}
+    "id":   {{ context.current_user.id }},
+    "uuid": {{ user.uuid | json }}
   }
 {% endparse_json %}
 

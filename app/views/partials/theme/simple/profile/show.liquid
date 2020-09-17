@@ -1,10 +1,10 @@
 <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
   <div class="w-full md:w-1/4 px-4 mb-4 md:mb-0">
     {% liquid
-      include 'theme/simple/profile/card', user: user, current_user: current_user
+      render 'theme/simple/profile/card', user: user, current_user: current_user
 
       if user != blank and user.id == current_user.id
-        include 'theme/simple/profile/owner_actions', user: user
+        render 'theme/simple/profile/owner_actions', user: user
       elsif current_user != blank
         render 'theme/simple/follow_button', current_user: current_user, user: user, big: true
       endif
@@ -14,10 +14,17 @@
     {% liquid
       render 'theme/simple/profile/nav', tab: section, user: user
 
-      assign file = 'theme/simple/profile/sections/' | append: section
-      include file, list: list, user: user
+      if section == 'activity'
+        render 'theme/simple/profile/sections/activity', list: list, user: user
+      elsif section == 'groups'
+        render 'theme/simple/profile/sections/groups', list: list, user: user
+      elsif section == 'following'
+        render 'theme/simple/profile/sections/following', list: list, user: user
+      elsif section == 'followers'
+        render 'theme/simple/profile/sections/followers', list: list, user: user
+      endif
     %}
   </div>
 </div>
 
-{% include 'theme/simple/items/follow.js' %}
+{% render 'theme/simple/items/follow.js' %}

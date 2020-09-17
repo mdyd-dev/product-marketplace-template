@@ -1,12 +1,6 @@
 <form action="/users" method="post">
   {% include 'authenticity_token' %}
 
-  <label class="block mt-3" for="username">
-    <span class="block">Username</span>
-    <input name="user[username]" type="text" id="username" value="{{ object.username }}" class="w-full form-input" autofocus />
-    {% include 'theme/simple/field_error', errors: object.errors.username %}
-  </label>
-
   <label class="block mt-3" for="email">
     <span class="block">E-mail</span>
     <input name="user[email]" type="email" id="email" value="{{ object.email }}" class="w-full form-input" autofocus />

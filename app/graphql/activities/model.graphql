@@ -1,6 +1,7 @@
 query search($id: ID, $limit: Int = 1) {
   models(
     per_page: $limit
+    sort: [ { created_at: { order: DESC } } ]
     filter: {
       id: { value: $id }
       deleted_at: { exists: false }

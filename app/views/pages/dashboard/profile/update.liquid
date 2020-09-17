@@ -1,0 +1,17 @@
+---
+slug: dashboard/profile
+method: put
+---
+{% liquid
+  include 'lib/must_be_authenticated'
+
+  function profile = 'lib/data/queries/profiles/find', uuid: context.session.user_profile_uuid
+  function object = 'lib/commands/profiles/update', object: context.params.profile, profile: profile
+
+  if object.valid
+    include 'redirect_to', url: '/dashboard/profile/edit'
+  else
+    graphql presigned_url = 'users/photos/presign' | dig: 'presigned'
+    render 'theme/simple/dashboard/profile/edit', object: object, context: context, presigned_url: presigned_url
+  endif
+%}

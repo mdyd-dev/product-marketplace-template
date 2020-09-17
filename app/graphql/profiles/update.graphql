@@ -1,0 +1,30 @@
+mutation update($id: ID!, $user_uuid: String, $uuid: String, $slug: String, $name: String $first_name: String $last_name: String) {
+  model_update(
+    id: $id
+    model: {
+      properties: [
+        { name: "user_uuid" value: $user_uuid }
+        { name: "uuid" value: $uuid }
+        { name: "name" value: $name }
+        { name: "slug" value: $slug }
+        { name: "first_name" value: $first_name }
+        { name: "last_name" value: $last_name }
+      ]
+    }
+  ){
+    id
+    created_at
+
+    name: property(name: "name")
+    slug: property(name: "slug")
+    uuid: property(name: "uuid")
+    first_name: property(name: "first_name")
+    last_name: property(name: "last_name")
+    user_uuid: property(name: "user_uuid")
+
+    user: related_user(join_on_property: "user_uuid", foreign_property: "uuid") {
+      id
+      email
+    }
+  }
+}

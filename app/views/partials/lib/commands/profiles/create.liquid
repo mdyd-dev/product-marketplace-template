@@ -1,0 +1,14 @@
+{% liquid
+  function object = 'lib/commands/profiles/create/build', user: user, object: object
+  function object = 'lib/commands/profiles/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', object: object, mutation_name: 'profiles/create'
+
+    if object.valid
+      include 'lib/commands/events/create', type: 'profile_created', actor_id: object.id, object_id: object.id
+    endif
+  endif
+
+  return object
+%}
