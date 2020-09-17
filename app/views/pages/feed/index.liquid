@@ -3,6 +3,6 @@
 
   function list = 'lib/data/queries/activities/search', feed: 'user-private', feed_id: current_user.id, limit: 100
 
-  render 'theme/simple/activities/feed/index', users: users, list: list, current_user: current_user, current_feed: context.params.feed
+  include 'theme/simple/activities/feed/index', users: users, list: list, current_user: current_user, current_feed: context.params.feed
 %}
 

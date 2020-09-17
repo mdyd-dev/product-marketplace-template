@@ -24,6 +24,7 @@ slug: profile
 
   if section == 'activity'
     function list = 'lib/data/queries/activities/search', feed: 'user-public', feed_id: user.id, limit: 100
+    function presigned_url = 'lib/data/queries/presigned_url'
   elsif section == 'groups'
     function list = 'lib/data/queries/relationships/search', limit: 20, name: 'membership', l_uuid: user_uuid
   elsif section == 'following'
@@ -32,5 +33,5 @@ slug: profile
     function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', r_uuid: user_uuid
   endif
 
-  include 'theme/simple/profile/show', section: section, user: user, list: list, current_user: current_user
+  include 'theme/simple/profile/show', section: section, user: user, list: list, current_user: current_user, presigned_url: presigned_url
 %}

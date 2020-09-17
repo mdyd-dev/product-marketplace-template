@@ -7,7 +7,6 @@ import Webcam from '@uppy/webcam';
 import '@uppy/core/dist/style.min.css';
 import '@uppy/dashboard/dist/style.min.css';
 import '@uppy/webcam/dist/style.min.css';
-
 import apiFetch from './apiFetch'
 
 const _form = document.querySelector('[data-s3-uppy-photo="form"]');
