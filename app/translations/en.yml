@@ -81,6 +81,7 @@ en:
       summary: Summary
       actions: Actions
       add: Add groups
+      deleted: Group has been deleted
 
     activities:
       list: Activities
