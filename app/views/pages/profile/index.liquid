@@ -19,8 +19,6 @@ slug: profile
     break
   endunless
 
-  echo profile
-
   assign section = query.section | default: 'activity'
   assign user_uuid = profile.uuid | default: 'there-should-be'
 

@@ -1,7 +1,8 @@
 {% liquid
   include 'lib/must_be_authenticated'
 
-  function profile = 'lib/data/queries/profiles/find', uuid: context.session.user_profile_uuid
+  function current_user = 'lib/data/queries/users/find', id: context.current_user.id
+  function profile = 'lib/data/queries/profiles/find', user_uuid: current_user.uuid
   graphql presigned_url = 'users/photos/presign' | dig: 'presigned'
 
   render 'theme/simple/dashboard/profile/edit', object: profile, presigned_url: presigned_url, context: context
