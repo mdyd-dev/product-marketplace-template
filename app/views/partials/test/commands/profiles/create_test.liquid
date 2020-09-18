@@ -12,7 +12,7 @@
 {% endparse_json %}
 
 {% comment %}LOAD TESTED PARTIAL/FUNCTION{% endcomment %}
-{% function profile = 'lib/commands/profiles/create', user: user, profile: profile %}
+{% function profile = 'lib/commands/profiles/create', user: user, object: profile %}
 
 {% liquid
   if profile.valid == false
@@ -22,11 +22,11 @@
   log profile, type: 'showme'
 
   if profile.uuid == blank
-    include 'test/register_error', contract: contract, field_name: 'object.uuid', key: 'app.test.should.not.be_blank'
+    include 'test/register_error', contract: contract, field_name: 'profile.uuid', key: 'app.test.should.not.be_blank'
   endif
 
   if profile.slug
-    include 'test/register_error', contract: contract, field_name: 'object.slug', key: 'app.test.should.be_blank'
+    include 'test/register_error', contract: contract, field_name: 'profile.slug', key: 'app.test.should.be_blank'
   endif
 
   if profile.errors.size == 0

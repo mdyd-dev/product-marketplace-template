@@ -1,8 +1,11 @@
 {% liquid
-  include 'lib/must_be_authenticated'
-  function user = 'lib/data/queries/users/find', id: context.current_user.id
+  function profile = 'lib/must_be_authenticated'
 
-  include 'lib/validate_profile_completness', user: user
-  include 'theme/simple/dashboard/index', user: user
-  include 'lib/commands/events/create', type: 'page_visited', actor_id: context.current_user.id, object: context.location
+  echo profile
+
+  include 'lib/validate_profile_completness', profile: profile
+
+  include 'lib/commands/events/create', type: 'page_visited', actor_id: profile.id, object: context.location
+
+  include 'theme/simple/dashboard/index', profile: profile
 %}

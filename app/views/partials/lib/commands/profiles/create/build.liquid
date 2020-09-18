@@ -1,6 +1,7 @@
 {% parse_json object %}
   {
-    "uuid":      {{ user.uuid | json }}
+    "uuid":    {{ '' | uuid | json }},
+    "user_id": {{ user.id | json }}
   }
 {% endparse_json %}
 
