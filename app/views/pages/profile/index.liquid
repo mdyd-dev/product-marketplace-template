@@ -33,6 +33,8 @@ slug: profile
     function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', l_uuid: user_uuid
   elsif section == 'followers'
     function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', r_uuid: user_uuid
+  elsif section == 'products'
+    function list = 'lib/data/queries/items/search', query: context.params, limit: 20, owner: user.id
   endif
 
   render 'theme/simple/profile/show', section: section, user: profile, list: list, current_user: current_user

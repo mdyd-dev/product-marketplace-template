@@ -10,12 +10,14 @@ import '@uppy/webcam/dist/style.min.css';
 import apiFetch from './apiFetch'
 
 const _form = document.querySelector('[data-s3-uppy-photo="form"]');
+const maxNumberOfFiles = _form.dataset.s3UppyMaxNumberOfFiles;
+const note = _form.dataset.s3UppyNote;
 
 const uppy = Uppy({
   autoProceed: true,
   restrictions: {
     maxFileSize: 2097152, // Limit size to 2 MB on the javascript side
-    maxNumberOfFiles: 1,
+    maxNumberOfFiles: maxNumberOfFiles,
     allowedFileTypes: ['image/png', 'image/jpeg', 'image/webp'],
   },
 })
@@ -24,9 +26,9 @@ const uppy = Uppy({
     replaceTargetContent: true,
     showProgressDetails: true,
     target: '#drag-drop-area',
-    note: 'Image up to 2MB',
+    note: note,
     width: '100%',
-    height: 250,
+    height: 300,
     proudlyDisplayPoweredByUppy: false,
     locale: {
       strings: {

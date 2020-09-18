@@ -13,13 +13,6 @@ if (commentNewPost) {
   });
 }
 
-const uppyItemPhotos = document.querySelector('[data-s3-uppy-item]');
-if (uppyItemPhotos) {
-  import(/* webpackChunkName: "item-image-upload" */ './item-image-upload.js').then(() => {
-    console.log('Image upload module loaded.');
-  });
-}
-
 const uppyProfile = document.querySelector('[data-s3-uppy-profile]');
 if (uppyProfile) {
   import(/* webpackChunkName: "profile-image-upload" */ './profile-image-upload.js').then(() => {
