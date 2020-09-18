@@ -12,7 +12,7 @@ mutation create($uuid: String!) {
 
     uuid: property(name: "uuid")
 
-    user: related_user(join_on_property: "user_uuid", foreign_property: "uuid") {
+    user: related_user(join_on_property: "uuid", foreign_property: "uuid") {
       id
       email
     }

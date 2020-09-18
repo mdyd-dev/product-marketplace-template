@@ -4,6 +4,5 @@ properties:
   - name: name
   - name: slug
   - name: uuid
-  - name: user_uuid
   - name: first_name
   - name: last_name
