@@ -9,6 +9,7 @@ import ItemSearch from './pages/itemsearch'
 import AdminPanel from './pages/adminp'
 import TopMenuBtns from './pages/topmenu'
 import DashboardPage from './pages/dashboard'
+import profileEditPage from './pages/profileEdit'
 
 const item = {
   name: faker.commerce.productName(),
@@ -39,27 +40,33 @@ const newItemForm = new NewItemForm()
 const topMenu = new TopMenuBtns()
 const itemSearch = new ItemSearch(item, editedItem)
 const dashboard = new DashboardPage()
+const profileEdit = new profileEditPage()
 
 
   fixture`Happy path scenario`.page(myUrl)
 
-test.page(myUrl + '/sign-up')(`Register admin`, async (t) => {
+/*test.page(myUrl + '/sign-up')(`Register admin`, async (t) => {
     await t
     .maximizeWindow()
     .typeText(newSessionForm.emailInput, 'admin@example.com')
     .typeText(newSessionForm.passInput, 'password')
-    .typeText(newSessionForm.usernameInput, 'admin')
     .click(newSessionForm.signUpBtn)
-})
-
+    .typeText(profileEdit.usernameField, 'imAdmin')
+    .typeText(profileEdit.firstnameField, 'adminFirstName')
+    .typeText(profileEdit.lastnameField, 'adminLastName')
+    .click(profileEdit.saveButton)
+})*/
 
 test.page(myUrl + '/sign-up')(`Register seller`, async (t) => {
   await t
     .typeText(newSessionForm.emailInput, newEmail)
     .typeText(newSessionForm.passInput, newPassword)
-    .typeText(newSessionForm.usernameInput, newUsername)
     .click(newSessionForm.signUpBtn)
-  await t.expect(Selector('main').withText(signupConfirmation).exists).ok()
+    .typeText(profileEdit.usernameField, newUsername)
+    .typeText(profileEdit.firstnameField, 'Tony')
+    .typeText(profileEdit.lastnameField, 'Montana')
+    .click(profileEdit.saveButton)
+ // await t.expect(Selector('main').withText(signupConfirmation).exists).ok() (FOR LATER)
 })
 
 
@@ -67,8 +74,11 @@ test.page(myUrl + '/sign-up')(`Register buyer`, async (t) => {
   await t
     .typeText(newSessionForm.emailInput, 'johnsmith@email.com')
     .typeText(newSessionForm.passInput, 'password')
-    .typeText(newSessionForm.usernameInput, 'johnsmith')
     .click(newSessionForm.signUpBtn)
+    .typeText(profileEdit.usernameField, 'JohnSmith')
+    .typeText(profileEdit.firstnameField, 'John')
+    .typeText(profileEdit.lastnameField, 'Smith')
+    .click(profileEdit.saveButton)
 })
 
 
@@ -83,10 +93,8 @@ test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log i
     .expect(newSessionForm.emailLabel.textContent).contains('Invalid email or password')
     .click(newSessionForm.regBtn)
     .typeText(newSessionForm.emailInput, 'admin@example.com')
-    .typeText(newSessionForm.passInput, 'password')
-    .typeText(newSessionForm.usernameInput, 'johnsmith')
+    .typeText(newSessionForm.passInput, 'wrongpassword')
     .click(newSessionForm.signUpBtn)
-    .expect(newSessionForm.usernameLabel.textContent).contains('already taken')
     .expect(newSessionForm.emailLabel.textContent).contains('already taken')
 })
 
@@ -170,6 +178,7 @@ test('Buying an item and following the seller', async (t) => {
     .click(itemShow.followButton)
     .expect(itemShow.alreadyFollowedButton.exists).ok()
     .click(itemShow.buyBtn)
+    //nie dziala checkout itemu
     .click(Selector('button').withText('Checkout'))
     .click(Selector('button').withText('Pay'))
     .click(topMenu.dashboardBtn)
@@ -219,3 +228,17 @@ test('Breakin-in test, edition by none user', async (t) => {
     await t.navigateTo(editURL + editItemId)
     await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok('message ' + notAuthorizedUser + " doesn't exists")
 })
+
+test('Profile Edit Test', async (t) => {
+  await t.useRole(sellerRole)
+  await t.debug()
+  .click(topMenu.dashboardBtn)
+  .click(dashboard.editProfile)
+  .typeText(profileEdit.firstnameField, 'John Lee', { replace: true })
+  .typeText(profileEdit.lastnameField, 'Hooker', { replace: true })
+  .click(profileEdit.saveButton)
+  .click(topMenu.dashboardBtn)
+  .click(dashboard.goProfile)
+  .expect(Selector('main').find('#userinfo').withText('John Lee Hooker').exists).ok()
+})
+

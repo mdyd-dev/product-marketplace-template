@@ -7,9 +7,9 @@
       {% render 'authenticity_token', context: context %}
       <input type="hidden" name="_method" value="put" />
 
-      <div class="mb-6" id="field-firstName">
+      <div class="mb-6" id="field-userName">
         <label class="block text-black cursor-pointer mb-2" for="name">{{'app.profiles.username' | t}}</label>
-        <input id="first-name" name="profile[name]" value="{{ object.name }}" type="text" maxlength="45" aria-invalid="false" aria-describedby="character-counter-firstName" class="form-input w-full disabled:opacity-50" data-label="First Name" autocomplete="given-name">
+        <input id="user-name" name="profile[name]" value="{{ object.name }}" type="text" maxlength="45" aria-invalid="false" aria-describedby="character-counter-firstName" class="form-input w-full disabled:opacity-50" data-label="First Name" autocomplete="given-name">
         {% render 'theme/simple/field_error', errors: object.errors.name %}
       </div>
 
