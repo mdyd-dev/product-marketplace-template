@@ -50,7 +50,6 @@ en:
     login: Log in
     logout: Log out %{user}
 
-
     order: Order
     your-orders: Your orders
     self-list: You are now on <b class="font-semibold">your</b> list

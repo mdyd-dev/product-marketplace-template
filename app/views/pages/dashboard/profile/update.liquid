@@ -5,16 +5,15 @@ method: put
 {% liquid
   include 'lib/must_be_authenticated'
 
-  function current_user = 'lib/data/queries/users/find', id: context.current_user.id
-  function profile = 'lib/data/queries/profiles/find', uuid: current_user.uuid
+  function user = 'lib/data/queries/users/find', id: context.current_user.id
+  function profile = 'lib/data/queries/profiles/find', uuid: user.uuid
 
   function object = 'lib/commands/profiles/update', object: context.params.profile, profile: profile
-
   if object.valid
     include 'redirect_to', url: '/dashboard'
   else
   log object, type: 'showme'
-    graphql presigned_url = 'users/photos/presign' | dig: 'presigned'
+    graphql presigned_url = 'photos/presign' | dig: 'presigned'
     render 'theme/simple/dashboard/profile/edit', object: object, context: context, presigned_url: presigned_url
   endif
 %}
