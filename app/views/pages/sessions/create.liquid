@@ -6,7 +6,7 @@ method: post
 
   if object.valid
     function user = 'lib/data/queries/users/find', id: context.current_user.id
-    session user_profile_uuid = user.profile.uuid
+    session user_profile_uuid = user.profile.uuid | default: user.uuid
 
     include 'redirect_to', url: '/', notice: 'app.sessions.created'
   else

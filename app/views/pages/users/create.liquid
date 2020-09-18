@@ -6,7 +6,10 @@ method: post
   function object = 'lib/commands/users/create', object: context.params.user
 
   if object.valid
-    function_rc session = 'lib/commands/sessions/create/execute', object: context.params.user
+    function session = 'lib/commands/sessions/create/execute', object: context.params.user
+    function profile = 'lib/commands/profiles/create', user: object
+
+  log profile, type: 'showme'
 
     include 'lib/commands/events/create', type: 'account_created', actor_id: db_object.id
     include 'redirect_to', url: '/dashboard', notice: 'app.account.created'
