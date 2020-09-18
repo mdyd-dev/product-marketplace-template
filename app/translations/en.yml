@@ -206,6 +206,7 @@ en:
       bank_account: Bank Account
       credit_cards: Credit Cards
       profile: Profile
+      edit-profile: Edit Profile
       your-profile: Your Profile
       your-groups: Your Groups
 
@@ -220,6 +221,7 @@ en:
       category: Category
       tags: Tags
       sort_by: Sort by
+      incomplete: Fill your profile
 
     dashboard-items:
       actions: Actions
