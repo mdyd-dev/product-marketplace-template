@@ -2,9 +2,9 @@ query model($uuid: String!) {
   models(per_page: 3
     filter: {
       properties: [
-        { name: "item_uuid" value: $uuid }
+        { name: "object_uuid" value: $uuid }
       ]
-      model_schema_name: { value: "item_photo"}
+      model_schema_name: { value: "photo"}
     } ){
     results {
       url: property_upload(name: "photo") {

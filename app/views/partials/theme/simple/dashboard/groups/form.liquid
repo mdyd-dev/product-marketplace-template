@@ -45,4 +45,11 @@
   </form>
 </div>
 
-{% include 'theme/simple/photos/uppy_form', object_uuid: group_uuid, presigned_url: presigned_url, user_id: user.id, photo_type: 'main' %}
+{% include 'theme/simple/photos/uppy_form',
+  object_uuid: group_uuid,
+  presigned_url: presigned_url,
+  user_id: user.id,
+  photo_type: 'main',
+  note: 'Image up to 2MB',
+  max_number_of_files: 1
+%}
