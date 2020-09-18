@@ -1,8 +1,5 @@
 {% liquid
   function profile = 'lib/must_be_authenticated'
-
-  echo profile
-
   include 'lib/validate_profile_completness', profile: profile
 
   include 'lib/commands/events/create', type: 'page_visited', actor_id: profile.id, object: context.location
