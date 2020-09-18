@@ -1,7 +1,7 @@
 <div class="flex flex-col">
   <div class="mr-10">
     {% liquid
-      assign img_url = user.avatar.versions.small
+      assign img_url = user.avatar.photo.versions.small
       unless img_url
         assign img_url = 'images/user.svg' | asset_url
       endunless

@@ -17,19 +17,19 @@
       <input type="hidden" name="_method" value="{% print method %}" />
 
       <div class="mb-6" id="field-firstName">
-        <label class="block text-black cursor-pointer mb-2" for="name">Username</label>
+        <label class="block text-black cursor-pointer mb-2" for="name">{{'app.profiles.username' | t}}</label>
         <input id="first-name" name="profile[name]" value="{{ object.name }}" type="text" maxlength="45" aria-invalid="false" aria-describedby="character-counter-firstName" class="form-input w-full disabled:opacity-50" data-label="First Name" autocomplete="given-name">
         {% render 'theme/simple/field_error', errors: object.errors.name %}
       </div>
 
       <div class="mb-6" id="field-firstName">
-        <label class="block text-black cursor-pointer mb-2" for="first-name">First Name </label>
+        <label class="block text-black cursor-pointer mb-2" for="first-name">{{'app.profiles.first_name' | t}}</label>
         <input id="first-name" name="profile[first_name]" value="{{ object.first_name }}" type="text" maxlength="45" aria-invalid="false" aria-describedby="character-counter-firstName" class="form-input w-full disabled:opacity-50" data-label="First Name" autocomplete="given-name">
         {% render 'theme/simple/field_error', errors: object.errors.first_name %}
       </div>
 
       <div class="mb-6" id="field-lastName">
-        <label class="block text-black cursor-pointer mb-2" for="last-name">Last Name </label>
+        <label class="block text-black cursor-pointer mb-2" for="last-name">{{'app.profiles.last_name' | t}}</label>
         <input id="last-name" name="profile[last_name]" value="{{ object.last_name }}" type="text" maxlength="45" aria-invalid="false" aria-describedby="character-counter-lastName" class="form-input w-full disabled:opacity-50" data-label="Last Name" autocomplete="family-name">
         {% render 'theme/simple/field_error', errors: object.errors.last_name %}
       </div>
@@ -43,7 +43,7 @@
   </div>
   <div class="sm:order-1 sm:flex">
     <div class="flex flex-col w-full text-center mb-6">
-      <span class="block mb-2 text-black">Profile photo</span>
+      <span class="block mb-2 text-black">{{'app.profiles.profile_photo' | t}}</span>
       <div class="w-64">
         {% render 'theme/simple/photos/uppy_area' %}
       </div>
@@ -51,4 +51,11 @@
   </div>
 </div>
 
-{% render 'theme/simple/dashboard/profile/uppy_form', presigned_url: presigned_url %}
+{% render 'theme/simple/photos/uppy_form',
+  object_uuid: object.user_uuid,
+  presigned_url: presigned_url,
+  user_id: user.id,
+  photo_type: 'avatar',
+  note: 'Image up to 2MB',
+  max_number_of_files: 1
+%}

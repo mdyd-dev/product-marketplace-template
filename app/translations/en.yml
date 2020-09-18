@@ -212,6 +212,11 @@ en:
 
     profiles:
       edit: Profile Edit
+      username: Username
+      first_name: First Name
+      last_name: Last Name
+      profile_photo: Profile Photo
+
 
     search:
       all_categories: All categories
