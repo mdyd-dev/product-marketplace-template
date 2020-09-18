@@ -2,7 +2,7 @@ query users(
   $id: ID,
   $ids: [ID!],
   $email: String,
-  $username: String,
+  $name: String,
   $slug: String,
   $limit: Int = 1,
   $valid_for: Int = 1,
@@ -14,7 +14,7 @@ query users(
       email: { value: $email }
       id:    { value: $id value_in: $ids }
       properties: [
-        { name: "username", value: $username },
+        { name: "name", value: $name },
         { name: "slug", value: $slug }
       ]
     }
@@ -25,20 +25,21 @@ query users(
       id
       email
       created_at
-      username: property(name: "username")
       uuid: property(name: "uuid")
-      slug: property(name: "slug")
-      first_name: property(name: "first_name")
-      last_name: property(name: "last_name")
       token: temporary_token(valid_for: $valid_for) @include(if: $with_token)
 
       profile: related_model(model_schema_name: "profile" join_on_property: "uuid" foreign_property: "uuid"){
         name: property(name: "name")
         uuid: property(name: "uuid")
         slug: property(name: "slug")
+
+        name: property(name: "name")
+        first_name: property(name: "first_name")
+        last_name: property(name: "last_name")
+
         created_at
         id
-        avatar: related_model(model_schema_name: "photo", join_on_property: "user_uuid", foreign_property: "object_uuid", filter: { properties: { name: "photo_type", value: "avatar"}}) {
+        avatar: related_model(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid", filter: { properties: { name: "photo_type", value: "avatar"}}) {
           photo: property_upload(name: "photo") {
             url
             versions

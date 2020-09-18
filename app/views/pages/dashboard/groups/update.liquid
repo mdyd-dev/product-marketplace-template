@@ -9,7 +9,7 @@ method: put
   if object.valid
     include 'redirect_to', url: '/dashboard/groups?a=b'
   else
-    graphql presigned_url = 'users/photos/presign' | dig: 'presigned'
+    graphql presigned_url = 'photos/presign' | dig: 'presigned'
     include 'theme/simple/dashboard/groups/edit', object: group, presigned_url: presigned_url
   endif
 %}

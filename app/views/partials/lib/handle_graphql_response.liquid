@@ -1,0 +1,7 @@
+{% liquid
+  if r.errors
+    assign type = 'error: ' | append: name
+    log r, type: type
+    break
+  endif
+%}
