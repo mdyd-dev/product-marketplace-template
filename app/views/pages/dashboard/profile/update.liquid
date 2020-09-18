@@ -3,10 +3,7 @@ slug: dashboard/profile
 method: put
 ---
 {% liquid
-  include 'lib/must_be_authenticated'
-
-  function user = 'lib/data/queries/users/find', id: context.current_user.id
-  function profile = 'lib/data/queries/profiles/find', uuid: user.uuid
+  function profile = 'lib/must_be_authenticated'
 
   function object = 'lib/commands/profiles/update', object: context.params.profile, profile: profile
   if object.valid

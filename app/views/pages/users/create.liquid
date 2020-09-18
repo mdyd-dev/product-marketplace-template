@@ -9,6 +9,11 @@ method: post
     function session = 'lib/commands/sessions/create/execute', object: context.params.user
     function profile = 'lib/commands/profiles/create', user: object
 
+    if profile.valid == false
+      log profile, type: 'showme'
+      break
+    endif
+
   log profile, type: 'showme'
 
     include 'lib/commands/events/create', type: 'account_created', actor_id: db_object.id

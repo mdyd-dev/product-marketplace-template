@@ -3,8 +3,6 @@ method: post
 ---
 
 {% liquid
-  include 'lib/must_be_authenticated'
-
   assign now = 'now' | to_time
 
   function follower = 'lib/data/queries/users/find', id: context.current_user.id

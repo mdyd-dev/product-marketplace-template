@@ -215,7 +215,7 @@ en:
       first_name: First Name
       last_name: Last Name
       profile_photo: Profile Photo
-
+      incomplete: Fill your profile
 
     search:
       all_categories: All categories
@@ -225,7 +225,6 @@ en:
       category: Category
       tags: Tags
       sort_by: Sort by
-      incomplete: Fill your profile
 
     dashboard-items:
       actions: Actions
