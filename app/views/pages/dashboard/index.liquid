@@ -3,8 +3,6 @@
   function user = 'lib/data/queries/users/find', id: context.current_user.id
 
   include 'lib/validate_profile_completness', user: user
-
   include 'theme/simple/dashboard/index', user: user
-
   include 'lib/commands/events/create', type: 'page_visited', actor_id: context.current_user.id, object: context.location
 %}

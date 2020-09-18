@@ -35,8 +35,8 @@
       </div>
 
       <div class="flex mt-4">
-        <a class="button button-sm button-secondary mr-5" href="/dashboard">Back</a>
-        <button type="submit" class="text-sm button">Save</button>
+        <a class="button button-sm button-secondary mr-5" href="/dashboard">{{ 'app.back' | t }}</a>
+        <button type="submit" class="text-sm button">{{ 'app.save' | t }}</button>
       </div>
 
     </form>
@@ -45,7 +45,7 @@
     <div class="flex flex-col w-full text-center mb-6">
       <span class="block mb-2 text-black">Profile photo</span>
       <div class="w-64">
-        {% render 'theme/simple/items/uppy_area' %}
+        {% render 'theme/simple/photos/uppy_area' %}
       </div>
     </div>
   </div>
