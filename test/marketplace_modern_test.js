@@ -239,6 +239,7 @@ test('Profile Edit Test', async (t) => {
   .click(profileEdit.saveButton)
   .click(topMenu.dashboardBtn)
   .click(dashboard.goProfile)
-  .expect(Selector('main').find('#userinfo').withText('John Lee Hooker').exists).ok()
+  .expect(Selector('main').find('#user-name').withText('John Lee Hooker').exists).ok()
+  .expect(Selector('main').find('#username').withText(newUsername).exists).ok()
 })
 
