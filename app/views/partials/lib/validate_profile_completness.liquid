@@ -1,5 +1,5 @@
 {% liquid
-  if user.profile == blank
+  if user.profile.slug == blank
     include 'redirect_to', url: "/dashboard/profile/edit", notice: 'app.profiles.incomplete'
   endif
 %}
