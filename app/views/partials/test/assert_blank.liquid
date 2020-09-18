@@ -1,0 +1,8 @@
+{% liquid
+
+  if topic == blank
+    hash_assign contract['errors'][key] = 'app.test.should_not.be_blank'
+    hash_assign contract['success'] = false
+  endif
+
+%}
