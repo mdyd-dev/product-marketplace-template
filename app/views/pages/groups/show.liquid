@@ -14,9 +14,7 @@ slug: groups
 
   function current_user = 'lib/data/queries/users/find', id: context.current_user.id
   function list = 'lib/data/queries/activities/search', feed: 'group', feed_id: current_user.id, limit: 100
-
   function presigned_url = 'lib/data/queries/presigned_url'
-  hash_assign context['presigned_url'] = presigned_url
 
-  render 'theme/simple/groups/show', group: group, current_user: current_user, tab: 'activity', list: list, context: context
+  render 'theme/simple/groups/show', group: group, current_user: current_user, tab: 'activity', list: list, context: context, presigned_url: presigned_url
 %}
