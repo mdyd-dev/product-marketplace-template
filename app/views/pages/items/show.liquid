@@ -3,16 +3,15 @@ slug: items
 ---
 
 {% liquid
-  assign id = context.params.slug2 | split: '-' | last
+  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id, followships: true
 
-  function_rc item = 'lib/data/queries/items/find', id: id
+  assign id = context.params.slug2 | split: '-' | last
+  function item = 'lib/data/queries/items/find', id: id
 
   unless item.id
     render 'theme/simple/404', status: 404
     break
   endunless
 
-  function_rc current_user = 'lib/data/queries/users/find', id: context.current_user.id
-
-  include 'theme/simple/items/show', item: item, current_user: current_user
+  render 'theme/simple/items/show', item: item, current_user: current_user
 %}
