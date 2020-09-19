@@ -30,7 +30,7 @@
       </p>
 
       <h3 class="mb-1 text-xs">
-        {% include 'theme/simple/business_card', user: item.owner %}
+        {% render 'theme/simple/business_card', user: item.owner, current_user: current_user %}
       </h3>
     </div>
   </div>
