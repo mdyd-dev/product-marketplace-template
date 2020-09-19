@@ -1,7 +1,8 @@
 {% liquid
   function_rc filters = 'lib/data/queries/search/filters', query: context.params
   function_rc items = 'lib/data/queries/items/search', limit: 12, featured: true
-  function_rc current_user = 'lib/data/queries/users/find', id: context.current_user.id
+
+  function_rc current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id, followships: true
 
   include 'theme/simple/home/index', items: items, filters: filters, current_user: current_user
 %}

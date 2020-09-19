@@ -1,7 +1,8 @@
 {% assign user_id = user.id | append: '' %}
+{% assign ids = current_user.followed_ids | map: 'id' %}
 
 {% liquid
-  if current_user.followed_user_ids contains user_id
+  if ids contains user_id
     assign following = true
   else
     assign following = false

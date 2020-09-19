@@ -2,9 +2,9 @@
 name: relationship 
 properties:
   - name: name
-  - name: l_uuid
-  - name: r_uuid
-  - name: l_activated_at
+  - name: l_id
+  - name: r_id
+  - name: l_accepted_at
     type: datetime
-  - name: r_activated_at
+  - name: r_accepted_at
     type: datetime

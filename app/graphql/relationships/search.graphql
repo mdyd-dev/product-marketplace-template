@@ -4,8 +4,8 @@ query models($model: [String!] = "group" $name: String! $r_uuid: String $l_uuid:
     filter: {
       properties: [
         { name: "name" value: $name }
-        { name: "r_uuid" value: $r_uuid }
-        { name: "l_uuid" value: $l_uuid }
+        { name: "r_id" value: $r_uuid }
+        { name: "l_id" value: $l_uuid }
       ]
     }
   ){
@@ -14,21 +14,21 @@ query models($model: [String!] = "group" $name: String! $r_uuid: String $l_uuid:
       id
       created_at
       name: property(name: "name")
-      r_uuid: property(name: "r_uuid")
-      l_uuid: property(name: "l_uuid")
-      r_activated_at: property(name: "r_activated_at")
-      l_activated_at: property(name: "l_activated_at")
+      r_id: property(name: "r_id")
+      l_id: property(name: "l_id")
+      r_accepted_at: property(name: "r_accepted_at")
+      l_accepted_at: property(name: "l_accepted_at")
 
-      lu: related_user(foreign_property: "uuid" join_on_property: "l_uuid"){
+      lu: related_user(foreign_property: "uuid" join_on_property: "l_id"){
         ...user
       }
-      ru: related_user(foreign_property: "uuid" join_on_property: "r_uuid"){
+      ru: related_user(foreign_property: "uuid" join_on_property: "r_id"){
         ...user
       }
-      lm: related_model(foreign_property: "uuid" join_on_property: "l_uuid" model_schema_name: $model){
+      lm: related_model(foreign_property: "uuid" join_on_property: "l_id" model_schema_name: $model){
         ...model
       }
-      rm: related_model(foreign_property: "uuid" join_on_property: "r_uuid" model_schema_name: $model){
+      rm: related_model(foreign_property: "uuid" join_on_property: "r_id" model_schema_name: $model){
         ...model
       }
     }
