@@ -6,8 +6,11 @@ query search($id: ID, $limit: Int = 20, $name: String, $owner_id: String, $with_
       model_schema_name: { value: "group" }
       properties: [
         { name: "name" value: $name }
-        { name: "owner_id" value: $owner_id }
       ]
+      related_models: {
+        join: { join_on_property: "id", foreign_property: "r_id"}
+        filter: { properties:{ name: "l_id", value: $owner_id}}
+      }
     }
     sort: [
       { created_at: { order: DESC }}

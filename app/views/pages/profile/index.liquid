@@ -20,7 +20,7 @@ slug: profile
   endunless
 
   assign section = query.section | default: 'activity'
-  assign profile_uuid = profile.uuid | default: 'there-should-be'
+  assign profile_id = profile.id | default: 'there-should-be'
 
   if section == 'activity'
     function list = 'lib/data/queries/activities/search', feed: 'user-public', feed_id: profile.id, limit: 100

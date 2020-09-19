@@ -3,11 +3,10 @@ slug: dashboard/groups
 method: post
 ---
 {% liquid
-  include 'lib/must_be_authenticated'
-
-  function object = 'lib/commands/groups/create', object: context.params.group
+  function profile = 'lib/must_be_authenticated'
+  function object = 'lib/commands/groups/create', object: context.params.group, owner_id: profile.id
   if object.valid
-    include 'redirect_to', url: '/dashboard/groups?a=b'
+    include 'redirect_to', url: '/dashboard/groups'
   else
     graphql presigned_url = 'photos/presign' | dig: 'presigned'
     include 'theme/simple/dashboard/groups/new', object: group, presigned_url: presigned_url

@@ -1,7 +1,7 @@
 {% liquid
-  include 'lib/must_be_authenticated'
+  function profile = 'lib/must_be_authenticated'
 
-  function groups = 'lib/data/queries/groups/search', limit: 100, owner_id: context.current_user.id
+  function groups = 'lib/data/queries/groups/search', limit: 100, owner_id: profile.id
 
   include 'theme/simple/dashboard/breadcrumbs', name: 'groups', total_entries: groups.total_entries, role: 'seller'
   include 'theme/simple/dashboard/groups/index', groups: groups

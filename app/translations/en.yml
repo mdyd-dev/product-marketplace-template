@@ -36,6 +36,7 @@ en:
         - followship
         - membership
         - collaboration
+        - owner
     feed:
       title: Feed
     title: MVP Marketplace

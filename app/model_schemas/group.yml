@@ -5,5 +5,3 @@ properties:
   - name: name
   - name: summary
   - name: description
-  - name: owner_id
-    type: string

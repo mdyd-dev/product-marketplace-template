@@ -1,11 +1,11 @@
-query models($model: [String!] = "group" $name: String! $r_uuid: String $l_uuid: String $limit: Int!){
+query models($model: [String!] = "group" $name: String! $r_id: String $l_id: String $limit: Int!){
   models(
     per_page: $limit
     filter: {
       properties: [
         { name: "name" value: $name }
-        { name: "r_id" value: $r_uuid }
-        { name: "l_id" value: $l_uuid }
+        { name: "r_id" value: $r_id }
+        { name: "l_id" value: $l_id }
       ]
     }
   ){
@@ -26,6 +26,7 @@ query models($model: [String!] = "group" $name: String! $r_uuid: String $l_uuid:
         ...user
       }
       lm: related_model(foreign_property: "uuid" join_on_property: "l_id" model_schema_name: $model){
+      lm: related_model(foreign_property: "id" join_on_property: "l_id" model_schema_name: $model){
         ...model
       }
       rm: related_model(foreign_property: "uuid" join_on_property: "r_id" model_schema_name: $model){
