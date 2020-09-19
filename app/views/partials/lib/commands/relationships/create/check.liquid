@@ -6,16 +6,16 @@
     include 'lib/register_error', contract: c, field_name: 'name', key: 'app.errors.not_included'
   endunless
 
-  if object.l_uuid == blank
-    include 'lib/register_error', contract: c, field_name: 'l_uuid', key: 'app.errors.blank'
+  if object.l_id == blank
+    include 'lib/register_error', contract: c, field_name: 'l_id', key: 'app.errors.blank'
   endif
 
-  if object.l_activated_at == blank
-    include 'lib/register_error', contract: c, field_name: 'l_activated_at', key: 'app.errors.blank'
+  if object.l_accepted_at == blank
+    include 'lib/register_error', contract: c, field_name: 'l_accepted_at', key: 'app.errors.blank'
   endif
 
-  if object.r_uuid == blank
-    include 'lib/register_error', contract: c, field_name: 'r_uuid', key: 'app.errors.blank'
+  if object.r_id == blank
+    include 'lib/register_error', contract: c, field_name: 'r_id', key: 'app.errors.blank'
   endif
 
   hash_assign object['valid'] = c.valid

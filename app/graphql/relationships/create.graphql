@@ -1,13 +1,13 @@
-mutation create($name: String!, $l_activated_at: String!, $r_activated_at: String, $l_uuid: String!, $r_uuid: String!) {
+mutation create($name: String!, $l_accepted_at: String!, $r_accepted_at: String, $l_id: String!, $r_id: String!) {
   model_create(
     model: {
       model_schema_name: "relationship"
       properties: [
         { name: "name" value: $name }
-        { name: "l_uuid" value: $l_uuid }
-        { name: "r_uuid" value: $r_uuid }
-        { name: "l_activated_at" value: $l_activated_at }
-        { name: "r_activated_at" value: $r_activated_at }
+        { name: "l_id" value: $l_id }
+        { name: "r_id" value: $r_id }
+        { name: "l_accepted_at" value: $l_accepted_at }
+        { name: "r_accepted_at" value: $r_accepted_at }
       ]
     }
   ){

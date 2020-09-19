@@ -26,11 +26,11 @@ slug: profile
     function list = 'lib/data/queries/activities/search', feed: 'user-public', feed_id: profile.id, limit: 100
     function presigned_url = 'lib/data/queries/presigned_url'
   elsif section == 'groups'
-    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'membership', l_uuid: profile_uuid
+    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'membership', l_id: profile_uuid
   elsif section == 'following'
-    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', l_uuid: profile_uuid
+    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', l_id: profile_uuid
   elsif section == 'followers'
-    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', r_uuid: profile_uuid
+    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', r_id: profile_uuid
   elsif section == 'products'
     function list = 'lib/data/queries/items/search', query: context.params, limit: 20, owner: user.id
   endif
