@@ -2,6 +2,8 @@
   include 'lib/must_be_authenticated'
   include 'lib/must_be_superadmin'
 
+  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
+
   assign feed = context.params.feed | split: '.'
   assign feed_name = feed[0] | default: 'system'
   assign feed_id = feed[1] | default: '1'
@@ -14,12 +16,13 @@
     endif
   endif
 
-  function_rc list = 'lib/data/queries/activities/search', feed: feed_name, feed_id: feed_id, limit: 100
-  function_rc users = 'lib/data/queries/users/search', limit: 100
-  function_rc current_user = 'lib/data/queries/users/find', id: context.current_user.id
+  function list = 'lib/data/queries/activities/search', feed: feed_name, feed_id: feed_id, limit: 100
+  function users = 'lib/data/queries/profiles/search', limit: 100
 
-  function_rc selected = 'lib/data/queries/users/find', id: feed_id
+  function selected = 'lib/data/queries/profiles/find', id: feed_id
 
   include 'theme/simple/admin/menu', section: 'activities'
   include 'theme/simple/admin/activities/index', list: list, section: 'activities', users: users, current_user: current_user, selected: selected
+
+  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
 %}

@@ -2,7 +2,7 @@
 slug: profile
 ---
 {% liquid
-  function current_user = 'lib/data/queries/users/find', id: context.current_user.id
+  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id, followship: true
 
   assign template = "/profile/{slug}"
   assign query = context.location.pathname | extract_url_params: template
@@ -14,7 +14,7 @@ slug: profile
 
   function profile = 'lib/data/queries/profiles/find', slug: query.slug
 
-  unless profile.uuid
+  unless profile.id
     render 'theme/simple/404', status: 404
     break
   endunless
@@ -26,14 +26,17 @@ slug: profile
     function list = 'lib/data/queries/activities/search', feed: 'user-public', feed_id: profile.id, limit: 100
     function presigned_url = 'lib/data/queries/presigned_url'
   elsif section == 'groups'
-    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'membership', l_id: profile_uuid
+    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'membership', l_id: profile_id
   elsif section == 'following'
-    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', l_id: profile_uuid
+    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', l_id: profile_id
   elsif section == 'followers'
-    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', r_id: profile_uuid
+    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', r_id: profile_id
   elsif section == 'products'
     function list = 'lib/data/queries/items/search', query: context.params, limit: 20, owner: user.id
   endif
 
+  log list, type: 'showme'
+
   render 'theme/simple/profile/show', section: section, user: profile, list: list, current_user: current_user
+  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
 %}

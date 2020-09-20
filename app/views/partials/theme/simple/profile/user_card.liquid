@@ -10,7 +10,7 @@
     <div class="p-6">
       <h2 class="text-gray-900 title-font font-medium mb-1">
         <a href="/profile/{{user.slug}}">
-          {{ user.first_name | append: user.last_name | default: user.username }}
+          {{ user.first_name | append: user.last_name | default: user.name }}
         </a>
       </h2>
       <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ group.name }}</h1>

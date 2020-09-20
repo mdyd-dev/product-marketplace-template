@@ -9,7 +9,7 @@
       <option value="">audit all events</option>
       {% for user in users.results %}
         {% assign feed = "user." | append: user.id %}
-        <option value="{{feed}}" {% if params.feed == feed %}selected{% endif %}>user: {{user.username}} (id:{{ user.id }})</option>
+        <option value="{{feed}}" {% if params.feed == feed %}selected{% endif %}>user: {{user.name}} (id:{{ user.id }})</option>
       {% endfor %}
     </select>
     <input type="submit" class="w-1/6 form-input" value="GO">
@@ -27,5 +27,3 @@
 
 
 </div>
-
-{% include 'theme/simple/items/follow.js' %}

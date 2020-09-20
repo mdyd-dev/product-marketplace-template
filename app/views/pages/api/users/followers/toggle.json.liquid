@@ -5,6 +5,8 @@ method: post
 {% liquid
   assign now = 'now' | to_time
 
+  log context.current_user.id, type: 'showme'
+
   function follower = 'lib/data/queries/profiles/find', user_id: context.current_user.id
   function followed = 'lib/data/queries/profiles/find', id: context.params.user_id
 
