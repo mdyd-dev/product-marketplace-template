@@ -1,5 +1,5 @@
 <div class="text-xs p-2">
-  {% print current_user.username %}'s Private Activity Feed
+  {% print current_user.name %}'s Private Activity Feed
 </div>
 
 <div class="w-full p-3">
@@ -8,9 +8,10 @@
 
     {% for record in list.results %}
       {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_user: current_user %}
+    {% else %}
+      <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
     {% endfor %}
   </div>
 
 </div>
 
-{% render 'theme/simple/items/follow.js' %}

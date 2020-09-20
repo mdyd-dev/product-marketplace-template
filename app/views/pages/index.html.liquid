@@ -5,4 +5,5 @@
   function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id, followships: true
 
   include 'theme/simple/home/index', items: items, filters: filters, current_user: current_user
+  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
 %}

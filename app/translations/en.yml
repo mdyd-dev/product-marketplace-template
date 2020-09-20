@@ -207,8 +207,9 @@ en:
       credit_cards: Credit Cards
       profile: Profile
       edit-profile: Edit Profile
-      your-profile: Your Profile
+      your-profile: Your Public Profile
       your-groups: Your Groups
+      your-feed: Activity Feed
 
     profiles:
       edit: Profile Edit

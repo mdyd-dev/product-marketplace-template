@@ -1,4 +1,4 @@
-query models($model: [String!] = "group" $name: String! $r_id: String $l_id: String $limit: Int!){
+query models($model: [String!] = ["profile", "group"] $name: String! $r_id: String $l_id: String $limit: Int!){
   models(
     per_page: $limit
     filter: {
@@ -19,17 +19,10 @@ query models($model: [String!] = "group" $name: String! $r_id: String $l_id: Str
       r_accepted_at: property(name: "r_accepted_at")
       l_accepted_at: property(name: "l_accepted_at")
 
-      lu: related_user(foreign_property: "uuid" join_on_property: "l_id"){
-        ...user
-      }
-      ru: related_user(foreign_property: "uuid" join_on_property: "r_id"){
-        ...user
-      }
-      lm: related_model(foreign_property: "uuid" join_on_property: "l_id" model_schema_name: $model){
-      lm: related_model(foreign_property: "id" join_on_property: "l_id" model_schema_name: $model){
+      l: related_model(foreign_property: "id" join_on_property: "l_id" model_schema_name: $model){
         ...model
       }
-      rm: related_model(foreign_property: "uuid" join_on_property: "r_id" model_schema_name: $model){
+      r: related_model(foreign_property: "id" join_on_property: "r_id" model_schema_name: $model){
         ...model
       }
     }
@@ -38,8 +31,9 @@ query models($model: [String!] = "group" $name: String! $r_id: String $l_id: Str
 
 fragment model on Model {
   id
-  name: property(name: "username")
-  username: property(name: "username")
+  name: property(name: "name")
+  first_name: property(name: "first_name")
+  last_name: property(name: "last_name")
   slug: property(name: "slug")
   uuid: property(name: "uuid")
   photo: property_upload(name: "avatar") {
@@ -47,14 +41,3 @@ fragment model on Model {
   }
 }
 
-fragment user on User {
-  id
-  email
-  name: property(name: "username")
-  username: property(name: "username")
-  slug: property(name: "slug")
-  uuid: property(name: "uuid")
-  photo: property_upload(name: "avatar") {
-    versions(names: ["tiny", "small"])
-  }
-}

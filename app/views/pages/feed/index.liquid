@@ -1,8 +1,9 @@
 {% liquid
-  function current_user = 'lib/data/queries/users/find', id: context.current_user.id
+  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id, followships: false
 
   function list = 'lib/data/queries/activities/search', feed: 'user-private', feed_id: current_user.id, limit: 100
 
-  include 'theme/simple/activities/feed/index', users: users, list: list, current_user: current_user, current_feed: context.params.feed
+  include 'theme/simple/activities/feed/index', list: list, current_user: current_user
+  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
 %}
 
