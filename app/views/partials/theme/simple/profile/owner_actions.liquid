@@ -12,9 +12,8 @@
       </div>
     -->
   </header>
-
   <p>User ID: <span class="font-mono">{{ user.id }}</span></p>
-  <p>Email: <span class="font-mono">{{ user.email }}</span></p>
+  <p>Email: <span class="font-mono">{{ user.user.email }}</span></p>
 
   <p><a href="/u/{{ user.id }}">{{ 'app.items.yours' | t }}</a></p>
 </section>

@@ -2,11 +2,16 @@
 slug: u
 ---
 {% liquid
-  assign user_id = context.params.slug2 | default: context.current_user.id
-  function_rc items = 'lib/data/queries/items/search', query: context.params, limit: 50, owner: user_id
-  function_rc current_user = 'lib/data/queries/users/find', id: context.current_user.id
-  function_rc user = 'lib/data/queries/users/find', id: user_id
-  function_rc filters = 'lib/data/queries/search/filters', query: context.params
+  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
+  function user = 'lib/data/queries/profiles/find', id: context.params.slug2
+
+  if user == blank
+    render 'theme/simple/404', status: 404
+    break
+  endif
+
+  function items = 'lib/data/queries/items/search', query: context.params, limit: 50, owner: user.id
+  function filters = 'lib/data/queries/search/filters', query: context.params
 
   include 'theme/simple/users/listing', items: items, filters: filters, user: user, current_user: current_user
 %}
