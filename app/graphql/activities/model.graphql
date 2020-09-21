@@ -13,8 +13,15 @@ query search($id: ID, $limit: Int = 1) {
       id
       name: property(name: "name")
       uuid: property(name: "uuid")
+      slug: property(name: "slug")
       description: property(name: "description")
       body: property(name: "body")
+
+      photo: related_model(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
+        url: property_upload(name: "photo") {
+          versions
+        }
+      }
     }
   }
 }
