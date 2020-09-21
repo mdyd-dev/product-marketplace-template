@@ -4,7 +4,7 @@ Backbone for a marketplace-like project to be deployed on platformOS.com
 
 # Status
 
-Still in active development and some concepts are being validated and might change.
+## Still in active development and some concepts are being validated and might change.
 
 # Installation
 
