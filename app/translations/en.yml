@@ -219,6 +219,7 @@ en:
       last_name: Last Name
       profile_photo: Profile Photo
       incomplete: Fill your profile
+      bio: Short Bio
 
     search:
       all_categories: All categories
