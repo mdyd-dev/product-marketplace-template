@@ -135,6 +135,7 @@ test('Editing item and search', async (t) => {
     .click(itemSearch.itemLink)
     .click(Selector('a').withText("Browse this user's items")) // goes on your list from item show
     .click(itemSearch.itemLink)
+    await t.debug()
 
   //change of item information
   await t.click(itemShow.editbutton)
@@ -181,9 +182,11 @@ test('Buying an item and following the seller', async (t) => {
     //nie dziala checkout itemu
     .click(Selector('button').withText('Checkout'))
     .click(Selector('button').withText('Pay'))
-    .click(topMenu.dashboardBtn)
+    await t.debug()
+    await t.click(topMenu.dashboardBtn)
     .click(dashboard.goProfile)
-    .expect(Selector('a').withText('johnsmith').exists).ok("Followed list not shown")
+    .click(Selector('a').withText('Following'))
+    .expect(Selector('h2').find('a').withText('TonyMontana').exists).ok("Followed list not shown")
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourBuyingOrders)
     .click(Selector('a').withText(item.name))
