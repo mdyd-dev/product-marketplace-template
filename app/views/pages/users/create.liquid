@@ -14,9 +14,7 @@ method: post
       break
     endif
 
-  log profile, type: 'showme'
-
-    include 'lib/commands/events/create', type: 'account_created', actor_id: db_object.id
+    include 'lib/commands/events/create', type: 'account_created', actor_id: profile.id
     include 'redirect_to', url: '/dashboard', notice: 'app.account.created'
   else
     include 'theme/simple/users/new', object: object

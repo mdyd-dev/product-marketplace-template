@@ -1,5 +1,7 @@
 {% assign type = payload.type %}
 
+{{ payload  }}
+
 <div class="mx-auto px-4 py-4 bg-white shadow-md rounded-lg w-full">
   {% render 'theme/simple/activities/feed_unit/header', url: payload.actor.url, name: payload.actor.name, photo: payload.actor.photo.url.versions.tiny, date: payload.date %}
 
@@ -9,7 +11,7 @@
         {% render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload %}
       {% elsif type contains 'visit' %}
         {% render 'theme/simple/activities/feed_unit/type/visit', payload: payload %}
-      {% elsif type contains 'account' %}
+      {% elsif type contains 'account' or type contains 'profile' %}
         {% render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload %}
       {% elsif type contains 'order_status' %}
         {% render 'theme/simple/activities/feed_unit/type/order_status', payload: payload %}

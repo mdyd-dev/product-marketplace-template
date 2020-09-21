@@ -101,6 +101,7 @@ en:
         order_status_created: changed status of the [%{target_id}] order to <span class="font-semibold">%{status}</span>
         order_created: placed an [%{object_id}] order for <a href="/items/%{target_id}">%{target}</a> item
         account_created: created an account.
+        profile_updated: updated profile information
         item_created: created a <a href="/items/%{object_id}">%{name}</a> item
 
     users:
