@@ -186,7 +186,7 @@ test('Buying an item and following the seller', async (t) => {
     await t.click(topMenu.dashboardBtn)
     .click(dashboard.goProfile)
     .click(Selector('a').withText('Following'))
-    .expect(Selector('h2').find('a').withText('TonyMontana').exists).ok("Followed list not shown")
+    .expect(Selector('h2').find('a').withText(newUsername).exists).ok("Followed list not shown")
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourBuyingOrders)
     .click(Selector('a').withText(item.name))
