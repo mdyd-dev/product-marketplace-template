@@ -1,9 +1,9 @@
-<form action="/u/{{ user_id }}" name="search">
+<form action="/u/{{ user.id }}" name="search">
   {% include 'theme/simple/home/search_form', query: search.query, filters: filters %}
-  {% if current_user.email contains user.email %}
+  {% if current_user.id == user.id %}
   <p>{{ 'app.items.self-list' | t }}</p>
   {% else %}
-  <p>{{ 'app.items.user-list' | t: name: user.username, email: user.email }}</p>
+  <p>{{ 'app.items.user-list' | t: name: user.name, id: user.id }}</p>
   {% endif %}
-  {% include 'theme/simple/items/index', items: items, items.owner.email %}
+  {% include 'theme/simple/items/index', items: items, items.owner.id %}
 </form>
