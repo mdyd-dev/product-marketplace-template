@@ -3,8 +3,10 @@ slug: dashboard/groups
 method: post
 ---
 {% liquid
-  function profile = 'lib/must_be_authenticated'
-  function object = 'lib/commands/groups/create', object: context.params.group, owner_id: profile.id
+  include 'lib/must_be_authenticated'
+  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
+
+  function object = 'lib/commands/groups/create', object: context.params.group, owner_id: current_user.id
   if object.valid
     include 'redirect_to', url: '/dashboard/groups'
   else
