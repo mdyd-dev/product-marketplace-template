@@ -82,11 +82,10 @@
         <p class="py-4 mt-4 border-t border-blue-300">Item Administration</p>
         <span class="flex">
           <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
-
         <form action="/items/delete" method="post" class="ml-2"
           onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }"
         >
-          {% render 'authenticity_token' %}
+          {% render 'authenticity_token', authenticity_token: authenticity_token %}
           <input type="hidden" name="id" value="{{ item.id }}">
 
           <button id="deletebutton" class="button button-secondary">{{ 'app.delete' | t }}</button>
