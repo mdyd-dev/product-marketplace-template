@@ -45,18 +45,6 @@ const profileEdit = new profileEditPage()
 
   fixture`Happy path scenario`.page(myUrl)
 
-/*test.page(myUrl + '/sign-up')(`Register admin`, async (t) => {
-    await t
-    .maximizeWindow()
-    .typeText(newSessionForm.emailInput, 'admin@example.com')
-    .typeText(newSessionForm.passInput, 'password')
-    .click(newSessionForm.signUpBtn)
-    .typeText(profileEdit.usernameField, 'imAdmin')
-    .typeText(profileEdit.firstnameField, 'adminFirstName')
-    .typeText(profileEdit.lastnameField, 'adminLastName')
-    .click(profileEdit.saveButton)
-})*/
-
 test.page(myUrl + '/sign-up')(`Register seller`, async (t) => {
   await t
     .typeText(newSessionForm.emailInput, newEmail)
@@ -135,7 +123,6 @@ test('Editing item and search', async (t) => {
     .click(itemSearch.itemLink)
     .click(Selector('a').withText("Browse this user's items")) // goes on your list from item show
     .click(itemSearch.itemLink)
-    await t.debug()
 
   //change of item information
   await t.click(itemShow.editbutton)
@@ -182,7 +169,6 @@ test('Buying an item and following the seller', async (t) => {
     //nie dziala checkout itemu
     .click(Selector('button').withText('Checkout'))
     .click(Selector('button').withText('Pay'))
-    await t.debug()
     await t.click(topMenu.dashboardBtn)
     .click(dashboard.goProfile)
     .click(Selector('a').withText('Following'))
@@ -194,6 +180,7 @@ test('Buying an item and following the seller', async (t) => {
     .useRole(sellerRole) // seller checks if his order shown as paid
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourSellingOrders)
+    .expect(Selector('a').withText(item.name).exists).ok()
     // expect here
 })
 
@@ -234,7 +221,6 @@ test('Breakin-in test, edition by none user', async (t) => {
 
 test('Profile Edit Test', async (t) => {
   await t.useRole(sellerRole)
-  await t.debug()
   .click(topMenu.dashboardBtn)
   .click(dashboard.editProfile)
   .typeText(profileEdit.firstnameField, 'John Lee', { replace: true })
@@ -244,5 +230,17 @@ test('Profile Edit Test', async (t) => {
   .click(dashboard.goProfile)
   .expect(Selector('main').find('#user-name').withText('John Lee Hooker').exists).ok()
   .expect(Selector('main').find('#username').withText(newUsername).exists).ok()
+})
+
+test('Groups', async (t) => {
+  await t.useRole(sellerRole)
+  .click(topMenu.dashboardBtn)
+  .click(dashboard.yourGroups)
+  .click(Selector('a').withText('Add groups'))
+  .typeText('#name', "Audi fans")
+  .typeText('#summary', "fun-club")
+  .typeText('#description', "We are the power")
+  .click(Selector('button').withText('Submit'))
+  .expect(Selector('a').withText("Audi fans").exists).ok()
 })
 
