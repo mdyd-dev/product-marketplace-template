@@ -23,7 +23,12 @@
   endif
 
   hash_assign model['photos'] = ri.models.results
-  hash_assign model['url'] = "/items/" | append: model.name | append: '-' | append: model.id | slugify
+
+  if model.type == 'profile'
+    hash_assign model['url'] = "/profile/" | append: model.slug
+  elsif model.type == 'item'
+    hash_assign model['url'] = "/items/" | append: model.name | append: '-' | append: model.id | slugify
+  endif
 
   return model
 %}
