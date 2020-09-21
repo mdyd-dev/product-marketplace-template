@@ -3,9 +3,10 @@ method: post
 ---
 {% liquid
   include 'lib/must_be_authenticated'
+  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
 
   function_rc item = 'lib/data/queries/items/find', id: context.params.item.id
-  include 'lib/can_edit', user_id: context.current_user.id, item: item
+  include 'lib/can_edit', user_id: current_user.id, item: item
 
   function_rc object = 'lib/commands/items/update/build', object: context.params.item
   function_rc object = 'lib/commands/items/update/check', object: object
@@ -14,7 +15,7 @@ method: post
     function_rc object = 'lib/commands/items/update/execute', object: object
 
     if object.valid
-      include 'lib/commands/events/create', type: 'item_updated', actor_id: context.current_user.id, object_id: object.id
+      include 'lib/commands/events/create', type: 'item_updated', actor_id: current_user.id, object_id: object.id
 
       function_rc url = 'link_to', path: '/items/', item: object
       include 'redirect_to', url: url, notice: 'app.items.updated'
