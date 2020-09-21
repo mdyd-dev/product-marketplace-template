@@ -180,7 +180,7 @@ test('Buying an item and following the seller', async (t) => {
     .useRole(sellerRole) // seller checks if his order shown as paid
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourSellingOrders)
-    .expect(Selector('a').withText(item.name).exists).ok()
+    .expect(Selector('a').withText(item.name).exists).ok("Item list not shown in seller orders")
     // expect here
 })
 
