@@ -1,3 +1,5 @@
+{% print payload.type | t: actor: payload.actor.name, target: payload.target.name, url: payload.target.url, scope: 'app.activities.types'  %}
+
 <p class="leading-snug">
-  {{ payload.object.body  }}
+  {{ payload.object.body }}
 </p>

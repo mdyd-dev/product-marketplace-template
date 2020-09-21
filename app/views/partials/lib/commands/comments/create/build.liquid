@@ -1,7 +1,7 @@
 {% parse_json object %}
   {
     "uuid": {{ object.uuid | json }},
-    "creator_id": {{ context.current_user.id | json }},
+    "creator_id": {{ current_user.id | json }},
     "commentable_uuid": {{ object.commentable_uuid | json }},
     "body": {{ object.body | json }},
     "title": {{ object.title | json }}

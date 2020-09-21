@@ -103,6 +103,7 @@ en:
         account_created: created an account.
         profile_updated: updated profile information
         item_created: created a <a href="/items/%{object_id}">%{name}</a> item
+        comment_created: "posted a comment on <a href=\"%{url}\"> %{target} </a> page"
 
     users:
       new: new user
