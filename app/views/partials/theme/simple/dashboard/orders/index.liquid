@@ -22,9 +22,9 @@
               <small> {{ order.item.status.name | default: 'app.item_statuses.none' | t }}</small>
             </a>
           </td>
-          <td class="px-4 py-2 text-left border-b">{{ order.seller.email | split: '@' | first }}</td>
+          <td class="px-4 py-2 text-left border-b">{{ order.seller.name }}</td>
           <td class="py-1 text-center border-b">=></td>
-          <td class="px-4 py-2 text-left border-b">{{ order.buyer.email | split: '@' | first }}</td>
+          <td class="px-4 py-2 text-left border-b">{{ order.buyer.name }}</td>
           <td class="px-4 py-2 text-left border-b">
             {{ order.status.name | default: 'missing-state-invalid-order' | t }}
             {% if order.order_status.timestamp %}
