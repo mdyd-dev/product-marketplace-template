@@ -78,7 +78,7 @@
         </form>
       </div>
 
-        {%- if item.owner.id == context.current_user.id and item.orders.size < 1 %}
+        {%- if item.owner.id == current_user.id and item.orders.size < 1 %}
         <p class="py-4 mt-4 border-t border-blue-300">Item Administration</p>
         <span class="flex">
           <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
