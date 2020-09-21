@@ -30,6 +30,7 @@ query search(
       name: property(name: "name")
       first_name: property(name: "first_name")
       last_name: property(name: "last_name")
+      bio: property(name: "bio")
 
       followships: related_models(
         model_schema_name: "relationship"

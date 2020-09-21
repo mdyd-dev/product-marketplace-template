@@ -22,9 +22,12 @@
     "name":       {{ object.name | json }},
     "slug":       {{ slug | json }},
     "first_name": {{ object.first_name | json }},
-    "last_name":  {{ object.last_name | json }}
+    "last_name":  {{ object.last_name | json }},
+    "bio":        {{ object.bio | json }}
   }
 {% endparse_json %}
+
+{% log object, type: 'showme' %}
 
 {% liquid
   return object

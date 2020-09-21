@@ -7,9 +7,5 @@
 
     redirect_to '/sessions/new'
     break
-  else
-    function current_user = 'lib/data/queries/users/find', id: context.current_user.id
-
-    return current_user.profile
   endunless
 %}
