@@ -27,12 +27,12 @@
           {% for group in groups.results %}
             <tr class="hover:bg-grey-lighter">
               <td class="py-4 px-6 border-b border-grey-light">
-                <a href="/groups/{{group.id}}">
+                <a href="/groups/show/{{group.id}}">
                   <img src="{{group.main_photo.photo.versions.small | default: 'https://dummyimage.com/100x100' }}" class="h-32 w-32 object-cover object-center" />
                 </a>
               </td>
               <td class="py-4 px-6 border-b border-grey-light">
-                <a href="/groups/{{group.id}}">
+                <a href="/groups/show/{{group.id}}">
                   {{ group.name }}
                 </a>
               </td>

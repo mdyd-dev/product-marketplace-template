@@ -1,0 +1,12 @@
+---
+slug: groups
+---
+{% liquid
+  include 'lib/must_be_authenticated'
+
+  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
+  function list = 'lib/data/queries/groups/search', limit: 100
+
+  include 'theme/simple/groups/cards', current_user: current_user, list: list
+  render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token
+%}

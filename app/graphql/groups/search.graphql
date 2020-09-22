@@ -9,7 +9,10 @@ query search($id: ID, $limit: Int = 20, $name: String, $owner_id: String, $with_
       ]
       related_models: {
         join: { join_on_property: "id", foreign_property: "r_id"}
-        filter: { properties:{ name: "l_id", value: $owner_id}}
+        filter: {
+          model_schema_name: { value: "relationship" },
+          properties: { name: "l_id", value: $owner_id }
+        }
       }
     }
     sort: [
@@ -31,8 +34,9 @@ query search($id: ID, $limit: Int = 20, $name: String, $owner_id: String, $with_
           versions
         }
       }
-      owner: related_model(model_schema_name: "relationship", join_on_property: "r_id") @include(if: $with_owner){
-        profile: related_model(model_schema_name: "profile", join_on_property: "r_id") {
+      owner: related_model(model_schema_name: "relationship", join_on_property: "id", foreign_property: "r_id") @include(if: $with_owner){
+        id
+        profile: related_model(model_schema_name: "profile", join_on_property: "l_id") {
           id
           username: property(name: "username")
           first_name: property(name: "first_name")
