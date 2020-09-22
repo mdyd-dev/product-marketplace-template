@@ -1,7 +1,18 @@
+{% liquid
+  assign empty_array = "" | split: ","
+  assign breadcrumbs = context.page.metadata.breadcrumbs | default: empty_array
+%}
+
 <h1 class="mb-6 text-2xl">
   <a href="/dashboard">{{ 'app.dashboard' | t }}</a>
-  / {{ 'app.' | append: role | t }}
-  / {{ 'app.' | append: name | append: '.list' | t }}
+  {% for breadcrumb in breadcrumbs %}
+    /
+    {% if breadcrumb.url %}
+      <a href="{{ breadcrumb.url }}">{{ breadcrumb.label | t }}</a>
+    {% else %}
+      {{ breadcrumb.label | t }}
+    {% endif %}
+  {%- endfor %}
 
   {% if total_entries > 0 -%}({{ total_entries  }}){%- endif %}
 </h1>

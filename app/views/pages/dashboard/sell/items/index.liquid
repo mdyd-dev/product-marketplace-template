@@ -1,3 +1,8 @@
+---
+metadata:
+  breadcrumbs:
+    - label: app.items.list
+---
 {% liquid
   include 'lib/must_be_authenticated'
   function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id

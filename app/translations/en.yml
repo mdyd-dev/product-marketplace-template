@@ -57,6 +57,8 @@ en:
     user-list: "You are now on <b class=\"font-semibold\">%{name}'s</b> list"
     back: Back
     save: Save
+    new: New
+    edit: Edit
     continue: Continue
     community: Community
 
@@ -81,8 +83,9 @@ en:
       picture: Picture
       summary: Summary
       actions: Actions
-      add: Add groups
+      add: Add group
       deleted: Group has been deleted
+      new: New
 
     activities:
       list: Activities
