@@ -3,9 +3,7 @@ slug: api/comments
 method: post
 ---
 {% liquid
-  comment
   include 'lib/must_be_authenticated_api'
-  endcomment
 
   function object = 'lib/commands/comments/create', object: context.params.comment
   if object.valid

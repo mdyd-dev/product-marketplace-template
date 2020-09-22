@@ -2,7 +2,7 @@
   <section class="text-gray-700 body-font">
     <div class="container flex">
       {% for record in list.results %}
-        {% render 'theme/simple/groups/card', group: record %}
+        {% render 'theme/simple/groups/card', group: record, current_user: current_user %}
       {% else %}
         <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
       {% endfor %}

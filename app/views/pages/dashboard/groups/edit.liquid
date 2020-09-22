@@ -9,7 +9,8 @@ metadata:
   include 'lib/must_be_authenticated'
 
   function group = 'lib/data/queries/groups/find', id: context.params.id, owner_id: context.current_user.id
+  function_rc presigned_url = 'lib/data/queries/presigned_url'
 
   include 'theme/simple/dashboard/breadcrumbs', name: 'groups', total_entries: groups.total_entries, role: 'community'
-  include 'theme/simple/dashboard/groups/edit', user: context.current_user, object: group
+  include 'theme/simple/dashboard/groups/edit', user: context.current_user, object: group, presigned_url: presigned_url
 %}

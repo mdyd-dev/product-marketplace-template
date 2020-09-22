@@ -7,14 +7,14 @@
       {{group.summary}}
     </h2>
   </div>
-  {% render 'theme/simple/groups/nav', tab: tab %}
+  {% render 'theme/simple/groups/nav', group: group, tab: tab %}
 
   <div>
     {% liquid
       assign file = 'theme/simple/groups/' | append: tab
       case tab
       when 'activity'
-        render 'theme/simple/groups/about', list: list, group: group
+        include 'theme/simple/groups/activity', list: list, group: group, current_user: current_user
       when 'about'
         render 'theme/simple/groups/about', list: list, group: group
       when 'members'

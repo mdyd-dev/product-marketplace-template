@@ -1,20 +1,20 @@
 ---
-slug: groups
+slug: groups/show
 ---
 {% liquid
   include 'lib/must_be_authenticated'
 
-  assign id = context.params.slug2 | split: '-' | last
-  function_rc group = 'lib/data/queries/groups/find', id: id, with_owner: true
+  assign group_id = context.params.slug3 | split: '-' | last
+  function_rc group = 'lib/data/queries/groups/find', id: group.id, with_owner: true
 
   unless group.id
     render 'theme/simple/404', status: 404
     break
   endunless
 
-  function current_user = 'lib/data/queries/users/find', id: context.current_user.id
-  function list = 'lib/data/queries/activities/search', feed: 'group', feed_id: current_user.id, limit: 100
+  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id, membership: true
+  function list = 'lib/data/queries/activities/search', feed: 'group-public', feed_id: group.id, limit: 100
   function presigned_url = 'lib/data/queries/presigned_url'
 
-  render 'theme/simple/groups/show', group: group, current_user: current_user, tab: 'activity', list: list, context: context, presigned_url: presigned_url
+  include 'theme/simple/groups/show', group: group, current_user: current_user, tab: 'activity', list: list, context: context, presigned_url: presigned_url
 %}

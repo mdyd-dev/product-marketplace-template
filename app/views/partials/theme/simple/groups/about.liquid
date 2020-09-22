@@ -7,8 +7,8 @@
   </h1>
 
   <div class="m-y-5 flex">
-    <img class="h-16 h-16 mr-5" src="{{  group.owner.avatar.photo.versions.small | default: 'https://dummyimage.com/100x100' }}" />
-    {{ group.owner.first_name }} {{ group.owner.last_name }}, Owner
+    <img class="h-16 h-16 mr-5" src="{{  group.owner.profile.avatar.photo.versions.small | default: 'https://dummyimage.com/100x100' }}" />
+    {{ group.owner.profile.first_name }} {{ group.owner.profile.last_name }}, Owner
   </div>
 
   <div class="mt-10">
