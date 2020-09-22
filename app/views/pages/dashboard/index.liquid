@@ -1,6 +1,5 @@
 {% liquid
   function current_user = 'lib/current_profile', user_id: context.current_user.id, required: true
-
   include 'lib/validate_profile_completeness', profile: current_user
 
   comment

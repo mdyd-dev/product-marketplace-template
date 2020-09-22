@@ -4,8 +4,7 @@ metadata:
     - label: app.items.list
 ---
 {% liquid
-  include 'lib/must_be_authenticated'
-  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
+  function current_user = 'lib/current_profile', user_id: context.current_user.id, required: true
 
   function_rc items = 'lib/data/queries/items/search', limit: 100, owner: current_user.id
 
