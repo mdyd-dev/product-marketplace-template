@@ -1,0 +1,12 @@
+
+{% liquid
+  if required and user_id == blank
+    session return_to = context.location.href
+
+    include 'redirect_to', url: '/sessions/new', error: 'app.errors.unauthenticated'
+    break
+  endif
+
+  function profile = 'lib/data/queries/profiles/find', user_id: user_id, id: id
+  return profile
+%}
