@@ -1,26 +1,12 @@
 {% assign type = payload.type %}
 
 <div class="mx-auto px-4 py-4 bg-white shadow-md rounded-lg w-full">
-  {% render 'theme/simple/activities/feed_unit/header', url: payload.actor.url, name: payload.actor.name, photo: payload.actor.photo.url.versions.tiny, date: payload.date %}
+  {% render 'theme/simple/activities/feed_unit/header', payload: payload %}
 
   <div class="py-2">
     <p class="leading-snug">
-      {% if type contains 'follow' %}
-        {% render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload %}
-      {% elsif type contains 'visit' %}
-        {% render 'theme/simple/activities/feed_unit/type/visit', payload: payload %}
-      {% elsif type contains 'account' or type contains 'profile' %}
-        {% render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload %}
-      {% elsif type contains 'order_status' %}
-        {% render 'theme/simple/activities/feed_unit/type/order_status', payload: payload %}
-      {% elsif type contains 'order' %}
-        {% render 'theme/simple/activities/feed_unit/type/order_created', payload: payload %}
-      {% elsif type contains 'item_created' %}
-        {% render 'theme/simple/activities/feed_unit/type/item_created', payload: payload %}
-        <div class="text-xs"> {{ payload.object.description }} </div>
-      {% elsif type contains 'comment_created' %}
-        {% render 'theme/simple/activities/feed_unit/type/comment_created', payload: payload %}
-      {% endif %}
+      <div class="text-xs"> {{ payload.object.description }} </div>
+      {{ payload.object.body }}
     </p>
   </div>
 

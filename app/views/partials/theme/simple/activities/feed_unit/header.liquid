@@ -1,3 +1,11 @@
+{% liquid
+  assign url = payload.actor.url
+  assign name = payload.actor.name
+  assign photo = payload.actor.photo.url.versions.tiny
+  assign date = payload.date
+  assign type = payload.type
+%}
+
 <div class="py-2 flex flex-row items-center justify-between">
   <div class="flex flex-row items-center">
     <a href="#" class="flex flex-row items-center focus:outline-none focus:shadow-outline rounded-lg">
@@ -10,6 +18,23 @@
         <a href="{{url}}">
           {% print name %}
         </a>
+
+        {% if type contains 'follow' %}
+          {% render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload %}
+        {% elsif type contains 'visit' %}
+          {% render 'theme/simple/activities/feed_unit/type/visit', payload: payload %}
+        {% elsif type contains 'account' or type contains 'profile' %}
+          {% render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload %}
+        {% elsif type contains 'order_status' %}
+          {% render 'theme/simple/activities/feed_unit/type/order_status', payload: payload %}
+        {% elsif type contains 'order' %}
+          {% render 'theme/simple/activities/feed_unit/type/order_created', payload: payload %}
+        {% elsif type contains 'item_created' %}
+          {% render 'theme/simple/activities/feed_unit/type/item_created', payload: payload %}
+        {% elsif type contains 'comment_created' %}
+          {% render 'theme/simple/activities/feed_unit/type/comment_created', payload: payload %}
+        {% endif %}
+
       </p>
     </a>
   </div>

@@ -98,14 +98,14 @@ en:
         actor: Actor
         type: Type
       types:
-        user_followed_user: "started following user <a href=\"%{url}\">%{target}</a>"
-        user_unfollowed_user: "stopped following user <a href=\"%{url}\">%{target}</a>"
+        user_followed_user: "started following <a href=\"%{url}\">%{target}</a>"
+        user_unfollowed_user: "stopped following <a href=\"%{url}\">%{target}</a>"
         page_visited: visited <a href="%{obj}">%{obj}</a> page
         order_status_created: changed status of the [%{target_id}] order to <span class="font-semibold">%{status}</span>
-        order_created: placed an [%{object_id}] order for <a href="/items/%{target_id}">%{target}</a> item
+        order_created: placed an [%{object_id}] order for <a href="/items/%{target_id}">%{target}</a>
         account_created: created an account.
         profile_updated: updated profile information
-        item_created: created a <a href="/items/%{object_id}">%{name}</a> item
+        item_created: created a <a href="/items/%{object_id}">%{name}</a>
         comment_created: "posted a comment on <a href=\"%{url}\"> %{target} </a> page"
 
     users:
