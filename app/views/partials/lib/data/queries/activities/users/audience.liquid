@@ -4,13 +4,11 @@
   endif
 
   graphql r = 'activities/users/audience', id: id, limit: 1000
+  include 'lib/handle_graphql_response', r: r, name: 'users/audience'
 
-  if r.errors
-    log r, type: 'showme'
-    break
-  endif
+  log r, type: 'showme'
 
-  assign ids = r.users.results | map: 'id'
+  assign ids = r.models.results | map: 'l_id'
 
   return ids
 %}

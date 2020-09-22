@@ -9,7 +9,7 @@ method: post
   function object = 'lib/commands/comments/create', object: context.params.comment, current_user: current_user
 
   if object.valid
-    include 'lib/commands/events/create', type: 'comment_created', actor_id: current_user.id, object_id: object.id, target_id: context.params.comment.commentable_id
+    include 'lib/commands/events/create', type: 'comment_created', actor_id: current_user.id, object_id: object.id, target_id: context.params.comment.commentable_id, delay: 0
     redirect_to context.params.return_to
   endif
 %}

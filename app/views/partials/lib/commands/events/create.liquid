@@ -1,4 +1,5 @@
-{% background "bg-task-name", type: type, object_id: object_id, actor_id: actor_id, target_id: target_id, object: object, delay: "0.01" %}
+{% assign delay = delay | default: '0.01' %}
+{% background "bg-task-name", type: type, object_id: object_id, actor_id: actor_id, target_id: target_id, object: object, delay: delay %}
 
   {% liquid
     for i in (0..10)
