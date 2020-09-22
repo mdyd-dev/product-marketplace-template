@@ -2,24 +2,17 @@
 method: post
 ---
 {% liquid
-  include 'lib/must_be_authenticated'
-  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
+  function current_user = 'lib/current_profile', user_id: context.current_user.id, required: true
 
-  function_rc object = 'lib/commands/items/create/build', object: context.params.item, owner: current_user.id
-  function_rc object = 'lib/commands/items/create/check', object: object
-
+  function object = 'lib/commands/items/create', object: context.params.item, owner: current_user.id
   if object.valid
-    function_rc object = 'lib/commands/items/create/execute', object: object
+    include 'lib/commands/events/create', type: 'item_created', actor_id: current_user.id, object_id: object.id
 
-    if object.valid
-      include 'lib/commands/events/create', type: 'item_created', actor_id: current_user.id, object_id: object.id
-
-      function_rc url = 'link_to', path: '/items/', item: object
-      include 'redirect_to', url: url, notice: 'app.items.created'
-    endif
+    function url = 'link_to', path: '/items/', item: object
+    include 'redirect_to', url: url, notice: 'app.items.created'
   else
-    function_rc filters = 'lib/data/queries/search/filters', query: context.params
-    function_rc presigned_url = 'lib/data/queries/presigned_url'
+    function filters = 'lib/data/queries/search/filters', query: context.params
+    function presigned_url = 'lib/data/queries/presigned_url'
 
     include 'theme/simple/items/new', item: object, lib: filters, presigned_url: presigned_url
   endif
