@@ -5,6 +5,8 @@
 
   if object.valid
     function object = 'lib/commands/execute', mutation_name: 'relationships/create' object: object
+  else
+    log object, type: 'showme relationships/create object invalid'
   endif
 
   return object

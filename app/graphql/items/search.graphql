@@ -32,7 +32,15 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
       tags: property_array(name: "tags")
       cover_photo_url: property(name: "cover_photo_url")
 
-      owner: related_model(model_schema_name: "profile" join_on_property: "owner", foreign_property: "id") {
+      owner: related_model(model_schema_name: "relationship" join_on_property: "id", foreign_property: "r_id") {
+        profile: related_model(model_schema_name: "profile" join_on_property: "l_id", foreign_property: "id") {
+          id
+          name: property(name: "name")
+          slug: property(name: "slug")
+        }
+      }
+
+      _owner: related_model(model_schema_name: "profile" join_on_property: "owner", foreign_property: "id") {
         id
         name: property(name: "name")
         slug: property(name: "slug")
