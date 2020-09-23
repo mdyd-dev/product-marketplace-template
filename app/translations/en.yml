@@ -274,6 +274,7 @@ en:
       blank: cannot be blank
       too_little: "has to be equal or greater than %{value}"
       too_much: "has to be equal or smaller than %{value}"
+      too_short: "has to longer than %{value} letters"
       taken: already taken
       session_create_failed: Invalid email or password
       unauthorized: The system has determined that <span class="font-semibold">you are not</span> presently <span class="font-semibold">authorized</span> to use this system function.

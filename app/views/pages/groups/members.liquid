@@ -14,4 +14,5 @@
 
   include 'theme/simple/groups/show', group: group, current_user: current_user, tab: 'members', list: list, context: context
   render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token
+  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
 %}
