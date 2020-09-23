@@ -33,6 +33,8 @@
           {% render 'theme/simple/activities/feed_unit/type/item_created', payload: payload %}
         {% elsif type contains 'comment_created' %}
           {% render 'theme/simple/activities/feed_unit/type/comment_created', payload: payload %}
+        {% elsif type contains 'user_joined_group' %}
+          {% render 'theme/simple/activities/feed_unit/type/user_joined_group', payload: payload %}
         {% endif %}
 
       </p>
