@@ -1,5 +1,5 @@
 {%  liquid
-  function object = 'lib/commands/comments/create/build', object: object, owner_id: context.current_user.id
+  function object = 'lib/commands/comments/create/build', object: object, current_user: current_user
   function object = 'lib/commands/comments/create/check', object: object
 
   if object.valid
