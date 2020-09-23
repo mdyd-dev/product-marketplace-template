@@ -8,7 +8,10 @@
 
   <div class="m-y-5 flex">
     <img class="h-16 h-16 mr-5" src="{{  group.owner.profile.avatar.photo.versions.small | default: 'https://dummyimage.com/100x100' }}" />
-    {{ group.owner.profile.first_name }} {{ group.owner.profile.last_name }}, Owner
+    <a class="text-xl font-bold" href="/profile/{{group.owner.profile.slug}}">
+      {{ group.owner.profile.first_name }} {{ group.owner.profile.last_name }}
+    </a>
+    <span class="text-xl font-medium">, Owner</span>
   </div>
 
   <div class="mt-10">
