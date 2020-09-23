@@ -3,12 +3,11 @@ method: post
 ---
 
 {% liquid
-  include 'lib/must_be_authenticated'
-  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
+  function current_user = 'lib/current_profile', user_id: context.current_user.id, required: true
+
   function item = 'lib/data/queries/items/find', id: context.params.item_id
 
   function object = 'lib/commands/orders/create', item: item, current_user: current_user
-
   if object.valid
     function status = 'lib/commands/order_statuses/create', order: object, current_user_id: current_user.id, name: 'app.order_statuses.placed'
 
@@ -16,6 +15,7 @@ method: post
 
     include 'redirect_to', url: '/dashboard/buy/orders', notice:  'app.orders.created'
   else
+    log object
     include 'theme/simple/orders/new', item: item, order: object
   endif
 

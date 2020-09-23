@@ -1,10 +1,11 @@
 {% liquid
 
   unless id
-    return_rc null
+    return null
   endunless
 
   graphql r  = 'items/search', id: id, limit: 1, withOrders: withOrders
+  include 'lib/handle_graphql_response', r: r, name: 'queries/items/find'
 
-  return_rc r.items.results.first
+  return r.items.results.first
 %}
