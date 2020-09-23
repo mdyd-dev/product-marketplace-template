@@ -11,6 +11,6 @@ method: post
     include 'redirect_to', url: '/dashboard/groups'
   else
     graphql presigned_url = 'photos/presign' | dig: 'presigned'
-    include 'theme/simple/dashboard/groups/new', object: group, presigned_url: presigned_url
+    include 'theme/simple/dashboard/groups/new', object: object, presigned_url: presigned_url
   endif
 %}
