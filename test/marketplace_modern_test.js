@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from 'testcafe'
-import { buyerRole, sellerRole, adminRole, newEmail, newPassword, loginConfirmation } from './roles'
+import { buyerRole, sellerRole, adminRole, newEmail, newPassword } from './roles'
 import faker from 'faker'
 import NewSessionForm from './pages/newsession'
 import NewItemForm from './pages/newitem'
@@ -34,7 +34,8 @@ const signupConfirmation = 'Your account has been created'
 const notAuthorizedUser = 'Permission denied'
 //pages
 const adminPage = new AdminPanel()
-const newSessionForm = new NewSessionForm()
+const registerForm = new NewSessionForm()
+const loginForm = new NewSessionForm()
 const itemShow = new ItemShowPage(item)
 const editPage = new ItemShowEdit(editedItem)
 const newItemForm = new NewItemForm()
@@ -42,58 +43,59 @@ const topMenu = new TopMenuBtns()
 const itemSearch = new ItemSearch(item, editedItem)
 const dashboard = new DashboardPage()
 const profileEdit = new profileEditPage()
+const profileFilling = new profileEditPage()
 
 
   fixture`Happy path scenario`.page(myUrl)
 
 test.page(myUrl + '/sign-up')(`Register seller`, async (t) => {
   await t
-    .typeText(newSessionForm.emailInput, newEmail)
-    .typeText(newSessionForm.passInput, newPassword)
-    .click(newSessionForm.signUpBtn)
-    .typeText(profileEdit.usernameField, newUsername)
-    .typeText(profileEdit.firstnameField, 'Tony')
-    .typeText(profileEdit.lastnameField, 'Montana')
-    .click(profileEdit.saveButton)
+    .typeText(registerForm.emailInput, newEmail)
+    .typeText(registerForm.passInput, newPassword)
+    .click(registerForm.submitBtn)
+    .typeText(profileFilling.usernameField, newUsername)
+    .typeText(profileFilling.firstnameField, 'Tony')
+    .typeText(profileFilling.lastnameField, 'Montana')
+    .click(profileFilling.saveButton)
 })
 
 
 test.page(myUrl + '/sign-up')(`Register buyer`, async (t) => {
   await t
-    .typeText(newSessionForm.emailInput, 'johnsmith@example.com')
-    .typeText(newSessionForm.passInput, 'password')
-    .click(newSessionForm.signUpBtn)
+    .typeText(registerForm.emailInput, 'johnsmith@example.com')
+    .typeText(registerForm.passInput, 'password')
+    .click(registerForm.submitBtn)
     await t
     var getLocation = await getURL()
     await t.expect(getLocation).contains(myUrl+ 'dashboard/profile/edit');
-    await t.typeText(profileEdit.usernameField, 'JohnSmith')
-    .typeText(profileEdit.firstnameField, 'John')
-    .typeText(profileEdit.lastnameField, 'Smith')
-    .click(profileEdit.saveButton)
+    await t.typeText(profileFilling.usernameField, 'JohnSmith')
+    .typeText(profileFilling.firstnameField, 'John')
+    .typeText(profileFilling.lastnameField, 'Smith')
+    .click(profileFilling.saveButton)
 })
 
 
 test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log in with wrong data`, async (t) => {
   await t
-    .click(newSessionForm.logInBtn)
-    .expect(newSessionForm.emailLabel.textContent).contains('cannot be blank')
-    .expect(newSessionForm.passwordLabel.textContent).contains('cannot be blank')
-    .typeText(newSessionForm.emailInput, 'admin@example.com')
-    .typeText(newSessionForm.passInput, 'wrongpassword')
-    .click(newSessionForm.logInBtn)
-    .expect(newSessionForm.emailLabel.textContent).contains('Invalid email or password')
-    .click(newSessionForm.regBtn)
-    .typeText(newSessionForm.emailInput, 'admin@example.com')
-    .typeText(newSessionForm.passInput, 'wrongpassword')
-    .click(newSessionForm.signUpBtn)
-    .expect(newSessionForm.emailLabel.textContent).contains('already taken')
+    .click(loginForm.logInBtn)
+    .expect(loginForm.emailLabel.textContent).contains('cannot be blank')
+    .expect(loginForm.passwordLabel.textContent).contains('cannot be blank')
+    .typeText(loginForm.emailInput, 'admin@example.com')
+    .typeText(loginForm.passInput, 'wrongpassword')
+    .click(loginForm.logInBtn)
+    .expect(loginForm.emailLabel.textContent).contains('Invalid email or password')
+    .click(loginForm.regBtn)
+    .typeText(registerForm.emailInput, 'admin@example.com')
+    .typeText(registerForm.passInput, 'wrongpassword')
+    .click(registerForm.submitBtn)
+    .expect(registerForm.emailLabel.textContent).contains('already taken')
 })
 
 test.page(myUrl + '/sessions/new')(`Login`, async (t) => {
   await t
-    .typeText(newSessionForm.emailInput, 'johnsmith@example.com')
-    .typeText(newSessionForm.passInput, 'password')
-    .click(newSessionForm.logInBtn)
+    .typeText(loginForm.emailInput, 'johnsmith@example.com')
+    .typeText(loginForm.passInput, 'password')
+    .click(loginForm.logInBtn)
     })
 
 test('Creating item then self follow try', async (t) => {
