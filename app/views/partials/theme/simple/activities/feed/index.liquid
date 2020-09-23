@@ -3,7 +3,9 @@
 </div>
 
 <div class="w-full p-3">
-    {% include 'theme/simple/profile/activity_new' %}
+  {%
+  include 'theme/simple/comments/new_entry', commentable: current_user, commentable_type: 'profile', placeholder: "What's new?", presigned_url: presigned_url
+  %}
   <div class="grid grid-cols-1 gap-6 my-6">
 
     {% for record in list.results %}
