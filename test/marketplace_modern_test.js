@@ -55,7 +55,6 @@ test.page(myUrl + '/sign-up')(`Register seller`, async (t) => {
     .typeText(profileEdit.firstnameField, 'Tony')
     .typeText(profileEdit.lastnameField, 'Montana')
     .click(profileEdit.saveButton)
- // await t.expect(Selector('main').withText(signupConfirmation).exists).ok() (FOR LATER)
 })
 
 
@@ -95,7 +94,6 @@ test.page(myUrl + '/sessions/new')(`Login`, async (t) => {
     .typeText(newSessionForm.emailInput, 'johnsmith@example.com')
     .typeText(newSessionForm.passInput, 'password')
     .click(newSessionForm.logInBtn)
-    .expect(Selector('main').withText(loginConfirmation).exists).ok('message ' + loginConfirmation + " doesn't exists")
     })
 
 test('Creating item then self follow try', async (t) => {
