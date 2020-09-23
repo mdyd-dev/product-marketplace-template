@@ -14,7 +14,7 @@ const myUrl = process.env.MPKIT_URL
 export const buyerRole = Role(myUrl, async (t) => {
   await t
     .click(topMenu.logInBtn)
-    .typeText(newSessionForm.emailInput, 'johnsmith@email.com')
+    .typeText(newSessionForm.emailInput, 'johnsmith@example.com')
     .typeText(newSessionForm.passInput, 'password')
     .click(newSessionForm.logInBtn)
   await t.expect(Selector('main').withText(loginConfirmation).exists).ok('message ' + loginConfirmation + " doesn't exists")
