@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from 'testcafe'
-import { buyerRole, sellerRole, adminRole, newEmail, newPassword } from './roles'
+import { buyerRole, sellerRole, adminRole, newEmail, newPassword, loginConfirmation } from './roles'
 import faker from 'faker'
 import NewSessionForm from './pages/newsession'
 import NewItemForm from './pages/newitem'
@@ -26,6 +26,7 @@ const editedItem = {
 }
 
 const newUsername = faker.name.firstName().toLowerCase()
+const loremSentence = faker.lorem.lines()
 const myUrl = process.env.MPKIT_URL
 const getURL = ClientFunction(() => window.location.href)
 const editURL = '/items/edit?id='
@@ -60,10 +61,13 @@ test.page(myUrl + '/sign-up')(`Register seller`, async (t) => {
 
 test.page(myUrl + '/sign-up')(`Register buyer`, async (t) => {
   await t
-    .typeText(newSessionForm.emailInput, 'johnsmith@email.com')
+    .typeText(newSessionForm.emailInput, 'johnsmith@example.com')
     .typeText(newSessionForm.passInput, 'password')
     .click(newSessionForm.signUpBtn)
-    .typeText(profileEdit.usernameField, 'JohnSmith')
+    await t
+    var getLocation = await getURL()
+    await t.expect(getLocation).contains(myUrl+ 'dashboard/profile/edit');
+    await t.typeText(profileEdit.usernameField, 'JohnSmith')
     .typeText(profileEdit.firstnameField, 'John')
     .typeText(profileEdit.lastnameField, 'Smith')
     .click(profileEdit.saveButton)
@@ -75,7 +79,7 @@ test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log i
     .click(newSessionForm.logInBtn)
     .expect(newSessionForm.emailLabel.textContent).contains('cannot be blank')
     .expect(newSessionForm.passwordLabel.textContent).contains('cannot be blank')
-    .typeText(newSessionForm.emailInput, 'admin@email.com')
+    .typeText(newSessionForm.emailInput, 'admin@example.com')
     .typeText(newSessionForm.passInput, 'wrongpassword')
     .click(newSessionForm.logInBtn)
     .expect(newSessionForm.emailLabel.textContent).contains('Invalid email or password')
@@ -86,6 +90,13 @@ test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log i
     .expect(newSessionForm.emailLabel.textContent).contains('already taken')
 })
 
+test.page(myUrl + '/sessions/new')(`Login`, async (t) => {
+  await t
+    .typeText(newSessionForm.emailInput, 'johnsmith@example.com')
+    .typeText(newSessionForm.passInput, 'password')
+    .click(newSessionForm.logInBtn)
+    .expect(Selector('main').withText(loginConfirmation).exists).ok('message ' + loginConfirmation + " doesn't exists")
+    })
 
 test('Creating item then self follow try', async (t) => {
     await t.useRole(sellerRole)
@@ -166,7 +177,6 @@ test('Buying an item and following the seller', async (t) => {
     .click(itemShow.followButton)
     .expect(itemShow.alreadyFollowedButton.exists).ok()
     .click(itemShow.buyBtn)
-    //nie dziala checkout itemu
     .click(Selector('button').withText('Checkout'))
     .click(Selector('button').withText('Pay'))
     await t.click(topMenu.dashboardBtn)
@@ -174,14 +184,13 @@ test('Buying an item and following the seller', async (t) => {
     .click(Selector('a').withText('Following'))
     .expect(Selector('h2').find('a').withText(newUsername).exists).ok("Followed list not shown")
     .click(topMenu.dashboardBtn)
-    .click(dashboard.yourBuyingOrders)
+    .click(dashboard.yourBuyingOrders) // buyer's order check
     .click(Selector('a').withText(item.name))
   await t.expect(Selector('div').withText('Ordered').exists).ok()
     .useRole(sellerRole) // seller checks if his order shown as paid
     .click(topMenu.dashboardBtn)
-    .click(dashboard.yourSellingOrders)
+    .click(dashboard.yourSellingOrders)  // seller's order check
     .expect(Selector('a').withText(item.name).exists).ok("Item list not shown in seller orders")
-    // expect here
 })
 
 
@@ -234,12 +243,13 @@ test('Profile Edit Test', async (t) => {
 
 test('Groups', async (t) => {
   await t.useRole(sellerRole)
+  await t.debug()
   .click(topMenu.dashboardBtn)
   .click(dashboard.yourGroups)
   .click(Selector('a').withText('Add group'))
   .typeText('#name', "Audi fans")
   .typeText('#summary', "fun-club")
-  .typeText('#description', "We are the power")
+  .typeText('#description', loremSentence)
   .click(Selector('button').withText('Submit'))
   .expect(Selector('a').withText("Audi fans").exists).ok()
 })
