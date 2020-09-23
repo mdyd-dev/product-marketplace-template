@@ -1,8 +1,52 @@
 import { Selector, ClientFunction } from 'testcafe'
 import { buyerRole, sellerRole, adminRole, newEmail, newPassword } from './roles'
-import { item, editedItem, newUsername, loremSentence, myUrl, getURL, editURL, notAuthorizedUser,
+/* import { item, editedItem, newUsername, loremSentence, myUrl, getURL, editURL, notAuthorizedUser,
 adminPage, registerForm, loginForm, itemShow, editPage, newItemForm, topMenu, itemSearch,
-dashboard, profileEdit, profileFilling } from './helper'
+dashboard, profileEdit, profileFilling } from './helper' */
+
+import faker from 'faker'
+import NewSessionForm from './pages/newsession'
+import NewItemForm from './pages/newitem'
+import ItemShowPage from './pages/itemshow'
+import ItemShowEdit from './pages/itemedit'
+import ItemSearch from './pages/itemsearch'
+import AdminPanel from './pages/adminp'
+import TopMenuBtns from './pages/topmenu'
+import DashboardPage from './pages/dashboard'
+import profileEditPage from './pages/profileEdit'
+
+const item = {
+  name: faker.commerce.productName(),
+  type: faker.commerce.productMaterial(),
+  description: faker.lorem.sentence(),
+  price: '10000',
+}
+
+const editedItem = {
+  name: faker.commerce.productName(),
+  type: faker.commerce.productMaterial(),
+  description: faker.lorem.sentence(),
+  price: '5000',
+}
+
+const newUsername = faker.name.firstName().toLowerCase()
+const loremSentence = (faker.lorem.lines() + " " + faker.lorem.lines() + " " + faker.lorem.lines())
+const myUrl = process.env.MPKIT_URL
+const getURL = ClientFunction(() => window.location.href)
+const editURL = '/items/edit?id='
+const notAuthorizedUser = 'Permission denied'
+//pages
+const adminPage = new AdminPanel()
+const registerForm = new NewSessionForm()
+const loginForm = new NewSessionForm()
+const itemShow = new ItemShowPage(item)
+const editPage = new ItemShowEdit(editedItem)
+const newItemForm = new NewItemForm()
+const topMenu = new TopMenuBtns()
+const itemSearch = new ItemSearch(item, editedItem)
+const dashboard = new DashboardPage()
+const profileEdit = new profileEditPage()
+const profileFilling = new profileEditPage()
 
   fixture`Happy path scenario`.page(myUrl)
 
