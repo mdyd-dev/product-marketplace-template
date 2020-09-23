@@ -10,6 +10,6 @@ export default class NewSessionForm {
     this.logInBtn = Selector('button').withText('Log in')
     this.usernameInput = Selector('label #username')
     this.regBtn = Selector('a').withText('Register')
-    this.signUpBtn = Selector('button').withText('Sign Up')
+    this.submitBtn = Selector('button').withText('Sign Up')
   }
 }
