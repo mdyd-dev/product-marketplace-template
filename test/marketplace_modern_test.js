@@ -1,50 +1,8 @@
 import { Selector, ClientFunction } from 'testcafe'
 import { buyerRole, sellerRole, adminRole, newEmail, newPassword } from './roles'
-import faker from 'faker'
-import NewSessionForm from './pages/newsession'
-import NewItemForm from './pages/newitem'
-import ItemShowPage from './pages/itemshow'
-import ItemShowEdit from './pages/itemedit'
-import ItemSearch from './pages/itemsearch'
-import AdminPanel from './pages/adminp'
-import TopMenuBtns from './pages/topmenu'
-import DashboardPage from './pages/dashboard'
-import profileEditPage from './pages/profileEdit'
-
-const item = {
-  name: faker.commerce.productName(),
-  type: faker.commerce.productMaterial(),
-  description: faker.commerce.productAdjective(),
-  price: '10000',
-}
-
-const editedItem = {
-  name: faker.commerce.productName(),
-  type: faker.commerce.productMaterial(),
-  description: faker.commerce.productAdjective(),
-  price: '5000',
-}
-
-const newUsername = faker.name.firstName().toLowerCase()
-const loremSentence = faker.lorem.lines()
-const myUrl = process.env.MPKIT_URL
-const getURL = ClientFunction(() => window.location.href)
-const editURL = '/items/edit?id='
-const signupConfirmation = 'Your account has been created'
-const notAuthorizedUser = 'Permission denied'
-//pages
-const adminPage = new AdminPanel()
-const registerForm = new NewSessionForm()
-const loginForm = new NewSessionForm()
-const itemShow = new ItemShowPage(item)
-const editPage = new ItemShowEdit(editedItem)
-const newItemForm = new NewItemForm()
-const topMenu = new TopMenuBtns()
-const itemSearch = new ItemSearch(item, editedItem)
-const dashboard = new DashboardPage()
-const profileEdit = new profileEditPage()
-const profileFilling = new profileEditPage()
-
+import { item, editedItem, newUsername, loremSentence, myUrl, getURL, editURL, notAuthorizedUser,
+adminPage, registerForm, loginForm, itemShow, editPage, newItemForm, topMenu, itemSearch,
+dashboard, profileEdit, profileFilling } from './helper'
 
   fixture`Happy path scenario`.page(myUrl)
 
@@ -91,16 +49,10 @@ test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log i
     .expect(registerForm.emailLabel.textContent).contains('already taken')
 })
 
-test.page(myUrl + '/sessions/new')(`Login`, async (t) => {
-  await t
-    .typeText(loginForm.emailInput, 'johnsmith@example.com')
-    .typeText(loginForm.passInput, 'password')
-    .click(loginForm.logInBtn)
-    })
-
 test('Creating item then self follow try', async (t) => {
     await t.useRole(sellerRole)
     await t.click(topMenu.listItemBtn)
+    await t.debug()
     .typeText(newItemForm.nameField, item.name)
     .typeText(newItemForm.descField, item.description)
     .typeText(newItemForm.priceField, item.price, { replace: true })
@@ -242,7 +194,7 @@ test('Profile Edit Test', async (t) => {
 })
 
 test('Groups', async (t) => {
-  await t.useRole(sellerRole)
+  await t.useRole(buyerRole)
   await t.debug()
   .click(topMenu.dashboardBtn)
   .click(dashboard.yourGroups)

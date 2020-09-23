@@ -17,7 +17,6 @@ export const buyerRole = Role(myUrl, async (t) => {
     .typeText(loginForm.emailInput, 'johnsmith@example.com')
     .typeText(loginForm.passInput, 'password')
     .click(loginForm.logInBtn)
-  await t.expect(Selector('main').withText(loginConfirmation).exists).ok('message ' + loginConfirmation + " doesn't exists")
 })
 
 export const sellerRole = Role(myUrl, async (t) => {
@@ -35,6 +34,5 @@ export const adminRole = Role(myUrl, async (t) => {
     .typeText(loginForm.emailInput, 'admin@example.com')
     .typeText(loginForm.passInput, 'password')
     .click(loginForm.logInBtn)
-  await t.expect(Selector('main').withText(loginConfirmation).exists).ok('message ' + loginConfirmation + " doesn't exists")
 })
 
