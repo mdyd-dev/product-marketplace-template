@@ -9,7 +9,7 @@
 {
   "item_id": "{% print item.id %}",
   "buyer":   "{% print current_user_id %}",
-  "seller":  "{% print item.owner.profile.id %}",
+  "seller":  "{% print item.owner.id %}",
   "total":    {% echo total %}
 }
 {% endparse_json %}

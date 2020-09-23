@@ -236,7 +236,7 @@ test('Groups', async (t) => {
   await t.useRole(sellerRole)
   .click(topMenu.dashboardBtn)
   .click(dashboard.yourGroups)
-  .click(Selector('a').withText('Add groups'))
+  .click(Selector('a').withText('Add group'))
   .typeText('#name', "Audi fans")
   .typeText('#summary', "fun-club")
   .typeText('#description', "We are the power")
