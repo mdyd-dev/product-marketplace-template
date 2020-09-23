@@ -3,6 +3,7 @@ slug: api/photos
 method: post
 ---
 {% liquid
-  function_rc object = 'lib/commands/photos/create', object: context.params.photo
+  function object = 'lib/commands/photos/create', object: context.params.photo, current_user: current_user
+
   include 'theme/json/shared/show', object: object
 %}
