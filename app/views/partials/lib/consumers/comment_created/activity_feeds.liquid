@@ -5,7 +5,8 @@
 
 {% liquid
   log event, type: 'event'
-  function_rc audience = 'lib/data/queries/activities/users/audience', id: event.actor.id
+
+  function audience = 'lib/data/queries/activities/users/audience', id: event.actor.id
   render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-private", ids: audience
 
   render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-private", ids: event.actor.id

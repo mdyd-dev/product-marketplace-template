@@ -7,7 +7,8 @@ method: post
 
   function object = 'lib/commands/comments/create', object: context.params.comment
   if object.valid
-    include 'lib/commands/events/create', type: 'comment_created', actor_id: context.current_user.id, object_id: object.id
+    include 'lib/commands/events/create', type: 'comment_created', actor_id: context.current_user.id, object_id: object.id, delay: "0"
   endif
+
   include 'theme/json/shared/show', object: object
 %}

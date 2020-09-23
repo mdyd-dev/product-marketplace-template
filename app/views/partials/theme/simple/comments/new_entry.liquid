@@ -1,5 +1,5 @@
 <form action="/comments" method="post" data-comment-new-post>
-  {% include 'authenticity_token' %}
+  {% include 'authenticity_token', authenticity_token: authenticity_token %}
   {% liquid
     assign uuid = '' | uuid
   %}
@@ -31,4 +31,4 @@
   </div>
 </form>
 
-{% include 'theme/simple/photos/uppy_form', object_uuid: uuid, presigned_url: presigned_url, user_id: user.id, photo_type: 'main' %}
+{% include 'theme/simple/photos/uppy_form', object_uuid: uuid, presigned_url: presigned_url, user_id: current_user.id, photo_type: 'main' %}
