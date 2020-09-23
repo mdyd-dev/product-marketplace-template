@@ -5,8 +5,6 @@ method: post
   function_rc object = 'lib/commands/sessions/create', object: context.params.user
 
   if object.valid
-    function_rc object = 'lib/commands/sessions/create/execute', object: object
-
     include 'redirect_to', url: '/', notice: 'app.sessions.created'
   else
     include 'theme/simple/sessions/new', object: object

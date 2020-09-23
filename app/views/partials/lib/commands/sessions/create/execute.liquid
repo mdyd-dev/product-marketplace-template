@@ -5,6 +5,8 @@
 
   if r.errors.size > 0
     include 'lib/register_error', contract: c, field_name: 'email', key: 'app.errors.session_create_failed'
+  else
+    hash_assign object['id'] = r.user.id
   endif
 
   hash_assign object['valid'] = c.valid

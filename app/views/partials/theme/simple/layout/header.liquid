@@ -13,22 +13,39 @@
       <a href="/items/new" class="mr-5 hover:text-gray-900">{{ 'app.list-your-item' | t }}</a>
 
       {% if context.current_user.id  %}
-      <a href="/dashboard" class="mr-5 hover:text-gray-900">{{ 'app.dashboard' | t }}</a>
-      {% assign superadmins = context.constants.superadmins | split: ',' %}
-      {% if superadmins contains context.current_user.email %}
-        <a href="/admin" class="mr-5 hover:text-gray-900">{{ 'app.admin' | t }}</a>
-      {% endif %}
+        <a href="/dashboard" class="mr-5 hover:text-gray-900">{{ 'app.dashboard' | t }}</a>
+        {% assign superadmins = context.constants.superadmins | split: ',' %}
+        {% if superadmins contains context.current_user.email %}
+          <a href="/admin" class="mr-5 hover:text-gray-900">{{ 'app.admin' | t }}</a>
+        {% endif %}
 
-      <form action="/sessions/destroy" method="post">
-        {% include 'authenticity_token' %}
-        <button class="button button-secondary button-sm">
-          Log out
-        </button>
-      </form>
+        {% assign profile = context.session.profile | parse_json %}
+        {{profile.first_name | default: profile.name}}
+        <div x-data="{ dropdownOpen: false }" class="relative ml-2">
+          <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
+            <svg class="h-5 w-5 text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"> <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /> </svg>
+          </button>
+          <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
+
+          <div x-show="dropdownOpen" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
+            <a href="/profile/{{profile.slug}}" class="block px-4 py-2 capitalize text-gray-700 hover:bg-blue-700 hover:text-white">
+              Your profile
+            </a>
+            <a href="/feed" class="block px-4 py-2 capitalize text-gray-700 hover:bg-blue-700 hover:text-white">
+              Activity Feed
+            </a>
+            <form action="/sessions/destroy" method="post">
+              {% include 'authenticity_token' %}
+              <button class="block px-4 py-2 capitalize text-gray-700 hover:bg-blue-700 hover:text-white w-full text-left">
+                Log out
+              </button>
+            </form>
+          </div>
+        </div>
       {% else %}
-      <a href="/sessions/new" class="button button-sm">
-        {{ 'app.login' | t }}
-      </a>
+        <a href="/sessions/new" class="button button-sm">
+          {{ 'app.login' | t }}
+        </a>
       {% endif %}
     </nav>
 

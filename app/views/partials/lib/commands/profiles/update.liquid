@@ -7,6 +7,7 @@
 
     if object.valid
       include 'lib/commands/events/create', type: 'profile_updated', actor_id: object.id
+      function result = 'lib/commands/sessions/store_profile_in_session', object: object
     endif
   endif
 
