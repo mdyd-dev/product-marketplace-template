@@ -21,7 +21,6 @@
   endif
 
   if comment
-    log comment
     if comment.type == 'profile'
       print "/profile/" | append: profile.slug
       return "/profile/" | append: profile.slug

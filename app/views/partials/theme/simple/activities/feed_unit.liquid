@@ -5,18 +5,18 @@
 
   <div class="py-2">
     <p class="leading-snug">
-      <div class="text-xs"> {{ payload.object.description }} </div>
-      {{ payload.object.body }}
+      <div class="text-xs"> {% print payload.object.description %} </div>
+      {% print payload.object.body %}
     </p>
   </div>
 
   {% if payload.object.photos.size > 0 %}
     <div class="mt-2">
-      <img class="object-cover w-9 m-auto rounded-lg" src="{% print payload.object.photos.first.url.versions.small %}" alt="{{payload.object.name}}">
+      <img class="object-cover w-9 m-auto rounded-lg" src="{% print payload.object.photos.first.url.versions.small %}" alt="{% print payload.object.name %}">
     </div>
   {% elsif payload.target.photos.size > 0 %}
     <div class="mt-2">
-      <img class="object-cover w-9 m-auto rounded-lg" src="{% print payload.target.photos.first.url.versions.small %}" alt="{{payload.target.name}}">
+      <img class="object-cover w-9 m-auto rounded-lg" src="{% print payload.target.photos.first.url.versions.small %}" alt="{% print payload.target.name %}">
     </div>
   {% endif %}
 </div>
