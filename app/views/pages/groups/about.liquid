@@ -9,7 +9,8 @@
   endunless
 
   function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id, membership: true
+  function list = 'lib/data/queries/relationships/search', limit: 4, name: 'membership', r_id: group_id
 
-  include 'theme/simple/groups/show', group: group, current_user: current_user, tab: 'about'
+  include 'theme/simple/groups/show', group: group, current_user: current_user, tab: 'about', list: list
   render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token
 %}
