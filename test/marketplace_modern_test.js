@@ -1,9 +1,6 @@
 import { Selector, ClientFunction } from 'testcafe'
 import { buyerRole, sellerRole, adminRole, newEmail, newPassword } from './roles'
-/* import { item, editedItem, newUsername, loremSentence, myUrl, getURL, editURL, notAuthorizedUser,
-adminPage, registerForm, loginForm, itemShow, editPage, newItemForm, topMenu, itemSearch,
-dashboard, profileEdit, profileFilling } from './helper' */
-
+import { register, myUrl, createItem } from './helper'
 import faker from 'faker'
 import NewSessionForm from './pages/newsession'
 import NewItemForm from './pages/newitem'
@@ -31,7 +28,6 @@ const editedItem = {
 
 const newUsername = faker.name.firstName().toLowerCase()
 const loremSentence = (faker.lorem.lines() + " " + faker.lorem.lines() + " " + faker.lorem.lines())
-const myUrl = process.env.MPKIT_URL
 const getURL = ClientFunction(() => window.location.href)
 const editURL = '/items/edit?id='
 const notAuthorizedUser = 'Permission denied'
@@ -46,35 +42,18 @@ const topMenu = new TopMenuBtns()
 const itemSearch = new ItemSearch(item, editedItem)
 const dashboard = new DashboardPage()
 const profileEdit = new profileEditPage()
-const profileFilling = new profileEditPage()
 
   fixture`Happy path scenario`.page(myUrl)
 
 test.page(myUrl + '/sign-up')(`Register seller`, async (t) => {
-  await t
-    .typeText(registerForm.emailInput, newEmail)
-    .typeText(registerForm.passInput, newPassword)
-    .click(registerForm.submitBtn)
-    .typeText(profileFilling.usernameField, newUsername)
-    .typeText(profileFilling.firstnameField, 'Tony')
-    .typeText(profileFilling.lastnameField, 'Montana')
-    .click(profileFilling.saveButton)
-})
+    await register(newEmail, newPassword, newUsername, 'Tony', 'Montana')
+  })
+
 
 
 test.page(myUrl + '/sign-up')(`Register buyer`, async (t) => {
-  await t
-    .typeText(registerForm.emailInput, 'johnsmith@example.com')
-    .typeText(registerForm.passInput, 'password')
-    .click(registerForm.submitBtn)
-    await t
-    var getLocation = await getURL()
-    await t.expect(getLocation).contains(myUrl+ 'dashboard/profile/edit');
-    await t.typeText(profileFilling.usernameField, 'JohnSmith')
-    .typeText(profileFilling.firstnameField, 'John')
-    .typeText(profileFilling.lastnameField, 'Smith')
-    .click(profileFilling.saveButton)
-})
+    await register('johnsmith@example.com', 'password', 'JohnSmith', 'John', 'Smith')
+  })
 
 
 test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log in with wrong data`, async (t) => {
@@ -95,16 +74,7 @@ test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log i
 
 test('Creating item then self follow try', async (t) => {
     await t.useRole(sellerRole)
-    await t.click(topMenu.listItemBtn)
-    await t.debug()
-    .typeText(newItemForm.nameField, item.name)
-    .typeText(newItemForm.descField, item.description)
-    .typeText(newItemForm.priceField, item.price, { replace: true })
-    .click(newItemForm.browseBtn)
-    .setFilesToUpload(Selector('main').find('[name="files[]"]'), [
-      '_uploads_/testimage.png',
-    ])
-    .click(newItemForm.submitBtn)
+    await createItem(item.name, item.description, item.price)
     //checks if all data is correct
     await t.expect(itemShow.name.exists).ok()
     await t.expect(itemShow.description.exists).ok()
@@ -155,11 +125,7 @@ test('Deleting item', async (t) => {
 
 test('Creating new item for sell', async (t) => {
     await t.useRole(sellerRole)
-    await t.click(topMenu.listItemBtn)
-    .typeText(newItemForm.nameField, item.name)
-    .typeText(newItemForm.descField, item.description)
-    .typeText(newItemForm.priceField, item.price, { replace: true })
-    .click(newItemForm.submitBtn)
+    await createItem(item.name, item.description, item.price)
 })
 
 
@@ -239,7 +205,6 @@ test('Profile Edit Test', async (t) => {
 
 test('Groups', async (t) => {
   await t.useRole(buyerRole)
-  await t.debug()
   .click(topMenu.dashboardBtn)
   .click(dashboard.yourGroups)
   .click(Selector('a').withText('Add group'))
@@ -250,3 +215,19 @@ test('Groups', async (t) => {
   .expect(Selector('a').withText("Audi fans").exists).ok()
 })
 
+test('Activity', async (t) => {
+  await t.useRole(buyerRole)
+  .click(topMenu.dashboardBtn)
+  .click(dashboard.activityFeed)
+  const feed = ("What's new buddies?")
+  await t.typeText(Selector('textarea'), feed)
+  .click(Selector('button').withText('Send'))
+  .expect(Selector('div .py-2').withText(feed).exists).ok()
+  .click(topMenu.dashboardBtn)
+  .click(dashboard.goProfile)
+  .expect(Selector('div .py-2').withText(feed).exists).ok()
+
+
+
+
+})
