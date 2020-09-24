@@ -10,6 +10,6 @@ slug: search
 
   function filters = 'lib/data/queries/search/filters', query: context.params
 
-  include 'theme/simple/home/index', items: items, filters: filters, current_user: current_user
+  include 'theme/simple/items/index', items: items, filters: filters, current_user: current_user
   render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
 %}
