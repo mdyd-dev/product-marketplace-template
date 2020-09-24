@@ -11,6 +11,13 @@
 
   render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-private", ids: event.actor.id
   render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-public", ids: event.actor.id
+
+  case event.target.type
+  when 'group'
+    render 'lib/commands/activities/publish', uuid: event.uuid, type: "group-public", ids: event.target.id
+  when 'profile'
+    render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-public", ids: event.target.id
+  endcase
 %}
 
 {% comment %} system:audit {% endcomment %}
