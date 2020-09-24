@@ -24,9 +24,9 @@
     </div>
 
     <div class="my-3">
-      <label class="block" for="name">Summary (displayed on list)</label>
+      <label class="block" for="summary">Summary (displayed on list)</label>
       <input class="w-2/3 form-input" type="text" id="summary" name="group[summary]" value="{{ object.summary }}" autofocus required />
-      {% include 'theme/simple/field_error', errors: object.errors.name %}
+      {% include 'theme/simple/field_error', errors: object.errors.summary %}
     </div>
 
     <div class="mt-3">

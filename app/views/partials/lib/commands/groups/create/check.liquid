@@ -7,6 +7,11 @@
 
   if object.name == blank
     include 'lib/register_error', contract: c, field_name: 'name', key: 'app.errors.blank'
+  else
+    graphql groups_count = 'groups/group_count', name: object.name | dig: 'groups', 'total_entries'
+    if groups_count > 0
+      include 'lib/register_error', contract: c, field_name: 'name', key: 'app.errors.taken'
+    endif
   endif
 
   if object.summary == blank
