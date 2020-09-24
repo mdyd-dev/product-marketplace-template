@@ -1,9 +1,9 @@
 query search($id: ID, $limit: Int = 20, $name: String, $with_owner: Boolean = false) {
-  groups: models(
+  models(
     per_page: $limit
     filter: {
       id: { value: $id }
-      model_schema_name: { value: "group" }
+      model_schema_name: { value: "comment" }
       properties: [
         { name: "name" value: $name }
       ]
@@ -20,12 +20,14 @@ query search($id: ID, $limit: Int = 20, $name: String, $with_owner: Boolean = fa
       name: property(name: "name")
       summary: property(name: "summary")
       description: property(name: "description")
-      main_photo: related_model(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
+
+      photos: related_models(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
         photo: property_upload(name: "photo") {
           url
           versions
         }
       }
+
       owner: related_user(join_on_property: "owner_id") @include(if: $with_owner){
         id
         username: property(name: "username")

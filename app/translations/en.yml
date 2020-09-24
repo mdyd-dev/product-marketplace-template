@@ -31,6 +31,12 @@ en:
         description: Listings counter
         delta: Since yesterday
   app:
+    home:
+      feeds:
+        comments: People commenting
+        groups: People gathering
+        items: People selling
+        profiles: People joining
     relationships:
       type:
         - followship
@@ -140,6 +146,7 @@ en:
         name: Name
         category: Category
         created_at: CreatedAt
+        owner: Owner
 
     categories:
       list: Categories

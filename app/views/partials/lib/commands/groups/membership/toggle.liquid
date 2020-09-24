@@ -11,7 +11,7 @@
   endif
 
   if action_name == 'leave'
-    assign event_type = 'user_leave_group'
+    assign event_type = 'user_left_group'
     function relation = 'lib/data/queries/relationships/find', name: 'membership', l_id: profile.id, r_id: group.id
 
     if relation
