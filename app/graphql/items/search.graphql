@@ -23,6 +23,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
     results {
       id
       created_at
+      type: model_schema_name
 
       uuid: property(name: "uuid")
       name: property(name: "name")
@@ -34,6 +35,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
 
       owner: related_model(model_schema_name: "profile" join_on_property: "owner", foreign_property: "id") {
         id
+        type: model_schema_name
         name: property(name: "name")
         slug: property(name: "slug")
       }

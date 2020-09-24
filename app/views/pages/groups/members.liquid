@@ -2,7 +2,7 @@
   include 'lib/must_be_authenticated'
 
   assign group_id = context.params.slug3 | split: '-' | last
-  function_rc group = 'lib/data/queries/groups/find', id: group.id, with_owner: false
+  function_rc group = 'lib/data/queries/groups/find', id: group_id, with_owner: false
 
   unless group.id
     render 'theme/simple/404', status: 404

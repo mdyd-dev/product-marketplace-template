@@ -23,6 +23,7 @@ query search($id: ID, $limit: Int = 20, $name: String, $owner_id: String, $with_
     results {
       id
       created_at
+      type: model_schema_name
 
       uuid: property(name: "uuid")
       name: property(name: "name")
