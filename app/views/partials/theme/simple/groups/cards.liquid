@@ -3,7 +3,7 @@
 </h1>
 <div class="flex flex-wrap w-full">
   <section class="text-gray-700 body-font">
-    <div class="container flex">
+    <div class="container flex flex-wrap">
       {% for record in list.results %}
         {% render 'theme/simple/groups/card', group: record, current_user: current_user %}
       {% else %}

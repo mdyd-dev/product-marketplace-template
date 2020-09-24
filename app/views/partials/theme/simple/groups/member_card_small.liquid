@@ -1,4 +1,4 @@
-<div class="p-4 md:w-1/2">
+<div class="p-2 md:w-1/2">
   <div class="h-full border-2 border-gray-200 rounded-lg overflow-hidden pt-5 bg-white">
     {% liquid
       assign img_url = user.avatar.photo.versions.small
@@ -8,9 +8,9 @@
     %}
     <img class="md:h-32 md:w-32 h-24 w-24 object-cover object-center rounded-full shadow-md mx-auto" src="{{ img_url }}" alt="blog">
     <div class="p-4">
-      <h2 class="text-gray-900 title-font font-medium mb-1">
+      <h2 class="text-gray-900 title-font font-medium mb-1 truncate">
         <a href="/profile/{{user.slug}}">
-          {% print user.name %}
+          {% print user.first_name %} {{ user.last_name  }}
         </a>
       </h2>
     </div>
