@@ -5,12 +5,8 @@ slug: groups/show
   include 'lib/must_be_authenticated'
 
   assign group_id = context.params.slug3 | split: '-' | last
-  function_rc group = 'lib/data/queries/groups/find', id: group.id, with_owner: true
-
-  unless group.id
-    render 'theme/simple/404', status: 404
-    break
-  endunless
+  function group = 'lib/data/queries/groups/find', id: group_id, with_owner: true
+  include 'lib/present_or_404', property: group.id
 
   function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id, membership: true
   function list = 'lib/data/queries/activities/search', feed: 'group-public', feed_id: group.id, limit: 100

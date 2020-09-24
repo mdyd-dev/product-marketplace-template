@@ -8,7 +8,7 @@ method: post
   if object.valid
     include 'lib/commands/events/create', type: 'item_created', actor_id: current_user.id, object_id: object.id
 
-    function url = 'link_to', path: '/items/', item: object
+    function url = 'link_to', item: object
     include 'redirect_to', url: url, notice: 'app.items.created'
   else
     function filters = 'lib/data/queries/search/filters', query: context.params

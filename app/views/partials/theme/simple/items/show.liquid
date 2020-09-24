@@ -45,7 +45,7 @@
       <div class="flex flex-wrap mb-4">
         <ul class="flex w-full categories">
           <li><span class="font-semibold">category: </span></li>
-          <li class="ml-2"><a href="/c/{{ item.category }}">{{ 'categories.' | append: item.category | t }}</a></li>
+          <li class="ml-2"><a href="/c/{% render 'link_to', category: item.category %}">{{ 'categories.' | append: item.category | t }}</a></li>
         </ul>
       </div>
 

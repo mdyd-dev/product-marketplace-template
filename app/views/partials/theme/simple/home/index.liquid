@@ -6,7 +6,7 @@
 
   <div class="flex flex-wrap -mx-4 cards">
     {% for item in feed[1].results %}
-      {% include 'theme/simple/home/card', actor: item.payload.actor, target: item.payload.target, object: item.payload.object %}
+      {% include 'theme/simple/home/card', actor: item.payload.actor, target: item.payload.target, object: item.payload.object, type: item.payload.type %}
     {% else %}
       <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
     {% endfor %}

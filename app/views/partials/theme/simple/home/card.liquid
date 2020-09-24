@@ -3,27 +3,24 @@
   <a class="relative block h-64 overflow-hidden rounded shadow-sm" href="{{ object.url }}">
     <img alt="{{ object.name }}" class="block object-cover object-center w-full h-full" src="{{ object.photo.url.versions.small }}">
   </a>
+  {% elsif target.photo %}
+  <a class="relative block h-64 overflow-hidden rounded shadow-sm" href="{{ target.url }}">
+    <img alt="{{ target.name }}" class="block object-cover object-center w-full h-full" src="{{ target.photo.url.versions.small }}">
+  </a>
   {% endif %}
+
+  <header class="text-gray-600 text-xs">
+    {% print type | t: scope: 'app.home.feeds.header' %}
+  </header>
 
   <div class="mt-4">
     <h2 class="text-lg font-medium text-gray-900 ">
-      <a href="{{ item.url }}">{{ item.name }}</a>
+      <a href="{% render 'link_to', comment: target %}">{{ item.name }}</a>
     </h2>
 
-    <h3 class="mb-1 text-xs ">
-      {% if item.category %}
-        <div>
-          <a href="/c/{% print item.category %}">
-            {% print 'categories.' | append: item.category | t %}
-          </a>
-        </div>
-      {% endif %}
-      {% comment %}
-        {{ item.tags | join: ", " }}
-        {% endcomment %}
-    </h3>
+    <div class="justify-between text-xs">
+      <div class="font-semibold text-medium">{% print object.name %}</div>
 
-    <div class="flex justify-between text-xs">
       {% echo object.body | default: object.description | default: object.bio %}
     </div>
     <div class="flex justify-between">

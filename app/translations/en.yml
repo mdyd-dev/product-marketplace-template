@@ -33,10 +33,14 @@ en:
   app:
     home:
       feeds:
-        comments: People commenting
+        comments: People posting
         groups: People gathering
         items: People selling
         profiles: People joining
+        header:
+          item_created: New Item
+          group_created: New Group
+          comment_created: New Post
     relationships:
       type:
         - followship

@@ -180,6 +180,7 @@ test(`Admin Panel test`, async (t) => {
 
 test('Breakin-in test, edition by none user', async (t) => {
     await t.useRole(buyerRole)
+    .click(topMenu.itemsBtn)
     .typeText(itemSearch.searchField, 'Watch')
     .click(itemSearch.searchBtn)
     .click(Selector('a').withText('Watch'))
