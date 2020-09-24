@@ -8,5 +8,6 @@ export default class TopMenuBtns {
     this.logInBtn = Selector('header').find('a').withText('Log in')
     this.logOutBtn = Selector('header').find('button').withText('Log out')
     this.adminBtn = Selector('header').find('a').withText('Admin')
+    this.itemsBtn = Selector('header').find('a').withText('Items')
   }
 }

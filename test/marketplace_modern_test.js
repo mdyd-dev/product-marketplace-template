@@ -132,6 +132,7 @@ test('Creating new item for sell', async (t) => {
 test('Buying an item and following the seller', async (t) => {
     await t
     .useRole(buyerRole)
+    .click(topMenu.itemsBtn)
     .typeText(itemSearch.searchField, item.name)
     .click(itemSearch.searchBtn)
     .expect(itemSearch.itemLink.exists).ok()
