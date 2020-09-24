@@ -19,23 +19,28 @@
           {% print name %}
         </a>
 
-        {% if type contains 'follow' %}
-          {% render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload %}
-        {% elsif type contains 'visit' %}
-          {% render 'theme/simple/activities/feed_unit/type/visit', payload: payload %}
-        {% elsif type contains 'account' or type contains 'profile' %}
-          {% render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload %}
-        {% elsif type contains 'order_status' %}
-          {% render 'theme/simple/activities/feed_unit/type/order_status', payload: payload %}
-        {% elsif type contains 'order' %}
-          {% render 'theme/simple/activities/feed_unit/type/order_created', payload: payload %}
-        {% elsif type contains 'item_created' %}
-          {% render 'theme/simple/activities/feed_unit/type/item_created', payload: payload %}
-        {% elsif type contains 'comment_created' %}
-          {% render 'theme/simple/activities/feed_unit/type/comment_created', payload: payload %}
-        {% elsif type contains 'user_joined_group' %}
-          {% render 'theme/simple/activities/feed_unit/type/user_joined_group', payload: payload %}
-        {% endif %}
+        {% liquid
+        case type
+        when 'user_followed_user', 'user_unfollowed_user'
+          render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload
+        when 'page_visited'
+          render 'theme/simple/activities/feed_unit/type/visit', payload: payload
+        when 'account_created', 'profile_created'
+          render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload
+        when 'order_status_created'
+          render 'theme/simple/activities/feed_unit/type/order_status', payload: payload
+        when 'order_created'
+          render 'theme/simple/activities/feed_unit/type/order_created', payload: payload
+        when 'item_created'
+          render 'theme/simple/activities/feed_unit/type/item_created', payload: payload
+        when 'comment_created'
+          render 'theme/simple/activities/feed_unit/type/comment_created', payload: payload
+        when 'user_joined_group'
+          render 'theme/simple/activities/feed_unit/type/user_joined_group', payload: payload
+        else
+          echo type
+        endcase
+        %}
 
       </p>
     </a>
