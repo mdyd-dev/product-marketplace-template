@@ -213,6 +213,16 @@ test('Groups', async (t) => {
   .typeText('#description', loremSentence)
   .click(Selector('button').withText('Submit'))
   .expect(Selector('a').withText("Audi fans").exists).ok()
+  //unique test
+  .click(topMenu.dashboardBtn)
+  .click(dashboard.yourGroups)
+  .click(Selector('a').withText('Add group'))
+  .typeText('#name', "Audi fans")
+  .typeText('#summary', "fun-club")
+  await t.debug()
+  .typeText('#description', loremSentence)
+  .click(Selector('button').withText('Submit'))
+  .expect(Selector('div').textContent).contains('already taken')
 })
 
 test('Activity', async (t) => {
@@ -226,8 +236,4 @@ test('Activity', async (t) => {
   .click(topMenu.dashboardBtn)
   .click(dashboard.goProfile)
   .expect(Selector('div .py-2').withText(feed).exists).ok()
-
-
-
-
 })
