@@ -1,0 +1,15 @@
+{% liquid
+  graphql r = 'items/search', args: query
+  graphql r = 'groups/search', args: query
+  graphql r = 'comments/search', args: query
+  graphql r = 'users/search', args: query
+
+
+  echo query
+  echo r
+
+  return_rc r.items
+  return_rc r.items
+  return_rc r.items
+  return_rc r.items
+%}
