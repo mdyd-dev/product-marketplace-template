@@ -6,20 +6,6 @@
         assign img_url = 'images/user.svg' | asset_url
       endunless
     %}
-    <img src="{{ img_url }}" alt="" class="w-64 h-64 mx-auto rounded-full object-cover object-center shadow-md md:mx-0 text-gray-400">
-  </div>
-
-  <div class="mr-10">
-    <div class="mb-4">
-      <div class="text-xl font-medium text-grey-darkest" id="user-name">
-        {{ user.first_name }} {{ user.last_name }}
-      </div>
-      <div class="text-normal text-grey-dark font-light" id="username">
-        {{ user.name }}
-      </div>
-      <div class="text-xs text-grey-dark font-light" id="bio">
-        {{ user.bio }}
-      </div>
-    </div>
+    <img src="{{ img_url }}" alt="" class="object-cover object-center w-64 h-64 mx-auto text-gray-400 rounded-full shadow-md md:mx-0">
   </div>
 </div>
