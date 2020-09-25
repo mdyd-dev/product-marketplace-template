@@ -15,6 +15,11 @@
       <a href="/groups" class="mr-5 hover:text-gray-900">{{ 'app.groups.list' | t }}</a>
 
       {% if context.current_user.id %}
+        <a href="/inbox" class="flex mr-5 hover:text-gray-900"  id='inbox-notifications' data-current-user-id="{{ profile.id }}" data-current-user-slug="{{ profile.slug }}">
+          <p>{{ 'app.header.inbox' | t }}</p>
+          <span id="notificationsBell" class="relative inline-flex rounded-full h-3 w-3 bg-pink-500 hidden"></span>
+        </a>
+
         {% assign superadmins = context.constants.superadmins | split: ',' %}
         {% if superadmins contains context.current_user.email %}
           <a href="/admin" class="mr-5 hover:text-gray-900">{{ 'app.admin' | t }}</a>

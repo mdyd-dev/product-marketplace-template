@@ -26,5 +26,12 @@
       endif
     %}
   </div>
+
+
+  {% if current_profile.id != user.id %}
+    <div class="w-full md:w-1/4 px-4 mb-4 md:mb-0">
+      {% render "modules/chat/chat", current_profile: current_profile, user: user %}
+    </div>
+  {% endif %}
 </div>
 

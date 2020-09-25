@@ -107,6 +107,7 @@ en:
       dashboard: Dashboard
       log-out: Log out
       chat: Chat
+      inbox: Inbox
 
     footer:
       description: MVP Marketplace template is modern marketplace to gather your clients together
