@@ -92,8 +92,7 @@ test('Editing item and search', async (t) => {
     .click(dashboard.goProfile)
     const sellerProfilePage = ClientFunction(() => document.location.href)
     await t.expect(sellerProfilePage()).contains(myUrl+'profile/' + newUsername) // checks if href contains slugified username
-    .click(Selector('a').withText("My items"))  // goes on your list from profile view
-    await t.expect(Selector('p').withText('You are now on your list').exists).ok()
+    .click(Selector('a').withText("Items"))  // goes on your list from profile view
     .click(itemSearch.sortButton)
     .click(Selector('option').withText('The Most Recent'))
     .click(itemSearch.searchBtn)
@@ -201,8 +200,7 @@ test('Profile Edit Test', async (t) => {
   .click(profileEdit.saveButton)
   .click(topMenu.dashboardBtn)
   .click(dashboard.goProfile)
-  .expect(Selector('main').find('#user-name').withText('John Lee Hooker').exists).ok()
-  .expect(Selector('main').find('#username').withText(newUsername).exists).ok()
+  await t.expect(Selector('main').find('#user-name').withText("John Lee Hooker").exists).ok()
 })
 
 test('Groups', async (t) => {
