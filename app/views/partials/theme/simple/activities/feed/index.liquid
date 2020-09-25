@@ -1,19 +1,17 @@
-<div class="text-xs p-2">
-  {% print current_user.name %}'s Private Activity Feed
-</div>
+<p>
+  {{ current_user.name }}'s Private Activity Feed
+</p>
 
-<div class="w-full p-3">
+<div class="w-full mt-2">
   {%
-  include 'theme/simple/comments/new_entry', commentable: current_user, commentable_type: 'profile', placeholder: "What's new?", presigned_url: presigned_url
+    include 'theme/simple/comments/new_entry', commentable: current_user, commentable_type: 'profile', placeholder: "What's new?", presigned_url: presigned_url
   %}
-  <div class="grid grid-cols-1 gap-6 my-6">
 
+  <div class="my-6">
     {% for record in list.results %}
       {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_user: current_user %}
     {% else %}
       <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
     {% endfor %}
   </div>
-
 </div>
-
