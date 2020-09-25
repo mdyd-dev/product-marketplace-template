@@ -4,7 +4,16 @@
   <main class="flex-1">
     {% include 'lib/flash/display' %}
 
-    {{ content_for_layout }}
+    {% if context.location.pathname contains '/dashboard' %}
+      <div class="flex flex-row">
+        {% include 'theme/simple/dashboard/sidebar' %}
+        <div class="flex-1 ml-10">
+          {{content_for_layout}}
+        </div>
+      </div>
+    {% else %}
+      {{content_for_layout}}
+    {% endif %}
   </main>
 
   {% include 'theme/simple/layout/footer' %}
