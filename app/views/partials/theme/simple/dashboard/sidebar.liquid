@@ -19,7 +19,8 @@
       <div x-show="open" class="">
         <a class="py-2 px-16 block  text-gray-600 hover:bg-white " href="/dashboard/sell/orders">{{ 'app.your-orders' | t }}</a>
         <a class="py-2 px-16 block  text-gray-600 hover:bg-white " href="/dashboard/sell/items">{{ 'app.your-items' | t }}</a>
-        <a class="py-2 px-16 block  text-gray-600 hover:bg-white " href="/payments/account">{{ 'app.p-dashboard.bank_account' | t }}</a>
+        <a class="py-2 px-16 block  text-gray-600 hover:bg-white " href="/dashboard/items/new">{{ 'app.list-your-item' | t }}</a>
+        <a class="py-2 px-16 block  text-gray-600 hover:bg-white " href="/dashboard/payments/account">{{ 'app.p-dashboard.bank_account' | t }}</a>
       </div>
     </div>
 
@@ -61,8 +62,8 @@
       </button>
 
       <div x-show="open" class="">
-        <a class="py-2 px-16 block  text-gray-600 hover:bg-white " href="/dashboard/feed">{{ 'app.p-dashboard.your-feed' | t }}</a>
-        <a class="py-2 px-16 block  text-gray-600 hover:bg-white " href="/profile/{{profile.slug}}">{{ 'app.p-dashboard.your-profile' | t }}</a>
+        <a class="py-2 px-16 block  text-gray-600 hover:bg-white " href="/dashboard">{{ 'app.p-dashboard.your-feed' | t }}</a>
+        <a class="py-2 px-16 block  text-gray-600 hover:bg-white " target="_blank" href="/profile/{{profile.slug}}">{{ 'app.p-dashboard.your-profile' | t }}</a>
         <a class="py-2 px-16 block  text-gray-600 hover:bg-white " href="/dashboard/profile/edit">{{ 'app.p-dashboard.edit-profile' | t }}</a>
         <a class="py-2 px-16 block  text-gray-600 hover:bg-white " href="/dashboard/groups">{{ 'app.p-dashboard.your-groups' | t }}</a>
       </div>

@@ -8,7 +8,7 @@
   assign group_uuid = object.uuid | default: uuid
 %}
 <div class="container flex flex-wrap groups-center mx-auto">
-  <form action="/dashboard/groups" method="post" class="w-full p-8 bg-gray-200 rounded-lg shadow-md md:w-1/2">
+  <form action="/dashboard/groups" method="post" class="w-full p-8 bg-gray-200 rounded-lg shadow-md md:w-2/3">
     {% include 'authenticity_token' %}
     <input type="hidden" name="_method" value="{{method}}" />
 
