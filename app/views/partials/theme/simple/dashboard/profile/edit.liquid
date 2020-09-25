@@ -1,33 +1,52 @@
 <div class="container flex flex-wrap items-center mx-auto mb-10">
-  <h1 class="text-2xl">{% print 'app.profiles.edit' | t %}</h1>
+  <h1 class="text-2xl">{{ 'app.profiles.edit' | t }}</h1>
 </div>
+
 <div class="sm:flex">
+
+  <div class="flex flex-col w-48 mb-6 text-center">
+    <div>
+      {% liquid
+        assign img_url = object.avatar.photo.versions.small
+        unless img_url
+        assign img_url = 'images/user.svg' | asset_url
+        endunless
+      %}
+      <img src="{{ img_url }}" alt="" class="object-cover object-center w-48 h-48 mx-auto text-gray-400 rounded-full shadow-md md:mx-0">
+    </div>
+    <div class="mt-10">
+      {% render 'theme/simple/photos/uppy_area' %}
+    </div>
+  </div>
+
   <div class="sm:flex-grow sm:pl-16 sm:order-2">
     <form action="/dashboard/profile" method="post">
       {% render 'authenticity_token', context: context %}
       <input type="hidden" name="_method" value="put" />
 
-      <div class="mb-6" id="field-name">
-        <label class="block text-black cursor-pointer mb-2" for="name">{{'app.profiles.username' | t}}</label>
-        <input id="name" name="profile[name]" value="{{ object.name }}" type="text" maxlength="45" aria-invalid="false" aria-describedby="character-counter-userName" class="form-input w-full disabled:opacity-50" data-label="First Name" autocomplete="given-name">
-        {% render 'theme/simple/field_error', errors: object.errors.name %}
-      </div>
+      <div class="w-1/2">
+        <div class="mb-6">
+          <label class="block mb-2 cursor-pointer" for="name">{{ 'app.profiles.username' | t }}</label>
+          <input id="name" name="profile[name]" value="{{ object.name }}" type="text" maxlength="45" class="w-full form-input" autocomplete="given-name">
+          {% render 'theme/simple/field_error', errors: object.errors.name %}
+        </div>
 
-      <div class="mb-6" id="field-firstName">
-        <label class="block text-black cursor-pointer mb-2" for="first-name">{{'app.profiles.first_name' | t}}</label>
-        <input id="first-name" name="profile[first_name]" value="{{ object.first_name }}" type="text" maxlength="45" aria-invalid="false" aria-describedby="character-counter-firstName" class="form-input w-full disabled:opacity-50" data-label="First Name" autocomplete="given-name">
-        {% render 'theme/simple/field_error', errors: object.errors.first_name %}
-      </div>
+        <div class="mb-6">
+          <label class="block mb-2 cursor-pointer" for="first-name">{{ 'app.profiles.first_name' | t }}</label>
+          <input id="first-name" name="profile[first_name]" value="{{ object.first_name }}" type="text" maxlength="45" class="w-full form-input" autocomplete="given-name">
+          {% render 'theme/simple/field_error', errors: object.errors.first_name %}
+        </div>
 
-      <div class="mb-6" id="field-lastName">
-        <label class="block text-black cursor-pointer mb-2" for="last-name">{{'app.profiles.last_name' | t}}</label>
-        <input id="last-name" name="profile[last_name]" value="{{ object.last_name }}" type="text" maxlength="45" aria-invalid="false" aria-describedby="character-counter-lastName" class="form-input w-full disabled:opacity-50" data-label="Last Name" autocomplete="family-name">
-        {% render 'theme/simple/field_error', errors: object.errors.last_name %}
+        <div class="mb-6">
+          <label class="block mb-2 cursor-pointer" for="last-name">{{ 'app.profiles.last_name' | t }}</label>
+          <input id="last-name" name="profile[last_name]" value="{{ object.last_name }}" type="text" maxlength="45" class="w-full form-input"  autocomplete="family-name">
+          {% render 'theme/simple/field_error', errors: object.errors.last_name %}
+        </div>
       </div>
 
       <div class="mb-6" id="field-bio">
-        <label class="block text-black cursor-pointer mb-2" for="bio">{{'app.profiles.bio' | t}}</label>
-        <textarea id="first-name" name="profile[bio]"aria-invalid="false" aria-describedby="character-counter-bio" class="form-input w-full disabled:opacity-50" data-label="Bio" autocomplete="bio">{{ object.bio }}</textarea>
+        <label class="block mb-2 cursor-pointer" for="bio">{{ 'app.profiles.bio' | t }}</label>
+        <textarea id="bio" name="profile[bio]" aria-invalid="false" rows="5" class="w-full form-input" autocomplete="bio">{{ object.bio }}</textarea>
         {% render 'theme/simple/field_error', errors: object.errors.bio %}
       </div>
 
@@ -36,23 +55,6 @@
       </div>
 
     </form>
-  </div>
-  <div class="sm:order-1 sm:flex">
-    <div class="flex flex-col w-full text-center mb-6">
-      <span class="block mb-2 text-black">{{'app.profiles.profile_photo' | t}}</span>
-      <div>
-        {% liquid
-          assign img_url = object.avatar.photo.versions.small
-          unless img_url
-          assign img_url = 'images/user.svg' | asset_url
-          endunless
-        %}
-        <img src="{{ img_url }}" alt="" class="w-64 h-64 mx-auto rounded-full object-cover object-center shadow-md md:mx-0 text-gray-400">
-      </div>
-      <div class="w-64 mt-10">
-        {% render 'theme/simple/photos/uppy_area' %}
-      </div>
-    </div>
   </div>
 </div>
 
