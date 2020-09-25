@@ -15,19 +15,19 @@ import profileEditPage from './pages/profileEdit'
 const item = {
   name: faker.commerce.productName(),
   type: faker.commerce.productMaterial(),
-  description: faker.lorem.sentence(),
+  description: faker.lorem.word(),
   price: '10000',
 }
 
 const editedItem = {
   name: faker.commerce.productName(),
   type: faker.commerce.productMaterial(),
-  description: faker.lorem.sentence(),
+  description: faker.lorem.word(),
   price: '5000',
 }
 
 const newUsername = faker.name.firstName().toLowerCase()
-const loremSentence = (faker.lorem.lines() + " " + faker.lorem.lines() + " " + faker.lorem.lines())
+const loremSentence = (faker.lorem.lines() + " " + faker.lorem.lines())
 const getURL = ClientFunction(() => window.location.href)
 const editURL = '/items/edit?id='
 const notAuthorizedUser = 'Permission denied'
@@ -50,7 +50,6 @@ test.page(myUrl + '/sign-up')(`Register seller`, async (t) => {
   })
 
 
-
 test.page(myUrl + '/sign-up')(`Register buyer`, async (t) => {
     await register('johnsmith@example.com', 'password', 'JohnSmith', 'John', 'Smith')
   })
@@ -62,12 +61,12 @@ test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log i
     .expect(loginForm.emailLabel.textContent).contains('cannot be blank')
     .expect(loginForm.passwordLabel.textContent).contains('cannot be blank')
     .typeText(loginForm.emailInput, 'admin@example.com')
-    .typeText(loginForm.passInput, 'wrongpassword')
+    .typeText(loginForm.passInput, 'asd')
     .click(loginForm.logInBtn)
     .expect(loginForm.emailLabel.textContent).contains('Invalid email or password')
     .click(loginForm.regBtn)
     .typeText(registerForm.emailInput, 'admin@example.com')
-    .typeText(registerForm.passInput, 'wrongpassword')
+    .typeText(registerForm.passInput, 'asd')
     .click(registerForm.submitBtn)
     .expect(registerForm.emailLabel.textContent).contains('already taken')
 })
@@ -162,16 +161,16 @@ test(`Admin Panel test`, async (t) => {
     .click(topMenu.adminBtn)
     .click(adminPage.users)
   const usersTableRow = Selector('tbody').find('tr')
-  await t.expect(usersTableRow.count).gte(3)
+  await t.expect(usersTableRow.count).gte(1)
     .click(adminPage.orders)
   const ordersTableRow = Selector('tbody').find('tr')
   await t.expect(ordersTableRow.count).gte(1)
     .click(adminPage.items)
   const itemsTableRow = Selector('tbody').find('tr')
-  await t.expect(itemsTableRow.count).gt(5)
+  await t.expect(itemsTableRow.count).gt(1)
     .click(adminPage.categories)
   const categoriesTableRow = Selector('tbody').find('tr')
-  await t.expect(categoriesTableRow.count).gt(5)
+  await t.expect(categoriesTableRow.count).gt(1)
     .click(adminPage.activities)
     .click(adminPage.setup)
   })

@@ -19,7 +19,7 @@ export async function register(newEmail, newPassword, newUsername, firstName, la
     .click(registerForm.submitBtn)
     await t
     var getLocation = await getURL()
-    await t.expect(getLocation).contains(myUrl+ 'dashboard/profile/edit');
+    await t.expect(getLocation).contains(myUrl+ 'dashboard/profile/edit')
     await t.typeText(profileFilling.usernameField, newUsername)
     .typeText(profileFilling.firstnameField, firstName)
     .typeText(profileFilling.lastnameField, lastName)
