@@ -1,14 +1,13 @@
 {% for feed in feeds %}
-<div class="container mx-auto border p-4">
-  <div class="text-3xl bg-gray-200">
+<div class="container mx-auto p-4">
+  <div class="text-3xl mb-4">
     {% print feed[0] | t: scope: 'app.home.feeds' %}
   </div>
-
   <div class="flex flex-wrap -mx-4 cards">
     {% for item in feed[1].results %}
       {% include 'theme/simple/home/card', actor: item.payload.actor, target: item.payload.target, object: item.payload.object, type: item.payload.type %}
     {% else %}
-      <h1 class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</h1>
+      <h1 class="container my-8 text-lg text-center text-gray-400">{{ 'app.no_items_found' | t }}</h1>
     {% endfor %}
   </div>
 </div>
