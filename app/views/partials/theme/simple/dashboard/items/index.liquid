@@ -30,8 +30,8 @@
           </td>
           -->
           <td class="px-4 py-2 border-b">
-            <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
-            <form action="/items/delete" method="post" class="ml-2 inline"
+            <a href="/dashboard/items/edit?id={{ item.id }}" class="button">Edit</a>
+            <form action="/dashboard/items/delete" method="post" class="ml-2 inline"
               onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }"
             >
               {% include 'authenticity_token' %}
@@ -47,7 +47,7 @@
 {% else %}
   <p>You don't have any items yet.</p>
   <div class="flex mt-4">
-    <a href="/items/new" class="w-auto flex-0 button">
+    <a href="/dashboard/items/new" class="w-auto flex-0 button">
       {{ 'app.dashboard-items.list-your-first-item' | t }}
     </a>
   </div>

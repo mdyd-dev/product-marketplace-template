@@ -9,7 +9,7 @@
 %}
 
 <div class="container flex flex-wrap items-center mx-auto">
-  <form action="/items/{{ path }}" method="post" class="w-full p-8 bg-gray-200 rounded-lg shadow-md md:w-1/2">
+  <form action="/dashboard/items/{{ path }}" method="post" class="w-full p-8 bg-gray-200 rounded-lg shadow-md md:w-2/3">
     {% include 'authenticity_token' %}
 
     {% if item.id %}

@@ -10,7 +10,7 @@
     </a>
 
     <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto">
-      <a href="/items/new" class="mr-5 hover:text-gray-900">{{ 'app.list-your-item' | t }}</a>
+      <a href="/dashboard/items/new" class="mr-5 hover:text-gray-900">{{ 'app.list-your-item' | t }}</a>
       <a href="/search" class="mr-5 hover:text-gray-900">{{ 'app.items.list' | t }}</a>
       <a href="/groups" class="mr-5 hover:text-gray-900">{{ 'app.groups.list' | t }}</a>
 
@@ -21,7 +21,6 @@
           <a href="/admin" class="mr-5 hover:text-gray-900">{{ 'app.admin' | t }}</a>
         {% endif %}
 
-        {% assign profile = context.session.profile | default: '{}' | parse_json %}
         {{profile.first_name | default: profile.name}}
         <div x-data="{ dropdownOpen: false }" class="relative ml-2">
           <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
