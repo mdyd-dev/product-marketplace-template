@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div class="mb-6" id="field-bio">
+      <div class="mb-6">
         <label class="block mb-2 cursor-pointer" for="bio">{{ 'app.profiles.bio' | t }}</label>
         <textarea id="bio" name="profile[bio]" aria-invalid="false" rows="5" class="w-full form-input" autocomplete="bio">{{ object.bio }}</textarea>
         {% render 'theme/simple/field_error', errors: object.errors.bio %}
