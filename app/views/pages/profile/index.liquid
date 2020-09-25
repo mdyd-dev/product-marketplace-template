@@ -39,3 +39,8 @@ slug: profile
   render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
   render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token
 %}
+
+
+{% content_for custom_scripts %}
+  <script src="{{ 'modules/chat/js/chat.js' | asset_url }}"></script>
+{% endcontent_for %}

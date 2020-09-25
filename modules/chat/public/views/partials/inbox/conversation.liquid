@@ -1,0 +1,34 @@
+<a href="/inbox?active_conversation={{ conversation.id }}">
+  {% if conversation.id == current_conversation.id %}
+    <div class="px-3 flex items-center" style="background-color: #DDECF2">
+  {% else %}
+      <div class="px-3 flex items-center text-gray-400">
+  {% endif %}
+  <div>
+    {% liquid
+      if conversation["from_user"]["id"] == current_user.id
+        assign from_user_id = conversation["to_user"]["id"]
+      else
+        assign from_user_id = conversation["from_user"]["id"]
+      endif
+
+      function from_user = 'lib/data/queries/profiles/find', id: from_user_id
+      assign img_url = from_user.avatar.photo.versions.small
+    %}
+
+    <img src="{{ img_url }}" alt="" class="object-cover object-center w-16 h-16 mx-auto text-gray-400 rounded-full shadow-md md:mx-0">
+  </div>
+  <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
+    <div class="flex items-bottom justify-between">
+      <p class="text-grey-darkest"> {{ from_user.name  }} </p>
+      <p class="text-xs text-grey-darkest">
+        {{ messages.models.results.last["timestamp"] | localize: 'long' }}
+      </p>
+    </div>
+    <p class="text-grey-dark mt-1 text-sm">
+
+      {{ messages.models.results.last["message"]  }}
+    </p>
+  </div>
+      </div>
+</a>

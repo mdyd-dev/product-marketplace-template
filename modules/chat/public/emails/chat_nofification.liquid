@@ -1,0 +1,10 @@
+---
+to: '{{ form.email }}'
+from: 'Chat <info@example.com>'
+reply_to: no-reply@example.com
+subject: 'Chat notification'
+---
+<h1>Hi {{ form.username }}!</h1>
+
+<p> User {{ form.sender }} sent a message in one of your chats </p>
+<p> The message was: {{ form.message }} </p>

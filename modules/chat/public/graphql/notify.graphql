@@ -1,0 +1,9 @@
+mutation notify($data: HashObject) {
+  email_send(
+    template: { name: "modules/chat/chat_nofification" }
+    data: $data
+  ) {
+    errors { message }
+    is_scheduled_to_send
+  }
+}

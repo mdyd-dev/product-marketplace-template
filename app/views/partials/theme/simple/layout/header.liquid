@@ -17,34 +17,36 @@
       <a href="/groups" class="p-3 hover:text-gray-900">{{ 'app.groups.list' | t }}</a>
 
       {% if context.current_user.id %}
-      {% assign superadmins = context.constants.superadmins | split: ',' %}
-      {% if superadmins contains context.current_user.email %}
-      <a href="/admin" class="p-3 hover:text-gray-900">{{ 'app.admin' | t }}</a>
-      {% endif %}
-      <a href="/dashboard" class="p-3 hover:text-gray-900">{{ 'app.header.feed' | t }}</a>
-      <a href="/dashboard/inbox" class="p-3 hover:text-gray-900">{{ 'app.header.chat' | t }}</a>
+        <a href="/inbox" class="flex mr-5 hover:text-gray-900"  id='inbox-notifications' data-current-user-id="{{ profile.id }}" data-current-user-slug="{{ profile.slug }}">
+          <p>{{ 'app.header.inbox' | t }}</p>
+          <span id="notificationsBell" class="relative inline-flex rounded-full h-3 w-3 bg-pink-500 hidden"></span>
+        </a>
 
-      <div x-data="{ dropdownOpen: false }" class="relative">
-        <button @click="dropdownOpen = !dropdownOpen"
-          class="relative z-10 block px-3 py-2 bg-white rounded-md focus:outline-none" data-menu-dropdown>
-          <span class="hover:text-gray-900">{{ profile.first_name | default: profile.name }}</span>
+        {% assign superadmins = context.constants.superadmins | split: ',' %}
+        {% if superadmins contains context.current_user.email %}
+          <a href="/admin" class="p-3 hover:text-gray-900">{{ 'app.admin' | t }}</a>
+        {% endif %}
+        <a href="/dashboard" class="p-3 hover:text-gray-900">{{ 'app.header.feed' | t }}</a>
+        <a href="/dashboard/inbox" class="p-3 hover:text-gray-900">{{ 'app.header.chat' | t }}</a>
 
-          <svg class="inline-block w-5 h-5 text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path d="M10 212c0 36.8 29.8 66.6 66.6 66.6s66.6-29.8 66.6-66.6-29.8-66.6-66.6-66.6C39.8 145.3 10 175.2 10 212zm341.5 58.3h578.8c31.9 0 59.7-26.4 59.7-59.7 0-33.3-27.8-58.3-59.7-58.3H351.5c-31.9 0-59.7 26.4-59.7 59.7 0 33.3 26.4 58.3 59.7 58.3zM10 499.3c0 36.8 29.8 66.6 66.6 66.6s66.6-29.8 66.6-66.6-29.8-66.6-66.6-66.6S10 462.5 10 499.3zM930.3 441H351.5c-31.9 0-59.7 26.4-59.7 59.7 0 33.3 26.4 59.7 59.7 59.7h578.8c31.9 0 59.7-26.4 59.7-59.7 0-33.3-27.8-59.7-59.7-59.7zM10 788c0 36.8 29.8 66.6 66.6 66.6s66.6-29.8 66.6-66.6-29.8-66.6-66.6-66.6S10 751.2 10 788zm920.3-59.7H351.5c-31.9 0-59.7 26.4-59.7 59.7s26.4 59.7 59.7 59.7h578.8c31.9 0 59.7-26.4 59.7-59.7s-27.8-59.7-59.7-59.7z"/></svg>
-        </button>
+        <div x-data="{ dropdownOpen: false }" class="relative">
+          <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block rounded-md bg-white ml-3 p-2 focus:outline-none" data-menu-dropdown>
+            <span class="mr-2 hover:text-gray-900">{{profile.first_name | default: profile.name }}</span>
+            <svg class="h-5 w-5 text-gray-800 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"> <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /> </svg>
+          </button>
+          <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
 
-        <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>
-
-        <div x-show="dropdownOpen" class="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl">
-          <a href="/dashboard" class="block px-4 py-2 text-gray-700 capitalize hover:bg-blue-700 hover:text-white">
-            {{ 'app.header.dashboard' | t }}
-          </a>
-          <form action="/sessions/destroy" method="post">
-            {% include 'authenticity_token' %}
-            <button
-              class="block w-full px-4 py-2 text-left text-gray-700 capitalize hover:bg-blue-700 hover:text-white">
-              {{ 'app.header.log-out' | t }}
-            </button>
-          </form>
+          <div x-show="dropdownOpen" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
+            <a href="/dashboard" class="block px-4 py-2 capitalize text-gray-700 hover:bg-blue-700 hover:text-white">
+              {{ 'app.header.dashboard' | t }}
+            </a>
+            <form action="/sessions/destroy" method="post">
+              {% include 'authenticity_token' %}
+              <button class="block px-4 py-2 capitalize text-gray-700 hover:bg-blue-700 hover:text-white w-full text-left">
+                {{ 'app.header.log-out' | t }}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
       {% else %}

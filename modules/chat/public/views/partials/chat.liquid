@@ -1,0 +1,31 @@
+{% liquid
+  graphql conversation = 'modules/chat/find_conversation', from_id: current_profile.id, to_id: user.id
+  graphql messages = 'modules/chat/find_messages', conversation_id: conversation.models.results.first.id
+
+%}
+
+<div class="flex relative mt-4">
+  <h2>Send a message</h2>
+</div>
+
+<div class="overflow-hidden" id="room" data-room-name="{{ user.id }}" data-sender-id="{{ current_profile.id }}" data-sender-name="{{ current_profile.name }}" data-recipient-id="{{ user.id }}">
+  <div id="messages">
+    {% for m in messages.models.results %}
+        <div class="mb-4 text-sm border-solid bg-gray-100">
+        <div class="flex-1 overflow-hidden">
+          <div>
+            <span class="font-bold">{{ m["from_user"]["name"] }}</span>
+            <span class="text-grey text-xs"> {{ m["timestamp"] | localize: 'long' }}</span>
+          </div>
+          <p class="text-black leading-normal"> {{ m["message"] }} </p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="pb-6 px-4">
+    <div class="flex rounded-lg border-2 border-grey overflow-hidden">
+      <input id="newMessage" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" />
+    </div>
+  </div>
+</div>
