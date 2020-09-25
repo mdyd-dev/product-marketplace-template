@@ -1,0 +1,64 @@
+query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $category: String, $sort: ModelsSortInput = {created_at: {order: DESC}}, $withOrders: Boolean = false) {
+   models(
+    per_page: $limit,
+    filter: {
+      id: {value: $id},
+      model_schema_name: {value: "item"},
+      deleted_at: { exists: false }
+      properties: [
+        { name: "tags", contains: $tag },
+        { name: "category", starts_with: $category }
+      ]
+      or: [
+        { properties: { name: "description", contains: $keyword } }
+        { properties: { name: "name", contains: $keyword } }
+        { properties: { name: "tags", contains: $keyword } }
+        { properties: { name: "category", contains: $keyword } }
+      ]
+    },
+    sort: [$sort])
+  {
+    total_entries
+    results {
+      id
+      created_at
+
+      uuid: property(name: "uuid")
+      name: property(name: "name")
+      category: property(name: "category")
+      description: property(name: "description")
+      price: property_int(name: "price")
+      tags: property_array(name: "tags")
+      cover_photo_url: property(name: "cover_photo_url")
+
+      owner: related_user(join_on_property: "owner", foreign_property: "id") {
+        id
+        email
+      }
+
+      status: related_model(join_on_property: "id", foreign_property: "item_id", model_schema_name: "item_status") {
+        id
+        created_at
+        name: property(name: "name")
+        item_id: property(name: "item_id")
+      }
+
+      orders: related_models(join_on_property: "id", foreign_property: "item_id", model_schema_name: "order") @include(if: $withOrders) {
+        id
+        created_at
+        order_status: related_model(join_on_property: "id", foreign_property: "order_id", model_schema_name: "order_status") {
+          id
+          created_at
+          name: property(name: "name")
+        }
+      }
+
+      photos: related_models(model_schema_name: "item_photo", join_on_property: "uuid", foreign_property: "item_uuid") {
+        photo: property_upload(name: "photo") {
+          url
+          versions
+        }
+      }
+    }
+  }
+}

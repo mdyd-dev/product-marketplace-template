@@ -1,19 +1,25 @@
 {% liquid
   function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
 
-  function models = 'lib/data/queries/models/search', limit: 20
+  graphql r = 'models/search', keyword: context.params.k, limit: 3
 
-  assign feeds = '{}' | parse_json
-  hash_assign feeds['items'] = items
-  hash_assign feeds['comments'] = comments
-  hash_assign feeds['groups'] = groups
-  hash_assign feeds['profiles'] = profiles
-
-
-  function filters = 'lib/data/queries/search/filters', query: context.params
-  comment
-  include 'theme/simple/items/index', items: items, filters: filters, current_user: current_user
-  endcomment
-  include 'theme/simple/home/index', feeds: feeds, current_user: current_user
-  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
+  assign models = r.models
 %}
+
+
+<div class="container mx-auto">
+<div class="flex flex-wrap -mx-4 cards">
+  {% if models.results.size > 0 %}
+  {% for model in models.results %}
+      {% include 'theme/simple/items/card', item: model %}
+      {% include 'theme/simple/users/card', user?: model %}
+      {% include 'theme/simple/groups/card', group: model %}
+      {% include 'theme/simple/comments/card', message?: model %}
+  {% endfor %}
+  {% else %}
+    <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
+  {% endif %}
+  </div>
+</div>
+
+
