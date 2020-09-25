@@ -1,22 +1,22 @@
 {% assign type = payload.type %}
 
-<div class="mx-auto px-4 py-4 bg-white shadow-md rounded-lg w-full">
+<div class="w-full p-6 mb-6 bg-white rounded-lg shadow-md">
   {% render 'theme/simple/activities/feed_unit/header', payload: payload %}
 
   <div class="py-2">
     <p class="leading-snug">
-      <div class="text-xs"> {% print payload.object.description %} </div>
+      <div class="text-xs">{{ payload.object.description }}</div>
       {% print payload.object.body %}
     </p>
   </div>
 
   {% if payload.object.photos.size > 0 %}
     <div class="mt-2">
-      <img class="object-cover w-9 m-auto rounded-lg" src="{% print payload.object.photos.first.url.versions.small %}" alt="{% print payload.object.name %}">
+      <img class="object-cover rounded-lg w-9" src="{{ payload.object.photos.first.url.versions.small }}" alt="{% print payload.object.name %}">
     </div>
   {% elsif payload.target.photos.size > 0 %}
     <div class="mt-2">
-      <img class="object-cover w-9 m-auto rounded-lg" src="{% print payload.target.photos.first.url.versions.small %}" alt="{% print payload.target.name %}">
+      <img class="object-cover rounded-lg w-9" src="{{ payload.target.photos.first.url.versions.small }}" alt="{% print payload.target.name %}">
     </div>
   {% endif %}
 </div>

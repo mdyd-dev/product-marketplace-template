@@ -6,16 +6,16 @@
   assign type = payload.type
 %}
 
-<div class="py-2 flex flex-row items-center justify-between">
+<div class="flex flex-row items-center justify-between py-2">
   <div class="flex flex-row items-center">
-    <a href="#" class="flex flex-row items-center focus:outline-none focus:shadow-outline rounded-lg">
+    <a href="#" class="flex flex-row items-center rounded-lg focus:outline-none focus:shadow-outline">
       {% if photo %}
-        <img class="rounded-full h-8 w-8 object-cover" src="{% print photo %}" alt="">
+        <img class="object-cover w-8 h-8 rounded-full" src="{{ photo }}" alt="{% print name %}">
       {% else %}
         {% render 'theme/simple/activities/feed_unit/default_photo' %}
       {% endif %}
       <p class="ml-2 text-base">
-        <a href="{{url}}">
+        <a href="{{ url }}">
           {% print name %}
         </a>
 
@@ -46,6 +46,6 @@
     </a>
   </div>
   <div class="flex flex-row items-center">
-    <p class="text-xs font-semibold text-gray-500">{% print date %}</p>
+    <p class="text-xs font-semibold text-gray-500">{{ date | strftime: '%F at %H:%M' }}</p>
   </div>
 </div>
