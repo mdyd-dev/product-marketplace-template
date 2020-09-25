@@ -13,6 +13,12 @@ pipeline {
     buildDiscarder(logRotator(daysToKeepStr: '1', artifactDaysToKeepStr: '1'))
   }
 
+  environment {
+    PROJECT_NAME = "${env.BRANCH_NAME}-${env.GIT_COMMIT[0..5]}-${env.BUILD_ID}"
+    GIT_AUTHOR   = commitAuthor()
+    APP_VERSION  = "${env.GIT_COMMIT}"
+  }
+
   stages {
     stage('build PR') {
       agent { docker {image 'node:12-alpine'; args '-u root' } }
@@ -49,7 +55,16 @@ pipeline {
       steps {
         sh 'testcafe "chromium:headless" test --skip-js-errors'
       }
-      post { failure { archiveArtifacts "screenshots/" } }
+      post {
+        failure {
+          archiveArtifacts "screenshots/"
+          script {
+            if (env.BRANCH_NAME != 'master') {
+              alert("platform-pipeline ${env.PROJECT_NAME} ${env.GIT_AUTHOR} Failed after ${buildDuration()}.")
+            }
+          }
+        }
+      }
     }
 
     // MASTER
@@ -88,7 +103,14 @@ pipeline {
       steps {
         sh 'testcafe "chromium:headless" test --skip-js-errors'
       }
-      post { failure { archiveArtifacts "screenshots/" } }
+      post {
+        failure {
+          archiveArtifacts "screenshots/"
+          script {
+            alert("platform-pipeline ${env.PROJECT_NAME} ${env.GIT_AUTHOR} Failed after ${buildDuration()}.")
+          }
+        }
+      }
     }
 
     stage('Deploy LIVE') {
