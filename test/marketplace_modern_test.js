@@ -92,7 +92,7 @@ test('Editing item and search', async (t) => {
     .click(dashboard.goProfile)
     const sellerProfilePage = ClientFunction(() => document.location.href)
     await t.expect(sellerProfilePage()).contains(myUrl+'profile/' + newUsername) // checks if href contains slugified username
-    .click(Selector('a').withText("User's items"))  // goes on your list from profile view
+    .click(Selector('a').withText("My items"))  // goes on your list from profile view
     await t.expect(Selector('p').withText('You are now on your list').exists).ok()
     .click(itemSearch.sortButton)
     .click(Selector('option').withText('The Most Recent'))
