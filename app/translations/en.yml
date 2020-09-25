@@ -55,6 +55,10 @@ en:
 
     total_entries: "Total items:"
     no_items_found: No items found
+    no_following_found: You are not following anyone
+    no_followers_found: Noone is following you
+    no_groups_found: You have no groups
+    no_activities_found: You have no activities yet
 
     list-your-item: List your item
     admin: Admin
