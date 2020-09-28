@@ -4,6 +4,7 @@ def qa_url = "https://getmarketplace-qa.staging.gapps.platformos.com/"
 def live_url = "https://getmarketplace.staging.gapps.platformos.com/"
 def pr_url = "https://getmarketplace-dg.staging.gapps.platformos.com/"
 
+def project_name = 'getmarketplace-template'
 pipeline {
   agent any
 
@@ -60,7 +61,7 @@ pipeline {
           archiveArtifacts "screenshots/"
           script {
             if (env.BRANCH_NAME != 'master') {
-              alert("platform-pipeline ${env.PROJECT_NAME} ${env.GIT_AUTHOR} Failed after ${buildDuration()}.")
+              alert("${project_name} ${env.PROJECT_NAME} ${env.GIT_AUTHOR} Failed after ${buildDuration()}.")
             }
           }
         }
@@ -104,10 +105,17 @@ pipeline {
         sh 'testcafe "chromium:headless" test --skip-js-errors'
       }
       post {
+        success {
+          script {
+            if (currentBuild.getPreviousBuild() && currentBuild.getPreviousBuild().getResult().toString() != "SUCCESS") {
+              notice("${project_name} ${env.PROJECT_NAME} ${env.GIT_AUTHOR} Build is back to normal after ${buildDuration()}.")
+            }
+          }
+        }
         failure {
           archiveArtifacts "screenshots/"
           script {
-            alert("platform-pipeline ${env.PROJECT_NAME} ${env.GIT_AUTHOR} Failed after ${buildDuration()}.")
+            alert("${project_name} ${env.PROJECT_NAME} ${env.GIT_AUTHOR} Failed after ${buildDuration()}.")
           }
         }
       }
