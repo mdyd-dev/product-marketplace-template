@@ -46,13 +46,13 @@ const profileEdit = new profileEditPage()
   fixture`Happy path scenario`.page(myUrl)
 
 test.page(myUrl + '/sign-up')(`Register seller`, async (t) => {
-    await register(newEmail, newPassword, newUsername, 'Tony', 'Montana')
-  })
+  await register(newEmail, newPassword, newUsername, 'Tony', 'Montana', true)
+})
 
 
 test.page(myUrl + '/sign-up')(`Register buyer`, async (t) => {
-    await register('johnsmith@example.com', 'password', 'JohnSmith', 'John', 'Smith')
-  })
+  await register('johnsmith@example.com', 'password', 'JohnSmith', 'John', 'Smith', false)
+})
 
 
 test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log in with wrong data`, async (t) => {
@@ -203,20 +203,21 @@ test('Profile Edit Test', async (t) => {
 })
 
 test('Groups', async (t) => {
+  const groupName = faker.lorem.words();
   await t.useRole(buyerRole)
   .click(topMenu.dashboardBtn)
   .click(dashboard.yourGroups)
   .click(Selector('a').withText('Add group'))
-  .typeText('#name', "Audi fans")
+  .typeText('#name', groupName)
   .typeText('#summary', "fun-club")
   .typeText('#description', loremSentence)
   .click(Selector('button').withText('Submit'))
-  .expect(Selector('a').withText("Audi fans").exists).ok()
+  .expect(Selector('a').withText(groupName).exists).ok()
   //unique test
   .click(topMenu.dashboardBtn)
   .click(dashboard.yourGroups)
   .click(Selector('a').withText('Add group'))
-  .typeText('#name', "Audi fans")
+  .typeText('#name', groupName)
   .typeText('#summary', "fun-club")
   await t.debug()
   .typeText('#description', loremSentence)
