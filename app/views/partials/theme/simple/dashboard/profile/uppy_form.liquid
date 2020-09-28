@@ -1,9 +1,0 @@
-{% comment %}
-  expect presigned_url as presigned_url
-{% endcomment %}
-
-<form action="{{ presigned_url.upload_url }}" data-s3-uppy-profile="form" hidden>
-  {% for field in presigned_url.upload_url_payload %}
-    <input type="hidden" name="{{ field[0] }}" value='{{ field[1] }}'>
-  {% endfor %}
-</form>
