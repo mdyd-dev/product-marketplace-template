@@ -11,19 +11,21 @@ const profileFilling = new profileEditPage()
 export const getURL = ClientFunction(() => window.location.href)
 export const myUrl = process.env.MPKIT_URL
 
-
-export async function register(newEmail, newPassword, newUsername, firstName, lastName) {
-    await t
+export async function register(newEmail, newPassword, newUsername, firstName, lastName, checkProfileValidation = false) {
+  await t
     .typeText(registerForm.emailInput, newEmail)
     .typeText(registerForm.passInput, newPassword)
     .click(registerForm.submitBtn)
+
+  if (checkProfileValidation) {
+    const getLocation = await getURL()
     await t
-    var getLocation = await getURL()
-    await t.expect(getLocation).contains(myUrl+ 'dashboard/profile/edit')
-    await t.typeText(profileFilling.usernameField, newUsername)
-    .typeText(profileFilling.firstnameField, firstName)
-    .typeText(profileFilling.lastnameField, lastName)
-    .click(profileFilling.saveButton);
+      .expect(getLocation).contains(myUrl+ 'dashboard/profile/edit')
+      .typeText(profileFilling.usernameField, newUsername)
+      .typeText(profileFilling.firstnameField, firstName)
+      .typeText(profileFilling.lastnameField, lastName)
+      .click(profileFilling.saveButton);
+  }
 };
 
 export async function createItem(itemName, itemDescription, itemPrice) {
