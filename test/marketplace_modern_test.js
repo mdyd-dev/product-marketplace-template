@@ -29,7 +29,7 @@ const editedItem = {
 const newUsername = faker.name.firstName().toLowerCase()
 const loremSentence = (faker.lorem.lines() + " " + faker.lorem.lines())
 const getURL = ClientFunction(() => window.location.href)
-const editURL = '/items/edit?id='
+const editURL = '/dashboard/items/edit?id='
 const notAuthorizedUser = 'Permission denied'
 //pages
 const adminPage = new AdminPanel()
