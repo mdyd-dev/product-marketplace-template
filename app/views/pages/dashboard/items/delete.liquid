@@ -2,8 +2,7 @@
 method: post
 ---
 {% liquid
-  include 'lib/must_be_authenticated'
-  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
+  function current_user = 'lib/current_profile', user_id: context.current_user.id, required: true
 
   function item = 'lib/data/queries/items/find', id: context.params.id, withOrders: true
   function object = 'lib/commands/items/delete', item: item

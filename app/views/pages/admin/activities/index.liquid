@@ -1,8 +1,6 @@
 {% liquid
-  include 'lib/must_be_authenticated'
+  function current_user = 'lib/current_profile', user_id: context.current_user.id, required: true
   include 'lib/must_be_superadmin'
-
-  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
 
   assign feed = context.params.feed | split: '.'
   assign feed_name = feed[0] | default: 'system'

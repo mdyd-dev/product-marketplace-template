@@ -7,6 +7,13 @@
     break
   endif
 
-  function profile = 'lib/data/queries/profiles/find', user_id: user_id, id: id
+  if membership == null
+    assign membership = false
+  endif
+  if followships == null
+    assign followships = false
+  endif
+
+  function profile = 'lib/data/queries/profiles/find', user_id: user_id, id: id, followships: followships, membership: membership
   return profile
 %}
