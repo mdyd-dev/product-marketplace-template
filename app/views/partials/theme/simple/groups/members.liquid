@@ -1,10 +1,10 @@
-<section class="text-gray-700 body-font">
-  <div class="container md:px-5 md:py-5 mx-auto">
+<section>
+  <div class="container mx-auto md:px-5 md:py-5">
     <div class="flex flex-wrap -mx-4">
       {% for record in list.results %}
         {% render 'theme/simple/profile/user_card', user: record.l, current_user: current_user %}
       {% else %}
-        <p class="container my-8 text-lg mx-4">{{ 'app.no_items_found' | t }}</p>
+        <p class="container mx-4 my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
       {% endfor %}
     </div>
   </div>
