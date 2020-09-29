@@ -1,30 +1,30 @@
 import { t, ClientFunction, Selector } from 'testcafe';
 import NewSessionForm from './pages/newsession'
-import profileEditPage from './pages/profileEdit'
+import ProfileEditForm from './pages/profileEdit'
 import TopMenuBtns from './pages/topmenu'
 import NewItemForm from './pages/newitem'
 
 const newItemForm = new NewItemForm()
 const topMenu = new TopMenuBtns()
 const registerForm = new NewSessionForm()
-const profileFilling = new profileEditPage()
+const profileEditForm = new ProfileEditForm()
 export const getURL = ClientFunction(() => window.location.href)
 export const myUrl = process.env.MPKIT_URL
 
-export async function register(newEmail, newPassword, newUsername, firstName, lastName, checkProfileValidation = false) {
+export async function register(user, options) {
   await t
-    .typeText(registerForm.emailInput, newEmail)
-    .typeText(registerForm.passInput, newPassword)
+    .typeText(registerForm.emailInput, user.email)
+    .typeText(registerForm.passInput, user.password)
     .click(registerForm.submitBtn)
 
-  if (checkProfileValidation) {
+  if (options.required) {
     const getLocation = await getURL()
     await t
       .expect(getLocation).contains(myUrl+ 'dashboard/profile/edit')
-      .typeText(profileFilling.usernameField, newUsername)
-      .typeText(profileFilling.firstnameField, firstName)
-      .typeText(profileFilling.lastnameField, lastName)
-      .click(profileFilling.saveButton);
+      .typeText(profileEditForm.name, user.name)
+      .typeText(profileEditForm.firstName, user.firstName)
+      .typeText(profileEditForm.lastName, user.lastName)
+      .click(profileEditForm.saveButton);
   }
 };
 

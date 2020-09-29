@@ -1,10 +1,10 @@
 import { Selector } from 'testcafe';
 
-export default class profileEditPage {
+export default class ProfileEditForm {
   constructor() {
-    this.usernameField = Selector('#name')
-    this.firstnameField = Selector('#first-name')
-    this.lastnameField = Selector('#last-name')
+    this.name = Selector('#name')
+    this.firstName = Selector('#first-name')
+    this.lastName = Selector('#last-name')
     this.saveButton = Selector('button').withText('Save')
   }
 }
