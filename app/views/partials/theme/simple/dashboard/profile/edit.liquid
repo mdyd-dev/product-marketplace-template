@@ -4,7 +4,7 @@
 
 <div class="sm:flex">
 
-  <div class="flex flex-col w-48 mb-6 text-center">
+  <div class="flex flex-col w-64 mb-6 text-center">
     <div>
       {% liquid
         assign img_url = object.avatar.photo.versions.small
@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class="sm:flex-grow sm:pl-16 sm:order-2">
+  <div class="ml-2 border-l sm:flex-grow sm:pl-8 sm:order-2 border-1">
     <form action="/dashboard/profile" method="post">
       {% render 'authenticity_token', context: context %}
       <input type="hidden" name="_method" value="put" />
