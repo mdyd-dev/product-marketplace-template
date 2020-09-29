@@ -211,6 +211,10 @@ test('Groups', async (t) => {
   await t.useRole(buyerRole)
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourGroups)
+
+  console.log(await getURL())
+
+  await
     .click(Selector('main').find('a').withText('Add group'))
     .typeText('#name', groupName)
     .typeText('#summary', "fun-club")
