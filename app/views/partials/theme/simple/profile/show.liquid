@@ -1,12 +1,12 @@
 <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
   <div class="w-full md:w-1/4 px-4 mb-4 md:mb-0">
     {% liquid
-      render 'theme/simple/profile/card', user: user, current_user: current_user
+      render 'theme/simple/profile/card', user: user, current_profile: current_profile
 
-      if user != blank and user.id == current_user.id
+      if user != blank and user.id == current_profile.id
         render 'theme/simple/profile/owner_actions', user: user
-      elsif current_user != blank
-        render 'theme/simple/follow_button', current_user: current_user, user: user, big: true
+      elsif current_profile != blank
+        render 'theme/simple/follow_button', current_profile: current_profile, user: user, big: true
       endif
     %}
   </div>
@@ -15,13 +15,13 @@
       render 'theme/simple/profile/nav', tab: section, user: user
 
       if section == 'activity'
-        render 'theme/simple/profile/sections/activity', list: list, current_user: current_user
+        render 'theme/simple/profile/sections/activity', list: list, current_profile: current_profile
       elsif section == 'groups'
-        render 'theme/simple/profile/sections/groups', list: list, current_user: current_user
+        render 'theme/simple/profile/sections/groups', list: list, current_profile: current_profile
       elsif section == 'following'
-        render 'theme/simple/profile/sections/following', list: list, current_user: current_user
+        render 'theme/simple/profile/sections/following', list: list, current_profile: current_profile
       elsif section == 'followers'
-        render 'theme/simple/profile/sections/followers', list: list, current_user: current_user
+        render 'theme/simple/profile/sections/followers', list: list, current_profile: current_profile
       endif
     %}
   </div>

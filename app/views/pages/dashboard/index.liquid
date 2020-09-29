@@ -4,14 +4,14 @@ metadata:
     - label: app.feed.title
 ---
 {% liquid
-  function current_user = 'lib/current_profile', user_id: context.current_user.id, required: true
-  include 'lib/validate_profile_completeness', profile: current_user
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  include 'lib/validate_profile_completeness', profile: current_profile
 
-  function list = 'lib/data/queries/activities/search', feed: 'user-private', feed_id: current_user.id, limit: 100
+  function list = 'lib/data/queries/activities/search', feed: 'user-private', feed_id: current_profile.id, limit: 100
 
   graphql presigned_url = 'photos/presign' | dig: 'presigned'
   include 'theme/simple/dashboard/breadcrumbs', name: 'feed'
-  include 'theme/simple/activities/feed/index', list: list, current_user: current_user, presigned_url: presigned_url
+  include 'theme/simple/activities/feed/index', list: list, current_profile: current_profile, presigned_url: presigned_url
   render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
 %}
 

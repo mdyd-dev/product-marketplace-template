@@ -1,5 +1,5 @@
 {% assign group_id = group.id | append: '' %}
-{% assign ids = current_user.joined_group_ids | map: 'id' %}
+{% assign ids = current_profile.joined_group_ids | map: 'id' %}
 
 {% liquid
   if ids contains group_id

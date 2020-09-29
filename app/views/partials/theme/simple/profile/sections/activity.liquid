@@ -1,12 +1,12 @@
 {% liquid
-  if user != blank and user.id == current_user.id
+  if user != blank and user.id == current_profile.id
     include 'theme/simple/profile/activity_new', user: user
   endif
 %}
 
 <section>
   {% for record in list.results %}
-    {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_user: current_user %}
+    {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_profile: current_profile %}
   {% else %}
     <p class="container my-8 text-lg">{{ 'app.no_activities_found' | t }}</p>
   {% endfor %}

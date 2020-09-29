@@ -7,7 +7,7 @@
 
     if object.valid
       assign now = 'now' | to_time
-      function relation = 'lib/commands/relationships/create', name: 'ownership', l_id: current_user.id, r_id: object.id, l_at: now, r_at: now
+      function relation = 'lib/commands/relationships/create', name: 'ownership', l_id: current_profile.id, r_id: object.id, l_at: now, r_at: now
     endif
   endif
 

@@ -2,7 +2,7 @@
   <div class="container mx-auto md:px-5 md:py-5">
     <div class="flex flex-wrap -mx-4">
       {% for record in list.results %}
-        {% render 'theme/simple/profile/user_card', user: record.l, current_user: current_user %}
+        {% render 'theme/simple/profile/user_card', user: record.l, current_profile: current_profile %}
       {% else %}
         <p class="container mx-4 my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
       {% endfor %}
