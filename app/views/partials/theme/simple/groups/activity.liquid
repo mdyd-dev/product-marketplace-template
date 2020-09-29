@@ -1,13 +1,13 @@
 {% liquid
-  if current_user.id
+  if current_profile.id
     include 'theme/simple/comments/new_entry', commentable: group, commentable_type: 'group', placeholder: "What's new?"
   endif
 %}
 
 <section class="my-5">
-  {% for record in list.results %}
-    {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_user: current_user %}
-  {% else %}
-    <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
-  {% endfor %}
+    {% for record in list.results %}
+      {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_profile: current_profile %}
+    {% else %}
+      <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
+    {% endfor %}
 </section>

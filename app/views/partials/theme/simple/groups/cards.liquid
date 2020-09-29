@@ -5,7 +5,7 @@
   <section>
     <div class="container flex flex-wrap">
       {% for record in list.results %}
-        {% render 'theme/simple/groups/card', group: record, current_user: current_user %}
+        {% render 'theme/simple/groups/card', group: record, current_profile: current_profile %}
       {% else %}
         <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
       {% endfor %}
