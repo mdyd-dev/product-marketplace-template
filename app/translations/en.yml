@@ -31,6 +31,12 @@ en:
         description: Listings counter
         delta: Since yesterday
   app:
+    quick_search:
+      type:
+        profile: Profile
+        group: Group
+        comment: Post
+        item: Item
     home:
       feeds:
         comments: People posting

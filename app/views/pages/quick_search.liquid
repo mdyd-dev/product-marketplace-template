@@ -1,7 +1,7 @@
 {% liquid
   function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
 
-  graphql r = 'models/search', keyword: context.params.k, limit: 1
+  graphql r = 'models/search', keyword: context.params.k, limit: 3
 
   assign models = r.models
 %}
@@ -11,10 +11,7 @@
 <div class="flex flex-wrap -mx-4 cards">
   {% if models.results.size > 0 %}
   {% for model in models.results %}
-      {% include 'theme/simple/items/card', item: model %}
-      {% include 'theme/simple/users/card', item: model %}
-      {% include 'theme/simple/groups/card', group: model %}
-      {% include 'theme/simple/comments/card', message: model %}
+      {% include 'theme/simple/quick_search/card', model: model %}
   {% endfor %}
   {% else %}
     <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>

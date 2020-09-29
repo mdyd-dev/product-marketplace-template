@@ -1,9 +1,5 @@
 {% liquid
   graphql r = 'models/search', keyword: keyword
 
-  log keyword
-  log query
-  log r
-
   return_rc r.models
 %}
