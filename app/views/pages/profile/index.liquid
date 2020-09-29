@@ -2,7 +2,7 @@
 slug: profile
 ---
 {% liquid
-  function current_user = 'lib/current_profile', user_id: context.current_user.id, followship: true
+  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id, followships: true
 
   assign template = "/profile/{slug}"
   assign query = context.location.pathname | extract_url_params: template
@@ -35,7 +35,7 @@ slug: profile
     function list = 'lib/data/queries/items/search', query: context.params, limit: 20, owner: user.id
   endif
 
-  render 'theme/simple/profile/show', section: section, user: profile, list: list, current_user: current_user
+  render 'theme/simple/profile/show', section: section, user: profile, list: list, current_profile: current_profile
   render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
   render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token
 %}

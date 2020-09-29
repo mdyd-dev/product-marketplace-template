@@ -1,6 +1,6 @@
-{% if user.id != current_user.id %}
+{% if user.id != current_profile.id %}
   {% assign user_id = user.id | append: '' %}
-  {% assign ids = current_user.followed_ids | map: 'id' %}
+  {% assign ids = current_profile.followed_ids | map: 'id' %}
 
   {% liquid
     if ids contains user_id
