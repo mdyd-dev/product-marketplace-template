@@ -195,7 +195,6 @@ test('Groups', async (t) => { // ISN'T FLAKY??
     .typeText('#summary', "fun-club")
     .typeText('#description', loremSentence, { paste: true })
     .click(Selector('button').withText('Submit'))
-    .expect(Selector('a').withText(groupName).exists).ok()
   //unique test
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourGroups)
@@ -205,6 +204,10 @@ test('Groups', async (t) => { // ISN'T FLAKY??
     .typeText('#description', loremSentence, { paste: true })
     .click(Selector('button').withText('Submit'))
     .expect(Selector('div').textContent).contains('already taken')
+  //checks if group exists
+    .click(dashboard.yourGroups)
+    .expect(Selector('a').withText(groupName).exists).ok()
+
 })
 
  test('Activity', async (t) => {
