@@ -3,8 +3,7 @@ slug: dashboard/groups
 method: post
 ---
 {% liquid
-  include 'lib/must_be_authenticated'
-  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
+  function current_user = 'lib/current_profile', user_id: context.current_user.id, required: true
 
   function object = 'lib/commands/groups/create', object: context.params.group, owner_id: current_user.id
   if object.valid
