@@ -1,5 +1,4 @@
----
-name: relationship 
+name: relationship
 properties:
   - name: name
   - name: l_id

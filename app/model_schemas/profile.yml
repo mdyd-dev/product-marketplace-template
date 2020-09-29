@@ -1,4 +1,3 @@
----
 name: profile
 properties:
   - name: uuid
