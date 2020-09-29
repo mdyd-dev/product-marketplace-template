@@ -1,0 +1,43 @@
+query search($id: ID, $limit: Int = 20, $potential_buyer: String, $seller: String, $item_id: String, $name: String) {
+  wishlist: models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      model_schema_name: { value: "wishitem" }
+      properties: [
+        { name: "potential_buyer" value: $potential_buyer }
+        { name: "seller" value: $seller }
+        { name: "item_id" value: $item_id }
+        { name: "name" value: $name }
+      ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+      created_at
+
+      total: property(name: "total")
+
+      potential_buyer: related_user(join_on_property: "potential_buyer", foreign_property: "id") {
+        id
+        email
+      }
+
+      seller: related_user(join_on_property: "seller", foreign_property: "id") {
+        id
+        email
+      }
+
+      item: related_model(join_on_property: "item_id", foreign_property: "id", model_schema_name: "item") {
+        id
+        created_at
+        name: property(name: "name")
+        price: property(name: "price")        
+      }
+    }
+  }
+}

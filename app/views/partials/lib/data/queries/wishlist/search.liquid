@@ -1,0 +1,5 @@
+{% liquid
+    graphql r = 'wishlist/search', limit: limit, page: 1, potential_buyer: potential_buyer, seller: seller, item_id: item_id
+  
+    return_rc r.wishlist
+  %}

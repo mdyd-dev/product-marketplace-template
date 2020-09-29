@@ -1,0 +1,11 @@
+---
+name: wishitem
+properties:
+  - name: item_id
+    type: string  
+  - name: potential_buyer
+    type: string  
+  - name: seller
+    type: string
+  - name: total
+    type: integer  

@@ -1,0 +1,26 @@
+---
+method: post
+---
+
+{% liquid
+    function_rc item = 'lib/data/queries/items/find', id: context.params.item_id
+    function_rc wishlist = 'lib/data/queries/wishlist/search', limit: 100, potential_buyer: context.current_user.id
+
+    function_rc object = 'lib/commands/wishlist/create/build', item: item, current_user_id: context.current_user.id
+    function_rc object = 'lib/commands/wishlist/create/check', object: object, wishlist: wishlist
+  
+    if object.valid
+      function_rc object = 'lib/commands/wishlist/create/execute', object: object
+  
+      if object.valid
+        include 'lib/commands/events/create', type: 'wishitem_created', actor_id: object.potential_buyer.id, target_id: object.seller.id, object_id: object.id
+                  
+        include 'redirect_to', url: '/dashboard/wishlist', notice: 'app.wishlist.item_created'
+      else        
+        include 'redirect_to', url: '/dashboard/wishlist', error: 'app.wishlist.item_failed_adding'
+      endif  
+    else
+      assign error = object.errors.base[0]
+      include  'redirect_to', url: '/dashboard/wishlist', error: error
+    endif
+  %}

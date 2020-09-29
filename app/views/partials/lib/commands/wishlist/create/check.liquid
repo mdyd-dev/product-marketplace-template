@@ -1,0 +1,35 @@
+{% assign MINIMAL_TOTAL = 10 %}
+
+{% liquid
+    assign c = '{ "errors": {}, "valid": true }' | parse_json
+    assign alreadyinWishlist =  wishlist.results | map: 'item' | map: 'id' | is_included_in_array: object.item_id
+  
+    if object.seller == object.potential_buyer
+      include 'lib/register_error', contract: c, field_name: 'base', key: 'app.errors.cannot_add_your_items_to_wishlist'
+    endif
+  
+    if alreadyinWishlist
+      include 'lib/register_error', contract: c, field_name: 'base', key: 'app.errors.item_already_in_wishlist'
+    endif
+
+    if object.seller == blank
+      include 'lib/register_error', contract: c, field_name: 'seller', key: 'app.errors.blank'
+    endif
+  
+    if object.potential_buyer == blank
+      include 'lib/register_error', contract: c, field_name: 'buyer', key: 'app.errors.blank'
+    endif
+  
+    if object.item_id == blank
+      include 'lib/register_error', contract: c, field_name: 'item_id', key: 'app.errors.blank'
+    endif
+  
+    if object.total < MINIMAL_TOTAL
+      include 'lib/register_error', contract: c, field_name: 'total', key: 'app.errors.too_little'
+    endif
+  
+    hash_assign object['valid'] = c.valid
+    hash_assign object['errors'] = c.errors
+  
+    return_rc object
+  %}

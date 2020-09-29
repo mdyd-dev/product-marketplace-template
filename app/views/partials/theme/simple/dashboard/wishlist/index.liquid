@@ -1,0 +1,50 @@
+{% if wishlist.total_entries > 0 %}
+  <table class="table w-full table-auto">
+    <thead>
+      <tr>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.item" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.seller" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left"></th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.potential_buyer" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.total" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.dashboard-items.actions" | t }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wishitem in wishlist.results %}
+        <tr>          
+          <td class="px-4 py-2 text-left border-b">
+            {% function_rc item_url = 'link_to', item: wishitem.item %}
+            <a href="{{ item_url }}">
+              {{ wishitem.item.name }}
+            </a>
+          </td>
+          <td class="px-4 py-2 text-left border-b">{{ wishitem.seller.email | split: '@' | first }}</td>
+          <td class="py-1 text-center border-b">=></td>
+          <td class="px-4 py-2 text-left border-b">{{ wishitem.potential_buyer.email | split: '@' | first }}</td>
+          <td class="px-4 py-2 text-left border-b">{{ wishitem.total | pricify_cents }}</td>
+          <td class="px-4 py-2 text-left border-b">
+            <form action="/orders/new" method="get" class="ml-2 inline ">
+              <input type="hidden" name="item_id" value="{{ wishitem.item.id }}">
+              <button id="buybutton" class="button">
+                Buy for {{ wishitem.item.price | pricify_cents }}
+              </button>
+            </form>
+            <form action="/wishitems/delete" method="post" class="ml-2 inline"
+              onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }"
+            >
+              {% include 'authenticity_token' %}
+              <input type="hidden" name="id" value="{{ wishitem.id }}">
+
+              <button id="deletebutton" class="button button-secondary">{{ 'app.delete' | t }}</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p class="w-full text-lg">
+    You currently don't have items in your wishlist.
+  </p>
+{% endif %}

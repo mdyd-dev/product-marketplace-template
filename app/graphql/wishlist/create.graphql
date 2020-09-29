@@ -1,0 +1,33 @@
+mutation create($item_id: String!, $potential_buyer: String!, $seller: String!, $total: Int! ) {
+  model_create(
+    model: {
+      model_schema_name: "wishitem"
+      properties: [
+        { name: "item_id" value: $item_id }
+        { name: "potential_buyer" value: $potential_buyer }
+        { name: "seller" value: $seller }
+        { name: "total" value_int: $total }
+      ]
+    }
+  ){
+    id
+    total: property(name: "total")
+
+    potential_buyer: related_user(join_on_property: "potential_buyer", foreign_property: "id") {
+      id
+      email
+    }
+
+    seller: related_user(join_on_property: "seller", foreign_property: "id") {
+      id
+      email
+    }
+
+    item: related_model(join_on_property: "item_id", foreign_property: "id", model_schema_name: "item") {
+      id
+      created_at
+      name: property(name: "name")
+      price: property(name: "price")
+    }
+  }
+}
