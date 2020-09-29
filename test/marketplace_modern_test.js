@@ -139,7 +139,6 @@ test('Creating new item for sell', async (t) => {
   await createItem(item.name, item.description, item.price)
 })
 
-TODO timeout
 test('Buying an item and following the seller', async (t) => {
   await t
     .useRole(buyerRole)
