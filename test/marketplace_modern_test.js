@@ -153,7 +153,6 @@ test('Buying an item and following the seller', async (t) => {
     .click(itemShow.buyBtn)
     .click(Selector('button').withText('Checkout'))
     .click(Selector('button').withText('Pay'))
-
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourBuyingOrders) // buyer's order check
     .click(Selector('a').withText(item.name))
