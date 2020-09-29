@@ -10,7 +10,7 @@ import TopMenuBtns from './pages/topmenu'
 import ItemSearch from './pages/itemsearch'
 import { newEmail, newPassword } from './roles'
 
-const myUrl = 'https://damcikinstance.staging.oregon.platform-os.com/'
+const myUrl = process.env.MPKIT_URL
 
 fixture`Happy scenario`.page(myUrl + 'sessions/new')
 
