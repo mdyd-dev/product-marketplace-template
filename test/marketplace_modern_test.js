@@ -214,7 +214,7 @@ test('Groups', async (t) => {
 
   console.log(await getURL())
 
-  await
+  await t
     .click(Selector('main').find('a').withText('Add group'))
     .typeText('#name', groupName)
     .typeText('#summary', "fun-club")
