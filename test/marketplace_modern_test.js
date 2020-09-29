@@ -139,36 +139,35 @@ test('Creating new item for sell', async (t) => {
   await createItem(item.name, item.description, item.price)
 })
 
-// TODO timeout
-// test('Buying an item and following the seller', async (t) => {
-//   await t
-//     .useRole(buyerRole)
-//     .click(topMenu.itemsBtn)
-//     .typeText(itemSearch.keyword, item.name)
-//     .click(itemSearch.searchBtn)
-//     .expect(itemSearch.itemLink.exists).ok()
-//     .click(itemSearch.itemLink)
-//     .click(itemShow.followButton)
-//     .expect(itemShow.alreadyFollowedButton.exists).ok()
-//     .click(itemShow.buyBtn)
-//     .click(Selector('button').withText('Checkout'))
-//     .click(Selector('button').withText('Pay'))
-//     .click(topMenu.dashboardBtn)
-//     .click(dashboard.yourBuyingOrders) // buyer's order check
-//     .click(Selector('a').withText(item.name))
-//     .expect(Selector('div').withText('Ordered').exists).ok()
+TODO timeout
+test('Buying an item and following the seller', async (t) => {
+  await t
+    .useRole(buyerRole)
+    .click(topMenu.itemsBtn)
+    .typeText(itemSearch.keyword, item.name)
+    .click(itemSearch.searchBtn)
+    .expect(itemSearch.itemLink.exists).ok()
+    .click(itemSearch.itemLink)
+    .click(itemShow.followButton)
+    .expect(itemShow.alreadyFollowedButton.exists).ok()
+    .click(itemShow.buyBtn)
+    .click(Selector('button').withText('Checkout'))
+    .click(Selector('button').withText('Pay'))
+    .click(topMenu.dashboardBtn)
+    .click(dashboard.yourBuyingOrders) // buyer's order check
+    .click(Selector('a').withText(item.name))
+    .expect(Selector('div').withText('Ordered').exists).ok()
+    .click(topMenu.dashboardBtn)
+    .click(dashboard.goProfile)
+    .click(Selector('a').withText('Following'))
+    .expect(Selector('h2').find('a').withText(SellerRandomUser.name).exists).ok("Followed list not shown")
 
-    // .click(topMenu.dashboardBtn)
-    // .click(dashboard.goProfile)
-    // .click(Selector('a').withText('Following'))
-    // .expect(Selector('h2').find('a').withText(SellerRandomUser.name).exists).ok("Followed list not shown")
-
-//   await t
-//     .useRole(sellerRole) // seller checks if his order shown as paid
-//     .click(topMenu.dashboardBtn)
-//     .click(dashboard.yourSellingOrders)  // seller's order check
-//     .expect(Selector('a').withText(item.name).exists).ok("Item list not shown in seller orders")
-// })
+  // await t
+  //   .useRole(sellerRole) // seller checks if his order shown as paid
+  //   .click(topMenu.dashboardBtn)
+  //   .click(dashboard.yourSellingOrders)  // seller's order check
+  //   .expect(Selector('a').withText(item.name).exists).ok("Item list not shown in seller orders")
+})
 
 
 test(`Admin Panel test`, async (t) => {
@@ -198,7 +197,7 @@ test('Breakin-in test, edition by none user', async (t) => {
     .typeText(itemSearch.keyword, 'Watch')
     .click(itemSearch.searchBtn)
     .click(Selector('a').withText('Watch'))
-  await t
+
   var itemEditUrl = await getURL()
   var itemEditUrl = itemEditUrl.split('-')
   var editItemId = itemEditUrl[itemEditUrl.length - 1]
@@ -211,8 +210,6 @@ test('Groups', async (t) => {
   await t.useRole(buyerRole)
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourGroups)
-
-  console.log(await getURL())
 
   await t
     .click(Selector('main').find('a').withText('Add group'))
