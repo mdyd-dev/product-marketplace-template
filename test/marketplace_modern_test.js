@@ -1,8 +1,7 @@
 import { Selector, ClientFunction } from 'testcafe'
-import { buyerRole, sellerRole, adminRole, Admin, SellerRandomUser, John } from './roles'
-import { register, myUrl, createItem } from './helper'
-import faker from 'faker'
-
+import { buyerRole, sellerRole, adminRole } from './roles'
+import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL, loremSentence, notAuthorizedUser, groupName } from './fixtures'
+import { register, createItem } from './helper'
 import NewSessionForm from './pages/newsession'
 import NewItemForm from './pages/newitem'
 import ItemShowPage from './pages/itemshow'
@@ -13,24 +12,6 @@ import TopMenuBtns from './pages/topmenu'
 import DashboardPage from './pages/dashboard'
 import ProfileEditForm from './pages/profileEdit'
 
-const item = {
-  name: faker.commerce.productName(),
-  type: faker.commerce.productMaterial(),
-  description: faker.lorem.word(),
-  price: '10000',
-}
-
-const editedItem = {
-  name: faker.commerce.productName(),
-  type: faker.commerce.productMaterial(),
-  description: faker.lorem.word(),
-  price: '5000',
-}
-
-const loremSentence = (faker.lorem.lines() + " " + faker.lorem.lines())
-const getURL = ClientFunction(() => window.location.href)
-const editURL = '/dashboard/items/edit?id='
-const notAuthorizedUser = 'Permission denied'
 //pages
 const adminPage = new AdminPanel()
 const registerForm = new NewSessionForm()
@@ -46,11 +27,11 @@ const profileEditForm = new ProfileEditForm()
 fixture`Happy path scenario`.page(myUrl)
 
 test.page(myUrl + '/sign-up')(`Register seller`, async (t) => {
-  await register(SellerRandomUser, { required: true })
+  await register(SellerRandomUser)
 })
 
 test.page(myUrl + '/sign-up')(`Register buyer John`, async (t) => {
-  await register(John, { required: false })
+  await register(John)
 })
 
 test('Edit John Profile Page', async (t) => {
@@ -133,14 +114,12 @@ test('Deleting item', async (t) => {
     .click(editPage.deleteBtn)
 })
 
-
 test('Creating new item for sell', async (t) => {
-  await t.debug()
   await t.useRole(sellerRole)
   await createItem(item.name, item.description, item.price)
 })
 
-test('Buying an item and following the seller', async (t) => { // this
+test('Buying an item and following the seller', async (t) => {
   await t
     .useRole(buyerRole)
     .click(topMenu.itemsBtn)
@@ -170,7 +149,7 @@ test('Buying an item and following the seller', async (t) => { // this
  })
 
 
- test(`Admin Panel test`, async (t) => {  // this
+ test(`Admin Panel test`, async (t) => {
    await t
      .useRole(adminRole)
      .click(topMenu.adminBtn)
@@ -205,8 +184,7 @@ test('Breakin-in test, edition by none user', async (t) => {
   await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok('message ' + notAuthorizedUser + " doesn't exists")
 })
 
-test('Groups', async (t) => {
-  const groupName = faker.lorem.words();
+test('Groups', async (t) => { // ISN'T FLAKY??
   await t.useRole(buyerRole)
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourGroups)
@@ -215,7 +193,7 @@ test('Groups', async (t) => {
     .click(Selector('main').find('a').withText('Add group'))
     .typeText('#name', groupName)
     .typeText('#summary', "fun-club")
-    .typeText('#description', loremSentence)
+    .typeText('#description', loremSentence, { paste: true })
     .click(Selector('button').withText('Submit'))
     .expect(Selector('a').withText(groupName).exists).ok()
   //unique test
@@ -224,13 +202,12 @@ test('Groups', async (t) => {
     .click(Selector('a').withText('Add group'))
     .typeText('#name', groupName)
     .typeText('#summary', "fun-club")
-    .typeText('#description', loremSentence)
+    .typeText('#description', loremSentence, { paste: true })
     .click(Selector('button').withText('Submit'))
     .expect(Selector('div').textContent).contains('already taken')
 })
 
- //TODO timeout
- test('Activity', async (t) => {  // this
+ test('Activity', async (t) => {
    const commentText = "What's new bro?"
    await t.useRole(buyerRole)
      .click(topMenu.dashboardBtn)
