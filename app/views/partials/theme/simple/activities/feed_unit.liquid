@@ -1,11 +1,11 @@
 {% assign type = payload.type %}
 
-<div class="w-full p-6 mb-6 bg-white rounded-lg shadow-md">
+<div class="w-full px-8 py-6 mb-6 bg-white rounded-lg shadow-md">
   {% render 'theme/simple/activities/feed_unit/header', payload: payload %}
 
   <div class="py-2">
     <p class="leading-snug">
-      <p class="">{{ payload.object.description }}</p>
+      <p>{{ payload.object.description }}</p>
       {% print payload.object.body %}
     </p>
   </div>

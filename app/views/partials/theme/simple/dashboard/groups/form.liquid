@@ -7,8 +7,8 @@
   assign uuid = '' | uuid
   assign group_uuid = object.uuid | default: uuid
 %}
-<div class="container flex flex-wrap groups-center mx-auto">
-  <form action="/dashboard/groups" method="post" class="w-full p-8 bg-gray-200 rounded-lg shadow-md md:w-2/3">
+<div class="container flex flex-wrap mx-auto groups-center">
+  <form action="/dashboard/groups" method="post" class="w-full md:w-2/3">
     {% include 'authenticity_token' %}
     <input type="hidden" name="_method" value="{{method}}" />
 
@@ -17,26 +17,26 @@
     {% endif %}
     <input type="hidden" name="group[uuid]" value="{{ group_uuid }}" />
 
-    <div class="my-3">
+    <div class="mt-5">
       <label class="block" for="name">Name</label>
       <input class="w-2/3 form-input" type="text" id="name" name="group[name]" value="{{ object.name }}" autofocus required />
       {% include 'theme/simple/field_error', errors: object.errors.name %}
     </div>
 
-    <div class="my-3">
+    <div class="mt-5">
       <label class="block" for="summary">Summary (displayed on list)</label>
-      <input class="w-2/3 form-input" type="text" id="summary" name="group[summary]" value="{{ object.summary }}" autofocus required />
+      <textarea class="w-2/3 form-input" id="summary" name="group[summary]" rows="3" required>{{ object.summary }}</textarea>
       {% include 'theme/simple/field_error', errors: object.errors.summary %}
     </div>
 
-    <div class="mt-3">
+    <div class="mt-5">
       <label class="block">Main Photo</label>
       {% include 'theme/simple/photos/uppy_area' %}
     </div>
 
-    <div class="mt-3">
+    <div class="mt-5">
       <label class="block" for="description">Description</label>
-      <textarea class="w-full form-input" type="text" id="description" name="group[description]" rows="3" required>{{ object.description }}</textarea>
+      <textarea class="w-full form-input" id="description" name="group[description]" rows="3" required>{{ object.description }}</textarea>
 
       {% include 'theme/simple/field_error', errors: object.errors.description %}
     </div>

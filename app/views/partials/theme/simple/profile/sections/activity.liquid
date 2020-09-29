@@ -4,7 +4,7 @@
   endif
 %}
 
-<section>
+<section class="my-5">
   {% for record in list.results %}
     {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_user: current_user %}
   {% else %}
