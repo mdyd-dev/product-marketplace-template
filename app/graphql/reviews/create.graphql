@@ -1,0 +1,16 @@
+mutation create_review($item_id: String!, $owner: String!, $rating: String, $comment: String, $item_uuid: String) {
+  model_create(
+    model: {
+      model_schema_name: "review"
+      properties: [
+        { name: "item_id" value: $item_id }
+        { name: "owner" value: $owner }
+        { name: "rating" value: $rating }
+        { name: "comment" value: $comment }
+        { name: "item_uuid" value: $item_uuid }
+      ]
+    }
+  ){
+    id properties
+  }
+}

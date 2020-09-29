@@ -1,0 +1,13 @@
+{% parse_json object %}
+  {
+  	"item_id":     {{ object.id | json }},
+    "owner":       {{ object.owner | json }},
+    "rating":      {{ object.rating | json }},
+    "comment":     {{ object.comment | json }},
+    "item_uuid":   {{ object.uuid | json }}
+  }
+{% endparse_json %}
+
+{% liquid
+  export object
+%}
