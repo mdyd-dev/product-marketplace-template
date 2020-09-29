@@ -99,7 +99,7 @@ See our [Get Started documentation for Setting Up Stripe Connect](https://docume
 ## platformOS project
 
 - We assume you have basic understanding of platformOS
-- Otherwise we recommend https://documentation.platformos.com first
+- Otherwise we recommend starting with our [Get Started: pOS Marketplace Template](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template) tutorial
 
 ## General rules
 
