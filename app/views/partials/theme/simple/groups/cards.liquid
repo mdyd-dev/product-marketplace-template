@@ -1,8 +1,8 @@
-<h1 class="title-font text-2xl font-medium mb-3">
+<h1 class="mb-3 text-2xl font-medium">
   {{ 'app.groups.list' | t }}
 </h1>
 <div class="flex flex-wrap w-full">
-  <section class="text-gray-700 body-font">
+  <section>
     <div class="container flex flex-wrap">
       {% for record in list.results %}
         {% render 'theme/simple/groups/card', group: record, current_user: current_user %}

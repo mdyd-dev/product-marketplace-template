@@ -1,14 +1,14 @@
 <div class="p-2 md:w-1/2">
-  <div class="h-full border-2 border-gray-200 rounded-lg overflow-hidden pt-5 bg-white">
+  <div class="h-full pt-5 overflow-hidden bg-white border-2 border-gray-200 rounded-lg">
     {% liquid
       assign img_url = user.avatar.photo.versions.small
       unless img_url
         assign img_url = 'images/user.svg' | asset_url
       endunless
     %}
-    <img class="md:h-32 md:w-32 h-24 w-24 object-cover object-center rounded-full shadow-md mx-auto" src="{{ img_url }}" alt="blog">
+    <img class="object-cover object-center w-24 h-24 mx-auto rounded-full shadow-md md:h-32 md:w-32" src="{{ img_url }}" alt="blog">
     <div class="p-4">
-      <h2 class="text-gray-900 title-font font-medium mb-1 truncate">
+      <h2 class="mb-1 font-medium text-gray-900 truncate">
         <a href="/profile/{{user.slug}}">
           {% print user.first_name %} {{ user.last_name  }}
         </a>

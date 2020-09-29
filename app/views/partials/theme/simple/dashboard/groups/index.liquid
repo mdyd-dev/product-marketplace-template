@@ -27,12 +27,12 @@
           {% for group in groups.results %}
             <tr class="hover:bg-grey-lighter">
               <td class="px-6 py-4 border-b border-grey-light">
-                <a href="/groups/show/{{group.id}}">
+                <a href="/groups/show/{{ group.id }}">
                   <img src="{{ group.main_photo.photo.versions.small | default: 'https://dummyimage.com/100x100' }}" class="object-cover object-center w-32 h-32" />
                 </a>
               </td>
               <td class="px-6 py-4 border-b border-grey-light">
-                <a href="/groups/show/{{group.id}}">
+                <a href="/groups/show/{ group.id }}">
                   {{ group.name }}
                 </a>
               </td>
@@ -40,7 +40,7 @@
                 {{ group.summary }}
               </td>
               <td class="px-6 py-4 border-b border-grey-light">
-                <a href="/dashboard/groups/edit?id={{ group.id }}" class="button button-inline">
+                <a href="/dashboard/groups/edit?id={{ group.id }}" class="button">
                   Edit
                 </a>
                 <form action="/dashboard/groups" method="post" class="inline ml-2" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
@@ -48,7 +48,7 @@
                   <input type="hidden" name="_method" value="delete" />
                   <input type="hidden" name="id" value="{{ item.id }}">
 
-                  <button id="deletebutton" class="button button-secondary button-inline">{{ 'app.delete' | t }}</button>
+                  <button id="deletebutton" class="button button-secondary">{{ 'app.delete' | t }}</button>
                 </form>
               </td>
             </tr>
