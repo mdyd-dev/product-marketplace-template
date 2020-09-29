@@ -2,7 +2,7 @@
 
 <div class="flex">
   <span class="business_card mr-2">By <a href="{% render 'link_to', profile: user %}">{% print name %}</a></span>
-  {% if current_user and current_user.id != user.id %}
-    {% render 'theme/simple/follow_button', current_user: current_user, user: user %}
+  {% if current_profile and current_profile.id != user.id %}
+    {% render 'theme/simple/follow_button', current_profile: current_profile, user: user %}
   {% endif %}
 </div>

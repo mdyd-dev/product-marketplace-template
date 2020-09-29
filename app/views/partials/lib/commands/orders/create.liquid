@@ -1,6 +1,6 @@
 {% liquid
 
-  function object = 'lib/commands/orders/create/build', item: item, current_user_id: current_user.id
+  function object = 'lib/commands/orders/create/build', item: item, current_user_id: current_profile.id
   function object = 'lib/commands/orders/create/check', object: object
 
   if object.valid

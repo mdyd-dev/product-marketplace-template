@@ -25,4 +25,4 @@
   </div>
 </form>
 
-{% include 'theme/simple/photos/uppy_form', object_uuid: uuid, presigned_url: presigned_url, user_id: current_user.id, photo_type: 'main' %}
+{% include 'theme/simple/photos/uppy_form', object_uuid: uuid, presigned_url: presigned_url, user_id: current_profile.id, photo_type: 'main' %}
