@@ -21,8 +21,8 @@
   if object.description == blank
     include 'lib/register_error', contract: c, field_name: 'description', key: 'app.errors.blank'
   else
-    if object.description.size < 100
-      assign msg = 'app.errors.too_little' | t: value: 100
+    if object.description.size < 30
+      assign msg = 'app.errors.too_little' | t: value: 30
       include 'lib/register_error', contract: c, field_name: 'description', message: msg
     endif
   endif
