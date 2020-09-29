@@ -1,34 +1,34 @@
 <div class="w-full p-3">
 
-  <form action="" class="flex w-full flex-rows justify-between">
-    <div class="flex flex-cols p-2 items-center">
+  <form action="" class="flex justify-between w-full">
+    <div class="flex items-center p-2 flex-cols">
       <span class="mr-2">public</span>
       <input name="public" type="checkbox" {% if context.params.public %}checked{% endif %}/>
     </div>
-    <select name="feed" class="w-5/6 form-input text-xl">
+    <select name="feed" class="w-5/6 text-xl form-input">
       <option value="">audit all events</option>
       <option value="system.1" {% if params.feed == "system.1" %}selected{% endif %}>all</option>
       <option value="system.2" {% if params.feed == "system.2" %}selected{% endif %}>comments</option>
 
       {% for user in users.results %}
         {% assign feed = "user." | append: user.id %}
-        <option value="{{feed}}" {% if params.feed == feed %}selected{% endif %}>user: {{user.name}} (id:{{ user.id }})</option>
+        <option value="{{feed}}" {% if params.feed == feed %}selected{% endif %}>user: {{ user.name }} (id:{{ user.id }})</option>
       {% endfor %}
 
       {% for group in groups.results %}
         {% assign feed = "group." | append: group.id %}
-        <option value="{{feed}}" {% if params.feed == feed %}selected{% endif %}>group: {{group.name}} (id:{{ group.id }})</option>
+        <option value="{{ feed }}" {% if params.feed == feed %}selected{% endif %}>group: {{ group.name }} (id:{{ group.id }})</option>
       {% endfor %}
 
     </select>
     <input type="submit" class="w-1/6 form-input" value="GO">
   </form>
 
-  <span class="text-xs ml-2">
+  <span class="ml-2 text-xs">
     following: {{ selected.followed_users | map: 'email' | join: ', ' }}
   </span>
 
-  <div class="grid grid-cols-1 gap-6 my-6">
+  <div class="my-5">
     {% for record in list.results %}
       {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_user: current_user %}
     {% endfor %}

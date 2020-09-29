@@ -1,10 +1,10 @@
 <div>
-  <div class="bg-gray-600 text-center p-16">
-    <h1 class="text-3xl font-medium text-white">
-      {{group.name}}
+  <div class="p-16 bg-gray-600">
+    <h1 class="text-4xl font-medium text-center text-white">
+      {{ group.name }}
     </h1>
-    <h2 class="text-xl font-medium text-white">
-      {{group.summary}}
+    <h2 class="text-xl font-medium text-center text-white">
+      {{ group.summary }}
     </h2>
   </div>
   {% render 'theme/simple/groups/nav', group: group, tab: tab, current_user: current_user %}

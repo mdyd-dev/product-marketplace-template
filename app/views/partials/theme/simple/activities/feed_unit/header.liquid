@@ -6,9 +6,9 @@
   assign type = payload.type
 %}
 
-<div class="flex flex-row items-center justify-between py-2">
+<div class="flex justify-between">
   <div class="flex flex-row items-center">
-    <a href="#" class="flex flex-row items-center rounded-lg focus:outline-none focus:shadow-outline">
+    <a href="#" class="flex flex-row items-center rounded-lg">
       {% if photo %}
         <img class="object-cover w-8 h-8 rounded-full" src="{{ photo }}" alt="{% print name %}">
       {% else %}
@@ -41,10 +41,10 @@
           echo type
         endcase
         %}
-
       </p>
     </a>
   </div>
+
   <div class="flex flex-row items-center">
     <p class="text-xs font-semibold text-gray-500">{{ date | strftime: '%F at %H:%M' }}</p>
   </div>
