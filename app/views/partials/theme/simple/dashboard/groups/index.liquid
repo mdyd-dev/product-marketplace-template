@@ -4,21 +4,21 @@
       {{ 'app.groups.add' | t }}
     </a>
   </div>
-  <div class="bg-white shadow-md rounded my-6">
+  <div class="my-6 bg-white rounded shadow-md">
     {% if groups.results.size > 0 %}
-      <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
+      <table class="w-full text-left border-collapse">
         <thead>
           <tr>
-            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            <th class="px-6 py-4 text-sm font-bold uppercase border-b bg-grey-lightest text-grey-dark border-grey-light">
               {{ "app.groups.picture" | t }}
             </th>
-            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            <th class="px-6 py-4 text-sm font-bold uppercase border-b bg-grey-lightest text-grey-dark border-grey-light">
               {{ "app.groups.name" | t }}
             </th>
-            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            <th class="px-6 py-4 text-sm font-bold uppercase border-b bg-grey-lightest text-grey-dark border-grey-light">
               {{ "app.groups.summary" | t }}
             </th>
-            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            <th class="px-6 py-4 text-sm font-bold uppercase border-b bg-grey-lightest text-grey-dark border-grey-light">
               {{ "app.groups.actions" | t }}
             </th>
           </tr>
@@ -26,24 +26,24 @@
         <tbody>
           {% for group in groups.results %}
             <tr class="hover:bg-grey-lighter">
-              <td class="py-4 px-6 border-b border-grey-light">
+              <td class="px-6 py-4 border-b border-grey-light">
                 <a href="/groups/show/{{group.id}}">
-                  <img src="{{group.main_photo.photo.versions.small | default: 'https://dummyimage.com/100x100' }}" class="h-32 w-32 object-cover object-center" />
+                  <img src="{{ group.main_photo.photo.versions.small | default: 'https://dummyimage.com/100x100' }}" class="object-cover object-center w-32 h-32" />
                 </a>
               </td>
-              <td class="py-4 px-6 border-b border-grey-light">
+              <td class="px-6 py-4 border-b border-grey-light">
                 <a href="/groups/show/{{group.id}}">
                   {{ group.name }}
                 </a>
               </td>
-              <td class="py-4 px-6 border-b border-grey-light">
+              <td class="px-6 py-4 border-b border-grey-light">
                 {{ group.summary }}
               </td>
-              <td class="py-4 px-6 border-b border-grey-light">
+              <td class="px-6 py-4 border-b border-grey-light">
                 <a href="/dashboard/groups/edit?id={{ group.id }}" class="button button-inline">
                   Edit
                 </a>
-                <form action="/dashboard/groups" method="post" class="ml-2 inline" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
+                <form action="/dashboard/groups" method="post" class="inline ml-2" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
                   {% include 'authenticity_token' %}
                   <input type="hidden" name="_method" value="delete" />
                   <input type="hidden" name="id" value="{{ item.id }}">
