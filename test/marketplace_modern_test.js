@@ -95,11 +95,11 @@ test('Editing item and search', async (t) => {
 
   //change of item information
   await t.click(itemShow.editbutton)
-    .typeText(newItemForm.nameField, John.name, { replace: true })
+    .typeText(newItemForm.nameField, John.johnItem, { replace: true })
     .typeText(newItemForm.descField, editedItem.description, { replace: true })
     .typeText(newItemForm.priceField, editedItem.price, { replace: true })
     .click(newItemForm.submitBtn)
-  await t.expect(Selector('h1').withText(John.name).exists).ok()
+  await t.expect(Selector('h1').withText(John.johnItem).exists).ok()
   await t.expect(editPage.description.exists).ok()
   await t.expect(editPage.price.innerText).eql('$5,000', 'check element text')
 })
@@ -111,7 +111,7 @@ test('Groups', async (t) => { // ISN'T FLAKY??
 
   await t
     .click(Selector('main').find('a').withText('Add group'))
-    .typeText('#name', John.name)
+    .typeText('#name', John.johnGroup)
     .typeText('#summary', "fun-club")
     .typeText('#description', loremSentence, { paste: true })
     .click(Selector('button').withText('Submit'))
@@ -119,7 +119,7 @@ test('Groups', async (t) => { // ISN'T FLAKY??
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourGroups)
     .click(Selector('a').withText('Add group'))
-    .typeText('#name', John.name)
+    .typeText('#name', John.johnGroup)
     .typeText('#summary', "fun-club")
     .typeText('#description', loremSentence, { paste: true })
     .click(Selector('button').withText('Submit'))

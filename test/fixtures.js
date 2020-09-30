@@ -21,7 +21,9 @@ export const John = {
   password: 'password',
   name: 'johnsmith',
   firstName: 'John',
-  lastName: 'Smith'
+  lastName: 'Smith',
+  johnItem: "johnsmith's boots",
+  johnGroup: "johnsmith's group",
 }
 
 export const Admin = {
