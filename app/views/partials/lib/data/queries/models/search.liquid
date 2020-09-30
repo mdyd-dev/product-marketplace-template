@@ -1,5 +1,5 @@
 {% liquid
   graphql r = 'models/search', keyword: keyword
-
+  assign models = r.models
   return_rc r.models
 %}

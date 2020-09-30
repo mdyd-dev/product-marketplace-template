@@ -1,9 +1,6 @@
 {% liquid
   function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
-
-  graphql r = 'models/search', keyword: context.params.k, limit: 15
-
-  assign models = r.models
+  function models = 'lib/data/queries/models/search', keyword: context.params.k, limit: 15
 %}
 
 
