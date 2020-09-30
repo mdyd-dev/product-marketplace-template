@@ -228,10 +228,17 @@ en:
       bank_account: Bank Account
       credit_cards: Credit Cards
       profile: Profile
+      payments: Payments
       edit-profile: Edit Profile
-      your-profile: Your Public Profile
-      your-groups: Your Groups
+      your-profile: Public Profile
+      my-groups: My Groups
+      chat: Chat
+      inbox: Inbox
       your-feed: Activity Feed
+      items-for-sell: Items for sell
+      items-to-buy: Items to buy
+      list-an-item: List an Item
+
 
     profiles:
       edit: Profile Edit
