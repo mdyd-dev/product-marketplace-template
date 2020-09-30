@@ -193,6 +193,7 @@ test('Breakin-in test, edition by none user', async (t) => {
 
 test('Groups', async (t) => { // ISN'T FLAKY??
   await t.useRole(buyerRole)
+    .click(topMenu.menuDropdown)
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourGroups)
 
