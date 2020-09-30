@@ -77,6 +77,13 @@ en:
     continue: Continue
     community: Community
 
+    header:
+      add: Add
+      feed: Feed
+      dashboard: Dashboard
+      log-out: Log out
+      chat: Chat
+
     orders:
       created: Order has been placed
       new: new order
