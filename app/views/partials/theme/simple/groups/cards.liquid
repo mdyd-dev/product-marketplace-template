@@ -2,7 +2,7 @@
   {{ 'app.groups.list' | t }}
 </h1>
 
-<div class="container grid grid-cols-3 gap-5">
+<div class="grid grid-cols-3 gap-5">
   {% for record in list.results %}
     {% render 'theme/simple/groups/card', group: record, current_profile: current_profile %}
   {% else %}

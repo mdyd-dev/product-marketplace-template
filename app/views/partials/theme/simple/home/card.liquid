@@ -1,16 +1,16 @@
-<div class="w-full px-0 mx-4 mb-8 lg:w-1/4 md:w-1/3 card bg-white rounded overflow-hidden">
+<div class="mb-8 overflow-hidden bg-white rounded">
   {% if object.photo %}
-  <a class="relative block h-64 overflow-hidden shadow-sm" href="{{ object.url }}">
+  <a class="block h-64 overflow-hidden shadow-sm" href="{{ object.url }}">
     <img alt="{{ object.name | default: object.id | truncate: 120 }}" class="block object-cover object-center w-full h-full" src="{{ object.photo.url.versions.small }}">
   </a>
   {% elsif target.photo %}
-  <a class="relative block h-64 overflow-hidden shadow-sm" href="{{ target.url }}">
+  <a class="block h-64 overflow-hidden shadow-sm" href="{{ target.url }}">
     <img alt="{{ target.name | default: object.id | truncate: 120 }}" class="block object-cover object-center w-full h-full" src="{{ target.photo.url.versions.small }}">
   </a>
   {% endif %}
 
   <div class="md:p-4">
-    <header class="text-gray-600 text-xs">
+    <header class="text-xs text-gray-600">
       {% print type | t: scope: 'app.home.feeds.header' %}
     </header>
 
@@ -24,11 +24,8 @@
 
         {% echo object.body | default: object.description | default: object.bio %}
       </div>
-      <div class="flex justify-between">
-        <p class="mt-1">
-        </p>
-
-        <h3 class="mb-1 text-xs">
+      <div class="flex">
+        <h3 class="mb-1 ml-auto text-xs">
           {% render 'theme/simple/business_card', user: actor, current_profile: current_profile %}
         </h3>
       </div>
