@@ -1,0 +1,10 @@
+<div class="container mx-auto">
+  <div class="flex flex-wrap -mx-4 cards">
+  <p class="container my-8 text-lg">Found <span class="font-semibold">{{ models.total_entries }}</span> results for <span class="font-semibold">"{{ keyword }}":</span></p>
+  {% for model in models.results %}
+      {% render 'theme/simple/quick_search/card', model: model %}
+  {% else %}
+      <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
+  {% endfor %}
+  </div>
+</div>

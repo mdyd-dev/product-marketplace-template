@@ -1,20 +1,4 @@
 {% liquid
-  function current_user = 'lib/data/queries/profiles/find', user_id: context.current_user.id
   function models = 'lib/data/queries/models/search', keyword: context.params.k, limit: 15
+  render 'theme/simple/quick_search/index', models: models, keyword: context.params.k
 %}
-
-
-<div class="container mx-auto">
-<div class="flex flex-wrap -mx-4 cards">
-  {% if models.results.size > 0 %}
-    <p class="container my-8 text-lg">Found <b>{{ models.results.size }}</b> results for <b>"{{ context.params.k }}":</b></p>
-  {% for model in models.results %}
-      {% include 'theme/simple/quick_search/card', model: model %}
-  {% endfor %}
-  {% else %}
-    <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
-  {% endif %}
-  </div>
-</div>
-
-
