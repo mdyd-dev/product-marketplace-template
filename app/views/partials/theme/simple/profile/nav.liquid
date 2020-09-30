@@ -1,19 +1,19 @@
-<div class="bg-white mb-5">
+<div class="mb-5 bg-white">
   <nav class="flex flex-col sm:flex-row">
     {% assign active_class = 'text-blue-500 border-b-2 font-medium border-blue-500'  %}
-    <a href="/profile/{{user.slug}}" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'activity' %}{{ active_class }}{% endif %}">
+    <a href="/profile/{{ user.slug }}" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'activity' %}{{ active_class }}{% endif %}">
       Activity
     </a>
-    <a href="/profile/{{user.slug}}/groups" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'groups' %}{{ active_class }}{% endif %}">
+    <a href="/profile/{{ user.slug }}/groups" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'groups' %}{{ active_class }}{% endif %}">
       Groups
     </a>
-    <a href="/profile/{{user.slug}}/following" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'following' %}{{ active_class }}{% endif %}">
+    <a href="/profile/{{ user.slug }}/following" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'following' %}{{ active_class }}{% endif %}">
       Following
     </a>
-    <a href="/profile/{{user.slug}}/followers" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'followers' %}{{ active_class }}{% endif %}">
+    <a href="/profile/{{ user.slug }}/followers" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'followers' %}{{ active_class }}{% endif %}">
       Followers
     </a>
-    <a href="/profile/{{user.slug}}/products" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'products' %}{{ active_class }}{% endif %}">
+    <a href="/profile/{{ user.slug }}/products" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'products' %}{{ active_class }}{% endif %}">
       Products
     </a>
   </nav>
