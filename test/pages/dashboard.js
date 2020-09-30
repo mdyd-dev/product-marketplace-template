@@ -6,8 +6,8 @@ export default class DashboardPage {
     this.editProfile = Selector('a').withText('Edit Profile')
     this.goProfile = Selector('a').withText('Public Profile')
     this.goYourItems = Selector('main').find('a').withText('Items for sell')
-    this.yourBuyingOrders = Selector('a').withText('Purchases').nth(1)
-    this.yourSellingOrders = Selector('a').withText('Sold').nth(0)
+    this.yourBuyingOrders = Selector('a').withText('Purchases')
+    this.yourSellingOrders = Selector('a').withText('Sold')
     this.yourGroups = Selector('a').withText('My Groups')
   }
 }
