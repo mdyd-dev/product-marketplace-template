@@ -134,6 +134,7 @@ test('Groups', async (t) => { // ISN'T FLAKY??
   await t.useRole(buyerRole)
     .typeText(Selector('#k'), John.name)
     .click(Selector('button').withText('Search'))
+    .debug()
     .expect(Selector('div').find('header').withText('Profile').exists).ok()
     .expect(Selector('div').find('header').withText('Group').exists).ok()
     .expect(Selector('div').find('header').withText('Item').exists).ok()
