@@ -204,6 +204,7 @@ test('Groups', async (t) => { // ISN'T FLAKY??
     .typeText('#description', loremSentence, { paste: true })
     .click(Selector('button').withText('Submit'))
   //unique test
+    .click(topMenu.menuDropdown)
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourGroups)
     .click(Selector('a').withText('Add group'))
