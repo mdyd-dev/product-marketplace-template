@@ -23,7 +23,7 @@
         <a href="/dashboard/inbox" class="mr-5 hover:text-gray-900">{{ 'app.header.chat' | t }}</a>
 
         <div x-data="{ dropdownOpen: false }" class="relative">
-          <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
+          <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block rounded-md bg-white p-2 focus:outline-none" data-menu-dropdown>
             <span class="mr-2 hover:text-gray-900">{{profile.first_name | default: profile.name }}</span>
             <svg class="h-5 w-5 text-gray-800 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"> <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /> </svg>
           </button>

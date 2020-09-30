@@ -36,12 +36,14 @@ test.page(myUrl + '/sign-up')(`Register buyer John`, async (t) => {
 
 test('Edit John Profile Page', async (t) => {
   await t.useRole(buyerRole)
+    .click(topMenu.menuDropdown)
     .click(topMenu.dashboardBtn)
     .click(dashboard.editProfile)
     .typeText(profileEditForm.name, John.name, { replace: true })
     .typeText(profileEditForm.firstName, John.firstName, { replace: true })
     .typeText(profileEditForm.lastName, John.lastName, { replace: true })
     .click(profileEditForm.saveButton)
+    .click(topMenu.menuDropdown)
     .click(topMenu.dashboardBtn)
     .click(dashboard.goProfile)
   await t
@@ -81,6 +83,7 @@ test('Editing item and search', async (t) => {
   await t
   //item search
     .useRole(sellerRole)
+    .click(topMenu.menuDropdown)
     .click(topMenu.dashboardBtn)
     .click(dashboard.goProfile)
   const sellerProfilePage = ClientFunction(() => document.location.href)
@@ -108,6 +111,7 @@ test('Editing item and search', async (t) => {
 test('Deleting item', async (t) => {
   await t
     .useRole(sellerRole)
+    .click(topMenu.menuDropdown)
     .click(topMenu.dashboardBtn)
     .click(dashboard.goYourItems)
     .setNativeDialogHandler(() => true)
@@ -132,10 +136,12 @@ test('Buying an item and following the seller', async (t) => {
     .click(itemShow.buyBtn)
     .click(Selector('button').withText('Checkout'))
     .click(Selector('button').withText('Pay'))
+    .click(topMenu.menuDropdown)
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourBuyingOrders) // buyer's order check
     .click(Selector('a').withText(item.name))
     .expect(Selector('div').withText('Ordered').exists).ok()
+    .click(topMenu.menuDropdown)
     .click(topMenu.dashboardBtn)
     .click(dashboard.goProfile)
     .click(Selector('a').withText('Following'))
@@ -143,6 +149,7 @@ test('Buying an item and following the seller', async (t) => {
 
  await t
    .useRole(sellerRole) // seller checks if his order shown as paid
+    .click(topMenu.menuDropdown)
    .click(topMenu.dashboardBtn)
    .click(dashboard.yourSellingOrders)  // seller's order check
    .expect(Selector('a').withText(item.name).exists).ok("Item list not shown in seller orders")
@@ -213,10 +220,12 @@ test('Groups', async (t) => { // ISN'T FLAKY??
  test('Activity', async (t) => {
    const commentText = "What's new bro?"
    await t.useRole(buyerRole)
+     .click(topMenu.menuDropdown)
      .click(topMenu.dashboardBtn)
      .click(dashboard.activityFeed)
      .typeText(Selector('textarea'), commentText)
      .click(Selector('button').withText('Send'))
+     .click(topMenu.menuDropdown)
      .click(topMenu.dashboardBtn)
      .click(dashboard.goProfile)
      .expect(Selector('div').withText(commentText).exists).ok("checks if feed exists at user's profile activities")
