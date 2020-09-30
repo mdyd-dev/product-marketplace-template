@@ -77,6 +77,13 @@ en:
     continue: Continue
     community: Community
 
+    header:
+      add: Add
+      feed: Feed
+      dashboard: Dashboard
+      log-out: Log out
+      chat: Chat
+
     orders:
       created: Order has been placed
       new: new order
@@ -228,10 +235,19 @@ en:
       bank_account: Bank Account
       credit_cards: Credit Cards
       profile: Profile
+      payments: Payments
       edit-profile: Edit Profile
-      your-profile: Your Public Profile
-      your-groups: Your Groups
+      your-profile: Public Profile
+      my-groups: My Groups
+      chat: Chat
+      inbox: Inbox
       your-feed: Activity Feed
+      items-for-sell: Items for sell
+      items-to-buy: Items to buy
+      list-an-item: List an Item
+      buy-orders: Purchases
+      sell-orders: Sold
+
 
     profiles:
       edit: Profile Edit
