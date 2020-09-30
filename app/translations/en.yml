@@ -238,6 +238,8 @@ en:
       items-for-sell: Items for sell
       items-to-buy: Items to buy
       list-an-item: List an Item
+      buy-orders: Purchases
+      sell-orders: Sold
 
 
     profiles:
