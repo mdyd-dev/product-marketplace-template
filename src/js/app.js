@@ -13,12 +13,6 @@ if (commentNewPost) {
   });
 }
 
-const dashboardSidebar = document.querySelector('[data-dashboard-sidebar]');
-if (dashboardSidebar) {
-  import(/* webpackChunkName: "comment-new-post" */ './dashboard-sidebar.js').then(() => {
-  });
-}
-
 const gallery = document.querySelector('.glider');
 if (gallery) {
   import(/* webpackChunkName: "gallery" */ './gallery.js').then(() => {
