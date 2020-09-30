@@ -55,6 +55,7 @@ en:
 
     total_entries: "Total items:"
     no_items_found: No items found
+    no_members_found: This group has no members
     no_following_found: You are not following anyone
     no_followers_found: Noone is following you
     no_groups_found: You have no groups
