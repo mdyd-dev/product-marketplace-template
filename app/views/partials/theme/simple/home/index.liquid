@@ -1,16 +1,16 @@
 {% render 'theme/simple/home/hero' %}
 
 {% for feed in feeds %}
-<section>
-  <div class="mb-4 text-3xl">
-    {% print feed[0] | t: scope: 'app.home.feeds' %}
-  </div>
-  <div class="grid grid-cols-3 gap-5">
-    {% for item in feed[1].results %}
-      {% include 'theme/simple/home/card', actor: item.payload.actor, target: item.payload.target, object: item.payload.object, type: item.payload.type %}
-    {% else %}
-      <h1 class="my-8 text-lg text-center text-gray-400">{{ 'app.no_items_found' | t }}</h1>
-    {% endfor %}
-  </div>
-</section>
+  {% if feed[1].results.size > 0 %}
+    <section>
+      <div class="mb-4 text-3xl">
+        {% print feed[0] | t: scope: 'app.home.feeds' %}
+      </div>
+      <div class="grid grid-cols-3 gap-5">
+        {% for item in feed[1].results %}
+          {% include 'theme/simple/home/card', actor: item.payload.actor, target: item.payload.target, object: item.payload.object, type: item.payload.type %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
 {% endfor %}
