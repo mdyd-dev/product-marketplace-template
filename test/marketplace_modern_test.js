@@ -95,13 +95,48 @@ test('Editing item and search', async (t) => {
 
   //change of item information
   await t.click(itemShow.editbutton)
-    .typeText(newItemForm.nameField, editedItem.name, { replace: true })
+    .typeText(newItemForm.nameField, John.name, { replace: true })
     .typeText(newItemForm.descField, editedItem.description, { replace: true })
     .typeText(newItemForm.priceField, editedItem.price, { replace: true })
     .click(newItemForm.submitBtn)
-  await t.expect(editPage.name.exists).ok()
+  await t.expect(Selector('h1').withText(John.name).exists).ok()
   await t.expect(editPage.description.exists).ok()
   await t.expect(editPage.price.innerText).eql('$5,000', 'check element text')
+})
+
+test('Groups', async (t) => { // ISN'T FLAKY??
+  await t.useRole(buyerRole)
+    .click(topMenu.dashboardBtn)
+    .click(dashboard.yourGroups)
+
+  await t
+    .click(Selector('main').find('a').withText('Add group'))
+    .typeText('#name', John.name)
+    .typeText('#summary', "fun-club")
+    .typeText('#description', loremSentence, { paste: true })
+    .click(Selector('button').withText('Submit'))
+  //unique test
+    .click(topMenu.dashboardBtn)
+    .click(dashboard.yourGroups)
+    .click(Selector('a').withText('Add group'))
+    .typeText('#name', John.name)
+    .typeText('#summary', "fun-club")
+    .typeText('#description', loremSentence, { paste: true })
+    .click(Selector('button').withText('Submit'))
+    .expect(Selector('div').textContent).contains('already taken')
+  //checks if group exists
+    .click(dashboard.yourGroups)
+    .expect(Selector('a').withText(John.name).exists).ok()
+
+})
+
+  test('Small search', async (t) => {
+  await t.useRole(buyerRole)
+    .typeText(Selector('#k'), John.name)
+    .click(Selector('button').withText('Search'))
+    .expect(Selector('div').find('header').withText('Profile').exists).ok()
+    .expect(Selector('div').find('header').withText('Group').exists).ok()
+    .expect(Selector('div').find('header').withText('Item').exists).ok()
 })
 
 
@@ -182,32 +217,6 @@ test('Breakin-in test, edition by none user', async (t) => {
   var editItemId = itemEditUrl[itemEditUrl.length - 1]
   await t.navigateTo(editURL + editItemId)
   await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok('message ' + notAuthorizedUser + " doesn't exists")
-})
-
-test('Groups', async (t) => { // ISN'T FLAKY??
-  await t.useRole(buyerRole)
-    .click(topMenu.dashboardBtn)
-    .click(dashboard.yourGroups)
-
-  await t
-    .click(Selector('main').find('a').withText('Add group'))
-    .typeText('#name', groupName)
-    .typeText('#summary', "fun-club")
-    .typeText('#description', loremSentence, { paste: true })
-    .click(Selector('button').withText('Submit'))
-  //unique test
-    .click(topMenu.dashboardBtn)
-    .click(dashboard.yourGroups)
-    .click(Selector('a').withText('Add group'))
-    .typeText('#name', groupName)
-    .typeText('#summary', "fun-club")
-    .typeText('#description', loremSentence, { paste: true })
-    .click(Selector('button').withText('Submit'))
-    .expect(Selector('div').textContent).contains('already taken')
-  //checks if group exists
-    .click(dashboard.yourGroups)
-    .expect(Selector('a').withText(groupName).exists).ok()
-
 })
 
  test('Activity', async (t) => {
