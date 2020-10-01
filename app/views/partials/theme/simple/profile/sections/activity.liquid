@@ -4,10 +4,10 @@
   endif
 %}
 
-<section class="my-5">
+<section class="grid grid-cols-3 gap-5 my-5">
   {% for record in list.results %}
     {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_profile: current_profile %}
   {% else %}
-    <p class="container my-8 text-lg">{{ 'app.no_activities_found' | t }}</p>
+    <p class="text-lg">{{ 'app.no_activities_found' | t }}</p>
   {% endfor %}
 </section>
