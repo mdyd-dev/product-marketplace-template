@@ -1,4 +1,5 @@
 ---
+slug: dashboard
 metadata:
   breadcrumbs:
     - label: app.feed.title
@@ -7,11 +8,29 @@ metadata:
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
   include 'lib/validate_profile_completeness', profile: current_profile
 
+  assign template = "/dashboard/{slug}/{section}"
+  assign query = context.location.pathname | extract_url_params: template
+
   function list = 'lib/data/queries/activities/search', feed: 'user-private', feed_id: current_profile.id, limit: 100
 
-  graphql presigned_url = 'photos/presign' | dig: 'presigned'
-  include 'theme/simple/dashboard/breadcrumbs', name: 'feed'
-  include 'theme/simple/activities/feed/index', list: list, current_profile: current_profile, presigned_url: presigned_url
-  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
-%}
+  assign section = query.section | default: 'activity'
+  assign profile_id = current_profile.id | default: 'there-should-be'
 
+  if section == 'activity'
+    function list = 'lib/data/queries/activities/search', feed: 'user-private', feed_id: current_profile.id, limit: 100
+    function presigned_url = 'lib/data/queries/presigned_url'
+  elsif section == 'groups'
+    function list = 'lib/data/queries/groups/search_for_member', limit: 20, name: 'membership', member_id: profile_id
+  elsif section == 'following'
+    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', l_id: profile_id
+  elsif section == 'followers'
+    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', r_id: profile_id
+  elsif section == 'products'
+    function list = 'lib/data/queries/items/search', query: context.params, limit: 20, owner: user.id
+  endif
+
+  include 'theme/simple/dashboard/breadcrumbs', name: 'feed'
+  include 'theme/simple/profile/private_feed', section: section, user: profile, list: list, current_profile: current_profile, presigned_url: presigned_url
+  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
+  render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token
+%}
