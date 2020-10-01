@@ -2,12 +2,12 @@
   <img src="{{ 'images/home-hero.jpg' | asset_url }}" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover">
 
   <div class="relative z-10 p-8 md:p-16 bg-gradient-transparent-black w-full">
-    <h1 class="text-2xl md:text-5xl font-black uppercase leading-none">Find Your Product</h1>
-    <p class="font-bold mb-2 md:mb-3">MVP Marketplace is a social marketplace to buy and sell all things</p>
+    <h1 class="text-2xl md:text-5xl font-black uppercase leading-none">{{'app.hero.main-sentence' | t}}</h1>
+    <p class="font-bold mb-2 md:mb-3">{{'app.hero.secondary-sentence' | t}}</p>
 
     <p>
-      <a href="/search" class="button mr-3">Shop</a>
-      <a href="/items/new" class="button button-secondary btn-lg">Sell</a>
+      <a href="/search" class="button mr-3">{{'app.hero.shop' | t}}</a>
+      <a href="/dashboard/items/new" class="button button-secondary btn-lg">{{'app.hero.sell' | t}}</a>
     </p>
   </div>
 </div>

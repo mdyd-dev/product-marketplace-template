@@ -85,6 +85,12 @@ en:
       log-out: Log out
       chat: Chat
 
+    hero:
+      shop: Shop
+      sell: Sell
+      main-sentence: Find Your Time
+      secondary-sentence: MVP Marketplace is a social marketplace to buy and sell all things
+
     orders:
       created: Order has been placed
       new: new order
