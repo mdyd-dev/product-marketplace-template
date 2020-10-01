@@ -1,13 +1,13 @@
-<div class="relative h-64 flex flex-column items-end text-white bg-gray-900 mb-16">
-  <img src="{{ 'images/home-hero.jpg' | asset_url }}" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover">
+<div class="relative flex items-end h-64 mb-8 text-white flex-column">
+  <img src="{{ 'images/home-hero.jpg' | asset_url }}" class="absolute inset-0 object-cover w-full h-full">
 
-  <div class="relative z-10 p-8 md:p-16 bg-gradient-transparent-black w-full">
-    <h1 class="text-2xl md:text-5xl font-black uppercase leading-none">{{'app.hero.main-sentence' | t}}</h1>
-    <p class="font-bold mb-2 md:mb-3">{{'app.hero.secondary-sentence' | t}}</p>
+  <div class="relative z-10 w-full p-8 md:p-16">
+    <h1 class="text-2xl font-black leading-none uppercase md:text-5xl">{{ 'app.hero.main-sentence' | t }}</h1>
+    <p class="mb-2 font-bold md:mb-3">{{ 'app.hero.secondary-sentence' | t }}</p>
 
     <p>
-      <a href="/search" class="button mr-3">{{'app.hero.shop' | t}}</a>
-      <a href="/dashboard/items/new" class="button button-secondary btn-lg">{{'app.hero.sell' | t}}</a>
+      <a href="/search" class="mr-3 text-lg button">{{ 'app.hero.shop' | t }}</a>
+      <a href="/dashboard/items/new" class="text-lg button button-secondary">{{ 'app.hero.sell' | t }}</a>
     </p>
   </div>
 </div>

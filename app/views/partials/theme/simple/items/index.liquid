@@ -2,11 +2,11 @@
   <form action="/search" name="search">
     {% include 'theme/simple/home/search_form', query: search.query, filters: filters %}
 
-    <div class="flex flex-wrap -mx-4 cards">
+    <div class="grid grid-cols-3 gap-5">
       {% for item in items.results %}
         {% include 'theme/simple/items/card', item: item %}
       {% else %}
-        <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
+        <p class="text-lg">{{ 'app.no_items_found' | t }}</p>
       {% endfor %}
     </div>
   </form>
