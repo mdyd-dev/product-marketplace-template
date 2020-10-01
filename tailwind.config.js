@@ -11,16 +11,14 @@ const systemColors = {
 
 module.exports = {
   purge: {
-    mode: "all",
     content: ['**/*.liquid', './src/js/**/*.js'],
     options: {
-      whitelist: ['uppy-'],
+      safelist: [/^uppy-/]
     }
   },
   future: {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
-
   },
   theme: {
     container: {
