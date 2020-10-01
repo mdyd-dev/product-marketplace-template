@@ -12,7 +12,7 @@
   </div>
   <div class="w-full md:w-3/4 px-4 mb-4 md:mb-0">
     {% liquid
-      render 'theme/simple/profile/nav', tab: section, user: user
+      render 'theme/simple/profile/nav', tab: section, user: user, path: 'profile'
 
       if section == 'activity'
         render 'theme/simple/profile/sections/activity', list: list, current_profile: current_profile
