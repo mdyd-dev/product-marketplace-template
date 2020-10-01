@@ -13,6 +13,9 @@ module.exports = {
   purge: {
     mode: "all",
     content: ['**/*.liquid', './src/js/**/*.js'],
+    options: {
+      whitelist: ['uppy-'],
+    }
   },
   future: {
     removeDeprecatedGapUtilities: true,
