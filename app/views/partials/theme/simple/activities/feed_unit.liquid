@@ -1,13 +1,12 @@
 {% assign type = payload.type %}
 
-<div class="px-8 py-6 bg-white rounded-lg shadow-md">
+
+<div class="flex flex-col p-6 bg-white rounded-lg shadow">
   {% render 'theme/simple/activities/feed_unit/header', payload: payload %}
 
   <div class="py-2 leading-snug break-all">
     <p>{{ payload.object.description }}</p>
-    <p>
-      {% print payload.object.body %}
-    </p>
+    <p>{% print payload.object.body %}</p>
   </div>
 
   {% if payload.object.photos.size > 0 %}

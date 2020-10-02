@@ -1,5 +1,5 @@
 .button, .button[href] {
-  @apply inline-flex items-center justify-center px-6 py-2 text-center text-white bg-blue-700 border-0 rounded;
+  @apply inline-flex items-center justify-center px-5 py-2 text-center text-white bg-blue-700 border-0 rounded;
 }
 
 .button:focus {
@@ -15,7 +15,7 @@
 }
 
 .button.button-secondary:hover  {
-  @apply bg-blue-100 border-blue-700 text-blue-700;
+  @apply text-blue-700 bg-blue-100 border-blue-700;
 }
 
 .button-secondary.button-sm {

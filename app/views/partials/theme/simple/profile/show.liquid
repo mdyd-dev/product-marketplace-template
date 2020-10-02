@@ -1,5 +1,5 @@
-<div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
-  <div class="w-full md:w-1/4 px-4 mb-4 md:mb-0">
+<div class="flex">
+  <div class="w-auto mr-5">
     {% liquid
       render 'theme/simple/profile/card', user: user, current_profile: current_profile
 
@@ -10,7 +10,8 @@
       endif
     %}
   </div>
-  <div class="w-full md:w-3/4 px-4 mb-4 md:mb-0">
+
+  <div class="w-full md:flex-1">
     {% liquid
       render 'theme/simple/profile/nav', tab: section, user: user, path: 'profile'
 
