@@ -1,11 +1,13 @@
-<div class="relative flex items-end h-64 mb-8 text-white flex-column">
-  <img src="{{ 'images/home-hero.jpg' | asset_url }}" class="absolute inset-0 object-cover w-full h-full">
-
-  <div class="relative z-10 w-full p-8 md:p-16">
+<div class="relative flex items-end h-64 mb-8 text-white bg-cover flex-column" style="background-image: url({{ 'images/home-hero.jpg' | asset_url }})">
+  <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
+  <div class="z-10 w-full p-8 md:p-16">
     <h1 class="text-2xl font-black leading-none uppercase md:text-5xl">{{ 'app.hero.main-sentence' | t }}</h1>
-    <p class="mb-2 font-bold md:mb-3">{{ 'app.hero.secondary-sentence' | t }}</p>
 
-    <p>
+    <p class="text-xl font-semibold">
+      {{ 'app.hero.secondary-sentence' | t }}
+    </p>
+
+    <p class="mt-5">
       <a href="/search" class="mr-3 text-lg button">{{ 'app.hero.shop' | t }}</a>
       <a href="/dashboard/items/new" class="text-lg button button-secondary">{{ 'app.hero.sell' | t }}</a>
     </p>
