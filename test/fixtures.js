@@ -1,4 +1,4 @@
-import { ClientFunction } from 'testcafe'
+import { ClientFunction, Selector } from 'testcafe'
 import NewSessionForm from './pages/newsession'
 import faker from 'faker'
 import TopMenuBtns from './pages/topmenu'
@@ -12,6 +12,7 @@ export const loremSentence = (faker.lorem.lines() + " " + faker.lorem.lines())
 export const editURL = '/dashboard/items/edit?id='
 export const notAuthorizedUser = 'Permission denied'
 export const groupName = faker.lorem.words();
+export const translationMissing = (Selector('body').withText("translation missing"))
 
 
 export const randomFirstName = faker.name.firstName()

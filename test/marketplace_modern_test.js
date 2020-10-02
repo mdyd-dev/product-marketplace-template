@@ -1,4 +1,4 @@
-import { Selector, ClientFunction } from 'testcafe'
+import { Selector, ClientFunction, t } from 'testcafe'
 import { buyerRole, sellerRole, adminRole } from './roles'
 import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL, loremSentence, notAuthorizedUser, groupName } from './fixtures'
 import { register, createItem } from './helper'
@@ -24,9 +24,17 @@ const itemSearch = new ItemSearch(item, editedItem)
 const dashboard = new DashboardPage()
 const profileEditForm = new ProfileEditForm()
 
-fixture`Happy path scenario`.page(myUrl)
+const translationMissing = Selector('body').withText('translation missing')
+async function checkTranslation(translationMissing) {
+  if (await translationMissing.exists)
+    await t.expect(translationMissing.exists).notOk();
+};
 
-test.page(myUrl + '/sign-up')(`Register seller`, async (t) => {
+
+fixture`Happy path scenario`
+          .page(myUrl)
+
+test.page(myUrl + '/sign-up')('Register seller', async (t) => {
   await register(SellerRandomUser)
 })
 
@@ -36,16 +44,19 @@ test.page(myUrl + '/sign-up')(`Register buyer John`, async (t) => {
 
 test('Edit John Profile Page', async (t) => {
   await t.useRole(buyerRole)
-    .click(topMenu.menuDropdown)
+    await checkTranslation(translationMissing) // home page translation missing check
+    await t.click(topMenu.menuDropdown)
     .click(topMenu.dashboardBtn)
-    .click(dashboard.editProfile)
-    .typeText(profileEditForm.name, John.name, { replace: true })
+    await t.click(dashboard.editProfile)
+    await checkTranslation(translationMissing) // profile eidt translation missing check
+    await t.typeText(profileEditForm.name, John.name, { replace: true })
     .typeText(profileEditForm.firstName, John.firstName, { replace: true })
     .typeText(profileEditForm.lastName, John.lastName, { replace: true })
     .click(profileEditForm.saveButton)
     .click(topMenu.menuDropdown)
     .click(topMenu.dashboardBtn)
     .click(dashboard.goProfile)
+    await checkTranslation(translationMissing) // public profile translation missing check
   await t
     .expect(Selector('main').find('#user-name').withText(`${John.firstName} ${John.lastName}`).exists).ok()
 })
@@ -54,7 +65,8 @@ test('Edit John Profile Page', async (t) => {
 test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log in with wrong data`, async (t) => {
   await t
     .click(loginForm.logInBtn)
-    .expect(loginForm.emailLabel.textContent).contains('cannot be blank')
+    await checkTranslation(translationMissing) // log in form translation missing check
+    await t.expect(loginForm.emailLabel.textContent).contains('cannot be blank')
     .expect(loginForm.passwordLabel.textContent).contains('cannot be blank')
     .typeText(loginForm.emailInput, 'admin@example.com')
     .typeText(loginForm.passInput, 'asd')
@@ -98,7 +110,8 @@ test('Editing item and search', async (t) => {
 
   //change of item information
   await t.click(itemShow.editbutton)
-    .typeText(newItemForm.nameField, editedItem.name, { replace: true })
+  await checkTranslation(translationMissing)
+    await t.typeText(newItemForm.nameField, editedItem.name, { replace: true })
     .typeText(newItemForm.descField, editedItem.description, { replace: true })
     .typeText(newItemForm.priceField, editedItem.price, { replace: true })
     .click(newItemForm.submitBtn)
@@ -160,7 +173,8 @@ test('Buying an item and following the seller', async (t) => {
    await t
      .useRole(adminRole)
      .click(topMenu.adminBtn)
-     .click(adminPage.users)
+     await checkTranslation(translationMissing) // Admin panel translation missing check
+     await t.click(adminPage.users)
    const usersTableRow = Selector('tbody').find('tr')
    await t.expect(usersTableRow.count).gte(1)
      .click(adminPage.orders)
@@ -183,7 +197,6 @@ test('Breakin-in test, edition by none user', async (t) => {
     .typeText(itemSearch.keyword, 'Watch')
     .click(itemSearch.searchBtn)
     .click(Selector('a').withText('Watch'))
-
   var itemEditUrl = await getURL()
   var itemEditUrl = itemEditUrl.split('-')
   var editItemId = itemEditUrl[itemEditUrl.length - 1]
@@ -191,15 +204,17 @@ test('Breakin-in test, edition by none user', async (t) => {
   await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok('message ' + notAuthorizedUser + " doesn't exists")
 })
 
-test('Groups', async (t) => { // ISN'T FLAKY??
+test('Groups', async (t) => {
   await t.useRole(buyerRole)
     .click(topMenu.menuDropdown)
     .click(topMenu.dashboardBtn)
     .click(dashboard.yourGroups)
+    await checkTranslation(translationMissing) // my groups translation missing check
 
   await t
     .click(Selector('main').find('a').withText('Add group'))
-    .typeText('#name', groupName)
+    await checkTranslation(translationMissing)
+    await t.typeText('#name', groupName)
     .typeText('#summary', "fun-club")
     .typeText('#description', loremSentence, { paste: true })
     .click(Selector('button').withText('Submit'))
@@ -215,8 +230,12 @@ test('Groups', async (t) => { // ISN'T FLAKY??
     .expect(Selector('div').textContent).contains('already taken')
   //checks if group exists
     .click(dashboard.yourGroups)
-    .expect(Selector('a').withText(groupName).exists).ok()
-
+    .expect(Selector('a').withText('group').exists).ok()
+  //edit group
+    .click(Selector('td').find('a').withText('Edit'))
+    .typeText('#name', 'audi fans', { replace: true })
+    await t.click(Selector('button').withText('Submit'))
+    .expect(Selector('a').withText('audi fans').exists).ok()
 })
 
  test('Activity', async (t) => {
@@ -224,8 +243,10 @@ test('Groups', async (t) => { // ISN'T FLAKY??
    await t.useRole(buyerRole)
      .click(topMenu.menuDropdown)
      .click(topMenu.dashboardBtn)
-     .click(dashboard.activityFeed)
-     .typeText(Selector('textarea'), commentText)
+     await checkTranslation(translationMissing) // dashboard translation missing check
+     await t.click(dashboard.activityFeed)
+     await checkTranslation(translationMissing) // activity feed translation missing check
+     await t.typeText(Selector('textarea'), commentText)
      .click(Selector('button').withText('Send'))
      .click(topMenu.menuDropdown)
      .click(topMenu.dashboardBtn)
