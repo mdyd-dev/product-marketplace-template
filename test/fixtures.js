@@ -5,6 +5,7 @@ import TopMenuBtns from './pages/topmenu'
 
 export const topMenu = new TopMenuBtns()
 export const loginForm = new NewSessionForm()
+export const resetConfirmation = 'Please check your email.';
 export const loginConfirmation = 'Logged in'
 export const getURL = ClientFunction(() => window.location.href)
 export const myUrl = process.env.MPKIT_URL

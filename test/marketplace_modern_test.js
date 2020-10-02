@@ -1,6 +1,6 @@
 import { Selector, ClientFunction, t } from 'testcafe'
 import { buyerRole, sellerRole, adminRole } from './roles'
-import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL, loremSentence, notAuthorizedUser, groupName } from './fixtures'
+import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL, loremSentence, notAuthorizedUser, groupName, resetConfirmation } from './fixtures'
 import { register, createItem } from './helper'
 import NewSessionForm from './pages/newsession'
 import NewItemForm from './pages/newitem'
@@ -60,6 +60,16 @@ test('Edit John Profile Page', async (t) => {
   await t
     .expect(Selector('main').find('#user-name').withText(`${John.firstName} ${John.lastName}`).exists).ok()
 })
+
+test(`Reset Password test`, async (t) => {
+  await t
+    .click(topMenu.logInBtn)
+    .click(loginForm.resetBtn)
+    .typeText(loginForm.emailInput, 'resetpassword@example.com')
+    .click(loginForm.resetPasswordSubmit)
+    .expect(Selector('main').withText(resetConfirmation).exists)
+    .ok('message ' + resetConfirmation + " doesn't exists");
+});
 
 
 test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log in with wrong data`, async (t) => {

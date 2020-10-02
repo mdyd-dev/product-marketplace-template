@@ -11,5 +11,7 @@ export default class NewSessionForm {
     this.usernameInput = Selector('label #username')
     this.regBtn = Selector('a').withText('Register')
     this.submitBtn = Selector('button').withText('Sign Up')
+    this.resetBtn = Selector('a').withText('Reset')
+    this.resetPasswordSubmit = Selector('button').withText('Send email with')
   }
 }
