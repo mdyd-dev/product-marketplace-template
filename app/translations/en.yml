@@ -37,10 +37,6 @@ en:
         groups: People gathering
         items: People selling
         profiles: People joining
-        header:
-          item_created: New Item
-          group_created: New Group
-          comment_created: New Post
     relationships:
       type:
         - followship
