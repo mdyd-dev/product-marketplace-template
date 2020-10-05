@@ -1,5 +1,6 @@
 <script>window.cdnUrl = '{{ "" | asset_url }}';</script>
 
 <script src="{{ 'js/app.js' | asset_url }}"></script>
+
 {% comment %}TODO: rewrite navigation dropdown in vanila js{% endcomment %}
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script src="{{ 'js/vendor/alpine.min.js' | asset_url }}"></script>
