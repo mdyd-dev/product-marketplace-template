@@ -7,7 +7,7 @@ export default class NewSessionForm {
     this.emailLabel = Selector('label').withText('E-mail')
     this.passwordLabel = Selector('label').withText('Password')
     this.usernameLabel = Selector('label[for="username"]')
-    this.logInBtn = Selector('button').withText('Log in')
+    this.logInBtn = Selector('button').withText('Log In')
     this.usernameInput = Selector('label #username')
     this.regBtn = Selector('a').withText('Register')
     this.submitBtn = Selector('button').withText('Sign Up')
