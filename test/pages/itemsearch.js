@@ -7,5 +7,6 @@ export default class ItemSearch {
     this.itemLink = Selector('a').withText(item.name)
     this.editedItemLink = Selector('div').find('a').withText(editedItem.name)
     this.sortButton = Selector('#sort')
+    this.smallSearch = Selector('[name="search-k"]')
   }
 }

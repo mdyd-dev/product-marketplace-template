@@ -132,8 +132,8 @@ test('Groups', async (t) => { // ISN'T FLAKY??
 
   test('Small search', async (t) => {
   await t.useRole(buyerRole)
-    .typeText(Selector('#search-k'), John.name)
-    .click(Selector('button').withText('Search'))
+    .typeText(Selector(itemSearch.smallSearch), John.name)
+    .click(itemSearch.searchBtn)
     .debug()
     .expect(Selector('div').find('header').withText('Profile').exists).ok()
     .expect(Selector('div').find('header').withText('Group').exists).ok()
