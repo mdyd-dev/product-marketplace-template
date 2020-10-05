@@ -164,7 +164,6 @@ test('Buying an item and following the seller', async (t) => {
     .click(dashboard.yourBuyingOrders) // buyer's order check
     .click(Selector('a').withText(item.name))
     .expect(Selector('div').withText('Ordered').exists).ok()
-    .debug()
     .click(topMenu.menuDropdown)
     .click(topMenu.dashboardBtn)
     .click(dashboard.goProfile)
