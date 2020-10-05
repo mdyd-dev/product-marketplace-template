@@ -1,10 +1,9 @@
 <div class="flex items-center justify-around py-20">
   <h1 class="text-2xl font-medium">
-    You haven’t added any groups yet. <br>
-    Create your first one now!
+    {{ 'app.groups.empty_state' | t }}
   </h1>
 
   <a href="/dashboard/groups/new" class="text-lg button">
-    Add group
+    {{ 'app.groups.add' | t }}
   </a>
 </div>

@@ -16,7 +16,7 @@
           <td>
             <a href="/profile/{% print record.profile.slug %}">{{ record.profile.name }}</a>
             <div class="text-xs">
-              slug: {{ record.profile.slug }} id: {{ record.profile.id }} uuid: {{ record.profile.uuid }}
+              {{ 'admin.menu.users.slug' | t }}  {{ record.profile.slug }} {{ 'admin.menu.users.id' | t }} {{ record.profile.id }} {{ 'admin.menu.users.uuid' | t }} {{ record.profile.uuid }}
             </div>
           </td>
           <td>

@@ -3,11 +3,28 @@ en:
     menu:
       setup: Configuration
       items: Items
-      activities: Activities
+      users:
+        slug: "slug: "
+        id: "id: "
+        uuid: "uuid: "
+      activities:
+        name: Activities
+        following: "following:"
+        list:
+          public: public
+          audit: audit all events
+          all: all
+          comments: comments
+          user: "user: "
+          user_id: "id: "
+          group: "group: "
+          group_id: "id: "
+
+
       setup: Setup
       categories: Categories
       orders: Orders
-      users: Users
+      users_title: Users
       home: Home
     metric:
       period:
@@ -48,6 +65,7 @@ en:
       title: Feed
     title: MVP Marketplace
     support_email: "support@getmarkeplace.co"
+    page_not_found: Page not found.
 
     total_entries: "Total items:"
     no_items_found: No items found
@@ -62,6 +80,15 @@ en:
     dashboard: Dashboard
     login: Log in
     logout: Log out %{user}
+    login_form:
+      log_in: Log In
+      email: E-mail
+      password: Password
+      register: Register
+      reset: Reset
+      anonymous: Don't have an account?
+      password_lost: Password lost?
+
 
     order: Order
     your-orders: Your orders
@@ -81,6 +108,29 @@ en:
       log-out: Log out
       chat: Chat
 
+    footer:
+      description: MVP Marketplace template is modern marketplace to gather your clients together
+      copyrights:
+        year: © 2020
+        title: MVP Marketplace — Powered by
+        product_owner: platformOS
+
+
+
+      header:
+        title:
+          general: GENERAL
+          join: JOIN
+          support: SUPPORT
+        list:
+          home: Home
+          about_us: About us
+          terms_of_service: Terms of service
+          sign_up: Sign up
+          log_in: Log in
+          contact_us: Contact Us
+          faq: FAQ
+
     hero:
       shop: Find your dream watch
       sell: Sell part of your collection
@@ -92,6 +142,7 @@ en:
       new: new order
       list: Orders
       payment_success: Payment success
+      none: Your orders will appear here. Right now you don't have any.
       status:
         updated: Order status changed
       attr:
@@ -100,10 +151,18 @@ en:
         seller: Seller
         buyer: Buyer
         total: Total
+      review:
+        confirm: Please confirm and submit your order
+        order_total: "Order total: "
+        success: Your order has been paid.
 
     groups:
       list: Groups
       group: Group
+      owner: ", Owner"
+      description: Description
+      members: Members
+      view_all: View all
       name: Name
       picture: Picture
       summary: Summary
@@ -111,6 +170,19 @@ en:
       add: Add group
       deleted: Group has been deleted
       new: New
+      new_group: New Group
+      edit: "Edit Group: "
+      empty_state: You haven’t added any groups yet. <br> Create your first one now!
+      nav:
+        activity: Activity
+        about: About
+        members: Members
+      form:
+        name: Name
+        summary: Summary (displayed on list)
+        photo: Main Photo
+        description: Description
+        submit: Submit
 
     activities:
       list: Activities
@@ -137,6 +209,11 @@ en:
     users:
       new: new user
       list: Users
+      create_account: Create an Account
+      form:
+        email: E-mail
+        password: Password
+        signup: Sign Up
       attr:
         id: ID
         created_at: Created at
@@ -152,10 +229,23 @@ en:
       user-list: You are now on <span class="font-semibold">%{name}'s</span> list (%{name})
       yours: My items
       list: Items
-      new: new item
+      items_404: 404 item not found
+      first_question: Do you want to add one?
+      new: New Item
+      buy_for: Buy for
+      item_administration: Item Administration
       created: Item created
+      edit: Edit Item
       updated: Item updated
       deleted: Item has been deleted successfully
+      none: You don't have any items yet.
+      form:
+        name: Name
+        photos: Photos
+        category: Category
+        description: Description
+        price: Price ($)
+        submit: Submit
       ordered_times:
         other: Ordered %{count} times
         one: Ordered %{count} time
@@ -172,6 +262,14 @@ en:
       attr:
         name: Category Name
         key: Key
+    stripe:
+      header: Stripe
+      register: Please visit <a href="https://stripe.com" target="_blank" rel="extrnal noopener">https://stripe.com</a>
+        and register your <span class="font-semibold">Stripe Connect</span> account.
+      copy_and_add: Copy and add this redirect URL in your
+      public_key: Enter your Stripe public key, secret key, and connect account client ID
+      settings: "stripe settings: "
+      save: Save
 
     payments:
       account:
@@ -197,6 +295,7 @@ en:
           you_can_manage_details: You can manage account details in the
         success:
           payout_account_added: Your payout account has been added.
+          account: Your payout account has been added.\
         failure:
           failed_adding_account: Failed adding payout account.
 
@@ -225,11 +324,19 @@ en:
     passwords:
       edit: Change password
       updated: Your new password has been set successfully.
+      password: Password
+      password_confirmation: Password Confirmation
+      password_update: Update Password
 
     emails:
       passwords:
         reset:
           subject: Reset Password
+    credit_cards:
+      name: Credit Cards
+      no_cards: You don't have any cards connected
+      expires: Expires
+      add: Add Credit Card
     p-dashboard:
       selling: Selling
       buying: Buying
@@ -251,7 +358,6 @@ en:
       buy-orders: Purchases
       sell-orders: Sold
 
-
     profiles:
       edit: Profile Edit
       username: Username
@@ -260,6 +366,13 @@ en:
       profile_photo: Profile Photo
       incomplete: Fill your profile
       bio: Short Bio
+      nav:
+        activity: Activity
+        groups: Groups
+        following: Following
+        followers: Followers
+        products: Products
+
 
     search:
       all_categories: All categories
