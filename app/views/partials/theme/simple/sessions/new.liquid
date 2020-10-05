@@ -1,6 +1,6 @@
 <div class="container items-center mx-auto">
   <div class="mx-auto mb-2 text-center lg:w-2/6 md:w-1/2">
-    <h1 class="text-2xl">Log In</h1>
+    <h1 class="text-2xl">{{ 'app.login_form.log_in' | t }}</h1>
   </div>
 
   <div class="w-full p-8 mx-auto mt-10 bg-gray-200 rounded-lg shadow-md lg:w-2/6 md:w-1/2 md:mt-0">
@@ -8,24 +8,24 @@
       {% render 'authenticity_token', context: context %}
 
       <label class="block mt-3" for="email">
-        <span class="block">E-mail</span>
+        <span class="block">{{ 'app.login_form.email' | t }}</span>
         <input name="user[email]" type="email" id="email" value="{{ object.email }}" class="w-full form-input" autofocus />
         {% render 'theme/simple/field_error', errors: object.errors.email %}
       </label>
 
       <label class="block mt-3" for="password">
-        <span class="block">Password</span>
+        <span class="block">{{ 'app.login_form.password' | t }}</span>
         <input name="user[password]" type="password" id="password" value="{{ object.password }}" class="w-full form-input" />
         {% render 'theme/simple/field_error', errors: object.errors.password %}
       </label>
 
-      <button class="mt-3 button">Log in</button>
+      <button class="mt-3 button">{{ 'app.login_form.log_in' | t }}</button>
     </form>
     <p class="mt-8 text-gray-600">
-      Don't have an account? <a href='/sign-up' class="underline">Register</a>
+      {{ 'app.login_form.anonymous' | t }} <a href='/sign-up' class="underline">{{ 'app.login_form.register' | t }}</a>
     </p>
     <p class="text-gray-600">
-      Password lost? <a href='/passwords/reset' class="underline">Reset</a>
+      {{ 'app.login_form.password_lost' | t }} <a href='/passwords/reset' class="underline">{{ 'app.login_form.reset' | t }}</a>
     </p>
   </div>
 </div>

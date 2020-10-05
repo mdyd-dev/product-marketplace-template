@@ -2,22 +2,22 @@
 
   <form action="" class="flex justify-between w-full">
     <div class="flex items-center p-2 flex-cols">
-      <span class="mr-2">public</span>
+      <span class="mr-2">{{ 'admin.menu.activities.list.public' | t }}</span>
       <input name="public" type="checkbox" {% if context.params.public %}checked{% endif %}/>
     </div>
     <select name="feed" class="w-5/6 text-xl form-input">
-      <option value="">audit all events</option>
-      <option value="system.1" {% if params.feed == "system.1" %}selected{% endif %}>all</option>
-      <option value="system.2" {% if params.feed == "system.2" %}selected{% endif %}>comments</option>
+      <option value="">{{ 'admin.menu.activities.list.audit' | t }}</option>
+      <option value="system.1" {% if params.feed == "system.1" %}selected{% endif %}>{{ 'admin.menu.activities.list.all' | t }}</option>
+      <option value="system.2" {% if params.feed == "system.2" %}selected{% endif %}>{{ 'admin.menu.activities.list.comments' | t }}</option>
 
       {% for user in users.results %}
         {% assign feed = "user." | append: user.id %}
-        <option value="{{feed}}" {% if params.feed == feed %}selected{% endif %}>user: {{ user.name }} (id:{{ user.id }})</option>
+        <option value="{{feed}}" {% if params.feed == feed %}selected{% endif %}>{{ 'admin.menu.activities.list.user' | t }} {{ user.name }} ({{ 'admin.menu.activities.list.user_id' | t }}{{ user.id }})</option>
       {% endfor %}
 
       {% for group in groups.results %}
         {% assign feed = "group." | append: group.id %}
-        <option value="{{ feed }}" {% if params.feed == feed %}selected{% endif %}>group: {{ group.name }} (id:{{ group.id }})</option>
+        <option value="{{ feed }}" {% if params.feed == feed %}selected{% endif %}>{{ 'admin.menu.activities.list.group' | t }} {{ group.name }} ({{ 'admin.menu.activities.list.group_id' | t }}{{ group.id }})</option>
       {% endfor %}
 
     </select>
@@ -25,7 +25,7 @@
   </form>
 
   <span class="ml-2 text-xs">
-    following: {{ selected.followed_users | map: 'email' | join: ', ' }}
+    {{ 'admin.menu.activities.following' | t }} {{ selected.followed_users | map: 'email' | join: ', ' }}
   </span>
 
   <div class="my-5">

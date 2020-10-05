@@ -18,19 +18,19 @@
     <input type="hidden" name="item[uuid]" value="{{ item_uuid }}" />
 
     <div class="my-3">
-      <label class="block" for="name">Name</label>
+      <label class="block" for="name">{{ 'app.items.form.name' | t }}</label>
       <input class="w-2/3 form-input" type="text" id="name" name="item[name]" value="{{ item.name }}" autofocus required
         />
       {% include 'theme/simple/field_error', errors: object.errors.name %}
     </div>
 
     <div class="mt-3">
-      <label class="block">Photos</label>
+      <label class="block">{{ 'app.items.form.photos' | t }}</label>
       {% include 'theme/simple/photos/uppy_area' %}
     </div>
 
     <div class="mt-3">
-      <label class="block" for="category">Category</label>
+      <label class="block" for="category">{{ 'app.items.form.category' | t }}</label>
       <select class="form-select" id="category" name="item[category]">
         {% for category in lib.categories %}
           {% assign ident = category | split: '/' | size | minus: 1 | times: 2 %}
@@ -45,7 +45,7 @@
     </div>
 
     <div class="mt-3">
-      <label class="block" for="description">Description</label>
+      <label class="block" for="description">{{ 'app.items.form.description' | t }}</label>
       <textarea class="w-full form-input" type="text" id="description" name="item[description]" rows="3"
         required>{{ item.description }}</textarea>
 
@@ -64,14 +64,14 @@
     {% endcomment %}
 
     <div class="mt-3">
-      <label class="block" for="price">Price ($)</label>
+      <label class="block" for="price">{{ 'app.items.form.price' | t }}</label>
       <!-- TODO: Add currency prefix $[input]  -->
       <input class="w-32 form-input" type="number" id="price" name="item[price]"
         value="{{ item.price | default: 1000 | pricify_cents | replace_regex: '[\$\,]', '' }}" />
       {% include 'theme/simple/field_error', errors: object.errors.price %}
     </div>
 
-    <button class="mt-8 button" value="{{ path }}">Submit</button>
+    <button class="mt-8 button" value="{{ path }}">{{ 'app.items.form.submit' | t }}</button>
   </form>
 
 </div>
