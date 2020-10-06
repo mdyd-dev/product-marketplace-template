@@ -3,7 +3,7 @@
 <div class="flex flex-col p-6 mb-6 bg-white rounded-lg shadow">
   {% render 'theme/simple/activities/feed_unit/header', payload: payload %}
 
-  {% if payload.object.description.size > 0 and payload.object.body.size > 0%}
+  {% if payload.object.description.size > 0 and payload.object.body.size > 0 %}
   <div class="py-2 leading-snug break-all">
     <p>{{ payload.object.description }}</p>
     <p>{% print payload.object.body %}</p>
