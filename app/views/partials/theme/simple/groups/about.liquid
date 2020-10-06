@@ -11,18 +11,18 @@
       <a class="text-xl font-bold" href="/profile/{{ group.owner.profile.slug }}">
         {{ group.owner.profile.first_name }} {{ group.owner.profile.last_name }}
       </a>
-      <span class="text-xl font-medium">, Owner</span>
+      <span class="text-xl font-medium">{{ 'app.groups.owner' | t }}</span>
     </div>
 
     <div class="mt-10">
-      Description
+      {{ 'app.groups.description' | t }}
       <p class="mt-5 text-lg">
         {{ group.description }}
       </p>
     </div>
   </div>
   <div class="w-1/3 p-5 pt-10 bg-white">
-    <h3 class="text-xl">Members ({{ list.total_entries }})</h3>
+    <h3 class="text-xl"> {{ 'app.groups.members' | t }} ({{ list.total_entries }})</h3>
     <div class="flex flex-wrap">
       {% for relationship in list.results %}
         {% assign user = relationship.l %}
@@ -32,7 +32,7 @@
 
     {% if list.total_entries > list.results.size %}
       <a href="/groups/members/{{ group.id }}" class="button button-secondary">
-        View all
+        {{ 'app.groups.view_all' | t }}
       </a>
     {% endif %}
   </div>

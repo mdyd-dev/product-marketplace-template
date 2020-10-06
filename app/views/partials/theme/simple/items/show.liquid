@@ -70,7 +70,7 @@
         <form action="/orders/new" method="get" class="ml-auto ">
           <input type="hidden" name="item_id" value="{{ item.id }}">
           <button id="buybutton" class="button">
-            Buy for {{ item.price | pricify_cents }}
+            {{ 'app.items.buy_for' | t }} {{ item.price | pricify_cents }}
           </button>
           {% if item.orders.size > 0 %}
           <div>{% print 'app.items.ordered_times' | t: count: item.orders.size %}</div>
@@ -79,9 +79,9 @@
       </div>
 
         {%- if item.owner.id == current_profile.id and item.orders.size < 1 %}
-        <p class="py-4 mt-4 border-t border-blue-300">Item Administration</p>
+        <p class="py-4 mt-4 border-t border-blue-300">{{ 'app.items.item_administration' | t }}</p>
         <span class="flex">
-          <a href="/dashboard/items/edit?id={{ item.id }}" class="button">Edit</a>
+          <a href="/dashboard/items/edit?id={{ item.id }}" class="button">{{ 'app.items.edit' | t }}</a>
         <form action="/dashboard/items/delete" method="post" class="ml-2"
           onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }"
         >

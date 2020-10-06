@@ -45,7 +45,7 @@
     </tbody>
   </table>
 {% else %}
-  <p>You don't have any items yet.</p>
+  <p>{{ 'app.items.none' | t }}</p>
   <div class="flex mt-4">
     <a href="/dashboard/items/new" class="w-auto flex-0 button">
       {{ 'app.dashboard-items.list-your-first-item' | t }}
