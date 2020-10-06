@@ -1,11 +1,11 @@
-<div class="h-full pt-5 overflow-hidden bg-white border-2 border-gray-200 rounded-lg">
+<div class="h-full pt-5 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm">
   {% liquid
     assign img_url = user.avatar.photo.versions.small
     unless img_url
       assign img_url = 'images/user.svg' | asset_url
     endunless
   %}
-  <img class="object-cover object-center w-24 h-24 mx-auto rounded-full shadow-md md:h-48 md:w-48" src="{{ img_url }}" alt="{{ user.slug }}">
+  <img class="object-cover object-center w-24 h-24 mx-auto rounded-full shadow-sm md:h-48 md:w-48" src="{{ img_url }}" alt="{{ user.slug }}">
 
   <div class="flex items-center justify-between p-6">
     {% render 'theme/simple/follow_button', current_profile: current_profile, user: user %}
