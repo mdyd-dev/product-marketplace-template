@@ -61,17 +61,21 @@ test('Edit John Profile Page', async (t) => {
   await t
     .expect(Selector('main').find('#user-name').withText(`${John.firstName} ${John.lastName}`).exists).ok()
 })
-
 test(`Reset Password test`, async (t) => {
   await t
     .click(topMenu.buttons.logIn)
     .click(loginForm.buttons.resetPassword)
-    .typeText(loginForm.inputs.email, 'resetpassword@example.com')
-    .click(loginForm.buttons.resetPasswordSubmit)
-    .expect(Selector('main').withText(resetConfirmation).exists)
-    .ok('message ' + resetConfirmation + " doesn't exists");
+    var resetPasswordUrl = await getURL()
+    var testCafeResetPasswordUrl = resetPasswordUrl+('?testcafe=1')
+    await t.navigateTo(testCafeResetPasswordUrl)
+    await t.typeText(loginForm.inputs.email, 'admin@example.com')
+    await t.click(loginForm.buttons.resetPasswordSubmit)
+    const text = await Selector('main').innerText
+    await t.navigateTo(text)
+    .typeText(Selector('[name="password[password]"]'), "newpassword")
+    .typeText(Selector('[name="password[password_confirmation]"]'), "newpassword")
+    .click(Selector('button').withText('Update Password'))
 });
-
 
 test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log in with wrong data`, async (t) => {
   await t
