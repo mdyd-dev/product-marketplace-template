@@ -2,10 +2,14 @@ import { Selector } from 'testcafe';
 
 export default class NewItemForm {
   constructor() {
-    this.nameField = Selector('#name')
-    this.descField = Selector('#description')
-    this.priceField = Selector('#price')
-    this.browseBtn = Selector('button').withText('browse your computer')
-    this.submitBtn = Selector('button').withText('Submit')
+    this.inputs = {
+      name: Selector('#name'),
+      description: Selector('#description'),
+      price: Selector('#price')
+    }
+    this.buttons = {
+      browseImages: Selector('button').withText('browse your computer'),
+      submit: Selector('button').withText('Submit')
+    }
   }
 }

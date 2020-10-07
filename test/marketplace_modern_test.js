@@ -17,6 +17,7 @@ const adminPage = new AdminPanel()
 const registerForm = new NewSessionForm()
 const loginForm = new NewSessionForm()
 const itemShow = new ItemShowPage(item)
+const editedItemShow = new ItemShowPage(editedItem)
 const editPage = new ItemShowEdit(editedItem)
 const newItemForm = new NewItemForm()
 const topMenu = new TopMenuBtns()
@@ -45,17 +46,17 @@ test.page(myUrl + '/sign-up')(`Register buyer John`, async (t) => {
 test('Edit John Profile Page', async (t) => {
   await t.useRole(buyerRole)
     await checkTranslation(translationMissing) // home page translation missing check
-    await t.click(topMenu.menuDropdown)
-    .click(topMenu.dashboardBtn)
-    await t.click(dashboard.editProfile)
-    await checkTranslation(translationMissing) // profile eidt translation missing check
-    await t.typeText(profileEditForm.name, John.name, { replace: true })
-    .typeText(profileEditForm.firstName, John.firstName, { replace: true })
-    .typeText(profileEditForm.lastName, John.lastName, { replace: true })
-    .click(profileEditForm.saveButton)
-    .click(topMenu.menuDropdown)
-    .click(topMenu.dashboardBtn)
-    .click(dashboard.goProfile)
+    await t.click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    await t.click(dashboard.nav.editProfile)
+    await checkTranslation(translationMissing) // profile edit translation missing check
+    await t.typeText(profileEditForm.inputs.name, John.name, { replace: true })
+    .typeText(profileEditForm.inputs.firstName, John.firstName, { replace: true })
+    .typeText(profileEditForm.inputs.lastName, John.lastName, { replace: true })
+    .click(profileEditForm.buttons.save)
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.publicProfile)
     await checkTranslation(translationMissing) // public profile translation missing check
   await t
     .expect(Selector('main').find('#user-name').withText(`${John.firstName} ${John.lastName}`).exists).ok()
@@ -63,10 +64,10 @@ test('Edit John Profile Page', async (t) => {
 
 test(`Reset Password test`, async (t) => {
   await t
-    .click(topMenu.logInBtn)
-    .click(loginForm.resetBtn)
-    .typeText(loginForm.emailInput, 'resetpassword@example.com')
-    .click(loginForm.resetPasswordSubmit)
+    .click(topMenu.buttons.logIn)
+    .click(loginForm.buttons.resetPassword)
+    .typeText(loginForm.inputs.email, 'resetpassword@example.com')
+    .click(loginForm.buttons.resetPasswordSubmit)
     .expect(Selector('main').withText(resetConfirmation).exists)
     .ok('message ' + resetConfirmation + " doesn't exists");
 });
@@ -74,28 +75,28 @@ test(`Reset Password test`, async (t) => {
 
 test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log in with wrong data`, async (t) => {
   await t
-    .click(loginForm.logInBtn)
+    .click(loginForm.buttons.logIn)
     await checkTranslation(translationMissing) // log in form translation missing check
-    await t.expect(loginForm.emailLabel.textContent).contains('cannot be blank')
-    .expect(loginForm.passwordLabel.textContent).contains('cannot be blank')
-    .typeText(loginForm.emailInput, 'admin@example.com')
-    .typeText(loginForm.passInput, 'asd')
-    .click(loginForm.logInBtn)
-    .expect(loginForm.emailLabel.textContent).contains('Invalid email or password')
-    .click(loginForm.regBtn)
-    .typeText(registerForm.emailInput, 'admin@example.com')
-    .typeText(registerForm.passInput, 'asd')
-    .click(registerForm.submitBtn)
-    .expect(registerForm.emailLabel.textContent).contains('already taken')
+    await t.expect(loginForm.labels.email.textContent).contains('cannot be blank')
+    .expect(loginForm.labels.password.textContent).contains('cannot be blank')
+    .typeText(loginForm.inputs.email, 'admin@example.com')
+    .typeText(loginForm.inputs.password, 'asd')
+    .click(loginForm.buttons.logIn)
+    .expect(loginForm.labels.email.textContent).contains('Invalid email or password')
+    .click(loginForm.buttons.register)
+    .typeText(registerForm.inputs.email, 'admin@example.com')
+    .typeText(registerForm.inputs.password, 'asd')
+    .click(registerForm.buttons.regSubmit)
+    .expect(registerForm.labels.email.textContent).contains('already taken')
 })
 
 test('Creating item then trying to follow', async (t) => {
   await t.useRole(sellerRole)
   await createItem(item.name, item.description, item.price)
   //checks if all data is correct
-  await t.expect(itemShow.name.exists).ok()
-  await t.expect(itemShow.description.exists).ok()
-  await t.expect(itemShow.price.innerText).eql('$10,000', 'check element text')
+  await t.expect(itemShow.fields.name.exists).ok()
+  await t.expect(itemShow.fields.description.exists).ok()
+  await t.expect(itemShow.fields.price.innerText).eql('$10,000', 'check element text')
   await t.expect('img[src="_uploads_/testimage.png"]').ok()
     .expect(Selector('button').withAttribute('data-follow-user').exists).notOk()
 })
@@ -105,40 +106,40 @@ test('Editing item and search', async (t) => {
   await t
   //item search
     .useRole(sellerRole)
-    .click(topMenu.menuDropdown)
-    .click(topMenu.dashboardBtn)
-    .click(dashboard.goProfile)
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.publicProfile)
   const sellerProfilePage = ClientFunction(() => document.location.href)
   await t.expect(sellerProfilePage()).contains(myUrl+'profile/' + SellerRandomUser.name) // checks if href contains slugified username
     .click(Selector('a').withText("Items"))  // goes on your list from profile view
-    .click(itemSearch.sortButton)
+    .click(itemSearch.buttons.sort)
     .click(Selector('option').withText('The Most Recent'))
-    .click(itemSearch.searchBtn)
-    .click(itemSearch.itemLink)
+    .click(itemSearch.buttons.search)
+    .click(itemSearch.links.item)
     .click(Selector('a').withText("Browse this user's items")) // goes on your list from item show
-    .click(itemSearch.itemLink)
+    .click(itemSearch.links.item)
 
   //change of item information
-  await t.click(itemShow.editbutton)
+  await t.click(itemShow.buttons.edit)
   await checkTranslation(translationMissing)
-    await t.typeText(newItemForm.nameField, editedItem.name, { replace: true })
-    .typeText(newItemForm.descField, editedItem.description, { replace: true })
-    .typeText(newItemForm.priceField, editedItem.price, { replace: true })
-    .click(newItemForm.submitBtn)
-  await t.expect(editPage.name.exists).ok()
-  await t.expect(editPage.description.exists).ok()
-  await t.expect(editPage.price.innerText).eql('$5,000', 'check element text')
+    await t.typeText(newItemForm.inputs.name, editedItem.name, { replace: true })
+    .typeText(newItemForm.inputs.description, editedItem.description, { replace: true })
+    .typeText(newItemForm.inputs.price, editedItem.price, { replace: true })
+    .click(newItemForm.buttons.submit)
+  await t.expect(editedItemShow.fields.name.exists).ok()
+  await t.expect(editedItemShow.fields.description.exists).ok()
+  await t.expect(editedItemShow.fields.editedPrice.innerText).eql('$5,000', 'check element text')
 })
 
 
 test('Deleting item', async (t) => {
   await t
     .useRole(sellerRole)
-    .click(topMenu.menuDropdown)
-    .click(topMenu.dashboardBtn)
-    .click(dashboard.goYourItems)
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.itemsForSell)
     .setNativeDialogHandler(() => true)
-    .click(editPage.deleteBtn)
+    .click(itemShow.buttons.delete)
 })
 
 test('Creating new item for sell', async (t) => {
@@ -149,32 +150,32 @@ test('Creating new item for sell', async (t) => {
 test('Buying an item and following the seller', async (t) => {
   await t
     .useRole(buyerRole)
-    .click(topMenu.itemsBtn)
-    .typeText(itemSearch.keyword, item.name)
-    .click(itemSearch.searchBtn)
-    .expect(itemSearch.itemLink.exists).ok()
-    .click(itemSearch.itemLink)
-    .click(itemShow.followButton)
-    .expect(itemShow.alreadyFollowedButton.exists).ok()
-    .click(itemShow.buyBtn)
+    .click(topMenu.buttons.items)
+    .typeText(itemSearch.search.keyword, item.name)
+    .click(itemSearch.buttons.search)
+    .expect(itemSearch.links.item.exists).ok()
+    .click(itemSearch.links.item)
+    .click(itemShow.buttons.follow)
+    .expect(itemShow.buttons.alreadyFollowedState.exists).ok()
+    .click(itemShow.buttons.buy)
     .click(Selector('button').withText('Checkout'))
     .click(Selector('button').withText('Pay'))
-    .click(topMenu.menuDropdown)
-    .click(topMenu.dashboardBtn)
-    .click(dashboard.yourBuyingOrders) // buyer's order check
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.purchases) // buyer's order check
     .click(Selector('a').withText(item.name))
     .expect(Selector('div').withText('Ordered').exists).ok()
-    .click(topMenu.menuDropdown)
-    .click(topMenu.dashboardBtn)
-    .click(dashboard.goProfile)
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.publicProfile)
     .click(Selector('a').withText('Following'))
     .expect(Selector('div').find('a').withText(SellerRandomUser.name).exists).ok("Followed list not shown")
 
  await t
    .useRole(sellerRole) // seller checks if his order shown as paid
-    .click(topMenu.menuDropdown)
-   .click(topMenu.dashboardBtn)
-   .click(dashboard.yourSellingOrders)  // seller's order check
+    .click(topMenu.buttons.menuDropdown)
+   .click(topMenu.buttons.dashboard)
+   .click(dashboard.nav.sold)  // seller's order check
    .expect(Selector('a').withText(item.name).exists).ok("Item list not shown in seller orders")
  })
 
@@ -182,30 +183,35 @@ test('Buying an item and following the seller', async (t) => {
  test(`Admin Panel test`, async (t) => {
    await t
      .useRole(adminRole)
-     .click(topMenu.adminBtn)
+     await t.click(topMenu.buttons.adminPanel)
      await checkTranslation(translationMissing) // Admin panel translation missing check
-     await t.click(adminPage.users)
-   const usersTableRow = Selector('tbody').find('tr')
-   await t.expect(usersTableRow.count).gte(1)
-     .click(adminPage.orders)
-    const ordersTableRow = Selector('tbody').find('tr')
-    await t.expect(ordersTableRow.count).gte(1)
-      .click(adminPage.items)
-   const itemsTableRow = Selector('tbody').find('tr')
-   await t.expect(itemsTableRow.count).gt(1)
-     .click(adminPage.categories)
-   const categoriesTableRow = Selector('tbody').find('tr')
-   await t.expect(categoriesTableRow.count).gt(1)
-     .click(adminPage.activities)
-     .click(adminPage.setup)
+
+     await t.click(adminPage.menu.users)
+     const usersTableRow = Selector('tbody').find('tr')
+     await t.expect(usersTableRow.count).gte(1)
+
+     await t.click(adminPage.menu.orders)
+     const ordersTableRow = Selector('tbody').find('tr')
+     await t.expect(ordersTableRow.count).gte(1)
+
+     await t.click(adminPage.menu.items)
+     const itemsTableRow = Selector('tbody').find('tr')
+     await t.expect(itemsTableRow.count).gt(1)
+
+     await t.click(adminPage.menu.categories)
+     const categoriesTableRow = Selector('tbody').find('tr')
+     await t.expect(categoriesTableRow.count).gt(1)
+
+     await t.click(adminPage.menu.activities)
+     await t.click(adminPage.menu.setup)
  })
 
 
 test('Breakin-in test, edition by none user', async (t) => {
   await t.useRole(buyerRole)
-    .click(topMenu.itemsBtn)
-    .typeText(itemSearch.keyword, 'Watch')
-    .click(itemSearch.searchBtn)
+    .click(topMenu.buttons.items)
+    .typeText(itemSearch.search.keyword, 'Watch')
+    .click(itemSearch.buttons.search)
     .click(Selector('a').withText('Watch'))
   var itemEditUrl = await getURL()
   var itemEditUrl = itemEditUrl.split('-')
@@ -216,9 +222,9 @@ test('Breakin-in test, edition by none user', async (t) => {
 
 test('Groups', async (t) => {
   await t.useRole(buyerRole)
-    .click(topMenu.menuDropdown)
-    .click(topMenu.dashboardBtn)
-    .click(dashboard.yourGroups)
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.myGroups)
     await checkTranslation(translationMissing) // my groups translation missing check
 
   await t
@@ -229,9 +235,9 @@ test('Groups', async (t) => {
     .typeText('#description', loremSentence, { paste: true })
     .click(Selector('button').withText('Submit'))
   //unique test
-    .click(topMenu.menuDropdown)
-    .click(topMenu.dashboardBtn)
-    .click(dashboard.yourGroups)
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.myGroups)
     .click(Selector('a').withText('Add group'))
     .typeText('#name', groupName)
     .typeText('#summary', "fun-club")
@@ -239,7 +245,7 @@ test('Groups', async (t) => {
     .click(Selector('button').withText('Submit'))
     .expect(Selector('div').textContent).contains('already taken')
   //checks if group exists
-    .click(dashboard.yourGroups)
+    .click(dashboard.nav.myGroups)
     .expect(Selector('a').withText('group').exists).ok()
   //edit group
     .click(Selector('td').find('a').withText('Edit'))
@@ -251,15 +257,15 @@ test('Groups', async (t) => {
  test('Activity', async (t) => {
    const commentText = "What's new bro?"
    await t.useRole(buyerRole)
-     .click(topMenu.menuDropdown)
-     .click(topMenu.dashboardBtn)
+     .click(topMenu.buttons.menuDropdown)
+     .click(topMenu.buttons.dashboard)
      await checkTranslation(translationMissing) // dashboard translation missing check
-     await t.click(dashboard.activityFeed)
+     await t.click(dashboard.nav.activityFeed)
      await checkTranslation(translationMissing) // activity feed translation missing check
      await t.typeText(Selector('textarea'), commentText)
      .click(Selector('button').withText('Send'))
-     .click(topMenu.menuDropdown)
-     .click(topMenu.dashboardBtn)
-     .click(dashboard.goProfile)
+     .click(topMenu.buttons.menuDropdown)
+     .click(topMenu.buttons.dashboard)
+     .click(dashboard.nav.publicProfile)
      .expect(Selector('div').withText(commentText).exists).ok("checks if feed exists at user's profile activities")
  })

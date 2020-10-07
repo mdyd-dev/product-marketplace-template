@@ -9,7 +9,11 @@ method: post
 
     if email.valid
       include 'lib/commands/events/create', type: 'authentication_link_created', actor_id: object.id
-      include 'redirect_to', url: '/', notice: 'app.authentication_links.created'
+      if context.params.testcafe
+        echo object.url
+      else
+        include 'redirect_to', url: '/', notice: 'app.authentication_links.created'
+      endif
     else
       log 'sending email failed', type: 'showme'
       log email.errors, type: 'showme'

@@ -18,26 +18,26 @@ async function checkTranslation(selector) {
 export async function register(user) {
   checkTranslation(translationMissing)
   await t
-    .typeText(registerForm.emailInput, user.email)
-    .typeText(registerForm.passInput, user.password)
-    await t.click(registerForm.submitBtn)
+    .typeText(registerForm.inputs.email, user.email)
+    .typeText(registerForm.inputs.password, user.password)
+    await t.click(registerForm.buttons.regSubmit)
     const getLocation = await getURL()
     await t.expect(getLocation).contains(myUrl+ 'dashboard/profile/edit')
-    .typeText(profileEditForm.name, user.name)
-    .typeText(profileEditForm.firstName, user.firstName)
-    .typeText(profileEditForm.lastName, user.lastName)
-    .click(profileEditForm.saveButton)
+    .typeText(profileEditForm.inputs.name, user.name)
+    .typeText(profileEditForm.inputs.firstName, user.firstName)
+    .typeText(profileEditForm.inputs.lastName, user.lastName)
+    .click(profileEditForm.buttons.save)
 };
 
 export async function createItem(itemName, itemDescription, itemPrice) {
-    await t.click(topMenu.listItemBtn)
-    await t.typeText(newItemForm.nameField, itemName)
+    await t.click(topMenu.buttons.listItem)
+    await t.typeText(newItemForm.inputs.name, itemName)
     await checkTranslation(translationMissing)
-    await t.typeText(newItemForm.descField, itemDescription)
-    .typeText(newItemForm.priceField, itemPrice, { replace: true })
-    .click(newItemForm.browseBtn)
+    await t.typeText(newItemForm.inputs.description, itemDescription)
+    .typeText(newItemForm.inputs.price, itemPrice, { replace: true })
+    .click(newItemForm.buttons.browseImages)
     .setFilesToUpload(Selector('main').find('[name="files[]"]'), [
       '_uploads_/testimage.png',
     ])
-    .click(newItemForm.submitBtn)
+    .click(newItemForm.buttons.submit)
 };
