@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+const yeoman = require("yeoman-environment");
+const env = yeoman.createEnv();
+const program = require("commander");
+const path = require("path");
+const chalk = require("chalk");
+
+const runYeoman = (modelName, attributes) => {
+  const generatorName = 'crud'
+  const generatorPath = path.join(__dirname, "..", "generators", generatorName);
+
+  try {
+    env.register(generatorPath, generatorName);
+    env.run(`crud ${modelName} ${attributes.join(' ')}`, {}, () => {});
+  } catch (e) {
+    console.error(chalk.red("Error: "));
+    console.error(e);
+  }
+}
+
+program
+  .description('Generate model files for basic operations create, read, update, delete')
+  .arguments('<model_name> <attributes...>')
+  .usage("<model_name> <attribute_name:type_attribute...> ex. generate car model:string year:int ")
+  .action(function (modelName, attributes) {
+    runYeoman(modelName, attributes);
+  });
+
+program.parse(process.argv);

@@ -1,0 +1,14 @@
+---
+slug: admin/support-tickets
+method: delete
+---
+{% liquid
+  function object = 'lib/data/queries/contacts/find', id: context.params.id
+  function object = 'lib/commands/contacts/delete', object: object
+
+  if object.valid
+    include 'redirect_to', url: '/contacts', notice: 'app.models.shared.deleted'
+  else
+    include 'redirect_to', url: '/contacts', error: 'app.models.shared.delete_failed'
+  endif
+%}

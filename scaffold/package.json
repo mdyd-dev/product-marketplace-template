@@ -1,0 +1,23 @@
+{
+  "name": "@marketplace-platform/marketplace-module",
+  "version": "1.1.0",
+  "description": "Marketplace Module Installer",
+  "repository": "mdyd-dev/marketplace-module",
+  "bin": {
+    "marketplace-module": "bin/marketplace-module"
+  },
+  "author": "pavelloz@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "cat": "^0.2.0",
+    "chalk": "^2.3.0",
+    "cli-table": "^0.3.1",
+    "commander": "^2.13.0",
+    "generator-pick-a-template": "^2.0.2",
+    "js-yaml": "^3.14.0",
+    "ls-all": "^1.1.0",
+    "pluralize": "^8.0.0",
+    "yeoman-environment": "^2.10.3",
+    "yeoman-generator": "^2.0.5"
+  }
+}

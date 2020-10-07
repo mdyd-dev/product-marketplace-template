@@ -1,0 +1,5 @@
+{% liquid
+  function <%= modelNamePlural %> = 'lib/data/queries/<%= modelNamePlural %>/search', limit: 100
+
+  include 'theme/simple/<%= modelNamePlural %>/index', <%= modelNamePlural %>: <%= modelNamePlural %>
+%}

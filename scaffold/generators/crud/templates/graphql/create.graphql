@@ -1,0 +1,18 @@
+mutation create_<%= modelName %>(
+<% attributes.forEach((attr) => { -%>
+  $<%= attr.name %>: String!
+<% }); -%>
+) {
+  model_create(
+    model: {
+      model_schema_name: "<%= modelName %>"
+      properties: [
+      <% attributes.forEach((attr) => { -%>
+        { name: "<%= attr.name %>" value: $<%= attr.name %> }
+      <% }); -%>
+      ]
+    }
+  ){
+    id properties
+  }
+}

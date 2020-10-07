@@ -1,0 +1,14 @@
+---
+slug: <%= modelNamePlural %>
+method: delete
+---
+{% liquid
+  function object = 'lib/data/queries/<%= modelNamePlural %>/find', id: context.params.id
+  function object = 'lib/commands/<%= modelNamePlural %>/delete', object: object
+
+  if object.valid
+    include 'redirect_to', url: '/<%= modelNamePlural %>', notice: 'app.models.shared.deleted'
+  else
+    include 'redirect_to', url: '/<%= modelNamePlural %>', error: 'app.models.shared.delete_failed'
+  endif
+%}

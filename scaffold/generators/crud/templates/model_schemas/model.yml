@@ -1,0 +1,6 @@
+name: <%= modelName %>
+properties:
+<% attributes.forEach((attr) => { -%>
+  - name: <%= attr.name %>
+    type: <%= attr.type %>
+<% }); -%>
