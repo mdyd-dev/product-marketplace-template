@@ -28,7 +28,7 @@ export const John = {
 
 export const Admin = {
   email: 'admin@example.com',
-  password: 'password'
+  password: 'newpassword'
 }
 
 export const SellerRandomUser = {
