@@ -1,5 +1,5 @@
 {% liquid
-  function object = 'modules/stripe/lib/account/create/build', object: object
+  function object = 'modules/stripe/lib/account/create/build', object: object, current_user: current_user
   if object.valid
     function object = 'modules/stripe/lib/account/create/execute', object: object
   endif

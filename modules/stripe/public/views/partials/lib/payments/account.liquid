@@ -1,7 +1,10 @@
 {% liquid
-  graphql result = "modules/stripe/accounts", external_id: context.current_user.id
-  log result
-  assign account = result | dig: 'accounts', 'results', 0
+  unless user_id
+    return null
+  endunless
 
-  return account
+  graphql r = "modules/stripe/accounts", external_id: user_id
+  include 'lib/handle_graphql_response', r: r, name: 'modules/stripe/payments/account'
+
+  return r.accounts.results.first
 %}

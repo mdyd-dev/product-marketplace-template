@@ -4,17 +4,17 @@ method: post
 layout_name: ''
 ---
 {% liquid
-  function valid_webhook = 'modules/stripe/lib/webhooks/must_be_valid_webhook', webhook_path: '/webhooks/checkout_session_completed'
+  function valid_webhook = 'modules/stripe/lib/webhooks/must_be_valid_webhook', webhook_path: '/webhooks/checkout_session_completed', context: context
   unless valid_webhook
     response_status 403
     break
   endunless
 
-  function object = 'modules/stripe/lib/webhooks/checkout_session_completed/call', post_params: context.post_params
+  function object = 'modules/stripe/lib/webhooks/checkout_session_completed/call', post_params: context.post_params, current_user: context.current_user
   if object.valid
     echo object
   else
-    response_status 403
+    response_status 500
     echo object
   endif
 %}
