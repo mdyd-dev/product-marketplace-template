@@ -13,12 +13,12 @@
 {% endparse_json %}
 
 {% liquid
-  include 'modules/stripe/lib/account/update/execute', object: object
+  function object = 'modules/stripe/lib/account/update/execute', object: object
 
   comment
     TODO: insert object into data to update
-  if context.exports.object.valid != true
-    echo context.exports.object
+  if object.valid != true
+    echo object
     include 'test/register_error', contract: contract, field_name: 'base', key: 'test.should.be_valid'
   endif
   endcomment
