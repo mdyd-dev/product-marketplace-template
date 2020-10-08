@@ -13,6 +13,9 @@ export default class ItemSearch {
       sort: Selector('#sort'),
       search: Selector('button').withText('Search')
     }
+    this.options = {
+      theMostRecent: Selector('option').withText('The Most Recent')
+    }
 
     //this.keyword = Selector('#k')
     //this.searchBtn = Selector('button').withText('Search')
