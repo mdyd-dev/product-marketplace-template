@@ -1,16 +1,17 @@
 import { Selector, ClientFunction, t } from 'testcafe'
 import { buyerRole, sellerRole, adminRole } from './roles'
-import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL, loremSentence, notAuthorizedUser, groupName, resetConfirmation } from './fixtures'
+import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL, loremSentence, notAuthorizedUser, groupName, newPassword, Admin } from './fixtures'
 import { register, createItem } from './helper'
 import NewSessionForm from './pages/newsession'
 import NewItemForm from './pages/newitem'
 import ItemShowPage from './pages/itemshow'
-import ItemShowEdit from './pages/itemedit'
 import ItemSearch from './pages/itemsearch'
 import AdminPanel from './pages/adminp'
 import TopMenuBtns from './pages/topmenu'
 import DashboardPage from './pages/dashboard'
 import ProfileEditForm from './pages/profileEdit'
+import PasswordReset from './pages/passwordReset'
+
 
 //pages
 const adminPage = new AdminPanel()
@@ -18,7 +19,7 @@ const registerForm = new NewSessionForm()
 const loginForm = new NewSessionForm()
 const itemShow = new ItemShowPage(item)
 const editedItemShow = new ItemShowPage(editedItem)
-const editPage = new ItemShowEdit(editedItem)
+const passwordResetForm = new PasswordReset()
 const newItemForm = new NewItemForm()
 const topMenu = new TopMenuBtns()
 const itemSearch = new ItemSearch(item, editedItem)
@@ -60,21 +61,19 @@ test('Edit John Profile Page', async (t) => {
     await checkTranslation(translationMissing) // public profile translation missing check
   await t
     .expect(Selector('main').find('#user-name').withText(`${John.firstName} ${John.lastName}`).exists).ok()
+
 })
 test(`Reset Password test`, async (t) => {
   await t
     .click(topMenu.buttons.logIn)
     .click(loginForm.buttons.resetPassword)
-    var resetPasswordUrl = await getURL()
-    var testCafeResetPasswordUrl = resetPasswordUrl+('?testcafe=1')
-    await t.navigateTo(testCafeResetPasswordUrl)
-    await t.typeText(loginForm.inputs.email, 'admin@example.com')
+    await t.typeText(loginForm.inputs.email, Admin.email)
     await t.click(loginForm.buttons.resetPasswordSubmit)
-    const text = await Selector('main').innerText
-    await t.navigateTo(text)
-    .typeText(Selector('[name="password[password]"]'), "newpassword")
-    .typeText(Selector('[name="password[password_confirmation]"]'), "newpassword")
-    .click(Selector('button').withText('Update Password'))
+    const passwordResetUrl = await Selector('main').innerText
+    await t.navigateTo(passwordResetUrl)
+    .typeText(passwordResetForm.inputs.newPassword, newPassword)
+    .typeText(passwordResetForm.inputs.newPasswordConfirmation, newPassword)
+    .click(passwordResetForm.buttons.submit)
 });
 
 test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log in with wrong data`, async (t) => {
