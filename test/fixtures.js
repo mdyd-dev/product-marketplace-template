@@ -14,6 +14,7 @@ export const editURL = '/dashboard/items/edit?id='
 export const notAuthorizedUser = 'Permission denied'
 export const groupName = faker.lorem.words();
 export const translationMissing = (Selector('body').withText("translation missing"))
+export const newPassword = 'newpassword'
 
 
 export const randomFirstName = faker.name.firstName()
