@@ -15,6 +15,7 @@ export const notAuthorizedUser = 'Permission denied'
 export const groupName = faker.lorem.words();
 export const translationMissing = (Selector('body').withText("translation missing"))
 export const newPassword = 'newpassword'
+export const link = Selector('a')
 
 
 export const randomFirstName = faker.name.firstName()

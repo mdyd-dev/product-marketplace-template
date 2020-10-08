@@ -1,6 +1,6 @@
 import { Selector } from 'testcafe';
 
-export default class ProfileEditForm {
+export default class ProfileView {
   constructor() {
     this.inputs = {
       name: Selector('#name'),

@@ -1,6 +1,6 @@
 import { Selector, ClientFunction, t } from 'testcafe'
 import { buyerRole, sellerRole, adminRole } from './roles'
-import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL, loremSentence, notAuthorizedUser, groupName, newPassword, Admin } from './fixtures'
+import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL, loremSentence, notAuthorizedUser, groupName, newPassword, Admin, link } from './fixtures'
 import { register, createItem } from './helper'
 import NewSessionForm from './pages/newsession'
 import NewItemForm from './pages/newitem'
@@ -11,6 +11,10 @@ import TopMenuBtns from './pages/topmenu'
 import DashboardPage from './pages/dashboard'
 import ProfileEditForm from './pages/profileEdit'
 import PasswordReset from './pages/passwordReset'
+import OrdersPage from './pages/orders'
+import ProfileView from './pages/publicProfile'
+import GroupsPage from './pages/groupsPage'
+
 
 
 //pages
@@ -25,6 +29,10 @@ const topMenu = new TopMenuBtns()
 const itemSearch = new ItemSearch(item, editedItem)
 const dashboard = new DashboardPage()
 const profileEditForm = new ProfileEditForm()
+const orders = new OrdersPage()
+const publicProfile = new ProfileView()
+const groupsPage = new GroupsPage()
+
 
 const translationMissing = Selector('body').withText('translation missing')
 async function checkTranslation(translationMissing) {
@@ -100,8 +108,8 @@ test('Creating item then trying to follow', async (t) => {
   await t.expect(itemShow.fields.name.exists).ok()
   await t.expect(itemShow.fields.description.exists).ok()
   await t.expect(itemShow.fields.price.innerText).eql('$10,000', 'check element text')
-  await t.expect('img[src="_uploads_/testimage.png"]').ok()
-    .expect(Selector('button').withAttribute('data-follow-user').exists).notOk()
+  await t.expect(itemShow.fields.displayImage).ok()
+  await t.expect(itemShow.buttons.follow.exists).notOk()
 })
 
 
@@ -114,12 +122,13 @@ test('Editing item and search', async (t) => {
     .click(dashboard.nav.publicProfile)
   const sellerProfilePage = ClientFunction(() => document.location.href)
   await t.expect(sellerProfilePage()).contains(myUrl+'profile/' + SellerRandomUser.name) // checks if href contains slugified username
-    .click(Selector('a').withText("Items"))  // goes on your list from profile view
+    .debug()
+    .click(topMenu.buttons.items)
     .click(itemSearch.buttons.sort)
-    .click(Selector('option').withText('The Most Recent'))
+    .click(itemSearch.options.theMostRecent)
     .click(itemSearch.buttons.search)
     .click(itemSearch.links.item)
-    .click(Selector('a').withText("Browse this user's items")) // goes on your list from item show
+    .click(itemShow.buttons.browseUsersList) // goes on your list from item show
     .click(itemSearch.links.item)
 
   //change of item information
@@ -161,25 +170,25 @@ test('Buying an item and following the seller', async (t) => {
     .click(itemShow.buttons.follow)
     .expect(itemShow.buttons.alreadyFollowedState.exists).ok()
     .click(itemShow.buttons.buy)
-    .click(Selector('button').withText('Checkout'))
-    .click(Selector('button').withText('Pay'))
+    .click(orders.buttons.checkout) // i need to make orders page
+    .click(orders.buttons.pay)
     .click(topMenu.buttons.menuDropdown)
     .click(topMenu.buttons.dashboard)
     .click(dashboard.nav.purchases) // buyer's order check
-    .click(Selector('a').withText(item.name))
-    .expect(Selector('div').withText('Ordered').exists).ok()
+    .click(link.withText(item.name))
+    .expect(itemShow.status.ordered.exists).ok()
     .click(topMenu.buttons.menuDropdown)
     .click(topMenu.buttons.dashboard)
     .click(dashboard.nav.publicProfile)
-    .click(Selector('a').withText('Following'))
-    .expect(Selector('div').find('a').withText(SellerRandomUser.name).exists).ok("Followed list not shown")
+    .click(publicProfile.menu.following)
+    .expect(publicProfile.links.userCard.withText(SellerRandomUser.name).exists).ok()
 
  await t
    .useRole(sellerRole) // seller checks if his order shown as paid
     .click(topMenu.buttons.menuDropdown)
    .click(topMenu.buttons.dashboard)
    .click(dashboard.nav.sold)  // seller's order check
-   .expect(Selector('a').withText(item.name).exists).ok("Item list not shown in seller orders")
+   .expect(link.withText(item.name).exists).ok("Item list not shown in seller orders")
  })
 
 
@@ -190,7 +199,7 @@ test('Buying an item and following the seller', async (t) => {
      await checkTranslation(translationMissing) // Admin panel translation missing check
 
      await t.click(adminPage.menu.users)
-     const usersTableRow = Selector('tbody').find('tr')
+     const usersTableRow = Selector('tbody').find('tr') // ADD TO PROPERTIES IN ADMIN PAGE OBJECT
      await t.expect(usersTableRow.count).gte(1)
 
      await t.click(adminPage.menu.orders)
@@ -215,12 +224,12 @@ test('Breakin-in test, edition by none user', async (t) => {
     .click(topMenu.buttons.items)
     .typeText(itemSearch.search.keyword, 'Watch')
     .click(itemSearch.buttons.search)
-    .click(Selector('a').withText('Watch'))
-  var itemEditUrl = await getURL()
-  var itemEditUrl = itemEditUrl.split('-')
-  var editItemId = itemEditUrl[itemEditUrl.length - 1]
-  await t.navigateTo(editURL + editItemId)
-  await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok('message ' + notAuthorizedUser + " doesn't exists")
+    .click(link.withText('Watch'))
+    var itemEditUrl = await getURL()
+    var itemEditUrl = itemEditUrl.split('-')
+    var editItemId = itemEditUrl[itemEditUrl.length - 1]
+    await t.navigateTo(editURL + editItemId)
+    await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok('message ' + notAuthorizedUser + " doesn't exists")
 })
 
 test('Groups', async (t) => {
@@ -230,31 +239,30 @@ test('Groups', async (t) => {
     .click(dashboard.nav.myGroups)
     await checkTranslation(translationMissing) // my groups translation missing check
 
-  await t
-    .click(Selector('main').find('a').withText('Add group'))
+    await t.click(groupsPage.buttons.addGroup)
     await checkTranslation(translationMissing)
-    await t.typeText('#name', groupName)
-    .typeText('#summary', "fun-club")
-    .typeText('#description', loremSentence, { paste: true })
-    .click(Selector('button').withText('Submit'))
+    await t.typeText(groupsPage.inputs.name, groupName)
+    .typeText(groupsPage.inputs.summary, "fun-club")
+    .typeText(groupsPage.inputs.description, loremSentence, { paste: true })
+    .click(groupsPage.buttons.submitForm)
   //unique test
     .click(topMenu.buttons.menuDropdown)
     .click(topMenu.buttons.dashboard)
     .click(dashboard.nav.myGroups)
-    .click(Selector('a').withText('Add group'))
-    .typeText('#name', groupName)
-    .typeText('#summary', "fun-club")
-    .typeText('#description', loremSentence, { paste: true })
-    .click(Selector('button').withText('Submit'))
+    .click(groupsPage.buttons.addGroup)
+    .typeText(groupsPage.inputs.name, groupName)
+    .typeText(groupsPage.inputs.summary, "fun-club")
+    .typeText(groupsPage.inputs.description, loremSentence, { paste: true })
+    .click(groupsPage.buttons.submitForm)
     .expect(Selector('div').textContent).contains('already taken')
   //checks if group exists
     .click(dashboard.nav.myGroups)
-    .expect(Selector('a').withText('group').exists).ok()
+    .expect(Selector('a').withText('group').exists).ok() // ??????
   //edit group
-    .click(Selector('td').find('a').withText('Edit'))
-    .typeText('#name', 'audi fans', { replace: true })
-    await t.click(Selector('button').withText('Submit'))
-    .expect(Selector('a').withText('audi fans').exists).ok()
+    .click(groupsPage.buttons.editGroup)
+    .typeText(groupsPage.inputs.name, 'audi fans', { replace: true })
+    .click(groupsPage.buttons.submitForm)
+    .expect(link.withText('audi fans').exists).ok()
 })
 
  test('Activity', async (t) => {
