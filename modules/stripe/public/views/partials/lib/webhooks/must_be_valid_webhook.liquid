@@ -6,7 +6,7 @@
     log "webhook_endpoint NOT FOUND", type: "ERROR"
 
     assign no = false
-    return_rc no
+    return no
   endif
 
   assign stripe_signature = context.headers.HTTP_STRIPE_SIGNATURE | split: ","
@@ -24,9 +24,9 @@
     log secret, type: "DEBUG secret"
     log g, type: 'DEBUG g'
     assign no = false
-    return_rc no
+    return no
   else
     assign yes = true
-    return_rc yes
+    return yes
   endif
 %}

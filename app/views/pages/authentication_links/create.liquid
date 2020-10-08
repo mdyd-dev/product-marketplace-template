@@ -2,10 +2,10 @@
 method: post
 ---
 {% liquid
-  function_rc object = 'lib/commands/authentication_links/create', email: context.params.authentication_link.email, host: context.location.host
+  function object = 'lib/commands/authentication_links/create', email: context.params.authentication_link.email, host: context.location.host
 
   if object.valid
-    function_rc email = 'lib/commands/emails/auth-link', object: object
+    function email = 'lib/commands/emails/auth-link', object: object
 
 
 

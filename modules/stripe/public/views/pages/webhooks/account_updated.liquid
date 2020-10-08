@@ -4,13 +4,13 @@ method: post
 layout_name: ''
 ---
 {% liquid
-  function_rc valid_webhook = 'modules/stripe/lib/webhooks/must_be_valid_webhook', webhook_path: '/webhooks/account_updated'
+  function valid_webhook = 'modules/stripe/lib/webhooks/must_be_valid_webhook', webhook_path: '/webhooks/account_updated'
   unless valid_webhook
     response_status 403
     break
   endunless
 
-  function_rc object = 'modules/stripe/lib/webhooks/account_updated/call', post_params: context.post_params
+  function object = 'modules/stripe/lib/webhooks/account_updated/call', post_params: context.post_params
   if object.valid
     echo object
   else

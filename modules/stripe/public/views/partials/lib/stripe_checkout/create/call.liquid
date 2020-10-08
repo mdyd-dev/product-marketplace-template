@@ -3,5 +3,5 @@
   assign checkout_session = response.api_call.response.body | parse_json
 
   log checkout_session, type: 'checkout_session'
-  return_rc checkout_session
+  return checkout_session
 %}

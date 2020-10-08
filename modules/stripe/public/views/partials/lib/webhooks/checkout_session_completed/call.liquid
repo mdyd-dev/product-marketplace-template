@@ -1,9 +1,9 @@
 {% liquid
-  function_rc object = 'modules/stripe/lib/webhooks/checkout_session_completed/build', post_params: post_params
-  function_rc object = 'modules/stripe/lib/webhooks/checkout_session_completed/validate', object: object
+  function object = 'modules/stripe/lib/webhooks/checkout_session_completed/build', post_params: post_params
+  function object = 'modules/stripe/lib/webhooks/checkout_session_completed/validate', object: object
   if object.valid
-    function_rc object = 'modules/stripe/lib/checkout_session/create/call', object: object
+    function object = 'modules/stripe/lib/checkout_session/create/call', object: object
   endif
 
-  return_rc object
+  return object
 %}

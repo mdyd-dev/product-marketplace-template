@@ -16,7 +16,7 @@
         <tr>
           <td class="px-4 py-2 text-left border-b">{{ order.created_at | l }}</td>
           <td class="px-4 py-2 text-left border-b">
-            {% function_rc item_url = 'link_to', path: '/items/', item: order.item %}
+            {% function item_url = 'link_to', path: '/items/', item: order.item %}
             <a href="{{ item_url }}">
               {{ order.item.name }}
               <small> {{ order.item.status.name | default: 'app.item_statuses.none' | t }}</small>

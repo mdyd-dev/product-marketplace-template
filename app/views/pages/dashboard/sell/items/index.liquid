@@ -6,7 +6,7 @@ metadata:
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
 
-  function_rc items = 'lib/data/queries/items/search', limit: 100, owner: current_profile.id
+  function items = 'lib/data/queries/items/search', limit: 100, owner: current_profile.id
 
   include 'theme/simple/dashboard/breadcrumbs', name: 'items', total_entries: items.total_entries, role: 'seller'
   include 'theme/simple/dashboard/items/index', items: items, role: 'seller'

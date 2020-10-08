@@ -7,7 +7,7 @@ method: post
   assign input = context.params.password
   hash_assign input['user_id'] = context.session.reset_password_session_user_id
 
-  function_rc object = 'lib/commands/passwords/create', object: input
+  function object = 'lib/commands/passwords/create', object: input
 
   if object.valid
     session reset_password_session_user_id = null

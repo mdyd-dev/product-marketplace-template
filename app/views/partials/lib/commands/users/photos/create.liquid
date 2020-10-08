@@ -1,15 +1,15 @@
 {% liquid
   log object, type: 'params'
-  function_rc object = 'lib/commands/users/photos/create/build', object: object
+  function object = 'lib/commands/users/photos/create/build', object: object
   log object, type: 'build'
-  function_rc object = 'lib/commands/users/photos/create/check', object: object
+  function object = 'lib/commands/users/photos/create/check', object: object
   log object, type: 'check'
 
   if object.valid
-    function_rc db_object = 'lib/commands/users/photos/create/execute', object: object
+    function db_object = 'lib/commands/users/photos/create/execute', object: object
   endif
 
   log object, type: 'end'
 
-  return_rc object
+  return object
 %}

@@ -1,8 +1,8 @@
 {% liquid
-  function_rc account = 'modules/stripe/lib/payments/account'
+  function account = 'modules/stripe/lib/payments/account'
 
   if account.id
-    function_rc login_link_url = 'modules/stripe/lib/account/login_link/call', account: account
+    function login_link_url = 'modules/stripe/lib/account/login_link/call', account: account
     log login_link_url, type: 'login_link_url'
     redirect_to login_link_url
   else

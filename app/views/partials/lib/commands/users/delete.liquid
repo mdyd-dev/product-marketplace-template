@@ -1,10 +1,10 @@
 {% liquid
-  function_rc object = 'lib/commands/users/delete/build', object: object
-  function_rc object = 'lib/commands/users/delete/check',  object: object
+  function object = 'lib/commands/users/delete/build', object: object
+  function object = 'lib/commands/users/delete/check',  object: object
 
   if object.valid
-    function_rc object = 'lib/commands/execute', object: object, mutation_name: 'users/delete', selection: 'user_delete'
+    function object = 'lib/commands/execute', object: object, mutation_name: 'users/delete', selection: 'user_delete'
   endif
 
-  return_rc object
+  return object
 %}

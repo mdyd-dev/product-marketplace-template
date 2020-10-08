@@ -1,8 +1,8 @@
 <div>
-  {% function_rc item_url = 'link_to', path: '/items/', item: item %}
+  {% function item_url = 'link_to', path: '/items/', item: item %}
 
   <a class="relative block h-64 overflow-hidden rounded shadow-sm" href="{{ item_url }}">
-    {% function_rc cover_url = 'theme/simple/items/cover_url', item: item %}
+    {% function cover_url = 'theme/simple/items/cover_url', item: item %}
     <img alt="{{ item.name }}" class="block object-cover object-center w-full h-full" src="{{ cover_url }}">
   </a>
 
