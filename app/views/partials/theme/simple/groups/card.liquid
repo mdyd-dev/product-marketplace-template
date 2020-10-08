@@ -11,7 +11,9 @@
     </h1>
     <p class="mb-3 leading-relaxed">{{ group.summary }}</p>
     <div class="flex flex-wrap items-center">
-      {% render 'theme/simple/groups/join_button', current_profile: current_profile, group: group %}
+      {% if current_profile %}
+        {% render 'theme/simple/groups/join_button', current_profile: current_profile, group: group %}
+      {% endif %}
       <span class="inline-flex items-center py-1 pr-3 ml-auto mr-3 text-sm leading-none text-gray-600 border-r-2 border-gray-300 lg:ml-auto md:ml-0">
         <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>

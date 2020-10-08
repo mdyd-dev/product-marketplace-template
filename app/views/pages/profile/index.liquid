@@ -2,7 +2,7 @@
 slug: profile
 ---
 {% liquid
-  function current_profile = 'lib/data/queries/profiles/find', user_id: context.current_user.id, followships: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, followships: true, membership: true
 
   assign template = "/profile/{slug}"
   assign query = context.location.pathname | extract_url_params: template

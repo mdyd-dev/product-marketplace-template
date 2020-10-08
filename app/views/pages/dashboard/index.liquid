@@ -5,13 +5,12 @@ metadata:
     - label: app.feed.title
 ---
 {% liquid
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true, followships: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true, followships: true, membership: true
+
   include 'lib/validate_profile_completeness', profile: current_profile
 
   assign template = "/dashboard/{slug}/{section}"
   assign query = context.location.pathname | extract_url_params: template
-
-  function list = 'lib/data/queries/activities/search', feed: 'user-private', feed_id: current_profile.id, limit: 100
 
   assign section = query.section | default: 'activity'
   assign profile_id = current_profile.id | default: 'there-should-be'
