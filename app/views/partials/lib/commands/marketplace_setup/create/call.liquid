@@ -1,9 +1,9 @@
 {% liquid
-  function_rc object = 'lib/commands/marketplace_setup/create/validate', object: constants
+  function object = 'lib/commands/marketplace_setup/create/validate', object: constants
   if object.valid
-    include 'lib/commands/marketplace_setup/create/save', object: context.exports.object
-    include 'modules/stripe/lib/webhook_endpoints/create/call', stripe_event: 'account.updated', path: '/webhooks/account_updated', connect: true
-    include 'modules/stripe/lib/webhook_endpoints/create/call', stripe_event: 'checkout.session.completed', path: '/webhooks/checkout_session_completed', connect: false
+    include 'lib/commands/marketplace_setup/create/save', object: object
+    function res = 'modules/stripe/lib/webhook_endpoints/create/call', stripe_event: 'account.updated', path: '/webhooks/account_updated', connect: true, host: context.location.host
+    function res = 'modules/stripe/lib/webhook_endpoints/create/call', stripe_event: 'checkout.session.completed', path: '/webhooks/checkout_session_completed', connect: false, host: context.location.host
   endif
-  return_rc object
+  return object
 %}
