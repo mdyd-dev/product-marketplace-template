@@ -1,0 +1,8 @@
+---
+slug: comments
+---
+{% function comment = 'lib/data/queries/comments/find', id: context.params.slug2 %}
+{% function url = 'f_link_to', object: comment.commentable %}
+
+{% assign url = url | append: '#' | append: comment.uuid  %}
+{% redirect_to url %}

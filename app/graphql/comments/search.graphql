@@ -17,8 +17,16 @@ query search($id: ID, $limit: Int = 20, $name: String, $with_owner: Boolean = fa
       id
       created_at
 
+      commentable: related_model(model_schema_name: ["profile", "item", "group"], join_on_property: "commentable_uuid", foreign_property: "uuid") {
+        type: model_schema_name
+        id
+        slug: property(name: "slug")
+        name: property(name: "name")
+      }
+
       name: property(name: "name")
       summary: property(name: "summary")
+      uuid: property(name: "uuid")
       description: property(name: "description")
 
       photos: related_models(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
