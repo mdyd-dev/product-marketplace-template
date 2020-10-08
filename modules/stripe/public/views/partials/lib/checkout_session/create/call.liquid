@@ -3,7 +3,7 @@
   function object = 'modules/stripe/lib/checkout_session/create/validate', object: object
   if object.valid
     function object = 'modules/stripe/lib/checkout_session/create/save', object: object
-    include 'lib/commands/events/create', type: 'stripe_payment_completed', actor_id: context.current_user.id, object_id: object.external_id
+    include 'lib/commands/events/create', type: 'stripe_payment_completed', actor_id: current_user.id, object_id: object.external_id
   endif
   return object
 %}
