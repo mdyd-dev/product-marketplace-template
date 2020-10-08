@@ -1,6 +1,6 @@
 import { Selector, ClientFunction, t } from 'testcafe'
 import { buyerRole, sellerRole, adminRole } from './roles'
-import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL, loremSentence,
+import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          notAuthorizedUser, group, newPassword, Admin, link } from './fixtures'
 import { register, createItem } from './helper'
 import NewSessionForm from './pages/newsession'
@@ -256,7 +256,7 @@ test('Groups', async (t) => {
   //checks if group exists
     .click(dashboard.nav.myGroups)
     .debug()
-    .expect(Selector('a').withText('group').exists).ok() // ??????
+    .expect(Selector('a').withText(group.name).exists).ok() // ??????
   //edit group
     .click(groupsPage.buttons.editGroup)
     .typeText(groupsPage.inputs.name, 'audi fans', { replace: true })
