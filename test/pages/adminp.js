@@ -11,6 +11,12 @@ export default class AdminPanel {
       items: Selector('li').find('a').withText('Items'),
       setup: Selector('a').withText('Setup')
     }
+    this.tableRows = {
+      users: Selector('tbody').find('tr'),
+      orders: Selector('tbody').find('tr'),
+      items: Selector('tbody').find('tr'),
+      categories: Selector('tbody').find('tr')
+    }
 
     /*
     this.users = Selector('a').withText('Users')

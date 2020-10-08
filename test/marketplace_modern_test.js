@@ -1,6 +1,7 @@
 import { Selector, ClientFunction, t } from 'testcafe'
 import { buyerRole, sellerRole, adminRole } from './roles'
-import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL, loremSentence, notAuthorizedUser, groupName, newPassword, Admin, link } from './fixtures'
+import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL, loremSentence,
+         notAuthorizedUser, group, newPassword, Admin, link } from './fixtures'
 import { register, createItem } from './helper'
 import NewSessionForm from './pages/newsession'
 import NewItemForm from './pages/newitem'
@@ -171,6 +172,7 @@ test('Buying an item and following the seller', async (t) => {
     .expect(itemShow.buttons.alreadyFollowedState.exists).ok()
     .click(itemShow.buttons.buy)
     .click(orders.buttons.checkout) // i need to make orders page
+    .debug() // something is wrong here?
     .click(orders.buttons.pay)
     .click(topMenu.buttons.menuDropdown)
     .click(topMenu.buttons.dashboard)
@@ -199,20 +201,16 @@ test('Buying an item and following the seller', async (t) => {
      await checkTranslation(translationMissing) // Admin panel translation missing check
 
      await t.click(adminPage.menu.users)
-     const usersTableRow = Selector('tbody').find('tr') // ADD TO PROPERTIES IN ADMIN PAGE OBJECT
-     await t.expect(usersTableRow.count).gte(1)
+     await t.expect(adminPage.tableRows.users.count).gte(1)
 
      await t.click(adminPage.menu.orders)
-     const ordersTableRow = Selector('tbody').find('tr')
-     await t.expect(ordersTableRow.count).gte(1)
+     await t.expect(adminPage.tableRows.orders.count).gte(1)
 
      await t.click(adminPage.menu.items)
-     const itemsTableRow = Selector('tbody').find('tr')
-     await t.expect(itemsTableRow.count).gt(1)
+     await t.expect(adminPage.tableRows.items.count).gt(1)
 
      await t.click(adminPage.menu.categories)
-     const categoriesTableRow = Selector('tbody').find('tr')
-     await t.expect(categoriesTableRow.count).gt(1)
+     await t.expect(adminPage.tableRows.categories.count).gt(1)
 
      await t.click(adminPage.menu.activities)
      await t.click(adminPage.menu.setup)
@@ -241,22 +239,23 @@ test('Groups', async (t) => {
 
     await t.click(groupsPage.buttons.addGroup)
     await checkTranslation(translationMissing)
-    await t.typeText(groupsPage.inputs.name, groupName)
-    .typeText(groupsPage.inputs.summary, "fun-club")
-    .typeText(groupsPage.inputs.description, loremSentence, { paste: true })
+    await t.typeText(groupsPage.inputs.name, group.name)
+    .typeText(groupsPage.inputs.summary, group.summary)
+    .typeText(groupsPage.inputs.description, group.description, { paste: true })
     .click(groupsPage.buttons.submitForm)
   //unique test
     .click(topMenu.buttons.menuDropdown)
     .click(topMenu.buttons.dashboard)
     .click(dashboard.nav.myGroups)
     .click(groupsPage.buttons.addGroup)
-    .typeText(groupsPage.inputs.name, groupName)
-    .typeText(groupsPage.inputs.summary, "fun-club")
-    .typeText(groupsPage.inputs.description, loremSentence, { paste: true })
+    .typeText(groupsPage.inputs.name, group.name)
+    .typeText(groupsPage.inputs.summary, group.summary)
+    .typeText(groupsPage.inputs.description, group.description, { paste: true })
     .click(groupsPage.buttons.submitForm)
     .expect(Selector('div').textContent).contains('already taken')
   //checks if group exists
     .click(dashboard.nav.myGroups)
+    .debug()
     .expect(Selector('a').withText('group').exists).ok() // ??????
   //edit group
     .click(groupsPage.buttons.editGroup)
