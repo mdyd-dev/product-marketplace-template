@@ -1,6 +1,6 @@
 {% liquid
   if id == blank
-    return_rc null
+    return null
   endif
 
   graphql r  = 'activities/user', id: id
@@ -9,5 +9,5 @@
 
   hash_assign user['url'] = "/profile/" | append: user.slug
 
-  return_rc user
+  return user
 %}

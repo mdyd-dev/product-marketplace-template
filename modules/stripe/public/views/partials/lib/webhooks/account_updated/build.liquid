@@ -2,5 +2,5 @@
   assign webhook_data = post_params | parse_json
   assign empty_object = '{}' | parse_json
   assign object = webhook_data.data.object | default: empty_object
-  return_rc object
+  return object
 %}

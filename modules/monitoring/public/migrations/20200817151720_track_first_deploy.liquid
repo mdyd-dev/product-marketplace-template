@@ -6,6 +6,6 @@
 
 {% liquid
   if context.location.host != 'getmarketplace-qa.staging.gapps.platformos.com'
-    function_rc res = 'modules/monitoring/commands/track_event', event_name: 'marketplace_install', data: data
+    function res = 'modules/monitoring/commands/track_event', event_name: 'marketplace_install', data: data
   endif
 %}

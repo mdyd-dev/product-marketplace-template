@@ -7,7 +7,7 @@
 
   if action_name == 'join'
     assign event_type = 'user_joined_group'
-    function_rc object = 'lib/commands/relationships/create', name: 'membership', l_id: profile.id, r_id: group.id, l_at: now, r_at: now
+    function object = 'lib/commands/relationships/create', name: 'membership', l_id: profile.id, r_id: group.id, l_at: now, r_at: now
   endif
 
   if action_name == 'leave'
@@ -15,7 +15,7 @@
     function relation = 'lib/data/queries/relationships/find', name: 'membership', l_id: profile.id, r_id: group.id
 
     if relation
-      function_rc object = 'lib/commands/relationships/delete', object: relation
+      function object = 'lib/commands/relationships/delete', object: relation
     endif
   endif
 

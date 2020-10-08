@@ -2,7 +2,7 @@
   include 'lib/must_be_authenticated'
   include 'lib/must_be_superadmin'
 
-  function_rc list = 'lib/data/queries/users/search', limit: 200, sort_order: 'DESC'
+  function list = 'lib/data/queries/users/search', limit: 200, sort_order: 'DESC'
 
   include 'theme/simple/admin/menu', section: 'users'
   render 'theme/simple/admin/users/index', list: list

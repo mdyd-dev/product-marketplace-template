@@ -5,7 +5,7 @@
 {% endcomment %}
 
 {% liquid
-  function_rc audience = 'lib/data/queries/activities/items/audience', id: event.target.id
+  function audience = 'lib/data/queries/activities/items/audience', id: event.target.id
   log audience, type: 'aud showme'
   render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-private", ids: audience
 

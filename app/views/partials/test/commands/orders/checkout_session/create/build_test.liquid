@@ -12,7 +12,7 @@
 }
 {% endparse_json %}
 {% liquid
-  function_rc checkout_session = 'lib/commands/orders/checkout_session/create/build', order: order
+  function checkout_session = 'lib/commands/orders/checkout_session/create/build', order: order
 
   unless checkout_session.line_items[0].price_data.unit_amount == 40000
     include 'test/register_error', contract: contract, field_name: 'base', message: 'wrong amount'

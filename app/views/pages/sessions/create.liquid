@@ -2,7 +2,7 @@
 method: post
 ---
 {% liquid
-  function_rc object = 'lib/commands/sessions/create', object: context.params.user
+  function object = 'lib/commands/sessions/create', object: context.params.user
 
   if object.valid
     include 'redirect_to', url: '/', notice: 'app.sessions.created'

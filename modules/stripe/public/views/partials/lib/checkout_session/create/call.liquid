@@ -1,9 +1,9 @@
 {% liquid
-  function_rc object = 'modules/stripe/lib/checkout_session/create/build', object: object
-  function_rc object = 'modules/stripe/lib/checkout_session/create/validate', object: object
+  function object = 'modules/stripe/lib/checkout_session/create/build', object: object
+  function object = 'modules/stripe/lib/checkout_session/create/validate', object: object
   if object.valid
-    function_rc object = 'modules/stripe/lib/checkout_session/create/save', object: object
+    function object = 'modules/stripe/lib/checkout_session/create/save', object: object
     include 'lib/commands/events/create', type: 'stripe_payment_completed', actor_id: context.current_user.id, object_id: object.external_id
   endif
-  return_rc object
+  return object
 %}

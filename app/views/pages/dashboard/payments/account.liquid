@@ -4,13 +4,13 @@ metadata:
     - label: app.payments.account.bank_account
 ---
 {% liquid
-  function_rc account = 'modules/stripe/lib/payments/account'
+  function account = 'modules/stripe/lib/payments/account'
 
   include 'theme/simple/dashboard/breadcrumbs'
   if account.id
     include 'theme/simple/payments/account/show', account: account
   else
-    function_rc connect_url = 'modules/stripe/lib/account/connect_url'
+    function connect_url = 'modules/stripe/lib/account/connect_url'
     include 'theme/simple/payments/account/new', connect_url: connect_url
   endif
 %}

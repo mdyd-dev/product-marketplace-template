@@ -7,7 +7,7 @@
 {% liquid
   include 'lib/commands/activities/publish', uuid: event.uuid, type: "system", ids: "1"
 
-  function_rc audience = 'lib/data/queries/activities/users/audience', id: event.actor.id
+  function audience = 'lib/data/queries/activities/users/audience', id: event.actor.id
   log audience, type: 'showme'
   render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-private", ids: audience
 

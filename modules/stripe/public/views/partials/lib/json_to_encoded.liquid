@@ -9,5 +9,5 @@
 {%- endfor -%}
 {% liquid
   assign request_params = request_params | join: '&' | html_safe
-  return_rc request_params
+  return request_params
 %}
