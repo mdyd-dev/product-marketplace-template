@@ -54,3 +54,10 @@ export const editedItem = {
   description: faker.lorem.word(),
   price: '5000',
 }
+
+export const group = {
+  name: groupName,
+  summary: "fun-club",
+  description: loremSentence
+
+}
