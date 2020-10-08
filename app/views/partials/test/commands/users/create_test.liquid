@@ -1,0 +1,44 @@
+{% comment %}PARTIAL INPUT{% endcomment %}
+{% parse_json payload %}
+  {
+    "username": "user name",
+    "email": "test@example.com",
+    "password": "password"
+  }
+{% endparse_json %}
+
+{% comment %}LOAD TESTED PARTIAL/FUNCTION{% endcomment %}
+{% liquid
+  function user = 'lib/commands/users/create', object: payload
+%}
+
+{% comment %}LOAD TESTED PARTIAL/FUNCTION{% endcomment %}
+{% liquid
+  unless user.valid
+    include 'test/register_error', contract: contract, field_name: 'user#valid', message: user.errors
+  endunless
+
+  function u = 'lib/data/queries/users/find', id: user.id
+
+  unless u
+    include 'test/register_error', contract: contract, field_name: 'primary user', key: 'app.test.should.be_valid'
+  endunless
+
+  function user2 = 'lib/commands/users/create', object: payload
+
+  if user2.valid
+    include 'test/register_error', contract: contract, field_name: 'extra user', key: 'app.test.should.not.be_valid'
+  endif
+
+  if user2.id
+    include 'test/register_error', contract: contract, field_name: 'extra user', key: 'app.test.should.not.be_valid'
+  endif
+
+  function deleted = 'lib/commands/users/delete', object: u
+
+  function u = 'lib/data/queries/users/find', id: user.id
+
+  if u
+    include 'test/register_error', contract: contract, field_name: 'deleted user', key: 'app.test.should.be_valid'
+  endif
+%}

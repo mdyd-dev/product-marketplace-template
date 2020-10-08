@@ -1,0 +1,67 @@
+query search(
+  $id: ID, $limit: Int = 20 $uuid: String $user_id: String $slug: String, $name: String
+  $followships: Boolean = false, $membership: Boolean = false
+) {
+  models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      model_schema_name: { value: "profile" }
+      properties: [
+        { name: "uuid" value: $uuid }
+        { name: "user_id" value: $user_id }
+        { name: "slug" value: $slug }
+        { name: "name" value: $name }
+      ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+      created_at
+      type: model_schema_name
+
+      user_id: property(name: "user_id")
+      uuid: property(name: "uuid")
+      slug: property(name: "slug")
+
+      name: property(name: "name")
+      first_name: property(name: "first_name")
+      last_name: property(name: "last_name")
+      bio: property(name: "bio")
+
+      followed_ids: related_models(
+        model_schema_name: "relationship"
+        join_on_property: "id"
+        foreign_property: "l_id"
+        filter: { properties: { name: "name" value: "followship" } }
+      ) @include(if: $followships){
+        id: property(name: "r_id")
+      }
+
+      joined_group_ids: related_models(
+        model_schema_name: "relationship"
+        join_on_property: "id"
+        foreign_property: "l_id"
+        filter: { properties: { name: "name" value: "membership" } }
+      ) @include(if: $membership){
+        id: property(name: "r_id")
+      }
+
+      avatar: related_model(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid", filter: { properties: { name: "photo_type", value: "avatar"}}) {
+        photo: property_upload(name: "photo") {
+          url
+          versions
+        }
+      }
+
+      user: related_user(join_on_property: "user_id", foreign_property: "id") {
+        id
+        email
+      }
+    }
+  }
+}

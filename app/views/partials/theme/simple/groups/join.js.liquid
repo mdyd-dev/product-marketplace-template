@@ -1,0 +1,48 @@
+<style>
+  button > * { pointer-events: none }
+
+  button:not(.joined) .join { display: visible }
+  button:not(.joined) .leave { display: none }
+
+  button.joined .leave { display: visible }
+  button.joined .join { display: none }
+</style>
+
+<script>
+  (() => {
+    const toggleGroupMembership = (action, group_id) => {
+      fetch('/api/groups/membership/toggle.json', {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          group_id: group_id,
+          action_name: action,
+          authenticity_token: {{ authenticity_token | json }}
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success: ', data)
+        })
+    };
+
+    const joinButtons = Array.from(document.querySelectorAll('button[data-join-group]'))
+    const setButtonState = (button) => button.classList.toggle('joined')
+
+    const toggleJoin = (event) => {
+      event.preventDefault();
+
+      const action = event.target.classList.contains('joined') ? 'leave' : 'join'
+
+      toggleGroupMembership(action, event.target.dataset.joinGroup)
+
+      joinButtons
+        .filter(e => e.dataset.joinGroup == event.target.dataset.joinGroup)
+        .forEach(b => setButtonState(b))
+    }
+
+    joinButtons.forEach(button => button.addEventListener('click', toggleJoin, true))
+  })()
+</script>

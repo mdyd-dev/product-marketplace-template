@@ -1,0 +1,15 @@
+---
+metadata:
+  breadcrumbs:
+    - url: /dashboard/groups
+      label: app.groups.list
+    - label: app.groups.new
+---
+{% liquid
+  include 'lib/must_be_authenticated'
+
+  function presigned_url = 'lib/data/queries/presigned_url'
+
+  include 'theme/simple/dashboard/breadcrumbs', name: 'groups', total_entries: groups.total_entries, role: 'community'
+  include 'theme/simple/dashboard/groups/new', presigned_url: presigned_url, user: context.current_user
+%}

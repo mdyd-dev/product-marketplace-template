@@ -18,5 +18,5 @@
 {% liquid
   graphql r = 'modules/monitoring/api_call', data: mixpanel_data, template: 'modules/monitoring/mixpanel_create_event'
   log r, type: 'monitoring/migration/track_first_deploy'
-  return_rc r
+  return r
 %}

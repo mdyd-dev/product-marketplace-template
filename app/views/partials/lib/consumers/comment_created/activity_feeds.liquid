@@ -1,0 +1,27 @@
+{% comment %}
+  actor:private actor:public actor:audience
+  object:private
+{% endcomment %}
+
+{% liquid
+  log event, type: 'event'
+
+  function audience = 'lib/data/queries/activities/users/audience', id: event.actor.id
+  render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-private", ids: audience
+
+  render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-private", ids: event.actor.id
+  render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-public", ids: event.actor.id
+
+  case event.target.type
+  when 'group'
+    render 'lib/commands/activities/publish', uuid: event.uuid, type: "group-public", ids: event.target.id
+  when 'profile'
+    render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-public", ids: event.target.id
+  endcase
+%}
+
+{% comment %} system:audit {% endcomment %}
+{% include 'lib/commands/activities/publish', uuid: event.uuid, type: "system", ids: "1" %}
+
+{% comment %} system:items {% endcomment %}
+{% include 'lib/commands/activities/publish', uuid: event.uuid, type: "system", ids: "2" %}

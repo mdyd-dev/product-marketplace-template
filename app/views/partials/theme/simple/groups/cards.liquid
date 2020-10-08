@@ -1,0 +1,11 @@
+<h1 class="mb-3 text-2xl font-medium">
+  {{ 'app.groups.list' | t }}
+</h1>
+
+<div class="grid grid-cols-3 gap-5">
+  {% for record in list.results %}
+    {% render 'theme/simple/groups/card', group: record, current_profile: current_profile %}
+  {% else %}
+    <p class="text-lg">{{ 'app.no_items_found' | t }}</p>
+  {% endfor %}
+</div>

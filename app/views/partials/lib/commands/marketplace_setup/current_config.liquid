@@ -4,5 +4,5 @@
   for key in keys
     assign config = config | add_hash_key: key, context.constants[key]
   endfor
-  return_rc config
+  return config
 %}

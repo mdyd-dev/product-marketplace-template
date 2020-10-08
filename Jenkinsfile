@@ -4,13 +4,20 @@ def qa_url = "https://getmarketplace-qa.staging.gapps.platformos.com/"
 def live_url = "https://getmarketplace.staging.gapps.platformos.com/"
 def pr_url = "https://getmarketplace-dg.staging.gapps.platformos.com/"
 
+def project_name = 'getmarketplace-template'
 pipeline {
   agent any
 
   options {
     disableConcurrentBuilds()
-    timeout(time: 4, unit: 'MINUTES')
+    timeout(time: 5, unit: 'MINUTES')
     buildDiscarder(logRotator(daysToKeepStr: '1', artifactDaysToKeepStr: '1'))
+  }
+
+  environment {
+    PROJECT_NAME = "${env.BRANCH_NAME}-${env.GIT_COMMIT[0..5]}-${env.BUILD_ID}"
+    GIT_AUTHOR   = commitAuthor()
+    APP_VERSION  = "${env.GIT_COMMIT}"
   }
 
   stages {
@@ -49,7 +56,16 @@ pipeline {
       steps {
         sh 'testcafe "chromium:headless" test --skip-js-errors'
       }
-      post { failure { archiveArtifacts "screenshots/" } }
+      post {
+        failure {
+          archiveArtifacts "screenshots/"
+          script {
+            if (env.BRANCH_NAME != 'master') {
+              alert("${project_name} ${env.PROJECT_NAME} ${env.GIT_AUTHOR} Failed after ${buildDuration()}.")
+            }
+          }
+        }
+      }
     }
 
     // MASTER
@@ -88,7 +104,21 @@ pipeline {
       steps {
         sh 'testcafe "chromium:headless" test --skip-js-errors'
       }
-      post { failure { archiveArtifacts "screenshots/" } }
+      post {
+        success {
+          script {
+            if (currentBuild.getPreviousBuild() && currentBuild.getPreviousBuild().getResult().toString() != "SUCCESS") {
+              notice("${project_name} ${env.PROJECT_NAME} ${env.GIT_AUTHOR} Build is back to normal after ${buildDuration()}.")
+            }
+          }
+        }
+        failure {
+          archiveArtifacts "screenshots/"
+          script {
+            alert("${project_name} ${env.PROJECT_NAME} ${env.GIT_AUTHOR} Failed after ${buildDuration()}.")
+          }
+        }
+      }
     }
 
     stage('Deploy LIVE') {

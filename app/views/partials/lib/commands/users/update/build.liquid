@@ -1,0 +1,9 @@
+{% parse_json object %}
+  {
+    "id":   {{ context.current_user.id }}
+  }
+{% endparse_json %}
+
+{% liquid
+  return object
+%}

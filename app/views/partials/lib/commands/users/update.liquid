@@ -1,0 +1,14 @@
+{% liquid
+  function object = 'lib/commands/users/update/build', object: params, user: user
+  function object = 'lib/commands/users/update/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/', object: object, mutation: 'users/update', selection: 'user_update'
+
+    if object.valid
+      include 'lib/commands/events/create', type: 'account_updated', actor_id: object.id
+    endif
+  endif
+
+  return object
+%}

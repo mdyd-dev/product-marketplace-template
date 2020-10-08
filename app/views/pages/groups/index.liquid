@@ -1,0 +1,11 @@
+---
+slug: groups
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true, membership: true
+
+  function list = 'lib/data/queries/groups/search', limit: 100
+
+  include 'theme/simple/groups/cards', current_profile: current_profile, list: list
+  render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token
+%}

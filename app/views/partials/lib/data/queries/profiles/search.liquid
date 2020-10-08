@@ -1,0 +1,6 @@
+{% liquid
+  graphql r = 'profiles/search', limit: limit, uuid: uuid, id: id, slug: slug, user_id: user_id
+  include 'lib/handle_graphql_response', r: r, name: 'queries/profiles/search'
+
+  return r.models
+%}

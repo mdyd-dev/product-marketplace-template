@@ -1,6 +1,17 @@
 {% liquid
-  function_rc filters = 'lib/data/queries/search/filters', query: context.params
-  function_rc items = 'lib/data/queries/items/search', limit: 12, featured: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, followships: true
 
-  include 'theme/simple/home/index', items: items, filters: filters
+  function items = 'lib/data/queries/activities/search', feed: 'system', feed_id: "5", limit: 3
+  function comments = 'lib/data/queries/activities/search', feed: 'system', feed_id: "2", limit: 3
+  function groups = 'lib/data/queries/activities/search', feed: 'system', feed_id: "3", limit: 3
+  function profiles = 'lib/data/queries/activities/search', feed: 'system', feed_id: "4", limit: 3
+
+  assign feeds = '{}' | parse_json
+  hash_assign feeds['items'] = items
+  hash_assign feeds['comments'] = comments
+  hash_assign feeds['groups'] = groups
+  hash_assign feeds['profiles'] = profiles
+
+  include 'theme/simple/home/index', feeds: feeds, current_profile: current_profile
+  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
 %}

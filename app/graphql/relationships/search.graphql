@@ -1,0 +1,47 @@
+query models($model: [String!] = ["profile", "group"] $name: String! $r_id: String $l_id: String $limit: Int!){
+  models(
+    per_page: $limit
+    filter: {
+      properties: [
+        { name: "name" value: $name }
+        { name: "r_id" value: $r_id }
+        { name: "l_id" value: $l_id }
+      ]
+    }
+  ){
+    total_entries
+    results {
+      id
+      created_at
+      name: property(name: "name")
+      r_id: property(name: "r_id")
+      l_id: property(name: "l_id")
+      r_accepted_at: property(name: "r_accepted_at")
+      l_accepted_at: property(name: "l_accepted_at")
+
+      l: related_model(foreign_property: "id" join_on_property: "l_id" model_schema_name: $model){
+        ...model
+      }
+      r: related_model(foreign_property: "id" join_on_property: "r_id" model_schema_name: $model){
+        ...model
+      }
+    }
+  }
+}
+
+fragment model on Model {
+  id
+  name: property(name: "name")
+  first_name: property(name: "first_name")
+  last_name: property(name: "last_name")
+  slug: property(name: "slug")
+  uuid: property(name: "uuid")
+
+  avatar: related_model(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid", filter: { properties: { name: "photo_type", value: "avatar"}}) {
+    photo: property_upload(name: "photo") {
+      url
+      versions
+    }
+  }
+}
+

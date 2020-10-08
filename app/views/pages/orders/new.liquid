@@ -1,10 +1,10 @@
 {% liquid
-  include 'lib/must_be_authenticated'
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
 
-  function_rc item = 'lib/data/queries/items/find', id: context.params.item_id
+  function item = 'lib/data/queries/items/find', id: context.params.item_id
 
-  function_rc object = 'lib/commands/orders/create/build', item: item, current_user_id: context.current_user.id
-  function_rc object = 'lib/commands/orders/create/check', object: object
+  function object = 'lib/commands/orders/create/build', item: item, current_user_id: context.current_user.id
+  function object = 'lib/commands/orders/create/check', object: object
 
   include 'theme/simple/orders/new', item: item, order: object
 %}

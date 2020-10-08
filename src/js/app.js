@@ -1,9 +1,15 @@
 import '../css/app.css';
 
-const uppy = document.querySelector('[data-s3-uppy]');
-if (uppy) {
-  import(/* webpackChunkName: "image-upload" */ './image-upload.js').then(() => {
+const uppyPhotos = document.querySelector('[data-s3-uppy-photo]');
+if (uppyPhotos) {
+  import(/* webpackChunkName: "photo-upload" */ './photo-upload.js').then(() => {
     console.log('Image upload module loaded.');
+  });
+}
+
+const commentNewPost = document.querySelector('[data-comment-new-post]');
+if (commentNewPost) {
+  import(/* webpackChunkName: "comment-new-post" */ './comment-new-post.js').then(() => {
   });
 }
 

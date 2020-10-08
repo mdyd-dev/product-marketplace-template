@@ -1,0 +1,27 @@
+query search($id: ID, $limit: Int = 1) {
+  models(
+    per_page: $limit
+    sort: [ { created_at: { order: DESC } } ]
+    filter: {
+      id: { value: $id }
+      deleted_at: { exists: false }
+    })
+  {
+    total_entries
+    results {
+      type: model_schema_name
+      id
+      name: property(name: "name")
+      uuid: property(name: "uuid")
+      slug: property(name: "slug")
+      description: property(name: "description")
+      body: property(name: "body")
+
+      photo: related_model(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
+        url: property_upload(name: "photo") {
+          versions
+        }
+      }
+    }
+  }
+}

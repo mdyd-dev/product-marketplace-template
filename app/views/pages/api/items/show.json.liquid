@@ -1,7 +1,7 @@
 {% liquid
   assign id = context.params.id | split: '-' | last
 
-  function_rc item = 'lib/data/queries/items/find', id: id
+  function item = 'lib/data/queries/items/find', id: id
 
   unless item.id
     render 'theme/simple/404', status: 404

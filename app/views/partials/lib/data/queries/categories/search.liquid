@@ -8,5 +8,5 @@
 {% liquid
   assign categories = categories | replace_regex: "$", "," | replace_regex: "\n", "" | split: ","
 
-  return_rc categories
+  return categories
 %}

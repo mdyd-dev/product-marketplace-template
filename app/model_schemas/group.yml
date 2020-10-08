@@ -1,0 +1,6 @@
+name: group
+properties:
+  - name: uuid
+  - name: name
+  - name: summary
+  - name: description

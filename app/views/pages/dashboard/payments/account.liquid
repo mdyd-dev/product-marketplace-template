@@ -1,0 +1,17 @@
+---
+metadata:
+  breadcrumbs:
+    - label: app.payments.account.bank_account
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function account = 'modules/stripe/lib/payments/account', user_id: context.current_user.id
+
+  include 'theme/simple/dashboard/breadcrumbs'
+  if account.id
+    include 'theme/simple/payments/account/show', account: account
+  else
+    function connect_url = 'modules/stripe/lib/account/connect_url', context: context
+    include 'theme/simple/payments/account/new', connect_url: connect_url
+  endif
+%}

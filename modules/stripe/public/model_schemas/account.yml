@@ -1,4 +1,3 @@
----
 name: account
 properties:
 - name: gateway_id

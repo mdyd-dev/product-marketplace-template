@@ -1,6 +1,6 @@
 {% liquid
-  function_rc query = 'lib/data/queries/items/search/build', limit: limit, owner: owner
-  function_rc items = 'lib/data/queries/items/search/execute', query: query
+  function query = 'lib/data/queries/items/search/build', limit: limit, owner: owner
+  function items = 'lib/data/queries/items/search/execute', query: query
 
-  return_rc items
+  return items
 %}

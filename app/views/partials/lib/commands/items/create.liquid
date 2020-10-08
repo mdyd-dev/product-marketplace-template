@@ -1,10 +1,15 @@
 {%  liquid
-  function_rc object = 'lib/commands/items/create/build', object: context.params.item, owner: context.current_user.id
-  function_rc object = 'lib/commands/items/create/check', object: object
+  function object = 'lib/commands/items/create/build', object: object, owner: owner
+  function object = 'lib/commands/items/create/check', object: object
 
   if object.valid
-    function_rc object = 'lib/commands/items/create/execute', object: object
+    function object = 'lib/commands/items/create/execute', object: object
+
+    if object.valid
+      assign now = 'now' | to_time
+      function relation = 'lib/commands/relationships/create', name: 'ownership', l_id: current_profile.id, r_id: object.id, l_at: now, r_at: now
+    endif
   endif
 
-  return_rc object
+  return object
 %}

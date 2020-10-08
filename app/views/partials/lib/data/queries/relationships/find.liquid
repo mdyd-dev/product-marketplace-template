@@ -1,0 +1,5 @@
+{% liquid
+  graphql r = 'relationships/search', limit: 1, name: name, l_id: l_id, r_id: r_id
+
+  return r.models.results.first
+%}

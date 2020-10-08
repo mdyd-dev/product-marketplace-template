@@ -1,0 +1,16 @@
+{% liquid
+  if id == empty
+    return null
+  endif
+
+  graphql r = 'activities/items/audience', id: id, limit: 10000
+
+  if r.errors
+    log r, type: 'showme'
+    break
+  endif
+
+  assign ids = r.models.results | map: 'owner' | map: 'id'
+
+  return ids
+%}

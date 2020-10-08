@@ -1,0 +1,10 @@
+{% liquid
+  function object = 'lib/commands/photos/create/build', object: object, current_profile: current_profile
+  function object = 'lib/commands/photos/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'photos/create' object: object
+  endif
+
+  return object
+%}

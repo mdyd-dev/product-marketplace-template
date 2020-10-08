@@ -3,14 +3,14 @@ slug: items
 ---
 
 {% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, followships: true
+  include 'lib/validate_profile_completeness', profile: current_profile
+
   assign id = context.params.slug2 | split: '-' | last
+  function item = 'lib/data/queries/items/find', id: id
 
-  function_rc item = 'lib/data/queries/items/find', id: id
+  include 'lib/present_or_404', property: item.id
 
-  unless item.id
-    render 'theme/simple/404', status: 404
-    break
-  endunless
-
-  include 'theme/simple/items/show', item: item
+  render 'theme/simple/items/show', item: item, current_profile: current_profile, authenticity_token: context.authenticity_token
+  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
 %}

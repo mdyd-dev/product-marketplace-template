@@ -1,6 +1,6 @@
 {% liquid
   assign income = 0
-  function_rc orders = 'lib/data/queries/orders/search', limit: 100
+  function orders = 'lib/data/queries/orders/search', limit: 100
 
   for order in orders.results
     if order.status.name == 'app.order_statuses.paid'
@@ -8,12 +8,12 @@
     endif
   endfor
 
-  function_rc items = 'lib/data/queries/items/search', limit: 1
-  function_rc users = 'lib/data/queries/users/search', limit: 1
+  function items = 'lib/data/queries/items/search', limit: 1
+  function users = 'lib/data/queries/users/search', limit: 1
 %}
 
 {%
-  function_rc object = 'lib/commands/metrics/create/build',
+  function object = 'lib/commands/metrics/create/build',
     items:  items.total_entries,
     users:  users.total_entries,
     orders: orders.total_entries,
@@ -22,8 +22,8 @@
 %}
 
 {% liquid
-  function_rc object = 'lib/commands/metrics/create/check', object: object
-  function_rc object = 'lib/commands/metrics/create/execute', object: object
+  function object = 'lib/commands/metrics/create/check', object: object
+  function object = 'lib/commands/metrics/create/execute', object: object
 
-  return_rc object
+  return object
 %}

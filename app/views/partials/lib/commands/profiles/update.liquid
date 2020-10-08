@@ -1,0 +1,15 @@
+{% liquid
+  function object = 'lib/commands/profiles/update/build', object: object, profile: profile
+  function object = 'lib/commands/profiles/update/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', object: object, mutation_name: 'profiles/update', selection: 'model_update'
+
+    if object.valid
+      include 'lib/commands/events/create', type: 'profile_updated', actor_id: object.id
+      function result = 'lib/commands/sessions/store_profile_in_session', object: object
+    endif
+  endif
+
+  return object
+%}

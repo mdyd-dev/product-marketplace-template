@@ -1,0 +1,9 @@
+---
+method: post
+---
+{% liquid
+  include 'lib/must_be_authenticated'
+
+  function object = 'lib/commands/users/photos/create', object: context.params.photo
+  include 'theme/json/shared/show', object: object
+%}

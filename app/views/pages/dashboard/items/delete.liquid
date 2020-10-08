@@ -1,0 +1,20 @@
+---
+method: post
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+
+  function item = 'lib/data/queries/items/find', id: context.params.id, withOrders: true
+  function object = 'lib/commands/items/delete', item: item
+
+  if object.valid
+    include 'lib/commands/events/create', type: 'item_deleted', actor_id: current_profile.id, object_id: item.id
+    include 'redirect_to', url: '/dashboard/sell/items', notice: 'app.items.deleted'
+  else
+    assign error = object.errors.base[0]
+
+    function item_url = 'link_to', path: '/items/', item: item
+    include 'redirect_to', url: item_url, error: error
+  endif
+%}
+

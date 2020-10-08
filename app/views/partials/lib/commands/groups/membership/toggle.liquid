@@ -1,0 +1,27 @@
+{% liquid
+  assign now = 'now' | to_time
+  assign id = null
+
+  function profile = 'lib/data/queries/profiles/find', user_id: user_id
+  function group = 'lib/data/queries/groups/find', id: group_id
+
+  if action_name == 'join'
+    assign event_type = 'user_joined_group'
+    function object = 'lib/commands/relationships/create', name: 'membership', l_id: profile.id, r_id: group.id, l_at: now, r_at: now
+  endif
+
+  if action_name == 'leave'
+    assign event_type = 'user_left_group'
+    function relation = 'lib/data/queries/relationships/find', name: 'membership', l_id: profile.id, r_id: group.id
+
+    if relation
+      function object = 'lib/commands/relationships/delete', object: relation
+    endif
+  endif
+
+  if object.valid
+    include 'lib/commands/events/create', type: event_type, actor_id: profile.id, target_id: group.id
+  endif
+
+  return object
+%}

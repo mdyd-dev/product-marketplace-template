@@ -1,10 +1,12 @@
 {% liquid
-  function_rc response = 'modules/stripe/lib/stripe_webhook/create/call', event: stripe_event, path: path
-  function_rc webhook = 'modules/stripe/lib/webhook_endpoints/create/build', response: response, event: stripe_event
+  function response = 'modules/stripe/lib/stripe_webhook/create/call', event: stripe_event, path: path, host: host, connect: connect
+  function webhook = 'modules/stripe/lib/webhook_endpoints/create/build', response: response, event: stripe_event
   if webhook.valid
     graphql result = 'modules/stripe/webhook_endpoint_create', args: webhook
     log result, type: 'webhook_endpoints/create model_create'
   else
     log webhook, type: 'webhook_endpoints/create invalid'
   endif
+
+  return result
 %}

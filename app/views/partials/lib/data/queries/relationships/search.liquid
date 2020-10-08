@@ -1,0 +1,10 @@
+{% liquid
+  if l_id == blank and r_id == blank
+  log "no left or right", type: 'showme'
+  endif
+
+  graphql r = 'relationships/search', limit: limit, name: name, l_id: l_id, r_id: r_id
+  include 'lib/handle_graphql_response', r: r, name: 'queries/relationships/search'
+
+  return r.models
+%}

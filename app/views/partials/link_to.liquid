@@ -1,6 +1,29 @@
 {% liquid
-  assign id = item.name | slugify | append: "-" | append: item.id
-  assign link = '/items/' | append: id
+  if group
+    print "/groups/show/" | append: group.id
+    return "/groups/show/" | append: group.id
+  endif
 
-  return_rc link
+  if profile
+    print "/profile/" | append: profile.slug
+    return "/profile/" | append: profile.slug
+  endif
+
+  if item
+    assign id = item.name | slugify | append: "-" | append: item.id
+    print "/items/" | append: id
+    return "/items/" | append: id
+  endif
+
+  if category
+    print "/c/" | append: category
+    return "/c/" | append: category
+  endif
+
+  if comment
+    if comment.type == 'profile'
+      print "/profile/" | append: profile.slug
+      return "/profile/" | append: profile.slug
+    endif
+  endif
 %}

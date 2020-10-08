@@ -1,0 +1,17 @@
+{% comment %}
+  actor:private
+  target:audience
+  object:private
+{% endcomment %}
+
+{% liquid
+  function audience = 'lib/data/queries/activities/items/audience', id: event.target.id
+  log audience, type: 'aud showme'
+  render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-private", ids: audience
+
+  render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-private", ids: event.actor.id
+%}
+
+{% comment %} system:audit {% endcomment %}
+{% include 'lib/commands/activities/publish', uuid: event.uuid, type: "system", ids: "1" %}
+

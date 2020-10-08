@@ -1,0 +1,25 @@
+{% liquid
+  assign c = '{ "errors": {}, "valid": true }' | parse_json
+  assign relationship_names = 'app.relationships.type' | t | parse_json
+
+  unless relationship_names contains object.name
+    include 'lib/register_error', contract: c, field_name: 'name', key: 'app.errors.not_included'
+  endunless
+
+  if object.l_id == blank
+    include 'lib/register_error', contract: c, field_name: 'l_id', key: 'app.errors.blank'
+  endif
+
+  if object.l_accepted_at == blank
+    include 'lib/register_error', contract: c, field_name: 'l_accepted_at', key: 'app.errors.blank'
+  endif
+
+  if object.r_id == blank
+    include 'lib/register_error', contract: c, field_name: 'r_id', key: 'app.errors.blank'
+  endif
+
+  hash_assign object['valid'] = c.valid
+  hash_assign object['errors'] = c.errors
+
+  return object
+%}

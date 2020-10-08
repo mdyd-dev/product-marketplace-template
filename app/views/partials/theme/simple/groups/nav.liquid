@@ -1,0 +1,17 @@
+  <nav class="flex justify-between mb-5 bg-white sm:flex-row">
+    <div class="flex h-full text-lg">
+      {% assign active_class = 'text-blue-500 border-b-2 font-medium border-blue-500'  %}
+      <a href="/groups/show/{{ group.id }}" class="pt-5 pb-4 px-6 hover:text-blue-500 focus:outline-none {% if tab == 'activity' %}{{ active_class }}{% endif %}">
+        {{ 'app.groups.nav.activity' | t }}
+      </a>
+      <a href="/groups/about/{{ group.id }}" class="pt-5 pb-4 px-6 hover:text-blue-500 focus:outline-none {% if tab == 'about' %}{{ active_class }}{% endif %}">
+        {{ 'app.groups.nav.about' | t }}
+      </a>
+      <a href="/groups/members/{{ group.id }}" class="pt-5 pb-4 px-6 hover:text-blue-500 focus:outline-none {% if tab == 'members' %}{{ active_class }}{% endif %}">
+        {{ 'app.groups.nav.members' | t }}
+      </a>
+    </div>
+    <div class="flex items-center mr-3">
+      {% render 'theme/simple/groups/join_button', group: group, current_profile: current_profile %}
+    </div>
+  </nav>

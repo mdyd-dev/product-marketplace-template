@@ -1,0 +1,10 @@
+{% liquid
+  function object = 'lib/commands/profiles/delete/build', object: object
+  function object = 'lib/commands/profiles/delete/check',  object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', object: object, mutation_name: 'profiles/delete', selection: 'model_delete'
+  endif
+
+  return object
+%}

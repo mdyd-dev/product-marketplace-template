@@ -1,5 +1,5 @@
 {% content_for item_metatags %}
-  {% include 'theme/simple/items/metatags', item: item %}
+  {% render 'theme/simple/items/metatags', item: item %}
 {% endcontent_for %}
 <div class="container">
   <div class="flex flex-wrap">
@@ -27,14 +27,15 @@
           <div role="tablist" class="py-4 glider-dots"></div>
         </div>
       {% else %}
-        {% function_rc cover_url = 'theme/simple/items/cover_url', item: item %}
+        {% function cover_url = 'theme/simple/items/cover_url', item: item %}
         <img alt="{{ item.name }}" class="object-center w-full h-full rounded" src="{{ cover_url }}">
       {% endif %}
     </div>
 
     <div class="w-full mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
       <h2 class="text-sm tracking-widest ">
-        <a href="/u/{{ item.owner.id }}">{% include 'theme/simple/business_card', user: item.owner.email %}</a>
+        {% render 'theme/simple/business_card', user: item.owner, current_profile: current_profile %}
+        <a href="/u/{{ item.owner.id }}">{% print 'app.items.by_user' | t %}</a>
       </h2>
 
       <h1 class="mb-1 text-2xl">
@@ -44,7 +45,7 @@
       <div class="flex flex-wrap mb-4">
         <ul class="flex w-full categories">
           <li><span class="font-semibold">category: </span></li>
-          <li class="ml-2"><a href="/s?k=&category={{ item.category }}">{{ 'categories.' | append: item.category | t }}</a></li>
+          <li class="ml-2"><a href="/c/{% render 'link_to', category: item.category %}">{{ 'categories.' | append: item.category | t }}</a></li>
         </ul>
       </div>
 
@@ -69,7 +70,7 @@
         <form action="/orders/new" method="get" class="ml-auto ">
           <input type="hidden" name="item_id" value="{{ item.id }}">
           <button id="buybutton" class="button">
-            Buy for {{ item.price | pricify_cents }}
+            {{ 'app.items.buy_for' | t }} {{ item.price | pricify_cents }}
           </button>
           {% if item.orders.size > 0 %}
           <div>{% print 'app.items.ordered_times' | t: count: item.orders.size %}</div>
@@ -77,15 +78,14 @@
         </form>
       </div>
 
-        {%- if item.owner.id == context.current_user.id and item.orders.size < 1 %}
-        <p class="py-4 mt-4 border-t border-blue-300">Item Administration</p>
+        {%- if item.owner.id == current_profile.id and item.orders.size < 1 %}
+        <p class="py-4 mt-4 border-t border-blue-300">{{ 'app.items.item_administration' | t }}</p>
         <span class="flex">
-          <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
-
-        <form action="/items/delete" method="post" class="ml-2"
+          <a href="/dashboard/items/edit?id={{ item.id }}" class="button">{{ 'app.items.edit' | t }}</a>
+        <form action="/dashboard/items/delete" method="post" class="ml-2"
           onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }"
         >
-          {% include 'authenticity_token' %}
+          {% render 'authenticity_token', authenticity_token: authenticity_token %}
           <input type="hidden" name="id" value="{{ item.id }}">
 
           <button id="deletebutton" class="button button-secondary">{{ 'app.delete' | t }}</button>

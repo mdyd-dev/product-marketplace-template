@@ -1,0 +1,7 @@
+{% parse_json rules %}
+  {% render 'lib/data/queries/activities/rules.json' %}
+{% endparse_json %}
+
+{% liquid
+  return rules | dig: type
+%}

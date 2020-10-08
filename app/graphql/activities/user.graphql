@@ -1,0 +1,23 @@
+query user($id: ID!) {
+  users(
+    per_page: 1
+    filter: {
+      id: { value: $id }
+    }
+  ) {
+    results {
+      ...user
+    }
+  }
+}
+
+fragment user on User {
+  id
+  email
+  name: property(name: "username")
+  username: property(name: "username")
+  slug: property(name: "slug")
+  photo: property_upload(name: "avatar") {
+    versions(names: ["tiny", "small"])
+  }
+}

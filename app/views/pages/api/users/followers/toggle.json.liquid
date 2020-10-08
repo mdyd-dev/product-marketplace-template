@@ -1,0 +1,30 @@
+---
+method: post
+---
+
+{% liquid
+  assign now = 'now' | to_time
+
+  function follower = 'lib/data/queries/profiles/find', user_id: context.current_user.id
+  function followed = 'lib/data/queries/profiles/find', id: context.params.user_id
+
+  if context.params.action_name == 'follow'
+    assign event_type = 'user_followed_user'
+    function object = 'lib/commands/relationships/create', name: 'followship', l_id: follower.id, r_id: followed.id, l_at: now, r_at: now
+  endif
+
+  if params.action_name == 'unfollow'
+    assign event_type = 'user_unfollowed_user'
+    function relation = 'lib/data/queries/relationships/find', name: 'followship', l_id: follower.id, r_id: followed.id
+
+    if relation
+      function object = 'lib/commands/relationships/delete', object: relation
+    endif
+  endif
+
+  if object.valid
+    include 'lib/commands/events/create', type: event_type, actor_id: follower.id, target_id: followed.id, delay: 0
+  endif
+
+  render 'theme/json/items/index', response: object
+%}

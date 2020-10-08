@@ -1,0 +1,10 @@
+---
+method: post
+---
+{% liquid
+  include 'lib/must_be_authenticated_api'
+
+  function object = 'lib/commands/groups/membership/toggle', user_id: context.current_user.id, group_id: context.params.group_id, action_name: context.params.action_name
+
+  render 'theme/json/shared/show', object: object
+%}

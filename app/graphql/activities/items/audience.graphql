@@ -1,0 +1,22 @@
+query search($id: ID, $limit: Int = 1) {
+  models(
+    per_page: $limit,
+    filter: {
+      id: {value: $id},
+      model_schema_name: {value: "item"},
+      deleted_at: { exists: false }
+    }
+  )
+  {
+    total_entries
+    results {
+      id
+      created_at
+      owner: related_user(join_on_property: "owner", foreign_property: "id") {
+        id
+        email
+        username: property(name: "username")
+      }
+    }
+  }
+}

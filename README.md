@@ -4,7 +4,7 @@ Backbone for a marketplace-like project to be deployed on platformOS.com
 
 # Status
 
-Still in active development and some concepts are being validated and might change.
+## Still in active development and some concepts are being validated and might change.
 
 # Installation
 
@@ -140,6 +140,8 @@ To ensure frontend is maintanable and easy to change, we follow couple of import
 
 ## events
 
+### general
+
 - each command produces an event
 - example: when users logs in the system produces `user_session_created` event ` { actor: { id: LOGGED_USER_ID } }`
 - then the event can be asynchronously consumed by a consumer
@@ -147,6 +149,62 @@ To ensure frontend is maintanable and easy to change, we follow couple of import
 ### consumers
 
 - location: `app/views/partials/lib/consumers`
+
+## Social Media / Community
+
+### following 
+
+- user can follow user 
+- TDB user can follow anything, category [topic] / item
+
+### activity feeds
+
+- activity record after creation can be published to the following feeds:
+
+  - user-public
+
+    stream of activities accesible to everyone
+  
+  - user-private
+
+    private activities stream visible only to related user
+    
+  - user-audience
+
+    private streams of users which follows the user
+  
+  - custom-audit [1]
+
+    all activities - visible 
+
+  - custom-items [2]
+
+    created items
+    
+### activities
+
+- user_followed_user 
+
+  actor = follower, target = followed
+
+  - target:private
+  - actor:public
+  - actor:audience
+
+- user_created_item
+
+  actor = owner, audience = followers
+
+  - actor:private
+  - actor:public
+  - actor:audience
+  
+- user_created_order
+
+  actor = customer, audience = item's owner
+
+  - actor:private
+  - target:audience
 
 ## Categories
 

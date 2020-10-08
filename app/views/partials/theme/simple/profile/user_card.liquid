@@ -1,0 +1,22 @@
+<div class="h-full pt-5 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm">
+  {% liquid
+    assign img_url = user.avatar.photo.versions.small
+    unless img_url
+      assign img_url = 'images/user.svg' | asset_url
+    endunless
+  %}
+  <img class="object-cover object-center w-24 h-24 mx-auto rounded-full shadow-sm md:h-48 md:w-48" src="{{ img_url }}" alt="{{ user.slug }}">
+
+  <div class="flex items-center justify-between p-6">
+    {% render 'theme/simple/follow_button', current_profile: current_profile, user: user %}
+
+    <a href="/profile/{{ user.slug }}" class="mb-1 ml-3 font-medium text-gray-900">
+      {{ user.name }}
+    </a>
+
+    <span class="inline-flex text-right text-gray-600 items-centertext-sm lg:ml-auto md:ml-0" title="Following">
+      <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"> <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path> <circle cx="12" cy="12" r="3"></circle> </svg>
+      1.2K
+    </span>
+  </div>
+</div>

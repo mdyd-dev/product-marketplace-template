@@ -6,14 +6,19 @@ const brandColors = {
 
 const systemColors = {
   blue: '#007aff',
+  'body-bg': ''
 };
 
 module.exports = {
   purge: {
-    content: ['app/**/*.liquid', 'modules/**/*.liquid', './src/js/**/*.js'],
+    content: ['**/*.liquid', './src/js/**/*.js'],
+    options: {
+      safelist: [/^uppy-/]
+    }
   },
   future: {
-    removeDeprecatedGapUtilities: true
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
   },
   theme: {
     container: {

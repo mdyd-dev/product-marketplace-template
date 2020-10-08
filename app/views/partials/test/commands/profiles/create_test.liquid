@@ -1,0 +1,76 @@
+{% comment %}PARTIAL INPUT{% endcomment %}
+{% parse_json user %}
+  {
+    "uuid": {{ "" | uuid | json }},
+    "id":  "1"
+  }
+{% endparse_json %}
+
+{% parse_json profile %}
+  {
+  }
+{% endparse_json %}
+
+{% comment %}LOAD TESTED PARTIAL/FUNCTION{% endcomment %}
+{% function profile = 'lib/commands/profiles/create', user: user, object: profile %}
+
+{% liquid
+  if profile.valid == false
+    include 'test/register_error', contract: contract, field_name: 'contract', key: profile.errors
+  endif
+
+  log profile, type: 'showme'
+
+  if profile.uuid == blank
+    include 'test/register_error', contract: contract, field_name: 'profile.uuid', key: 'app.test.should.not.be_blank'
+  endif
+
+  if profile.slug
+    include 'test/register_error', contract: contract, field_name: 'profile.slug', key: 'app.test.should.be_blank'
+  endif
+
+  if profile.errors.size == 0
+    include 'test/register_error', contract: contract, field_name: 'contact.errors', key: 'app.test.should.be_empty'
+  endif
+%}
+
+{% parse_json payload %}
+  {
+    "name": "username",
+    "first_name": "first",
+    "last_name": "last"
+  }
+{% endparse_json %}
+
+{% function profile = 'lib/commands/profiles/update', object: payload, profile: profile %}
+
+{% liquid
+  if profile.valid == false
+    include 'test/register_error', contract: contract, field_name: 'contract', key: profile.errors
+  endif
+
+  if profile.name == blank
+    include 'test/register_error', contract: contract, field_name: 'updateed object.name', key: 'app.test.should.not.be_blank'
+  endif
+
+  if profile.slug == blank
+    include 'test/register_error', contract: contract, field_name: 'updateed object.slug', key: 'app.test.should.not.be_blank'
+  endif
+
+  if profile.uuid == blank
+    include 'test/register_error', contract: contract, field_name: 'updateed object.uuid', key: 'app.test.should.not.be_blank'
+  endif
+
+  if profile.errors.size == 0
+    include 'test/register_error', contract: contract, field_name: 'contact.errors', key: 'app.test.should.be_empty'
+  endif
+%}
+
+{% liquid
+  assign slug = profile.slug
+  function profile = 'lib/commands/profiles/update', object: payload, profile: profile
+
+  if profile.slug != slug
+    include 'test/register_error', contract: contract, field_name: 'updateed object.slug', key: 'app.test.should.not.be_blank'
+  endif
+%}

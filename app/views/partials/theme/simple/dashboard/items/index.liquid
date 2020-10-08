@@ -13,7 +13,7 @@
       {% for item in items.results %}
         <tr>
           <td class="px-4 py-2 border-b">
-            {% function_rc item_url = 'link_to', item: item %}
+            {% function item_url = 'link_to', path: '/items/', item: item %}
             <a href="{{ item_url }}">
               {% print item.name %}
               <small> {% echo item.status.name | default: 'app.item_statuses.none' | t %}</small>
@@ -30,8 +30,8 @@
           </td>
           -->
           <td class="px-4 py-2 border-b">
-            <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
-            <form action="/items/delete" method="post" class="ml-2 inline"
+            <a href="/dashboard/items/edit?id={{ item.id }}" class="button">Edit</a>
+            <form action="/dashboard/items/delete" method="post" class="ml-2 inline"
               onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }"
             >
               {% include 'authenticity_token' %}
@@ -45,9 +45,9 @@
     </tbody>
   </table>
 {% else %}
-  <p>You don't have any items yet.</p>
+  <p>{{ 'app.items.none' | t }}</p>
   <div class="flex mt-4">
-    <a href="/items/new" class="w-auto flex-0 button">
+    <a href="/dashboard/items/new" class="w-auto flex-0 button">
       {{ 'app.dashboard-items.list-your-first-item' | t }}
     </a>
   </div>

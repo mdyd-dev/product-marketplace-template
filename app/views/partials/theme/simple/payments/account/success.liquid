@@ -1,9 +1,9 @@
 <div class="p-4 mb-4 bg-gray-200 border rounded" data-test="information">
   <p>
-    Your payout accound has been added.
+    {{ 'app.payments.account.success.payout_account_added' | t }}
   </p>
 </div>
 
-<a class="button" href="/payments/account">
+<a class="button" href="/dashboard/payments/account">
   {{ 'app.continue' | t }}
 </a>

@@ -1,0 +1,9 @@
+name: relationship
+properties:
+  - name: name
+  - name: l_id
+  - name: r_id
+  - name: l_accepted_at
+    type: datetime
+  - name: r_accepted_at
+    type: datetime

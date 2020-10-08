@@ -1,5 +1,5 @@
 {% liquid
-  function_rc user = 'lib/data/queries/users/find', email: email, with_token: true, valid_for: 5
+  function user = 'lib/data/queries/users/find', email: email, with_token: true, valid_for: 5
 %}
 
 {% parse_json object %}
@@ -12,5 +12,5 @@
 {% endparse_json %}
 
 {% liquid
-  return_rc object
+  return object
 %}

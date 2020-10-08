@@ -1,0 +1,12 @@
+{% parse_json object %}
+  {
+    "direct_url":  {{ object.direct_url | json }},
+    "user_id":     {{ current_profile.id | json }},
+    "photo_type":     {{ object.photo_type | json }},
+    "object_uuid":   {{ object.object_uuid | json }}
+  }
+{% endparse_json %}
+
+{% liquid
+  return object
+%}

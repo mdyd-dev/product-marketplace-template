@@ -1,0 +1,12 @@
+{% liquid
+  function object = 'lib/commands/sessions/create/build', object: object
+  function object = 'lib/commands/sessions/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/sessions/create/execute', object: object
+    function profile = 'lib/data/queries/profiles/find', user_id: object.id
+    function result = 'lib/commands/sessions/store_profile_in_session', object: profile
+  endif
+
+  return object
+%}

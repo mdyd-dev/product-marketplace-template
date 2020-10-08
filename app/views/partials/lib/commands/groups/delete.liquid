@@ -1,0 +1,10 @@
+{% liquid
+  function object = 'lib/commands/groups/delete/build', group: group
+  function object = 'lib/commands/groups/delete/check',  object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'groups/delete', selection: 'model_delete', object: object
+  endif
+
+  return object
+%}

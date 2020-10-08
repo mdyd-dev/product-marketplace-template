@@ -1,0 +1,9 @@
+name: profile
+properties:
+  - name: uuid
+  - name: name
+  - name: user_id
+  - name: slug
+  - name: first_name
+  - name: last_name
+  - name: bio

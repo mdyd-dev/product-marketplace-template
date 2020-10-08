@@ -1,0 +1,16 @@
+{% liquid
+  if uuid == blank and slug == blank and id == blank and user_id == blank
+    return null
+  endif
+
+  if membership == null
+    assign membership = false
+  endif
+  if followships == null
+    assign followships = false
+  endif
+  graphql r  = 'profiles/search', limit: 1, uuid: uuid, slug: slug, id: id, user_id: user_id, followships: followships, membership: membership
+  include 'lib/handle_graphql_response', r: r, name: 'queries/profiles/find'
+
+  return r.models.results.first
+%}

@@ -1,0 +1,13 @@
+{% parse_json object %}
+  {
+    "uuid": {{ object.uuid | json }},
+    "creator_id": {{ current_profile.id | json }},
+    "commentable_uuid": {{ object.commentable_uuid | json }},
+    "body": {{ object.body | json }},
+    "title": {{ object.title | json }}
+  }
+{% endparse_json %}
+
+{% liquid
+  return object
+%}

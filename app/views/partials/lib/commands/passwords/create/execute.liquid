@@ -1,5 +1,5 @@
 {% liquid
-  graphql r = 'users/update', args: object
+  graphql r = 'users/update_password', args: object
 
   if r.errors
     log r.errors, type: 'errors.graphql.invalid'
@@ -8,5 +8,5 @@
     hash_assign object['errors'] = r.errors
   endif
 
-  return_rc object
+  return object
 %}

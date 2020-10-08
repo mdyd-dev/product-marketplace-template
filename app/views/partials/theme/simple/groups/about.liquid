@@ -1,0 +1,39 @@
+<div class="flex">
+  <div class="w-2/3 p-5 bg-white md:mr-10">
+    <img class="object-cover object-center w-full h-64" src="{{ group.main_photo.photo.versions.uncropped | default: 'https://dummyimage.com/720x400' }}" alt="blog">
+
+    <h1 class="mt-5 mb-10 text-2xl font-medium text-gray-700">
+      {{ group.name }}
+    </h1>
+
+    <div class="flex items-center my-5">
+      <img class="object-cover object-center w-16 h-16 mr-5 rounded-full shadow-md" src="{{  group.owner.profile.avatar.photo.versions.small | default: 'https://dummyimage.com/100x100' }}" />
+      <a class="text-xl font-bold" href="/profile/{{ group.owner.profile.slug }}">
+        {{ group.owner.profile.first_name }} {{ group.owner.profile.last_name }}
+      </a>
+      <span class="text-xl font-medium">{{ 'app.groups.owner' | t }}</span>
+    </div>
+
+    <div class="mt-10">
+      {{ 'app.groups.description' | t }}
+      <p class="mt-5 text-lg">
+        {{ group.description }}
+      </p>
+    </div>
+  </div>
+  <div class="w-1/3 p-5 pt-10 bg-white">
+    <h3 class="text-xl"> {{ 'app.groups.members' | t }} ({{ list.total_entries }})</h3>
+    <div class="flex flex-wrap">
+      {% for relationship in list.results %}
+        {% assign user = relationship.l %}
+        {% render 'theme/simple/groups/member_card_small', user: user %}
+      {% endfor %}
+    </div>
+
+    {% if list.total_entries > list.results.size %}
+      <a href="/groups/members/{{ group.id }}" class="button button-secondary">
+        {{ 'app.groups.view_all' | t }}
+      </a>
+    {% endif %}
+  </div>
+</div>

@@ -1,2 +1,8 @@
-{% assign name = user | default: 'Unknown' %}
-<span class="business_card">By {{ name }} <br></span>
+{% assign name = user.name | default: 'Unknown' %}
+
+<div class="flex items-center mt-auto">
+  <span class="mr-2">By <a href="{% render 'link_to', profile: user %}">{% print name %}</a></span>
+  {% if current_profile and current_profile.id != user.id %}
+    {% render 'theme/simple/follow_button', current_profile: current_profile, user: user %}
+  {% endif %}
+</div>

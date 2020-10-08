@@ -7,7 +7,7 @@
     include 'theme/simple/layout/flash', error: flash.error, notice: flash.notice
 
     if context.location.pathname != flash.from
-      session sflash = nil
+      session sflash = null
     endif
   endif
 %}

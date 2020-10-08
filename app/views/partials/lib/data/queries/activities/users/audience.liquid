@@ -1,0 +1,14 @@
+{% liquid
+  if id == empty
+    return null
+  endif
+
+  graphql r = 'activities/users/audience', id: id, limit: 1000
+  include 'lib/handle_graphql_response', r: r, name: 'users/audience'
+
+  log r, type: 'showme'
+
+  assign ids = r.models.results | map: 'l_id'
+
+  return ids
+%}

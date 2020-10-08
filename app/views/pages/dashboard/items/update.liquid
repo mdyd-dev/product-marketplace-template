@@ -1,0 +1,22 @@
+---
+method: post
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+
+  function item = 'lib/data/queries/items/find', id: context.params.item.id
+  include 'lib/can_edit', user_id: current_profile.id, item: item
+
+  function object = 'lib/commands/items/update', object: context.params.item
+  if object.valid
+    include 'lib/commands/events/create', type: 'item_updated', actor_id: current_profile.id, object_id: object.id
+
+    function url = 'link_to', path: '/items/', item: object
+    include 'redirect_to', url: url, notice: 'app.items.updated'
+  else
+    function filters = 'lib/data/queries/search/filters', query: context.params
+    function presigned_url = 'lib/data/queries/presigned_url'
+
+    include 'theme/simple/items/edit', item: object, lib: filters, presigned_url: presigned_url
+  endif
+%}

@@ -1,9 +1,9 @@
 {% liquid
-  function_rc object = 'modules/stripe/lib/stripe_account/fetch/call', params: params
+  function object = 'modules/stripe/lib/stripe_account/fetch/call', params: params
 
   if object.valid
-    function_rc object = 'modules/stripe/lib/account/create/call', object: object
+    function object = 'modules/stripe/lib/account/create/call', object: object, current_user: current_user
   endif
 
-  return_rc object
+  return object
 %}

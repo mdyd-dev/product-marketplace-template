@@ -1,0 +1,9 @@
+{% liquid
+  function object = 'modules/stripe/lib/account/connect', params: context.params, current_user: context.current_user
+
+  if object.valid
+    include 'theme/simple/payments/account/success'
+  else
+    include 'theme/simple/payments/account/failure'
+  endif
+%}

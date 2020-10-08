@@ -1,42 +1,38 @@
-<table class="table w-full text-sm table-auto">
-  <thead>
-    <tr>
-      <th class="text-lg font-normal text-left">
-        {{ 'app.activities.attr.created_at' | t }}
-      </th>
-      <th class="text-lg font-normal text-left">
-        {{ 'app.activities.attr.type' | t }}
-      </th>
-      <th class="text-lg font-normal text-left">
-        {{ 'app.activities.attr.actor' | t }}
-      </th>
-      <th class="text-lg font-normal text-left">
-        {{ 'app.activities.attr.object' | t }}
-      </th>
-      <th class="text-lg font-normal text-left">
-        {{ 'app.activities.attr.target' | t }}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="w-full p-3">
+
+  <form action="" class="flex justify-between w-full">
+    <div class="flex items-center p-2 flex-cols">
+      <span class="mr-2">{{ 'admin.menu.activities.list.public' | t }}</span>
+      <input name="public" type="checkbox" {% if context.params.public %}checked{% endif %}/>
+    </div>
+    <select name="feed" class="w-5/6 text-xl form-input">
+      <option value="">{{ 'admin.menu.activities.list.audit' | t }}</option>
+      <option value="system.1" {% if params.feed == "system.1" %}selected{% endif %}>{{ 'admin.menu.activities.list.all' | t }}</option>
+      <option value="system.2" {% if params.feed == "system.2" %}selected{% endif %}>{{ 'admin.menu.activities.list.comments' | t }}</option>
+
+      {% for user in users.results %}
+        {% assign feed = "user." | append: user.id %}
+        <option value="{{feed}}" {% if params.feed == feed %}selected{% endif %}>{{ 'admin.menu.activities.list.user' | t }} {{ user.name }} ({{ 'admin.menu.activities.list.user_id' | t }}{{ user.id }})</option>
+      {% endfor %}
+
+      {% for group in groups.results %}
+        {% assign feed = "group." | append: group.id %}
+        <option value="{{ feed }}" {% if params.feed == feed %}selected{% endif %}>{{ 'admin.menu.activities.list.group' | t }} {{ group.name }} ({{ 'admin.menu.activities.list.group_id' | t }}{{ group.id }})</option>
+      {% endfor %}
+
+    </select>
+    <input type="submit" class="w-1/6 form-input" value="GO">
+  </form>
+
+  <span class="ml-2 text-xs">
+    {{ 'admin.menu.activities.following' | t }} {{ selected.followed_users | map: 'email' | join: ', ' }}
+  </span>
+
+  <div class="my-5">
     {% for record in list.results %}
-      <tr>
-        <td class="text-left">
-          {{ record.payload.date }}
-        </td>
-        <td class="text-left">
-          {{ record.payload.type }}
-        </td>
-        <td class="text-left">
-          {{ record.payload.actor.id }}
-        </td>
-        <td class="text-left">
-          {{ record.payload.object.id }}
-        </td>
-        <td class="text-left">
-          {{ record.payload.target.id }}
-        </td>
-      </tr>
+      {% render 'theme/simple/activities/feed_unit', payload: record.payload, current_profile: current_profile %}
     {% endfor %}
-  </tbody>
-</table>
+  </div>
+
+
+</div>

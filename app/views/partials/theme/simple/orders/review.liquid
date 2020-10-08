@@ -1,5 +1,5 @@
 <h3 class="mb-4 text-xl font-semibold">
-  Please confirm and submit your order
+  {{ 'app.orders.review.confirm' | t }}
 </h3>
 
 <form action="/orders/pay" id="pay-form" method="post" class="w-1/2"
@@ -11,7 +11,7 @@
   <input type="hidden" name="order_id" value="{{ order.id }}"/>
 
   <p>
-    Order total: {{ order.total | pricify_cents }}<br>
+    {{ 'app.orders.review.order_total' | t }} {{ order.total | pricify_cents }}<br>
   </p>
 
   <button class="button">

@@ -1,0 +1,13 @@
+{% liquid
+  if id == blank
+    return null
+  endif
+
+  graphql r  = 'activities/user', id: id
+
+  assign user = r.users.results.first
+
+  hash_assign user['url'] = "/profile/" | append: user.slug
+
+  return user
+%}

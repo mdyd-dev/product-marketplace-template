@@ -1,0 +1,31 @@
+{% liquid
+  if id == blank
+    return null
+  endif
+
+  graphql r = 'activities/model', id: id, limit: 1
+
+  if r.errors
+    log r, type: 'showme query activities/model'
+    break
+  endif
+
+  assign model = r.models.results.first
+  unless model
+    return null
+  endunless
+
+  assign uuid = model.uuid | default: 'no-uuid-this-is-fake-report-and-add'
+  graphql ri = 'activities/photo', uuid: uuid
+  if ri.errors
+    log ri, type: 'showme activities/photo query'
+    break
+  endif
+
+  hash_assign model['photos'] = ri.models.results
+
+  function url = 'f_link_to', object: model
+  hash_assign model['url'] = url
+
+  return model
+%}

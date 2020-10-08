@@ -1,0 +1,25 @@
+<div>
+  <div class="p-16 bg-gray-600">
+    <h1 class="text-4xl font-medium text-center text-white">
+      {{ group.name }}
+    </h1>
+    <h2 class="text-xl font-medium text-center text-white">
+      {{ group.summary }}
+    </h2>
+  </div>
+  {% render 'theme/simple/groups/nav', group: group, tab: tab, current_profile: current_profile %}
+
+  <div>
+    {% liquid
+      assign file = 'theme/simple/groups/' | append: tab
+      case tab
+      when 'activity'
+        include 'theme/simple/groups/activity', list: list, group: group, current_profile: current_profile
+      when 'about'
+        render 'theme/simple/groups/about', list: list, group: group
+      when 'members'
+        render 'theme/simple/groups/members', list: list, group: group
+      endcase
+    %}
+  </div>
+</div>

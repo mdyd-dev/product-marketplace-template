@@ -1,0 +1,56 @@
+query search($id: ID, $limit: Int = 20, $name: String, $owner_id: String, $with_owner: Boolean = false) {
+  groups: models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      model_schema_name: { value: "group" }
+      properties: [
+        { name: "name" value: $name }
+      ]
+      related_models: {
+        join: { join_on_property: "id", foreign_property: "r_id"}
+        filter: {
+          model_schema_name: { value: "relationship" },
+          properties: { name: "l_id", value: $owner_id }
+        }
+      }
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+      created_at
+      type: model_schema_name
+
+      uuid: property(name: "uuid")
+      name: property(name: "name")
+      summary: property(name: "summary")
+      description: property(name: "description")
+      main_photo: related_model(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
+        photo: property_upload(name: "photo") {
+          url
+          versions
+        }
+      }
+      owner: related_model(model_schema_name: "relationship", join_on_property: "id", foreign_property: "r_id") @include(if: $with_owner){
+        id
+        profile: related_model(model_schema_name: "profile", join_on_property: "l_id") {
+          id
+          username: property(name: "username")
+          first_name: property(name: "first_name")
+          last_name: property(name: "last_name")
+          slug: property(name: "slug")
+          avatar: related_model(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid", filter: { properties: { name: "photo_type", value: "avatar"}}) {
+            photo: property_upload(name: "photo") {
+              url
+              versions
+            }
+          }
+        }
+      }
+    }
+  }
+}
