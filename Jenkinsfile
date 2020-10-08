@@ -110,7 +110,7 @@ pipeline {
         success {
           script {
             if (currentBuild.getPreviousBuild() && currentBuild.getPreviousBuild().getResult().toString() != "SUCCESS") {
-              notice("${project_name} ${env.PROJECT_NAME} ${env.GIT_AUTHOR} Build is back to normal after ${buildDuration()}.")
+              notify("${project_name} ${env.PROJECT_NAME} ${env.GIT_AUTHOR} Build is back to normal after ${buildDuration()}.")
             }
           }
         }
