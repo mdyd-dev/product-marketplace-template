@@ -90,7 +90,9 @@ pipeline {
       }
       agent { docker { image 'platformos/pos-cli' } }
       steps {
+        sh 'pos-cli data clean --auto-confirm --include-schema'
         sh 'pos-cli deploy'
+        sh 'pos-cli data import --path=./seed/data.zip --zip'
       }
     }
 
