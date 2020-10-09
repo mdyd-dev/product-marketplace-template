@@ -256,7 +256,7 @@ test('Groups', async (t) => {
   //checks if group exists
     .click(dashboard.nav.myGroups)
     .debug()
-    .expect(Selector('a').withText(group.name).exists).ok() // ??????
+    .expect(Selector('a').withText(group.name).exists).ok()
   //edit group
     .click(groupsPage.buttons.editGroup)
     .typeText(groupsPage.inputs.name, 'audi fans', { replace: true })
