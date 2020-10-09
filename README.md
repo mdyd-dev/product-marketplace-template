@@ -150,6 +150,10 @@ To ensure frontend is maintanable and easy to change, we follow couple of import
 
 - location: `app/views/partials/lib/consumers`
 
+## Custom validation error messages
+
+See [commit/c4c046](https://github.com/mdyd-dev/product-marketplace-template/commit/c4c046d34d5cd031d69dc02e2c1b6c03b3f54967) if you want to add custom message to any existing form field. 
+
 ## Social Media / Community
 
 ### following 
