@@ -59,5 +59,4 @@ export const group = {
   name: groupName,
   summary: "fun-club",
   description: loremSentence
-
 }
