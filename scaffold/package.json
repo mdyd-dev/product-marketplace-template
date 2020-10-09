@@ -1,0 +1,18 @@
+{
+  "name": "@marketplace-platform/generate",
+  "version": "1.1.0",
+  "description": "generate",
+  "bin": {
+    "generate": "bin/generate"
+  },
+  "author": "pavelloz@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "commander": "^2.13.0",
+    "js-yaml": "^3.14.0",
+    "pluralize": "^8.0.0",
+    "yeoman-environment": "^2.10.3",
+    "yeoman-generator": "^2.0.5"
+  }
+}

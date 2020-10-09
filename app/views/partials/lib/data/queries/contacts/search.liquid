@@ -1,0 +1,5 @@
+{% liquid
+  graphql r = 'contacts/search', limit: limit, page: 1
+
+  return r.contacts
+%}

@@ -1,0 +1,20 @@
+mutation update_contact(
+  $id: ID!
+  $email: String!
+  $message: String!
+  $reason: String!
+) {
+  model_update(
+    id: $id
+    model: {
+      model_schema_name: "contact"
+      properties: [
+              { name: "email" value: $email }
+              { name: "message" value: $message }
+              { name: "reason" value: $reason }
+            ]
+    }
+  ){
+    id properties
+  }
+}

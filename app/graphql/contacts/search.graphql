@@ -1,0 +1,34 @@
+query search(
+  $id: ID
+  $limit: Int = 20
+  $email: String
+  $message: String
+  $reason: String
+) {
+  contacts: models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      model_schema_name: { value: "contact" }
+      properties: [
+              { name: "email" value: $email }
+              { name: "message" value: $message }
+              { name: "reason" value: $reason }
+            ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+      created_at
+      type: model_schema_name
+
+          email: property(name: "email")
+          message: property(name: "message")
+          reason: property(name: "reason")
+        }
+  }
+}

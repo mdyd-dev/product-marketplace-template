@@ -1,0 +1,12 @@
+---
+slug: contacts
+method: post
+---
+{% liquid
+  function object = 'lib/commands/contacts/create', object: context.params.contact, host: context.location.host
+  if object.valid
+    include 'redirect_to', url: '/', notice: 'app.models.contacts.message_sent'
+  else
+    include 'theme/simple/contacts/new', object: object
+  endif
+%}

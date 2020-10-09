@@ -1,0 +1,34 @@
+query search(
+  $id: ID
+  $limit: Int = 20
+<% attributes.forEach((attr) => { -%>
+  $<%= attr.name %>: String
+<% }); -%>
+) {
+  <%= modelNamePlural %>: models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      model_schema_name: { value: "<%= modelName %>" }
+      properties: [
+      <% attributes.forEach((attr) => { -%>
+        { name: "<%= attr.name %>" value: $<%= attr.name %> }
+      <% }); -%>
+      ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+      created_at
+      type: model_schema_name
+
+    <% attributes.forEach((attr) => { -%>
+      <%= attr.name %>: property(name: "<%= attr.name %>")
+    <% }); -%>
+    }
+  }
+}

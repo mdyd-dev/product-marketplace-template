@@ -1,0 +1,13 @@
+{% parse_json object %}
+  {
+    "to":    {% print 'app.support_email' | t | json %},
+    "from":    {% print 'app.support_email' | t | json %},
+    "subject": {% print 'app.emails.contact-us.subject' | t: host: host | json %},
+    "host":     {% print host | json %},
+    "object":   {{ object.properties }}
+  }
+{% endparse_json %}
+{% liquid
+  function object = 'lib/commands/emails/send', template: 'contacts/new_support_ticket', object: object
+  return object
+%}

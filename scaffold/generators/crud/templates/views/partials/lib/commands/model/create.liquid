@@ -1,0 +1,10 @@
+{%  liquid
+  function object = 'lib/commands/<%= modelNamePlural %>/create/build', object: object
+  function object = 'lib/commands/<%= modelNamePlural %>/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: '<%= modelNamePlural %>/create' object: object
+  endif
+
+  return object
+%}

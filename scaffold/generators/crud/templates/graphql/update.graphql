@@ -1,0 +1,20 @@
+mutation update_<%= modelName %>(
+  $id: ID!
+<% attributes.forEach((attr) => { -%>
+  $<%= attr.name %>: String!
+<% }); -%>
+) {
+  model_update(
+    id: $id
+    model: {
+      model_schema_name: "<%= modelName %>"
+      properties: [
+      <% attributes.forEach((attr) => { -%>
+        { name: "<%= attr.name %>" value: $<%= attr.name %> }
+      <% }); -%>
+      ]
+    }
+  ){
+    id properties
+  }
+}

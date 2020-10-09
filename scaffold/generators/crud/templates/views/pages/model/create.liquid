@@ -1,0 +1,12 @@
+---
+slug: <%= modelNamePlural %>
+method: post
+---
+{% liquid
+  function object = 'lib/commands/<%= modelNamePlural %>/create', object: context.params.<%= modelName %>
+  if object.valid
+    include 'redirect_to', url: '/<%= modelNamePlural %>'
+  else
+    include 'theme/simple/<%= modelNamePlural %>/new', object: object
+  endif
+%}

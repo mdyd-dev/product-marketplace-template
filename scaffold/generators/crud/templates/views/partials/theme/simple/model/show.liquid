@@ -1,0 +1,13 @@
+<h1 class="text-4xl font-medium text-center">
+  <%= modelName %> - {{ <%= modelName %>.id }}
+</h1>
+
+<% attributes.forEach((attr) => { -%>
+<span class="font-medium">
+  {{ 'app.models.<%= modelNamePlural %>.form.<%= attr.name %>' | t }}
+</span>
+<p class="mb-10">
+  {{ <%= modelName %>.<%= attr.name %> }}
+</p>
+
+<% }); -%>

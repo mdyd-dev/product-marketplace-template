@@ -1,31 +1,29 @@
 en:
   admin:
     menu:
-      setup: Configuration
       items: Items
       users:
-        slug: "slug: "
-        id: "id: "
-        uuid: "uuid: "
+        slug: 'slug: '
+        id: 'id: '
+        uuid: 'uuid: '
       activities:
         name: Activities
-        following: "following:"
+        following: 'following:'
         list:
           public: public
           audit: audit all events
           all: all
           comments: comments
-          user: "user: "
-          user_id: "id: "
-          group: "group: "
-          group_id: "id: "
-
-
+          user: 'user: '
+          user_id: 'id: '
+          group: 'group: '
+          group_id: 'id: '
       setup: Setup
       categories: Categories
       orders: Orders
       users_title: Users
       home: Home
+      support-tickets: Support tickets
     metric:
       period:
         montly: Montly
@@ -33,7 +31,7 @@ en:
         total: Total
       income:
         name: Income
-        description: "Marketplace Owner fee is set to 10%"
+        description: Marketplace Owner fee is set to 10%
         delta: Since yesterday
       users:
         name: Users
@@ -64,22 +62,20 @@ en:
     feed:
       title: Feed
     title: MVP Marketplace
-    support_email: "support@getmarkeplace.co"
+    support_email: support@getmarkeplace.co
     page_not_found: Page not found.
-
-    total_entries: "Total items:"
+    total_entries: 'Total items:'
     no_items_found: No items found
     no_members_found: This group has no members
     no_following_found: You are not following anyone
     no_followers_found: Noone is following you
     no_groups_found: You have no groups
     no_activities_found: You have no activities yet
-
     list-your-item: List your item
     admin: Admin
     dashboard: Dashboard
     login: Log in
-    logout: Log out %{user}
+    logout: 'Log out %{user}'
     login_form:
       log_in: Log In
       email: E-mail
@@ -88,35 +84,30 @@ en:
       reset: Reset
       anonymous: Don't have an account?
       password_lost: Password lost?
-
-
     order: Order
     your-orders: Your orders
     self-list: You are now on <b class="font-semibold">your</b> list
-    user-list: "You are now on <b class=\"font-semibold\">%{name}'s</b> list"
+    user-list: 'You are now on <b class="font-semibold">%{name}''s</b> list'
     back: Back
     save: Save
     new: New
     edit: Edit
     continue: Continue
     community: Community
-
     header:
       add: Add
       feed: Feed
       dashboard: Dashboard
       log-out: Log out
       chat: Chat
-
     footer:
-      description: MVP Marketplace template is modern marketplace to gather your clients together
+      description: >-
+        MVP Marketplace template is modern marketplace to gather your clients
+        together
       copyrights:
         year: © 2020
         title: MVP Marketplace — Powered by
         product_owner: platformOS
-
-
-
       header:
         title:
           general: GENERAL
@@ -130,13 +121,11 @@ en:
           log_in: Log in
           contact_us: Contact Us
           faq: FAQ
-
     hero:
       shop: Find your dream watch
       sell: Sell part of your collection
       main-sentence: Find Your Time
       secondary-sentence: MVP Marketplace is a social marketplace to buy and sell all things
-
     orders:
       created: Order has been placed
       new: new order
@@ -153,13 +142,12 @@ en:
         total: Total
       review:
         confirm: Please confirm and submit your order
-        order_total: "Order total: "
+        order_total: 'Order total: '
         success: Your order has been paid.
-
     groups:
       list: Groups
       group: Group
-      owner: ", Owner"
+      owner: ', Owner'
       description: Description
       members: Members
       view_all: View all
@@ -171,7 +159,7 @@ en:
       deleted: Group has been deleted
       new: New
       new_group: New Group
-      edit: "Edit Group: "
+      edit: 'Edit Group: '
       empty_state: You haven’t added any groups yet. <br> Create your first one now!
       nav:
         activity: Activity
@@ -196,17 +184,20 @@ en:
         actor: Actor
         type: Type
       types:
-        user_followed_user: "started following <a href=\"%{url}\">%{target}</a>"
-        user_unfollowed_user: "stopped following <a href=\"%{url}\">%{target}</a>"
-        page_visited: visited <a href="%{obj}">%{obj}</a> page
-        order_status_created: changed status of the [%{target_id}] order to <span class="font-semibold">%{status}</span>
-        order_created: placed an [%{object_id}] order for <a href="/items/%{target_id}">%{target}</a>
+        user_followed_user: 'started following <a href="%{url}">%{target}</a>'
+        user_unfollowed_user: 'stopped following <a href="%{url}">%{target}</a>'
+        page_visited: 'visited <a href="%{obj}">%{obj}</a> page'
+        order_status_created: >-
+          changed status of the [%{target_id}] order to <span
+          class="font-semibold">%{status}</span>
+        order_created: >-
+          placed an [%{object_id}] order for <a
+          href="/items/%{target_id}">%{target}</a>
         account_created: created an account.
         profile_updated: updated profile information
-        item_created: created a <a href="/items/%{object_id}">%{name}</a>
-        comment_created: "posted a comment on <a href=\"%{url}\"> %{target} </a> %{type} page"
-        user_joined_group: "joined <a href=\"%{url}\"> %{target} </a> group"
-
+        item_created: 'created a <a href="/items/%{object_id}">%{name}</a>'
+        comment_created: 'posted a comment on <a href="%{url}"> %{target} </a> %{type} page'
+        user_joined_group: 'joined to <a href="%{url}"> %{target} </a> group'
     users:
       new: new user
       list: Users
@@ -223,11 +214,12 @@ en:
         slug: slug
         followers: Followers
         profile: Profile
-
     items:
       by_user: Browse this user's items
       self-list: You are now on <span class="font-semibold">your</span> list
-      user-list: You are now on <span class="font-semibold">%{name}'s</span> list (%{name})
+      user-list: >-
+        You are now on <span class="font-semibold">%{name}'s</span> list
+        (%{name})
       yours: My items
       list: Items
       items_404: 404 item not found
@@ -248,15 +240,14 @@ en:
         price: Price ($)
         submit: Submit
       ordered_times:
-        other: Ordered %{count} times
-        one: Ordered %{count} time
+        other: 'Ordered %{count} times'
+        one: 'Ordered %{count} time'
       attr:
         id: ID
         name: Name
         category: Category
         created_at: CreatedAt
         owner: Owner
-
     categories:
       list: Categories
       new: new category
@@ -265,33 +256,39 @@ en:
         key: Key
     stripe:
       header: Stripe
-      register: Please visit <a href="https://stripe.com" target="_blank" rel="extrnal noopener">https://stripe.com</a>
-        and register your <span class="font-semibold">Stripe Connect</span> account.
+      register: >-
+        Please visit <a href="https://stripe.com" target="_blank" rel="extrnal
+        noopener">https://stripe.com</a> and register your <span
+        class="font-semibold">Stripe Connect</span> account.
       copy_and_add: Copy and add this redirect URL in your
-      public_key: Enter your Stripe public key, secret key, and connect account client ID
-      settings: "stripe settings: "
+      public_key: 'Enter your Stripe public key, secret key, and connect account client ID'
+      settings: 'stripe settings: '
       save: Save
-
     payments:
       account:
         bank_account: Bank Account
         new:
           to_start_selling: To start selling please
           no_account: No Account
-          you_have_to_connect: You have not connected your Product MVP Marketplace account to Stripe yet. It’s required if you are planning to sell products on Product MVP Marketplace.
+          you_have_to_connect: >-
+            You have not connected your Product MVP Marketplace account to
+            Stripe yet. It’s required if you are planning to sell products on
+            Product MVP Marketplace.
           connect_with_stripe: Connect with Stripe
         show:
           account_information: Seller Account Information
           account_verified: Account verified
           verification_pending: Verification pending
           stripe_account_dashboard: Stripe Account Dashboard
-          you_have_connected: Your Stripe account is connected, but it is still
+          you_have_connected: 'Your Stripe account is connected, but it is still'
           pending_verification: pending verification
-          check_details: You can check details of the verification process and manage account details in the
+          check_details: >-
+            You can check details of the verification process and manage account
+            details in the
           there_is_a_problem: There is a problem with your bank account verification process.
           go_to: Go to
           to_find_more: to find out more.
-          verification_status: "Verification status:"
+          verification_status: 'Verification status:'
           you_have_successfully_connected: You have successfully connected and verified your Stripe account.
           you_can_manage_details: You can manage account details in the
         success:
@@ -299,40 +296,36 @@ en:
           account: Your payout account has been added.\
         failure:
           failed_adding_account: Failed adding payout account.
-
     item: Item
     your-items: Your items
-
     item_id: Item ID
     created_at: Created at
     buyer: Buyer
     seller: Seller
     status: Status
     paid_at: Paid at
-
     name: Name
     price: Price
     quantity: Quantity
     total: Total
-
     checkout: Checkout
     mark-as-paid: Mark as paid
     pay: Pay
     pay_online: Pay online
     cancel: Cancel
     ship: Ship
-
     passwords:
       edit: Change password
       updated: Your new password has been set successfully.
       password: Password
       password_confirmation: Password Confirmation
       password_update: Update Password
-
     emails:
       passwords:
         reset:
           subject: Reset Password
+      contact-us:
+        subject: 'New message from Contact-Us form on %{host}'
     credit_cards:
       name: Credit Cards
       no_cards: You don't have any cards connected
@@ -358,7 +351,6 @@ en:
       list-an-item: List an Item
       buy-orders: Purchases
       sell-orders: Sold
-
     profiles:
       edit: Profile Edit
       username: Username
@@ -373,8 +365,6 @@ en:
         following: Following
         followers: Followers
         products: Products
-
-
     search:
       all_categories: All categories
       all_tags: All tags
@@ -383,21 +373,17 @@ en:
       category: Category
       tags: Tags
       sort_by: Sort by
-
     dashboard-items:
       actions: Actions
       list-your-first-item: Add your first item
-
     marketplace_setup:
       mpo_fee_percent: Marketplace Owner Fee (percent)
       stripe_pk_key: Stripe Publishable Key
       stripe_sk_key: Stripe Secret Key
       stripe_client_id: Stripe Owner Connect Account client ID
-
     item_statuses:
       sold: sold
-      none: "&nbsp;"
-
+      none: '&nbsp;'
     order_statuses:
       order_status: status
       pending_payment: pending
@@ -405,36 +391,60 @@ en:
       paid: paid
       canceled: canceled
       shipped: shipped
-
     sessions:
       created: Logged in
       destroyed: Logged out
-
     account:
       created: Your account has been created
       reset_password:
         title: Reset password
         send_link: Send email with authentication link
     authentication_links:
-      created: Please check your email. We have sent you a password resetting instructions.
-
+      created: >-
+        Please check your email. We have sent you a password resetting
+        instructions.
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself
       blank: cannot be blank
-      too_little: "has to be equal or greater than %{value}"
-      too_much: "has to be equal or smaller than %{value}"
-      too_short: "has to longer than %{value} letters"
+      too_little: 'has to be equal or greater than %{value}'
+      too_much: 'has to be equal or smaller than %{value}'
+      too_short: 'has to longer than %{value} letters'
       taken: already taken
       session_create_failed: Invalid email or password
-      unauthorized: The system has determined that <span class="font-semibold">you are not</span> presently <span class="font-semibold">authorized</span> to use this system function.
-      unauthenticated: Please <b class="font-semibold">sign in</b> with you credentials or <b class="font-semibold">register</b> new account before continuing.
-      item_with_orders: The system has determined that <span class="font-semibold">your item</span> has <span class="font-semibold">open orders</span>. Cowardly refusing destroying.
-      cannot_edit_coz_has_active_orders: The system has determined that <span class="font-semibold">your item</span> has <span class="font-semibold">orders</span>. Editing is not allowed.
+      unauthorized: >-
+        The system has determined that <span class="font-semibold">you are
+        not</span> presently <span class="font-semibold">authorized</span> to
+        use this system function.
+      unauthenticated: >-
+        Please <b class="font-semibold">sign in</b> with you credentials or <b
+        class="font-semibold">register</b> new account before continuing.
+      item_with_orders: >-
+        The system has determined that <span class="font-semibold">your
+        item</span> has <span class="font-semibold">open orders</span>. Cowardly
+        refusing destroying.
+      cannot_edit_coz_has_active_orders: >-
+        The system has determined that <span class="font-semibold">your
+        item</span> has <span class="font-semibold">orders</span>. Editing is
+        not allowed.
       denied: Permission denied
-
     confirm-delete: Are you sure you want to delete this item?
     delete: Delete
-
+    models:
+      shared:
+        submit: Save
+        delete: Delete
+        delete_failed: Delete failed
+      contacts:
+        new: New contact
+        add: Add contact
+        edit: Edit contact
+        empty_state: You haven't added any contacts yet. <br> Create your first one now!
+        message_sent: Message sent. We will contact with you shortly.
+        form:
+          email: Email
+          message: Message
+          reason: Reason
+          submit: Send message
   lib:
     sort_options:
       relevance: Relevance
