@@ -183,7 +183,8 @@ en:
         photo: Main Photo
         description: Description
         submit: Submit
-
+      errors:
+        description_too_short: Description is too short, it has to be longer than %{size} chars
     activities:
       list: Activities
       new: new

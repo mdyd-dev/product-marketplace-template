@@ -22,7 +22,7 @@
     include 'lib/register_error', contract: c, field_name: 'description', key: 'app.errors.blank'
   else
     if object.description.size < 30
-      assign msg = 'app.errors.too_little' | t: value: 30
+      assign msg = 'app.groups.errors.description_too_short' | t: size: 30
       include 'lib/register_error', contract: c, field_name: 'description', message: msg
     endif
   endif
