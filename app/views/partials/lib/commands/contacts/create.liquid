@@ -4,6 +4,7 @@
 
   if object.valid
     function object = 'lib/commands/execute', mutation_name: 'contacts/create' object: object
+    function email = 'lib/commands/emails/new_support_ticket', object: object, host: host
   endif
 
   return object
