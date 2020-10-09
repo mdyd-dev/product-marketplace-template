@@ -212,6 +212,56 @@ categories can be adjusted by:
 - editing: https://github.com/mdyd-dev/marketplace-template-poc/blob/master/app/views/partials/lib/queries/raw_category_list.liquid
 - adding a translation to the `app/translations/en_categies.liquid` file
 
+## Generators
+
+To imporve workflow with creating new resource you can use generator that will create all files needed to create, update, delete.
+Generator follow development guidelines.
+
+```
+  ./scaffold/bin/generate resource --help
+
+    Usage: generate <model_name> <attribute_name:type_attribute...> ex. generate car model:string year:int 
+
+    Generate model files for basic operations create, read, update, delete
+```
+
+Resource generator is expecting model name, list of fields with names and their types.
+```
+  ./scaffold/bin/generate resource car model:string color:string year:int
+    create scaffold/generators/crud/templates/translations/cars.yml
+    create app/model_schemas/car.yml
+    create app/graphql/cars/create.graphql
+    create app/graphql/cars/delete.graphql
+    create app/graphql/cars/search.graphql
+    create app/graphql/cars/update.graphql
+    create app/views/partials/lib/data/queries/cars/find.liquid
+    create app/views/partials/lib/data/queries/cars/search.liquid
+    create app/views/partials/lib/commands/cars/create.liquid
+    create app/views/partials/lib/commands/cars/create/build.liquid
+    create app/views/partials/lib/commands/cars/create/check.liquid
+    create app/views/partials/lib/commands/cars/delete.liquid
+    create app/views/partials/lib/commands/cars/delete/check.liquid
+    create app/views/partials/lib/commands/cars/update/build.liquid
+    create app/views/partials/lib/commands/cars/update/check.liquid
+    create app/views/pages/cars/create.liquid
+    create app/views/pages/cars/delete.liquid
+    create app/views/pages/cars/edit.liquid
+    create app/views/pages/cars/index.liquid
+    create app/views/pages/cars/new.liquid
+    create app/views/pages/cars/show.liquid
+    create app/views/pages/cars/update.liquid
+    create app/views/partials/theme/simple/cars/edit.liquid
+    create app/views/partials/theme/simple/cars/empty_state.liquid
+    create app/views/partials/theme/simple/cars/form.liquid
+    create app/views/partials/theme/simple/cars/index.liquid
+    create app/views/partials/theme/simple/cars/new.liquid
+    create app/views/partials/theme/simple/cars/show.liquid
+```
+
+After deploy you can access page when you can list, create, update and delete objects: https://your-instance-domain.com/cars
+
+Now you have good place to start in customizing it to your needs.
+
 ## TESTS
 
 ### e2e tests
