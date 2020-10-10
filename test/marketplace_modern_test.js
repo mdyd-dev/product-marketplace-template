@@ -261,6 +261,7 @@ test('Groups', async (t) => {
     .click(groupsPage.buttons.editGroup)
     .typeText(groupsPage.inputs.name, 'audi fans', { replace: true })
     .click(groupsPage.buttons.submitForm)
+    .wait(100)
     .expect(link.withText('audi fans').exists).ok()
 })
 
