@@ -108,6 +108,12 @@ en:
         year: © 2020
         title: MVP Marketplace — Powered by
         product_owner: platformOS
+      social_links:
+        twitter: Twitter
+        instagram: Instagram
+        facebook: Facebook
+      contact:
+        email: info@arabimall.com
       header:
         title:
           general: GENERAL
