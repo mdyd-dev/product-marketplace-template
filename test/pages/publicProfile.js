@@ -12,5 +12,8 @@ export default class ProfileView {
     this.links = {
       userCard: Selector('div').find('a')
     }
+    this.fields = {
+      username: Selector('main').find('#user-name')
+    }
   }
 }

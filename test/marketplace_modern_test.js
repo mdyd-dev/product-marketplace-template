@@ -1,49 +1,12 @@
 import { Selector, ClientFunction, t } from 'testcafe'
 import { buyerRole, sellerRole, adminRole } from './roles'
 import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
-         notAuthorizedUser, group, newPassword, Admin, link, commentText } from './fixtures'
+         notAuthorizedUser, group, newPassword, Admin, link, commentText,
+         adminPage, registerForm, loginForm, itemShow, editedItemShow,
+         passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
+         profileEditForm, orders, publicProfile, groupsPage, footer,
+         contactUsForm, activityFeed } from './fixtures'
 import { register, createItem } from './helper'
-import NewSessionForm from './pages/newsession'
-import NewItemForm from './pages/newitem'
-import ItemShowPage from './pages/itemshow'
-import ItemSearch from './pages/itemsearch'
-import AdminPanel from './pages/adminp'
-import TopMenuBtns from './pages/topmenu'
-import DashboardPage from './pages/dashboard'
-import ProfileEditForm from './pages/profileEdit'
-import PasswordReset from './pages/passwordReset'
-import OrdersPage from './pages/orders'
-import ProfileView from './pages/publicProfile'
-import GroupsPage from './pages/groupsPage'
-import Footer from './pages/footer'
-import ContactUs from './pages/contactUsForm'
-import ActivityFeed from './pages/activityPage'
-
-
-
-
-
-
-//pages
-const adminPage = new AdminPanel()
-const registerForm = new NewSessionForm()
-const loginForm = new NewSessionForm()
-const itemShow = new ItemShowPage(item)
-const editedItemShow = new ItemShowPage(editedItem)
-const passwordResetForm = new PasswordReset()
-const newItemForm = new NewItemForm()
-const topMenu = new TopMenuBtns()
-const itemSearch = new ItemSearch(item, editedItem)
-const dashboard = new DashboardPage()
-const profileEditForm = new ProfileEditForm()
-const orders = new OrdersPage()
-const publicProfile = new ProfileView()
-const groupsPage = new GroupsPage()
-const footer = new Footer()
-const contactUsForm = new ContactUs()
-const activityPage = new ActivityFeed()
-
-
 
 
 const translationMissing = Selector('body').withText('translation missing')
@@ -80,7 +43,7 @@ test('Edit John Profile Page', async (t) => {
     .click(dashboard.nav.publicProfile)
     await checkTranslation(translationMissing) // public profile translation missing check
   await t
-    .expect(Selector('main').find('#user-name').withText(`${John.firstName} ${John.lastName}`).exists).ok()
+    .expect(publicProfile.fields.username.withText(`${John.firstName} ${John.lastName}`).exists).ok()
 
 })
 test(`Reset Password test`, async (t) => {
@@ -266,13 +229,12 @@ test('Groups', async (t) => {
     .expect(Selector('div').textContent).contains('already taken')
   //checks if group exists
     .click(dashboard.nav.myGroups)
-    .debug()
-    .expect(Selector('a').withText(group.name).exists).ok() // ??????
+    .expect(link.withText(group.name).exists).ok() // ??????
   //edit group
     .click(groupsPage.buttons.editGroup)
-    .typeText(groupsPage.inputs.name, 'audi fans', { replace: true })
+    .typeText(groupsPage.inputs.name, group.audifans, { replace: true })
     .click(groupsPage.buttons.submitForm)
-    .expect(link.withText('audi fans').exists).ok()
+    .expect(link.withText(group.audifans).exists).ok()
 })
 
  test('Activity', async (t) => {
@@ -282,8 +244,8 @@ test('Groups', async (t) => {
      await checkTranslation(translationMissing) // dashboard translation missing check
      await t.click(dashboard.nav.activityFeed)
      await checkTranslation(translationMissing) // activity feed translation missing check
-     await t.typeText(activityPage.inputs.message, commentText)
-     .click(activityPage.buttons.send)
+     await t.typeText(activityFeed.inputs.message, commentText)
+     .click(activityFeed.buttons.send)
      .click(topMenu.buttons.menuDropdown)
      .click(topMenu.buttons.dashboard)
      .click(dashboard.nav.publicProfile)
