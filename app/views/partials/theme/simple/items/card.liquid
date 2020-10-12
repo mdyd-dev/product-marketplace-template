@@ -14,7 +14,7 @@
     <h3 class="mb-1 text-xs ">
       {% if item.category %}
         <div>
-          <a href="/c/{% print item.category %}">
+          <a href="{% render 'link_to', category: item.category %}">
             {% print 'categories.' | append: item.category | t %}
           </a>
         </div>
