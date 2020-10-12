@@ -12,10 +12,10 @@
 {% parse_json query %}
 {
   "limit": {{ limit | default: 20 }},
-  "keyword": {{ query.k | json }},
-  "sort": {{ sort_options[query.sort] | json }},
+  "keyword": {{ params.k | json }},
+  "sort": {{ sort_options[params.sort] | json }},
   "owner": {{ owner | json }},
-  "category": {{ query.category | json }},
+  "category": {{ params.category | json }},
   "withOrders": {{ withOrders | default: false }}
 
 }
