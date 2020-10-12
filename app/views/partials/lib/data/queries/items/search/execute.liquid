@@ -1,5 +1,4 @@
 {% liquid
-  log query, type: 'showme'
   graphql r = 'items/search', args: query
   include 'lib/handle_graphql_response', r: r, name: 'queries/search/execute'
 
