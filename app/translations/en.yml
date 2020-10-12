@@ -435,7 +435,7 @@ en:
         delete: Delete
         delete_failed: Delete failed
       contacts:
-        new: New contact
+        contact-us: Contact Us
         add: Add contact
         edit: Edit contact
         empty_state: You haven't added any contacts yet. <br> Create your first one now!
