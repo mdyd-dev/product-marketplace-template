@@ -1,0 +1,6 @@
+{% liquid
+  graphql r = 'models/search', keyword: keyword
+  include 'lib/handle_graphql_response', r: r, name: 'queries/models/search'
+
+  return r.models
+%}

@@ -13,7 +13,7 @@
     <a href="/{{path}}/{{ user.slug }}/followers" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'followers' %}{{ active_class }}{% endif %}">
       {{ 'app.profiles.nav.followers' | t }}
     </a>
-    <a href="/{{path}}/{{ user.slug }}/products" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'products' %}{{ active_class }}{% endif %}">
+    <a href="/{{path}}/{{user.slug}}/products" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'products' %}{{ active_class }}{% endif %}">
       {{ 'app.profiles.nav.products' | t }}
     </a>
   </nav>

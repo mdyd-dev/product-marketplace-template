@@ -1,0 +1,11 @@
+<div class="container mx-auto">
+  <div class="flex flex-wrap -mx-4 cards">
+    {% if models.results.size > 0 %}
+      {% for model in models.results %}
+        {% render 'theme/simple/quick_search/card', model: model %}
+      {% endfor %}
+    {% else %}
+      <p class="container my-8 text-lg">{{ 'app.no_items_found' | t }}</p>
+    {% endif %}
+  </div>
+</div>

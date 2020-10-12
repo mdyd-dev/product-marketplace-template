@@ -10,6 +10,7 @@
     </a>
 
     <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto">
+      {% include 'theme/simple/home/quick_search_form' %}
       <a href="/dashboard/items/new" class="mr-5 hover:text-gray-900">{{ 'app.header.add' | t }}</a>
       <a href="/search" class="mr-5 hover:text-gray-900">{{ 'app.items.list' | t }}</a>
       <a href="/groups" class="mr-5 hover:text-gray-900">{{ 'app.groups.list' | t }}</a>

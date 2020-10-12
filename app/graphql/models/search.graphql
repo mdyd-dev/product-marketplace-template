@@ -1,0 +1,59 @@
+query search(
+  $id: ID
+  $limit: Int = 20
+  $tag: String
+  $keyword: String
+  $category: String
+  $sort: ModelsSortInput = { created_at: { order: DESC } }
+) {
+  models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      model_schema_name: { value_in: ["item", "group", "profile"] }
+      deleted_at: { exists: false }
+      properties: [
+        { name: "tags", contains: $tag }
+        { name: "category", starts_with: $category }
+      ]
+      or: [
+        { properties: { name: "description", contains: $keyword } }
+        { properties: { name: "name", contains: $keyword } }
+        { properties: { name: "tags", contains: $keyword } }
+        { properties: { name: "category", contains: $keyword } }
+        { properties: { name: "body", contains: $keyword } }
+      ]
+    }
+    sort: [$sort]
+  ) {
+    total_entries
+    results {
+      id
+      created_at
+      type: model_schema_name
+
+      uuid: property(name: "uuid")
+      name: property(name: "name")
+      category: property(name: "category")
+      description: property(name: "description")
+      slug: property(name: "slug")
+      tags: property_array(name: "tags")
+
+      owner: related_user(join_on_property: "owner", foreign_property: "id") {
+        id
+        email
+      }
+
+      photo: related_model(
+        model_schema_name: "photo"
+        join_on_property: "uuid"
+        foreign_property: "object_uuid"
+      ) {
+        photo: property_upload(name: "photo") {
+          url
+          versions
+        }
+      }
+    }
+  }
+}
