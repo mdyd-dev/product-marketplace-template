@@ -15,6 +15,10 @@ import PasswordReset from './pages/passwordReset'
 import OrdersPage from './pages/orders'
 import ProfileView from './pages/publicProfile'
 import GroupsPage from './pages/groupsPage'
+import Footer from './pages/footer'
+import ContactUs from './pages/contactUsForm'
+
+
 
 
 
@@ -33,6 +37,10 @@ const profileEditForm = new ProfileEditForm()
 const orders = new OrdersPage()
 const publicProfile = new ProfileView()
 const groupsPage = new GroupsPage()
+const footer = new Footer()
+const contactUsForm = new ContactUs()
+
+
 
 
 const translationMissing = Selector('body').withText('translation missing')
@@ -279,3 +287,14 @@ test('Groups', async (t) => {
      .click(dashboard.nav.publicProfile)
      .expect(Selector('div').withText(commentText).exists).ok("checks if feed exists at user's profile activities")
  })
+
+ test('Contact us', async (t) => {
+  await t.useRole(buyerRole)
+    .click(footer.support.contactUs)
+    .typeText(contactUsForm.inputs.email, John.email)
+    .click(contactUsForm.buttons.menuDropdown)
+    .click(contactUsForm.options.purchaseTranslationMissing)
+    .typeText(contactUsForm.inputs.message, "There was a problem with...")
+    .click(contactUsForm.buttons.sendMessage)
+    .expect(contactUsForm.messages.success.exists).ok()
+})
