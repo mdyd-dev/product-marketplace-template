@@ -1,7 +1,7 @@
 import { Selector, ClientFunction, t } from 'testcafe'
 import { buyerRole, sellerRole, adminRole } from './roles'
 import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
-         notAuthorizedUser, group, newPassword, Admin, link } from './fixtures'
+         notAuthorizedUser, group, newPassword, Admin, link, commentText } from './fixtures'
 import { register, createItem } from './helper'
 import NewSessionForm from './pages/newsession'
 import NewItemForm from './pages/newitem'
@@ -17,6 +17,8 @@ import ProfileView from './pages/publicProfile'
 import GroupsPage from './pages/groupsPage'
 import Footer from './pages/footer'
 import ContactUs from './pages/contactUsForm'
+import ActivityFeed from './pages/activityPage'
+
 
 
 
@@ -39,6 +41,7 @@ const publicProfile = new ProfileView()
 const groupsPage = new GroupsPage()
 const footer = new Footer()
 const contactUsForm = new ContactUs()
+const activityPage = new ActivityFeed()
 
 
 
@@ -273,15 +276,14 @@ test('Groups', async (t) => {
 })
 
  test('Activity', async (t) => {
-   const commentText = "What's new bro?"
    await t.useRole(buyerRole)
      .click(topMenu.buttons.menuDropdown)
      .click(topMenu.buttons.dashboard)
      await checkTranslation(translationMissing) // dashboard translation missing check
      await t.click(dashboard.nav.activityFeed)
      await checkTranslation(translationMissing) // activity feed translation missing check
-     await t.typeText(Selector('textarea'), commentText)
-     .click(Selector('button').withText('Send'))
+     await t.typeText(activityPage.inputs.message, commentText)
+     .click(activityPage.buttons.send)
      .click(topMenu.buttons.menuDropdown)
      .click(topMenu.buttons.dashboard)
      .click(dashboard.nav.publicProfile)

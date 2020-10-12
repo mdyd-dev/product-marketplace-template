@@ -16,6 +16,7 @@ export const groupName = faker.lorem.words();
 export const translationMissing = (Selector('body').withText("translation missing"))
 export const newPassword = 'newpassword'
 export const link = Selector('a')
+export const commentText = "What's new bro?"
 
 
 export const randomFirstName = faker.name.firstName()
