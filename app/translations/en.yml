@@ -109,6 +109,7 @@ en:
       chat: Chat
 
     footer:
+      title: About Us
       description: MVP Marketplace template is modern marketplace to gather your clients together
       copyrights:
         year: © 2020
@@ -121,12 +122,31 @@ en:
         title:
           general: GENERAL
           join: JOIN
-          support: SUPPORT
+          support: Support
+          contact: Contact
+          connect: Connect
+          company: Company
+          sellers: Sellers
+
         list:
+          resources: Resources
+          howitworks: How it works
+          benef: Benefits
+          termsofservice: Terms of Service.
+          privacypolicy: Privacy Policy
+          smartbuy: Smart buy
+          namefounder: Name founder
+          xcite: Xcite
+          homemade: Home made
           home: Home
           about_us: About us
           terms_of_service: Terms of service
           sign_up: Sign up
+          feedback: Feedback
+          email: info@example.com
+          facebook: Facebook
+          twitter: Twitter
+          instagram: Instagram
           log_in: Log in
           contact_us: Contact Us
           faq: FAQ
