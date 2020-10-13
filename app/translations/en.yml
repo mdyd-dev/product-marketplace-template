@@ -59,6 +59,7 @@ en:
         groups: People gathering
         items: People selling
         profiles: People joining
+        categories: Popular categories
     relationships:
       type:
         - followship
