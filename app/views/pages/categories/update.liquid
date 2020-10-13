@@ -1,0 +1,12 @@
+---
+slug: categories
+method: put
+---
+{% liquid
+  function object = 'lib/commands/call', object: context.params.category, command: 'categories/update', selection: 'model_update'
+  if object.valid
+    include 'redirect_to', url: '/categories'
+  else
+    include 'theme/simple/categories/edit', object: object
+  endif
+%}

@@ -1,12 +1,7 @@
-{% comment %}
-  keys copied from translation/en_categories.yml in order  to keep specific order
-{% endcomment %}
-{%- capture categories -%}
-  {% include 'lib/data/queries/categories/raw_category_list' %}
-{%- endcapture -%}
-
 {% liquid
-  assign categories = categories | replace_regex: "$", "," | replace_regex: "\n", "" | split: ","
+  assign limit = limit | default: 100
+  graphql r = 'categories/search', limit: limit, page: 1
+  include 'lib/handle_graphql_response', r: r, name: 'queries/categories/search'
 
-  return categories
+  return r.categories
 %}

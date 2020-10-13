@@ -266,6 +266,13 @@ After deploy you can access page when you can list, create, update and delete ob
 
 Now you have good place to start in customizing it to your needs.
 
+
+for automation / CI/CD purposes:
+
+    docker run -u $(id -u ${USER}):$(id -g ${USER}) -it --rm -v $(pwd):/app -w /app node:12-alpine npm install
+    docker run -u $(id -u ${USER}):$(id -g ${USER}) -it --rm -v $(pwd):/app -w /app node:12-alpine ./scaffold/bin/generate resource RESOURCENAME PROPERTY:TYPE ...
+
+
 ## TESTS
 
 ### e2e tests

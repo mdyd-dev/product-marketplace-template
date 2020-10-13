@@ -1,0 +1,12 @@
+---
+slug: categories
+method: post
+---
+{% liquid
+  function object = 'lib/commands/categories/create', object: context.params.category
+  if object.valid
+    include 'redirect_to', url: '/categories'
+  else
+    include 'theme/simple/categories/new', object: object
+  endif
+%}

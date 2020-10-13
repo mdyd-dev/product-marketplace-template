@@ -6,15 +6,14 @@
     </tr>
   </thead>
   <tbody>
-
-    {% for record in list %}
+    {% for record in list.results %}
       <tr>
         <td class="text-left">
-          {{ record }}
+          {{ record.key }}
         </td>
         <td class="text-left">
           <a href="/c/{{ record }}">
-            {{ 'categories.' | append: record | t }}
+            {{ 'categories.' | append: record.key | t }}
           </a>
         </td>
       </tr>

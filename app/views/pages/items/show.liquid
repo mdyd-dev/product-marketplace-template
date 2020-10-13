@@ -4,7 +4,6 @@ slug: items
 
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, followships: true
-  include 'lib/validate_profile_completeness', profile: current_profile
 
   assign id = context.params.slug2 | split: '-' | last
   function item = 'lib/data/queries/items/find', id: id

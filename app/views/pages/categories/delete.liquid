@@ -1,0 +1,14 @@
+---
+slug: categories
+method: delete
+---
+{% liquid
+  function object = 'lib/data/queries/categories/find', id: context.params.id
+  function object = 'lib/commands/categories/delete', object: object
+
+  if object.valid
+    include 'redirect_to', url: '/categories', notice: 'app.models.shared.deleted'
+  else
+    include 'redirect_to', url: '/categories', error: 'app.models.shared.delete_failed'
+  endif
+%}

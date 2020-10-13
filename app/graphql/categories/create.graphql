@@ -1,0 +1,16 @@
+mutation create_category(
+  $key: String!
+  $uuid: String!
+) {
+  model_create(
+    model: {
+      model_schema_name: "category"
+      properties: [
+              { name: "key" value: $key }
+              { name: "uuid" value: $uuid }
+            ]
+    }
+  ){
+    id properties
+  }
+}

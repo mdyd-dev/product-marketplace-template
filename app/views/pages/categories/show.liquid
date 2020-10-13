@@ -1,0 +1,11 @@
+---
+slug: categories/show
+---
+{% liquid
+
+  assign category_id = context.params.slug3 | split: '-' | last
+  function category = 'lib/data/queries/categories/find', id: category_id
+  include 'lib/present_or_404', property: category.id
+
+  include 'theme/simple/categories/show', category: category
+%}

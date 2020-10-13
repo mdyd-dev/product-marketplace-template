@@ -22,10 +22,14 @@
     "@tailwindcss/custom-forms": "^0.2.1",
     "autoprefixer": "^10.0.1",
     "babel-loader": "^8.1.0",
+    "chalk": "^2.3.0",
+    "commander": "^2.13.0",
     "concurrently": "^5.3.0",
     "cross-env": "^7.0.2",
     "css-loader": "^4.3.0",
+    "js-yaml": "^3.14.0",
     "mini-css-extract-plugin": "^0.11.2",
+    "pluralize": "^8.0.0",
     "postcss": "^8.1.1",
     "postcss-csso": "^4.0.0",
     "postcss-fixes": "^2.0.1",
@@ -37,7 +41,9 @@
     "testcafe": "^1.9.3",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-require-from": "^1.8.1"
+    "webpack-require-from": "^1.8.1",
+    "yeoman-environment": "^2.10.3",
+    "yeoman-generator": "^2.0.5"
   },
   "optionalDependencies": {
     "fsevents": "^2.1.3"
