@@ -19,11 +19,6 @@
       <input class="w-2/3 form-input" type="text" id="key" name="category[key]" value="{{ object.key }}" autofocus required />
       {% include 'theme/simple/field_error', errors: object.errors.key %}
     </div>
-    <div class="mt-5">
-      <label class="block" for="uuid">{{ 'app.models.categories.form.uuid' | t }}</label>
-      <input class="w-2/3 form-input" type="text" id="uuid" name="category[uuid]" value="{{ object.uuid }}" autofocus required />
-      {% include 'theme/simple/field_error', errors: object.errors.uuid %}
-    </div>
 
     <button class="mt-8 button">{{ 'app.models.shared.submit' | t }}</button>
   </form>

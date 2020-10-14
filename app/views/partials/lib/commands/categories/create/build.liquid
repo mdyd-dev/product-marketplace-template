@@ -2,7 +2,7 @@
   {
     "id": {{ object.id | json }},
     "key": {{ object.key | json }},
-    "uuid": {{ object.uuid | json }}
+    "uuid": {{ '' | uuid | json }}
   }
 {% endparse_json %}
 

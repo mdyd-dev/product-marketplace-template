@@ -12,7 +12,7 @@
           {{ record.key }}
         </td>
         <td class="text-left">
-          <a href="/c/{{ record }}">
+          <a href="{% render 'link_to', category: record.key %}">
             {{ 'categories.' | append: record.key | t }}
           </a>
         </td>

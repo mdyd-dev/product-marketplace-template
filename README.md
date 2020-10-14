@@ -213,7 +213,7 @@ See [commit/c4c046](https://github.com/mdyd-dev/product-marketplace-template/com
 ## Categories
 
 categories can be adjusted by:
-- editing: https://github.com/mdyd-dev/marketplace-template-poc/blob/master/app/views/partials/lib/queries/raw_category_list.liquid
+- /admin/categories
 - adding a translation to the `app/translations/en_categies.liquid` file
 
 ## Generators

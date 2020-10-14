@@ -1,7 +1,7 @@
 mutation update_category(
   $id: ID!
   $key: String!
-  $uuid: String!
+  $uuid: String
 ) {
   model_update(
     id: $id
