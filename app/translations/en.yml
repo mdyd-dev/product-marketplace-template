@@ -47,7 +47,7 @@ en:
         delta: Since yesterday
   app:
     quick_search:
-      name: quick search...
+      name: Search...
       type:
         profile: Profile
         group: Group
