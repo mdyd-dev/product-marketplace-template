@@ -1,7 +1,7 @@
 mutation update_<%= modelName %>(
   $id: ID!
 <% attributes.forEach((attr) => { -%>
-  $<%= attr.name %>: String!
+  $<%= attr.name %>: String
 <% }); -%>
 ) {
   model_update(

@@ -5,8 +5,10 @@
   function comments = 'lib/data/queries/activities/search', feed: 'system', feed_id: "2", limit: 3
   function groups = 'lib/data/queries/activities/search', feed: 'system', feed_id: "3", limit: 3
   function profiles = 'lib/data/queries/activities/search', feed: 'system', feed_id: "4", limit: 3
+  function categories = 'lib/data/queries/categories/search', limit: 3
 
   assign feeds = '{}' | parse_json
+  hash_assign feeds['categories'] = categories
   hash_assign feeds['items'] = items
   hash_assign feeds['comments'] = comments
   hash_assign feeds['groups'] = groups

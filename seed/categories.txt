@@ -6,12 +6,9 @@ jewellery/artificial_jewellery
 jewellery/earrings
 jewellery/hair_accessories
 jewellery/jewellery_sets
-jewellery/mangalsutras_n_tanmaniyas
 jewellery/necklaces_n_chains
 jewellery/necklaces_n_chains/chains
 jewellery/necklaces_n_chains/necklaces
-jewellery/nose_rings_n_studs
-jewellery/pendants_n_lockets
 jewellery/precious_jewellery
 jewellery/rings
 watches

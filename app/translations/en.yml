@@ -59,6 +59,7 @@ en:
         groups: People gathering
         items: People selling
         profiles: People joining
+        categories: Popular categories
     relationships:
       type:
         - followship
@@ -187,7 +188,7 @@ en:
         description: Description
         submit: Submit
       errors:
-        description_too_short: Description is too short, it has to be longer than %{size} chars
+        description_too_short: 'Description is too short, it has to be longer than %{size} chars'
     activities:
       list: Activities
       new: new
@@ -452,12 +453,22 @@ en:
       contacts:
         contact-us: Contact Us
         message_sent: Message sent. We will contact with you shortly.
-        message-explain: Please explain your message in detail so that we may help you as best as possible in the shortest amount of time.
+        message-explain: >-
+          Please explain your message in detail so that we may help you as best
+          as possible in the shortest amount of time.
         form:
           email: Email
           message: Message
           reason: Reason
           submit: Send message
+      categories:
+        new: New category
+        add: Add category
+        edit: Edit category
+        empty_state: You haven't added any categories yet. <br> Create your first one now!
+        form:
+          key: key
+          uuid: uuid
   lib:
     sort_options:
       relevance: Relevance

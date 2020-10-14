@@ -1,0 +1,10 @@
+{%  liquid
+  function object = 'lib/commands/categories/create/build', object: object
+  function object = 'lib/commands/categories/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'categories/create' object: object
+  endif
+
+  return object
+%}

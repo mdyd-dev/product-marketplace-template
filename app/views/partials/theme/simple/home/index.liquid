@@ -8,7 +8,11 @@
       </h3>
       <div class="grid grid-cols-3 gap-5">
         {% for item in feed[1].results %}
-          {% include 'theme/simple/home/card', actor: item.payload.actor, target: item.payload.target, object: item.payload.object, type: item.payload.type %}
+          {% if item.type == 'category' %}
+            {% render 'theme/simple/home/category', object: item %}
+          {% else %}
+            {% render 'theme/simple/home/card', actor: item.payload.actor, target: item.payload.target, object: item.payload.object, type: item.payload.type %}
+          {% endif %}
         {% endfor %}
       </div>
     </section>

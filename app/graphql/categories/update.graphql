@@ -1,0 +1,18 @@
+mutation update_category(
+  $id: ID!
+  $key: String!
+  $uuid: String
+) {
+  model_update(
+    id: $id
+    model: {
+      model_schema_name: "category"
+      properties: [
+              { name: "key" value: $key }
+              { name: "uuid" value: $uuid }
+            ]
+    }
+  ){
+    id properties
+  }
+}
