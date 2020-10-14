@@ -8,6 +8,7 @@
   data-s3-uppy-photo-type="{{ photo_type }}"
   data-s3-uppy-note="{{ note }}"
   data-s3-uppy-max-number-of-files="{{ max_number_of_files }}"
+  data-s3-uppy-photos='{{ existing_photos }}'
   hidden>
   {% for field in presigned_url.upload_url_payload %}
     <input type="hidden" name="{{ field[0] }}" value='{{ field[1] }}'>
