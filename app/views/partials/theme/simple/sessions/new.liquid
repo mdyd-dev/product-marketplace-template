@@ -9,13 +9,13 @@
 
       <label class="block mt-3" for="email">
         <span class="block">{{ 'app.login_form.email' | t }}</span>
-        <input name="user[email]" type="email" id="email" value="{{ object.email }}" class="w-full form-input" autofocus />
+        <input name="user[email]" type="email" id="email" value="{{ object.email | raw_escape_string }}" class="w-full form-input" autofocus />
         {% render 'theme/simple/field_error', errors: object.errors.email %}
       </label>
 
       <label class="block mt-3" for="password">
         <span class="block">{{ 'app.login_form.password' | t }}</span>
-        <input name="user[password]" type="password" id="password" value="{{ object.password }}" class="w-full form-input" />
+        <input name="user[password]" type="password" id="password" value="{{ object.password | raw_escape_string }}" class="w-full form-input" />
         {% render 'theme/simple/field_error', errors: object.errors.password %}
       </label>
 
