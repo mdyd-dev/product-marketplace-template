@@ -7,10 +7,10 @@ export default class ItemSearch {
       editedItem: Selector('div').find('a').withText(editedItem.name)
     }
     this.search = {
-      keyword: Selector('#k'),
+      keyword: Selector('#keyword'),
     }
     this.buttons = {
-      sort: Selector('#sort'),
+      sort: Selector('#sort_by'),
       search: Selector('button').withText('Search')
     }
     this.options = {

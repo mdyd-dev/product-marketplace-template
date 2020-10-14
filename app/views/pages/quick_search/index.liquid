@@ -1,5 +1,5 @@
 {% liquid
-  function models = 'lib/data/queries/models/search', keyword: context.params.keyword, limit: 15
+  function models = 'lib/data/queries/models/search', keyword: context.params.qkeyword, limit: 15
 
-  render 'theme/simple/quick_search/index', models: models, keyword: context.params.keyword
+  render 'theme/simple/quick_search/index', models: models
 %}
