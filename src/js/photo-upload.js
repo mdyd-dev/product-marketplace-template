@@ -12,16 +12,48 @@ import apiFetch from './apiFetch'
 const _form = document.querySelector('[data-s3-uppy-photo="form"]');
 const maxNumberOfFiles = _form.dataset.s3UppyMaxNumberOfFiles;
 const note = _form.dataset.s3UppyNote;
+const photos = JSON.parse(_form.dataset.s3UppyPhotos);
 
 const uppy = Uppy({
-  autoProceed: true,
+  autoProceed: photos.length == 0,
   restrictions: {
     maxFileSize: 2097152, // Limit size to 2 MB on the javascript side
     maxNumberOfFiles: maxNumberOfFiles,
     allowedFileTypes: ['image/png', 'image/jpeg', 'image/webp'],
   },
-})
-  .use(Dashboard, {
+});
+
+const createImage = (imageUrl) => {
+  const objectUuid = _form.dataset.s3UppyObjectUuid;
+  const photoType = _form.dataset.s3UppyPhotoType;
+  // Create model for this user with s3 image url
+  return apiFetch('/api/photos', {
+    data: { photo: { direct_url: imageUrl, photo_type: photoType, object_uuid: objectUuid } }
+  });
+};
+
+const loadExistingPhotos = async (photos) => {
+  for (let i = 0; i < photos.length; i++) {
+    const photo = photos[i];
+    const response = await fetch(photo.url);
+    const blob = await response.blob();
+    uppy.addFile({
+      name: photo.file_name, // image name
+      type: blob.type,
+      data: blob,
+      remote: true
+    });
+  }
+  uppy.getFiles().forEach(file => {
+    console.log(file.id);
+    uppy.setFileState(file.id, {
+      progress: { uploadComplete: true, percentage: 100, uploadStarted: Date.now() }
+    })
+  });
+};
+
+uppy.use(Dashboard,
+  {
     inline: true,
     replaceTargetContent: true,
     showProgressDetails: true,
@@ -30,6 +62,7 @@ const uppy = Uppy({
     width: '100%',
     height: 300,
     proudlyDisplayPoweredByUppy: false,
+    showRemoveButtonAfterComplete: true,
     locale: {
       strings: {
         dropPasteImport: 'Drag & drop, paste, or %{browse} to upload file',
@@ -38,7 +71,7 @@ const uppy = Uppy({
     },
   })
   .use(Webcam, { target: Dashboard, modes: ['picture'] })
-  .use(GoldenRetriever)
+  // .use(GoldenRetriever)
   .use(AWSS3, {
     getUploadParameters() {
       // 1. Get URL to post to from action attribute
@@ -67,11 +100,9 @@ uppy.on('complete', ({ failed, successful }) => {
   });
 });
 
-const createImage = (imageUrl) => {
-  const objectUuid = _form.dataset.s3UppyObjectUuid;
-  const photoType = _form.dataset.s3UppyPhotoType;
-  // Create model for this user with s3 image url
-  return apiFetch('/api/photos', {
-    data: { photo: { direct_url: imageUrl, photo_type: photoType, object_uuid: objectUuid } }
-  });
-};
+uppy.on('file-removed', (file, reason) => {
+  // TODO: make request to remove photo. Add photo id in metadata in addFile
+  console.log('Removed file', file)
+})
+
+loadExistingPhotos(photos);

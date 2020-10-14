@@ -1,0 +1,5 @@
+{% liquid
+  graphql r = 'photos/search', object_uuid: object_uuid
+
+  return r.photos
+%}
