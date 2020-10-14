@@ -11,7 +11,7 @@
               <tr>
                 {% for user in users.results %}
                   <td>{% print user.id %}</td>
-                  <td>{% print user.email %}</td>
+                  <td>{{ user.email }}</td>
                   <td>{% print user.created_at  %}</td>
                 {% endfor %}
               </tr>

@@ -1,5 +1,5 @@
-{% print payload.type | t: actor: payload.actor.username,
+{{ payload.type | t: actor: payload.actor.username,
      object_id: payload.object.id,
      target: payload.target.name,
      target_id: payload.target.id,
-     scope: 'app.activities.types'  %}
+     scope: 'app.activities.types' }}

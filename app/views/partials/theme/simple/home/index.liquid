@@ -4,7 +4,7 @@
   {% if feed[1].results.size > 0 %}
     <section>
       <h3 class="mb-3 text-3xl">
-        {% print feed[0] | t: scope: 'app.home.feeds' %}
+        {{ feed[0] | t: scope: 'app.home.feeds' }}
       </h3>
       <div class="grid grid-cols-3 gap-5">
         {% for item in feed[1].results %}

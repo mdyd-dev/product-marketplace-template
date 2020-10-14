@@ -11,11 +11,11 @@
   <!-- Photo should be inserted only if event = create -->
   {% if payload.object.photos.size > 0 %}
     <div class="mt-2">
-      <img class="object-cover rounded-lg w-9" src="{{ payload.object.photos.first.url.versions.small }}" alt="{% print payload.object.name %}">
+      <img class="object-cover rounded-lg w-9" src="{{ payload.object.photos.first.url.versions.small }}" alt="{{ payload.object.name }}">
     </div>
   {% elsif payload.target.photos.size > 0 %}
     <div class="mt-2">
-      <img class="object-cover rounded-lg w-9" src="{{ payload.target.photos.first.url.versions.small }}" alt="{% print payload.target.name %}">
+      <img class="object-cover rounded-lg w-9" src="{{ payload.target.photos.first.url.versions.small }}" alt="{{ payload.target.name }}">
     </div>
   {% endif %}
 </div>
