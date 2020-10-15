@@ -12,7 +12,7 @@ import apiFetch from './apiFetch'
 const _form = document.querySelector('[data-s3-uppy-photo="form"]');
 const maxNumberOfFiles = _form.dataset.s3UppyMaxNumberOfFiles;
 const note = _form.dataset.s3UppyNote;
-const photos = JSON.parse(_form.dataset.s3UppyPhotos || '[]');
+const photos = JSON.parse(_form.dataset.s3UppyPhotos || '[]') || [];
 
 const uppy = Uppy({
   autoProceed: photos.length == 0,
