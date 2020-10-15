@@ -1,4 +1,4 @@
-<div class="container flex flex-col min-h-screen">
+<div class="container flex flex-col min-h-screen px-5">
   {% liquid
     if context.current_user.id
       assign profile = context.session.profile | default: '{}' | parse_json
