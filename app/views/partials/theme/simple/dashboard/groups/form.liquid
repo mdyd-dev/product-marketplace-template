@@ -46,7 +46,7 @@
 </div>
 
 {% liquid
-  assign photo = photo | default: object.main_photo
+  assign photo = photos[0] | default: object.main_photo
   assign photos = '[]' | parse_json
   assign photos = photos | add_to_array: photo
 %}
