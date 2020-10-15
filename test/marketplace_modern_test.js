@@ -269,3 +269,11 @@ test('Smart search', async (t) => {
     .typeText(itemSearch.quickSearch.keyword, John.name)
     .click(itemSearch.buttons.search)
 })
+
+test('Products', async (t) => {
+  await t.useRole(buyerRole)
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.publicProfile)
+    .click(publicProfile.menu.products)
+})
