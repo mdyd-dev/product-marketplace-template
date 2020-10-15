@@ -11,7 +11,7 @@ export default class ItemSearch {
       keyword: Selector('#keyword'),
     }
     this.quickSearch = {
-      keyword: Selector('#qkeyword'),
+      keyword: Selector('input[name="qkeyword"]')
     }
     this.buttons = {
       sort: Selector('#sort_by'),
