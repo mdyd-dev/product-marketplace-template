@@ -7,10 +7,11 @@ query search($object_uuid: String!){
     }
   ){
     results{
+      id
       photo: property_upload(name: "photo") {
         file_name
         url
-       versions
+        versions
       }
     }
   }

@@ -45,11 +45,17 @@
   </form>
 </div>
 
+{% liquid
+  assign photo = photos[0] | default: object.main_photo
+  assign photos = '[]' | parse_json
+  assign photos = photos | add_to_array: photo
+%}
 {% include 'theme/simple/photos/uppy_form',
   object_uuid: group_uuid,
   presigned_url: presigned_url,
   user_id: user.id,
   photo_type: 'main',
   note: 'Image up to 2MB',
-  max_number_of_files: 1
+  max_number_of_files: 1,
+  existing_photos: photos
 %}

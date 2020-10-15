@@ -76,6 +76,6 @@
 
 </div>
 {% liquid
-  assign photos = photos | default: item.photos | map: 'photo' | json
+  assign photos = photos | default: item.photos
   render 'theme/simple/photos/uppy_form', object_uuid: item_uuid, presigned_url: presigned_url, user_id: user.id, photo_type: 'photo', note: 'Images only, up to 3 files, 2MB each', max_number_of_files: 3, existing_photos: photos
 %}
