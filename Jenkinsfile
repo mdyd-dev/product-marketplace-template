@@ -10,7 +10,7 @@ pipeline {
 
   options {
     disableConcurrentBuilds()
-    timeout(time: 5, unit: 'MINUTES')
+    timeout(time: 10, unit: 'MINUTES')
     buildDiscarder(logRotator(daysToKeepStr: '1', artifactDaysToKeepStr: '1'))
   }
 
@@ -46,6 +46,8 @@ pipeline {
     }
 
     stage('Test PR') {
+      options { timeout(time: 3, unit: 'MINUTES') }
+
       when { expression { env.BRANCH_NAME != 'master' } }
       environment {
         MPKIT_URL = "${pr_url}"
@@ -86,6 +88,7 @@ pipeline {
     }
 
     stage('Test') {
+      options { timeout(time: 4, unit: 'MINUTES') }
       when { branch 'master' }
       environment {
         MPKIT_URL = "${qa_url}"
