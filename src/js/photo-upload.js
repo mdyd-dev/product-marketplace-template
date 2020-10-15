@@ -23,12 +23,19 @@ const uppy = Uppy({
   },
 });
 
-const createImage = (imageUrl) => {
+const createPhoto = (imageUrl) => {
   const objectUuid = _form.dataset.s3UppyObjectUuid;
   const photoType = _form.dataset.s3UppyPhotoType;
   // Create model for this user with s3 image url
   return apiFetch('/api/photos', {
     data: { photo: { direct_url: imageUrl, photo_type: photoType, object_uuid: objectUuid } }
+  });
+};
+
+const deletePhoto = (photoId) => {
+  return apiFetch('/api/photos', {
+    method: 'DELETE',
+    data: { photo: { id: photoId } }
   });
 };
 
@@ -38,9 +45,10 @@ const loadExistingPhotos = async (photos) => {
     const response = await fetch(photo.url);
     const blob = await response.blob();
     uppy.addFile({
-      name: photo.file_name, // image name
+      name: photo.file_name,
       type: blob.type,
       data: blob,
+      meta: { photoId: photo.id }
       remote: true
     });
   }
@@ -91,18 +99,14 @@ uppy.use(Dashboard,
   });
 
 uppy.on('complete', ({ failed, successful }) => {
-  /*
-    For every successfully uploaded image to S3, send request to the Instance
-    that will create a model with the uploaded image's URL as direct_url param.
-  */
-  Promise.all(successful.map(({ response }) => createImage(response.body.location))).then(() => {
+  Promise.all(successful.map(({ response }) => createPhoto(response.body.location))).then(() => {
     console.log('File uploaded and image created!');
   });
 });
 
 uppy.on('file-removed', (file, reason) => {
-  // TODO: make request to remove photo. Add photo id in metadata in addFile
-  console.log('Removed file', file)
+  console.log('Remove file', file);
+  deletePhoto(file.meta.photoId) if (file.meta.photoId);
 })
 
 loadExistingPhotos(photos);
