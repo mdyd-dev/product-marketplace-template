@@ -12,7 +12,7 @@ import apiFetch from './apiFetch'
 const _form = document.querySelector('[data-s3-uppy-photo="form"]');
 const maxNumberOfFiles = _form.dataset.s3UppyMaxNumberOfFiles;
 const note = _form.dataset.s3UppyNote;
-const photos = JSON.parse(_form.dataset.s3UppyPhotos);
+const photos = JSON.parse(_form.dataset.s3UppyPhotos || '[]');
 
 const uppy = Uppy({
   autoProceed: photos.length == 0,
@@ -42,13 +42,13 @@ const deletePhoto = (photoId) => {
 const loadExistingPhotos = async (photos) => {
   for (let i = 0; i < photos.length; i++) {
     const photo = photos[i];
-    const response = await fetch(photo.url);
+    const response = await fetch(photo.photo.url);
     const blob = await response.blob();
     uppy.addFile({
-      name: photo.file_name,
+      name: photo.photo.file_name,
       type: blob.type,
       data: blob,
-      meta: { photoId: photo.id }
+      meta: { photoId: photo.id },
       remote: true
     });
   }
@@ -106,7 +106,7 @@ uppy.on('complete', ({ failed, successful }) => {
 
 uppy.on('file-removed', (file, reason) => {
   console.log('Remove file', file);
-  deletePhoto(file.meta.photoId) if (file.meta.photoId);
+  if (file.meta.photoId) deletePhoto(file.meta.photoId);
 })
 
 loadExistingPhotos(photos);
