@@ -1,6 +1,9 @@
 ---
 en:
   categories:
+    zordertest: Z order test
+    aordertest: A order test
+    aordertest/dupa: a Dupa
     jewellery: Jewellery
     jewellery/accessories: Accessories
     jewellery/accessories/brooches: Brooches

@@ -31,9 +31,8 @@
 
     <div class="mt-3">
       <label class="block" for="category">{{ 'app.items.form.category' | t }}</label>
-      {% assign sortedCategories = lib.categories | sort %}
       <select class="form-select" id="category" name="item[category]">
-        {% for category in sortedCategories %}
+        {% for category in lib.categories %}
         {% echo lib.categories %}
           {% assign ident = category | split: '/' | size | minus: 1 | times: 2 %}
           <option value="{{ category }}" {% if item.category == category %}selected{% endif %}>
