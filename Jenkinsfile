@@ -21,9 +21,8 @@ pipeline {
   }
 
   stages {
-    stage('build PR') {
+    stage('build') {
       agent { docker {image 'node:12-alpine'; args '-u root' } }
-      when { expression { env.BRANCH_NAME != 'master' } }
       steps {
         sh 'npm ci'
         sh 'npm run build'
@@ -69,16 +68,6 @@ pipeline {
     }
 
     // MASTER
-
-    stage('build') {
-      when { branch 'master' }
-
-      agent { docker {image 'node:12-alpine'; args '-u root' } }
-      steps {
-        sh 'npm ci'
-        sh 'npm run build'
-      }
-    }
 
     stage('Deploy QA') {
       when { branch 'master' }
