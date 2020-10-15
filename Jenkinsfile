@@ -46,7 +46,7 @@ pipeline {
     }
 
     stage('Test PR') {
-      options { timeout(time: 3, unit: 'MINUTES') }
+      options { timeout(time: 4, unit: 'MINUTES') }
 
       when { expression { env.BRANCH_NAME != 'master' } }
       environment {
