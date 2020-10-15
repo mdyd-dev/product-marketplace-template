@@ -1,1 +1,7 @@
-{% include 'theme/simple/items/index', items: list %}
+<div class="grid grid-cols-3 gap-5">
+  {% for item in list.results %}
+    {% render 'theme/simple/items/card', item: item, current_profile: current_profile %}
+  {% else %}
+    <p class="text-lg">{{ 'app.no_items_found' | t }}</p>
+  {% endfor %}
+</div>
