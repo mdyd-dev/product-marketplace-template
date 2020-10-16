@@ -16,10 +16,6 @@ module.exports = {
       safelist: [/^uppy-/]
     }
   },
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
   theme: {
     container: {
       center: true,
@@ -32,19 +28,21 @@ module.exports = {
     },
     extend: {
       colors: {
-        // `ex` prefix will create classes like `text-ex-red`
         ex: {
           ...brandColors,
           ...systemColors,
         },
       },
-      // fontFamily: {
-      //   sans: ['Lato', ...defaultTheme.fontFamily.sans],
-      // },
     },
   },
   variants: {
     borderWidth: ['responsive', 'hover'],
   },
   plugins: [require('@tailwindcss/custom-forms')],
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+    defaultLineHeights: true,
+    standardFontWeights: true
+  }
 };
