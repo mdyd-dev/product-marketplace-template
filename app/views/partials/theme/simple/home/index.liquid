@@ -4,11 +4,15 @@
   {% if feed[1].results.size > 0 %}
     <section>
       <h3 class="mb-3 text-3xl">
-        {% print feed[0] | t: scope: 'app.home.feeds' %}
+        {{ feed[0] | t: scope: 'app.home.feeds' }}
       </h3>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-		{% for item in feed[1].results %}
-          {% include 'theme/simple/home/card', actor: item.payload.actor, target: item.payload.target, object: item.payload.object, type: item.payload.type %}
+        {% for item in feed[1].results %}
+          {% if item.type == 'category' %}
+            {% render 'theme/simple/home/category', object: item %}
+          {% else %}
+            {% render 'theme/simple/home/card', actor: item.payload.actor, target: item.payload.target, object: item.payload.object, type: item.payload.type %}
+          {% endif %}
         {% endfor %}
       </div>
     </section>

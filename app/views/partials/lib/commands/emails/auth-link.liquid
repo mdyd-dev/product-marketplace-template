@@ -8,7 +8,7 @@ metadata:
 ---
 {% parse_json object %}
   {
-    "to":      {% print object.email | json %},
+    "to":      {{ object.email | json }},
     "from":    {% print 'app.support_email' | t | json %},
     "subject": {% print 'app.emails.passwords.reset.subject' | t | json %},
     "url":     {% print object.url | json %},

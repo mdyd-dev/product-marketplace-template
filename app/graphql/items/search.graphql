@@ -58,7 +58,9 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
       }
 
       photos: related_models(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
+        id
         photo: property_upload(name: "photo") {
+          file_name
           url
           versions
         }

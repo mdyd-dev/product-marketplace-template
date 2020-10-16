@@ -10,7 +10,7 @@
 <div class="flex items-center">
   <p class="w-8 mr-3">
     {% if photo %}
-      <img class="object-cover w-8 h-8 overflow-hidden rounded-full" src="{{ photo }}" alt="{% print name %}">
+      <img class="object-cover w-8 h-8 overflow-hidden rounded-full" src="{{ photo }}" alt="{{ name }}">
     {% else %}
       {% render 'theme/simple/activities/feed_unit/default_photo' %}
     {% endif %}
@@ -18,7 +18,7 @@
 
   <p>
     <a href="{{ url }}">
-      {% print name %}
+      {{ name }}
     </a>
 
     {% liquid

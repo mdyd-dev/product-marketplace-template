@@ -213,7 +213,7 @@ See [commit/c4c046](https://github.com/mdyd-dev/product-marketplace-template/com
 ## Categories
 
 categories can be adjusted by:
-- editing: https://github.com/mdyd-dev/marketplace-template-poc/blob/master/app/views/partials/lib/queries/raw_category_list.liquid
+- /admin/categories
 - adding a translation to the `app/translations/en_categies.liquid` file
 
 ## Generators
@@ -265,6 +265,13 @@ Resource generator is expecting model name, list of fields with names and their 
 After deploy you can access page when you can list, create, update and delete objects: https://your-instance-domain.com/cars
 
 Now you have good place to start in customizing it to your needs.
+
+
+for automation / CI/CD purposes:
+
+    docker run -u $(id -u ${USER}):$(id -g ${USER}) -it --rm -v $(pwd):/app -w /app node:12-alpine npm install
+    docker run -u $(id -u ${USER}):$(id -g ${USER}) -it --rm -v $(pwd):/app -w /app node:12-alpine ./scaffold/bin/generate resource RESOURCENAME PROPERTY:TYPE ...
+
 
 ## TESTS
 

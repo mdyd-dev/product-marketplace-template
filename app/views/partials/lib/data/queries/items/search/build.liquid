@@ -12,12 +12,12 @@
 {% parse_json query %}
 {
   "limit": {{ limit | default: 20 }},
-  "keyword": {{ params.k | json }},
-  "sort": {{ sort_options[params.sort] | json }},
+  "keyword": {{ params.keyword | json }},
+  "sort_by": {{ params.sort_by | json }},
+  "sort": {{ sort_options[params.sort_by] | json }},
   "owner": {{ owner | json }},
   "category": {{ params.category | json }},
   "withOrders": {{ withOrders | default: false }}
-
 }
 {% endparse_json %}
 

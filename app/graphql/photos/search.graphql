@@ -1,0 +1,18 @@
+query search($object_uuid: String!){
+  photos: models(
+    per_page: 20
+    filter: {
+      model_schema_name: { value: "photo" },
+      properties: { name: "object_uuid", value: $object_uuid}
+    }
+  ){
+    results{
+      id
+      photo: property_upload(name: "photo") {
+        file_name
+        url
+        versions
+      }
+    }
+  }
+}

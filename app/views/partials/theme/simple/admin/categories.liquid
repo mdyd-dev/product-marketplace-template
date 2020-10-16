@@ -2,7 +2,7 @@
 <table class="table-auto w-full">
   {% for category in list %}
     <tr>
-      <td class="px-4 py-2 border-b">{% print category %}</td>
+      <td class="px-4 py-2 border-b">{{ category }}</td>
       <td class="px-4 py-2 border-b">{% echo 'categories.' | append: category | t %}</td>
     </tr>
   {% endfor %}

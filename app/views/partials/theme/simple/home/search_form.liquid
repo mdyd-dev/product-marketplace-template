@@ -2,10 +2,10 @@
   <div class="w-full md:flex-1 md:w-auto">
     <label for="k" class="block mb-1 capitalize">{{ 'app.search.keywords' | t }}</label>
     <input class="w-full form-input"
-      name="k"
-      id="k"
+      name="keyword"
+      id="keyword"
       type="text"
-      value="{{ filters.query.k }}"
+      value="{{ filters.query.keyword | default: "" | raw_escape_string }}"
      />
   </div>
 
@@ -24,9 +24,9 @@
   </div>
 
   <div class="w-full my-6 md:my-0 md:mx-6 md:w-auto">
-    <label for="sort" class="block mb-1 capitalize">{{ 'app.search.sort_by' | t }}</label>
-    <select class="w-full form-select" id="sort" name="sort">
-      {% assign sort = filters.query.sort | default: 'relevance' %}
+    <label for="sort_by" class="block mb-1 capitalize">{{ 'app.search.sort_by' | t }}</label>
+    <select class="w-full form-select" id="sort_by" name="sort_by">
+      {% assign sort = filters.query.sort_by | default: 'relevance' %}
       {% for s in filters.sort_options %}
         <option value="{{ s[0] }}" {% if sort == s[0] %}selected{% endif %}>{{ s[1] }}</option>
       {% endfor %}
