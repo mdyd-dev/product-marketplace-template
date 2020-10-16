@@ -7,7 +7,7 @@ export default class ProfileView {
       //groups:
       following: Selector('a').withText('Following'),
       followers: Selector('a').withText('Followers'),
-      //products:
+      products: Selector('a').withText('Products'),
     }
     this.links = {
       userCard: Selector('div').find('a')

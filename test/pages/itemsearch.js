@@ -4,10 +4,14 @@ export default class ItemSearch {
   constructor(item, editedItem) {
     this.links = {
       item: Selector('a').withText(item.name),
+      commonItem: Selector('a').withText(item.commonName),
       editedItem: Selector('div').find('a').withText(editedItem.name)
     }
     this.search = {
       keyword: Selector('#keyword'),
+    }
+    this.quickSearch = {
+      keyword: Selector('input[name="qkeyword"]')
     }
     this.buttons = {
       sort: Selector('#sort_by'),

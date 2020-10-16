@@ -10,7 +10,7 @@ pipeline {
 
   options {
     disableConcurrentBuilds()
-    timeout(time: 5, unit: 'MINUTES')
+    timeout(time: 10, unit: 'MINUTES')
     buildDiscarder(logRotator(daysToKeepStr: '1', artifactDaysToKeepStr: '1'))
   }
 
@@ -21,9 +21,8 @@ pipeline {
   }
 
   stages {
-    stage('build PR') {
+    stage('build') {
       agent { docker {image 'node:12-alpine'; args '-u root' } }
-      when { expression { env.BRANCH_NAME != 'master' } }
       steps {
         sh 'npm ci'
         sh 'npm run build'
@@ -47,6 +46,8 @@ pipeline {
     }
 
     stage('Test PR') {
+      options { timeout(time: 4, unit: 'MINUTES') }
+
       when { expression { env.BRANCH_NAME != 'master' } }
       environment {
         MPKIT_URL = "${pr_url}"
@@ -70,16 +71,6 @@ pipeline {
 
     // MASTER
 
-    stage('build') {
-      when { branch 'master' }
-
-      agent { docker {image 'node:12-alpine'; args '-u root' } }
-      steps {
-        sh 'npm ci'
-        sh 'npm run build'
-      }
-    }
-
     stage('Deploy QA') {
       when { branch 'master' }
       environment {
@@ -97,6 +88,7 @@ pipeline {
     }
 
     stage('Test') {
+      options { timeout(time: 4, unit: 'MINUTES') }
       when { branch 'master' }
       environment {
         MPKIT_URL = "${qa_url}"

@@ -131,17 +131,17 @@ test('Deleting item', async (t) => {
 
 test('Creating new item for sell', async (t) => {
   await t.useRole(sellerRole)
-  await createItem(item.name, item.description, item.price)
+  await createItem(item.commonName, item.description, item.price)
 })
 
 test('Buying an item and following the seller', async (t) => {
   await t
     .useRole(buyerRole)
     .click(topMenu.buttons.items)
-    .typeText(itemSearch.search.keyword, item.name)
+    .typeText(itemSearch.search.keyword, item.commonName)
     .click(itemSearch.buttons.search)
-    .expect(itemSearch.links.item.exists).ok()
-    .click(itemSearch.links.item)
+    .expect(itemSearch.links.commonItem.exists).ok()
+    .click(itemSearch.links.commonItem)
     .click(itemShow.buttons.follow)
     .expect(itemShow.buttons.alreadyFollowedState.exists).ok()
     .click(itemShow.buttons.buy)
@@ -151,7 +151,7 @@ test('Buying an item and following the seller', async (t) => {
     .click(topMenu.buttons.menuDropdown)
     .click(topMenu.buttons.dashboard)
     .click(dashboard.nav.purchases) // buyer's order check
-    .click(link.withText(item.name))
+    .click(link.withText(item.commonName))
     .expect(itemShow.status.ordered.exists).ok()
     .click(topMenu.buttons.menuDropdown)
     .click(topMenu.buttons.dashboard)
@@ -164,7 +164,7 @@ test('Buying an item and following the seller', async (t) => {
     .click(topMenu.buttons.menuDropdown)
    .click(topMenu.buttons.dashboard)
    .click(dashboard.nav.sold)  // seller's order check
-   .expect(link.withText(item.name).exists).ok("Item list not shown in seller orders")
+   .expect(link.withText(item.commonName).exists).ok("Item list not shown in seller orders")
  })
 
 
@@ -232,9 +232,9 @@ test('Groups', async (t) => {
     .expect(link.withText(group.name).exists).ok() // ??????
   //edit group
     .click(groupsPage.buttons.editGroup)
-    .typeText(groupsPage.inputs.name, group.audifans, { replace: true })
+    .typeText(groupsPage.inputs.name, group.commonName, { replace: true })
     .click(groupsPage.buttons.submitForm)
-    .expect(link.withText(group.audifans).exists).ok()
+    .expect(link.withText(group.commonName).exists).ok()
 })
 
  test('Activity', async (t) => {
@@ -261,4 +261,19 @@ test('Groups', async (t) => {
     .typeText(contactUsForm.inputs.message, "There was a problem with...")
     .click(contactUsForm.buttons.sendMessage)
     .expect(contactUsForm.messages.success.exists).ok()
+})
+
+
+test('Smart search', async (t) => {
+  await t.useRole(buyerRole)
+    .typeText(itemSearch.quickSearch.keyword, John.name)
+    .click(itemSearch.buttons.search)
+})
+
+test('Products', async (t) => {
+  await t.useRole(buyerRole)
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.publicProfile)
+    .click(publicProfile.menu.products)
 })
