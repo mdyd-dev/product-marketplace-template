@@ -11,6 +11,8 @@
       render 'theme/simple/profile/sections/following', list: list, current_profile: current_profile
     elsif section == 'followers'
       render 'theme/simple/profile/sections/followers', list: list, current_profile: current_profile
+    elsif section == 'products'
+      render 'theme/simple/profile/sections/products', list: list, current_profile: current_profile
     endif
   %}
 </div>
