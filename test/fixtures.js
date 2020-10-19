@@ -16,6 +16,7 @@ import Footer from './pages/footer'
 import ContactUs from './pages/contactUsForm'
 import PasswordReset from './pages/passwordReset'
 import NewSessionForm from './pages/newsession'
+import PaymentsAccountPage from './pages/paymentsAccountPage'
 
 
 //variables
@@ -35,6 +36,7 @@ export const randomFirstName = faker.name.firstName()
 
 
 //pages
+export const paymentsAccountPage = new PaymentsAccountPage()
 export const adminPage = new AdminPanel()
 export const registerForm = new NewSessionForm()
 export const loginForm = new NewSessionForm()

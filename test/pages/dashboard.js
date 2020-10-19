@@ -15,6 +15,10 @@ export default class DashboardPage {
       myGroups: Selector('a').withText('My Groups')
       //inbox: in build
     }
+    this.bankAccount = {
+      connectWithStripe: Selector('a').withText('Connect with Stripe')
+
+    }
 
 
     //this.activityFeed = Selector('main').find('a').withText('Activity Feed')

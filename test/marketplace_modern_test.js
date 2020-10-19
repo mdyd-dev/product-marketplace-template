@@ -5,8 +5,9 @@ import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          adminPage, registerForm, loginForm, itemShow, editedItemShow,
          passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
          profileEditForm, orders, publicProfile, groupsPage, footer,
-         contactUsForm, activityFeed } from './fixtures'
+         contactUsForm, activityFeed, paymentsAccountPage } from './fixtures'
 import { register, createItem } from './helper'
+
 
 
 const translationMissing = Selector('body').withText('translation missing')
@@ -263,7 +264,6 @@ test('Groups', async (t) => {
     .expect(contactUsForm.messages.success.exists).ok()
 })
 
-
 test('Smart search', async (t) => {
   await t.useRole(buyerRole)
     .typeText(itemSearch.quickSearch.keyword, John.name)
@@ -277,3 +277,43 @@ test('Products', async (t) => {
     .click(dashboard.nav.publicProfile)
     .click(publicProfile.menu.products)
 })
+
+
+/* test.page(myUrl+ '/sign-up')('Stripe', async (t) => {
+  //await register(SellerRandomUser)
+  await t.useRole(buyerRole)
+  .click(topMenu.buttons.menuDropdown)
+  .click(topMenu.buttons.dashboard)
+  .click(dashboard.nav.bankAccount)
+  .click(dashboard.bankAccount.connectWithStripe)
+  .click(paymentsAccountPage.countrySelect)
+  .click(paymentsAccountPage.select.countryOption.withText('United States'))
+  .click(paymentsAccountPage.radiobutton.typeOfEntity)
+  .typeText(paymentsAccountPage.input.mobilePhone, '0000000000')
+  .typeText(paymentsAccountPage.input.email, John.email, { replace: true })
+  .click(paymentsAccountPage.button.next)
+  .click(paymentsAccountPage.button.useTestCode)
+  .typeText(paymentsAccountPage.input.firstName, 'Damian')
+  .typeText(paymentsAccountPage.input.lastName, 'QA')
+  .typeText(paymentsAccountPage.input.dobMonth, '12')
+  .typeText(paymentsAccountPage.input.dobDay, '18')
+  .typeText(paymentsAccountPage.input.dobYear, '1995')
+  .typeText(paymentsAccountPage.input.addressStreet, '2045 Evans Ave')
+  .typeText(paymentsAccountPage.input.addressCity, 'San Francisco')
+  .typeText(paymentsAccountPage.input.addressCode, '94124')
+  .click(paymentsAccountPage.stateSelect)
+  .click(paymentsAccountPage.select.stateOption.withText("California"))
+  .typeText(paymentsAccountPage.input.ssn, '0000')
+  .click(paymentsAccountPage.button.next)
+  .click(paymentsAccountPage.button.selectIndustrySelect)
+  .click(paymentsAccountPage.select.industryOption)
+  .typeText(paymentsAccountPage.input.companyWebsite, 'www.company.com')
+  .click(paymentsAccountPage.button.next)
+  .click(paymentsAccountPage.button.useTestAccount)
+  .click(paymentsAccountPage.button.done)
+  .click(Selector('a').withText('Continue'))
+  .click(Selector('a').withText('Stripe Account Dashboard'))
+
+}) */
+
+
