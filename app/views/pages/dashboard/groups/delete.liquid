@@ -3,14 +3,15 @@ slug: 'dashboard/groups'
 method: delete
 ---
 {% liquid
-  include 'lib/must_be_authenticated'
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
 
-  function group = 'lib/data/queries/groups/find', id: context.params.id, owner_id: context.current_user.id
+  function group = 'lib/data/queries/groups/find', id: context.params.id, owner_id: current_profile.id
   function object = 'lib/commands/groups/delete', group: group
+  log object
 
   if object.valid
     include 'redirect_to', url: '/dashboard/groups', notice: 'app.groups.deleted'
   else
-    include 'redirect_to', url: '/dashboard/groups', error: 'app.groups.delete_failed'
+    include 'redirect_to', url: '/dashboard/groups', error: 'app.models.shared.delete_failed'
   endif
 %}
