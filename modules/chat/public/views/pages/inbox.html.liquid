@@ -73,14 +73,5 @@ slug: inbox
 {% endif %}
 
 {% content_for custom_scripts %}
-<script src="{{ 'modules/chat/js/chat.js' | asset_url }}"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-  const id = "main-message-window";
-  var element = document.getElementById(id);
-  if (element) {
-    element.scrollTop = element.scrollHeight - element.clientHeight;
-  }
-  });
-</script>
+  <script src="{{ 'modules/chat/js/chat.js' | asset_url }}"></script>
 {% endcontent_for %}

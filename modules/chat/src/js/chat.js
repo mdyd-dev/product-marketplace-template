@@ -93,4 +93,12 @@ document.addEventListener("DOMContentLoaded", function(){
       }
     })
   }
+
+
+
+  const id = "main-message-window";
+  var conversationWindow = document.getElementById(id);
+  if (conversationWindow) {
+    conversationWindow.scrollTop = conversationWindow.scrollHeight - conversationWindow.clientHeight;
+  }
 });
