@@ -1,0 +1,34 @@
+<section class="py-12 px-4 text-center">
+  <h2 class="text-4xl mb-2 leading-tight font-heading">{{ 'app.about-us.our-story' | t }}</h2>
+  <p class="max-w-xl mx-auto mb-12 text-gray-500">{{ 'app.about-us.our-story-subtitle' | t }}</p>
+  <p class="mb-10 text-left">
+    {{ 'app.about-us.our-story-paragraph' | t }}
+  </p>
+  <p class="mb-10 text-left">
+    {{ 'app.about-us.our-story-paragraph2' | t }}
+  </p>
+</section>
+<section class="py-12 px-4 text-center">
+  <h2 class="text-4xl mb-2 leading-tight font-heading">{{ 'app.about-us.our-team' | t }}</h2>
+  <p class="max-w-xl mx-auto mb-12 text-gray-500">{{ 'app.about-us.our-team-subtitle' | t }}</p>
+  <div class="flex flex-wrap -mx-8">
+    <div class="md:w-1/3 p-8">
+      <img class="w-1/3 mx-auto mb-4 rounded-full" src="{{ 'images/person1.jpg' | asset_url }}" alt="">
+      <h3 class="text-xl font-heading">{{ 'app.about-us.person1-name' | t }}</h3>
+      <span>{{ 'app.about-us.person1-position' | t }}</span>
+      <p class="mt-4 text-gray-500 leading-relaxed">{{ 'app.about-us.person1-description' | t }}</p>
+    </div>
+    <div class="md:w-1/3 p-8">
+      <img class="w-1/3 mx-auto mb-4 rounded-full" src="{{ 'images/person2.jpg' | asset_url }}" alt="">
+      <h3 class="text-xl font-heading">{{ 'app.about-us.person2-name' | t }}</h3>
+      <span>{{ 'app.about-us.person2-position' | t }}</span>
+      <p class="mt-4 text-gray-500 leading-relaxed">{{ 'app.about-us.person2-description' | t }}</p>
+    </div>
+    <div class="md:w-1/3 p-8">
+      <img class="w-1/3 mx-auto mb-4 rounded-full" src="{{ 'images/person3.jpg' | asset_url }}" alt="">
+      <h3 class="text-xl font-heading">{{ 'app.about-us.person3-name' | t }}</h3>
+      <span>{{ 'app.about-us.person3-position' | t }}</span>
+      <p class="mt-4 text-gray-500 leading-relaxed">{{ 'app.about-us.person3-description' | t }}</p>
+    </div>
+  </div>
+</section>

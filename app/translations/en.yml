@@ -70,7 +70,7 @@ en:
     feed:
       title: Feed
     title: MVP Marketplace
-    support_email: support@getmarkeplace.co
+    support_email: support@getmarketplace.co
     page_not_found: Page not found.
     total_entries: 'Total items:'
     no_items_found: No items found
@@ -419,6 +419,40 @@ en:
       created: >-
         Please check your email. We have sent you a password resetting
         instructions.
+    faq:
+      title: Frequently Asked Questions
+      subtitle: The most common questions about how our business works and what can do for you.
+      questions:
+        section1:
+          q1:
+            question: How it works?
+            answer: Very simple
+          q2:
+            question: How much it cost?
+            answer: It's cheap
+        section2:
+          q1:
+            question: Is it safe?
+            answer: Yes it is
+          q2:
+            question: Does it works
+            answer: Always
+    about-us:
+      our-story: Our story
+      our-story-subtitle: Watches. It all started with a classic Casio F-91W
+      our-story-paragraph: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      our-story-paragraph2: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+      our-team: Our team
+      our-team-subtitle: Because no great company could exist without accountants, sellers, stock workers, and of course - paper.
+      person1-name: Karen Filippelli
+      person1-position: Founder, Chief Executive Officer
+      person1-description: Started as a Sales representative at Stamford branch, moved to Scranton. Operated in both private and public company structures.
+      person2-name: Darryl Philbin
+      person2-position: Marketing Director
+      person2-description: The warehouse is not a piece of cake, man. I started there as an Assistant and finally got a promotion to the Marketing Director.
+      person3-name: Kelly Kapoor
+      person3-position: Customer Service
+      person3-description: I work for MVP Marketplace for a few years now. I learned a lot. You know, one person department is not easy to manage.
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself
       blank: cannot be blank
