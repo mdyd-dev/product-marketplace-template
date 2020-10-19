@@ -23,8 +23,9 @@
 {% endparse_json %}
 
 {% liquid
-  if params.status
-    hash_assign query['status'] = 'app.statuses.items.' | append: params.status
+  assign status = params.status | default: status
+  if status
+    hash_assign query['status'] = 'app.statuses.items.' | append: status
   endif
 %}
 

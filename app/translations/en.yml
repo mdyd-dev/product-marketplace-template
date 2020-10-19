@@ -402,13 +402,12 @@ en:
         pending_payment: pending
         placed: new
         paid: paid
-        canceled: canceled
+        cancelled: canceled
         shipped: shipped
       items:
-        new: New
         published: Published
         unpublished: Unpublished
-        sold: Sold
+        unavailable: Out of stock
     sessions:
       created: Logged in
       destroyed: Logged out
@@ -477,12 +476,12 @@ en:
         edit: Edit status
         empty_state: You haven't added any statuses yet. <br> Create your first one now!
         form:
-          object_id: object_id
           name: name
-          payload: payload
           fullname: fullname
           scope: scope
           timestamp: timestamp
+          object_id: object_id
+          payload: payload
   lib:
     sort_options:
       relevance: Relevance

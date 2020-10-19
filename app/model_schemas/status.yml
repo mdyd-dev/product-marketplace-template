@@ -12,3 +12,5 @@ properties:
     type: string
   - name: payload
     type: string
+  - name: profile_id
+    type: string

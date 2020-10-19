@@ -36,10 +36,11 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id
         name: property(name: "name")
         price: property(name: "price")
 
-        status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status") {
+        status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status" sort: { created_at: { order: ASC } }) {
           id
           created_at
           name: property(name: "name")
+          fullname: property(name: "fullname")
         }
       }
 
@@ -49,17 +50,19 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id
         name: property(name: "name")
         price: property_int(name: "price")
 
-        status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status") {
+        status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status" sort: { created_at: { order: ASC } }) {
           id
           created_at
-          name: property(name: "name")
+          name: property(name: "fullname")
         }
       }
 
-      status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status") {
+      status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status" sort: { created_at: { order: ASC } }) {
         id
         created_at
         name: property(name: "name")
+        timestamp: property(name: "timestamp")
+        fullname: property(name: "fullname")
       }
     }
   }

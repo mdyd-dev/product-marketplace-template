@@ -13,6 +13,12 @@ mutation create_<%= modelName %>(
       ]
     }
   ){
-    id properties
-  }
+    id
+    created_at
+    deleted_at
+
+ <% attributes.forEach((attr) => { -%>
+   <%= attr.name %>: property(name: "<%= attr.name %>")
+ <% }); -%>
+    }
 }

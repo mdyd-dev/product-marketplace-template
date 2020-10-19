@@ -5,7 +5,8 @@
     "fullname": {{ object.scope | append: '.' | append: object.name | json }},
     "timestamp": {{ object.timestamp | default: 'now' | to_time | json }},
     "object_id": {{ object.object_id | json }},
-    "payload": {{ object.payload | json }}
+    "payload": {{ object.payload | json }},
+    "profile_id": {{ profile_id | json }}
   }
 {% endparse_json %}
 

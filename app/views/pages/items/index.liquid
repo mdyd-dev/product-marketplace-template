@@ -4,7 +4,7 @@ slug: search
 
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, followships: true
-  function items = 'lib/data/queries/items/search', params: context.params, limit: 21
+  function items = 'lib/data/queries/items/search', params: context.params, limit: 21, status: 'published'
   function filters = 'lib/data/queries/search/filters', query: items.query
 
   include 'theme/simple/items/index', items: items, filters: filters, current_profile: current_profile
