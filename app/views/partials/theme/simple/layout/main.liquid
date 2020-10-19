@@ -12,7 +12,7 @@
     {% if context.location.pathname contains '/dashboard' %}
       <div class="flex flex-col md:flex-row">
         {% include 'theme/simple/dashboard/sidebar' %}
-        <div class="flex-1 ml-10">
+        <div class="flex-1 md:ml-10">
           {{content_for_layout}}
         </div>
       </div>
