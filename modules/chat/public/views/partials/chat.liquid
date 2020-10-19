@@ -1,9 +1,3 @@
-{% liquid
-  graphql conversation = 'modules/chat/find_conversation', from_id: current_profile.id, to_id: user.id
-  graphql messages = 'modules/chat/find_messages', conversation_id: conversation.models.results.first.id
-
-%}
-
 <div class="flex relative mt-4">
   <h2>Send a message</h2>
 </div>

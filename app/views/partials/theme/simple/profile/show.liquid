@@ -32,7 +32,12 @@
 
   {% if current_profile.id != user.id %}
     <div class="w-full md:w-1/4 px-4 mb-4 md:mb-0">
-      {% render "modules/chat/chat", current_profile: current_profile, user: user %}
+
+      {% liquid
+        graphql conversation = 'modules/chat/find_conversation', from_id: current_profile.id, to_id: user.id
+        graphql messages = 'modules/chat/find_messages', conversation_id: conversation.models.results.first.id
+        render "modules/chat/chat", current_profile: current_profile, user: user, messages: messages, conversation: conversation 
+      %}
     </div>
   {% endif %}
 </div>
