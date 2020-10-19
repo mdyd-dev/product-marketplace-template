@@ -19,10 +19,6 @@
       function object = 'lib/data/queries/activities/model', id: object_id
     endif
 
-    comment
-      'REFACTOR: find a better way of detecting type of target object', type: 'TODO'
-    endcomment
-
     function event = 'lib/commands/events/create/build', type: type, actor: actor, object: object, target: target
     function event = 'lib/commands/events/create/check', object: event
 

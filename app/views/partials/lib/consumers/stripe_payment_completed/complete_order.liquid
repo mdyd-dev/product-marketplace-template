@@ -1,8 +1,8 @@
 {% liquid
   assign order_id = event.object.id
   assign user_id = event.actor.id
-  assign status = 'app.order_statuses.paid'
+  assign status = 'app.statuses.orders.paid'
   log event, type: 'event'
 
-  include 'lib/commands/order_statuses/create', order_id: order_id, current_user_id: user.id, name: status
+  include 'lib/commands/statuses/create', object_id: order_id, current_profile_id: user.id, name: status
 %}

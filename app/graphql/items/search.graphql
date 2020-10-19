@@ -1,4 +1,4 @@
-query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $category: String, $owner: String, $sort: ModelsSortInput = {created_at: {order: DESC}}, $withOrders: Boolean = false) {
+query search($id: ID, $limit: Int = 20, $status: [String!], $tag: String, $keyword: String, $category: String, $owner: String, $sort: ModelsSortInput = {created_at: {order: DESC}}, $withStatuses: Boolean = false, $withOrders: Boolean = false) {
   items: models(
     per_page: $limit,
     filter: {
@@ -6,6 +6,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
       model_schema_name: { value: "item" }
       deleted_at: { exists: false }
       properties: [
+        { name: "c__status", value_in: $status },
         { name: "owner", value: $owner },
         { name: "tags", contains: $tag },
         { name: "category", starts_with: $category }
@@ -32,6 +33,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
       price: property_int(name: "price")
       tags: property_array(name: "tags")
       cover_photo_url: property(name: "cover_photo_url")
+      c__status: property(name: "c__status")
 
       owner: related_model(model_schema_name: "profile" join_on_property: "owner", foreign_property: "id") {
         id
@@ -40,17 +42,17 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
         slug: property(name: "slug")
       }
 
-      status: related_model(join_on_property: "id", foreign_property: "item_id", model_schema_name: "item_status") {
+      status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status" sort: { created_at: { order: ASC } }) @include(if: $withStatuses) {
         id
         created_at
         name: property(name: "name")
-        item_id: property(name: "item_id")
+        object_id: property(name: "object_id")
       }
 
       orders: related_models(join_on_property: "id", foreign_property: "item_id", model_schema_name: "order") @include(if: $withOrders) {
         id
         created_at
-        order_status: related_model(join_on_property: "id", foreign_property: "order_id", model_schema_name: "order_status") {
+        status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status") {
           id
           created_at
           name: property(name: "name")

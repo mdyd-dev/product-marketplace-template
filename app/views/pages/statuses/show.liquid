@@ -1,0 +1,11 @@
+---
+slug: statuses/show
+---
+{% liquid
+
+  assign status_id = context.params.slug3 | split: '-' | last
+  function status = 'lib/data/queries/statuses/find', id: status_id
+  include 'lib/present_or_404', property: status.id
+
+  include 'theme/simple/statuses/show', status: status
+%}

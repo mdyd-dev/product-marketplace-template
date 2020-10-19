@@ -6,8 +6,11 @@ metadata:
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
 
-  function items = 'lib/data/queries/items/search', limit: 100, owner: current_profile.id
+  function items = 'lib/data/queries/items/search', limit: 20, owner: current_profile.id, params: context.params, withStatuses: true
+  function filters = 'lib/data/queries/search/filters', query: context.params
 
   include 'theme/simple/dashboard/breadcrumbs', name: 'items', total_entries: items.total_entries, role: 'seller'
-  include 'theme/simple/dashboard/items/index', items: items, role: 'seller'
+  include 'theme/simple/dashboard/items/index', items: items, role: 'seller', filters: filters
+
+  render 'theme/simple/dashboard/items/item-status-object.js', authenticity_token: context.authenticity_token
 %}

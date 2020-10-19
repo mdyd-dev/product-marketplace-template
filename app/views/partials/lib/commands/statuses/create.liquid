@@ -1,0 +1,11 @@
+{%  liquid
+  log object, type: '6'
+  function object = 'lib/commands/statuses/create/build', object: object, current_profile_id: current_profile_id
+  function object = 'lib/commands/statuses/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'statuses/create' object: object
+  endif
+
+  return object
+%}
