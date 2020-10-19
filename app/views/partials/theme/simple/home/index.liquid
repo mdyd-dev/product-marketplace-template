@@ -2,11 +2,11 @@
 
 {% for feed in feeds %}
   {% if feed[1].results.size > 0 %}
-    <section>
-      <h3 class="mb-3 text-3xl">
+    <section class="mt-8">
+      <h2 class="mb-3 text-3xl">
         {{ feed[0] | t: scope: 'app.home.feeds' }}
-      </h3>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      </h2>
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {% for item in feed[1].results %}
           {% if item.type == 'category' %}
             {% render 'theme/simple/home/category', object: item %}

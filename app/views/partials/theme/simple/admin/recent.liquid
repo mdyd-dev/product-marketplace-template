@@ -8,12 +8,12 @@
           pr-0
         {% endif %}
       ">
-        <div class="h-full border rounded shadow bg-white">
+        <div class="h-full bg-white border rounded shadow">
           <div class="flex items-center justify-between px-4 py-3 border-b">
             <h3 class="text-lg font-heading">
               {{ 'admin.metric.'| append: metric.name | append: ".name" | t }}
             </h3>
-            <span class="px-3 py-1 text-sm font-semibold text-white bg-green-600 rounded-full">
+            <span class="px-3 py-1 text-sm font-semibold text-white bg-green-700 rounded-full">
               {{ 'admin.metric.period.'| append: metric.period | t }}
             </span>
           </div>
@@ -28,7 +28,7 @@
             <span>
               {{ 'admin.metric.' | append: metric.name | append: '.delta' | t }}
             </span>
-            <span class="text-lg text-green-600">
+            <span class="text-lg text-green-700">
               {% if metric.name == 'income' %}
                 {{ metric.delta | pricify_cents }}
               {% else %}
@@ -38,9 +38,9 @@
           </div>
         </div>
 
-      <span class="text-xs">
-        {{ 'admin.metric.'| append: metric.name | append: ".description" | t }}
-      </span>
+        <span class="text-xs">
+          {{ 'admin.metric.'| append: metric.name | append: ".description" | t }}
+        </span>
       </div>
     {% endfor %}
   </div>

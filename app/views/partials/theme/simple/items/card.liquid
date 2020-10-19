@@ -7,21 +7,19 @@
   </a>
 
   <div class="mt-4">
+    {% if item_url %}
     <h2 class="text-lg font-medium text-gray-900 ">
       <a href="{{ item_url }}">{{ item.name }}</a>
     </h2>
+    {% endif %}
 
-    <h3 class="mb-1 text-xs ">
+    <!-- TODO: If empty, dont show. -->
+    <h3 class="mb-1 text-xs">
       {% if item.category %}
-        <div>
-          <a href="{% render 'link_to', category: item.category %}">
-            {% print 'categories.' | append: item.category | t %}
-          </a>
-        </div>
+        <a href="{% render 'link_to', category: item.category %}" class="block">
+          {% print 'categories.' | append: item.category | t %}
+        </a>
       {% endif %}
-      {% comment %}
-        {{ item.tags | join: ", " }}
-        {% endcomment %}
     </h3>
 
     <div class="flex justify-between">
