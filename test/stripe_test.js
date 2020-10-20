@@ -1,6 +1,6 @@
 import { Selector, t } from 'testcafe'
 import { buyerRole } from './roles'
-import { John, myUrl, topMenu, dashboard, paymentsAccountPage, SellerRandomUser } from './fixtures'
+import { John, myUrl, topMenu, dashboard, paymentsAccountPage } from './fixtures'
 
 
 fixture`Stripe`.page(myUrl)
