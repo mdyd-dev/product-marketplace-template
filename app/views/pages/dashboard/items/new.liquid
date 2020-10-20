@@ -11,7 +11,6 @@ metadata:
   function filters = 'lib/data/queries/search/filters', query: context.params
   function presigned_url = 'lib/data/queries/presigned_url'
 
-  include 'lib/validate_profile_completeness', profile: current_profile
   include 'theme/simple/dashboard/breadcrumbs'
   include 'theme/simple/items/new', lib: filters, presigned_url: presigned_url, user: context.current_user
 %}
