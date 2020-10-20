@@ -25,7 +25,7 @@ metadata:
   elsif section == 'followers'
     function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', r_id: profile_id
   elsif section == 'products'
-    function list = 'lib/data/queries/items/search', query: context.params, limit: 20, owner: user.id
+    function list = 'lib/data/queries/items/search', query: context.params, limit: 20, owner: profile_id
   endif
 
   include 'theme/simple/dashboard/breadcrumbs', name: 'feed'
