@@ -2,6 +2,10 @@
   @apply inline-flex items-center justify-center px-5 py-2 text-center text-white bg-blue-700 border-2 border-transparent rounded;
 }
 
+.button.button-sm {
+	@apply border;
+}
+
 .button:focus {
   @apply outline-none;
 }
