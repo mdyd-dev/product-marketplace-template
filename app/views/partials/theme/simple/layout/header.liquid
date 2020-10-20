@@ -17,17 +17,15 @@
       <a href="/groups" class="p-3 hover:text-gray-900">{{ 'app.groups.list' | t }}</a>
 
       {% if context.current_user.id %}
-        <a href="/inbox" class="flex mr-5 hover:text-gray-900"  id='inbox-notifications' data-current-user-id="{{ profile.id }}" data-current-user-slug="{{ profile.slug }}">
-          <p>{{ 'app.header.inbox' | t }}</p>
-          <span id="notificationsBell" class="relative inline-flex rounded-full h-3 w-3 bg-pink-500 hidden"></span>
-        </a>
-
         {% assign superadmins = context.constants.superadmins | split: ',' %}
         {% if superadmins contains context.current_user.email %}
           <a href="/admin" class="p-3 hover:text-gray-900">{{ 'app.admin' | t }}</a>
         {% endif %}
         <a href="/dashboard" class="p-3 hover:text-gray-900">{{ 'app.header.feed' | t }}</a>
-        <a href="/dashboard/inbox" class="p-3 hover:text-gray-900">{{ 'app.header.chat' | t }}</a>
+        <a href="/dashboard/inbox" class="p-3 hover:text-gray-900" id='inbox-notifications' data-current-user-id="{{ profile.id }}" data-current-user-slug="{{ profile.slug }}">
+          <p>{{ 'app.header.chat' | t }}</p>
+          <span id="notificationsBell" class="relative inline-flex rounded-full h-3 w-3 bg-pink-500 hidden"></span>
+        </a>
 
         <div x-data="{ dropdownOpen: false }" class="relative">
           <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block rounded-md bg-white ml-3 p-2 focus:outline-none" data-menu-dropdown>
