@@ -46,7 +46,7 @@
                 <form action="/dashboard/groups" method="post" class="inline ml-2" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
                   {% include 'authenticity_token' %}
                   <input type="hidden" name="_method" value="delete" />
-                  <input type="hidden" name="id" value="{{ item.id }}">
+                  <input type="hidden" name="id" value="{{ group.id }}">
 
                   <button id="deletebutton" class="button button-secondary">{{ 'app.delete' | t }}</button>
                 </form>
