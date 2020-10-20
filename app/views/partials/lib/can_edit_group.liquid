@@ -1,0 +1,5 @@
+{% liquid
+  unless profile_id == group.owner.profile.id
+    include 'redirect_to', url: '/', error: 'app.errors.denied'
+  endunless
+%}

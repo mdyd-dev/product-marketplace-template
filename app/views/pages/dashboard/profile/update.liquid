@@ -3,7 +3,7 @@ slug: dashboard/profile
 method: put
 ---
 {% liquid
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true, require_profile: false
 
   function object = 'lib/commands/profiles/update', object: context.params.profile, profile: current_profile
   if object.valid
