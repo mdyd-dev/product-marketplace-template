@@ -17,7 +17,7 @@ export default class ContactUs {
     }
 
     this.options = {
-      purchaseTranslationMissing: Selector('option').withText('translation missing: en.app.models.contacts.reasons.purchase')
+      purchase: Selector('option').withText('Purchase')
     }
   }
 }

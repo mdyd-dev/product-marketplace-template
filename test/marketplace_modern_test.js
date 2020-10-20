@@ -257,7 +257,7 @@ test('Groups', async (t) => {
     .click(footer.support.contactUs)
     .typeText(contactUsForm.inputs.email, John.email)
     .click(contactUsForm.buttons.menuDropdown)
-    .click(contactUsForm.options.purchaseTranslationMissing)
+    .click(contactUsForm.options.purchase)
     .typeText(contactUsForm.inputs.message, "There was a problem with...")
     .click(contactUsForm.buttons.sendMessage)
     .expect(contactUsForm.messages.success.exists).ok()
