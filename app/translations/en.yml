@@ -507,6 +507,12 @@ en:
         delete: Delete
         delete_failed: Delete failed
       contacts:
+        reasons:
+          purchase: Purchase
+          delivery: Delivery
+          payments: Payments
+          account: Account
+          other: Other
         contact-us: Contact Us
         message_sent: Message sent. We will contact with you shortly.
         message-explain: >-
