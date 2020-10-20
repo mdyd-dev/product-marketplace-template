@@ -214,7 +214,7 @@ See [commit/c4c046](https://github.com/mdyd-dev/product-marketplace-template/com
 
 categories can be adjusted by:
 - /admin/categories
-- adding a translation to the `app/translations/en_categies.liquid` file
+- adding a translation to the `app/translations/en_categories.liquid` file
 
 ## Generators
 
@@ -224,7 +224,7 @@ Generator follow development guidelines.
 ```
   ./scaffold/bin/generate resource --help
 
-    Usage: generate <model_name> <attribute_name:type_attribute...> ex. generate car model:string year:int 
+    Usage: generate <model_name> <attribute_name:type_attribute...> ex. generate car car_model:string year:integer 
 
     Generate model files for basic operations create, read, update, delete
 ```
