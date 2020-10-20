@@ -70,7 +70,7 @@ en:
     feed:
       title: Feed
     title: MVP Marketplace
-    support_email: support@getmarkeplace.co
+    support_email: support@getmarketplace.co
     page_not_found: Page not found.
     total_entries: 'Total items:'
     no_items_found: No items found
@@ -419,6 +419,62 @@ en:
       created: >-
         Please check your email. We have sent you a password resetting
         instructions.
+    faq:
+      title: Frequently Asked Questions
+      subtitle: The most common questions about how our business works and what can do for you.
+      questions:
+        section1:
+          q1:
+            question: How it works?
+            answer: Very simple
+          q2:
+            question: How much it cost?
+            answer: It's cheap
+        section2:
+          q1:
+            question: Is it safe?
+            answer: Yes it is
+          q2:
+            question: Does it works
+            answer: Always
+    about-us:
+      our-story: Our story
+      our-story-subtitle: Watches. It all started with a classic Casio F-91W
+      our-story-paragraph: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      our-story-paragraph2: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+      our-team: Our team
+      our-team-subtitle: Because no great company could exist without accountants, sellers, stock workers, and of course - paper.
+      person1-name: Karen Filippelli
+      person1-position: Founder, Chief Executive Officer
+      person1-description: Started as a Sales representative at Stamford branch, moved to Scranton. Operated in both private and public company structures.
+      person2-name: Darryl Philbin
+      person2-position: Marketing Director
+      person2-description: The warehouse is not a piece of cake, man. I started there as an Assistant and finally got a promotion to the Marketing Director.
+      person3-name: Kelly Kapoor
+      person3-position: Customer Service
+      person3-description: I work for MVP Marketplace for a few years now. I learned a lot. You know, one person department is not easy to manage.
+    terms:
+      terms-of-service: TERMS OF SERVICE
+      last-updated: These Terms of Service were last updated on September 1, 2020.
+      section1: MVP MARKETPLACE CORPORATION ("MVP MARKETPLACE," "we," "us," and/or "our") provides its services (described below) to you through its mobile applications and other software made available by MVP MARKETPLACE ("Software") and its website located at http://www.MVP MARKETPLACE.com (the "Site") (collectively, such services, Software and the Site, collectively, the "Service(s)"), subject to the following Terms of Service (as amended from time to time, these "Terms of Service"). We reserve the right, at our sole discretion, to change or modify portions of these Terms of Service at any time without further notice. You should periodically visit this page to review the current Terms of Service so you are aware of any revision to which you are bound. If we do this, we will post the changes to these Terms of Service on this page and will indicate at the top of this page the date these terms were last revised. We will also notify you, either through the Services user interface, in an email notification or through other reasonable means. Any such changes will become effective for existing users no earlier than ten (10) days after they are posted, except that changes addressing new functions of the Services or changes made for legal reasons will be effective immediately. Your continued use of the Service after the date any such changes become effective constitutes your acceptance of the new Terms of Service. If you do not agree to abide by these or any future Terms of Service, do not use or access (or continue to use or access) the Service.
+      please-read: PLEASE READ THESE TERMS OF SERVICE CAREFULLY AS THEY CONTAIN AN AGREEMENT TO ARBITRATE AND OTHER IMPORTANT INFORMATION REGARDING YOUR LEGAL RIGHTS, REMEDIES AND OBLIGATIONS. THE AGREEMENT TO ARBITRATE REQUIRES (WITH LIMITED EXCEPTION) THAT YOU SUBMIT CLAIMS YOU HAVE AGAINST US TO BINDING AND FINAL ARBITRATION, AND FURTHER (1) YOU WILL ONLY BE PERMITTED TO PURSUE CLAIMS AGAINST COMPANY ON AN INDIVIDUAL BASIS, NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY CLASS OR REPRESENTATIVE ACTION OR PROCEEDING, AND (2) YOU WILL ONLY BE PERMITTED TO SEEK RELIEF (INCLUDING MONETARY, INJUNCTIVE, AND DECLARATORY RELIEF) ON AN INDIVIDUAL BASIS. PLEASE INDICATE YOUR ACCEPTANCE TO THESE TERMS OF SERVICE IN ACCORDANCE WITH THE INSTRUCTIONS PROVIDED BY MVP MARKETPLACE. INDICATING ACCEPTANCE ESTABLISHES A BINDING AND EXECUTED WRITTEN AGREEMENT BETWEEN YOU AND MVP MARKETPLACE. IF YOU DO NOT ACCEPT THESE TERMS OF SERVICE, YOU CANNOT USE THE SERVICE.
+      in-addition: In addition, when using certain services, you shall be subject to any additional terms, policies or guidelines applicable to such services that may be posted on the Service from time to time, including, without limitation,
+      the-privacy-policy-at: the Privacy Policy at
+      the-fee-policy-at: the Fee Policy at
+      and-the-prohibited: and the Prohibited Items Policy at
+      all-such-terms: All such terms, policies and guidelines are hereby incorporated by reference into these Terms of Service.
+      termination: Termination
+      termination-content: You agree that MVP MARKETPLACE, in its sole discretion, may suspend or terminate your account (or any part thereof) or use of the Service and remove and discard any items or content within the Service, for any reason, including, without limitation, for lack of use or if MVP MARKETPLACE believes that you have violated or acted inconsistently with the letter or spirit of these Terms of Service. Any suspected fraudulent, abusive or illegal activity that may be grounds for termination of your use of Service, may be referred to appropriate law enforcement authorities. MVP MARKETPLACE may also in its sole discretion and at any time discontinue providing the Service, or any part thereof, with or without notice. You agree that any termination of your access to the Service under any provision of these Terms of Service may be effected without prior notice, and acknowledge and agree that MVP MARKETPLACE may immediately deactivate or delete your account and all related information and files in your account and/or bar any further access to such files or the Service. Further, you agree that MVP MARKETPLACE shall not be liable to you or any third-party for any termination of your access to the Service.
+      user-disputes: User Disputes
+      user-disputes-content: You agree that you are solely responsible for your interactions (including any purchase and sale transactions) with any other user in connection with the Service and MVP MARKETPLACE will have no liability or responsibility with respect thereto. MVP MARKETPLACE reserves the right, but has no obligation, to become involved in any way with disputes between you and any other user of the Service.
+      general: General
+      general-content: These Terms of Service constitute the entire agreement between you and MVP MARKETPLACE and govern your use of the Service, superseding any prior agreements between you and MVP MARKETPLACE with respect to the Service. You also may be subject to additional terms and conditions that may apply when you use affiliate or third-party services, third-party content or third-party software. These Terms of Service shall be governed by the laws of the State of California without regard to its conflict of law provisions. With respect to any disputes or claims not subject to arbitration, as set forth above, you and MVP MARKETPLACE agree to submit to the personal and exclusive jurisdiction of the state and federal courts located within San Diego County, California. The failure of MVP MARKETPLACE to exercise or enforce any right or provision of these Terms of Service shall not constitute a waiver of such right or provision. If any provision of these Terms of Service is found by a court of competent jurisdiction to be invalid, the parties nevertheless agree that the court should endeavor to give effect to the parties' intentions as reflected in the provision, and the other provisions of these Terms of Service remain in full force and effect. You agree that regardless of any statute or law to the contrary, any claim or cause of action arising out of or related to use of the Service or these Terms of Service must be filed within one (1) year after such claim or cause of action arose or be forever barred. A printed version of this agreement and of any notice given in electronic form shall be admissible in judicial or administrative proceedings based upon or relating to this agreement to the same extent and subject to the same conditions as other business documents and records originally generated and maintained in printed form. The section titles in these Terms of Service are for convenience only and have no legal or contractual effect. Notices to you may be made via either email or regular mail. The Service may also provide notices to you of changes to these Terms of Service or other matters by displaying notices or links to notices generally on the Service.&nbsp;
+      your-privacy: Your Privacy
+      your-privacy-content: At MVP MARKETPLACE, we respect the privacy of our users. For details please see our Privacy Policy. By using the Service, you consent to our collection and use of personal data as outlined therein.&nbsp;
+      questions: Questions? Concerns? Suggestions?&nbsp;
+      please-contact: Please contact us at
+      please-contact-continue: . to report any violations of these Terms of Service or to pose any questions regarding these Terms of Service or the Service.
+
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself
       blank: cannot be blank
