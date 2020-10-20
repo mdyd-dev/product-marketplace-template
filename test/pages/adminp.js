@@ -9,7 +9,8 @@ export default class AdminPanel {
       categories: Selector('a').withText('Categories'),
       orders: Selector('a').withText('Orders'),
       items: Selector('li').find('a').withText('Items'),
-      setup: Selector('a').withText('Setup')
+      setup: Selector('a').withText('Setup'),
+      supportTickets: Selector('a').withText('Support tickets')
     }
     this.tableRows = {
       users: Selector('tbody').find('tr'),
