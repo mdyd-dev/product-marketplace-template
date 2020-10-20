@@ -268,12 +268,16 @@ test('Smart search', async (t) => {
   await t.useRole(buyerRole)
     .typeText(itemSearch.quickSearch.keyword, John.name)
     .click(itemSearch.buttons.search)
+    .expect(link.withText(group.commonName).exists).ok()
+    .expect(link.withText(item.commonName).exists).ok()
+    .expect(link.withText(John.name).exists).ok()
 })
 
 test('Products', async (t) => {
-  await t.useRole(buyerRole)
+  await t.useRole(sellerRole)
     .click(topMenu.buttons.menuDropdown)
     .click(topMenu.buttons.dashboard)
     .click(dashboard.nav.publicProfile)
     .click(publicProfile.menu.products)
+    .expect(link.withText(item.commonName).exists).ok()
 })
