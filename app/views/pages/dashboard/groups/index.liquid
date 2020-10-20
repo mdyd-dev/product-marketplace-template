@@ -6,6 +6,8 @@ metadata:
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
 
+  include 'lib/validate_profile_completeness', profile: current_profile
+
   function groups = 'lib/data/queries/groups/search', limit: 100, owner_id: current_profile.id
 
   include 'theme/simple/dashboard/breadcrumbs', name: 'groups', total_entries: groups.total_entries
