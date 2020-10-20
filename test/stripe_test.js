@@ -1,12 +1,11 @@
 import { Selector, t } from 'testcafe'
 import { buyerRole } from './roles'
-import { John, myUrl, topMenu, dashboard, paymentsAccountPage } from './fixtures'
+import { John, myUrl, topMenu, dashboard, paymentsAccountPage, SellerRandomUser } from './fixtures'
 
 
 fixture`Stripe`.page(myUrl)
 
 test.page(myUrl+ '/sign-up')('Stripe', async (t) => {
-  //await register(SellerRandomUser)
   await t.useRole(buyerRole)
   .click(topMenu.buttons.menuDropdown)
   .click(topMenu.buttons.dashboard)
