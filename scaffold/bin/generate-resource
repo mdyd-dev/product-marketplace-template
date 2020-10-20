@@ -25,7 +25,7 @@ const description = `Generate model and endpoints create, read, update, deletes.
 
   Example:
 
-    generate resource car model:string color:string year:int`;
+    generate resource car car_model:string color:string year:integer`;
 program
   .description(description)
   .arguments('<model_name> <attributes...>')
