@@ -44,8 +44,8 @@ slug: inbox
               </div>
             </div>
 
-            <div class="flex-1 overflow-auto" id="main-message-window" >
-              <div class="py-2 px-3">
+            <div class="flex-1 overflow-auto">
+              <div class="py-2 px-3"  id="main-message-window" >
                 {% liquid
                   graphql messages = 'modules/chat/find_messages', conversation_id: current_conversation.id
                   for message in messages.models.results

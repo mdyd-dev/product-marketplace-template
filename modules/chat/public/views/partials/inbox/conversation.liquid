@@ -24,9 +24,20 @@
   </div>
   <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
     <div class="flex items-bottom justify-between">
-      <a class="text-grey-darkest text-sm" href="/profile/{{ from_user.slug }}">
-        {{ from_user.first_name }} {{ from_user.last_name }}
-      </a>
+      {% liquid
+
+        assign name = from_user.first_name | append: " " | append: from_user.last_name
+        if name == " "
+          assign name = from_user.slug
+        endif
+      %}
+      {% if conversation.id == current_conversation.id %}
+        <a class="text-grey-darkest text-sm" href="/profile/{{ from_user.slug }}">
+          {{ name }}
+        </a>
+      {% else %}
+        <p class="text-grey-darkest text-sm"> {{ name }}</p>
+      {% endif %}
 
       <p class="text-xs text-grey-darkest">
         {{ messages.models.results.last["timestamp"] | localize: 'long' }}
