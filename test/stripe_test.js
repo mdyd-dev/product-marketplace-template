@@ -10,6 +10,7 @@ test.page(myUrl+ '/sign-up')('Stripe test', async (t) => {
   .click(topMenu.buttons.dashboard)
   .click(dashboard.nav.bankAccount)
   .click(dashboard.bankAccount.connectWithStripe)
+  .wait(1000)
   .click(paymentsAccountPage.countrySelect)
   .click(paymentsAccountPage.select.countryOption.withText(John.country))
   .click(paymentsAccountPage.radiobutton.typeOfEntity)
