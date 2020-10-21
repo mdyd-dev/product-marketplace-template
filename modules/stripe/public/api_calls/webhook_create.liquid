@@ -10,7 +10,7 @@ callback: >
       log response_data.error, type: 'modules/stripe/create_webhook'
     endif
   %}
-headers: >
+request_headers: >
   {% if data %}
     {
       "Content-Type": "application/x-www-form-urlencoded",

@@ -8,7 +8,7 @@ callback: >
   {% if response_data.error %}
     {%- log response_data.error, type: 'modules/stripe/account_login_link' -%}
   {% endif %}
-headers: >
+request_headers: >
   {
     "Content-Type": "application/x-www-form-urlencoded",
     "Authorization": "Bearer {{ context.constants.stripe_sk_key }}",
