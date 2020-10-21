@@ -11,7 +11,11 @@ document.addEventListener("DOMContentLoaded", function(){
       if (data.to_id === current_user_id || data.from_id == current_user_id) {
         document.getElementById('notificationsBell').style.display = "block";
         if (window.location.pathname.startsWith("/inbox") && data.to_id == current_user_id) {
-          appendToRecipientMessages(data);
+          const room = document.getElementById('new-chat-message');
+          const sentTo = room.getAttribute('data-to-id');
+          if (sentTo == data.from_id) {
+            appendToRecipientMessages(data);
+          }
         }
       }
     }
@@ -32,6 +36,10 @@ function appendToRecipientMessages(data) {
 </div>
 `;
     messagesWindow.innerHTML += message;
+
+    const messagesScroll = document.getElementById('main-message-scroll');
+    messagesScroll.scrollTop =
+      messagesScroll.scrollHeight - messagesScroll.clientHeight;
   }
 
 }

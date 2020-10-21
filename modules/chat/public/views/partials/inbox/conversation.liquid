@@ -26,10 +26,7 @@
     <div class="flex items-bottom justify-between">
       {% liquid
 
-        assign name = from_user.first_name | append: " " | append: from_user.last_name
-        if name == " "
-          assign name = from_user.slug
-        endif
+        assign name = from_user.first_name | append: " " | append: from_user.last_name | append: " (" | append: from_user.name | append: ")"
       %}
       {% if conversation.id == current_conversation.id %}
         <a class="text-grey-darkest text-sm" href="/profile/{{ from_user.slug }}">
