@@ -28,7 +28,7 @@ export const adminRole = Role(myUrl, async (t) => {
   await t
     .click(topMenu.buttons.logIn)
     .typeText(loginForm.inputs.email, Admin.email)
-    .typeText(loginForm.inputs.password, Admin.password)
+    .typeText(loginForm.inputs.password, Admin.newPassword)
     .click(loginForm.buttons.logIn)
 })
 
