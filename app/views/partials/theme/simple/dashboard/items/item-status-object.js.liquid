@@ -1,7 +1,7 @@
 <script>
   (() => {
     const createStatus = (name, object_id, scope) => {
-      fetch('/statuses', {
+      fetch('/api/statuses.json', {
         method: 'POST', // or 'PUT'
         headers: {
           'Content-Type': 'application/json'
