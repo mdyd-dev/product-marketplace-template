@@ -252,7 +252,7 @@ test('Groups', async (t) => {
      .expect(Selector('div').withText(commentText).exists).ok("checks if feed exists at user's profile activities")
  })
 
- test('Contact us', async (t) => {
+ test('Support tickets / Contact Us', async (t) => {
   await t.useRole(buyerRole)
     .click(footer.support.contactUs)
     .typeText(contactUsForm.inputs.email, John.email)
@@ -261,6 +261,14 @@ test('Groups', async (t) => {
     .typeText(contactUsForm.inputs.message, "There was a problem with...")
     .click(contactUsForm.buttons.sendMessage)
     .expect(contactUsForm.messages.success.exists).ok()
+
+  // ticket check via admin panel
+
+  await t.useRole(adminRole)
+    .click(topMenu.buttons.adminPanel)
+    .click(adminPage.menu.supportTickets)
+    .click(Selector('td').find('a').withText(John.email))
+    .expect(Selector('body').withText("There was a problem with...").exists).ok()
 })
 
 
@@ -268,6 +276,7 @@ test('Smart search', async (t) => {
   await t.useRole(buyerRole)
     .typeText(itemSearch.quickSearch.keyword, John.name)
     .click(itemSearch.buttons.search)
+    // expects item, group and profile with 'common name'
     .expect(link.withText(group.commonName).exists).ok()
     .expect(link.withText(item.commonName).exists).ok()
     .expect(link.withText(John.name).exists).ok()
@@ -279,5 +288,6 @@ test('Products', async (t) => {
     .click(topMenu.buttons.dashboard)
     .click(dashboard.nav.publicProfile)
     .click(publicProfile.menu.products)
+    // expects an item that belongs to the profile we are currently visiting
     .expect(link.withText(item.commonName).exists).ok()
 })
