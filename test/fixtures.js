@@ -59,7 +59,18 @@ export const John = {
   password: 'password',
   name: 'johnsmith',
   firstName: 'John',
-  lastName: 'Smith'
+  lastName: 'Smith',
+  country: 'United States',
+  mobilePhone: '0000000000',
+  birthDay: '18',
+  birthMonth: '12',
+  birthYear: '1995',
+  addressStreet: '2045 Evans Ave',
+  addressCity: 'San Francisco',
+  addressCode: '94124',
+  state: 'California',
+  ssn: '0000',
+  site: 'www.company.com'
 }
 
 export const Admin = {
