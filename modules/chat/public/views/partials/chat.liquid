@@ -3,6 +3,12 @@
 </div>
 
 <div class="overflow-hidden" id="room" data-room-name="{{ user.id }}" data-sender-id="{{ current_profile.id }}" data-sender-name="{{ current_profile.name }}" data-recipient-id="{{ user.id }}">
+  <div class="pb-6 px-4">
+    <div class="flex rounded-lg border-2 border-grey overflow-hidden">
+      <input id="newMessage" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" />
+    </div>
+  </div>
+
   <div id="messages">
     {% for m in messages.models.results %}
         <div class="mb-4 text-sm border-solid bg-gray-100">
@@ -17,9 +23,4 @@
     {% endfor %}
   </div>
 
-  <div class="pb-6 px-4">
-    <div class="flex rounded-lg border-2 border-grey overflow-hidden">
-      <input id="newMessage" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" />
-    </div>
-  </div>
 </div>

@@ -35,11 +35,7 @@ function appendToRecipientMessages(data) {
   </div>
 </div>
 `;
-    messagesWindow.innerHTML += message;
-
-    const messagesScroll = document.getElementById('main-message-scroll');
-    messagesScroll.scrollTop =
-      messagesScroll.scrollHeight - messagesScroll.clientHeight;
+    messagesWindow.insertAdjacentHTML('afterbegin', message);
   }
 
 }

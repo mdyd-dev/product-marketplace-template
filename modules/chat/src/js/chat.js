@@ -21,10 +21,6 @@ document.addEventListener("DOMContentLoaded", function(){
   // for /profile
   if (newMessage != null) {
 
-    const profileMessages = document.getElementById("profile-messages");
-    if (profileMessages != null) {
-      profileMessages.scrollTop = profileMessages.scrollHeight - profileMessages.clientHeight;
-    }
 
     if (senderMessages === null) {
       senderMessages = consumer.subscriptions.create({ channel: "conversate", room_id: roomName, sender_name: userName, from_id: userId, to_id: recipientId, timestamp: new Date() }, {
@@ -32,8 +28,7 @@ document.addEventListener("DOMContentLoaded", function(){
           console.log("Recived (sender):", data);
           const notifications = document.getElementById('messages');
           if (notifications != null && data.create == true) {
-            notifications.innerHTML += `
-      <div class="flex items-start mb-4 text-sm bg-gray-400" >
+            notifications.insertAdjacentHTML('afterbegin', `<div class="flex items-start mb-4 text-sm bg-gray-400" >
         <!-- A message -->
         <div class="flex-1 overflow-hidden border-1 border-gray-600">
           <div>
@@ -43,25 +38,21 @@ document.addEventListener("DOMContentLoaded", function(){
           <p class="text-black leading-normal"> ${data.message} </p>
         </div>
       </div>
-             `;
-          }
-          const profileMessages = document.getElementById("profile-messages");
-          if (profileMessages != null) {
-            profileMessages.scrollTop = profileMessages.scrollHeight - profileMessages.clientHeight;
+             `);
           }
         }
 
       });
     }
 
-  if (recipientMessages === null) {
+    if (recipientMessages === null) {
       recipientMessages = consumer.subscriptions.create({ channel: "conversate", room_id: userId }, {
         received(data) {
           console.log("Recived (recipient):", data);
           const notifications = document.getElementById('messages');
 
           if (notifications != null && data.create == true) {
-            notifications.innerHTML += `
+            notifications.insertAdjacentHTML('afterbegin', `
       <div class="flex items-start mb-4 text-sm bg-gray-400" >
         <!-- A message -->
         <div class="flex-1 overflow-hidden border-1 border-gray-600">
@@ -72,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function(){
           <p class="text-black leading-normal"> ${data.message} </p>
         </div>
       </div>
-             `;
+             `);
           }
 
         }
@@ -122,7 +113,8 @@ document.addEventListener("DOMContentLoaded", function(){
           const notifications = document.getElementById('messages');
 
           if (notifications != null) {
-            notifications.innerHTML += `
+
+            notifications.insertAdjacentHTML('afterbegin', `
       <div class="flex items-start mb-4 text-sm bg-gray-400" >
         <!-- A message -->
         <div class="flex-1 overflow-hidden border-1 border-gray-600">
@@ -133,13 +125,10 @@ document.addEventListener("DOMContentLoaded", function(){
           <p class="text-black leading-normal"> ${data.message} </p>
         </div>
       </div>
-             `;
+             `);
           }
 
-          const profileMessages = document.getElementById("profile-messages");
-          if (profileMessages != null) {
-            profileMessages.scrollTop = profileMessages.scrollHeight - profileMessages.clientHeight;
-          }
+
         }
       });
     }
@@ -171,14 +160,10 @@ function appendToSenderMessages(data) {
   </div>
 </div>
 `;
-    messagesWindow.innerHTML += message;
+
+    messagesWindow.insertAdjacentHTML('afterbegin', message);
 
 
-    const messagesScroll = document.getElementById('main-message-scroll');
-    if (messagesScroll != null) {
-    messagesScroll.scrollTop =
-      messagesScroll.scrollHeight - messagesScroll.clientHeight;
-    }
   }
 
 }

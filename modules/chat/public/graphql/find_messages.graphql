@@ -1,7 +1,7 @@
 query find_messages($conversation_id: String!) {
   models(per_page: 1000,
     sort: {
-      properties: { name: "timestamp", order: ASC }
+      properties: { name: "timestamp", order: DESC }
     }
     filter: {
       model_schema_name: { exact: "modules/chat/message" },
