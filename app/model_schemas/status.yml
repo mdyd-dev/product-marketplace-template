@@ -1,0 +1,16 @@
+name: status
+properties:
+  - name: name
+    type: string
+  - name: fullname
+    type: string
+  - name: scope
+    type: string
+  - name: timestamp
+    type: datetime
+  - name: object_id
+    type: string
+  - name: payload
+    type: string
+  - name: profile_id
+    type: string

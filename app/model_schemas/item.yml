@@ -15,3 +15,6 @@ properties:
     type: string
   - name: cover_photo_url
     type: string
+
+  - name: c__status
+    type: string

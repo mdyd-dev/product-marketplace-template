@@ -1,0 +1,50 @@
+{% liquid
+  if object.id
+    assign method = 'put'
+  else
+    assign method = 'post'
+  endif
+%}
+<div class="container flex flex-wrap mx-auto groups-center">
+  <form action="/statuses" method="post" class="w-full md:w-2/3">
+    {% include 'authenticity_token' %}
+    <input type="hidden" name="_method" value="{{method}}" />
+
+    {% if object.id %}
+      <input type="hidden" name="status[id]" value="{{ object.id }}" />
+    {% endif %}
+
+    <div class="mt-5">
+      <label class="block" for="name">{{ 'app.models.statuses.form.name' | t }}</label>
+      <input class="w-2/3 form-input" type="text" id="name" name="status[name]" value="{{ object.name }}" autofocus required />
+      {% include 'theme/simple/field_error', errors: object.errors.name %}
+    </div>
+    <div class="mt-5">
+      <label class="block" for="fullname">{{ 'app.models.statuses.form.fullname' | t }}</label>
+      <input class="w-2/3 form-input" type="text" id="fullname" name="status[fullname]" value="{{ object.fullname }}" autofocus required />
+      {% include 'theme/simple/field_error', errors: object.errors.fullname %}
+    </div>
+    <div class="mt-5">
+      <label class="block" for="scope">{{ 'app.models.statuses.form.scope' | t }}</label>
+      <input class="w-2/3 form-input" type="text" id="scope" name="status[scope]" value="{{ object.scope }}" autofocus required />
+      {% include 'theme/simple/field_error', errors: object.errors.scope %}
+    </div>
+    <div class="mt-5">
+      <label class="block" for="timestamp">{{ 'app.models.statuses.form.timestamp' | t }}</label>
+      <input class="w-2/3 form-input" type="text" id="timestamp" name="status[timestamp]" value="{{ object.timestamp }}" autofocus required />
+      {% include 'theme/simple/field_error', errors: object.errors.timestamp %}
+    </div>
+    <div class="mt-5">
+      <label class="block" for="object_id">{{ 'app.models.statuses.form.object_id' | t }}</label>
+      <input class="w-2/3 form-input" type="text" id="object_id" name="status[object_id]" value="{{ object.object_id }}" autofocus required />
+      {% include 'theme/simple/field_error', errors: object.errors.object_id %}
+    </div>
+    <div class="mt-5">
+      <label class="block" for="payload">{{ 'app.models.statuses.form.payload' | t }}</label>
+      <input class="w-2/3 form-input" type="text" id="payload" name="status[payload]" value="{{ object.payload }}" autofocus required />
+      {% include 'theme/simple/field_error', errors: object.errors.payload %}
+    </div>
+
+    <button class="mt-8 button">{{ 'app.models.shared.submit' | t }}</button>
+  </form>
+</div>

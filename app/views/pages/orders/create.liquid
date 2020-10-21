@@ -9,7 +9,7 @@ method: post
 
   function object = 'lib/commands/orders/create', item: item, current_profile: current_profile
   if object.valid
-    function status = 'lib/commands/order_statuses/create', order: object, current_user_id: current_profile.id, name: 'app.order_statuses.placed'
+    function status = 'lib/commands/statuses/create', profile_id: current_profile.id, object_id: object.id, name: 'placed', scope: 'app.statuses.orders'
 
     include 'lib/commands/events/create', type: 'order_created', actor_id: object.buyer.id, target_id: context.params.item_id, object_id: object.id
 

@@ -1,0 +1,14 @@
+---
+slug: statuses
+method: delete
+---
+{% liquid
+  function object = 'lib/data/queries/statuses/find', id: context.params.id
+  function object = 'lib/commands/statuses/delete', object: object
+
+  if object.valid
+    include 'redirect_to', url: '/statuses', notice: 'app.models.shared.deleted'
+  else
+    include 'redirect_to', url: '/statuses', error: 'app.models.shared.delete_failed'
+  endif
+%}

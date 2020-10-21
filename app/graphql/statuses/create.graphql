@@ -1,0 +1,35 @@
+mutation create_status(
+  $name: String!
+  $fullname: String!
+  $scope: String!
+  $timestamp: String!
+  $object_id: String!
+  $payload: String
+  $profile_id: String!
+) {
+  model_create(
+    model: {
+      model_schema_name: "status"
+      properties: [
+              { name: "name" value: $name }
+              { name: "fullname" value: $fullname }
+              { name: "scope" value: $scope }
+              { name: "timestamp" value: $timestamp }
+              { name: "object_id" value: $object_id }
+              { name: "payload" value: $payload }
+              { name: "profile_id" value: $profile_id }
+            ]
+    }
+  ){
+    id
+    created_at
+    deleted_at
+
+    name: property(name: "name")
+    fullname: property(name: "fullname")
+    scope: property(name: "scope")
+    timestamp: property(name: "timestamp")
+    object_id: property(name: "object_id")
+    payload: property(name: "payload")
+  }
+}

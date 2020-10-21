@@ -1,0 +1,20 @@
+{%  liquid
+  unless object
+    assign object = '{}' | parse_json
+    hash_assign object['object_id'] = object_id
+    hash_assign object['name'] = name
+    hash_assign object['scope'] = scope
+    hash_assign object['fullname'] = scope | append: '.' | append: name
+  endunless
+
+  function object = 'lib/commands/statuses/create/build', object: object, profile_id: profile_id
+  function object = 'lib/commands/statuses/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'statuses/create' object: object
+  else
+    log object, 'showme STATUS-INVALID'
+  endif
+
+  return object
+%}

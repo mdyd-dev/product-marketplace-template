@@ -1,5 +1,5 @@
 {% liquid
-  function query = 'lib/data/queries/items/search/build', limit: limit, owner: owner, params: params
+  function query = 'lib/data/queries/items/search/build', limit: limit, owner: owner, params: params, withStatuses: withStatuses, status: status
   function items = 'lib/data/queries/items/search/execute', query: query
 
   hash_assign items['query'] = query

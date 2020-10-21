@@ -30,7 +30,7 @@ mutation create($item_id: String!, $buyer: String!, $total: Int!, $seller: Strin
       price: property(name: "price")
     }
 
-    status: related_model(join_on_property: "id", foreign_property: "order_id", model_schema_name: "order_status") {
+    status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status") {
       id
       created_at
       name: property(name: "name")

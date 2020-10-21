@@ -1,0 +1,13 @@
+{% liquid
+
+  function status = 'lib/data/queries/statuses/find', id: event.object.id
+
+  if status.scope == 'app.statuses.items'
+    assign object = '{}' | parse_json
+    hash_assign object['id'] = event.target.id
+    hash_assign object['c__status'] = status.fullname
+
+    function object = 'lib/commands/execute', mutation_name: 'items/update' object: object, selection: 'model_update'
+    log object
+  endif
+%}

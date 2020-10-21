@@ -1,0 +1,43 @@
+query search(
+  $id: ID
+  $limit: Int = 20
+  $name: String
+  $fullname: String
+  $scope: String
+  $timestamp: String
+  $object_id: String
+  $payload: String
+) {
+  statuses: models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      model_schema_name: { value: "status" }
+      properties: [
+              { name: "name" value: $name }
+              { name: "fullname" value: $fullname }
+              { name: "scope" value: $scope }
+              { name: "timestamp" value: $timestamp }
+              { name: "object_id" value: $object_id }
+              { name: "payload" value: $payload }
+            ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+      created_at
+      type: model_schema_name
+
+          name: property(name: "name")
+          fullname: property(name: "fullname")
+          scope: property(name: "scope")
+          timestamp: property(name: "timestamp")
+          object_id: property(name: "object_id")
+          payload: property(name: "payload")
+        }
+  }
+}
