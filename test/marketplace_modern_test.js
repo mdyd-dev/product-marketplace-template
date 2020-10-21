@@ -229,7 +229,7 @@ test('Groups', async (t) => {
     .expect(Selector('div').textContent).contains('already taken')
   //checks if group exists
     .click(dashboard.nav.myGroups)
-    .expect(link.withText(group.name).exists).ok() // ??????
+    .expect(link.withText(group.name).exists).ok()
   //edit group
     .click(groupsPage.buttons.editGroup)
     .typeText(groupsPage.inputs.name, group.commonName, { replace: true })
