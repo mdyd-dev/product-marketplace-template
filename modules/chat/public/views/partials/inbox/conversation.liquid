@@ -14,6 +14,10 @@
 
       function from_user = 'lib/data/queries/profiles/find', id: from_user_id
       assign img_url = from_user.avatar.photo.versions.small
+      unless img_url
+        assign img_url = 'images/user.svg' | asset_url
+      endunless
+
     %}
 
     <img src="{{ img_url }}" alt="" class="object-cover object-center w-16 h-16 mx-auto text-gray-400 rounded-full shadow-md md:mx-0">
