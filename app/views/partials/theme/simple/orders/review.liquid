@@ -7,7 +7,7 @@
   data-stripe-pk-key="{{ context.constants.stripe_pk_key }}"
 >
   {% include 'authenticity_token' %}
-  <input type="hidden" name="status" value="app.order_statuses.paid"/>
+  <input type="hidden" name="status" value="app.statuses.orders.paid"/>
   <input type="hidden" name="order_id" value="{{ order.id }}"/>
 
   <p>

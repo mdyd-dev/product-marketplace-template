@@ -3,7 +3,7 @@
   function orders = 'lib/data/queries/orders/search', limit: 100
 
   for order in orders.results
-    if order.status.name == 'app.order_statuses.paid'
+    if order.status.name == 'app.statuses.orders.paid'
       assign income = income | plus: order.total
     endif
   endfor

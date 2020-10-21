@@ -1,0 +1,17 @@
+---
+slug: statuses
+method: post
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+
+  function object = 'lib/commands/statuses/create', object: context.params.status, profile_id: current_profile.id
+  if object.valid
+    include 'lib/commands/events/create', type: 'status_created', actor_id: current_profile.id, object_id: object.id, target_id: object.object_id
+
+    include 'redirect_to', url: '/statuses'
+  else
+    log object
+    include 'theme/simple/statuses/new', object: object
+  endif
+%}

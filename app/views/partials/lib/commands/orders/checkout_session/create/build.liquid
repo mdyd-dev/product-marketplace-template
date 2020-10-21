@@ -13,7 +13,7 @@
 {
  "payment_method_types": ["card"],
  "line_items": [
-    {% for line in order.lines %}
+    {% for line in order.line_items %}
       {
         "price_data": {
           "product_data": { "name": "{{line.name}}" },

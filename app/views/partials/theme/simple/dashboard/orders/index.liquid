@@ -19,22 +19,22 @@
             {% function item_url = 'link_to', path: '/items/', item: order.item %}
             <a href="{{ item_url }}">
               {{ order.item.name }}
-              <small> {{ order.item.status.name | default: 'app.item_statuses.none' | t }}</small>
             </a>
+            <small> {{ order.item.status.name }}</small>
           </td>
           <td class="px-4 py-2 text-left border-b">{{ order.seller.name }}</td>
           <td class="py-1 text-center border-b">=></td>
           <td class="px-4 py-2 text-left border-b">{{ order.buyer.name }}</td>
           <td class="px-4 py-2 text-left border-b">
-            {{ order.status.name | default: 'missing-state-invalid-order' | t }}
-            {% if order.order_status.timestamp %}
-            <br/><small>{{ order.order_status.timestamp | to_time | l }}</small>
+            {% if order.status.timestamp %}
+              <small> {{ order.status.fullname | t }}</small>
+              <br/><small>{{ order.status.timestamp | to_time | l }}</small>
             {% endif %}
           </td>
           <td class="px-4 py-2 text-left border-b">{{ order.total | pricify_cents }}</td>
           <td class="px-4 py-2 text-left border-b">
             {% assign actions = 'theme/simple/dashboard/orders/actions/' | append: role  %}
-            {% include actions %}
+            {% include actions, order: order %}
           </td>
         </tr>
       {% endfor %}

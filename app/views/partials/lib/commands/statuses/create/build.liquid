@@ -1,0 +1,15 @@
+{% parse_json object %}
+  {
+    "name": {{ object.name | json }},
+    "scope": {{ object.scope | json }},
+    "fullname": {{ object.scope | append: '.' | append: object.name | json }},
+    "timestamp": {{ object.timestamp | default: 'now' | to_time | json }},
+    "object_id": {{ object.object_id | json }},
+    "payload": {{ object.payload | json }},
+    "profile_id": {{ profile_id | json }}
+  }
+{% endparse_json %}
+
+{% liquid
+  return object
+%}

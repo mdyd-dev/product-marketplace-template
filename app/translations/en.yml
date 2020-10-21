@@ -231,6 +231,7 @@ en:
         followers: Followers
         profile: Profile
     items:
+      all: All
       by_user: Browse this user's items
       self-list: You are now on <span class="font-semibold">your</span> list
       user-list: >-
@@ -397,16 +398,17 @@ en:
       stripe_pk_key: Stripe Publishable Key
       stripe_sk_key: Stripe Secret Key
       stripe_client_id: Stripe Owner Connect Account client ID
-    item_statuses:
-      sold: sold
-      none: '&nbsp;'
-    order_statuses:
-      order_status: status
-      pending_payment: pending
-      placed: new
-      paid: paid
-      canceled: canceled
-      shipped: shipped
+    statuses:
+      orders:
+        pending_payment: pending
+        placed: new
+        paid: paid
+        cancelled: canceled
+        shipped: shipped
+      items:
+        published: Published
+        unpublished: Unpublished
+        unavailable: Out of stock
     sessions:
       created: Logged in
       destroyed: Logged out
@@ -531,6 +533,18 @@ en:
         form:
           key: key
           uuid: uuid
+      statuses:
+        new: New status
+        add: Add status
+        edit: Edit status
+        empty_state: You haven't added any statuses yet. <br> Create your first one now!
+        form:
+          name: name
+          fullname: fullname
+          scope: scope
+          timestamp: timestamp
+          object_id: object_id
+          payload: payload
   lib:
     sort_options:
       relevance: Relevance

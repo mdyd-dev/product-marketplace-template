@@ -1,0 +1,9 @@
+<form action="/statuses" method="post" class="mt-2">
+  {% render 'authenticity_token', authenticity_token: authenticity_token %}
+  <input type="hidden" name="status[scope]" value="{{ scope }}"/>
+  <input type="hidden" name="status[name]" value="{{ name }}"/>
+  <input type="hidden" name="status[object_id]" value="{{ object_id }}"/>
+  <input type="hidden" name="return_to" value="{{ return_to }}"/>
+
+  <button class="button button-sm {% if secondary %}button-secondary{% endif %}">{{ label | t }}</button>
+</form>

@@ -1,0 +1,5 @@
+{% liquid
+  function statuses = 'lib/data/queries/statuses/search', limit: 100
+
+  include 'theme/simple/statuses/index', statuses: statuses
+%}

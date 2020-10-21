@@ -8,7 +8,7 @@ callback: >
   {% if response_data.error %}
     {%- log response_data.error, type: 'modules/payments/connect_account' -%}
   {% endif %}
-headers: "{}"
+request_headers: "{}"
 ---
 {% parse_json 'data' %}
   {
