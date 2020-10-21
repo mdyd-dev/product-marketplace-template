@@ -15,14 +15,23 @@ document.addEventListener("DOMContentLoaded", function(){
   }
   const newMessage = document.getElementById('newMessage');
   const newConversationMessage = document.getElementById('new-chat-message');
-  var messages = null;
+  var senderMessages = null;
+  var recipientMessages = null;
 
+  // for /profile
   if (newMessage != null) {
-    newMessage.addEventListener('keydown', function(event) {
-      if (messages === null) {
-        messages = consumer.subscriptions.create({ channel: "conversate", room_id: roomName, sender_name: userName, from_id: userId, to_id: recipientId, timestamp: new Date() }, {
-          received(data) {
-            const notifications = document.getElementById('messages');
+
+    const profileMessages = document.getElementById("profile-messages");
+    if (profileMessages != null) {
+      profileMessages.scrollTop = profileMessages.scrollHeight - profileMessages.clientHeight;
+    }
+
+    if (senderMessages === null) {
+      senderMessages = consumer.subscriptions.create({ channel: "conversate", room_id: roomName, sender_name: userName, from_id: userId, to_id: recipientId, timestamp: new Date() }, {
+        received(data) {
+          console.log("Recived (sender):", data);
+          const notifications = document.getElementById('messages');
+          if (notifications != null && data.create == true) {
             notifications.innerHTML += `
       <div class="flex items-start mb-4 text-sm bg-gray-400" >
         <!-- A message -->
@@ -36,12 +45,48 @@ document.addEventListener("DOMContentLoaded", function(){
       </div>
              `;
           }
-        });
-      }
+          const profileMessages = document.getElementById("profile-messages");
+          if (profileMessages != null) {
+            profileMessages.scrollTop = profileMessages.scrollHeight - profileMessages.clientHeight;
+          }
+        }
 
+      });
+    }
+
+  if (recipientMessages === null) {
+      recipientMessages = consumer.subscriptions.create({ channel: "conversate", room_id: userId }, {
+        received(data) {
+          console.log("Recived (recipient):", data);
+          const notifications = document.getElementById('messages');
+
+          if (notifications != null && data.create == true) {
+            notifications.innerHTML += `
+      <div class="flex items-start mb-4 text-sm bg-gray-400" >
+        <!-- A message -->
+        <div class="flex-1 overflow-hidden border-1 border-gray-600">
+          <div>
+            <span class="font-bold"> ${data.sender_name}</span>
+            <span class="text-grey text-xs">${data.timestamp}</span>
+          </div>
+          <p class="text-black leading-normal"> ${data.message} </p>
+        </div>
+      </div>
+             `;
+          }
+
+        }
+      });
+    }
+
+    newMessage.addEventListener('keydown', function(event) {
       if (event.keyCode === 13 && userName !== '') {
         const messageData = { message: newMessage.value, from_id: userId, sender_name: userName, to_id: recipientId, timestamp: new Date(), create: true };
-        messages.send(messageData);
+        console.log("Sending..", messageData);
+        senderMessages.send(Object.assign(messageData, { create: true  }));
+        console.log("SEnder", senderMessages);
+        recipientMessages.send(Object.assign(messageData, { create: false }));
+        console.log("Recipient", recipientMessages);
         newMessage.value = '';
       }
     });
@@ -50,32 +95,56 @@ document.addEventListener("DOMContentLoaded", function(){
   var senderChannel = null;
   var recipientChannel = null;
 
-
+  // for /inbox
   if (newConversationMessage != null) {
 
     console.log("Waiting for new messages");
-    newConversationMessage.addEventListener('keydown', function(event) {
 
-      const roomName = newConversationMessage.getAttribute('data-from-id');
-      const userName = newConversationMessage.getAttribute('data-from-name');;
-      const userId = newConversationMessage.getAttribute('data-from-id');
-      const recipientId = newConversationMessage.getAttribute('data-to-id');
+    const roomName = newConversationMessage.getAttribute('data-from-id');
+    const userName = newConversationMessage.getAttribute('data-from-name');;
+    const userId = newConversationMessage.getAttribute('data-from-id');
+    const recipientId = newConversationMessage.getAttribute('data-to-id');
 
-      if (senderChannel === null) {
-        senderChannel = consumer.subscriptions.create({ channel: "conversate", room_id: roomName, sender_name: userName, from_id: userId, to_id: recipientId, timestamp: new Date() }, {
-          received(data) {
+    if (senderChannel === null) {
+      senderChannel = consumer.subscriptions.create({ channel: "conversate", room_id: roomName, sender_name: userName, from_id: userId, to_id: recipientId, timestamp: new Date() }, {
+        received(data) {
+          if (data.from_id == userId) {
             appendToSenderMessages(data);
           }
-        });
-      }
+        }
+      });
+    }
 
-      if (recipientChannel === null) {
-        recipientChannel = consumer.subscriptions.create({ channel: "conversate", room_id: recipientId, sender_name: userName, from_id: userId, to_id: recipientId, timestamp: new Date() }, {
-          received(data) {
+    if (recipientChannel === null) {
+      recipientChannel = consumer.subscriptions.create({ channel: "conversate", room_id: recipientId, sender_name: userName, from_id: userId, to_id: recipientId, timestamp: new Date() }, {
+        received(data) {
+          console.log("Recived:", data);
+          const notifications = document.getElementById('messages');
+
+          if (notifications != null) {
+            notifications.innerHTML += `
+      <div class="flex items-start mb-4 text-sm bg-gray-400" >
+        <!-- A message -->
+        <div class="flex-1 overflow-hidden border-1 border-gray-600">
+          <div>
+            <span class="font-bold"> ${data.sender_name}</span>
+            <span class="text-grey text-xs">${data.timestamp}</span>
+          </div>
+          <p class="text-black leading-normal"> ${data.message} </p>
+        </div>
+      </div>
+             `;
           }
-        });
-      }
 
+          const profileMessages = document.getElementById("profile-messages");
+          if (profileMessages != null) {
+            profileMessages.scrollTop = profileMessages.scrollHeight - profileMessages.clientHeight;
+          }
+        }
+      });
+    }
+
+    newConversationMessage.addEventListener('keydown', function(event) {
       if (event.keyCode === 13 && userName !== '') {
         const messageData = { message: newConversationMessage.value, from_id: userId, sender_name: userName, to_id: recipientId, timestamp: new Date() };
         senderChannel.send(Object.assign(messageData, { create: true  }));
@@ -103,6 +172,13 @@ function appendToSenderMessages(data) {
 </div>
 `;
     messagesWindow.innerHTML += message;
+
+
+    const messagesScroll = document.getElementById('main-message-scroll');
+    if (messagesScroll != null) {
+    messagesScroll.scrollTop =
+      messagesScroll.scrollHeight - messagesScroll.clientHeight;
+    }
   }
 
 }
