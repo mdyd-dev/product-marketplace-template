@@ -10,7 +10,7 @@ callback: >
       log response_data.error, type: 'modules/stripe/checkout_session_create'
     endif
   %}
-headers: >
+request_headers: >
   {% if data %}
     {
       "Content-Type": "application/x-www-form-urlencoded",
