@@ -2,7 +2,7 @@
   <form action="/search" name="search">
     {% render 'theme/simple/home/search_form', query: search.query, filters: filters %}
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-5">
+    <div class="grid-basic">
       {% for item in items.results %}
         {% render 'theme/simple/items/card', item: item, current_profile: current_profile %}
       {% else %}
