@@ -1,5 +1,5 @@
 <div class="flex relative mt-4">
-  <h2>Send a message</h2>
+  <h2> {{ 'app.header.chat' | t }} </h2>
 </div>
 
 <div class="overflow-hidden" id="room" data-room-name="{{ user.id }}" data-sender-id="{{ current_profile.id }}" data-sender-name="{{ current_profile.name }}" data-recipient-id="{{ user.id }}">

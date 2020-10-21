@@ -20,7 +20,10 @@
   </div>
   <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
     <div class="flex items-bottom justify-between">
-      <p class="text-grey-darkest"> {{ from_user.name  }} </p>
+      <a class="text-grey-darkest text-sm" href="/profile/{{ from_user.slug }}">
+        {{ from_user.first_name }} {{ from_user.last_name }}
+      </a>
+
       <p class="text-xs text-grey-darkest">
         {{ messages.models.results.last["timestamp"] | localize: 'long' }}
       </p>
