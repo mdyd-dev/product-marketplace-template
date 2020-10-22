@@ -1,0 +1,12 @@
+---
+slug: <%= modelNamePlural %>
+method: post
+response_headers: "{% render 'theme/json/headers' %}"
+---
+{% liquid
+  function current_profile = 'lib/current_profile_api', user_id: context.current_user.id, required: true
+
+  function object = 'lib/commands/<%= modelNamePlural %>/create', object: context.params.<%= modelName %>
+
+  render 'theme/json/shared/show', object: object
+%}

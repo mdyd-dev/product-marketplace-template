@@ -1,4 +1,4 @@
-mutation update($id: ID!, $item_id: String, $buyer: String, $status: String, $total: Int, $seller: String) {
+mutation update($id: ID!, $item_id: String, $buyer: String, $total_price_cents: Int, $total_shipping_cost_cents: Int, $products_price_cents: Int, $seller: String, $c__status: String) {
   model_update(
     id: $id
     model: {
@@ -6,8 +6,12 @@ mutation update($id: ID!, $item_id: String, $buyer: String, $status: String, $to
         { name: "item_id" value: $item_id }
         { name: "buyer" value: $buyer }
         { name: "seller" value: $seller }
-        { name: "total" value_int: $total }
-        { name: "status" value: $status }
+        { name: "total_price_cents" value_int: $total_price_cents }
+        { name: "total_shipping_cost_cents" value_int: $total_shipping_cost_cents }
+        { name: "products_price_cents" value_int: $products_price_cents }
+
+        # cache
+        { name: "c__status" value: $c__status }
       ]
     }
   ){

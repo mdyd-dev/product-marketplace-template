@@ -1,0 +1,19 @@
+<div class="py-10">
+  <h1 class="text-3xl font-medium">
+    {{ 'app.orders.show.order' | t }} {{order.id}}
+  </h1>
+</div>
+<p>
+  Status:
+  <b>{{ order.status.fullname | t }}</b>
+</p>
+<p>
+  {{ 'app.orders.checkout.order_total' | t }}
+  <b>{{ order.total_price_cents | pricify_cents }}</b>
+</p>
+
+<h3 class="mb-4 text-xl font-semibold">
+  {{ 'app.orders.checkout.confirm' | t }}
+</h3>
+
+{% include 'theme/simple/dashboard/orders/actions/buyer', order: order, checkout_session: checkout_session %}

@@ -67,18 +67,20 @@
       <div class="flex mt-4">
         <span class="text-2xl text-gray-900 ">{{ item.price | pricify_cents }}</span>
 
-        <form action="/orders/new" method="get" class="ml-auto ">
-          <input type="hidden" name="item_id" value="{{ item.id }}">
+        <form action="/orders/line_items" method="post" class="ml-auto ">
+          {% render 'authenticity_token', authenticity_token: authenticity_token %}
+          <input type="hidden" name="line_item[item_id]" value="{{ item.id }}">
+          <input type="hidden" name="line_item[quantity]" value="1">
           <button id="buybutton" class="button">
             {{ 'app.items.buy_for' | t }} {{ item.price | pricify_cents }}
           </button>
-          {% if item.orders.size > 0 %}
-          <div>{% print 'app.items.ordered_times' | t: count: item.orders.size %}</div>
+          {% if item.line_items.size > 0 %}
+            <div>{% print 'app.items.ordered_times' | t: count: item.line_items.size %}</div>
           {% endif %}
         </form>
       </div>
 
-        {%- if item.owner.id == current_profile.id and item.orders.size < 1 %}
+        {%- if item.owner.id == current_profile.id and item.line_items.size < 1 %}
         <p class="py-4 mt-4 border-t border-blue-300">{{ 'app.items.item_administration' | t }}</p>
         <span class="flex">
           <a href="/dashboard/items/edit?id={{ item.id }}" class="button">{{ 'app.items.edit' | t }}</a>

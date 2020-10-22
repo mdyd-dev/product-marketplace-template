@@ -1,0 +1,17 @@
+{% liquid
+  if membership == null
+    assign membership = false
+  endif
+  if followships == null
+    assign followships = false
+  endif
+
+  function profile = 'lib/data/queries/profiles/find', user_id: user_id, followships: followships, membership: membership
+
+  if user_id == blank or profile.slug == blank
+    include 'theme/json/shared/not_authenticated'
+    break
+  endif
+
+  return profile
+%}

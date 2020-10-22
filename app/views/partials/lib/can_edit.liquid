@@ -3,7 +3,7 @@
     include 'redirect_to', url: '/', error: 'app.errors.denied'
   endunless
 
-  if item.orders.size > 0
+  if item.line_items.size > 0
     function url = 'link_to', path: '/items/', item: item
     include 'redirect_to', url: url, error: 'app.errors.cannot_edit_coz_has_active_orders'
   endif

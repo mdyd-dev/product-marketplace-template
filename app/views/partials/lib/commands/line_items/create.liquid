@@ -1,0 +1,13 @@
+{% liquid
+  function order = 'lib/data/queries/orders/find', seller: item.owner.id, buyer: current_profile.id, status: 'placed'
+  unless order
+    function order = 'lib/commands/orders/create', current_profile: current_profile, item: item
+  endunless
+  function object = 'lib/commands/line_items/create/build', item: item, current_user_id: current_profile.id, order: order, params: params
+  function object = 'lib/commands/line_items/create/check', object: object
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'line_items/create' object: object
+  endif
+
+  return object
+%}

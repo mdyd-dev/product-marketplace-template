@@ -1,4 +1,4 @@
-query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id: String, $name: String) {
+query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String, $name: String, $status: [String!]) {
   orders: models(
     per_page: $limit
     filter: {
@@ -7,8 +7,8 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id
       properties: [
         { name: "buyer" value: $buyer }
         { name: "seller" value: $seller }
-        { name: "item_id" value: $item_id }
         { name: "name" value: $name }
+        { name: "c__status", value_in: $status },
       ]
     }
     sort: [
@@ -20,7 +20,10 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id
       id
       created_at
 
-      total: property(name: "total")
+      total_price_cents: property_int(name: "total_price_cents")
+      total_shipping_cost_cents: property_int(name: "total_shipping_cost_cents")
+      products_price_cents: property_int(name: "products_price_cents")
+      c__status: property(name: "c__status")
 
       buyer: related_model(join_on_property: "buyer", foreign_property: "id" model_schema_name: "profile") {
         ...profile
@@ -30,30 +33,32 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String $item_id
         ...profile
       }
 
-      item: related_model(join_on_property: "item_id", foreign_property: "id", model_schema_name: "item") {
+
+      line_items: related_models(join_on_property: "id", foreign_property: "order_id", model_schema_name: "line_item") {
         id
         created_at
+        item_id: property(name: "item_id")
         name: property(name: "name")
-        price: property(name: "price")
-
-        status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status" sort: { created_at: { order: ASC } }) {
-          id
-          created_at
-          name: property(name: "name")
-          fullname: property(name: "fullname")
-        }
-      }
-
-      line_items: related_models(join_on_property: "item_id", foreign_property: "id", model_schema_name: "item") {
-        item_id: id
-        created_at
-        name: property(name: "name")
-        price: property_int(name: "price")
+        quantity: property_int(name: "quantity")
+        price_cents: property_int(name: "price_cents")
+        total_price_cents: property_int(name: "total_price_cents")
 
         status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status" sort: { created_at: { order: ASC } }) {
           id
           created_at
           name: property(name: "fullname")
+        }
+        item: related_model(join_on_property: "item_id", foreign_property: "id", model_schema_name: "item") {
+          id
+          cover_photo_url: property(name: "cover_photo_url")
+          photos: related_models(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
+            id
+            photo: property_upload(name: "photo") {
+              file_name
+              url
+              versions
+            }
+          }
         }
       }
 

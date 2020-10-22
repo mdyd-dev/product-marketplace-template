@@ -149,6 +149,7 @@ test('Buying an item and following the seller', async (t) => {
     .click(topMenu.buttons.menuDropdown)
     .click(topMenu.buttons.dashboard)
     .click(dashboard.nav.purchases) // buyer's order check
+    .click(orders.tableRows.firstLink)
     .click(link.withText(item.commonName))
     .expect(itemShow.status.ordered.exists).ok()
     .click(topMenu.buttons.menuDropdown)
@@ -162,7 +163,7 @@ test('Buying an item and following the seller', async (t) => {
     .click(topMenu.buttons.menuDropdown)
    .click(topMenu.buttons.dashboard)
    .click(dashboard.nav.sold)  // seller's order check
-   .expect(link.withText(item.commonName).exists).ok("Item list not shown in seller orders")
+   .expect(orders.tableRows.firstRow.withText(John.name).exists).ok()
  })
 
 

@@ -5,11 +5,10 @@
     scope: 'app.statuses.orders',
     object_id: order.id,
     return_to: context.location.href,
-    label: 'app.pay' %}
+    label: 'app.orders.checkout.pay-manually' %}
+  <br/>
 
-  <a href="/orders/review?order_id={{order.id}}" class="button button-sm mt-2">
-    {{ 'app.pay_online' | t }}
-  </a>
+  {% include 'theme/simple/orders/review', order: order, checkout_session: checkout_session %}
 
   {% render 'theme/simple/statuses/quick_form',
     authenticity_token: context.authenticity_token,

@@ -1,0 +1,35 @@
+{% parse_json buyer %}
+  {
+    "id": "5"
+  }
+{% endparse_json %}
+{% parse_json seller %}
+  {
+    "id": "6"
+  }
+{% endparse_json %}
+{% parse_json item_data %}
+  {
+    "name":        "item-name",
+    "description": "item-description",
+    "price":       10,
+    "uuid":        "item.uuid"
+  }
+{% endparse_json %}
+{% liquid
+  function order = 'lib/data/queries/orders/find', seller: seller.id
+  function r = 'lib/commands/orders/delete', object: order
+
+  function item = 'lib/commands/items/create', object: item_data, owner: seller.id
+  hash_assign item['owner'] = seller
+  assign params = '{"quantity": "2"}' | parse_json
+  function line_item = 'lib/commands/line_items/create', item: item, params: params, current_profile: buyer
+
+  function result = 'lib/commands/orders/recalculate', order_id: line_item.order_id
+  function order = 'lib/data/queries/orders/find', id: line_item.order_id
+
+  include 'test/assertions/valid_object', contract: contract, object: result, field_name: 'order'
+  include 'test/assertions/equal', contract: contract, field_name: 'total_price_cents', given: order.total_price_cents, expected: 4500
+  include 'test/assertions/equal', contract: contract, field_name: 'products_price_cents', given: order.products_price_cents, expected: 2000
+  include 'test/assertions/equal', contract: contract, field_name: 'total_shipping_cost_cents', given: order.total_shipping_cost_cents, expected: 2500
+%}

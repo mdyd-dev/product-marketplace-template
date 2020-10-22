@@ -218,8 +218,12 @@ categories can be adjusted by:
 
 ## Generators
 
-To imporve workflow with creating new resource you can use generator that will create all files needed to create, update, delete.
-Generator follow development guidelines.
+To imporve workflow with creating new resource you can use generator that will create boilerplate files for your.
+Generators follow development guidelines.
+
+### CRUD
+
+CRUD generator will create all files needed to create, update, delete.
 
 ```
   ./scaffold/bin/generate resource --help
@@ -267,7 +271,36 @@ After deploy you can access page when you can list, create, update and delete ob
 Now you have good place to start in customizing it to your needs.
 
 
-for automation / CI/CD purposes:
+
+### REST API
+
+REST API generator will create json endpoints
+
+```
+  ./scaffold/bin/generate rest-api --help
+
+    Usage: generate <model_name>
+    
+    Example:
+
+    generate rest-api car
+
+```
+
+REST api generator is expecting model name.
+
+```
+./scaffold/bin/generate rest-api car
+   create app/views/pages/api/cars/create.json.liquid
+   create app/views/pages/api/cars/delete.json.liquid
+   create app/views/pages/api/cars/show.json.liquid
+   create app/views/pages/api/cars/update.json.liquid
+REST api endpoints generated
+
+```
+
+
+### For automation / CI/CD purposes:
 
     docker run -u $(id -u ${USER}):$(id -g ${USER}) -it --rm -v $(pwd):/app -w /app node:12-alpine npm install
     docker run -u $(id -u ${USER}):$(id -g ${USER}) -it --rm -v $(pwd):/app -w /app node:12-alpine ./scaffold/bin/generate resource RESOURCENAME PROPERTY:TYPE ...

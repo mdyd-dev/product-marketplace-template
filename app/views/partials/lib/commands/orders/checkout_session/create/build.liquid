@@ -1,10 +1,10 @@
 {% liquid
   assign stripe_fee_percent = 0.029
   assign stripe_fixed_fee = 30
-  assign mpo_fee_percent = context.constants.mpo_fee_percent | default: 10 | divided_by: 100.0
+  assign mpo_fee_percent = mpo_fee_percent | default: 10 | divided_by: 100.0
 
-  assign mpo_fee = order.total | times: mpo_fee_percent | ceil
-  assign stripe_fee = order.total | times: stripe_fee_percent | plus: stripe_fixed_fee | ceil
+  assign mpo_fee = order.total_price_cents | times: mpo_fee_percent | ceil
+  assign stripe_fee = order.total_price_cents | times: stripe_fee_percent | plus: stripe_fixed_fee | ceil
 
   assign application_fee = mpo_fee | plus: stripe_fee
 %}
@@ -17,7 +17,7 @@
       {
         "price_data": {
           "product_data": { "name": "{{line.name}}" },
-          "unit_amount": {{ line.price }},
+          "unit_amount": {{ line.total_price_cents }},
           "currency": "usd"
         },
         "quantity": 1
