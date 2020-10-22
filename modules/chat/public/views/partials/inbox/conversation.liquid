@@ -18,13 +18,19 @@
         <p class="text-grey-darkest text-sm"> {{ name }}</p>
       {% endif %}
 
-      <p class="text-xs text-grey-darkest">
-        {{ messages.models.results.first["timestamp"] | localize: 'long' }}
-      </p>
+      {% if conversation.id == current_conversation.id %}
+        <p class="text-xs text-grey-darkest">
+          {{ messages.models.results.first["timestamp"] | localize: 'long' }}
+        </p>
+      {% endif %}
     </div>
+
+
     <p class="text-grey-dark mt-1 text-sm">
 
-      {{ messages.models.results.first["message"]  }}
+      {% if conversation.id == current_conversation.id %}
+        {{ messages.models.results.first["message"]  }}
+      {% endif %}
     </p>
   </div>
       </div>
