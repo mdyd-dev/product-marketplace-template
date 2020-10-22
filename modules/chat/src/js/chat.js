@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", function(){
     if (senderMessages === null) {
       senderMessages = consumer.subscriptions.create({ channel: "conversate", room_id: roomName, sender_name: userName, from_id: userId, to_id: recipientId, timestamp: new Date() }, {
         received(data) {
-          console.log("Recived (sender):", data);
+          console.log("[Profile] Recived (sender):", data);
           const notifications = document.getElementById('messages');
-          if (notifications != null && data.create == true) {
+          if (notifications != null && data.create == true && data.from_id == userId) {
             notifications.insertAdjacentHTML('afterbegin', `<div class="mb-4 text-sm bg-white" >
         <!-- A message -->
         <div class="flex-1 overflow-hidden">
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function(){
           console.log("[Profile] Recived (recipient):", data);
           const notifications = document.getElementById('messages');
 
-          if (notifications != null && data.create == true) {
+          if (notifications != null && data.create == true && data.to_id == userId) {
             notifications.insertAdjacentHTML('afterbegin', `
       <div class="mb-4 text-sm bg-gray-100" >
         <!-- A message -->
