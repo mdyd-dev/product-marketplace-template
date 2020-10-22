@@ -1,6 +1,12 @@
 {% liquid
 	if context.current_user.id
 		function current_profile = 'lib/current_profile', user_id: context.current_user.id	
+
+		if current_profile.avatar.photo.versions.tiny
+			assign avatar = current_profile.avatar.photo.versions.tiny
+		else
+			assign avatar = 'images/user.svg' | asset_url
+		endif
 	endif
 %}
 
@@ -36,7 +42,7 @@
           class="flex items-center relative z-10 px-3 py-2 bg-white rounded-md focus:outline-none" data-menu-dropdown>
           <span class="hover:text-gray-900">{{ profile.first_name | default: profile.name }}</span>
 
-		  <img src="{{ current_profile.avatar.photo.versions.tiny }}" class="w-5 h-5 rounded-full ml-2">
+		  <img src="{{ avatar }}" class="w-5 h-5 rounded-full ml-2">
         </button>
 
         <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>
