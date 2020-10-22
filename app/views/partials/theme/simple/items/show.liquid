@@ -28,11 +28,11 @@
         </div>
       {% else %}
         {% function cover_url = 'theme/simple/items/cover_url', item: item %}
-        <img alt="{{ item.name }}" class="object-center w-full h-full rounded" src="{{ cover_url }}">
+        <img alt="{{ item.name }}" class="object-center w-full rounded" src="{{ cover_url }}">
       {% endif %}
     </div>
 
-    <div class="w-full mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0">
+    <div class="w-full mt-5 lg:mt-0 lg:w-1/2 lg:pl-10">
       <h2 class="text-sm tracking-widest ">
         {% render 'theme/simple/business_card', user: item.owner, current_profile: current_profile %}
         <a href="/u/{{ item.owner.id }}">{% print 'app.items.by_user' | t %}</a>
