@@ -24,7 +24,19 @@ slug: inbox
               {% liquid
                 for conversation in conversations.models.results
                 graphql messages = 'modules/chat/find_messages', conversation_id: conversation.id
-                render 'modules/chat/inbox/conversation', conversation: conversation, messages: messages, current_conversation: current_conversation, current_user: current_user
+                if conversation["from_user"]["id"] == current_user.id
+                  assign from_user_id = conversation["to_user"]["id"]
+                else
+                  assign from_user_id = conversation["from_user"]["id"]
+                endif
+
+                function from_user = 'lib/data/queries/profiles/find', id: from_user_id
+                assign img_url = from_user.avatar.photo.versions.small
+                unless img_url
+                  assign img_url = 'images/user.svg' | asset_url
+                endunless
+
+                render 'modules/chat/inbox/conversation', img_url: imp_url, conversation: conversation, messages: messages, current_conversation: current_conversation, current_user: current_user
                 endfor
               %}
             </div>

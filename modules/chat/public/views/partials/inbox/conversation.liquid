@@ -5,29 +5,11 @@
       <div class="px-3 flex items-center text-gray-400">
   {% endif %}
   <div>
-    {% liquid
-      if conversation["from_user"]["id"] == current_user.id
-        assign from_user_id = conversation["to_user"]["id"]
-      else
-        assign from_user_id = conversation["from_user"]["id"]
-      endif
-
-      function from_user = 'lib/data/queries/profiles/find', id: from_user_id
-      assign img_url = from_user.avatar.photo.versions.small
-      unless img_url
-        assign img_url = 'images/user.svg' | asset_url
-      endunless
-
-    %}
-
     <img src="{{ img_url }}" alt="" class="object-cover object-center w-16 h-16 mx-auto text-gray-400 rounded-full shadow-md md:mx-0">
   </div>
   <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
     <div class="flex items-bottom justify-between">
-      {% liquid
-
-        assign name = from_user.first_name | append: " " | append: from_user.last_name | append: " (" | append: from_user.name | append: ")"
-      %}
+      {% assign name = from_user.first_name | append: " " | append: from_user.last_name | append: " (" | append: from_user.name | append: ")" %}
       {% if conversation.id == current_conversation.id %}
         <a class="text-grey-darkest text-sm" href="/profile/{{ from_user.slug }}">
           {{ name }}
