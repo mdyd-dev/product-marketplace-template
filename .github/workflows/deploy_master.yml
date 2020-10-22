@@ -1,0 +1,81 @@
+name: Deploy master
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ github-actions-master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Build
+        run: |
+          npm ci
+          npm run build
+
+  deploy_qa:
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      MPKIT_URL: ${{ secrets.MPKIT_URL_QA }}
+      MPKIT_EMAIL: ${{ secrets.MPKIT_EMAIL }}
+      MPKIT_TOKEN: ${{ secrets.MPKIT_TOKEN }}
+      CI: true
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Deploy
+        run: |
+          npm -g install @platformos/pos-cli
+          pos-cli data clean --auto-confirm --include-schema
+          pos-cli deploy
+          pos-cli data import --path=./seed/data.zip --zip
+
+  test_qa:
+    needs: deploy_qa
+    runs-on: ubuntu-latest
+    container: platformos/testcafe:latest
+    env:
+      MPKIT_URL: ${{ secrets.MPKIT_URL_QA }}
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v1
+      - name: Run testcafe
+        run: |
+          testcafe "chromium:headless" test --skip-js-errors
+
+  deploy_live:
+    needs: test_qa
+    runs-on: ubuntu-latest
+    env:
+      MPKIT_URL: ${{ secrets.MPKIT_URL_LIVE }}
+      MPKIT_EMAIL: ${{ secrets.MPKIT_EMAIL }}
+      MPKIT_TOKEN: ${{ secrets.MPKIT_TOKEN }}
+      CI: true
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Deploy
+        run: |
+          npm -g install @platformos/pos-cli
+          pos-cli deploy
