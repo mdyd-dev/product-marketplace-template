@@ -36,7 +36,7 @@ slug: inbox
                   assign img_url = 'images/user.svg' | asset_url
                 endunless
 
-                render 'modules/chat/inbox/conversation', img_url: imp_url, conversation: conversation, messages: messages, current_conversation: current_conversation, current_user: current_user
+                render 'modules/chat/inbox/conversation', img_url: img_url, conversation: conversation, messages: messages, current_conversation: current_conversation, current_user: current_user, from_user: from_user
                 endfor
               %}
             </div>

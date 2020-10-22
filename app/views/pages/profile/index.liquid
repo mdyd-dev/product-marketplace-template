@@ -35,7 +35,10 @@ slug: profile
     function list = 'lib/data/queries/items/search', query: context.params, limit: 20, owner: profile_id
   endif
 
-  render 'theme/simple/profile/show', section: section, user: profile, list: list, current_profile: current_profile
+  graphql conversation = 'modules/chat/find_conversation', from_id: current_profile.id, to_id: profile.id
+  graphql messages = 'modules/chat/find_messages', conversation_id: conversation.models.results.first.id
+
+  render 'theme/simple/profile/show', section: section, user: profile, list: list, current_profile: current_profile, conversation: conversation, messages: messages
   render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
   render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token
 %}
