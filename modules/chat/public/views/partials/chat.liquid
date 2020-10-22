@@ -11,7 +11,11 @@
 
   <div id="messages">
     {% for m in messages.models.results %}
+      {% if m["from_user"]["id"] == user.id %}
+        <div class="mb-4 text-sm border-solid bg-white">
+      {% else %}
         <div class="mb-4 text-sm border-solid bg-gray-100">
+      {% endif %}
         <div class="flex-1 overflow-hidden">
           <div>
             <span class="font-bold">{{ m["from_user"]["name"] }}</span>

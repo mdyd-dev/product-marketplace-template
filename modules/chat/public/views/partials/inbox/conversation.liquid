@@ -37,12 +37,12 @@
       {% endif %}
 
       <p class="text-xs text-grey-darkest">
-        {{ messages.models.results.last["timestamp"] | localize: 'long' }}
+        {{ messages.models.results.first["timestamp"] | localize: 'long' }}
       </p>
     </div>
     <p class="text-grey-dark mt-1 text-sm">
 
-      {{ messages.models.results.last["message"]  }}
+      {{ messages.models.results.first["message"]  }}
     </p>
   </div>
       </div>
