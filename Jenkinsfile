@@ -97,6 +97,7 @@ pipeline {
       agent { docker { image "platformos/testcafe" } }
       steps {
         sh 'testcafe "chromium:headless" test --skip-js-errors'
+        sh 'OK'
       }
       post {
         success {
