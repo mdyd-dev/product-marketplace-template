@@ -11,6 +11,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -28,6 +30,8 @@ jobs:
     needs: build
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
     env:
       MPKIT_URL: ${{ secrets.MPKIT_URL_PR }}
       MPKIT_EMAIL: ${{ secrets.MPKIT_EMAIL }}
@@ -50,6 +54,8 @@ jobs:
     needs: deploy_pr
     runs-on: ubuntu-latest
     container: platformos/testcafe:latest
+    strategy:
+      max-parallel: 1
     env:
       MPKIT_URL: ${{ secrets.MPKIT_URL_PR }}
     steps:
