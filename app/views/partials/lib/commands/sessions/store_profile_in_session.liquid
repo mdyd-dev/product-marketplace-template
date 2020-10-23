@@ -4,7 +4,8 @@
     "slug":  {{ object.slug | json }},
     "name":  {{ object.name | json }},
     "first_name":  {{ object.first_name | json }},
-    "last_name":  {{ object.last_name | json }}
+	"last_name":  {{ object.last_name | json }},
+	"avatar":  {{ object.avatar.photo | json }}
   }
 {% endparse_json %}
 
