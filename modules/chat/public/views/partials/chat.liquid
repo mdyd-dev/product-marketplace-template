@@ -1,0 +1,32 @@
+<div class="w-full md:w-1/3 p-4 mb-4 md:mb-0 mb-5 bg-white overflow-auto h-screen" id="profile-messages">
+  <div class="flex relative mt-4">
+    <h2> {{ 'app.header.chat' | t }} </h2>
+  </div>
+
+  <div class="overflow-hidden" id="room" data-room-name="{{ user.id }}" data-sender-id="{{ current_profile.id }}" data-sender-name="{{ current_profile.name }}" data-recipient-id="{{ user.id }}">
+    <div class="pb-6 px-4">
+      <div class="flex rounded-lg border-2 border-grey overflow-hidden">
+        <input id="newMessage" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" />
+      </div>
+    </div>
+
+    <div id="messages">
+      {% for m in messages.models.results %}
+        {% if m["from_user"]["id"] == user.id %}
+          <div class="mb-4 text-sm border-solid bg-white">
+        {% else %}
+            <div class="mb-4 text-sm border-solid bg-gray-100">
+        {% endif %}
+        <div class="flex-1 overflow-hidden">
+          <div>
+            <span class="font-bold">{{ m["from_user"]["name"] }}</span>
+            <span class="text-grey text-xs"> {{ m["timestamp"] | localize: 'long' }}</span>
+          </div>
+          <p class="text-black leading-normal"> {{ m["message"] }} </p>
+        </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    </div>
+</div>

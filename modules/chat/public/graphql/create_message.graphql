@@ -1,0 +1,16 @@
+mutation create_message($conversation_id: String!, $timestamp: String!, $message: String!, $from_id: String!, $to_id: String!) {
+  model_create(
+    model: {
+    model_schema_name: "modules/chat/message"
+    properties: [
+      { name: "conversation_id", value: $conversation_id }
+      { name: "message", value: $message }
+      { name: "to_id", value: $to_id }
+      { name: "from_id", value: $from_id }
+      { name: "timestamp", value: $timestamp }
+    ]
+    }
+  ) {
+  id properties
+  }
+}

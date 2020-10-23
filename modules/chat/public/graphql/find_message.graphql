@@ -1,0 +1,31 @@
+query find_message($from_id: String!, $to_id: String!, $conversation_id: String!, $timestamp: String) {
+  models(per_page: 1,
+    filter: {
+      model_schema_name: { exact: "modules/chat/conversation" },
+      properties: [
+        { name: "from_id", value: $from_id }
+        { name: "to_id", value: $to_id }
+        { name: "conversation_id", value: $conversation_id }
+        { name: "timestamp", value: $timestamp }
+      ]
+    }
+  ) {
+    results {
+      from_id: property(name: "from_id")
+      from_user: related_model(model_schema_name: "profile", join_on_property: "from_id") {
+        id
+        slug: property(name: "slug")
+        name: property(name: "name")
+        user_id: property(name: "user_id")
+      }
+      to_id: property(name: "to_id")
+      to_user: related_model(model_schema_name: "profile", join_on_property: "to_id") {
+        id
+        slug: property(name: "slug")
+        name: property(name: "name")
+        user_id: property(name: "user_id")
+      }
+      id
+    }
+  }
+}

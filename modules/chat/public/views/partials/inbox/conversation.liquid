@@ -1,0 +1,37 @@
+<a href="/inbox?active_conversation={{ conversation.id }}">
+  {% if conversation.id == current_conversation.id %}
+    <div class="px-3 flex items-center" style="background-color: #DDECF2">
+  {% else %}
+      <div class="px-3 flex items-center text-gray-400">
+  {% endif %}
+  <div>
+    <img src="{{ img_url }}" alt="" class="object-cover object-center w-16 h-16 mx-auto text-gray-400 rounded-full shadow-md md:mx-0">
+  </div>
+  <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
+    <div class="flex items-bottom justify-between">
+      {% assign name = from_user.first_name | append: " " | append: from_user.last_name | append: " (" | append: from_user.name | append: ")" %}
+      {% if conversation.id == current_conversation.id %}
+        <a class="text-grey-darkest text-sm" href="/profile/{{ from_user.slug }}">
+          {{ name }}
+        </a>
+      {% else %}
+        <p class="text-grey-darkest text-sm"> {{ name }}</p>
+      {% endif %}
+
+      {% if conversation.id == current_conversation.id %}
+        <p class="text-xs text-grey-darkest">
+          {{ messages.models.results.first["timestamp"] | localize: 'long' }}
+        </p>
+      {% endif %}
+    </div>
+
+
+    <p class="text-grey-dark mt-1 text-sm">
+
+      {% if conversation.id == current_conversation.id %}
+        {{ messages.models.results.first["message"]  }}
+      {% endif %}
+    </p>
+  </div>
+      </div>
+</a>

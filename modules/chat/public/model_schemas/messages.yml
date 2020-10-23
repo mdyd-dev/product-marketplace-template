@@ -1,0 +1,9 @@
+---
+name: message
+properties:
+  - name: conversation_id
+  - name: message
+  - name: from_id
+  - name: to_id
+  - name: timestamp
+    type: datetime

@@ -1,0 +1,5 @@
+---
+name: conversation
+properties:
+  - name: from_id
+  - name: to_id

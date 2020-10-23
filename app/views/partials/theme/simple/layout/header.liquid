@@ -21,7 +21,10 @@
                     <a href="/admin" class="p-3 hover:text-gray-900">{{ 'app.admin' | t }}</a>
                 {% endif %}
                 <a href="/dashboard" class="p-3 hover:text-gray-900">{{ 'app.header.feed' | t }}</a>
-                <a href="/dashboard/inbox" class="p-3 hover:text-gray-900">{{ 'app.header.chat' | t }}</a>
+				<a href="/inbox" class="p-3 hover:text-gray-900" id='inbox-notifications' data-current-user-id="{{ profile.id }}" data-current-user-slug="{{ profile.slug }}">
+					<p>{{ 'app.header.chat' | t }}</p>
+					<span id="notificationsBell" class="relative inline-flex rounded-full h-3 w-3 bg-pink-500 hidden"></span>
+				</a>
 
                 <div x-data="{ dropdownOpen: false }" class="relative">
                     <button @click="dropdownOpen = !dropdownOpen" class="flex items-center relative z-10 px-3 py-2 bg-white rounded-md focus:outline-none" data-menu-dropdown>

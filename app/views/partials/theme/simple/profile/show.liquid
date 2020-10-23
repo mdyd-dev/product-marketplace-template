@@ -28,5 +28,12 @@
       endif
     %}
   </div>
+
+  {% liquid
+
+    if current_profile.id != user.id and chat_enabled != blank
+      render "modules/chat/chat", current_profile: current_profile, user: user, messages: messages, conversation: conversation
+    endif
+  %}
 </div>
 
