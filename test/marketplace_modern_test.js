@@ -97,7 +97,6 @@ test('Editing item and search', async (t) => {
     .click(dashboard.nav.publicProfile)
   const sellerProfilePage = ClientFunction(() => document.location.href)
   await t.expect(sellerProfilePage()).contains(myUrl+'profile/' + SellerRandomUser.name) // checks if href contains slugified username
-    .debug()
     .click(topMenu.buttons.items)
     .click(itemSearch.buttons.sort)
     .click(itemSearch.options.theMostRecent)
@@ -146,7 +145,6 @@ test('Buying an item and following the seller', async (t) => {
     .expect(itemShow.buttons.alreadyFollowedState.exists).ok()
     .click(itemShow.buttons.buy)
     .click(orders.buttons.checkout) // i need to make orders page
-    .debug() // something is wrong here?
     .click(orders.buttons.pay)
     .click(topMenu.buttons.menuDropdown)
     .click(topMenu.buttons.dashboard)
