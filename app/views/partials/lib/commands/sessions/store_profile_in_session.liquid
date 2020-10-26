@@ -1,3 +1,32 @@
+{% comment %}
+	Prepares the default avatar in case there is none provided by the user
+{% endcomment %}
+
+{% parse_json avatar_versions %}
+	{
+		"url": {{ "images/user.svg" | asset_url | json }},
+		"versions": {
+			"tiny": {{ "images/user.svg" | asset_url | json }},
+			"small": {{ "images/user.svg" | asset_url | json }},
+			"uncropped": {{ "images/user.svg" | asset_url | json }}
+		}
+	}
+{% endparse_json %}
+
+{% liquid
+	if object.avatar
+		assign avatar = object.avatar.photo
+	else
+		assign avatar = avatar_versions
+	endif
+%}
+
+
+
+{% comment %}
+	Prepares the basic profile information stored for logged in user
+{% endcomment %}
+
 {% parse_json basic_profile %}
   {
     "id":  {{ object.id | json }},
@@ -5,7 +34,7 @@
     "name":  {{ object.name | json }},
     "first_name":  {{ object.first_name | json }},
 	"last_name":  {{ object.last_name | json }},
-	"avatar":  {{ object.avatar.photo | json }}
+	"avatar":  {{ avatar | json }}
   }
 {% endparse_json %}
 
