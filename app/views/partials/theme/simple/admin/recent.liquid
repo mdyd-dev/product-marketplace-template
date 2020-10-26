@@ -1,14 +1,8 @@
 <section class="py-8">
-  <div class="flex flex-wrap">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
     {% for metric in metrics %}
-      <div class="w-full px-4 mb-4 lg:w-1/4 lg:mb-0
-        {% if forloop.first %}
-          pl-0
-        {% elsif forloop.last %}
-          pr-0
-        {% endif %}
-      ">
-        <div class="h-full bg-white border rounded shadow">
+	  <div class="w-full">
+        <div class="bg-white border rounded shadow">
           <div class="flex items-center justify-between px-4 py-3 border-b">
             <h3 class="text-lg font-heading">
               {{ 'admin.metric.'| append: metric.name | append: ".name" | t }}
