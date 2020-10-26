@@ -8,9 +8,14 @@ export default class GroupsPage {
       editGroup: Selector('td').find('a').withText('Edit')
     }
     this.inputs = {
-      name: Selector('#name'),
-      summary: Selector('#summary'),
-      description: Selector('#description')
+      name: Selector('input[name="group[name]"]'),
+      summary: Selector('textarea[name="group[summary]"]'),
+      description: Selector('textarea[name="group[description]"]')
     }
   }
 }
+
+
+
+
+

@@ -3,9 +3,8 @@ import { Selector } from 'testcafe';
 export default class NewSessionForm {
   constructor() {
     this.inputs = {
-      email: Selector('label #email'),
-      password: Selector('label #password'),
-      username: Selector('label #username')
+      email: Selector('input[name="user[email]"]'),
+      password: Selector('input[name="user[password]"]'),
     }
     this.labels = {
       email: Selector('label').withText('E-mail'),
@@ -16,9 +15,13 @@ export default class NewSessionForm {
       logIn: Selector('button').withText('Log In'),
       regSubmit: Selector('button').withText('Sign Up'),
       register: Selector('a').withText('Register'),
-      resetPassword: Selector('a').withText('Reset'),
-      resetPasswordSubmit: Selector('button').withText('Send email with')
+      resetPassword: Selector('a').withText('Reset')
     }
+
+
+
+
+
 
     /*
     this.emailInput = Selector('label #email')

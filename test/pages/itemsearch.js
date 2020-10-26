@@ -8,13 +8,13 @@ export default class ItemSearch {
       editedItem: Selector('div').find('a').withText(editedItem.name)
     }
     this.search = {
-      keyword: Selector('#keyword'),
+      keyword: Selector('input[name="keyword"]'),
     }
     this.quickSearch = {
       keyword: Selector('input[name="qkeyword"]')
     }
     this.buttons = {
-      sort: Selector('#sort_by'),
+      sort: Selector('select[name="sort_by"]'),
       search: Selector('button').withText('Search')
     }
     this.options = {
@@ -30,3 +30,5 @@ export default class ItemSearch {
     //this.sortButton = Selector('#sort')
   }
 }
+
+
