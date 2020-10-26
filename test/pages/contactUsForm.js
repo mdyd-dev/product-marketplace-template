@@ -3,12 +3,12 @@ import { Selector } from 'testcafe';
 export default class ContactUs {
   constructor() {
     this.inputs = {
-      email: Selector('#form-properties-attributes-email'),
-      message: Selector('#form-properties-attributes-message')
+      email: Selector('input[name="contact[email]"]'),
+      message: Selector('textarea[name="contact[message]"]')
     }
 
     this.buttons = {
-      menuDropdown: Selector('#form-properties-attributes-reason'),
+      menuDropdown: Selector('select[name="contact[reason]"]'),
       sendMessage: Selector('button').withText('Send message')
     }
 
