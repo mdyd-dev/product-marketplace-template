@@ -14,11 +14,7 @@
 {% endparse_json %}
 
 {% liquid
-	if object.avatar
-		assign avatar = object.avatar.photo
-	else
-		assign avatar = avatar_versions
-	endif
+	assign avatar = object.avatar.photo | default: avatar_versions
 %}
 
 
