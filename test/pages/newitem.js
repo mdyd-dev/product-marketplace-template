@@ -3,9 +3,9 @@ import { Selector } from 'testcafe';
 export default class NewItemForm {
   constructor() {
     this.inputs = {
-      name: Selector('#name'),
-      description: Selector('#description'),
-      price: Selector('#price')
+      name: Selector('input[name="item[name]"]'),
+      description: Selector('textarea[name="item[description]"]'),
+      price: Selector('input[name="item[price]"]')
     }
     this.buttons = {
       browseImages: Selector('button').withText('browse your computer'),
