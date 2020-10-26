@@ -50,8 +50,8 @@ test(`Reset Password test`, async (t) => {
   await t
     .click(topMenu.buttons.logIn)
     .click(loginForm.buttons.resetPassword)
-    await t.typeText(loginForm.inputs.email, Admin.email)
-    await t.click(loginForm.buttons.resetPasswordSubmit)
+    await t.typeText(passwordResetForm.inputs.email, Admin.email)
+    await t.click(passwordResetForm.buttons.resetPasswordSubmit)
     const passwordResetUrl = await Selector('main').innerText
     await t.navigateTo(passwordResetUrl)
     .typeText(passwordResetForm.inputs.newPassword, Admin.newPassword)

@@ -13,7 +13,7 @@ export default class ProfileView {
       userCard: Selector('div').find('a')
     }
     this.fields = {
-      username: Selector('main').find('#user-name')
+      username: Selector('div[data-tc="user-name"]')
     }
   }
 }
