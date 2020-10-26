@@ -7,7 +7,7 @@
     <p>{{ 'app.items.user-list' | t: name: user.name, id: user.id }}</p>
     {% endif %}
 
-    <div class="grid grid-cols-3 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-5">
       {% for item in items.results %}
       {% include 'theme/simple/items/card', item: item %}
       {% else %}
