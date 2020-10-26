@@ -1,11 +1,11 @@
 import { Selector, ClientFunction, t } from 'testcafe'
 import { buyerRole, sellerRole, adminRole } from './roles'
 import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
-         notAuthorizedUser, group, newPassword, Admin, link, commentText,
+         notAuthorizedUser, group, Admin, link, commentText,
          adminPage, registerForm, loginForm, itemShow, editedItemShow,
          passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
          profileEditForm, orders, publicProfile, groupsPage, footer,
-         contactUsForm, activityFeed } from './fixtures'
+         contactUsForm, activityFeed, categoryName } from './fixtures'
 import { register, createItem } from './helper'
 
 
@@ -166,7 +166,7 @@ test('Buying an item and following the seller', async (t) => {
  })
 
 
- test(`Admin Panel test`, async (t) => {
+ test(`Admin Panel`, async (t) => {
    await t
      .useRole(adminRole)
      await t.click(topMenu.buttons.adminPanel)
@@ -187,6 +187,17 @@ test('Buying an item and following the seller', async (t) => {
      await t.click(adminPage.menu.activities)
      await t.click(adminPage.menu.setup)
  })
+
+ test(`Categories`, async (t) => {
+  await t
+    .useRole(adminRole)
+    await t.click(topMenu.buttons.adminPanel)
+    await t.click(adminPage.menu.categories)
+    await t.click(adminPage.buttons.addCategory)
+    await t.typeText(adminPage.inputs.categoryNameField, categoryName)
+    await t.click(adminPage.buttons.save)
+    await t.expect(link.withText(categoryName).exists).ok()
+})
 
 
 test('Breakin-in test, edition by none user', async (t) => {

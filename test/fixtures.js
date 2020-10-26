@@ -31,6 +31,7 @@ export const translationMissing = (Selector('body').withText("translation missin
 export const link = Selector('a')
 export const commentText = "What's new bro?"
 export const randomFirstName = faker.name.firstName()
+export const categoryName = "Clothes"
 
 
 //pages

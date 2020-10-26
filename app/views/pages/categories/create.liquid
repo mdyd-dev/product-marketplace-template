@@ -8,7 +8,7 @@ method: post
 
   function object = 'lib/commands/categories/create', object: context.params.category
   if object.valid
-    include 'redirect_to', url: '/categories'
+    include 'redirect_to', url: 'admin/categories'
   else
     include 'theme/simple/categories/new', object: object
   endif

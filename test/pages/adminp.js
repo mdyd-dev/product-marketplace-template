@@ -18,16 +18,12 @@ export default class AdminPanel {
       items: Selector('tbody').find('tr'),
       categories: Selector('tbody').find('tr')
     }
-
-    /*
-    this.users = Selector('a').withText('Users')
-    this.home = Selector('a').withText('Home')
-    this.activities = Selector('a').withText('Activities')
-    this.categories = Selector('a').withText('Categories')
-    this.orders = Selector('a').withText('Orders')
-    this.items = Selector('li').find('a').withText('Items')
-    this.setup = Selector('a').withText('Setup')
-    */
-
+    this.buttons = {
+      addCategory: Selector('a').withText('Add category'),
+      save: Selector('button').withText('Save')
+    }
+    this.inputs = {
+      categoryNameField: Selector('#key')
+    }
   }
 }
