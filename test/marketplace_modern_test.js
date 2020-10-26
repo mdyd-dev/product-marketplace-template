@@ -1,7 +1,7 @@
 import { Selector, ClientFunction, t } from 'testcafe'
 import { buyerRole, sellerRole, adminRole } from './roles'
 import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
-         notAuthorizedUser, group, newPassword, Admin, link, commentText,
+         notAuthorizedUser, group, Admin, link, commentText,
          adminPage, registerForm, loginForm, itemShow, editedItemShow,
          passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
          profileEditForm, orders, publicProfile, groupsPage, footer,
