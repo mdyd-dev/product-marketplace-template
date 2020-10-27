@@ -5,26 +5,26 @@
 		<div class="w-2/6 lg:pl-2">{{ 'app.items.attr.category' | t }}</div>
 		<div class="w-1/6 lg:pl-2">{{ 'app.items.attr.created_at' | t }}</div>
 	</header>
-</section>
 
-{% for record in list.results %}
-<article class="lg:flex gap-2 mb-5 pt-5 border-t">
-	<div class="lg:w-2/6 lg:pl-2">
-		<a href="/items/{{ record.id }}" class="font-bold lg:font-normal">
-			{{ record.name }}
-		</a>
-	</div>
-	<div class="lg:w-1/6 lg:pl-2">
-		<span class="lg:hidden">{{ 'app.items.attr.owner' | t }}: </span>
-		<a href="/users/{{ record.owner.slug }}">{{ record.owner.name }}</a>
-	</div>
-	<div class="lg:w-2/6 lg:pl-2">
-		<span class="lg:hidden">{{ 'app.items.attr.category' | t }}: </span>
-		{{ record.category }}
-	</div>
-	<div class="lg:w-1/6 lg:pl-2">
-		<span class="lg:hidden">{{ 'app.items.attr.created_at' | t }}: </span>
-		{{ record.created_at }}
-	</div>
-</article>
-{% endfor %}
+	{% for record in list.results %}
+		<article class="lg:flex gap-2 mb-5 pt-5 border-t">
+			<div class="lg:w-2/6 lg:pl-2">
+				<a href="/items/{{ record.id }}" class="font-bold lg:font-normal">
+					{{ record.name }}
+				</a>
+			</div>
+			<div class="lg:w-1/6 lg:pl-2">
+				<span class="lg:hidden">{{ 'app.items.attr.owner' | t }}: </span>
+				<a href="/users/{{ record.owner.slug }}">{{ record.owner.name }}</a>
+			</div>
+			<div class="lg:w-2/6 lg:pl-2">
+				<span class="lg:hidden">{{ 'app.items.attr.category' | t }}: </span>
+				{{ record.category }}
+			</div>
+			<div class="lg:w-1/6 lg:pl-2">
+				<span class="lg:hidden">{{ 'app.items.attr.created_at' | t }}: </span>
+				{{ record.created_at }}
+			</div>
+		</article>
+	{% endfor %}
+</section>
