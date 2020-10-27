@@ -1,31 +1,30 @@
-<table class="table w-full text-sm table-auto">
-  <thead>
-    <tr>
-      <th class="text-lg font-normal text-left">{{ 'app.items.attr.name' | t }}</th>
-      <th class="text-lg font-normal text-left">{{ 'app.items.attr.owner' | t }}</th>
-      <th class="text-lg font-normal text-left">{{ 'app.items.attr.category' | t }}</th>
-      <th class="text-lg font-normal text-left">{{ 'app.items.attr.created_at' | t }}</th>
-    </tr>
-  </thead>
-  <tbody>
+<section>
+	<header class="hidden lg:flex gap-2 mb-5 font-bold">
+		<div class="w-2/6">{{ 'app.items.attr.name' | t }}</div>
+		<div class="w-1/6 lg:pl-2">{{ 'app.items.attr.owner' | t }}</div>
+		<div class="w-2/6 lg:pl-2">{{ 'app.items.attr.category' | t }}</div>
+		<div class="w-1/6 lg:pl-2">{{ 'app.items.attr.created_at' | t }}</div>
+	</header>
+</section>
 
-    {% for record in list.results %}
-      <tr>
-        <td class="text-left">
-          <a href="/items/{{ record.id }}">
-            {{ record.name }}
-          </a>
-        </td>
-        <td class="text-left">
-          <a href="/users/{{ record.owner.slug }}">{{ record.owner.name }}</a>
-        </td>
-        <td class="text-left">
-          {{ record.category }}
-        </td>
-        <td class="text-left">
-          {{ record.created_at }}
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+{% for record in list.results %}
+<article class="lg:flex gap-2 mb-5 pt-5 border-t">
+	<div class="lg:w-2/6 lg:pl-2">
+		<a href="/items/{{ record.id }}" class="font-bold lg:font-normal">
+			{{ record.name }}
+		</a>
+	</div>
+	<div class="lg:w-1/6 lg:pl-2">
+		<span class="lg:hidden">{{ 'app.items.attr.owner' | t }}: </span>
+		<a href="/users/{{ record.owner.slug }}">{{ record.owner.name }}</a>
+	</div>
+	<div class="lg:w-2/6 lg:pl-2">
+		<span class="lg:hidden">{{ 'app.items.attr.category' | t }}: </span>
+		{{ record.category }}
+	</div>
+	<div class="lg:w-1/6 lg:pl-2">
+		<span class="lg:hidden">{{ 'app.items.attr.created_at' | t }}: </span>
+		{{ record.created_at }}
+	</div>
+</article>
+{% endfor %}

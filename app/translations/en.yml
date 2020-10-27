@@ -265,7 +265,7 @@ en:
         id: ID
         name: Name
         category: Category
-        created_at: CreatedAt
+        created_at: 'Created At'
         owner: Owner
     categories:
       list: Categories
