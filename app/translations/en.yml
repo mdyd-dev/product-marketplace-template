@@ -19,6 +19,7 @@ en:
           user_id: 'id: '
           group: 'group: '
           group_id: 'id: '
+          apply: 'Apply'
       setup: Setup
       categories: Categories
       orders: Orders
