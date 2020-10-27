@@ -38,6 +38,8 @@
       graphql result = 'modules/chat/create_message', conversation_id: conv.model_create.id, message: context["params"]["message"], timestamp: context["params"]["timestamp"], from_id: fromId, to_id: toId
       log result, type: 'channel_actions/conversate create_message'
     endif
+  else
+    log "Skippind. Message will be persisted on sender side", 'channel_actions/conversate skip_message'
   endif
 
 %}
