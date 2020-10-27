@@ -6,6 +6,7 @@ en:
         slug: 'slug: '
         id: 'id: '
         uuid: 'uuid: '
+        missing_profile: 'missing profile'
       activities:
         name: Activities
         following: 'following:'
