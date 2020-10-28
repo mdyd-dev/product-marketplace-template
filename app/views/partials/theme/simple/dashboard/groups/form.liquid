@@ -48,7 +48,7 @@
 {% liquid
   assign photo = photos[0] | default: object.main_photo
   assign photos = '[]' | parse_json
-  assign photos = photos | add_to_array: photo
+  assign photos = photos | add_to_array: photo | compact
 %}
 {% include 'theme/simple/photos/uppy_form',
   object_uuid: group_uuid,
