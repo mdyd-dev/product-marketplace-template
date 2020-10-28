@@ -213,38 +213,38 @@ test('Breakin-in test, edition by none user', async (t) => {
     await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok('message ' + notAuthorizedUser + " doesn't exists")
 })
 
-test('Groups', async (t) => {
-  await t.useRole(buyerRole)
-    .click(topMenu.buttons.menuDropdown)
-    .click(topMenu.buttons.dashboard)
-    .click(dashboard.nav.myGroups)
-    await checkTranslation(translationMissing) // my groups translation missing check
+// test('Groups', async (t) => {
+//   await t.useRole(buyerRole)
+//     .click(topMenu.buttons.menuDropdown)
+//     .click(topMenu.buttons.dashboard)
+//     .click(dashboard.nav.myGroups)
+//     await checkTranslation(translationMissing) // my groups translation missing check
 
-    await t.click(groupsPage.buttons.addGroup)
-    await checkTranslation(translationMissing)
-    await t.typeText(groupsPage.inputs.name, group.name)
-    .typeText(groupsPage.inputs.summary, group.summary)
-    .typeText(groupsPage.inputs.description, group.description, { paste: true })
-    .click(groupsPage.buttons.submitForm)
-  //unique test
-    .click(topMenu.buttons.menuDropdown)
-    .click(topMenu.buttons.dashboard)
-    .click(dashboard.nav.myGroups)
-    .click(groupsPage.buttons.addGroup)
-    .typeText(groupsPage.inputs.name, group.name)
-    .typeText(groupsPage.inputs.summary, group.summary)
-    .typeText(groupsPage.inputs.description, group.description, { paste: true })
-    .click(groupsPage.buttons.submitForm)
-    .expect(Selector('div').textContent).contains('already taken')
-  //checks if group exists
-    .click(dashboard.nav.myGroups)
-    .expect(link.withText(group.name).exists).ok()
-  //edit group
-    .click(groupsPage.buttons.editGroup)
-    .typeText(groupsPage.inputs.name, group.commonName, { replace: true })
-    .click(groupsPage.buttons.submitForm)
-    .expect(link.withText(group.commonName).exists).ok()
-})
+//     await t.click(groupsPage.buttons.addGroup)
+//     await checkTranslation(translationMissing)
+//     await t.typeText(groupsPage.inputs.name, group.name)
+//     .typeText(groupsPage.inputs.summary, group.summary)
+//     .typeText(groupsPage.inputs.description, group.description, { paste: true })
+//     .click(groupsPage.buttons.submitForm)
+//   //unique test
+//     .click(topMenu.buttons.menuDropdown)
+//     .click(topMenu.buttons.dashboard)
+//     .click(dashboard.nav.myGroups)
+//     .click(groupsPage.buttons.addGroup)
+//     .typeText(groupsPage.inputs.name, group.name)
+//     .typeText(groupsPage.inputs.summary, group.summary)
+//     .typeText(groupsPage.inputs.description, group.description, { paste: true })
+//     .click(groupsPage.buttons.submitForm)
+//     .expect(Selector('div').textContent).contains('already taken')
+//   //checks if group exists
+//     .click(dashboard.nav.myGroups)
+//     .expect(link.withText(group.name).exists).ok()
+//   //edit group
+//     .click(groupsPage.buttons.editGroup)
+//     .typeText(groupsPage.inputs.name, group.commonName, { replace: true })
+//     .click(groupsPage.buttons.submitForm)
+//     .expect(link.withText(group.commonName).exists).ok()
+// })
 
  test('Activity', async (t) => {
    await t.useRole(buyerRole)
@@ -281,15 +281,15 @@ test('Groups', async (t) => {
 })
 
 
-test('Smart search', async (t) => {
-  await t.useRole(buyerRole)
-    .typeText(itemSearch.quickSearch.keyword, John.name)
-    .click(itemSearch.buttons.search)
-    // expects item, group and profile with 'common name'
-    .expect(link.withText(group.commonName).exists).ok()
-    .expect(link.withText(item.commonName).exists).ok()
-    .expect(link.withText(John.name).exists).ok()
-})
+// test('Smart search', async (t) => {
+//   await t.useRole(buyerRole)
+//     .typeText(itemSearch.quickSearch.keyword, John.name)
+//     .click(itemSearch.buttons.search)
+//     // expects item, group and profile with 'common name'
+//     .expect(link.withText(group.commonName).exists).ok()
+//     .expect(link.withText(item.commonName).exists).ok()
+//     .expect(link.withText(John.name).exists).ok()
+// })
 
 test('Products', async (t) => {
   await t.useRole(sellerRole)
