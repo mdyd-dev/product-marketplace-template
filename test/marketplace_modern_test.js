@@ -281,15 +281,15 @@ test('Groups', async (t) => {
 })
 
 
-// test('Smart search', async (t) => {
-//   await t.useRole(buyerRole)
-//     .typeText(itemSearch.quickSearch.keyword, John.name)
-//     .click(itemSearch.buttons.search)
-//     // expects item, group and profile with 'common name'
-//     .expect(link.withText(group.commonName).exists).ok()
-//     .expect(link.withText(item.commonName).exists).ok()
-//     .expect(link.withText(John.name).exists).ok()
-// })
+test('Smart search', async (t) => {
+  await t.useRole(buyerRole)
+    .typeText(itemSearch.quickSearch.keyword, John.name)
+    .click(itemSearch.buttons.search)
+    // expects item, group and profile with 'common name'
+    .expect(link.withText(group.commonName).exists).ok()
+    .expect(link.withText(item.commonName).exists).ok()
+    .expect(link.withText(John.name).exists).ok()
+})
 
 test('Products', async (t) => {
   await t.useRole(sellerRole)
