@@ -76,4 +76,4 @@ jobs:
       - uses: actions/checkout@v1
       - name: Run testcafe
         run: |
-          testcafe "chromium:headless" test --skip-js-errors
+          testcafe "chromium:headless" test
