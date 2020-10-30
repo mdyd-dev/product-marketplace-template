@@ -1,0 +1,16 @@
+{% liquid
+  assign line_items_cents = object.line_items | map: 'total_price_cents' | sum_array
+  assign shipping_cost_cents = 2500
+  assign total_cents = line_items_cents | plus: shipping_cost_cents
+%}
+{% parse_json object %}
+{
+  "id": {{ object.id }},
+  "total_shipping_cost_cents": {{ shipping_cost_cents }},
+  "products_price_cents": {{ line_items_cents }},
+  "total_price_cents": {{ total_cents }}
+}
+{% endparse_json %}
+{% liquid
+  return object
+%}

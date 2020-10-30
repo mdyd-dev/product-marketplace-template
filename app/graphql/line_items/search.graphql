@@ -1,0 +1,48 @@
+query search(
+  $id: ID
+  $limit: Int = 20
+  $item_id: String
+  $order_id: String
+  $name: String
+  $description: String
+  $price_cents: String
+  $quantity: String
+  $total_price_cents: String
+) {
+  line_items: models(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      model_schema_name: { value: "line_item" }
+      properties: [
+        { name: "item_id" value: $item_id }
+        { name: "order_id" value: $order_id }
+        { name: "name" value: $name }
+        { name: "description" value: $description }
+        { name: "price_cents" value: $price_cents }
+        { name: "quantity" value: $quantity }
+        { name: "total_price_cents" value: $total_price_cents }
+      ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+      created_at
+      type: model_schema_name
+      item_id: property(name: "item_id")
+      order_id: property(name: "order_id")
+      name: property(name: "name")
+      description: property(name: "description")
+      price_cents: property(name: "price_cents")
+      quantity: property(name: "quantity")
+      total_price_cents: property(name: "total_price_cents")
+      order: related_models(join_on_property: "order_id", foreign_property: "id", model_schema_name: "order") {
+        id
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{% liquid
+  function order = 'lib/data/queries/orders/find', id: order_id
+  function object = 'lib/commands/orders/recalculate/build', object: order
+  function object = 'lib/commands/execute', object: object, mutation_name: 'orders/update', selection: 'model_update'
+  return object
+%}

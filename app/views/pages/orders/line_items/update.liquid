@@ -1,0 +1,17 @@
+---
+slug: 'orders/line_items'
+method: put
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+
+  function line_item = 'lib/data/queries/line_items/find', id: context.params.id
+  function object = 'lib/commands/line_items/update', object: line_item, params: context.params.line_item
+  function order_url = 'link_to', order: line_item.order
+  if object.valid
+    function result = 'lib/commands/orders/recalculate', order_id: object.order_id
+    include 'redirect_to', url: order_url, notice: 'app.models.line_items.updated'
+  else
+    include 'redirect_to', url: order_url, error: 'app.models.line_items.update_failed'
+  endif
+%}

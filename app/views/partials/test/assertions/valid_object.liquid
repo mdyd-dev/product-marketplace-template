@@ -1,0 +1,5 @@
+{% liquid
+  if object.valid != true
+    include 'test/register_error', contract: contract, field_name: field_name, message: object.errors
+  endif
+%}

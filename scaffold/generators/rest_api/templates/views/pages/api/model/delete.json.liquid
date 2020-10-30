@@ -1,0 +1,11 @@
+---
+slug: <%= modelNamePlural %>
+method: delete
+---
+{% liquid
+  include 'lib/must_be_authenticated_api'
+  function object = 'lib/data/queries/<%= modelNamePlural %>/find', id: context.params.id
+  function object = 'lib/commands/<%= modelNamePlural %>/delete', object: object
+
+  render 'theme/json/shared/show', object: object
+%}

@@ -1,0 +1,120 @@
+<div class="py-10">
+  <h1 class="text-3xl font-medium">
+    {{ 'app.orders.show.order' | t }} {{order.id}}
+  </h1>
+</div>
+<div class="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y">
+  <div class="flex-1">
+    <table class="w-full text-sm lg:text-base" cellspacing="0">
+      <thead>
+        <tr class="h-12 uppercase">
+          <th class="hidden md:table-cell"></th>
+          <th class="text-left">{{ 'app.orders.show.item' | t }}</th>
+          <th class="lg:text-right text-left pl-5 lg:pl-0">
+            <span class="lg:hidden" title="Quantity">{{ 'app.orders.show.qtd' | t }}</span>
+            <span class="hidden lg:inline">{{ 'app.orders.show.quantity' | t }}</span>
+          </th>
+          <th class="text-right">{{ 'app.orders.show.total_price' | t }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for line_item in order.line_items %}
+          {% function item_url = 'link_to', item: line_item.item %}
+          <tr>
+            <td class="hidden pb-4 md:table-cell">
+              <a href="{{ item_url }}">
+                {% function cover_url = 'theme/simple/items/cover_url', item: line_item.item %}
+                <img src="{{ cover_url }}" class="w-20 rounded">
+              </a>
+            </td>
+            <td>
+              <a href="{{ item_url }}" class="mb-2 md:ml-4">
+                {{line_item.name}}
+              </a>
+            </td>
+            <td class="justify-center md:justify-end md:flex mt-6">
+              <div class="w-20 h-10">
+                <div class="relative flex flex-row w-full h-8">
+                  <form action="/orders/line_items" method="post">
+                    {% include 'authenticity_token' %}
+                    <input type="hidden" name="_method" value="put" />
+                    <input type="hidden" name="id" value="{{ line_item.id }}">
+                    <input type="number"
+                      name="line_item[quantity]" value="{{line_item.quantity}}"
+                      onchange="this.form.submit();"
+                      class="w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" />
+                  </form>
+                </div>
+              </div>
+            </td>
+            <td class="text-right">
+              <span class="text-sm lg:text-base font-medium">
+                {{ line_item.total_price_cents | pricify_cents }}
+              </span>
+              <form action="/orders/line_items" method="post">
+                {% include 'authenticity_token' %}
+                <input type="hidden" name="_method" value="delete" />
+                <input type="hidden" name="id" value="{{ line_item.id }}">
+
+                <button type="submit" class="text-gray-700 md:ml-4">
+                  <small>({{ 'app.orders.show.remove_item' | t }})</small>
+                </button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <hr class="pb-6 mt-6">
+    <div class="my-4 mt-6 -mx-2 lg:flex">
+      <div class="lg:px-2 lg:w-1/2 flex items-end">
+        <div class="p-4">
+          <a href="/search">
+            {{ 'app.orders.show.continue-shopping' | t }}
+          </a>
+        </div>
+      </div>
+      <div class="lg:px-2 lg:w-1/2">
+        <div class="p-4">
+          <div class="flex justify-between border-b">
+            <div class="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
+              {{ 'app.orders.show.subtotal' | t }}
+            </div>
+            <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
+              {{ order.products_price_cents | pricify_cents }}
+            </div>
+          </div>
+          <div class="flex justify-between pt-4 border-b">
+            <div class="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
+              {{ 'app.orders.show.delivery' | t }}
+            </div>
+            <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
+              {{ order.total_shipping_cost_cents | pricify_cents }}
+            </div>
+          </div>
+          <!--
+            <div class="flex justify-between pt-4 border-b">
+              <div class="flex lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-gray-800">
+                Coupon "90off"
+              </div>
+              <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-green-700">
+                -133,944.77€
+              </div>
+            </div>
+          -->
+          <div class="flex justify-between pt-4 border-b">
+            <div class="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-black text-center text-gray-800">
+              {{ 'app.orders.show.total' | t }}
+            </div>
+            <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-black text-center text-gray-900">
+              {{ order.total_price_cents | pricify_cents }}
+            </div>
+          </div>
+          <a href="/dashboard/buy/orders_checkout/{{order.id}}" class="button flex justify-center w-full px-10 py-3 mt-6 uppercase item-center">
+            <span class="ml-2 mt-5px item-center font-medium">{{ 'app.orders.show.checkout' | t }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
