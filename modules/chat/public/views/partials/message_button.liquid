@@ -1,0 +1,14 @@
+<script>
+	console.log({{ current_profile }});
+	console.log({{ user }});
+</script>
+
+{% liquid
+	if conversation.models.results[0].id
+		assign params = '?active_conversation=' | append: conversation.models.results[0].id
+	else
+		assign params = '?active_conversation=new&from_id=' | append: current_profile.id | append: '&to_id=' | append: user.id
+	endif
+%}
+
+<a href="/inbox/{{ params }}" class="button">{{ 'app.chat.send_message' | t }}</a>

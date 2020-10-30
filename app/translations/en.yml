@@ -314,6 +314,8 @@ en:
           account: Your payout account has been added.\
         failure:
           failed_adding_account: Failed adding payout account.
+    chat:
+      send_message: Send message
     item: Item
     your-items: Your items
     item_id: Item ID
