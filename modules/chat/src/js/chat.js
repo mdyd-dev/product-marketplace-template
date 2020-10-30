@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(){
         received(data) {
           console.log("[Profile] Recived (sender):", data);
           const notifications = document.getElementById('messages');
-          if (notifications != null && data.create == true && data.from_id == userId) {
+          if (notifications != null && data.create == true) {
             notifications.insertAdjacentHTML('afterbegin', `<div class="mb-4 text-sm bg-white" >
         <!-- A message -->
         <div class="flex-1 overflow-hidden">
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function(){
           console.log("[Profile] Recived (recipient):", data);
           const notifications = document.getElementById('messages');
 
-          if (notifications != null && data.create == true && data.to_id == userId) {
+          if (notifications != null && data.create == true) {
             notifications.insertAdjacentHTML('afterbegin', `
       <div class="mb-4 text-sm bg-gray-100" >
         <!-- A message -->
@@ -113,17 +113,21 @@ document.addEventListener("DOMContentLoaded", function(){
 
     if (senderChannel === null) {
       senderChannel = consumer.subscriptions.create({ channel: "conversate", room_id: roomName, sender_name: userName, from_id: userId, to_id: recipientId, timestamp: new Date() }, {
-        received(data) {
+        received: function(data) {
           if (data.from_id == userId) {
             appendToSenderMessages(data);
           }
+        },
+
+        connected: function(data) {
+          console.log("[Inbox] Connected to sender channel");
         }
       });
     }
 
     if (recipientChannel === null) {
       recipientChannel = consumer.subscriptions.create({ channel: "conversate", room_id: recipientId, sender_name: userName, from_id: userId, to_id: recipientId, timestamp: new Date() }, {
-        received(data) {
+        received: function(data) {
           console.log("[Inbox] Recived:", data);
           const notifications = document.getElementById('messages');
 
@@ -142,9 +146,12 @@ document.addEventListener("DOMContentLoaded", function(){
       </div>
              `);
           }
+        },
 
-
+        connected: function(data) {
+          console.log("[Inbox] Connected to recipient channel");
         }
+
       });
     }
 

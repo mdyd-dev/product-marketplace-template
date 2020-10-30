@@ -1,8 +1,11 @@
 import consumer from "./consumer";
 
-
 const inbox = document.getElementById('inbox-notifications');
-const current_user_id = inbox.getAttribute('data-current-user-id');
+var current_user_id;
+if (inbox != null) {
+  current_user_id = inbox.getAttribute('data-current-user-id');
+}
+
 const inboxMainMessagesId = "main-message-window";
 
 function notification(sender, message) {
@@ -38,22 +41,26 @@ function appendToRecipientMessages(data) {
 document.addEventListener("DOMContentLoaded", function(){
   console.log("Setup notifications for user #", current_user_id);
 
-  consumer.subscriptions.create({ channel: "conversate", room_id: current_user_id }, {
-    received(data) {
-      if (data.to_id === current_user_id || data.from_id == current_user_id) {
-        document.getElementById('notificationsBell').style.display = "block";
-        if (data.to_id == current_user_id) {
-          notification(data.sender_name, data.message);
-        }
-        if (window.location.pathname.startsWith("/inbox") && data.to_id == current_user_id) {
-          const room = document.getElementById('new-chat-message');
-          const sentTo = room.getAttribute('data-to-id');
-          if (sentTo == data.from_id) {
-            appendToRecipientMessages(data);
+  if (current_user_id != null) {
+
+    consumer.subscriptions.create({ channel: "conversate", room_id: current_user_id }, {
+      received(data) {
+        console.log("[Notofications] Recived notification");
+        if (data.to_id === current_user_id || data.from_id == current_user_id) {
+          document.getElementById('notificationsBell').style.display = "block";
+          if (data.to_id == current_user_id) {
+            notification(data.sender_name, data.message);
+          }
+          if (window.location.pathname.startsWith("/inbox") && data.to_id == current_user_id) {
+            const room = document.getElementById('new-chat-message');
+            const sentTo = room.getAttribute('data-to-id');
+            if (sentTo == data.from_id) {
+              appendToRecipientMessages(data);
+            }
           }
         }
       }
-    }
-  });
+    });
+  }
 });
 
