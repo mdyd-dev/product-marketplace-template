@@ -55,7 +55,7 @@ pipeline {
 
       agent { docker { image "platformos/testcafe" } }
       steps {
-        sh 'testcafe "chromium:headless" test'
+        sh 'testcafe "chromium:headless" test --skip-uncaught-errors'
       }
       post {
         failure {
@@ -96,7 +96,7 @@ pipeline {
 
       agent { docker { image "platformos/testcafe" } }
       steps {
-        sh 'testcafe "chromium:headless" test'
+        sh 'testcafe "chromium:headless" test --skip-uncaught-errors'
         sh 'echo OK'
       }
       post {
