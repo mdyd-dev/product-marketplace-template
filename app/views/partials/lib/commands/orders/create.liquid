@@ -4,9 +4,6 @@
 
   if object.valid
     function object = 'lib/commands/orders/create/execute', object: object
-    function status = 'lib/commands/statuses/create', profile_id: current_profile.id, object_id: object.id, name: 'placed', scope: 'app.statuses.orders'
-
-    include 'lib/commands/events/create', type: 'order_created', actor_id: object.buyer.id, target_id: context.params.item_id, object_id: object.id
   endif
 
   return object
