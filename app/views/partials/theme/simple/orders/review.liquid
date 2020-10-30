@@ -1,34 +1,36 @@
-<form action="/orders/pay" id="pay-form" method="post" class="w-1/2"
-  data-checkout-session-id="{{ checkout_session.id }}"
-  data-stripe-pk-key="{{ context.constants.stripe_pk_key }}"
->
-  {% include 'authenticity_token' %}
-  <input type="hidden" name="status" value="app.statuses.orders.paid"/>
-  <input type="hidden" name="order_id" value="{{ order.id }}"/>
-  <button class="button">
-    {{ 'app.orders.checkout.pay-online' | t }}
-  </button>
-</form>
-</div>
+{% if context.constants.stripe_pk_key %}
+  <form action="/orders/pay" id="pay-form" method="post" class="w-1/2"
+    data-checkout-session-id="{{ checkout_session.id }}"
+    data-stripe-pk-key="{{ context.constants.stripe_pk_key }}"
+  >
+    {% include 'authenticity_token' %}
+    <input type="hidden" name="status" value="app.statuses.orders.paid"/>
+    <input type="hidden" name="order_id" value="{{ order.id }}"/>
+    <button class="button">
+      {{ 'app.orders.checkout.pay-online' | t }}
+    </button>
+  </form>
+  </div>
 
-{% content_for custom_scripts %}
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-  const form = document.getElementById('pay-form');
-  const checkoutButton = form.querySelector('button');
-  const stripe = Stripe(form.dataset.stripePkKey);
+  {% content_for custom_scripts %}
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    const form = document.getElementById('pay-form');
+    const checkoutButton = form.querySelector('button');
+    const stripe = Stripe(form.dataset.stripePkKey);
 
-  checkoutButton.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    stripe.redirectToCheckout({
-      // Make the id field from the Checkout Session creation API response
-      // available to this file, so you can provide it as argument here
-      // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
-      sessionId: form.dataset.checkoutSessionId
-    })
-    // If `redirectToCheckout` fails due to a browser or network
-    // error, display the localized error message to your customer
-    // using `error.message`.
-  });
-</script>
-{% endcontent_for %}
+    checkoutButton.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      stripe.redirectToCheckout({
+        // Make the id field from the Checkout Session creation API response
+        // available to this file, so you can provide it as argument here
+        // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+        sessionId: form.dataset.checkoutSessionId
+      })
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `error.message`.
+    });
+  </script>
+  {% endcontent_for %}
+{% endif %}
