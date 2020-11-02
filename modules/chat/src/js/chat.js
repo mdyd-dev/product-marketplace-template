@@ -5,6 +5,7 @@ var roomName;
 var userId;
 var recipientId;
 var userName;
+const inbox = document.querySelector('#inbox');
 const newMessage = document.getElementById('newMessage');
 const newConversationMessage = document.getElementById('new-chat-message');
 
@@ -163,7 +164,16 @@ document.addEventListener("DOMContentLoaded", function(){
 
         newConversationMessage.value = '';
       }
-    })
+	});
+
+
+	// purpose:		measures the height of the screen and fits the inbox
+	// ------------------------------------------------------------------------
+	function resizeInbox(){
+		inbox.style.height = `calc(100vh - ${inbox.offsetTop}px - 20px)`;
+	};
+
+	resizeInbox();
   }
 
 
