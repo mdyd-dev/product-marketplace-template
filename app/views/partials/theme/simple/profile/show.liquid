@@ -1,8 +1,10 @@
 <div class="flex flex-col md:flex-row ">
-  <div class="mr-5 flex-shrink-0 mb-5">
+  <div class="mr-5 mb-5 text-center">
     {% liquid
       render 'theme/simple/profile/card', user: user, current_profile: current_profile
+	%}
 
+	{% liquid
       if user != blank and user.id == current_profile.id
         render 'theme/simple/profile/owner_actions', user: user
       elsif current_profile != blank
