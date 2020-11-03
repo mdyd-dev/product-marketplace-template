@@ -30,8 +30,8 @@ function appendToRecipientMessages(data) {
 	timestamp = timestamp.getHours() + ':' + timestamp.getMinutes();
 
     const message = `
-<div class="flex mb-2 justify-start">
-  <div class="rounded py-2 px-3 bg-gray-300">
+<div class="flex mb-2 break-words justify-start">
+  <div class="max-w-full rounded py-2 px-3 bg-gray-300">
     <p class="text-sm mt-1"> ${ data["message"] } </p>
     <p class="text-right text-xs text-gray-500 mt-1"> ${ timestamp } </p>
   </div>

@@ -24,7 +24,7 @@
 
         <div class="w-2/3 border-l flex flex-col">
           <div class="flex-1 overflow-auto" id="main-message-scroll">
-            <div class="p-3" id="main-message-window">
+            <div class="max-w-full p-3" id="main-message-window">
 			  {% liquid
 				assign messages_desc = messages.models.results | reverse
 
