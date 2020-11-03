@@ -38,14 +38,12 @@
               %}
             </div>
 		  </div>
-          <div class="bg-grey-lighter px-4 py-4 flex items-center">
-            <div class="flex-1 mx-4">
-              {% if current_conversation["from_user"]["id"] != current_user.id %}
-                <input placeholder="{{ 'app.chat.message_input_placeholder' | t }}" id="new-chat-message" data-from-name="{{ current_user.name }}" data-conversation-id="{{ current_conversation.id}}" data-from-id="{{ current_conversation.to_id }}" data-to-id="{{ current_conversation.from_id }}" class="w-full border rounded px-2 py-2" type="text"/>
-              {% else %}
-                <input placeholder="{{ 'app.chat.message_input_placeholder' | t }}" id="new-chat-message" data-from-name="{{ current_user.name }}" data-conversation-id="{{ current_conversation.id}}" data-from-id="{{ current_conversation.from_id }}" data-to-id="{{ current_conversation.to_id }}" class="w-full border rounded px-2 py-2" type="text"/>
-              {% endif %}
-            </div>
+          <div class="bg-grey-lighter px-3 py-3">
+			{% if current_conversation["from_user"]["id"] != current_user.id %}
+			<input placeholder="{{ 'app.chat.message_input_placeholder' | t }}" id="new-chat-message" data-from-name="{{ current_user.name }}" data-conversation-id="{{ current_conversation.id}}" data-from-id="{{ current_conversation.to_id }}" data-to-id="{{ current_conversation.from_id }}" class="w-full border rounded px-2 py-2" type="text"/>
+			{% else %}
+			<input placeholder="{{ 'app.chat.message_input_placeholder' | t }}" id="new-chat-message" data-from-name="{{ current_user.name }}" data-conversation-id="{{ current_conversation.id}}" data-from-id="{{ current_conversation.from_id }}" data-to-id="{{ current_conversation.to_id }}" class="w-full border rounded px-2 py-2" type="text"/>
+			{% endif %}
           </div>
         </div>
       </div>
