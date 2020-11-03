@@ -7,6 +7,7 @@ if (inbox != null) {
 }
 
 const inboxMainMessagesId = "main-message-window";
+const messagesBox = document.querySelector('#main-message-scroll');
 
 function notification(sender, message) {
   if (!("Notification" in window)) {
@@ -33,9 +34,9 @@ function appendToRecipientMessages(data) {
   </div>
 </div>
 `;
-    messagesWindow.insertAdjacentHTML('afterbegin', message);
+    messagesWindow.insertAdjacentHTML('beforeend', message);
+	scrollBottom();
   }
-
 }
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -64,3 +65,8 @@ document.addEventListener("DOMContentLoaded", function(){
   }
 });
 
+// purpose:		scrolls the chat window to the bottom
+// ------------------------------------------------------------------------
+function scrollBottom(){
+	messagesBox.scrollTo(0, messagesBox.scrollHeight);
+};

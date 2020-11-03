@@ -8,6 +8,8 @@ var userName;
 const inbox = document.querySelector('#inbox');
 const newMessage = document.getElementById('newMessage');
 const newConversationMessage = document.getElementById('new-chat-message');
+const inboxMainMessagesId = "main-message-window";
+const messagesBox = document.querySelector('#main-message-scroll');
 
 // channels on profile page
 var senderMessages = null;
@@ -17,7 +19,7 @@ var recipientMessages = null;
 var senderChannel = null;
 var recipientChannel = null;
 
-const inboxMainMessagesId = "main-message-window";
+
 
 function appendToSenderMessages(data) {
   const messagesWindow = document.getElementById(inboxMainMessagesId);
@@ -30,7 +32,9 @@ function appendToSenderMessages(data) {
   </div>
 </div>
 `;
-    messagesWindow.insertAdjacentHTML('afterbegin', message);
+
+	messagesWindow.insertAdjacentHTML('beforeend', message);
+	scrollBottom();
   }
 }
 
@@ -146,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function(){
         </div>
       </div>
              `);
-          }
+		  }
         },
 
         connected: function(data) {
@@ -156,13 +160,13 @@ document.addEventListener("DOMContentLoaded", function(){
       });
     }
 
-    newConversationMessage.addEventListener('keydown', function(event) {
-      if (event.keyCode === 13 && userName !== '') {
+    newConversationMessage.addEventListener('keypress', function(event) {
+      if (event.code === 'Enter' && userName !== '') {
         const messageData = { message: newConversationMessage.value, from_id: userId, sender_name: userName, to_id: recipientId, timestamp: new Date() };
         senderChannel.send(Object.assign(messageData, { create: true  }));
         recipientChannel.send(Object.assign(messageData, { create: false }));
 
-        newConversationMessage.value = '';
+		newConversationMessage.value = '';
       }
 	});
 
@@ -175,6 +179,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
 	resizeInbox();
   }
-
-
 });
+
+// purpose:		scrolls the chat window to the bottom
+// ------------------------------------------------------------------------
+function scrollBottom(){
+	messagesBox.scrollTo(0, messagesBox.scrollHeight);
+};
+
+scrollBottom();
