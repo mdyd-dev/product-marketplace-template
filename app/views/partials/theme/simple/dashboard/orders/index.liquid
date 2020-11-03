@@ -3,38 +3,51 @@
     <thead>
       <tr>
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.created_at" | t }}</th>
-        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.item" | t }}</th>
-        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.seller" | t }}</th>
-        <th class="px-4 py-2 text-lg font-medium text-left"></th>
-        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.buyer" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.models.orders.form.id" | t }}</th>
+        {% if role == 'buyer' %}
+          <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.seller" | t }}</th>
+        {% endif %}
+        {% if role == 'seller' %}
+          <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.buyer" | t }}</th>
+        {% endif %}
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.status" | t }}</th>
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.total" | t }}</th>
       </tr>
     </thead>
     <tbody>
       {% for order in orders.results %}
+        {% function order_url = 'link_to', order: order %}
         <tr>
-          <td class="px-4 py-2 text-left border-b">{{ order.created_at | l }}</td>
           <td class="px-4 py-2 text-left border-b">
-            {% function item_url = 'link_to', path: '/items/', item: order.item %}
-            <a href="{{ item_url }}">
-              {{ order.item.name }}
+            <a href="{{ order_url }}">
+              {{ order.created_at | l }}
             </a>
-            <small> {{ order.item.status.name }}</small>
           </td>
-          <td class="px-4 py-2 text-left border-b">{{ order.seller.name }}</td>
-          <td class="py-1 text-center border-b">=></td>
-          <td class="px-4 py-2 text-left border-b">{{ order.buyer.name }}</td>
+          <td class="px-4 py-2 text-left border-b">
+            <a href="{{ order_url }}">
+              {{ order.id }}
+            </a>
+          </td>
+          {% if role == 'buyer' %}
+            <td class="px-4 py-2 text-left border-b">{{ order.seller.name }}</td>
+          {% endif %}
+          {% if role == 'seller' %}
+            <td class="px-4 py-2 text-left border-b">{{ order.buyer.name }}</td>
+          {% endif %}
           <td class="px-4 py-2 text-left border-b">
             {% if order.status.timestamp %}
-              <small> {{ order.status.fullname | t }}</small>
-              <br/><small>{{ order.status.timestamp | to_time | l }}</small>
+              <b>{{ order.status.fullname | t }}</b>
             {% endif %}
           </td>
-          <td class="px-4 py-2 text-left border-b">{{ order.total | pricify_cents }}</td>
+          <td class="px-4 py-2 text-left border-b">{{ order.total_price_cents | default: 0 | pricify_cents }}</td>
           <td class="px-4 py-2 text-left border-b">
-            {% assign actions = 'theme/simple/dashboard/orders/actions/' | append: role  %}
-            {% include actions, order: order %}
+            <a href="/dashboard/buy/orders_checkout/{{order.id}}" class="button button-sm mt-2">Checkout</a>
+            {% liquid
+              if role == 'seller'
+                assign actions = 'theme/simple/dashboard/orders/actions/' | append: role
+                include actions, order: order
+              endif
+            %}
           </td>
         </tr>
       {% endfor %}

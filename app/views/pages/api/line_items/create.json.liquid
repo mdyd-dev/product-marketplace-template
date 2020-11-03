@@ -1,0 +1,12 @@
+---
+slug: line_items
+method: post
+response_headers: "{% render 'theme/json/headers' %}"
+---
+{% liquid
+  function current_profile = 'lib/current_profile_api', user_id: context.current_user.id, required: true
+
+  function object = 'lib/commands/line_items/create', object: context.params.line_item
+
+  render 'theme/json/shared/show', object: object
+%}

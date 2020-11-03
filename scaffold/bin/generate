@@ -5,6 +5,7 @@ const program = require('commander');
 program
   .name('generate')
   .command('resource', 'generate model and endpoints for create, read, update and delete')
+  .command('rest-api', 'generate rest api endpoints')
   .parse(process.argv);
 
 const commandList = Object.keys(program._execs);

@@ -1,0 +1,9 @@
+{% liquid
+  if constants.stripe_sk_key
+    graphql seller_account = 'modules/stripe/accounts', external_id: order.seller.id | dig: 'accounts', 'results', 0
+    function object = 'lib/commands/orders/checkout_session/create/build', order: order, seller_account: seller_account, mpo_fee_percent: constants.mpo_fee_percent
+    function checkout_session = 'modules/stripe/lib/stripe_checkout/create/call', object: object
+  endif
+
+  return checkout_session
+%}

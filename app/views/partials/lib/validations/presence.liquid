@@ -1,0 +1,11 @@
+{% comment %}
+  params: @object
+          @field_name
+          @c
+{% endcomment %}
+{% liquid
+  if object[field_name] == blank
+    include 'lib/register_error', contract: c, field_name: field_name, key: 'app.errors.blank'
+  endif
+  return c
+%}

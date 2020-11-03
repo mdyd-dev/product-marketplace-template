@@ -1,0 +1,19 @@
+---
+method: post
+slug: orders/line_items
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+
+  function item = 'lib/data/queries/items/find', id: context.params.line_item.item_id
+  function order = 'lib/commands/line_items/find_or_create_order', item: item, current_profile: current_profile
+  function object = 'lib/commands/line_items/create', item: item, params: context.params.line_item, current_profile: current_profile, order: order
+  if object.valid
+    function result = 'lib/commands/orders/recalculate', order_id: object.order_id
+    function order_url = 'link_to', order: object.order
+    include 'redirect_to', url: order_url, notice: 'app.orders.created'
+  else
+    function item_url = 'link_to', item: item
+    include 'redirect_to', url: item_url, error: 'app.orders.line-items.failed-to-create'
+  endif
+%}

@@ -1,0 +1,28 @@
+{% parse_json buyer %}
+  {
+    "id": "5"
+  }
+{% endparse_json %}
+{% parse_json seller %}
+  {
+    "id": "6"
+  }
+{% endparse_json %}
+{% parse_json item_data %}
+  {
+    "name":        "item-name",
+    "description": "item-description",
+    "price":       10,
+    "uuid":        "item.uuid"
+  }
+{% endparse_json %}
+{% liquid
+  function item = 'lib/commands/items/create', object: item_data, owner: seller.id
+  hash_assign item['owner'] = seller
+  function line_item = 'lib/commands/line_items/create', item: item, current_profile: buyer
+  include 'test/assertions/valid_object', contract: contract, object: line_item, field_name: 'line_item'
+
+  function line_item = 'lib/commands/line_items/delete', object: line_item
+
+  include 'test/assertions/valid_object', contract: contract, object: line_item, field_name: 'line_item'
+%}

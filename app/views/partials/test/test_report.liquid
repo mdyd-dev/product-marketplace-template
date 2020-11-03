@@ -1,12 +1,16 @@
 <div class="flex">
   <div class="m-2 w-2/6 {%if contract.success%}text-green-500{%else%}text-red-800{%endif%}">
-    {{ name | replace: 'test/', '' }}
+    {% assign test_name = name | replace: 'test/', '' %}
+    {{ test_name }}
+    <a href="/tests/run?name={{test_name}}" class="{%if contract.success%}text-green-500{%else%}text-red-800{%endif%} !important">
+      (run test)
+    </a>
   </div>
   <div class="w-4/6">
     {% for e in contract.errors %}
       <div class="flex">
         <div class="w-1/6 m-2"> {{ e[0] }} </div>
-        <div class="w-5/6 m-2"> {{ e[1] | join: ", "  }} </div>
+        <div class="w-5/6 m-2"> {{ e[1] | join: ", <br/>"  }} </div>
       </div>
     {% endfor %}
   </div>

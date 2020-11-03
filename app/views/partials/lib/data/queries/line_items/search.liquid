@@ -1,0 +1,6 @@
+{% liquid
+  graphql r = 'line_items/search', limit: limit, page: 1
+  include 'lib/handle_graphql_response', r: r, name: 'queries/line_items/search'
+
+  return r.line_items
+%}

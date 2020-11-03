@@ -1,0 +1,12 @@
+---
+slug: line_items
+method: put
+---
+{% liquid
+  function current_profile = 'lib/current_profile_api', user_id: context.current_user.id, required: true
+
+  function object = 'lib/data/queries/line_items/find', id: context.params.id
+  function object = 'lib/commands/line_items/update', object: object, params: context.params.line_item
+
+  render 'theme/json/shared/show', object: object
+%}
