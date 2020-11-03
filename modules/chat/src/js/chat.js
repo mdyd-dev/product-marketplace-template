@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
     newConversationMessage.addEventListener('keypress', function(event) {
-      if (event.code === 'Enter' && userName !== '') {
+      if (event.key === 'Enter' && newConversationMessage.value.trim() && userName !== '') {
         const messageData = { message: newConversationMessage.value, from_id: userId, sender_name: userName, to_id: recipientId, timestamp: new Date() };
         senderChannel.send(Object.assign(messageData, { create: true  }));
         recipientChannel.send(Object.assign(messageData, { create: false }));
