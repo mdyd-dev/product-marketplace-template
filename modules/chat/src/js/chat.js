@@ -28,11 +28,14 @@ document.addEventListener("DOMContentLoaded", function(){
 	function appendToSenderMessages(data) {
 		const messagesWindow = document.getElementById(inboxMainMessagesId);
 		if (messagesWindow != null) {
+			let timestamp = new Date(data["timestamp"]);
+			timestamp = timestamp.getHours() + ':' + timestamp.getMinutes();
+
 		  const message = `
 	  <div class="flex mb-2 justify-end">
 		<div class="rounded py-2 px-3 bg-indigo-200">
 		  <p class="text-sm mt-1"> ${ data["message"] } </p>
-		  <p class="text-right text-xs text-gray-500 mt-1"> ${ data["timestamp"] } </p>
+		  <p class="text-right text-xs text-gray-500 mt-1"> ${ timestamp } </p>
 		</div>
 	  </div>
 	  `;
