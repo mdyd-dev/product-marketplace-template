@@ -204,5 +204,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		messagesBox.scrollTo(0, messagesBox.scrollHeight);
 	};
 
-	scrollBottom();
+	if(inbox){
+		scrollBottom();
+	}
 });
