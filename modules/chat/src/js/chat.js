@@ -19,6 +19,17 @@ var senderChannel = null;
 var recipientChannel = null;
 
 
+// purpose:		escapes the html to a browser-safe string
+// arguments:	a html string to be escaped (string/html)
+// returns:		a browser-safe string
+// ------------------------------------------------------------------------
+function encodeHtml(string)
+{
+	var element = document.createElement('div');
+	element.innerText = element.textContent = string;
+	string = element.innerHTML;
+	return string;
+}
 
 document.addEventListener("DOMContentLoaded", function(){
 	const inbox = document.querySelector('#inbox');
@@ -34,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		  const message = `
 	  <div class="flex mb-2 break-words justify-end">
 		<div class="max-w-full rounded py-2 px-3 bg-indigo-200">
-		  <p class="text-sm mt-1"> ${ data["message"] } </p>
+		  <p class="text-sm mt-1"> ${ encodeHtml(data["message"]) } </p>
 		  <p class="text-right text-xs text-gray-500 mt-1"> ${ timestamp } </p>
 		</div>
 	  </div>
@@ -104,6 +115,9 @@ document.addEventListener("DOMContentLoaded", function(){
 
     newMessage.addEventListener('keydown', function(event) {
       if (event.keyCode === 13 && userName !== '') {
+
+
+
         const messageData = { message: newMessage.value, from_id: userId, sender_name: userName, to_id: recipientId, timestamp: new Date(), create: true };
         senderMessages.send(Object.assign(messageData, { create: true  }));
         recipientMessages.send(Object.assign(messageData, { create: false }));

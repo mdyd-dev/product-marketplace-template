@@ -9,6 +9,18 @@ if (inbox != null) {
 const inboxMainMessagesId = "main-message-window";
 const messagesBox = document.querySelector('#main-message-scroll');
 
+// purpose:		escapes the html to a browser-safe string
+// arguments:	a html string to be escaped (string/html)
+// returns:		a browser-safe string
+// ------------------------------------------------------------------------
+function encodeHtml(string)
+{
+	var element = document.createElement('div');
+	element.innerText = element.textContent = string;
+	string = element.innerHTML;
+	return string;
+}
+
 function notification(sender, message) {
   if (!("Notification" in window)) {
     console.log("This browser does not support desktop notification");
@@ -32,7 +44,7 @@ function appendToRecipientMessages(data) {
     const message = `
 <div class="flex mb-2 break-words justify-start">
   <div class="max-w-full rounded py-2 px-3 bg-gray-300">
-    <p class="text-sm mt-1"> ${ data["message"] } </p>
+    <p class="text-sm mt-1"> ${ encodeHtml(data["message"]) } </p>
     <p class="text-right text-xs text-gray-500 mt-1"> ${ timestamp } </p>
   </div>
 </div>
@@ -51,8 +63,8 @@ document.addEventListener("DOMContentLoaded", function(){
       received(data) {
         console.log("[Notofications] Recived notification");
         if (data.to_id === current_user_id || data.from_id == current_user_id) {
-          document.getElementById('notificationsBell').style.display = "block";
           if (data.to_id == current_user_id) {
+			document.getElementById('notificationsBell').style.display = "block";
             notification(data.sender_name, data.message);
           }
           if (window.location.pathname.startsWith("/inbox") && data.to_id == current_user_id) {
