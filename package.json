@@ -3,6 +3,7 @@
     "dev-sync": "pos-cli sync dev --livereload",
     "dev-gui": "pos-cli gui serve dev",
     "dev-watch": "npx webpack-cli -w",
+    "dev-logs": "pos-cli logs dev",
     "start": "npx concurrently npm:dev-*",
     "build": "cross-env NODE_ENV=production npx webpack-cli",
     "build:dev": "cross-env NODE_ENV=development npx webpack-cli",
