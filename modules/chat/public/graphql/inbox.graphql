@@ -28,7 +28,7 @@ query inbox($user_id: String!) {
         user_id: property(name: "user_id")
       }
       id
-      last_message: related_model(model_schema_name: "modules/chat/message" join_on_property: "id" foreign_property: "conversation_id" sort: {created_at: {order: DESC}}){
+      last_message: related_model(model_schema_name: "modules/chat/message" join_on_property: "id" foreign_property: "conversation_id" sort: {created_at: {order: ASC}}){
         timestamp: property(name: "timestamp")
       }
     }
