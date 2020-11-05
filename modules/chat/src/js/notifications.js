@@ -29,16 +29,18 @@ const chatNotifications = function(){
 	module.settings = {};
 	// do you want to enable debug mode that logs to console (bool)
 	module.settings.debug = true;
+	// the notification marker on the page to show when needed (dom element)
+	module.settings.bell = document.querySelector('#notification-bell');
 
 	// the channel to receive notifications through (Action Cable channel)
 	module.listeningChannel = null;
 
-	module.settings.messageInput = document.querySelector('#chat-messageInput');
+
 	// purpose:		creates a subscription to a room between users
-	// returns:		triggers a 'message' event on document when new message
-	//				appears on the channel (send or received)
+	// returns:		triggers a 'chatNotification' event on document when new notification
+	//				is being received, passes the notification details
 	// ------------------------------------------------------------------------
-	module.createSubscription = function(){
+	module.createSubscription = () => {
 		module.listeningChannel = consumer.subscriptions.create(
 			{
 				channel: 'notifications',
@@ -46,8 +48,12 @@ const chatNotifications = function(){
 			},
 			{
 				received: function(data){
-					console.log('[Notifications] Notification received');
-					console.log(data)
+					document.dispatchEvent(new CustomEvent('chatNotification', {detail: data}));
+
+					if(module.settings.debug){
+						console.log('[Notifications] Notification received');
+						console.log(data);
+					}
 				},
 
 				connected: function(data) {
@@ -61,6 +67,8 @@ const chatNotifications = function(){
 
 
 	// purpose:		sends a notification to user of given id
+	// arguments:	target user id (int)
+	//				any data you want to pass to notification (object, required)
 	// ------------------------------------------------------------------------
 	module.send = (userId, notificationData) => {
 		let sendingChannel = consumer.subscriptions.create(
@@ -85,17 +93,15 @@ const chatNotifications = function(){
 			}
 		);
 
-		sendingChannel.send({message: 'test'});
+		sendingChannel.send(notificationData);
 	};
 
 
 	// purpose:		initializes the module
 	// ------------------------------------------------------------------------
 	module.init = function(){
-
-		// create subscription for the channel
+		// create subscription for receiving channel
 		module.createSubscription();
-
 	};
 
 	module.init();
@@ -106,93 +112,3 @@ const chatNotifications = function(){
 document.addEventListener('DOMContentLoaded', () => {
 	document.chatNotifications = Object.freeze(new chatNotifications());
 });
-
-
-
-// import consumer from "./consumer";
-
-// const inbox = document.getElementById('inbox-notifications');
-// var current_user_id;
-// if (inbox != null) {
-//   current_user_id = inbox.getAttribute('data-current-user-id');
-// }
-
-// const inboxMainMessagesId = "main-message-window";
-// const messagesBox = document.querySelector('#main-message-scroll');
-
-// // purpose:		escapes the html to a browser-safe string
-// // arguments:	a html string to be escaped (string/html)
-// // returns:		a browser-safe string
-// // ------------------------------------------------------------------------
-// function encodeHtml(string)
-// {
-// 	var element = document.createElement('div');
-// 	element.innerText = element.textContent = string;
-// 	string = element.innerHTML;
-// 	return string;
-// }
-
-// function notification(sender, message) {
-//   if (!("Notification" in window)) {
-//     console.log("This browser does not support desktop notification");
-//   } else if (Notification.permission === "granted") {
-//     var notification = new Notification(`${sender}: ${message}`);
-//   } else if (Notification.permission !== "denied") {
-//     Notification.requestPermission().then(function (permission) {
-//       if (permission === "granted") {
-//         var notification = new Notification(`${sender}: ${message}`);
-//       }    
-//     });
-//   }
-// }
-
-// function appendToRecipientMessages(data) {
-//   const messagesWindow = document.getElementById(inboxMainMessagesId);
-//   if (messagesWindow != null) {
-// 	let timestamp = new Date(data["timestamp"]);
-// 	timestamp = timestamp.getHours() + ':' + timestamp.getMinutes();
-
-//     const message = `
-// <div class="flex mb-2 break-words justify-start">
-//   <div class="max-w-full rounded py-2 px-3 bg-gray-300">
-//     <p class="text-sm mt-1"> ${ encodeHtml(data["message"]) } </p>
-//     <p class="text-right text-xs text-gray-500 mt-1"> ${ timestamp } </p>
-//   </div>
-// </div>
-// `;
-//     messagesWindow.insertAdjacentHTML('beforeend', message);
-// 	scrollBottom();
-//   }
-// }
-
-// document.addEventListener("DOMContentLoaded", function(){
-//   console.log("Setup notifications for user #", current_user_id);
-
-//   if (current_user_id != null) {
-
-//     consumer.subscriptions.create({ channel: "conversate", room_id: current_user_id }, {
-//       received(data) {
-//         console.log("[Notofications] Recived notification");
-//         if (data.to_id === current_user_id || data.from_id == current_user_id) {
-//           if (data.to_id == current_user_id) {
-// 			document.getElementById('notificationsBell').style.display = "block";
-//             notification(data.sender_name, data.message);
-//           }
-//           if (window.location.pathname.startsWith("/inbox") && data.to_id == current_user_id) {
-//             const room = document.getElementById('new-chat-message');
-//             const sentTo = room.getAttribute('data-to-id');
-//             if (sentTo == data.from_id) {
-//               appendToRecipientMessages(data);
-//             }
-//           }
-//         }
-//       }
-//     });
-//   }
-// });
-
-// // purpose:		scrolls the chat window to the bottom
-// // ------------------------------------------------------------------------
-// function scrollBottom(){
-// 	messagesBox.scrollTo(0, messagesBox.scrollHeight);
-// };
