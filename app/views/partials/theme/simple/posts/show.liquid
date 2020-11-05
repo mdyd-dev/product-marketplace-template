@@ -1,0 +1,11 @@
+<h1 class="text-4xl font-medium">
+  {{root_post.title}}
+</h1>
+<div class="my-6">
+  {% include 'theme/simple/posts/card', post: root_post, current_profile: current_profile  %}
+  {% for child_post in root_post.posts %}
+    {% include 'theme/simple/posts/card', post: child_post, current_profile: current_profile, root_post: root_post  %}
+  {% endfor %}
+</div>
+
+{% include 'theme/simple/dashboard/posts/reply', post: root_post, object: object %}

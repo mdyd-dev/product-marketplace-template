@@ -1,0 +1,15 @@
+{% parse_json object %}
+  {
+    "id": {{ object.id | json }},
+    "parent_id": {{ object.parent_id | json }},
+    "creator_id": {{ current_profile.id | json }},
+    "title": {{ object.title | json }},
+    "body": {{ object.body | json }},
+    "tags": {{ object.tags | downcase | split: ',' | uniq }},
+    "c__score": {{ object.c__score | json }}
+  }
+{% endparse_json %}
+
+{% liquid
+  return object
+%}

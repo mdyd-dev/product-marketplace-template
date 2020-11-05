@@ -63,9 +63,11 @@
     "@uppy/drag-drop": "^1.4.19",
     "@uppy/golden-retriever": "^1.3.19",
     "@uppy/webcam": "^1.7.0",
+    "easymde": "^2.12.1",
     "faker-cli": "^2.0.0",
     "ffmpeg": "0.0.4",
     "glider-js": "^1.7.3",
+    "lodash.startcase": "^4.4.0",
     "testcafe-browser-provider-lambdatest": "^2.0.3",
     "testcafe-reporter-html": "^1.4.6",
     "testcafe-reporter-spec-time": "^3.0.1"

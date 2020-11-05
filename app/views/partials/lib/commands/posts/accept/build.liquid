@@ -1,0 +1,17 @@
+{% liquid
+  if post.accepted_post_id == object.accepted_post_id
+    assign accepted_post_id = null
+  else
+    assign accepted_post_id = object.accepted_post_id
+  endif
+%}
+{% parse_json object %}
+  {
+    "id": {{ object.id | json }},
+    "accepted_post_id": {{ accepted_post_id | json }}
+  }
+{% endparse_json %}
+
+{% liquid
+  return object
+%}

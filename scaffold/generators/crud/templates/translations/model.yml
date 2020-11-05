@@ -5,5 +5,5 @@ model:
   empty_state: You haven't added any <%= modelNamePlural %> yet. <br> Create your first one now!
   form:
 <% attributes.forEach((attr) => { -%>
-    <%= attr.name %>: <%= attr.name %>
+    <%= attr.name %>: <%= attr.nameHuman %>
 <% }); -%>

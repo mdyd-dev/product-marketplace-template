@@ -1,0 +1,58 @@
+<div class="w-full mx-auto">
+  <div class="mb-5 text-right">
+    <a href="/dashboard/posts/new" class="button">
+      {{ 'app.models.posts.add' | t }}
+    </a>
+  </div>
+
+  {% for post in posts.results %}
+    {% liquid
+      function post_path = 'link_to', post: post
+      if post.accepted_post_id != blank
+        assign score_css = 'border-green-600 text-green-600'
+      else
+        assign score_css = null
+      endif
+    %}
+
+    <div class="pr-10 pl-5 my-4 py-6 bg-white rounded-lg shadow-md">
+      <div class="flex">
+        <div class="pt-4 pr-5 text-center">
+          <span class="px-4 py-3 border  {{ score_css }} rounded-lg">
+            {{ post.c__score | default: 0 }}
+          </span>
+          <div class="text-xs mt-3">{{ 'app.models.posts.score' | t }}</div>
+        </div>
+        <div class="w-full">
+          <div class="flex justify-between items-center">
+            <span class="font-light text-gray-600">{{post.created_at | l: 'compact'}}</span>
+            <span>
+              {% for tag in post.tags %}
+                <a class="px-2 py-1 bg-gray-200 text-gray-100 rounded hover:bg-gray-400" href="#">{{tag}}</a>
+              {% endfor %}
+            </span>
+          </div>
+          <div class="mt-2">
+            <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="{{post_path}}">
+              {{post.title}}
+            </a>
+            <p class="mt-2 text-gray-600">{{post.body | truncatewords: 20, '...'}}</p>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <a class="text-blue-600 hover:underline" href="{{post_path}}">
+              {{'app.models.posts.read_more' | t }}
+            </a>
+            <div>
+              <a class="flex items-center" href="{% render 'link_to', profile: post.creator %}">
+                <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="{{ post.creator.avatar.photo.versions.tiny }}" alt="avatar">
+                <h1 class="text-gray-700 font-bold">{{post.creator.name}}</h1>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    {% include 'theme/simple/posts/empty_state' %}
+  {% endfor %}
+</div>

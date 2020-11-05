@@ -1,0 +1,14 @@
+---
+slug: dashboard/posts
+method: delete
+---
+{% liquid
+  function object = 'lib/data/queries/posts/find', id: context.params.id
+  function object = 'lib/commands/posts/delete', object: object
+
+  if object.valid
+    include 'redirect_to', url: '/dashboard/posts', notice: 'app.models.shared.deleted'
+  else
+    include 'redirect_to', url: '/dashboard/posts', error: 'app.models.shared.delete_failed'
+  endif
+%}

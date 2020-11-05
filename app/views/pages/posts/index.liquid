@@ -1,0 +1,5 @@
+{% liquid
+  function posts = 'lib/data/queries/posts/search', limit: 100, parent_id_exists: false
+
+  include 'theme/simple/posts/index', posts: posts
+%}
