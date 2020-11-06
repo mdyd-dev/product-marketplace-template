@@ -29,6 +29,7 @@ slug: inbox
 %}
 
 <script>
+	// this is a workaround that prevents user from creating X conversations with the same user by refreshing the page
 	if({{ new_conversation }}){
 		history.pushState({}, '', '/inbox/?active_conversation={{ active_conversation }}');
 	}

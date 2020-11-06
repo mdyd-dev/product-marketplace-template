@@ -174,6 +174,7 @@ const chat = function(){
 				document.chatNotifications.send(event.detail.to_id, event.detail);
 			}
 		});
+		
 	};
 
 	module.init();

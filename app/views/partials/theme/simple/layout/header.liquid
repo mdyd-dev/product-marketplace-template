@@ -21,7 +21,7 @@
                     <a href="/admin" class="p-3 hover:text-gray-900">{{ 'app.admin' | t }}</a>
                 {% endif %}
                 <a href="/dashboard" class="p-3 hover:text-gray-900">{{ 'app.header.feed' | t }}</a>
-				<a href="/inbox" class="p-3 hover:text-gray-900" id='inbox-notifications' data-current-user-id="{{ profile.id }}" data-current-user-slug="{{ profile.slug }}">
+				<a href="/inbox" class="p-3 hover:text-gray-900" id="notifications-chat" data-current-user-id="{{ profile.id }}" data-current-user-slug="{{ profile.slug }}">
 					<p class="relative">
 						{{ 'app.header.chat' | t }}
 						<span id="notification-bell" style="top: -2px; right: -10px;" class="absolute rounded-full h-3 w-3 bg-pink-500 hidden"></span>

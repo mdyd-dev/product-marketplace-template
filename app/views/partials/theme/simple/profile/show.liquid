@@ -1,18 +1,14 @@
 <div class="flex flex-col md:flex-row ">
   <div class="mr-5 mb-5 text-center">
-    {% liquid
-      render 'theme/simple/profile/card', user: user, current_profile: current_profile
-	%}
+	{% liquid
+		render 'theme/simple/profile/card', user: user, current_profile: current_profile
 
-	{% liquid
-      if user != blank and user.id == current_profile.id
-        render 'theme/simple/profile/owner_actions', user: user
-      elsif current_profile != blank
-        render 'theme/simple/follow_button', current_profile: current_profile, user: user, big: true
-      endif
-	%}
+		if user != blank and user.id == current_profile.id
+			render 'theme/simple/profile/owner_actions', user: user
+		elsif current_profile != blank
+			render 'theme/simple/follow_button', current_profile: current_profile, user: user, big: true
+		endif
 	
-	{% liquid
 		if current_profile.id != user.id and chat_enabled != blank
 			render "modules/chat/message_button", current_profile: current_profile, user: user, conversation: conversation
 		endif	
