@@ -143,7 +143,7 @@ const chatNotifications = function(){
 
 };
 
-if(module.settings.notificationsContainer){
+if(document.querySelector('#notifications-chat')){
   document.addEventListener('DOMContentLoaded', () => {
     document.chatNotifications = Object.freeze(new chatNotifications());
   });
