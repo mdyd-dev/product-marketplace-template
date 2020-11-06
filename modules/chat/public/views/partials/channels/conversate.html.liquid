@@ -21,8 +21,6 @@
 
   graphql conversation = "modules/chat/find_conversation", from_id: fromId, to_id: toId
 
-  log context["params"]
-
   if context["params"]["create"] == true
 	assign message_safe = context["params"]["message"] | raw_escape_string
 
@@ -32,14 +30,11 @@
 
       if message.models.results.size == 0
         graphql result = 'modules/chat/create_message', conversation_id: conversation_id, message: message_safe, timestamp: context["params"]["timestamp"], from_id: fromId, to_id: toId
-        log result, type: 'channel_actions/conversate create_message'
       endif
     else
       graphql conv = 'modules/chat/create_conversation', from_id: fromId, to_id: toId
-      log conv, type: 'channel_actions/conversate create_conversation'
 
       graphql result = 'modules/chat/create_message', conversation_id: conv.model_create.id, message: message_safe, timestamp: context["params"]["timestamp"], from_id: fromId, to_id: toId
-      log result, type: 'channel_actions/conversate create_message'
     endif
   else
     log "Skippind. Message will be persisted on sender side", 'channel_actions/conversate skip_message'
