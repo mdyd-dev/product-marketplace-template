@@ -29,8 +29,12 @@ const chatNotifications = function(){
 	module.settings = {};
 	// do you want to enable debug mode that logs to console (bool)
 	module.settings.debug = true;
+	// the container with the notifications (dom node)
+	module.settings.notificationsContainer = document.querySelector('#notifications-chat');
 	// the notification marker on the page to show when needed (dom element)
 	module.settings.bell = document.querySelector('#notification-bell');
+	// the main container with the chat inbox (dom node)
+	module.settings.inbox = document.querySelector('#chat-inbox');
 
 	// the channel to receive notifications through (Action Cable channel)
 	module.listeningChannel = null;
@@ -44,7 +48,7 @@ const chatNotifications = function(){
 		module.listeningChannel = consumer.subscriptions.create(
 			{
 				channel: 'notifications',
-				room_id: 'notifications-' + document.querySelector('#inbox-notifications').getAttribute('data-current-user-id')
+				room_id: 'notifications-' + module.settings.notificationsContainer.getAttribute('data-current-user-id')
 			},
 			{
 				received: function(data){
@@ -58,7 +62,7 @@ const chatNotifications = function(){
 
 				connected: function(data) {
 					if(module.settings.debug){
-						console.log(`[Notifications] Connected to channel and joined room notifications-${document.querySelector('#inbox-notifications').getAttribute('data-current-user-id')}`);
+						console.log(`[Notifications] Connected to channel and joined room notifications-${module.settings.notificationsContainer.getAttribute('data-current-user-id')}`);
 					}
 				}
 			}
@@ -97,11 +101,42 @@ const chatNotifications = function(){
 	};
 
 
+	// purpose:		handles the notification bell
+	// arguments:	to show or to hide the bell (bool)
+	// ------------------------------------------------------------------------
+	module.bell = (show) => {
+		if(show){
+			module.settings.bell.style.display = 'block';
+			localStorage.bell = 'visible';
+		} else {
+			module.settings.bell.style.display = 'none';
+			localStorage.bell = 'hidden';
+		}
+	};
+
+
 	// purpose:		initializes the module
 	// ------------------------------------------------------------------------
 	module.init = function(){
 		// create subscription for receiving channel
 		module.createSubscription();
+
+		// react to receiving notification
+		if(!module.settings.inbox){
+			document.addEventListener('chatNotification', (data) => {
+				module.bell(true);
+			});
+		}
+
+		// show the bell when the notifications were not cleared
+		if(localStorage.bell === 'visible'){
+			module.bell(true);
+		}
+
+		// clear the notifications
+		module.settings.notificationsContainer.addEventListener('click', () => {
+			module.bell(false);
+		});
 	};
 
 	module.init();
