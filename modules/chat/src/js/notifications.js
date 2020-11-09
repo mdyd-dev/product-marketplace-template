@@ -1,66 +1,150 @@
+/*
+  simple tool to handle notifications about new chat messages
+  that uses WebSockets and Action Cable library to handle them
+
+  https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
+  https://www.npmjs.com/package/actioncable
+
+  please keep in mind that this simple implementation does not
+  verify if the user should get the notification in back-end and could
+  be easily abused as it is done in front-end only;
+  it's serves as an example
+*/
+
+
+
+// imports
+// ------------------------------------------------------------------------
 import consumer from "./consumer";
 
-const inbox = document.getElementById('inbox-notifications');
-var current_user_id;
-if (inbox != null) {
-  current_user_id = inbox.getAttribute('data-current-user-id');
-}
 
-const inboxMainMessagesId = "main-message-window";
 
-function notification(sender, message) {
-  if (!("Notification" in window)) {
-    console.log("This browser does not support desktop notification");
-  } else if (Notification.permission === "granted") {
-    var notification = new Notification(`${sender}: ${message}`);
-  } else if (Notification.permission !== "denied") {
-    Notification.requestPermission().then(function (permission) {
-      if (permission === "granted") {
-        var notification = new Notification(`${sender}: ${message}`);
-      }
-    });
-  }
-}
+const chatNotifications = function(){
 
-function appendToRecipientMessages(data) {
-  const messagesWindow = document.getElementById(inboxMainMessagesId);
-  if (messagesWindow != null) {
-    const message = `
-<div class="flex mb-2 justify-start">
-  <div class="rounded py-2 px-3 bg-gray-300">
-    <p class="text-sm mt-1"> ${ data["message"] } </p>
-    <p class="text-right text-xs text-gray-500 mt-1"> ${ data["timestamp"] } </p>
-  </div>
-</div>
-`;
-    messagesWindow.insertAdjacentHTML('afterbegin', message);
-  }
+  // cache 'this' value not to be overwritten later
+  const module = this;
 
-}
+  // purpose:		settings that are being used across the module
+  // ------------------------------------------------------------------------
+  module.settings = {};
+  // do you want to enable debug mode that logs to console (bool)
+  module.settings.debug = false;
+  // the container with the notifications (dom node)
+  module.settings.notificationsContainer = document.querySelector('#notifications-chat');
+  // the notification marker on the page to show when needed (dom element)
+  module.settings.bell = document.querySelector('#notification-bell');
+  // the main container with the chat inbox (dom node)
+  module.settings.inbox = document.querySelector('#chat-inbox');
 
-document.addEventListener("DOMContentLoaded", function(){
-  console.log("Setup notifications for user #", current_user_id);
+  // the channel to receive notifications through (Action Cable channel)
+  module.listeningChannel = null;
 
-  if (current_user_id != null) {
 
-    consumer.subscriptions.create({ channel: "conversate", room_id: current_user_id }, {
-      received(data) {
-        console.log("[Notofications] Recived notification");
-        if (data.to_id === current_user_id || data.from_id == current_user_id) {
-          document.getElementById('notificationsBell').style.display = "block";
-          if (data.to_id == current_user_id) {
-            notification(data.sender_name, data.message);
+  // purpose:		creates a subscription to a room between users
+  // returns:		triggers a 'chatNotification' event on document when new notification
+  //				is being received, passes the notification details
+  // ------------------------------------------------------------------------
+  module.createSubscription = () => {
+    module.listeningChannel = consumer.subscriptions.create(
+      {
+        channel: 'notifications',
+        room_id: 'notifications-' + module.settings.notificationsContainer.getAttribute('data-current-user-id')
+      },
+      {
+        received: function(data){
+          document.dispatchEvent(new CustomEvent('chatNotification', {detail: data}));
+
+          if(module.settings.debug){
+            console.log('[Notifications] Notification received');
+            console.log(data);
           }
-          if (window.location.pathname.startsWith("/inbox") && data.to_id == current_user_id) {
-            const room = document.getElementById('new-chat-message');
-            const sentTo = room.getAttribute('data-to-id');
-            if (sentTo == data.from_id) {
-              appendToRecipientMessages(data);
-            }
+        },
+
+        connected: function(data) {
+          if(module.settings.debug){
+            console.log(`[Notifications] Connected to channel and joined room notifications-${module.settings.notificationsContainer.getAttribute('data-current-user-id')}`);
           }
         }
       }
-    });
-  }
-});
+    );
+  };
 
+
+  // purpose:		sends a notification to user of given id
+  // arguments:	target user id (int)
+  //				any data you want to pass to notification (object, required)
+  // ------------------------------------------------------------------------
+  module.send = (userId, notificationData) => {
+    let sendingChannel = consumer.subscriptions.create(
+      {
+        channel: 'notifications',
+        room_id: 'notifications-' + userId
+      },
+      {
+        received: function(data){
+          if(module.settings.debug){
+            console.log(`[Notifications] Notification for user ${userId} was send`);
+            console.log(data);
+          }
+          
+        },
+
+        connected: function() {
+          if(module.settings.debug){
+            console.log(`[Notifications] Connected to channel with user ${userId}`);
+          }
+        }
+      }
+    );
+
+    sendingChannel.send(notificationData);
+  };
+
+
+  // purpose:		handles the notification bell
+  // arguments:	to show or to hide the bell (bool)
+  // ------------------------------------------------------------------------
+  module.bell = (show) => {
+    if(show){
+      module.settings.bell.style.display = 'block';
+      localStorage.bell = 'visible';
+    } else {
+      module.settings.bell.style.display = 'none';
+      localStorage.bell = 'hidden';
+    }
+  };
+
+
+  // purpose:		initializes the module
+  // ------------------------------------------------------------------------
+  module.init = function(){
+    // create subscription for receiving channel
+    module.createSubscription();
+
+    // react to receiving notification
+    if(!module.settings.inbox){
+      document.addEventListener('chatNotification', (data) => {
+        module.bell(true);
+      });
+    }
+
+    // show the bell when the notifications were not cleared
+    if(localStorage.bell === 'visible'){
+      module.bell(true);
+    }
+
+    // clear the notifications
+    module.settings.notificationsContainer.addEventListener('click', () => {
+      module.bell(false);
+    });
+  };
+
+  module.init();
+
+};
+
+if(document.querySelector('#notifications-chat')){
+  document.addEventListener('DOMContentLoaded', () => {
+    document.chatNotifications = Object.freeze(new chatNotifications());
+  });
+}

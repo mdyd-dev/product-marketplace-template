@@ -1,0 +1,16 @@
+{% liquid
+  assign template = '?active_conversation={conversation_id}&from_id={from_id}&to_id={to_id}'
+
+  if conversation.models.results[0].id
+    assign params = template | expand_url_template: conversation_id: conversation.models.results[0].id
+  else
+    assign params = template | expand_url_template: conversation_id: 'new', from_id: current_profile.id, to_id: user.id
+  endif
+%}
+
+<div class="mt-3">
+  <a href="/inbox/{{ params }}" class="button whitespace-no-wrap chat-sendMessage">
+    {{ 'app.chat.send_message' | t }}
+    <svg class="w-4 ml-3" xmlns="http://www.w3.org/2000/svg" focusable="false" viewBox="0 0 24 24" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+  </a>
+</div>

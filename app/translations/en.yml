@@ -330,6 +330,10 @@ en:
           account: Your payout account has been added.\
         failure:
           failed_adding_account: Failed adding payout account.
+    chat:
+      send_message: Send message
+      message_input_placeholder: Type your message here and press Enter to send
+      blank_message: To start a conversation, find a person profile and use the ‘Send message’ button
     item: Item
     your-items: Your items
     item_id: Item ID

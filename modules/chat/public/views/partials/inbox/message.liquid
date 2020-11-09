@@ -1,6 +1,6 @@
-<div class="flex mb-2 {{ justify }}">
-  <div class="rounded py-2 px-3 {{ bg_color }}">
-    <p class="text-sm mt-1"> {{ message["message"] }} </p>
-    <p class="text-right text-xs text-gray-500 mt-1"> {{ message["timestamp"] | localize: 'short' }} </p>
-  </div>
-</div>
+<li class="flex mb-2 break-words {{ justify }}">
+	<div class="max-w-full rounded py-2 px-3 {{ bg_color }}">
+		<p class="text-sm mt-1"> {{ message["message"]  }} </p>
+		<p class="text-right text-xs text-gray-500 mt-1"> {{ message["timestamp"] | localize: 'short' }} </p>
+	</div>
+</li>
