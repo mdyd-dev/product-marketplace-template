@@ -9,7 +9,7 @@
 			render 'theme/simple/follow_button', current_profile: current_profile, user: user, big: true
 		endif
 	
-		if current_profile.id != user.id and chat_enabled != blank
+		if current_profile.id != user.id
 			render "modules/chat/message_button", current_profile: current_profile, user: user, conversation: conversation
 		endif	
 	%}
