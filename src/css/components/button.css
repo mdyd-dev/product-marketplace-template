@@ -29,3 +29,11 @@
 .button-sm {
   @apply px-3 py-1 text-sm;
 }
+
+.button.button-warning {
+	@apply text-white bg-red-700;
+}
+
+.button.button-warning:hover {
+	@apply text-white bg-red-600;
+}
