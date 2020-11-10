@@ -1,0 +1,12 @@
+{% liquid
+  function order = 'lib/data/queries/orders/find', seller: item.owner.id, buyer: current_profile.id, status: 'app.statuses.orders.placed'
+  unless order
+    function order = 'lib/commands/orders/create', current_profile: current_profile, item: item
+    function status = 'lib/commands/statuses/create', profile_id: current_profile.id, object_id: order.id, name: 'placed', scope: 'app.statuses.orders'
+
+    include 'lib/commands/events/create', type: 'order_created', actor_id: order.buyer.id, target_id: item.id, object_id: order.id
+    include 'lib/commands/events/create', type: 'status_created', actor_id: current_profile.id, object_id: status.id, target_id: status.object_id
+  endunless
+
+  return order
+%}

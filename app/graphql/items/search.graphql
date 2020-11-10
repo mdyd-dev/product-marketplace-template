@@ -49,14 +49,8 @@ query search($id: ID, $limit: Int = 20, $status: [String!], $tag: String, $keywo
         object_id: property(name: "object_id")
       }
 
-      orders: related_models(join_on_property: "id", foreign_property: "item_id", model_schema_name: "order") @include(if: $withOrders) {
+      line_items: related_models(join_on_property: "id", foreign_property: "item_id", model_schema_name: "line_item") @include(if: $withOrders) {
         id
-        created_at
-        status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status") {
-          id
-          created_at
-          name: property(name: "name")
-        }
       }
 
       photos: related_models(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {

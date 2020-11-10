@@ -21,15 +21,17 @@
                     <a href="/admin" class="p-3 hover:text-gray-900">{{ 'app.admin' | t }}</a>
                 {% endif %}
                 <a href="/dashboard" class="p-3 hover:text-gray-900">{{ 'app.header.feed' | t }}</a>
-				<a href="/inbox" class="p-3 hover:text-gray-900" id='inbox-notifications' data-current-user-id="{{ profile.id }}" data-current-user-slug="{{ profile.slug }}">
-					<p>{{ 'app.header.chat' | t }}</p>
-					<span id="notificationsBell" class="relative inline-flex rounded-full h-3 w-3 bg-pink-500 hidden"></span>
+				<a href="/inbox" class="p-3 hover:text-gray-900" id="notifications-chat" data-current-user-id="{{ profile.id }}" data-current-user-slug="{{ profile.slug }}">
+					<p class="relative">
+						{{ 'app.header.chat' | t }}
+						<span id="notification-bell" style="top: -2px; right: -10px;" class="absolute rounded-full h-3 w-3 bg-pink-500 hidden"></span>
+					</p>
 				</a>
 
                 <div x-data="{ dropdownOpen: false }" class="relative">
                     <button @click="dropdownOpen = !dropdownOpen" class="flex items-center relative z-10 px-3 py-2 bg-white rounded-md focus:outline-none" data-menu-dropdown>
-                        <span class="hover:text-gray-900">{{ profile.first_name | default: profile.name }}</span>
-                        <img src="{{ profile.avatar.versions.tiny }}" class="w-5 h-5 rounded-full ml-2">
+						<span class="hover:text-gray-900">{{ profile.first_name | default: profile.name }}</span>
+	                        <img src="{{ profile.avatar.versions.tiny }}" class="w-5 h-5 rounded-full ml-2">
 					</button>
 
                     <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>

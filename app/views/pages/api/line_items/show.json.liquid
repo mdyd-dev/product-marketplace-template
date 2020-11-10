@@ -1,0 +1,11 @@
+---
+slug: line_items/show
+---
+{% liquid
+
+  assign line_item_id = context.params.slug3 | split: '-' | last
+  function line_item = 'lib/data/queries/line_items/find', id: line_item_id
+  include 'lib/present_or_404', property: line_item.id
+
+  include 'theme/simple/line_items/show', line_item: line_item
+%}

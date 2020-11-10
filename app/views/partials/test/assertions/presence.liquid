@@ -1,0 +1,5 @@
+{% liquid
+  if object[field_name] == blank
+    include 'test/register_error', contract: contract, field_name: field_name, key: 'test.should.not.be_blank'
+  endif
+%}

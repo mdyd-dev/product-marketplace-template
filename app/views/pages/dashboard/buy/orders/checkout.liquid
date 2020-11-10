@@ -1,0 +1,16 @@
+---
+slug: dashboard/buy/orders_checkout
+metadata:
+  breadcrumbs:
+    - label: app.buyer
+    - label: app.orders.list
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+
+  function order = 'lib/data/queries/orders/find', buyer: current_profile.id, id: context.params.slugs withStatuses: true
+  function checkout_session = 'lib/commands/orders/checkout_session/create', order: order, constants: context.constants
+
+  include 'theme/simple/dashboard/breadcrumbs'
+  include 'theme/simple/dashboard/orders/checkout', order: order, checkout_session: checkout_session
+%}

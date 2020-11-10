@@ -13,6 +13,18 @@ mutation create_item($name: String!, $description: String, $tags: [String], $own
       ]
     }
   ){
-    id properties
+    id
+    properties
+    name: property(name: "name")
+    description: property(name: "description")
+    price: property(name: "price")
+    uuid: property(name: "uuid")
+    category: property(name: "category")
+    owner: related_model(model_schema_name: "profile" join_on_property: "owner", foreign_property: "id") {
+      id
+      type: model_schema_name
+      name: property(name: "name")
+      slug: property(name: "slug")
+    }
   }
 }

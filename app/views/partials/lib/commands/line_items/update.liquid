@@ -1,0 +1,9 @@
+{% liquid
+  function object = 'lib/commands/line_items/update/build', object: object, params: params
+  function object = 'lib/commands/line_items/update/check', object: object
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'line_items/update' object: object, selection: 'model_update'
+  endif
+
+  return object
+%}

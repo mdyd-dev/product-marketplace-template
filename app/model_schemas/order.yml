@@ -1,12 +1,15 @@
 name: order
 properties:
-  - name: item_id
-    type: string
   - name: buyer
     type: string
   - name: seller
     type: string
-  - name: total
+  - name: total_shipping_cost_cents
     type: integer
-  - name: status
+  - name: products_price_cents
+    type: integer
+  - name: total_price_cents
+    type: integer
+
+  - name: c__status
     type: string

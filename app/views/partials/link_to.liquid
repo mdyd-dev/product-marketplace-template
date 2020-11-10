@@ -26,4 +26,9 @@
       return "/profile/" | append: profile.slug
     endif
   endif
+
+  if order
+    print "/dashboard/buy/orders_show/" | append: order.id
+    return "/dashboard/buy/orders_show/" | append: order.id
+  endif
 %}

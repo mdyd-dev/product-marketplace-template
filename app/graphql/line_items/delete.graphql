@@ -1,0 +1,8 @@
+mutation delete($id: ID!) {
+  model_delete(
+    id: $id
+  ){
+    id
+    order_id: property(name: "order_id")
+  }
+}

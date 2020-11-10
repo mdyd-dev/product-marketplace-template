@@ -1,0 +1,6 @@
+{% liquid
+  if given != expected
+    assign msg = 'test.should.equal' | t: given: given, expected: expected
+    include 'test/register_error', contract: contract, field_name: field_name, message: msg
+  endif
+%}
