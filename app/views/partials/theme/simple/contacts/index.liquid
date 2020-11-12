@@ -1,51 +1,40 @@
-<div class="w-full mx-auto">
-  <div class="mb-5 text-right">
-  </div>
-  <div class="my-6 bg-white rounded shadow-md">
-    <table class="w-full text-left border-collapse">
-      <thead>
-        <tr>
-          <th class="px-6 py-4 text-sm font-bold uppercase border-b bg-grey-lightest text-grey-dark border-grey-light">
-            {{ "app.models.contacts.form.email" | t }}
-          </th>
-          <th class="px-6 py-4 text-sm font-bold uppercase border-b bg-grey-lightest text-grey-dark border-grey-light">
-            {{ "app.models.contacts.form.message" | t }}
-          </th>
-          <th class="px-6 py-4 text-sm font-bold uppercase border-b bg-grey-lightest text-grey-dark border-grey-light">
-            {{ "app.models.contacts.form.reason" | t }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for contact in contacts.results %}
-          <tr class="hover:bg-grey-lighter">
-            <td class="px-6 py-4 border-b border-grey-light">
-              <a href="/admin/support-tickets/show/{{ contact.id }}">
-                {{ contact.email }}
-              </a>
-            </td>
-            <td class="px-6 py-4 border-b border-grey-light">
-              <a href="/admin/support-tickets/show/{{ contact.id }}">
-                {{ contact.message }}
-              </a>
-            </td>
-            <td class="px-6 py-4 border-b border-grey-light">
-              <a href="/admin/support-tickets/show/{{ contact.id }}">
-                {{ contact.reason }}
-              </a>
-            </td>
-            <td class="px-6 py-4 border-b border-grey-light">
-              <form action="/admin/support-tickets" method="post" class="inline ml-2" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
-                {% include 'authenticity_token' %}
-                <input type="hidden" name="_method" value="delete" />
-                <input type="hidden" name="id" value="{{ contact.id }}">
+<section>
+  <header class="hidden lg:flex gap-2 mb-5 font-bold">
+		<div class="lg:w-1/6">{{ 'app.models.contacts.form.email' | t }}</div>
+		<div class="lg:w-1/6">{{ 'app.models.contacts.form.reason' | t }}</div>
+		<div class="lg:w-3/6">{{ 'app.models.contacts.form.message' | t }}</div>
+		<div class="lg:w-1/6"></div>
+  </header>
+  
+  {% for contact in contacts.results %}
+    <article class="lg:flex gap-2 mb-5 pt-5 border-t">
+      <div class="lg:w-1/6">
+        <span class="lg:hidden">{{ 'app.models.contacts.form.email' | t }}: </span>
+        <a href="/admin/support-tickets/show/{{ contact.id }}">
+          {{ contact.email }}
+        </a>
+      </div>
+      <div class="lg:w-1/6">
+        <span class="lg:hidden">{{ 'app.models.contacts.form.reason' | t }}: </span>
+        <a href="/admin/support-tickets/show/{{ contact.id }}">
+          {{ contact.reason }}
+        </a>
+      </div>
+      <div class="lg:w-3/6">
+        <span class="lg:hidden">{{ 'app.models.contacts.form.reason' | t }}: </span>
+        <a href="/admin/support-tickets/show/{{ contact.id }}">
+          {{ contact.message | truncatewords: 30 }}
+        </a>
+      </div>
+      <div class="lg:w-1/6">
+        <form action="/admin/support-tickets" method="post" class="inline ml-2" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
+          {% include 'authenticity_token' %}
+          <input type="hidden" name="_method" value="delete" />
+          <input type="hidden" name="id" value="{{ contact.id }}">
 
-                <button id="deletebutton" class="button button-secondary">{{ 'app.models.shared.delete' | t }}</button>
-              </form>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</div>
+          <button id="deletebutton" class="button button-warning">{{ 'app.models.shared.delete' | t }}</button>
+        </form>
+      </div>
+    </article>
+  {% endfor %}
+</section>
