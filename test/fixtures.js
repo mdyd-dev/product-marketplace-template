@@ -69,7 +69,7 @@ export const Admin = {
 
 export const SellerRandomUser = {
   email: faker.internet.email().toLowerCase(),
-  password: faker.internet.password(),
+  password: '12345',
   name: randomFirstName.toLowerCase(),
   firstName: randomFirstName,
   lastName: 'Porter'

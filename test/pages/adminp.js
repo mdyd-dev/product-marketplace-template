@@ -13,10 +13,10 @@ export default class AdminPanel {
       supportTickets: Selector('a').withText('Support tickets')
     }
     this.tableRows = {
-      users: Selector('tbody').find('tr'),
-      orders: Selector('tbody').find('tr'),
-      items: Selector('tbody').find('tr'),
-      categories: Selector('tbody').find('tr')
+      users: Selector('article'),
+      orders: Selector('section'),
+      items: Selector('article'),
+      categories: Selector('article')
     }
     this.buttons = {
       addCategory: Selector('a').withText('Add category'),

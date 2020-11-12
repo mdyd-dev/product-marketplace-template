@@ -277,8 +277,8 @@ test('Groups', async (t) => {
   await t.useRole(adminRole)
     .click(topMenu.buttons.adminPanel)
     .click(adminPage.menu.supportTickets)
-    .click(Selector('td').find('a').withText(John.email))
-    .expect(Selector('body').withText("There was a problem with...").exists).ok()
+    .click(Selector('article').withText(John.email))
+    .expect(Selector('article').withText("There was a problem with...").exists).ok()
 })
 
 
