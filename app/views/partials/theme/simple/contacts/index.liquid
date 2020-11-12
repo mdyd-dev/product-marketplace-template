@@ -21,13 +21,13 @@
         </a>
       </div>
       <div class="lg:w-3/6">
-        <span class="lg:hidden">{{ 'app.models.contacts.form.reason' | t }}: </span>
+        <span class="lg:hidden">{{ 'app.models.contacts.form.message' | t }}: </span>
         <a href="/admin/support-tickets/show/{{ contact.id }}">
           {{ contact.message | truncatewords: 30 }}
         </a>
       </div>
-      <div class="lg:w-1/6">
-        <form action="/admin/support-tickets" method="post" class="inline ml-2" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
+      <div class="mt-2 lg:mt-0 lg:w-1/6">
+        <form action="/admin/support-tickets" method="post" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
           {% include 'authenticity_token' %}
           <input type="hidden" name="_method" value="delete" />
           <input type="hidden" name="id" value="{{ contact.id }}">
