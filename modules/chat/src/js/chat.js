@@ -175,13 +175,12 @@ const chat = function(){
         document.chatNotifications.send(event.detail.to_id, event.detail);
       }
     });
-    
   };
 
   module.init();
 
 };
-
+console.log('test');
 document.addEventListener('DOMContentLoaded', () => {
   if(document.querySelector('#chat-inbox')){
     document.chat = Object.freeze(new chat());
@@ -204,7 +203,7 @@ const sendMessageButton = function(userSettings){
 	module.settings = {};
 	// the 'send message' button (dom node)
   module.sendMessageButton = userSettings.sendMessageButton ? userSettings.sendMessageButton : document.querySelector('.chat-sendMessage');
-  
+
 
   // purpose:		blocks the button after first click to prevent
   //            cloning the conversations to a single user

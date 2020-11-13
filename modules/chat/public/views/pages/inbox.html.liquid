@@ -19,7 +19,7 @@ slug: inbox
 
 	graphql conversations = 'modules/chat/inbox', user_id: current_user.id
 	assign current_conversation = conversations.models.results | where: "id", active_conversation | first | default: conversations.models.results.first
-	graphql messages = 'modules/chat/find_messages', conversation_id: current_conversation.id
+	graphql messages = 'modules/chat/find_messages', conversation_id: current_conversation.id, page: 1
 
 	if current_conversation != blank
 		render 'modules/chat/inbox/conversations', current_conversation: current_conversation, conversations: conversations, current_user: current_user, messages: messages
