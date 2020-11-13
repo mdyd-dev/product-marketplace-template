@@ -175,12 +175,31 @@ const chat = function(){
         document.chatNotifications.send(event.detail.to_id, event.detail);
       }
     });
+
+
+    fetch('/api/chat/get_messages?conversation_id=4108')
+    .then(response => {
+      if(response.ok){
+        return response.json();
+      } else {
+        return Promise.reject(response);
+      }
+    })
+    .then((data) => {
+      console.log('ok');
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log('error');
+      console.log(error);
+      error.json().then(data => console.log(data));
+    });
   };
 
   module.init();
 
 };
-console.log('test');
+
 document.addEventListener('DOMContentLoaded', () => {
   if(document.querySelector('#chat-inbox')){
     document.chat = Object.freeze(new chat());
