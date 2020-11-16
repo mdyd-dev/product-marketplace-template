@@ -44,14 +44,20 @@ const chat = function(){
         <p class="text-right text-xs text-gray-500 mt-1">${date.getHours()}:${date.getMinutes()}</p>
       </div>
     </li>
-  `
+    `
   };
   // the id of the currently logged user (string)
   module.settings.currentUserId = module.settings.messageInput.getAttribute('data-from-id');
+  // the loading indicator when loading messages (dom node)
+  module.settings.loadingIndicator = document.querySelector('#chat-loadingIndicator');
+  // current page of messages (int)
+  module.settings.currentPage = 1;
+  // are there more pages (bool)
+  module.settings.morePages = module.settings.loadingIndicator.dataset.more === 'true';
 
   // the channel to send messages through (Action Cable channel)
   module.channel = null;
-  // the id for the conversation
+  // the id for the conversation (string)
   module.conversationId = module.settings.messageInput.getAttribute('data-conversation-id');
 
 
@@ -135,7 +141,7 @@ const chat = function(){
 
   // purpose:		appends a message to the chat box
   // arguments:	all the message data that needs to be shown
-  //				according to the template in messageTemplate (object)
+  //				    according to the template in messageTemplate (object)
   // ------------------------------------------------------------------------
   module.showMessage = (messageData) => {
     module.settings.messagesList.insertAdjacentHTML('beforeend', module.settings.messageTemplate(messageData));
@@ -143,6 +149,49 @@ const chat = function(){
     if(module.settings.debug){
       console.log('[Inbox] Message shown in chat');
     }
+  };
+
+
+  // purpose:		loads messages from given page
+  // arguments:	the page number (int, default: 1)
+  //            items per page to get (int, default: 30)
+  // ------------------------------------------------------------------------
+  module.loadPage = (page = 1, perPage = 30) => {
+    let latestMessage = module.settings.messagesList.querySelector('li:first-child');
+
+    module.settings.loadingIndicator.style.display = 'block';
+
+    fetch(`/api/chat/get_messages?conversation_id=${module.conversationId}&page=${page}&per_page=${perPage}`)
+    .then(response => {
+      if(response.ok){
+        return response.json();
+      } else {
+        return Promise.reject(response);
+      }
+    })
+    .then((data) => {
+      let html = '';
+
+      Object.entries(data.results).reverse().forEach(([key, data]) => {
+        data = Object.assign(data, { status: (module.settings.currentUserId == data.from_id) ? 'sent' : 'received'});
+
+        html += module.settings.messageTemplate(data);
+      });
+
+      module.settings.messagesList.insertAdjacentHTML('afterbegin', html);
+
+      if(!data.has_next_page){
+        module.settings.morePages = false;
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      error.json().then(data => console.log(data));
+    })
+    .finally(() => {
+      module.settings.loadingIndicator.style.display = 'none';
+      module.settings.messagesListContainer.scrollTop = latestMessage.offsetTop - 300;
+    });
   };
 
 
@@ -176,24 +225,20 @@ const chat = function(){
       }
     });
 
-
-    fetch('/api/chat/get_messages?conversation_id=4108')
-    .then(response => {
-      if(response.ok){
-        return response.json();
-      } else {
-        return Promise.reject(response);
+    // load previous messages when user scrolls to top
+    let messagesListTimeout = '';
+    module.settings.messagesListContainer.addEventListener('scroll', () => {
+      if(module.settings.morePages === true){
+        clearTimeout(messagesListTimeout);
+        messagesListTimeout = setTimeout(() => {
+          if(module.settings.messagesListContainer.scrollTop === 0){
+            module.settings.currentPage = module.settings.currentPage + 1;
+            module.loadPage(module.settings.currentPage);
+          }
+        }, 200);
       }
-    })
-    .then((data) => {
-      console.log('ok');
-      console.log(data);
-    })
-    .catch((error) => {
-      console.log('error');
-      console.log(error);
-      error.json().then(data => console.log(data));
     });
+
   };
 
   module.init();
