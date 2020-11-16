@@ -16,6 +16,7 @@ import Footer from './pages/footer'
 import ContactUs from './pages/contactUsForm'
 import PasswordReset from './pages/passwordReset'
 import NewSessionForm from './pages/newsession'
+import TopicsPage from './pages/topicsPage'
 
 
 //variables
@@ -49,6 +50,7 @@ export const groupsPage = new GroupsPage()
 export const footer = new Footer()
 export const contactUsForm = new ContactUs()
 export const activityFeed = new ActivityFeed()
+export const topicsPage = new TopicsPage()
 
 
 

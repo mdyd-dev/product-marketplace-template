@@ -10,16 +10,8 @@ export default class TopMenuBtns {
       logIn: Selector('header').find('a').withText('Log in'),
       logOut: Selector('header').find('button').withText('Log out'),
       adminPanel: Selector('header').find('a').withText('Admin'),
-      items: Selector('header').find('a').withText('Items')
+      items: Selector('header').find('a').withText('Items'),
+      questions : Selector('a').withText('Questions')
     }
-
-    /*this.logoBtn = Selector('span').withText('MVP Marketplace')
-    this.listItemBtn = Selector('a').withText('Add')
-    this.menuDropdown = Selector('header').find('button').withAttribute('data-menu-dropdown')
-    this.dashboardBtn = Selector('a').withText('Dashboard')
-    this.logInBtn = Selector('header').find('a').withText('Log in')
-    this.logOutBtn = Selector('header').find('button').withText('Log out')
-    this.adminBtn = Selector('header').find('a').withText('Admin')
-    this.itemsBtn = Selector('header').find('a').withText('Items')*/
   }
 }
