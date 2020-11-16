@@ -1,0 +1,6 @@
+{% capture result %}
+  {% include 'test/show_text', contracts: contracts, total_errors: total_errors, total_duration: total_duration, test_name: test_name %}
+{% endcapture %}
+{% liquid
+  log result, type: '######## liquid test #########'
+%}

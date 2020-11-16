@@ -1,16 +1,32 @@
-<h2 class="text-xl">Test results</h2>
-
 {% liquid
+  assign __start = "now" | to_time
   graphql tests = 'tests', path: context.params.name | dig: "admin_liquid_partials" | dig: "results"
 
   if tests.size == 0
     echo 'no tests found'
   endif
+  assign total_errors = 0
+  assign contracts = '' | split: ','
 
   for test in tests
     assign contract = '{ "errors": {}, "success": true }' | parse_json
 
     include test.path, registry: test.path, contract: contract
-    include 'test/test_report', name: test.path, contract: contract
+    hash_assign contract['test_path'] = test.path
+    assign contracts = contracts | add_to_array: contract
+    assign total_errors = total_errors | plus: contract.errors.size
   endfor
+  assign __stop = "now" | to_time
+  assign total_duration = __start | time_diff: __stop, 's'
+
+  assign data = '{}' | parse_json
+  hash_assign data['contracts'] = contracts
+  hash_assign data['total_errors'] = total_errors
+  hash_assign data['total_duration'] = total_duration
+
+  assign test_formatter = format | default: 'html' | prepend: 'test/show_'
+  include test_formatter, contracts: contracts, total_errors: total_errors, total_duration: total_duration, test_name: test_name
+  if total_errors > 0
+    response_status 500
+  endif
 %}

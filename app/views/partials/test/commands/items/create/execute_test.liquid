@@ -12,15 +12,9 @@
 {% endparse_json %}
 
 {% liquid
-  include 'lib/commands/items/create/execute', item: data
+  function object = 'lib/commands/items/create/execute', object: data
 
-  if context.exports.item == blank
-    include 'test/register_error', contract: contract, field_name: 'item', key: 'app.test.should.be_set'
-  endif
+  function contract = 'test/assertions/presence', contract: contract, object: object, field_name: 'id'
 
-  if context.exports.item.id == blank
-    include 'test/register_error', contract: contract, field_name: 'item.id', key: 'app.test.should.be_set'
-  endif
-
-  include 'lib/items/delete', id: context.exports.item.id
+  function foo = 'lib/commands/items/delete', item: object
 %}

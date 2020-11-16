@@ -1,0 +1,5 @@
+{% assign test_name = name | replace: 'test/', '' %}
+{{ test_name }}
+{% for e in contract.errors %}
+  {{ e[0] }} {{ e[1] | join: ", "  }}
+{% endfor %}

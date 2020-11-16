@@ -8,3 +8,4 @@ en:
       not:
         be_empty: should not be empty
         be_blank: should not be blank
+        be_valid: should not be valid
