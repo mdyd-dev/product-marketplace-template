@@ -1,0 +1,26 @@
+{% parse_json profile %}
+  {
+    "id": "5"
+  }
+{% endparse_json %}
+
+{% liquid
+  assign params = '{"title": "ooo oo", "body":"foo ooo ooo ooo", "uuid": "12345"}' | parse_json
+  function post = 'lib/commands/posts/create', object: params, current_profile: profile
+  assign params = '{}' | parse_json
+  hash_assign params['id'] = post.id
+  hash_assign params['accepted_post_id'] = post.id
+
+  function object = 'lib/commands/posts/accept', object: params, current_profile: profile, post: post
+
+  function contract = 'test/assertions/valid_object', contract: contract, object: object, field_name: 'id'
+  function contract = 'test/assertions/presence', contract: contract, object: object, field_name: 'accepted_post_id'
+%}
+
+{% liquid
+  assign post = object
+  function object = 'lib/commands/posts/accept', object: params, current_profile: profile, post: post
+
+  function contract = 'test/assertions/valid_object', contract: contract, object: object, field_name: 'id'
+  function contract = 'test/assertions/not_presence', contract: contract, object: object, field_name: 'accepted_post_id'
+%}

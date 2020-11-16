@@ -1,0 +1,17 @@
+---
+slug: dashboard/posts/reply
+method: post
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+
+  function object = 'lib/commands/posts/reply', object: context.params.post, current_profile: current_profile
+
+  if object.valid
+    include 'lib/commands/events/create', type: 'post_replied', actor_id: current_profile.id, object_id: object.id
+    redirect_to context.params.return_to
+  else
+    function post = 'lib/data/queries/posts/find', id: object.parent_id
+    include 'theme/simple/posts/show', root_post: post, object: object
+  endif
+%}

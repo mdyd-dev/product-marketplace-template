@@ -1,0 +1,39 @@
+{% liquid
+  if object.id
+    assign method = 'put'
+    assign submit_label = 'app.models.posts.edit'
+  else
+    assign method = 'post'
+    assign submit_label = 'app.models.posts.add'
+  endif
+%}
+<div class="container flex flex-wrap mx-auto groups-center">
+  <form action="/dashboard/posts" method="post" class="w-full md:w-2/3">
+    {% include 'authenticity_token' %}
+    <input type="hidden" name="_method" value="{{method}}" />
+
+    {% if object.id %}
+      <input type="hidden" name="post[id]" value="{{ object.id }}" />
+    {% endif %}
+
+    <div class="mt-5">
+      <label class="block" for="title">{{ 'app.models.posts.form.title' | t }}</label>
+      <input class="w-2/3 form-input" id="title" name="post[title]" value="{{ object.title }}">
+      {% include 'theme/simple/field_error', errors: object.errors.title %}
+    </div>
+
+    <div class="mt-5">
+      <label class="block" for="body">{{ 'app.models.posts.form.body' | t }}</label>
+      <textarea class="w-2/3 form-input" id="body" name="post[body]" data-markdown-editor>{{ object.body }}</textarea>
+      {% include 'theme/simple/field_error', errors: object.errors.body %}
+    </div>
+
+    <div class="mt-3">
+      <label class="block" for="tags">{{ 'app.models.posts.form.tags' | t }}</label>
+      <input class="w-2/3 form-input" type="text" id="tags" name="post[tags]" value="{{ object.tags | join: ',' }}" />
+      {% include 'theme/simple/field_error', errors: object.errors.tags %}
+    </div>
+
+    <button class="mt-8 button">{{ submit_label | t }}</button>
+  </form>
+</div>

@@ -1,0 +1,12 @@
+---
+slug: dashboard/posts
+method: put
+---
+{% liquid
+  function object = 'lib/commands/call', object: context.params.post, command: 'posts/update', selection: 'model_update'
+  if object.valid
+    include 'redirect_to', url: '/dashboard/posts'
+  else
+    include 'theme/simple/dashboard/posts/edit', object: object
+  endif
+%}

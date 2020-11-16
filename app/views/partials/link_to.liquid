@@ -31,4 +31,9 @@
     print "/dashboard/buy/orders_show/" | append: order.id
     return "/dashboard/buy/orders_show/" | append: order.id
   endif
+
+  if post
+    print "/posts/show/" | append: post.id
+    return "/posts/show/" | append: post.id
+  endif
 %}

@@ -19,3 +19,10 @@ if (gallery) {
     console.log('Gallery module loaded.');
   });
 }
+
+const markdownEditor = document.querySelector('[data-markdown-editor]');
+if (markdownEditor) {
+  import(/* webpackChunkName: "markdown-editor" */ './markdown-editor.js').then(() => {
+    console.log('Markdown editor module loaded.');
+  });
+}

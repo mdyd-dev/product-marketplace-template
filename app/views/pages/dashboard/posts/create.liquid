@@ -1,0 +1,16 @@
+---
+slug: dashboard/posts
+method: post
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function object = 'lib/commands/posts/create', object: context.params.post, current_profile: current_profile
+
+  if object.valid
+    include 'lib/commands/events/create', type: 'post_created', actor_id: current_profile.id, object_id: object.id
+    function url = 'link_to', post: object
+    redirect_to url
+  else
+    include 'theme/simple/dashboard/posts/new', object: object
+  endif
+%}

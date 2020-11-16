@@ -1,0 +1,29 @@
+<form action="/dashboard/posts/vote" method="post">
+  {% include 'authenticity_token' %}
+  <input type="hidden" name="post[id]" value="{{ post.id }}"/>
+  <input type="hidden" name="post[type]" value="{% if post.upvote_profile_ids contains current_profile.id %}clear{% else %}up{% endif %}"/>
+  <button class="{% if post.upvote_profile_ids contains current_profile.id %}text-orange-600{% endif %}">
+    <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /> </svg>
+  </button>
+</form>
+
+<span class="pb-2 text-3xl font-bold">{{ post.upvote_profile_ids.size | minus: post.downvote_profile_ids.size | default: 0 }}</span>
+
+<form action="/dashboard/posts/vote" method="post">
+  {% include 'authenticity_token' %}
+  <input type="hidden" name="post[id]" value="{{ post.id }}"/>
+  <input type="hidden" name="post[type]" value="{% if post.downvote_profile_ids contains current_profile.id %}clear{% else %}down{% endif %}"/>
+  <button class="{% if post.downvote_profile_ids contains current_profile.id %}text-orange-600{% endif %}">
+    <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /> </svg>
+  </button>
+</form>
+{% if post.parent_id != null and root_post.creator.id == current_profile.id %}
+  <form action="/dashboard/posts/accept" method="post">
+    {% include 'authenticity_token' %}
+    <input type="hidden" name="post[id]" value="{{ post.parent_id }}"/>
+    <input type="hidden" name="post[accepted_post_id]" value="{{ post.id }}"/>
+    <button class="mt-5 {% if root_post.accepted_post_id == post.id %}text-green-600{% endif %}">
+      <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /> </svg>
+    </button>
+  </form>
+{% endif %}

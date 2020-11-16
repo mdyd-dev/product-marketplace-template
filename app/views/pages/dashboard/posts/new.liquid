@@ -1,0 +1,12 @@
+---
+metadata:
+  breadcrumbs:
+    - url: /dashboard/posts
+      label: app.posts.list
+    - label: app.new
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+
+  include 'theme/simple/dashboard/posts/new'
+%}
