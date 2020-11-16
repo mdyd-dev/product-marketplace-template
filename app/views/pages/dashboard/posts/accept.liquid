@@ -9,11 +9,17 @@ method: post
 
   function object = 'lib/commands/posts/accept', object: context.params.post, current_profile: current_profile, post: post
 
+  assign root_post = object.parent_id
   if object.valid
-    function url = 'link_to', post: post
+    if object.accepted_post_id
+      include 'lib/commands/events/create', type: 'post_anwser_accepted', actor_id: current_profile.id, object_id: object.id
+    else
+      include 'lib/commands/events/create', type: 'post_anwser_cleared', actor_id: current_profile.id, object_id: object.id
+    endif
+
+    function url = 'link_to', post: root_post
     redirect_to url
   else
-    function post = 'lib/data/queries/posts/find', id: object.parent_id
-    include 'theme/simple/posts/show', root_post: post, object: object
+    include 'theme/simple/posts/show', root_post: root_post, object: object
   endif
 %}
