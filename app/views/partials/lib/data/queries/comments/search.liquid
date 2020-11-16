@@ -1,6 +1,9 @@
 {% liquid
-  graphql r = 'comments/search', limit: limit, page: 1
+  if commentable_uuid_exists == 'false'
+    assign commentable_uuid_exists = false
+  endif
+  graphql r = 'comments/search', limit: limit, page: 1, commentable_uuid_exists: commentable_uuid_exists
   include 'lib/handle_graphql_response', r: r, name: 'queries/comments/search'
 
-  return r.models
+  return r.comments
 %}

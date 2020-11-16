@@ -1,6 +1,6 @@
 mutation create_<%= modelName %>(
 <% attributes.forEach((attr) => { -%>
-  $<%= attr.name %>: String!
+  $<%= attr.name %>: <%= graphqlArgumentMap[attr.type] %>!
 <% }); -%>
 ) {
   model_create(
@@ -8,7 +8,7 @@ mutation create_<%= modelName %>(
       model_schema_name: "<%= modelName %>"
       properties: [
       <% attributes.forEach((attr) => { -%>
-        { name: "<%= attr.name %>" value: $<%= attr.name %> }
+        { name: "<%= attr.name %>" <%= graphqlArgumentValueMap[attr.type] %>: $<%= attr.name %> }
       <% }); -%>
       ]
     }
@@ -18,7 +18,7 @@ mutation create_<%= modelName %>(
     deleted_at
 
  <% attributes.forEach((attr) => { -%>
-   <%= attr.name %>: property(name: "<%= attr.name %>")
+   <%= attr.name %>: <%= graphqlPropertyMap[attr.type] %>(name: "<%= attr.name %>")
  <% }); -%>
     }
 }

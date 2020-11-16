@@ -1,0 +1,13 @@
+---
+metadata:
+  breadcrumbs:
+    - url: /dashboard/posts
+      label: app.models.posts.list
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function posts = 'lib/data/queries/posts/search', limit: 100, parent_id_exists: false, creator_id: current_profile.id
+
+  include 'theme/simple/dashboard/breadcrumbs', total_entries: posts.total_entries
+  include 'theme/simple/dashboard/posts/index', posts: posts
+%}
