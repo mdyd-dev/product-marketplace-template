@@ -119,6 +119,7 @@ const chat = function(){
     );
   };
 
+
   // purpose:		sends the message through the Action Cable
   // arguments:	the message to send (string)
   // ------------------------------------------------------------------------
@@ -138,6 +139,7 @@ const chat = function(){
       console.log(messageData);
     }
   };
+
 
   // purpose:		appends a message to the chat box
   // arguments:	all the message data that needs to be shown
@@ -159,10 +161,13 @@ const chat = function(){
   module.loadPage = (page = 1, perPage = 30) => {
     let latestMessage = module.settings.messagesList.querySelector('li:first-child');
 
+    // show the loading indicator at start
     module.settings.loadingIndicator.style.display = 'block';
 
+    // get the data
     fetch(`/api/chat/get_messages?conversation_id=${module.conversationId}&page=${page}&per_page=${perPage}`)
     .then(response => {
+      // parse it to JSON if valid
       if(response.ok){
         return response.json();
       } else {
@@ -170,6 +175,7 @@ const chat = function(){
       }
     })
     .then((data) => {
+      // construct all the HTML elements for messages
       let html = '';
 
       Object.entries(data.results).reverse().forEach(([key, data]) => {
@@ -178,8 +184,10 @@ const chat = function(){
         html += module.settings.messageTemplate(data);
       });
 
+      // put the messages on top
       module.settings.messagesList.insertAdjacentHTML('afterbegin', html);
 
+      // disable loading next pages if there is nothing left
       if(!data.has_next_page){
         module.settings.morePages = false;
       }
@@ -189,7 +197,9 @@ const chat = function(){
       error.json().then(data => console.log(data));
     })
     .finally(() => {
+      // remove the loading indicator
       module.settings.loadingIndicator.style.display = 'none';
+      // scroll to the last seen message
       module.settings.messagesListContainer.scrollTop = latestMessage.offsetTop - 300;
     });
   };
@@ -235,7 +245,7 @@ const chat = function(){
             module.settings.currentPage = module.settings.currentPage + 1;
             module.loadPage(module.settings.currentPage);
           }
-        }, 200);
+        }, 300);
       }
     });
 
