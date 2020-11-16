@@ -12,6 +12,12 @@ properties:
             quality: 80
           resize:
             fit: inside
+        - name: uncropped_webp
+          output:
+            format: webp
+            quality: 70
+          resize:
+            fit: inside
         - name: small
           output:
             format: jpeg
