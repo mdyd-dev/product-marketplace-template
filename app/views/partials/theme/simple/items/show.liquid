@@ -1,6 +1,7 @@
 {% content_for item_metatags %}
   {% render 'theme/simple/items/metatags', item: item %}
 {% endcontent_for %}
+
 <div class="container">
   <div class="flex flex-wrap">
     <div class="w-full md:w-1/2">
@@ -8,7 +9,11 @@
         <div class="relative glider-contain">
           <div class="overflow-x-hidden glider" glider>
             {% for p in item.photos limit: 5 %}
-              <div><img alt="{{ item.name }}" src="{{ p.photo.versions.uncropped }}" class="object-cover w-full"></div>
+              <picture class="object-cover w-full">
+                <source srcset="{{ p.photo.versions.uncropped_webp }}" type="image/webp" alt="{{ item.name }}">
+                <source srcset="{{ p.photo.versions.uncropped }}" type="image/jpeg" alt="{{ item.name }}">
+                <img src="{{ p.photo.versions.uncropped }}" alt="{{ item.name }}">
+              </picture>
             {% endfor %}
           </div>
 
@@ -27,8 +32,11 @@
           <div role="tablist" class="py-4 glider-dots"></div>
         </div>
       {% else %}
-        {% function cover_url = 'theme/simple/items/cover_url', item: item %}
-        <img alt="{{ item.name }}" class="object-center w-full rounded" src="{{ cover_url }}">
+        <picture class="object-cover w-full">
+          <source srcset="{{ item.photos[0].photo.versions.uncropped_webp }}" type="image/webp" alt="{{ item.name }}">
+          <source srcset="{{ item.photos[0].photo.versions.uncropped }}" type="image/jpeg" alt="{{ item.name }}">
+          <img src="{{ item.photos[0].photo.versions.uncropped }}" alt="{{ item.name }}">
+        </picture>
       {% endif %}
     </div>
 
