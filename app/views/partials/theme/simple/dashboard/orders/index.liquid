@@ -1,6 +1,6 @@
 {% if orders.total_entries > 0 %}
   <section class="w-full lg:table">
-  
+
     <header class="hidden lg:table-row font-bold">
       <div class="lg:pl-2 lg:py-4 lg:table-cell">{{ 'app.created_at' | t }}</div>
       <div class="lg:pl-2 lg:py-4 lg:table-cell">{{ 'app.models.orders.form.id' | t }}</div>
@@ -18,7 +18,7 @@
     {% for order in orders.results %}
       {% function order_url = 'link_to', order: order %}
       <div class="lg:table-row pb-5 mb-4 border-b">
-  
+
         <div class="lg:pl-2 lg:py-4 lg:table-cell lg:border-t">
           <span class="lg:hidden">{{ 'app.created_at' | t }}: </span>
           <a href="{{ order_url }}">
@@ -39,7 +39,7 @@
             {{ order.seller.name }}
           </div>
         {% endif %}
-  
+
         {% if role == 'seller' %}
           <div class="lg:pl-2 lg:py-4 lg:table-cell lg:border-t">
             <span class="lg:hidden">{{ 'app.buyer' | t }}: </span>
@@ -73,7 +73,7 @@
 
       </div>
     {% endfor %}
-    
+
   </section>
 
 {% else %}
