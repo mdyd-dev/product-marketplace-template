@@ -21,27 +21,9 @@ jobs:
           github_token: ${{ github.token }}
           paths_ignore: '["**/README.md"]'
 
-  build:
+  deploy_pr:
     needs: pre_job
     if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
-    runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 1
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-
-      - name: Build
-        run: |
-          npm ci
-          npm run build
-
-  deploy_pr:
-    needs: build
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 1
@@ -55,7 +37,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-
+      - name: Build
+        run: |
+          npm ci
+          npm run build
       - name: Deploy
         run: |
           npm -g install @platformos/pos-cli
