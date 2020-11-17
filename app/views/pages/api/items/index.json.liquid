@@ -1,8 +1,8 @@
 {% liquid
-  function query = 'lib/data/queries/items/search/build', query: context.params, limit: 50
-  function items = 'lib/data/queries/items/search/execute', query: query
+  function query = 'lib/queries/items/search/build', query: context.params, limit: 50
+  function items = 'lib/queries/items/search/execute', query: query
 
-  function filters = 'lib/data/queries/search/filters', query: context.params
+  function filters = 'lib/queries/search/filters', query: context.params
 
   assign response = '{}' | parse_json
   hash_assign response['items'] = items

@@ -1,5 +1,5 @@
 {% liquid
-  function post = 'lib/data/queries/posts/find', id: event.object.id
+  function post = 'lib/queries/posts/find', id: event.object.id
 
   assign object = '{}' | parse_json
   hash_assign object['id'] = post.id

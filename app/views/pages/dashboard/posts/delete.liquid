@@ -3,7 +3,7 @@ slug: dashboard/posts
 method: delete
 ---
 {% liquid
-  function object = 'lib/data/queries/posts/find', id: context.params.id
+  function object = 'lib/queries/posts/find', id: context.params.id
   function object = 'lib/commands/posts/delete', object: object
 
   if object.valid

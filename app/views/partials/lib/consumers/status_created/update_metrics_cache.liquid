@@ -1,6 +1,6 @@
 {% liquid
 
-  function status = 'lib/data/queries/statuses/find', id: event.object.id
+  function status = 'lib/queries/statuses/find', id: event.object.id
 
   if status.scope == 'app.statuses.items'
     assign object = '{}' | parse_json

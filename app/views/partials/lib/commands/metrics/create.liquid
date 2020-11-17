@@ -1,6 +1,6 @@
 {% liquid
   assign income = 0
-  function orders = 'lib/data/queries/orders/search', limit: 100
+  function orders = 'lib/queries/orders/search', limit: 100
 
   for order in orders.results
     if order.status.name == 'app.statuses.orders.paid'
@@ -8,8 +8,8 @@
     endif
   endfor
 
-  function items = 'lib/data/queries/items/search', limit: 1
-  function users = 'lib/data/queries/users/search', limit: 1
+  function items = 'lib/queries/items/search', limit: 1
+  function users = 'lib/queries/users/search', limit: 1
 %}
 
 {%

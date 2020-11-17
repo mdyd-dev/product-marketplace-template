@@ -5,7 +5,7 @@ slug: orders/line_items
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
 
-  function item = 'lib/data/queries/items/find', id: context.params.line_item.item_id
+  function item = 'lib/queries/items/find', id: context.params.line_item.item_id
   function order = 'lib/commands/line_items/find_or_create_order', item: item, current_profile: current_profile
   function object = 'lib/commands/line_items/create', item: item, params: context.params.line_item, current_profile: current_profile, order: order
   if object.valid

@@ -1,11 +1,11 @@
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, followships: true
 
-  function items = 'lib/data/queries/activities/search', feed: 'system', feed_id: "5", limit: 3
-  function comments = 'lib/data/queries/activities/search', feed: 'system', feed_id: "2", limit: 3
-  function groups = 'lib/data/queries/activities/search', feed: 'system', feed_id: "3", limit: 3
-  function profiles = 'lib/data/queries/activities/search', feed: 'system', feed_id: "4", limit: 3
-  function categories = 'lib/data/queries/categories/search', limit: 3
+  function items = 'lib/queries/activities/search', feed: 'system', feed_id: "5", limit: 3
+  function comments = 'lib/queries/activities/search', feed: 'system', feed_id: "2", limit: 3
+  function groups = 'lib/queries/activities/search', feed: 'system', feed_id: "3", limit: 3
+  function profiles = 'lib/queries/activities/search', feed: 'system', feed_id: "4", limit: 3
+  function categories = 'lib/queries/categories/search', limit: 3
 
   assign feeds = '{}' | parse_json
   hash_assign feeds['categories'] = categories

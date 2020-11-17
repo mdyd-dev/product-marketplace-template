@@ -1,5 +1,5 @@
 {% liquid
-  function order = 'lib/data/queries/orders/find', seller: item.owner.id, buyer: current_profile.id, status: 'app.statuses.orders.placed'
+  function order = 'lib/queries/orders/find', seller: item.owner.id, buyer: current_profile.id, status: 'app.statuses.orders.placed'
   unless order
     function order = 'lib/commands/orders/create', current_profile: current_profile, item: item
     function status = 'lib/commands/statuses/create', profile_id: current_profile.id, object_id: order.id, name: 'placed', scope: 'app.statuses.orders'

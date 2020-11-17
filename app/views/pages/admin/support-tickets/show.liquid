@@ -6,7 +6,7 @@ slug: admin/support-tickets/show
   include 'lib/must_be_superadmin'
 
   assign contact_id = context.params.slugs | split: '-' | last
-  function contact = 'lib/data/queries/contacts/find', id: contact_id
+  function contact = 'lib/queries/contacts/find', id: contact_id
   include 'lib/present_or_404', property: contact.id
 
   include 'theme/simple/admin/menu', section: 'support-tickets'

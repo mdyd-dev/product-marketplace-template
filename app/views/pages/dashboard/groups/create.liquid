@@ -11,7 +11,7 @@ method: post
     include 'redirect_to', url: '/dashboard/groups'
   else
     graphql presigned_url = 'photos/presign' | dig: 'presigned'
-    function photos = 'lib/data/queries/photos/search', object_uuid: object.uuid
+    function photos = 'lib/queries/photos/search', object_uuid: object.uuid
 
     include 'theme/simple/dashboard/groups/new', object: object, presigned_url: presigned_url, photos: photos.results
   endif

@@ -1,5 +1,5 @@
 {% liquid
-  function order = 'lib/data/queries/orders/find', id: event.target.id
+  function order = 'lib/queries/orders/find', id: event.target.id
 
   if order.status.name == 'app.statuses.orders.paid'
     function report = 'lib/commands/metrics/create'

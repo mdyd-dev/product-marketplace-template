@@ -7,7 +7,7 @@ metadata:
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
 
-  function orders = 'lib/data/queries/orders/search', limit: 100, buyer: current_profile.id, withStatuses: true
+  function orders = 'lib/queries/orders/search', limit: 100, buyer: current_profile.id, withStatuses: true
 
   include 'theme/simple/dashboard/breadcrumbs', name: 'orders', total_entries: orders.total_entries, role: 'buyer'
   include 'theme/simple/dashboard/orders/index', orders: orders, role: 'buyer'

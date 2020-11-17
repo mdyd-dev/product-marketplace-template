@@ -2,10 +2,10 @@
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, membership: true
 
   assign group_id = context.params.slug3 | split: '-' | last
-  function group = 'lib/data/queries/groups/find', id: group_id, with_owner: true
+  function group = 'lib/queries/groups/find', id: group_id, with_owner: true
   include 'lib/present_or_404', property: group.id
 
-  function list = 'lib/data/queries/relationships/search', limit: 4, name: 'membership', r_id: group_id
+  function list = 'lib/queries/relationships/search', limit: 4, name: 'membership', r_id: group_id
 
   include 'theme/simple/groups/show', group: group, current_profile: current_profile, tab: 'about', list: list
   render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token

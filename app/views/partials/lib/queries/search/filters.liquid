@@ -4,7 +4,7 @@
   assign sort_options = 'lib.sort_options' | t
   hash_assign search_form['sort_options'] = sort_options
 
-  function categories = 'lib/data/queries/categories/search', limit: 100
+  function categories = 'lib/queries/categories/search', limit: 100
   hash_assign search_form['categories'] = categories | dig: 'results' | map: 'key'
 
   hash_assign search_form['query'] = query

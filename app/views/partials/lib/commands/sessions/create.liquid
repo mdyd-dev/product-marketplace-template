@@ -4,7 +4,7 @@
 
   if object.valid
     function object = 'lib/commands/sessions/create/execute', object: object
-    function profile = 'lib/data/queries/profiles/find', user_id: object.id
+    function profile = 'lib/queries/profiles/find', user_id: object.id
     function result = 'lib/commands/sessions/store_profile_in_session', object: profile
   endif
 

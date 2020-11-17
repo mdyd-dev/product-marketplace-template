@@ -1,0 +1,8 @@
+{% liquid
+  function query = 'lib/queries/items/search/build', limit: limit, owner: owner, params: params, withStatuses: withStatuses, status: status
+  function items = 'lib/queries/items/search/execute', query: query
+
+  hash_assign items['query'] = query
+
+  return items
+%}
