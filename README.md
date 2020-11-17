@@ -2,6 +2,12 @@
 
 Backbone for a marketplace-like project to be deployed on platformOS.com
 
+# Demo
+
+You can preview the marketplace template at our demo site here: 
+
+[getmarketplace.co](https://getmarketplace.co)
+
 # Status
 
 ## Still in active development and some concepts are being validated and might change.
