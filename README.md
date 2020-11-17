@@ -6,7 +6,7 @@ Backbone for a marketplace-like project to be deployed on platformOS.com
 
 You can preview the marketplace template at our demo site here: 
 
-[getmarketplace.co](https://getmarketplace.co)
+<a href="https://getmarketplace.co" target="_blank">https://getmarketplace.co</a>
 
 # Status
 
