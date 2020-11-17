@@ -1,6 +1,7 @@
 en:
   time:
     formats:
+      long: '%a, %b %e, %Y at %H:%M'
       compact: '%b %d %Y at %H:%M'
   admin:
     menu:
@@ -9,6 +10,7 @@ en:
         slug: 'slug: '
         id: 'id: '
         uuid: 'uuid: '
+        missing_profile: 'missing profile'
       activities:
         name: Activities
         following: 'following:'
@@ -21,6 +23,7 @@ en:
           user_id: 'id: '
           group: 'group: '
           group_id: 'id: '
+          apply: 'Apply'
       setup: Setup
       categories: Categories
       orders: Orders
@@ -283,7 +286,7 @@ en:
         id: ID
         name: Name
         category: Category
-        created_at: CreatedAt
+        created_at: 'Created At'
         owner: Owner
     categories:
       list: Categories

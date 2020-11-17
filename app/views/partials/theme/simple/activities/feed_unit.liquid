@@ -3,10 +3,12 @@
 <div class="flex flex-col p-6 mb-6 bg-white rounded-lg shadow">
   {% render 'theme/simple/activities/feed_unit/header', payload: payload %}
 
-  <div class="py-2 leading-snug break-all">
-    <p>{{ payload.object.description }}</p>
-    <p>{{ payload.object.body }}</p>
-  </div>
+  {% if payload.object.description or payload.object.body %}
+	<div class="py-2 leading-snug break-all">
+		<p>{{ payload.object.description }}</p>
+		<p>{{ payload.object.body }}</p>
+	</div>
+  {% endif %}
 
   <!-- Photo should be inserted only if event = create -->
   {% if payload.object.photos.size > 0 %}

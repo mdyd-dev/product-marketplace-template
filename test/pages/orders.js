@@ -7,9 +7,8 @@ export default class OrdersPage {
       pay: Selector('button').withText('Pay Manually')
     }
     this.tableRows = {
-      orders: Selector('tbody').find('tr'),
-      firstLink: Selector('tbody').find('tr').nth(0).find('a'),
-      firstRow: Selector('tbody').find('tr').nth(0)
+      firstLink: Selector('section').find('a'),
+      firstRow: Selector('section').find('div'),
     }
   }
 }
