@@ -1,4 +1,7 @@
 en:
+  time:
+    formats:
+      long: '%a, %b %e, %Y at %H:%M'
   admin:
     menu:
       items: Items

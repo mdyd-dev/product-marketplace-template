@@ -45,7 +45,7 @@
 			endcase
 			%}
 
-			<time datetime="{{ date }}" class="block mt-1 text-sm text-gray-500">{{ date | strftime: '%F at %H:%M' }}</p>
+			<time datetime="{{ date }}" class="block mt-1 text-sm text-gray-500">{{ date | localize: 'long' }}</p>
 		</p>
 	</div>
 </div>
