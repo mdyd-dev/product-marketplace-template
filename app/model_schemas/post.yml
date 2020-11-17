@@ -1,0 +1,20 @@
+name: post
+properties:
+  - name: parent_id
+    type: string
+  - name: creator_id
+    type: string
+  - name: title
+    type: string
+  - name: body
+    type: text
+  - name: tags
+    type: array
+  - name: upvote_profile_ids
+    type: array
+  - name: downvote_profile_ids
+    type: array
+  - name: accepted_post_id
+    type: string
+  - name: c__score
+    type: integer

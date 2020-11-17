@@ -27,7 +27,7 @@ query search(
       type: model_schema_name
 
     <% attributes.forEach((attr) => { -%>
-      <%= attr.name %>: property(name: "<%= attr.name %>")
+      <%= attr.name %>: <%= graphqlPropertyMap[attr.type] %>(name: "<%= attr.name %>")
     <% }); -%>
     }
   }

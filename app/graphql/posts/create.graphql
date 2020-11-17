@@ -1,0 +1,42 @@
+mutation create_post(
+  $parent_id: String
+  $creator_id: String!
+  $title: String
+  $body: String!
+  $tags: [String]
+  $upvote_profile_ids: [String]
+  $downvote_profile_ids: [String]
+  $accepted_post_id: String
+  $c__score: Int
+) {
+  model_create(
+    model: {
+      model_schema_name: "post"
+      properties: [
+              { name: "parent_id" value: $parent_id }
+              { name: "creator_id" value: $creator_id }
+              { name: "title" value: $title }
+              { name: "body" value: $body }
+              { name: "tags" value_array: $tags }
+              { name: "upvote_profile_ids" value_array: $upvote_profile_ids }
+              { name: "downvote_profile_ids" value_array: $downvote_profile_ids }
+              { name: "accepted_post_id" value: $accepted_post_id }
+              { name: "c__score" value_int: $c__score }
+            ]
+    }
+  ){
+    id
+    created_at
+    deleted_at
+
+    parent_id: property(name: "parent_id")
+    creator_id: property(name: "creator_id")
+    title: property(name: "title")
+    body: property(name: "body")
+    tags: property_array(name: "tags")
+    upvote_profile_ids: property_array(name: "upvote_profile_ids")
+    downvote_profile_ids: property_array(name: "downvote_profile_ids")
+    accepted_post_id: property(name: "accepted_post_id")
+    c__score: property_int(name: "c__score")
+     }
+}

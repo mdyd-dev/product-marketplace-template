@@ -1,0 +1,10 @@
+{%  liquid
+  function object = 'lib/commands/posts/create/build', object: object, current_profile: current_profile
+  function object = 'lib/commands/posts/reply/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'posts/create' object: object
+  endif
+
+  return object
+%}

@@ -1,0 +1,5 @@
+mutation delete($id: ID!) {
+  model_delete(
+    id: $id
+  ){ id }
+}

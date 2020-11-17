@@ -1,0 +1,36 @@
+<div class="flex bg-white shadow-lg rounded-lg border {% if root_post.accepted_post_id == post.id %}border-green-600{% else %}border-white{% endif %} mx-4 md:mx-auto mb-10">
+  <div class="flex items-start px-4 py-6 w-full">
+    <div class="flex flex-col items-center pr-4">
+      <a href="{% render 'link_to', profile: post.creator %}">
+        <img class="w-12 h-12 rounded-full object-cover mb-5 shadow" src="{{ post.creator.avatar.photo.versions.tiny }}" alt="avatar">
+      </a>
+      {% include 'theme/simple/posts/vote_box', post: post, current_profile: current_profile, root_post: root_post %}
+    </div>
+    <div class="flex flex-col w-full h-full">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-semibold text-gray-900 -mt-1">{{post.creator.name}}</h2>
+        <small class="text-sm text-gray-700">{{post.created_at | l: 'compact'}}</small>
+      </div>
+      <div class="flex-1 mt-3 markdown">
+        {{post.body | default: '' | markdownify}}
+      </div>
+      <div class="mt-4 flex items-center justify-between">
+        <div class="flex">
+          <!-- <div class="flex mr-2 text-gray-700 text-sm mr-3">
+               <svg fill="none" viewBox="0 0 24 24"  class="w-4 h-4 mr-1" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/> </svg>
+               <span>{{post.likes}}</span>
+               </div>
+               <div class="flex mr-2 text-gray-700 text-sm mr-8">
+               <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/> </svg>
+               <span>8</span>
+               </div> -->
+        </div>
+        <span>
+          {% for tag in post.tags %}
+            <a class="px-2 py-1 bg-gray-200 text-gray-100 rounded hover:bg-gray-400" href="#">{{tag}}</a>
+          {% endfor %}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

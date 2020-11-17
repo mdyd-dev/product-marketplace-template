@@ -2,6 +2,7 @@ en:
   time:
     formats:
       long: '%a, %b %e, %Y at %H:%M'
+      compact: '%b %d %Y at %H:%M'
   admin:
     menu:
       items: Items
@@ -338,7 +339,9 @@ en:
     chat:
       send_message: Send message
       message_input_placeholder: Type your message here and press Enter to send
-      blank_message: To start a conversation, find a person profile and use the ‘Send message’ button
+      blank_message: >-
+        To start a conversation, find a person profile and use the ‘Send
+        message’ button
     item: Item
     your-items: Your items
     item_id: Item ID
@@ -386,6 +389,7 @@ en:
       edit-profile: Edit Profile
       your-profile: Public Profile
       my-groups: My Groups
+      posts: Questions
       chat: Chat
       inbox: Inbox
       your-feed: Activity Feed
@@ -922,6 +926,10 @@ en:
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself
       blank: cannot be blank
+      length:
+        minimum: 'is too short (minimum is %{count} characters)'
+        maximum: 'is too long (maximum is %{count} characters)'
+        is: 'is the wrong length (should be %{count} characters)'
       too_little: 'has to be equal or greater than %{value}'
       too_much: 'has to be equal or smaller than %{value}'
       too_short: 'has to longer than %{value} letters'
@@ -1006,6 +1014,36 @@ en:
           price_cents: price_cents
           quantity: quantity
           total_price_cents: total_price_cents
+      comments:
+        new: New comment
+        add: Add comment
+        edit: Edit comment
+        empty_state: You haven't added any comments yet. <br> Create your first one now!
+        read_more: Read more
+        form:
+          creator_id: creator_id
+          body: Body
+          title: Title
+          uuid: uuid
+          commentable_id: commentable_id
+          commentable_type: commentable_type
+      posts:
+        list: Questions
+        new: Ask Question
+        add: Add Question
+        edit: Edit Question
+        empty_state: You haven't added any questions yet. <br> Create your first one now!
+        read_more: Read more
+        post_answer: Post answer
+        your_answer: Your Answer
+        answers: answers
+        score: score
+        form:
+          body: Body
+          title: Title
+          tags: Tags
+          upvotes: Upvotes
+          downvotes: Downvotes
   lib:
     sort_options:
       relevance: Relevance
