@@ -11,7 +11,7 @@ export default class TopicsPage {
       questionTitle: Selector('#title'),
       questionBody: Selector('label[for="body"]'),
       //questionBody: Selector('div').find('textarea'),
-      answerBody: Selector('.EasyMDEContainer').find('div').nth(1),
+      answerBody: Selector('label[for="body"]'),
       questionTags: Selector('#tags')
     }
     this.vote = {

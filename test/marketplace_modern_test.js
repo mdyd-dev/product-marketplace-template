@@ -322,9 +322,10 @@ test('Add answer', async (t) => {
   await t.useRole(buyerRole)
     .click(topMenu.buttons.questions)
     .click(link.withText('How to sell?'))
-    .typeText(topicsPage.inputs.answerBody, "core of this problem is..", {replace: true})
+    .click(Selector('label[for="body"]'))
+    .pressKey("t e s t")
     .click(topicsPage.buttons.postAnswer)
-    .expect(topicsPage.fields.answerBody.withText('core of this problem is..').exists).ok()
+    .expect(topicsPage.fields.answerBody.withText('test').exists).ok()
 })
 
 test('Rate question and answer', async (t) => {
@@ -334,7 +335,7 @@ test('Rate question and answer', async (t) => {
     .click(topicsPage.vote.pointUpQuestion) // rate the question
     .click(topicsPage.vote.pointUpAnswer) // rate the answer
     .expect(topicsPage.fields.questionBody.withText('test123').exists).ok()
-    .expect(topicsPage.fields.answerBody.withText('core of this problem is..').exists).ok()
+    .expect(topicsPage.fields.answerBody.withText('test').exists).ok()
     .expect(topicsPage.ratings.question.exists).ok()
     .expect(topicsPage.ratings.firstAnswer.exists).ok()
 })
