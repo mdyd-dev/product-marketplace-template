@@ -1,5 +1,11 @@
-query find_messages($conversation_id: String!) {
-  models(per_page: 30,
+query find_messages(
+    $conversation_id: String!,
+    $page: Int = 1,
+    $per_page: Int = 9999
+  ){
+  models(
+    page: $page
+    per_page: $per_page,
     sort: {
       properties: { name: "timestamp", order: DESC }
     }
@@ -27,5 +33,7 @@ query find_messages($conversation_id: String!) {
         user_id: property(name: "user_id")
       }
     }
+    has_next_page,
+    current_page
   }
 }
