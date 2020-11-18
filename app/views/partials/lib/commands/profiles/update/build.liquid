@@ -6,7 +6,7 @@
   for i in (1..20)
     assign slug = name | slugify
 
-    function profiles = 'lib/data/queries/profiles/search', slug: slug, limit: 1
+    function profiles = 'lib/queries/profiles/search', slug: slug, limit: 1
     if profiles.total_entries == 0
       break
     endif

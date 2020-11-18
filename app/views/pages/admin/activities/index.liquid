@@ -14,11 +14,11 @@
     endif
   endif
 
-  function list = 'lib/data/queries/activities/search', feed: feed_name, feed_id: feed_id, limit: 200
-  function users = 'lib/data/queries/profiles/search', limit: 100
-  function groups = 'lib/data/queries/groups/search', limit: 100
+  function list = 'lib/queries/activities/search', feed: feed_name, feed_id: feed_id, limit: 200
+  function users = 'lib/queries/profiles/search', limit: 100
+  function groups = 'lib/queries/groups/search', limit: 100
 
-  function selected = 'lib/data/queries/profiles/find', id: feed_id
+  function selected = 'lib/queries/profiles/find', id: feed_id
 
   include 'theme/simple/admin/menu', section: 'activities'
   include 'theme/simple/admin/activities/index', list: list, section: 'activities', users: users, current_profile: current_profile, selected: selected

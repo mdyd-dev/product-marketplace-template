@@ -3,7 +3,7 @@ slug: <%= modelNamePlural %>
 method: delete
 ---
 {% liquid
-  function object = 'lib/data/queries/<%= modelNamePlural %>/find', id: context.params.id
+  function object = 'lib/queries/<%= modelNamePlural %>/find', id: context.params.id
   function object = 'lib/commands/<%= modelNamePlural %>/delete', object: object
 
   if object.valid

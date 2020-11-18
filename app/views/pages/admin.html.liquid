@@ -7,8 +7,8 @@
   assign today = 'now' | to_date | json
   assign yesterday = 'yesterday' | to_date | json
 
-  function today = 'lib/data/queries/metrics/find', limit: 1, date: today
-  function yesterday = 'lib/data/queries/metrics/find', limit: 1, date: yesterday
+  function today = 'lib/queries/metrics/find', limit: 1, date: today
+  function yesterday = 'lib/queries/metrics/find', limit: 1, date: yesterday
 
   function report = 'lib/commands/metrics/report', today: today, yesterday: yesterday
 

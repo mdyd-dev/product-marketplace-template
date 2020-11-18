@@ -3,7 +3,7 @@
 
   {% liquid
     for i in (0..10)
-      function actor  = 'lib/data/queries/activities/model', id: actor_id
+      function actor  = 'lib/queries/activities/model', id: actor_id
       if actor
         break
        endif
@@ -13,10 +13,10 @@
       endunless
     endfor
 
-    function target = 'lib/data/queries/activities/model', id: target_id
+    function target = 'lib/queries/activities/model', id: target_id
 
     if object_id
-      function object = 'lib/data/queries/activities/model', id: object_id
+      function object = 'lib/queries/activities/model', id: object_id
     endif
 
     function event = 'lib/commands/events/create/build', type: type, actor: actor, object: object, target: target

@@ -6,7 +6,7 @@ slug: items
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, followships: true
 
   assign id = context.params.slug2 | split: '-' | last
-  function item = 'lib/data/queries/items/find', id: id
+  function item = 'lib/queries/items/find', id: id
 
   include 'lib/present_or_404', property: item.id
 

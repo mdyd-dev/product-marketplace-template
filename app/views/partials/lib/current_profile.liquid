@@ -14,7 +14,7 @@
     assign followships = false
   endif
 
-  function profile = 'lib/data/queries/profiles/find', user_id: user_id, id: id, followships: followships, membership: membership
+  function profile = 'lib/queries/profiles/find', user_id: user_id, id: id, followships: followships, membership: membership
 
   if require_profile == false
     return profile

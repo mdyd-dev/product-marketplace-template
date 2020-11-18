@@ -11,9 +11,9 @@ method: post
     function url = 'link_to', item: object
     include 'redirect_to', url: url, notice: 'app.items.created'
   else
-    function filters = 'lib/data/queries/search/filters', query: context.params
-    function presigned_url = 'lib/data/queries/presigned_url'
-    function photos = 'lib/data/queries/photos/search', object_uuid: object.uuid
+    function filters = 'lib/queries/search/filters', query: context.params
+    function presigned_url = 'lib/queries/presigned_url'
+    function photos = 'lib/queries/photos/search', object_uuid: object.uuid
 
     include 'theme/simple/items/new', item: object, lib: filters, presigned_url: presigned_url, photos: photos.results
   endif

@@ -18,7 +18,7 @@
     include 'test/register_error', contract: contract, field_name: 'user#valid', message: user.errors
   endunless
 
-  function u = 'lib/data/queries/users/find', id: user.id
+  function u = 'lib/queries/users/find', id: user.id
 
   unless u
     include 'test/register_error', contract: contract, field_name: 'primary user', key: 'app.test.should.be_valid'
@@ -36,7 +36,7 @@
 
   function deleted = 'lib/commands/users/delete', object: u
 
-  function u = 'lib/data/queries/users/find', id: user.id
+  function u = 'lib/queries/users/find', id: user.id
 
   if u
     include 'test/register_error', contract: contract, field_name: 'deleted user', key: 'app.test.should.be_valid'

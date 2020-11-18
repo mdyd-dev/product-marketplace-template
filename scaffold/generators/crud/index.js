@@ -87,8 +87,8 @@ module.exports = class extends Generator {
         this.props
       )
       this.fs.copyTpl(
-        this.templatePath('./views/partials/lib/data/queries/model'),
-        this.destinationPath(`app/views/partials/lib/data/queries/${this.props.modelNamePlural}`),
+        this.templatePath('./views/partials/lib/queries/model'),
+        this.destinationPath(`app/views/partials/lib/queries/${this.props.modelNamePlural}`),
         this.props
       )
       this.fs.copyTpl(

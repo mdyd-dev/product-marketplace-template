@@ -132,7 +132,7 @@ Command is our concept to encapsulate business rules. By following our recommend
 
 ## Data queries
 
-- location: `app/views/partials/lib/data/queries`
+- location: `app/views/partials/lib/queries`
 - generaly these are wrappers on graphql queries
 
 ## Presentation views - HTML / JSON
@@ -248,8 +248,8 @@ Resource generator is expecting model name, list of fields with names and their 
     create app/graphql/cars/delete.graphql
     create app/graphql/cars/search.graphql
     create app/graphql/cars/update.graphql
-    create app/views/partials/lib/data/queries/cars/find.liquid
-    create app/views/partials/lib/data/queries/cars/search.liquid
+    create app/views/partials/lib/queries/cars/find.liquid
+    create app/views/partials/lib/queries/cars/search.liquid
     create app/views/partials/lib/commands/cars/create.liquid
     create app/views/partials/lib/commands/cars/create/build.liquid
     create app/views/partials/lib/commands/cars/create/check.liquid

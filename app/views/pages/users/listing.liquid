@@ -3,15 +3,15 @@ slug: u
 ---
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id
-  function user = 'lib/data/queries/profiles/find', id: context.params.slug2
+  function user = 'lib/queries/profiles/find', id: context.params.slug2
 
   if user == blank
     render 'theme/simple/404', status: 404
     break
   endif
 
-  function items = 'lib/data/queries/items/search', query: context.params, limit: 50, owner: user.id
-  function filters = 'lib/data/queries/search/filters', query: context.params
+  function items = 'lib/queries/items/search', query: context.params, limit: 50, owner: user.id
+  function filters = 'lib/queries/search/filters', query: context.params
 
   include 'theme/simple/users/listing', items: items, filters: filters, user: user, current_profile: current_profile
   render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token

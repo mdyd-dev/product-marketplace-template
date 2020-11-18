@@ -3,7 +3,7 @@ slug: admin/support-tickets
 method: delete
 ---
 {% liquid
-  function object = 'lib/data/queries/contacts/find', id: context.params.id
+  function object = 'lib/queries/contacts/find', id: context.params.id
   function object = 'lib/commands/contacts/delete', object: object
 
   if object.valid

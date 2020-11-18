@@ -11,7 +11,7 @@ method: post
     include 'lib/commands/events/create', type: 'post_replied', actor_id: current_profile.id, object_id: object.id
     redirect_to context.params.return_to
   else
-    function post = 'lib/data/queries/posts/find', id: object.parent_id
+    function post = 'lib/queries/posts/find', id: object.parent_id
     include 'theme/simple/posts/show', root_post: post, object: object
   endif
 %}

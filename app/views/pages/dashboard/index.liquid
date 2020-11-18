@@ -16,16 +16,16 @@ metadata:
   assign profile_id = current_profile.id | default: 'there-should-be'
 
   if section == 'activity'
-    function list = 'lib/data/queries/activities/search', feed: 'user-private', feed_id: current_profile.id, limit: 100
-    function presigned_url = 'lib/data/queries/presigned_url'
+    function list = 'lib/queries/activities/search', feed: 'user-private', feed_id: current_profile.id, limit: 100
+    function presigned_url = 'lib/queries/presigned_url'
   elsif section == 'groups'
-    function list = 'lib/data/queries/groups/search_for_member', limit: 20, name: 'membership', member_id: profile_id
+    function list = 'lib/queries/groups/search_for_member', limit: 20, name: 'membership', member_id: profile_id
   elsif section == 'following'
-    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', l_id: profile_id
+    function list = 'lib/queries/relationships/search', limit: 20, name: 'followship', l_id: profile_id
   elsif section == 'followers'
-    function list = 'lib/data/queries/relationships/search', limit: 20, name: 'followship', r_id: profile_id
+    function list = 'lib/queries/relationships/search', limit: 20, name: 'followship', r_id: profile_id
   elsif section == 'products'
-    function list = 'lib/data/queries/items/search', query: context.params, limit: 20, owner: profile_id
+    function list = 'lib/queries/items/search', query: context.params, limit: 20, owner: profile_id
   endif
 
   include 'theme/simple/dashboard/breadcrumbs', name: 'feed'
