@@ -13,28 +13,11 @@ method: get
 {% endcomment %}
 
 {% liquid
-  assign current_user_id = context.current_user.id
-
   assign conversation_id = context.params.conversation_id
   assign page = context.params.page | plus: 0 | default: 1
   assign per_page = context.params.per_page | plus: 0 | default: 30
 
   graphql messages = 'modules/chat/find_messages', conversation_id: conversation_id, page: page, per_page: per_page
-%}
 
-{% if messages.models.results[0] %}
-  {% if messages.models.results[0].from_id == current_user_id or messages.models.results[0].to_id == current_user_id %}
-    {{ messages.models | json }}
-  {% else %}
-    {% response_status 403 %}
-    {
-      "code": 403,
-      "message": "Trying to view conversation from another user"
-    }
-  {% endif %}
-{% else %}
-  {
-    "code": 200,
-    "message": "No messages in given conversation"
-  }
-{% endif %}
+  render 'modules/chat/theme/json/messages/show', messages: messages, current_user_id: context.current_user.id
+%}
