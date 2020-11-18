@@ -18,11 +18,11 @@
 
     <div class="mt-5">
       <label class="block" for="title">{{ 'app.models.posts.form.title' | t }}</label>
-      <input class="w-2/3 form-input" id="title" name="post[title]" value="{{ object.title }}">>
+      <input class="w-2/3 form-input" id="title" name="post[title]" value="{{ object.title }}">
       {% include 'theme/simple/field_error', errors: object.errors.title %}
     </div>
 
-    <div class="mt-5" data-tc="test">
+    <div class="mt-5">
       <label class="block" for="body">{{ 'app.models.posts.form.body' | t }}</label>
       <textarea class="w-2/3 form-input" id="body" name="post[body]" data-markdown-editor>{{ object.body }}</textarea>
       {% include 'theme/simple/field_error', errors: object.errors.body %}

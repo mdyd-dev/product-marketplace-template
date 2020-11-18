@@ -8,7 +8,7 @@
       <input type="hidden" name="post[id]" value="{{ object.id }}" />
     {% endif %}
 
-    <div class="mt-5" data-tc="test">
+    <div class="mt-5">
       <label class="block" for="body">{{ 'app.models.posts.your_answer' | t }}</label>
       <textarea class="w-2/3 form-input" id="body" name="post[body]" data-markdown-editor>{{ object.body }}</textarea>
       {% render 'theme/simple/field_error', errors: object.errors.body %}
