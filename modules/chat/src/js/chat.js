@@ -165,7 +165,7 @@ const chat = function(){
     module.settings.loadingIndicator.style.display = 'block';
 
     // get the data
-    fetch(`/api/chat/get_messages?conversation_id=${module.conversationId}&page=${page}&per_page=${perPage}`)
+    fetch(`/api/chat/messages?conversation_id=${module.conversationId}&page=${page}&per_page=${perPage}`)
     .then(response => {
       // parse it to JSON if valid
       if(response.ok){
@@ -175,7 +175,7 @@ const chat = function(){
       }
     })
     .then((data) => {
-      // construct all the HTML elements for messages
+      // construct HTML elements for messages
       let html = '';
 
       Object.entries(data.results).reverse().forEach(([key, data]) => {
