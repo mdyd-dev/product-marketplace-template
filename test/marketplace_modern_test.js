@@ -5,7 +5,7 @@ import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          adminPage, registerForm, loginForm, itemShow, editedItemShow,
          passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
          profileEditForm, orders, publicProfile, groupsPage, footer,
-         contactUsForm, activityFeed, categoryName } from './fixtures'
+         contactUsForm, activityFeed, categoryName, topicsPage } from './fixtures'
 import { register, createItem } from './helper'
 
 
@@ -300,4 +300,42 @@ test('Products', async (t) => {
     .click(publicProfile.menu.products)
     // expects an item that belongs to the profile we are currently visiting
     .expect(link.withText(item.commonName).exists).ok()
+})
+
+fixture`Question/Topics`
+          .page(myUrl)
+
+test('Add question', async (t) => {
+  await t.useRole(adminRole)
+    .debug()
+    .click(topMenu.buttons.questions)
+    .click(topicsPage.buttons.addQuestion)
+    .typeText(topicsPage.inputs.questionTitle, "How to sell?")
+    .click(Selector('label[for="body"]'))
+    .pressKey("t e s t 1 2 3")
+    .typeText(topicsPage.inputs.questionTags, "test-question-tag")
+    .click(topicsPage.buttons.postQuestion)
+    .debug()
+})
+
+test('Add answer', async (t) => {
+  await t.useRole(buyerRole)
+    .click(topMenu.buttons.questions)
+    .click(link.withText('How to sell?'))
+    .click(Selector('label[for="body"]'))
+    .pressKey("t e s t")
+    .click(topicsPage.buttons.postAnswer)
+    .expect(topicsPage.fields.answerBody.withText('test').exists).ok()
+})
+
+test('Rate question and answer', async (t) => {
+  await t.useRole(sellerRole)
+    .click(topMenu.buttons.questions)
+    .click(link.withText('How to sell?'))
+    .click(topicsPage.vote.pointUpQuestion) // rate the question
+    .click(topicsPage.vote.pointUpAnswer) // rate the answer
+    .expect(topicsPage.fields.questionBody.withText('test123').exists).ok()
+    .expect(topicsPage.fields.answerBody.withText('test').exists).ok()
+    .expect(topicsPage.ratings.question.exists).ok()
+    .expect(topicsPage.ratings.firstAnswer.exists).ok()
 })
