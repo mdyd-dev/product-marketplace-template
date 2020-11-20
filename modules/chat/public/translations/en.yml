@@ -1,0 +1,6 @@
+en:
+  blank_message: >-
+    To start a conversation, find a person profile and use the ‘Send
+    message’ button
+  loading_previous: Loading previous messages…
+  message_input_placeholder: Type your message here and press Enter to send
