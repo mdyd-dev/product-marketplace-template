@@ -1,4 +1,4 @@
-<div class="flex bg-white shadow-lg rounded-lg border {% if root_post.accepted_post_id == post.id %}border-green-600{% else %}border-white{% endif %} mx-4 md:mx-auto mb-10">
+<div class="flex bg-white shadow-lg rounded-lg border {% if root_post.accepted_post_id == post.id %}border-green-600{% else %}border-white{% endif %} mx-4 md:mx-auto mb-10" data-tc="postcard">
   <div class="flex items-start px-4 py-6 w-full">
     <div class="flex flex-col items-center pr-4">
       <a href="{% render 'link_to', profile: post.creator %}">
