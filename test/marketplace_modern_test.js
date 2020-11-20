@@ -11,9 +11,6 @@ import { register, createItem, checkErrors } from './helper'
 
 fixture`Happy path scenario`
           .page(myUrl)
-          //.beforeEach( async t => {
-          //  await checkErrors()
-          //})
 
 test.page(myUrl + '/sign-up')('Register seller', async (t) => {
   await register(SellerRandomUser)
@@ -21,7 +18,6 @@ test.page(myUrl + '/sign-up')('Register seller', async (t) => {
 
 test.page(myUrl + '/sign-up')(`Register buyer John`, async (t) => {
   await register(John)
-  await t.debug()
 })
 
 test('Edit John Profile Page', async (t) => {
@@ -294,7 +290,6 @@ fixture`Question/Topics`
 
 test('Add question', async (t) => {
   await t.useRole(adminRole)
-    .debug()
     .click(topMenu.buttons.questions)
     await checkErrors()
     await t.click(topicsPage.buttons.addQuestion)
@@ -304,7 +299,6 @@ test('Add question', async (t) => {
     .pressKey("t e s t")
     .typeText(topicsPage.inputs.questionTags, "test-question-tag")
     .click(topicsPage.buttons.postQuestion)
-    .debug()
 })
 
 test('Add answer', async (t) => {
