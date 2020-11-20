@@ -1,4 +1,4 @@
-<form action="/dashboard/posts/vote" method="post">
+<form action="/dashboard/posts/vote" method="post" data-tc="voteup">
   {% include 'authenticity_token' %}
   <input type="hidden" name="post[id]" value="{{ post.id }}"/>
   <input type="hidden" name="post[type]" value="{% if post.upvote_profile_ids contains current_profile.id %}clear{% else %}up{% endif %}"/>
@@ -9,7 +9,7 @@
 
 <span class="pb-2 text-3xl font-bold">{{ post.upvote_profile_ids.size | minus: post.downvote_profile_ids.size | default: 0 }}</span>
 
-<form action="/dashboard/posts/vote" method="post">
+<form action="/dashboard/posts/vote" method="post" data-tc="votedown">
   {% include 'authenticity_token' %}
   <input type="hidden" name="post[id]" value="{{ post.id }}"/>
   <input type="hidden" name="post[type]" value="{% if post.downvote_profile_ids contains current_profile.id %}clear{% else %}down{% endif %}"/>

@@ -316,9 +316,9 @@ test('Rate question and answer', async (t) => {
   await t.useRole(sellerRole)
     .click(topMenu.buttons.questions)
     .click(link.withText('How to sell?'))
-    .click(topicsPage.vote.pointUpQuestion) // rate the question
-    .click(topicsPage.vote.pointUpAnswer) // rate the answer
-    .expect(topicsPage.fields.questionBody.withText('test').exists).ok()
+    .click(Selector('form[data-tc="voteup"]')) // rate the question
+    await t.click(Selector('form[data-tc="voteup"]').nth(1)) // rate the answer
+    await t.expect(topicsPage.fields.questionBody.withText('test').exists).ok()
     .expect(topicsPage.fields.answerBody.withText('test').exists).ok()
     .expect(topicsPage.ratings.question.exists).ok()
     .expect(topicsPage.ratings.firstAnswer.exists).ok()
@@ -356,4 +356,27 @@ test(`Categories`, async (t) => {
     await t.typeText(adminPage.inputs.categoryNameField, categoryName)
     await t.click(adminPage.buttons.save)
     await t.expect(link.withText(categoryName).exists).ok()
+})
+
+test('Order statuses', async (t) => {
+  await t.useRole(sellerRole)
+    .debug()
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.itemsForSell)
+    .click(Selector('td').find('select'))
+    .click(Selector('option').withText('Unpublished'))
+    .click(topMenu.buttons.items)
+    .typeText(Selector('input[name="keyword"]'), 'johnsmith')
+    .click(Selector('form[action="/search"]').find('button').withText('Search'))
+    .expect(link.withText('johnsmith').exists).notOk()
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.itemsForSell)
+    .click(Selector('td').find('select'))
+    .click(Selector('option').withText('Unpublished'))
+    await t.click(topMenu.buttons.items)
+    .typeText(Selector('input[name="keyword"]'), 'johnsmith')
+    .click(Selector('form[action="/search"]').find('button').withText('Search'))
+    .expect(Selector('h2').find('a').withText('johnsmith watch').exists).notOk()
 })
