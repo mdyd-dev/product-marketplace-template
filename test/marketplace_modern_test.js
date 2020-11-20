@@ -318,7 +318,7 @@ test('Rate question and answer', async (t) => {
     .click(topMenu.buttons.questions)
     .click(link.withText('How to sell?'))
     .click(Selector('form[data-tc="voteup"]')) // rate the question
-    await t.click(Selector('div[data-tc="postcard"]:nth-child(2)').find('form[data-tc="voteup"]')) // rate answer
+    await t.click(Selector('div[data-tc="postcard"]').nth(1).find('form[data-tc="voteup"]')) // rate answer
     await t.expect(topicsPage.fields.questionBody.withText('test').exists).ok()
     .expect(topicsPage.fields.answerBody.withText('test2').exists).ok()
     .expect(topicsPage.ratings.question.exists).ok()
