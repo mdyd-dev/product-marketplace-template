@@ -1,59 +1,51 @@
-<header class="py-4">
-    <div class="container flex flex-col flex-wrap items-center mx-auto md:flex-row">
+<header class="py-4 container flex flex-col flex-wrap items-center mx-auto md:flex-row">
 
-        <a class="flex items-center font-medium text-gray-900" href="/">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 p-2 text-white bg-blue-500 rounded-full" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
-            <span class="ml-3 text-xl">{{ 'app.title' | t }}</span>
-        </a>
+  <a class="flex items-center font-medium text-gray-900" href="/">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 p-2 text-white bg-blue-500 rounded-full" viewBox="0 0 24 24">
+      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+    </svg>
+    <span class="ml-3 text-xl">{{ 'app.title' | t }}</span>
+  </a>
 
-        {% include 'theme/simple/home/quick_search_form' %}
+  {% include 'theme/simple/home/quick_search_form' %}
 
-        <nav class="flex flex-wrap items-center text-base mx-auto mt-4 lg:mx-0 lg:mt-0">
-            <a href="/dashboard/items/new" class="p-3 hover:text-gray-900">{{ 'app.header.add' | t }}</a>
-            <a href="/search" class="p-3 hover:text-gray-900">{{ 'app.items.list' | t }}</a>
-            <a href="/groups" class="p-3 hover:text-gray-900">{{ 'app.groups.list' | t }}</a>
-            <a href="/posts" class="p-3 hover:text-gray-900">{{ 'app.models.posts.list' | t }}</a>
+  <nav>
+    <ul class="flex flex-wrap items-center text-base mx-auto mt-4 lg:mx-0 lg:mt-0">
+      <li><a href="/dashboard/items/new" class="p-3 hover:text-gray-900">{{ 'app.header.add' | t }}</a></li>
+      <li><a href="/search" class="p-3 hover:text-gray-900">{{ 'app.items.list' | t }}</a></li>
+      <li><a href="/groups" class="p-3 hover:text-gray-900">{{ 'app.groups.list' | t }}</a></li>
+      <li><a href="/posts" class="p-3 hover:text-gray-900">{{ 'app.models.posts.list' | t }}</a></li>
+      {% if context.current_user.id %}
+        {% assign superadmins = context.constants.superadmins | split: ',' %}
+        {% if superadmins contains context.current_user.email %}
+          <li><a href="/admin" class="p-3 hover:text-gray-900">{{ 'app.admin' | t }}</a></li>
+        {% endif %}
+        <li class="relative">
+          <a href="/inbox" class="p-3 hover:text-gray-900" id="notifications-chat" data-current-user-id="{{ profile.id }}" data-current-user-slug="{{ profile.slug }}">
+            {{ 'app.header.chat' | t }}
+            <span id="notification-bell" style="top: -2px; right: -10px;" class="absolute rounded-full h-3 w-3 bg-pink-500 hidden"></span>
+          </a>
+        </li>
+        <li>
+          <a href="/dashboard" class="p-3 flex hover:text-gray-900">
+            {{ profile.first_name | default: profile.name }}
+            <img src="{{ profile.avatar.versions.tiny }}" class="w-5 h-5 rounded-full ml-2">
+          </a>
+        </li>
+        <li>
+          <form action="/sessions/destroy" method="post">
+            {% include 'authenticity_token' %}
+            <button type="submit">
+              {{ 'app.header.log-out' | t }}
+            </button>
+          </form>
+        </li>
+      {% else %}
+        <li>
+          <a href="/sessions/new" class="ml-3 button button-sm">{{ 'app.login' | t }}</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
 
-            {% if context.current_user.id %}
-                {% assign superadmins = context.constants.superadmins | split: ',' %}
-                {% if superadmins contains context.current_user.email %}
-                    <a href="/admin" class="p-3 hover:text-gray-900">{{ 'app.admin' | t }}</a>
-                {% endif %}
-                <a href="/dashboard" class="p-3 hover:text-gray-900">{{ 'app.header.feed' | t }}</a>
-				<a href="/inbox" class="p-3 hover:text-gray-900" id="notifications-chat" data-current-user-id="{{ profile.id }}" data-current-user-slug="{{ profile.slug }}">
-					<p class="relative">
-						{{ 'app.header.chat' | t }}
-						<span id="notification-bell" style="top: -2px; right: -10px;" class="absolute rounded-full h-3 w-3 bg-pink-500 hidden"></span>
-					</p>
-				</a>
-
-                <div x-data="{ dropdownOpen: false }" class="relative">
-                    <button @click="dropdownOpen = !dropdownOpen" class="flex items-center relative z-10 px-3 py-2 bg-white rounded-md focus:outline-none" data-menu-dropdown>
-						<span class="hover:text-gray-900">{{ profile.first_name | default: profile.name }}</span>
-	                        <img src="{{ profile.avatar.versions.tiny }}" class="w-5 h-5 rounded-full ml-2">
-					</button>
-
-                    <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>
-
-                    <div x-show="dropdownOpen" x-cloak class="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl">
-                        <a href="/dashboard" class="block px-4 py-2 text-gray-700 capitalize hover:bg-blue-700 hover:text-white">
-                            {{ 'app.header.dashboard' | t }}
-                        </a>
-                        <form action="/sessions/destroy" method="post">
-                            {% include 'authenticity_token' %}
-                            <button class="block w-full px-4 py-2 text-left text-gray-700 capitalize hover:bg-blue-700 hover:text-white">
-                                {{ 'app.header.log-out' | t }}
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            {% else %}
-                <a href="/sessions/new" class="ml-3 button button-sm">
-                    {{ 'app.login' | t }}
-                </a>
-            {% endif %}
-        </nav>
-    </div>
 </header>

@@ -11,8 +11,3 @@ main a[href]:hover {
   @apply text-blue-600;
 }
 /* purgecss end ignore */
-
-/* used by alpine.js to mark items before JS initializes */
-[x-cloak] {
-	display: none;
-}
