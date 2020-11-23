@@ -15,8 +15,8 @@ export default class TopicsPage {
       questionTags: Selector('#tags')
     }
     this.vote = {
-      pointUpQuestion: Selector('form[action="/dashboard/posts/vote"]'),
-      pointUpAnswer: Selector('form[action="/dashboard/posts/vote"]').nth(2),
+      pointUpQuestion: Selector('button[data-tc="voteup"]'),
+      pointUpAnswer: Selector('button[data-tc="voteup"]').nth(1),
     }
     this.fields = {
       questionBody: Selector('div').find('p'),

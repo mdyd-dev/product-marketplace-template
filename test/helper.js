@@ -41,3 +41,12 @@ export async function createItem(itemName, itemDescription, itemPrice) {
     ])
     .click(newItemForm.buttons.submit)
 };
+
+export async function checkErrors() {
+  await t.expect(Selector('body').withText("translation missing").exists).notOk();
+  await t.expect(Selector('main').find('img[alt="Page missing"]').exists).notOk();
+  await t.expect('body').notContains('Liquid Error')
+  await t.expect('body').notContains('RenderFormTag Error:')
+  await t.expect('body').notContains('QueryGraphTag Error:')
+  await t.expect('body').notContains('ExecuteQueryTagError:');
+};
