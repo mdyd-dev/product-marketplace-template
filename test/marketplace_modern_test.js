@@ -333,8 +333,8 @@ test('Rate question and answer', async (t) => {
   await t.useRole(sellerRole)
     .click(topMenu.buttons.questions)
     .click(link.withText('How to sell?'))
-    .checkErrors()
-    .click(topicsPage.vote.pointUpQuestion) // rate the question
+    await checkErrors()
+    await t.click(topicsPage.vote.pointUpQuestion) // rate the question
     .click(topicsPage.vote.pointUpAnswer) // rate the answer
     .expect(topicsPage.fields.questionBody.withText('test123').exists).ok()
     .expect(topicsPage.fields.answerBody.withText('test').exists).ok()
