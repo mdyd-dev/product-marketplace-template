@@ -309,7 +309,7 @@ test('Add question', async (t) => {
   await t.useRole(adminRole)
     .debug()
     .click(topMenu.buttons.questions)
-    .checkErrors()
+    await checkErrors()
     await t.click(topicsPage.buttons.addQuestion)
     .typeText(topicsPage.inputs.questionTitle, "How to sell?")
     .click(Selector('label[for="body"]'))
