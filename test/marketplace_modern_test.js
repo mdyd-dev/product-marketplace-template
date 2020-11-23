@@ -250,7 +250,7 @@ test('Groups', async (t) => {
   //checks if group exists
     .click(dashboard.nav.myGroups)
     await checkErrors()
-    .expect(link.withText(group.name).exists).ok()
+    await t.expect(link.withText(group.name).exists).ok()
   //edit group
     .click(groupsPage.buttons.editGroup)
     .typeText(groupsPage.inputs.name, group.commonName, { replace: true })
@@ -277,7 +277,7 @@ test('Groups', async (t) => {
   await t.useRole(buyerRole)
     .click(footer.support.contactUs)
     await checkErrors()
-    .typeText(contactUsForm.inputs.email, John.email)
+    await t.typeText(contactUsForm.inputs.email, John.email)
     .click(contactUsForm.buttons.menuDropdown)
     .click(contactUsForm.options.purchase)
     .typeText(contactUsForm.inputs.message, "There was a problem with...")
@@ -290,7 +290,7 @@ test('Groups', async (t) => {
     .click(topMenu.buttons.adminPanel)
     .click(adminPage.menu.supportTickets)
     await checkErrors()
-    .click(Selector('article').withText(John.email))
+    await t.click(Selector('article').withText(John.email))
     .expect(Selector('article').withText("There was a problem with...").exists).ok()
 })
 
@@ -301,7 +301,7 @@ test('Smart search', async (t) => {
     .click(itemSearch.buttons.search)
     // expects item, group and profile with 'common name'
     await checkErrors()
-    .expect(link.withText(group.commonName).exists).ok()
+    await t.expect(link.withText(group.commonName).exists).ok()
     .expect(link.withText(item.commonName).exists).ok()
     .expect(link.withText(John.name).exists).ok()
 })
@@ -314,7 +314,7 @@ test('Products', async (t) => {
     .click(publicProfile.menu.products)
     await checkErrors()
     // expects an item that belongs to the profile we are currently visiting
-    .expect(link.withText(item.commonName).exists).ok()
+    await t.expect(link.withText(item.commonName).exists).ok()
 })
 
 fixture`Question/Topics`
