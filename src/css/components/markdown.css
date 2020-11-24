@@ -55,11 +55,11 @@
 }
 
 .markdown code {
-  @apply font-mono text-sm inline bg-gray-200 rounded px-1 py-5;
+  @apply font-mono text-sm inline bg-gray-200 rounded px-1 py-1;
 }
 
 .markdown pre {
-  @apply bg-gray-100 rounded p-4;
+  @apply mt-3 bg-gray-100 rounded p-4;
 }
 
 .markdown pre code {
