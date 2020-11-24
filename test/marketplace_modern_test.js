@@ -19,6 +19,7 @@ async function checkTranslation(translationMissing) {
 fixture`Happy path scenario`
           .page(myUrl)
 
+
 test.page(myUrl + '/sign-up')('Register seller', async (t) => {
   await register(SellerRandomUser)
 })
@@ -328,7 +329,7 @@ test('Add question', async (t) => {
     await t.click(topicsPage.buttons.addQuestion)
     .typeText(topicsPage.inputs.questionTitle, "How to sell?")
     .click(Selector('label[for="body"]'))
-    .pressKey("t e s t 1 2 3")
+    .pressKey("q u e s t i o n")
     .typeText(topicsPage.inputs.questionTags, "test-question-tag")
     .click(topicsPage.buttons.postQuestion)
     .debug()
@@ -339,20 +340,21 @@ test('Add answer', async (t) => {
     .click(topMenu.buttons.questions)
     .click(link.withText('How to sell?'))
     .click(Selector('label[for="body"]'))
-    .pressKey("t e s t")
+    .pressKey("a n s w e r")
     .click(topicsPage.buttons.postAnswer)
-    .expect(topicsPage.fields.answerBody.withText('test').exists).ok()
+    .expect(topicsPage.fields.answerBody.withText('answer').exists).ok()
+    //.expect(Selector('.container').withExactText('foo').exists).ok();
 })
 
 test('Rate question and answer', async (t) => {
   await t.useRole(sellerRole)
     .click(topMenu.buttons.questions)
-    .click(link.withText('How to sell?'))
+    .click(Selector('div').find('a').withText('How to sell?'))
     await checkErrors()
     await t.click(topicsPage.vote.pointUpQuestion) // rate the question
     .click(topicsPage.vote.pointUpAnswer) // rate the answer
-    .expect(topicsPage.fields.questionBody.withText('test123').exists).ok()
-    .expect(topicsPage.fields.answerBody.withText('test').exists).ok()
+    .expect(topicsPage.fields.questionBody.withText('question').exists).ok()
+    .expect(topicsPage.fields.answerBody.withText('answer').exists).ok()
     .expect(topicsPage.ratings.question.exists).ok()
     .expect(topicsPage.ratings.firstAnswer.exists).ok()
 })
