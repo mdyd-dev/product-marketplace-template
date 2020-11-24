@@ -40,11 +40,5 @@ module.exports = {
 	padding: ['responsive', 'last'],
 	margin: ['responsive', 'last']
   },
-  plugins: [require('@tailwindcss/custom-forms')],
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-    defaultLineHeights: true,
-    standardFontWeights: true
-  }
+  plugins: [require('@tailwindcss/forms')]
 };
