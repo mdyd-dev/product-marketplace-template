@@ -1,4 +1,4 @@
-<header class="py-4 container flex flex-col flex-wrap items-center mx-auto md:flex-row">
+<header class="w-full py-4 flex flex-col flex-wrap items-center mx-auto md:flex-row">
 
   <a class="flex items-center font-medium text-gray-900" href="/">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 p-2 text-white bg-blue-500 rounded-full" viewBox="0 0 24 24">
@@ -27,7 +27,7 @@
           </a>
         </li>
         <li>
-          <a href="/dashboard" class="p-3 flex hover:text-gray-900">
+          <a href="/dashboard" class="p-3 flex items-center hover:text-gray-900">
             {{ profile.first_name | default: profile.name }}
             <img src="{{ profile.avatar.versions.tiny }}" class="w-5 h-5 rounded-full ml-2">
           </a>
