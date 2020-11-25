@@ -3,7 +3,7 @@ import NewSessionForm from './pages/newsession'
 import ProfileEditForm from './pages/profileEdit'
 import TopMenuBtns from './pages/topmenu'
 import NewItemForm from './pages/newitem'
-import { getURL, myUrl } from './fixtures'
+import { getURL, myUrl, topicsPage } from './fixtures'
 
 const newItemForm = new NewItemForm()
 const topMenu = new TopMenuBtns()

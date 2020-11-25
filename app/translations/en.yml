@@ -920,6 +920,7 @@ en:
         href="mailto:support@MVP.com">support@MVP.com.</a></span>
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself
+      disallowed: is not valid
       blank: cannot be blank
       length:
         minimum: 'is too short (minimum is %{count} characters)'
