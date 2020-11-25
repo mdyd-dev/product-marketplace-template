@@ -1,7 +1,6 @@
 {% assign MINIMAL_PRICE = 10 | times: 100 %}
 {% assign MAXIMAL_PRICE = 100000 | times: 100 %}
 
-
 {% liquid
   assign c = '{ "errors": {}, "valid": true }' | parse_json
 
@@ -12,7 +11,6 @@
   if object.name == blank
     include 'lib/register_error', contract: c, field_name: 'name', key: 'app.errors.blank'
   endif
-
 
   if object.category == blank
     include 'lib/register_error', contract: c, field_name: 'category', key: 'app.errors.blank'
