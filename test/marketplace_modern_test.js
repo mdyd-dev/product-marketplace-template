@@ -6,7 +6,7 @@ import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
          profileEditForm, orders, publicProfile, groupsPage, footer,
          contactUsForm, activityFeed, categoryName, topicsPage } from './fixtures'
-import { register, createItem, checkErrors, createQuestion } from './helper'
+import { register, createItem, checkErrors, createQuestion, createAnswer } from './helper'
 
 
 const translationMissing = Selector('body').withText('translation missing')
@@ -334,9 +334,8 @@ test('Add answer', async (t) => {
   await t.useRole(buyerRole)
     .click(topMenu.buttons.questions)
     .click(Selector('div').find('a').withText('How to sell?'))
-    .click(Selector('label[for="body"]'))
-    .pressKey("a n s w e r")
-    .click(topicsPage.buttons.postAnswer)
+    await createAnswer()
+    await t.click(topicsPage.buttons.postAnswer)
     .expect(topicsPage.fields.answerBody.withText('answer').exists).ok()
 })
 

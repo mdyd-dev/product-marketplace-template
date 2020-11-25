@@ -60,3 +60,16 @@ export async function createQuestion() {
   .click(topicsPage.buttons.postQuestion)
   .expect(topicsPage.fields.answerBody.withText('question').exists).ok()
 };
+
+export async function createAnswer() {
+  await t
+  .click(Selector('label[for="body"]'))
+  .pressKey("a")
+  .pressKey("n")
+  .pressKey("s")
+  .pressKey("w")
+  .pressKey("e")
+  .pressKey("r")
+};
+
+
