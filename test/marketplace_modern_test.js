@@ -6,7 +6,7 @@ import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
          profileEditForm, orders, publicProfile, groupsPage, footer,
          contactUsForm, activityFeed, categoryName, topicsPage } from './fixtures'
-import { register, createItem, checkErrors } from './helper'
+import { register, createItem, checkErrors, createQuestion } from './helper'
 
 
 const translationMissing = Selector('body').withText('translation missing')
@@ -327,23 +327,17 @@ test('Add question', async (t) => {
     .click(topMenu.buttons.questions)
     await checkErrors()
     await t.click(topicsPage.buttons.addQuestion)
-    .typeText(topicsPage.inputs.questionTitle, "How to sell?")
-    .click(Selector('label[for="body"]'))
-    .pressKey("q u e s t i o n")
-    .typeText(topicsPage.inputs.questionTags, "test-question-tag")
-    .click(topicsPage.buttons.postQuestion)
-    .debug()
+    await createQuestion()
 })
 
 test('Add answer', async (t) => {
   await t.useRole(buyerRole)
     .click(topMenu.buttons.questions)
-    .click(link.withText('How to sell?'))
+    .click(Selector('div').find('a').withText('How to sell?'))
     .click(Selector('label[for="body"]'))
     .pressKey("a n s w e r")
     .click(topicsPage.buttons.postAnswer)
     .expect(topicsPage.fields.answerBody.withText('answer').exists).ok()
-    //.expect(Selector('.container').withExactText('foo').exists).ok();
 })
 
 test('Rate question and answer', async (t) => {

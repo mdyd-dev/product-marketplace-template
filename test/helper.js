@@ -3,7 +3,7 @@ import NewSessionForm from './pages/newsession'
 import ProfileEditForm from './pages/profileEdit'
 import TopMenuBtns from './pages/topmenu'
 import NewItemForm from './pages/newitem'
-import { getURL, myUrl } from './fixtures'
+import { getURL, myUrl, topicsPage } from './fixtures'
 
 const newItemForm = new NewItemForm()
 const topMenu = new TopMenuBtns()
@@ -49,4 +49,14 @@ export async function checkErrors() {
   await t.expect('body').notContains('RenderFormTag Error:')
   await t.expect('body').notContains('QueryGraphTag Error:')
   await t.expect('body').notContains('ExecuteQueryTagError:');
+};
+
+export async function createQuestion() {
+  await t
+  .typeText(topicsPage.inputs.questionTitle, "How to sell?")
+  .click(Selector('label[for="body"]'))
+  .pressKey("q u e s t i o n")
+  .typeText(topicsPage.inputs.questionTags, "test-question-tag")
+  .click(topicsPage.buttons.postQuestion)
+  .expect(topicsPage.fields.answerBody.withText('question').exists).ok()
 };
