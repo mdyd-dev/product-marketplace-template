@@ -6,7 +6,7 @@ import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
          profileEditForm, orders, publicProfile, groupsPage, footer,
          contactUsForm, activityFeed, categoryName, topicsPage } from './fixtures'
-import { register, createItem, checkErrors, createQuestion, createAnswer } from './helper'
+import { register, createItem, checkErrors } from './helper'
 
 
 const translationMissing = Selector('body').withText('translation missing')
@@ -18,7 +18,6 @@ async function checkTranslation(translationMissing) {
 
 fixture`Happy path scenario`
           .page(myUrl)
-
 
 test.page(myUrl + '/sign-up')('Register seller', async (t) => {
   await register(SellerRandomUser)
@@ -327,27 +326,33 @@ test('Add question', async (t) => {
     .click(topMenu.buttons.questions)
     await checkErrors()
     await t.click(topicsPage.buttons.addQuestion)
-    await createQuestion()
+    .typeText(topicsPage.inputs.questionTitle, "How to sell?")
+    .click(Selector('label[for="body"]'))
+    .pressKey("t e s t 1 2 3")
+    .typeText(topicsPage.inputs.questionTags, "test-question-tag")
+    .click(topicsPage.buttons.postQuestion)
+    .debug()
 })
 
 test('Add answer', async (t) => {
   await t.useRole(buyerRole)
     .click(topMenu.buttons.questions)
-    .click(Selector('div').find('a').withText('How to sell?'))
-    await createAnswer()
-    await t.click(topicsPage.buttons.postAnswer)
-    .expect(topicsPage.fields.answerBody.withText('answer').exists).ok()
+    .click(link.withText('How to sell?'))
+    .click(Selector('label[for="body"]'))
+    .pressKey("t e s t")
+    .click(topicsPage.buttons.postAnswer)
+    .expect(topicsPage.fields.answerBody.withText('test').exists).ok()
 })
 
 test('Rate question and answer', async (t) => {
   await t.useRole(sellerRole)
     .click(topMenu.buttons.questions)
-    .click(Selector('div').find('a').withText('How to sell?'))
+    .click(link.withText('How to sell?'))
     await checkErrors()
     await t.click(topicsPage.vote.pointUpQuestion) // rate the question
     .click(topicsPage.vote.pointUpAnswer) // rate the answer
-    .expect(topicsPage.fields.questionBody.withText('question').exists).ok()
-    .expect(topicsPage.fields.answerBody.withText('answer').exists).ok()
+    .expect(topicsPage.fields.questionBody.withText('test123').exists).ok()
+    .expect(topicsPage.fields.answerBody.withText('test').exists).ok()
     .expect(topicsPage.ratings.question.exists).ok()
     .expect(topicsPage.ratings.firstAnswer.exists).ok()
 })

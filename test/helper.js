@@ -50,26 +50,3 @@ export async function checkErrors() {
   await t.expect('body').notContains('QueryGraphTag Error:')
   await t.expect('body').notContains('ExecuteQueryTagError:');
 };
-
-export async function createQuestion() {
-  await t
-  .typeText(topicsPage.inputs.questionTitle, "How to sell?")
-  .click(Selector('label[for="body"]'))
-  .pressKey("q u e s t i o n")
-  .typeText(topicsPage.inputs.questionTags, "test-question-tag")
-  .click(topicsPage.buttons.postQuestion)
-  .expect(topicsPage.fields.answerBody.withText('question').exists).ok()
-};
-
-export async function createAnswer() {
-  await t
-  .click(Selector('label[for="body"]'))
-  .pressKey("a")
-  .pressKey("n")
-  .pressKey("s")
-  .pressKey("w")
-  .pressKey("e")
-  .pressKey("r")
-};
-
-
