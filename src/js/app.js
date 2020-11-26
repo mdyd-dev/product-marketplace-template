@@ -26,3 +26,10 @@ if (markdownEditor) {
     console.log('Markdown editor module loaded.');
   });
 }
+
+const styleGuide = document.querySelector('#styleGuide');
+if (styleGuide) {
+  import(/* webpackChunkName: "style-guide" */ './style-guide.js').then(() => {
+    console.log('Style guide module loaded.');
+  });
+}
