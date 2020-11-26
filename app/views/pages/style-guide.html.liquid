@@ -172,6 +172,63 @@
         {% render 'theme/simple/ui/subtitle', label: 'Example subtitle' %}
       </section>
     </div>
+
+    <div class="mt-16 flex gap-10">
+      <section class="w-2/3">
+        {% render 'theme/simple/ui/subtitle', label: 'Sidenotes' %}
+        <dl>
+          <div>
+            <dt>Color:</dt>
+            <dd class="font-mono styleGuide-color"></dd>
+          </div>
+          <div>
+            <dt>Font:</dt>
+            <dd class="font-mono styleGuide-font"></dd>
+          </div>
+          <div>
+            <dt>Size:</dt>
+            <dd class="font-mono styleGuide-size"></dd>
+          </div>
+        </dl>
+      </section>
+      <section class="w-1/3 p-5 flex items-center border styleGuide-example">
+        {% render 'theme/simple/ui/sidenote', label: 'Example sidenote' %}
+      </section>
+      <section class="styleGuide-code">
+        {% raw %}{% render 'theme/simple/ui/sidenote', label: 'Example sidenote' %}{% endraw %}
+      </section>
+    </div>
   </article>
+
+  <article id="styleGuide-linksButtons" class="mt-20">
+    <header>
+      {% render 'theme/simple/ui/title', label: 'Links and buttons' %}
+    </header>
+
+    <div class="flex gap-10">
+      <section class="w-2/3">
+        {% render 'theme/simple/ui/subtitle', label: 'Links' %}
+        <dl>
+          <div>
+            <dt>Color:</dt>
+            <dd class="font-mono styleGuide-color"></dd>
+          </div>
+          <div>
+            <dt>Font:</dt>
+            <dd class="font-mono styleGuide-font"></dd>
+          </div>
+          <div>
+            <dt>Size:</dt>
+            <dd class="font-mono styleGuide-size"></dd>
+          </div>
+        </dl>
+      </section>
+      <section class="w-1/3 p-5 flex items-center border styleGuide-example">
+        <a href="http://platformos.com/">Sample link</a>
+      </section>
+    </div>
+  </article>
+
+
 
 </section>
