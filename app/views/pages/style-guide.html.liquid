@@ -106,18 +106,18 @@
     <div class="flex gap-10">
       <section class="w-2/3">
         {% render 'theme/simple/ui/subtitle', label: 'Text content' %}
-        <dl>
-          <div>
-            <dt>Color:</dt>
-            <dd class="font-mono styleGuide-color"></dd>
+        <dl class="table">
+          <div class="table-row">
+            <dt class="pr-5 table-cell">Color:</dt>
+            <dd class="table-cell font-mono styleGuide-color"></dd>
           </div>
-          <div>
-            <dt>Font:</dt>
-            <dd class="font-mono styleGuide-font"></dd>
+          <div class="table-row">
+            <dt class="pr-5 table-cell">Font:</dt>
+            <dd class="table-cell font-mono styleGuide-font"></dd>
           </div>
-          <div>
-            <dt>Size:</dt>
-            <dd class="font-mono styleGuide-size"></dd>
+          <div class="table-row">
+            <dt class="pr-5 table-cell">Size:</dt>
+            <dd class="table-cell font-mono styleGuide-size"></dd>
           </div>
         </dl>
       </section>
@@ -130,20 +130,29 @@
     <div class="mt-16 flex gap-10">
       <section class="w-2/3">
         {% render 'theme/simple/ui/subtitle', label: 'Titles' %}
-        <dl>
-          <div>
-            <dt>Color:</dt>
-            <dd class="font-mono styleGuide-color"></dd>
+        <dl class="table">
+          <div class="table-row">
+            <dt class="pr-5 table-cell">Color:</dt>
+            <dd class="table-cell font-mono styleGuide-color"></dd>
           </div>
-          <div>
-            <dt>Font:</dt>
-            <dd class="font-mono styleGuide-font"></dd>
+          <div class="table-row">
+            <dt class="pr-5 table-cell">Font:</dt>
+            <dd class="table-cell font-mono styleGuide-font"></dd>
           </div>
-          <div>
-            <dt>Size:</dt>
-            <dd class="font-mono styleGuide-size"></dd>
+          <div class="table-row">
+            <dt class="pr-5 table-cell">Size:</dt>
+            <dd class="table-cell font-mono styleGuide-size"></dd>
           </div>
         </dl>
+        <div class="mt-5 p-5 border bg-white font-mono styleGuide-code">
+          {% raw %}{% render 'theme/simple/ui/title', label: 'Example title' %}{% endraw %}
+          <button class="float-right styleGuide-copy" title="Copy to clipboard">
+            <svg width="24" height="24" class="text-gray-700" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 21.75C16.5 22.5784 15.8284 23.25 15 23.25H4.5C3.67157 23.25 3 22.5784 3 21.75V8.25C3 7.42157 3.67157 6.75 4.5 6.75H12.129C12.5265 6.75008 12.9078 6.90798 13.189 7.189L16.061 10.061C16.342 10.3422 16.4999 10.7235 16.5 11.121V21.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7.5 6.75V2.25C7.5 1.42157 8.17157 0.75 9 0.75H16.629C17.0265 0.750085 17.4078 0.907982 17.689 1.189L20.561 4.061C20.842 4.3422 20.9999 4.72345 21 5.121V15.75C21 16.5784 20.3284 17.25 19.5 17.25H16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
       </section>
       <section class="w-1/3 p-5 flex items-center border styleGuide-example">
         {% render 'theme/simple/ui/title', label: 'Example title' %}
@@ -153,20 +162,29 @@
     <div class="mt-16 flex gap-10">
       <section class="w-2/3">
         {% render 'theme/simple/ui/subtitle', label: 'Subtitles' %}
-        <dl>
-          <div>
-            <dt>Color:</dt>
-            <dd class="font-mono styleGuide-color"></dd>
+        <dl class="table">
+          <div class="table-row">
+            <dt class="pr-5 table-cell">Color:</dt>
+            <dd class="table-cell font-mono styleGuide-color"></dd>
           </div>
-          <div>
-            <dt>Font:</dt>
-            <dd class="font-mono styleGuide-font"></dd>
+          <div class="table-row">
+            <dt class="pr-5 table-cell">Font:</dt>
+            <dd class="table-cell font-mono styleGuide-font"></dd>
           </div>
-          <div>
-            <dt>Size:</dt>
-            <dd class="font-mono styleGuide-size"></dd>
+          <div class="table-row">
+            <dt class="pr-5 table-cell">Size:</dt>
+            <dd class="table-cell font-mono styleGuide-size"></dd>
           </div>
         </dl>
+        <div class="mt-5 p-5 border bg-white font-mono styleGuide-code">
+          {% raw %}{% render 'theme/simple/ui/subtitle', label: 'Example subtitle' %}{% endraw %}
+          <button class="float-right styleGuide-copy" title="Copy to clipboard">
+            <svg width="24" height="24" class="text-gray-700" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 21.75C16.5 22.5784 15.8284 23.25 15 23.25H4.5C3.67157 23.25 3 22.5784 3 21.75V8.25C3 7.42157 3.67157 6.75 4.5 6.75H12.129C12.5265 6.75008 12.9078 6.90798 13.189 7.189L16.061 10.061C16.342 10.3422 16.4999 10.7235 16.5 11.121V21.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7.5 6.75V2.25C7.5 1.42157 8.17157 0.75 9 0.75H16.629C17.0265 0.750085 17.4078 0.907982 17.689 1.189L20.561 4.061C20.842 4.3422 20.9999 4.72345 21 5.121V15.75C21 16.5784 20.3284 17.25 19.5 17.25H16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
       </section>
       <section class="w-1/3 p-5 flex items-center border styleGuide-example">
         {% render 'theme/simple/ui/subtitle', label: 'Example subtitle' %}
@@ -176,26 +194,32 @@
     <div class="mt-16 flex gap-10">
       <section class="w-2/3">
         {% render 'theme/simple/ui/subtitle', label: 'Sidenotes' %}
-        <dl>
-          <div>
-            <dt>Color:</dt>
-            <dd class="font-mono styleGuide-color"></dd>
+        <dl class="table">
+          <div class="table-row">
+            <dt class="pr-5 table-cell">Color:</dt>
+            <dd class="table-cell font-mono styleGuide-color"></dd>
           </div>
-          <div>
-            <dt>Font:</dt>
-            <dd class="font-mono styleGuide-font"></dd>
+          <div class="table-row">
+            <dt class="table-cell">Font:</dt>
+            <dd class="table-cell font-mono styleGuide-font"></dd>
           </div>
-          <div>
-            <dt>Size:</dt>
-            <dd class="font-mono styleGuide-size"></dd>
+          <div class="table-row">
+            <dt class="table-cell">Size:</dt>
+            <dd class="table-cell font-mono styleGuide-size"></dd>
           </div>
         </dl>
+        <div class="mt-5 p-5 border bg-white font-mono styleGuide-code">
+          {% raw %}{% render 'theme/simple/ui/sidenote', label: 'Example sidenote' %}{% endraw %}
+          <button class="float-right styleGuide-copy" title="Copy to clipboard">
+            <svg width="24" height="24" class="text-gray-700" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 21.75C16.5 22.5784 15.8284 23.25 15 23.25H4.5C3.67157 23.25 3 22.5784 3 21.75V8.25C3 7.42157 3.67157 6.75 4.5 6.75H12.129C12.5265 6.75008 12.9078 6.90798 13.189 7.189L16.061 10.061C16.342 10.3422 16.4999 10.7235 16.5 11.121V21.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7.5 6.75V2.25C7.5 1.42157 8.17157 0.75 9 0.75H16.629C17.0265 0.750085 17.4078 0.907982 17.689 1.189L20.561 4.061C20.842 4.3422 20.9999 4.72345 21 5.121V15.75C21 16.5784 20.3284 17.25 19.5 17.25H16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
       </section>
       <section class="w-1/3 p-5 flex items-center border styleGuide-example">
         {% render 'theme/simple/ui/sidenote', label: 'Example sidenote' %}
-      </section>
-      <section class="styleGuide-code">
-        {% raw %}{% render 'theme/simple/ui/sidenote', label: 'Example sidenote' %}{% endraw %}
       </section>
     </div>
   </article>

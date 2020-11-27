@@ -16,6 +16,7 @@ const styleGuide = function(){
   module.init = () => {
     styleGuide.colors();
     styleGuide.typography();
+    styleGuide.clipboard();
   };
 
   module.init();
@@ -117,7 +118,54 @@ styleGuide.typography = () => {
     });
   };
 
-console.log('dupa')
+  module.init();
+
+};
+
+
+
+// purpose:		handles copying the text to clipboard
+// ************************************************************************
+styleGuide.clipboard = () => {
+
+  // cache 'this' value not to be overwritten later
+  const module = this;
+
+  // purpose:		settings that are being used across the module
+  // ------------------------------------------------------------------------
+  module.settings = {};
+  // the button that activates the copying (dom node)
+  module.settings.button = document.querySelectorAll('.styleGuide-copy');
+
+
+  // purpose:   initializes module
+  // ------------------------------------------------------------------------
+  module.init = () => {
+    module.clipboard();
+  };
+
+
+  // purpose:		saves the code content to clipboard on button click
+  // ------------------------------------------------------------------------
+  module.clipboard = () => {
+    module.settings.button.forEach((element) => {
+      element.addEventListener('click', (event) => {
+        let text = event.target.closest('.styleGuide-code').childNodes[0].textContent.trim();
+
+        navigator.clipboard.writeText(text).then(() => {
+          event.target.classList.add('text-green-700');
+
+          setTimeout(() => {
+            event.target.classList.remove('text-green-700');
+          }, 800);
+        }, () => {
+          new Error('Could not copy the code to clipboard');
+        });
+      });
+    });
+  };
+
+
   module.init();
 
 };
