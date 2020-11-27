@@ -56,9 +56,24 @@ jobs:
       max-parallel: 1
     env:
       MPKIT_URL: ${{ secrets.MPKIT_URL_PR }}
+      MPKIT_TOKEN: ${{ secrets.MPKIT_TOKEN }}
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v1
-      - name: Run testcafe
+      - name: Run tests
         run: |
-          testcafe "chromium:headless" test
+          echo "Start liquid tests"
+          testname=$(curl -s ${MPKIT_URL}/tests/run_async)
+          testname=`echo $testname`
+          sleep 15
+          response=$(curl -s ${MPKIT_URL}/api/app_builder/logs -H  "Authorization: Token ${MPKIT_TOKEN}")
+          echo "End liquid tests"
+          matchstring="Success_${testname}"
+          echo "${response}"
+          echo $matchstring
+          if [[ $response =~ $matchstring ]]; then
+            testcafe "chromium:headless" test
+          else
+            exit 1
+          fi
+        shell: bash

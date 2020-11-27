@@ -1,0 +1,12 @@
+---
+layout: null
+---
+{% liquid
+  assign test_name = 5 | random_string | prepend: "liquid_test_"
+%}
+{% background source_name: "liquid_tests", test_name: test_name %}
+  {% liquid
+    include 'test/run', format: 'log', test_name: test_name
+  %}
+{% endbackground %}
+{{test_name}}

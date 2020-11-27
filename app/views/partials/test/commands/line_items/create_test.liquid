@@ -13,10 +13,18 @@
     "name":        "item-name",
     "description": "item-description",
     "price":       10,
-    "uuid":        "item.uuid"
+    "uuid":        "item.uuid",
+    "category":    "jewellery"
   }
 {% endparse_json %}
+{% parse_json category_data %}
+  {
+    "key": "jewellery"
+  }
+{% endparse_json %}
+
 {% liquid
+  function category = 'lib/commands/categories/create', object: category_data
   function item = 'lib/commands/items/create', object: item_data, owner: seller.id
   hash_assign item['owner'] = seller
   assign params = '{"quantity": "2"}' | parse_json
