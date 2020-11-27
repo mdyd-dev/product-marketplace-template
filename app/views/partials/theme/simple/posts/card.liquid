@@ -1,14 +1,21 @@
+{% liquid
+  function creator_url = 'link_to', profile: post.creator
+%}
 <div class="flex bg-white shadow-lg rounded-lg border {% if root_post.accepted_post_id == post.id %}border-green-600{% else %}border-white{% endif %} mx-4 md:mx-auto mb-10" data-tc="postcard">
   <div class="flex items-start px-4 py-6 w-full">
     <div class="flex flex-col items-center pr-4">
-      <a href="{% render 'link_to', profile: post.creator %}">
+      <a href="{{ creator_url }}">
         <img class="w-12 h-12 rounded-full object-cover mb-5 shadow" src="{{ post.creator.avatar.photo.versions.tiny }}" alt="avatar">
       </a>
       {% include 'theme/simple/posts/vote_box', post: post, current_profile: current_profile, root_post: root_post %}
     </div>
     <div class="flex flex-col w-full h-full">
       <div class="flex items-center justify-between">
-        <h2 class="text-lg font-semibold text-gray-900 -mt-1">{{post.creator.name}}</h2>
+        <h2 class="text-lg font-semibold text-gray-900 -mt-1">
+          <a href="{{ creator_url }}">
+            {{post.creator.name}}
+          </a>
+        </h2>
         <small class="text-sm text-gray-700">{{post.created_at | l: 'compact'}}</small>
       </div>
       <div class="flex-1 mt-3 markdown">
@@ -27,7 +34,7 @@
         </div>
         <span>
           {% for tag in post.tags %}
-            <a class="px-2 py-1 bg-gray-200 text-gray-100 rounded hover:bg-gray-400" href="#">{{tag}}</a>
+            <a class="px-2 py-1 bg-gray-200 text-gray-100 rounded hover:bg-gray-400" href="/posts?tag={{tag}}">{{tag}}</a>
           {% endfor %}
         </span>
       </div>
