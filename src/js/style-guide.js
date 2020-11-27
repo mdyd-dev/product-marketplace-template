@@ -150,7 +150,7 @@ styleGuide.clipboard = () => {
   module.clipboard = () => {
     module.settings.button.forEach((element) => {
       element.addEventListener('click', (event) => {
-        let text = event.target.closest('.styleGuide-code').childNodes[0].textContent.trim();
+        let text = event.target.parentElement.parentElement.childNodes[0].textContent.trim();
 
         navigator.clipboard.writeText(text).then(() => {
           event.target.classList.add('text-green-700');

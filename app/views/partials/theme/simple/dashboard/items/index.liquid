@@ -1,6 +1,6 @@
-  <a href="?" class="button {% if filters.query.status == blank %}{%else%}button-secondary{%endif%} button-sm"> {% print 'app.items.all' | t %} </a>
+  <a href="?" class="button {% if filters.query.status == blank %}{%else%}button-secondary{%endif%} button-small"> {% print 'app.items.all' | t %} </a>
 {% for s in filters.statuses.items %}
-  <a href="?status={{ s[0] }}" class="button {% if s[0] == filters.query.status %}{%else%}button-secondary{%endif%} button-sm">
+  <a href="?status={{ s[0] }}" class="button {% if s[0] == filters.query.status %}{%else%}button-secondary{%endif%} button-small">
     {{ s[1] }}
   </a>
 {% endfor %}

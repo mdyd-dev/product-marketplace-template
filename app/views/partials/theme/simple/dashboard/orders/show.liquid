@@ -9,12 +9,12 @@
 	<header class="hidden lg:flex gap-2 mb-5 font-bold">
 		<div class="lg:w-8/12">{{ 'app.orders.show.item' | t }}</div>
     <div class="lg:w-1/12 lg:pl-2 lg:text-center">
-      <span class="">{{ 'app.orders.show.quantity' | t }}</span>    
+      <span class="">{{ 'app.orders.show.quantity' | t }}</span>
     </div>
     <div class="lg:w-2/12 lg:pl-2 lg:text-right">{{ 'app.orders.show.total_price' | t }}</div>
     <div class="lg:w-1/12"></div>
   </header>
-  
+
   {% for line_item in order.line_items %}
     {% function item_url = 'link_to', item: line_item.item %}
     <article class="lg:flex gap-2 mb-5 last:mb-0 pb-5 last:pb-0 border-b last:border-b-0">
@@ -49,7 +49,7 @@
         </form>
       </div>
       <div class="flex items-center lg:w-1/12 justify-end">
-        <button type="submit" title="{{ 'app.orders.show.remove_item' | t }}" class="button button-sm button-warning">
+        <button type="submit" title="{{ 'app.orders.show.remove_item' | t }}" class="button button-small button-danger">
           <span class="lg:hidden">{{ 'app.orders.show.remove_item' | t }} </span>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 lg:w-5 ml-2 lg:ml-0 fill-current"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
         </button>
@@ -84,7 +84,7 @@
     </div>
   </li>
 </ul>
-  
+
   <div class="mt-6 gap-5 flex flex-wrap justify-between items-center">
     <a href="/search">
       {{ 'app.orders.show.continue-shopping' | t }}

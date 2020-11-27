@@ -5,7 +5,7 @@
 		<div class="lg:w-3/6">{{ 'app.models.contacts.form.message' | t }}</div>
 		<div class="lg:w-1/6"></div>
   </header>
-  
+
   {% for contact in contacts.results %}
     <article class="lg:flex gap-2 mb-5 pt-5 border-t">
       <div class="lg:w-1/6">
@@ -32,7 +32,7 @@
           <input type="hidden" name="_method" value="delete" />
           <input type="hidden" name="id" value="{{ contact.id }}">
 
-          <button id="deletebutton" class="button button-warning">{{ 'app.models.shared.delete' | t }}</button>
+          <button id="deletebutton" class="button button-danger">{{ 'app.models.shared.delete' | t }}</button>
         </form>
       </div>
     </article>

@@ -7,11 +7,11 @@
 
 /* links
 ============================================================================ */
-main a[href] {
+main a {
   @apply text-blue-700;
 }
 
-main a[href]:hover {
+main a:hover {
   @apply text-blue-600;
 }
 
