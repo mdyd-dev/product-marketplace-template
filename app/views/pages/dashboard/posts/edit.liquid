@@ -7,7 +7,8 @@ metadata:
 ---
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
-  function object = 'lib/queries/posts/find', id: context.params.id, creator_id: current_profile.id
+  function post = 'lib/queries/posts/find', id: context.params.id, creator_id: current_profile.id
+  include 'lib/present_or_404', property:  post.id
 
-  include 'theme/simple/dashboard/posts/edit', object: object
+  include 'theme/simple/dashboard/posts/edit', object: post
 %}
