@@ -171,7 +171,7 @@ test('Buying an item and following the seller', async (t) => {
  })
 
 
- test.skip(`Admin Panel`, async (t) => {
+ test(`Admin Panel`, async (t) => {
    await t
      .useRole(adminRole)
      await t.click(topMenu.buttons.adminPanel)
