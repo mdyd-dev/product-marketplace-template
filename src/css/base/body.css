@@ -1,6 +1,6 @@
 /*
   links
-  typography
+  content
 */
 
 
@@ -8,19 +8,28 @@
 /* links
 ============================================================================ */
 main a {
-  @apply text-blue-700;
+  @apply
+    text-blue-700;
 }
 
 main a:hover {
-  @apply text-blue-600;
+  @apply
+    text-blue-600;
 }
 
 
 
-/* typography
+/* content
 ============================================================================ */
 main p + p {
-  @apply mt-4;
+  @apply
+    mt-4;
+}
+
+/* small annotations and sidenotes */
+.sidenote {
+  @apply
+    text-xs;
 }
 
 
