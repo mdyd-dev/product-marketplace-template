@@ -22,7 +22,7 @@ query search(
         { name: "creator_id" value: $creator_id }
         { name: "title" value: $title }
         { name: "body" value: $body }
-        { name: "tags" value: $tags }
+        { name: "tags" contains: $tags }
         { name: "upvote_profile_ids" value: $upvote_profile_ids }
         { name: "downvote_profile_ids" value: $downvote_profile_ids }
         { name: "accepted_post_id" value: $accepted_post_id }
