@@ -371,5 +371,5 @@ test('Delete question', async (t) => {
     .debug()
     .click(dashboard.nav.questions)
     await t.setNativeDialogHandler(() => true)
-    .click(topicsPage.buttons.deleteQuestion.exists)
+    .click(topicsPage.buttons.deleteQuestion.exists).ok()
 })
