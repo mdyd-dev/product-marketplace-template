@@ -335,7 +335,6 @@ test('Add question and edit', async (t) => {
     .click(topMenu.buttons.menuDropdown)
     .click(topMenu.buttons.dashboard)
     .click(dashboard.nav.questions)
-    .expect(topicsPage.buttons.deleteQuestion.exists).ok()
     .click(topicsPage.buttons.editQuestion)
     .typeText(topicsPage.inputs.questionTitle, "How to sell?", { replace: true })
     .click(topicsPage.buttons.submitEdit)
