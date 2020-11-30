@@ -69,7 +69,6 @@
     "ffmpeg": "0.0.4",
     "glider-js": "^1.7.3",
     "lodash.startcase": "^4.4.0",
-    "npm": "^6.14.9",
     "testcafe-browser-provider-lambdatest": "^2.0.3",
     "testcafe-reporter-html": "^1.4.6",
     "testcafe-reporter-spec-time": "^3.0.1"
