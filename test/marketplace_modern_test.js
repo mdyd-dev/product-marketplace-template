@@ -363,13 +363,3 @@ test('Rate question and answer', async (t) => {
     .expect(topicsPage.ratings.question.exists).ok()
     .expect(topicsPage.ratings.firstAnswer.exists).ok()
 })
-
-test('Delete question', async (t) => {
-  await t.useRole(adminRole)
-    .click(topMenu.buttons.menuDropdown)
-    .click(topMenu.buttons.dashboard)
-    .debug()
-    .click(dashboard.nav.questions)
-    await t.setNativeDialogHandler(() => true)
-    .click(topicsPage.buttons.deleteQuestion.exists).ok()
-})
