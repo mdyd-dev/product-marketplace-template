@@ -171,7 +171,7 @@ test('Buying an item and following the seller', async (t) => {
  })
 
 
- test(`Admin Panel`, async (t) => {
+ test.skip(`Admin Panel`, async (t) => {
    await t
      .useRole(adminRole)
      await t.click(topMenu.buttons.adminPanel)
@@ -260,6 +260,7 @@ test('Groups', async (t) => {
 
  test('Activity', async (t) => {
    await t.useRole(buyerRole)
+     .debug()
      .click(topMenu.buttons.menuDropdown)
      .click(topMenu.buttons.dashboard)
      await checkErrors()
@@ -320,18 +321,24 @@ test('Products', async (t) => {
 fixture`Question/Topics`
           .page(myUrl)
 
-test('Add question', async (t) => {
+test('Add question and edit', async (t) => {
   await t.useRole(adminRole)
-    .debug()
     .click(topMenu.buttons.questions)
     await checkErrors()
     await t.click(topicsPage.buttons.addQuestion)
-    .typeText(topicsPage.inputs.questionTitle, "How to sell?")
+    .typeText(topicsPage.inputs.questionTitle, "How to buy?")
     .click(Selector('label[for="body"]'))
     .pressKey("t e s t 1 2 3")
     .typeText(topicsPage.inputs.questionTags, "test-question-tag")
     .click(topicsPage.buttons.postQuestion)
-    .debug()
+    //.expect(topicsPage.buttons.editQuestion.exists).ok()
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.questions)
+    .expect(topicsPage.buttons.deleteQuestion.exists).ok()
+    .click(topicsPage.buttons.editQuestion)
+    .typeText(topicsPage.inputs.questionTitle, "How to sell?", { replace: true })
+    .click(topicsPage.buttons.submitEdit)
 })
 
 test('Add answer', async (t) => {
@@ -355,4 +362,14 @@ test('Rate question and answer', async (t) => {
     .expect(topicsPage.fields.answerBody.withText('test').exists).ok()
     .expect(topicsPage.ratings.question.exists).ok()
     .expect(topicsPage.ratings.firstAnswer.exists).ok()
+})
+
+test('Delete question', async (t) => {
+  await t.useRole(adminRole)
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .debug()
+    .click(dashboard.nav.questions)
+    await t.setNativeDialogHandler(() => true)
+    .click(topicsPage.buttons.deleteQuestion.exists)
 })
