@@ -260,6 +260,7 @@ test('Groups', async (t) => {
 
  test('Activity', async (t) => {
    await t.useRole(buyerRole)
+     .debug()
      .click(topMenu.buttons.menuDropdown)
      .click(topMenu.buttons.dashboard)
      await checkErrors()
@@ -320,21 +321,26 @@ test('Products', async (t) => {
 fixture`Question/Topics`
           .page(myUrl)
 
-test('Add question', async (t) => {
+test('Add question and edit', async (t) => {
   await t.useRole(adminRole)
-    .debug()
     .click(topMenu.buttons.questions)
     await checkErrors()
     await t.click(topicsPage.buttons.addQuestion)
-    .typeText(topicsPage.inputs.questionTitle, "How to sell?")
+    .typeText(topicsPage.inputs.questionTitle, "How to buy?")
     .click(Selector('label[for="body"]'))
     .pressKey("t e s t 1 2 3")
     .typeText(topicsPage.inputs.questionTags, "test-question-tag")
     .click(topicsPage.buttons.postQuestion)
-    .debug()
+    //.expect(topicsPage.buttons.editQuestion.exists).ok()
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.questions)
+    .click(topicsPage.buttons.editQuestion)
+    .typeText(topicsPage.inputs.questionTitle, "How to sell?", { replace: true })
+    .click(topicsPage.buttons.submitEdit)
 })
 
-test('Add answer', async (t) => {
+test.skip('Add answer', async (t) => {
   await t.useRole(buyerRole)
     .click(topMenu.buttons.questions)
     .click(link.withText('How to sell?'))
@@ -350,9 +356,18 @@ test('Rate question and answer', async (t) => {
     .click(link.withText('How to sell?'))
     await checkErrors()
     await t.click(topicsPage.vote.pointUpQuestion) // rate the question
-    .click(topicsPage.vote.pointUpAnswer) // rate the answer
+    //.click(topicsPage.vote.pointUpAnswer) // rate the answer
     .expect(topicsPage.fields.questionBody.withText('test123').exists).ok()
-    .expect(topicsPage.fields.answerBody.withText('test').exists).ok()
+    //.expect(topicsPage.fields.answerBody.withText('test').exists).ok()
     .expect(topicsPage.ratings.question.exists).ok()
-    .expect(topicsPage.ratings.firstAnswer.exists).ok()
+    //.expect(topicsPage.ratings.firstAnswer.exists).ok()
+})
+
+test('Delete question', async (t) => {
+  await t.useRole(adminRole)
+    .click(topMenu.buttons.menuDropdown)
+    .click(topMenu.buttons.dashboard)
+    .click(dashboard.nav.questions)
+    await t.setNativeDialogHandler(() => true)
+    .click(Selector('button').withText('Delete'))
 })
