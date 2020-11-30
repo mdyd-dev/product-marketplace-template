@@ -44,7 +44,13 @@
             </a>
             <div>
               <a class="flex items-center" href="{% render 'link_to', profile: post.creator %}">
-                <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="{{ post.creator.avatar.photo.versions.tiny }}" alt="avatar">
+                {% liquid
+                  assign img_url = post.creator.avatar.photo.versions.tiny
+                  unless img_url
+                    assign img_url = 'images/user.svg' | asset_url
+                  endunless
+                %}
+                <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="{{ img_url }}" alt="avatar">
                 <h1 class="text-gray-700 font-bold">{{post.creator.name}}</h1>
               </a>
             </div>

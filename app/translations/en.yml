@@ -954,6 +954,7 @@ en:
         submit: Save
         delete: Delete
         delete_failed: Delete failed
+        deleted: Deleted
       contacts:
         reasons:
           purchase: Purchase

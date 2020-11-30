@@ -53,7 +53,7 @@ const loadExistingPhotos = async (photos) => {
     });
   }
   uppy.getFiles().forEach(file => {
-    console.log(file.id);
+    // console.log(file.id);
     uppy.setFileState(file.id, {
       progress: { uploadComplete: true, percentage: 100, uploadStarted: Date.now() }
     })
@@ -100,12 +100,12 @@ uppy.use(Dashboard,
 
 uppy.on('complete', ({ failed, successful }) => {
   Promise.all(successful.map(({ response }) => createPhoto(response.body.location))).then(() => {
-    console.log('File uploaded and image created!');
+    // console.log('File uploaded and image created!');
   });
 });
 
 uppy.on('file-removed', (file, reason) => {
-  console.log('Remove file', file);
+  // console.log('Remove file', file);
   if (file.meta.photoId) deletePhoto(file.meta.photoId);
 })
 
