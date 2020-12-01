@@ -8,7 +8,7 @@ mutation create_comment(
 ) {
   model_create(
     model: {
-      model_schema_name: "comment"
+      table: "comment"
       properties: [
         { name: "uuid" value: $uuid }
         { name: "commentable_uuid" value: $commentable_uuid }

@@ -6,7 +6,7 @@ mutation update_category(
   model_update(
     id: $id
     model: {
-      model_schema_name: "category"
+      table: "category"
       properties: [
               { name: "key" value: $key }
               { name: "uuid" value: $uuid }

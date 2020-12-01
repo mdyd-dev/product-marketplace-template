@@ -1,7 +1,7 @@
 mutation create($uuid: String! $user_id: String!) {
   model_create(
     model: {
-      model_schema_name: "profile"
+      table: "profile"
       properties: [
         { name: "uuid" value: $uuid }
         { name: "user_id" value: $user_id }

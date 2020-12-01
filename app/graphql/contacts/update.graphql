@@ -7,7 +7,7 @@ mutation update_contact(
   model_update(
     id: $id
     model: {
-      model_schema_name: "contact"
+      table: "contact"
       properties: [
               { name: "email" value: $email }
               { name: "message" value: $message }

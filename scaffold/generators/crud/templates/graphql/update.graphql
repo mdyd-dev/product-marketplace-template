@@ -7,7 +7,7 @@ mutation update_<%= modelName %>(
   model_update(
     id: $id
     model: {
-      model_schema_name: "<%= modelName %>"
+      table: "<%= modelName %>"
       properties: [
       <% attributes.forEach((attr) => { -%>
         { name: "<%= attr.name %>" <%= graphqlArgumentValueMap[attr.type] %>: $<%= attr.name %> }
