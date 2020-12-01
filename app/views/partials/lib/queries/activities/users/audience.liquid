@@ -8,7 +8,7 @@
 
   log r, type: 'showme'
 
-  assign ids = r.models.results | map: 'l_id'
+  assign ids = r.records.results | map: 'l_id'
 
   return ids
 %}
