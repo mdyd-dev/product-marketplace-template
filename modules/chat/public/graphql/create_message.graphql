@@ -1,7 +1,7 @@
 mutation create_message($conversation_id: String!, $timestamp: String!, $message: String!, $from_id: String!, $to_id: String!) {
   model_create(
     model: {
-    model_schema_name: "modules/chat/message"
+    table: "modules/chat/message"
     properties: [
       { name: "conversation_id", value: $conversation_id }
       { name: "message", value: $message }

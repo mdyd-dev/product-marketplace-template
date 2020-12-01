@@ -7,11 +7,11 @@ query search(
   $creator_id: String
   $query: String
 ) {
-  comments: models(
+  comments: records(
     per_page: $limit
     filter: {
       id: { value: $id }
-      model_schema_name: { value: "comment" }
+      table: { value: "comment" }
       properties: [
         { name: "uuid" value: $uuid }
         { name: "commentable_uuid" value: $commentable_uuid }
@@ -29,26 +29,26 @@ query search(
     results {
       id
       created_at
-      type: model_schema_name
+      type: table
       uuid: property(name: "uuid")
       title: property(name: "title")
       body: property(name: "body")
 
-      commentable: related_model(model_schema_name: ["profile", "item", "group", "comment"], join_on_property: "commentable_uuid", foreign_property: "uuid") {
-        type: model_schema_name
+      commentable: related_record(table: ["profile", "item", "group", "comment"], join_on_property: "commentable_uuid", foreign_property: "uuid") {
+        type: table
         id
         slug: property(name: "slug")
         name: property(name: "name")
       }
 
-      photos: related_models(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
+      photos: related_records(table: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
         photo: property_upload(name: "photo") {
           url
           versions
         }
       }
 
-      creator: related_model(model_schema_name: "profile", join_on_property: "creator_id"){
+      creator: related_record(table: "profile", join_on_property: "creator_id"){
         ...profile
       }
     }
@@ -61,7 +61,7 @@ fragment profile on Model {
   first_name: property(name: "first_name")
   last_name: property(name: "last_name")
   slug: property(name: "slug")
-  avatar: related_model(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid", filter: { properties: { name: "photo_type", value: "avatar"}}) {
+  avatar: related_record(table: "photo", join_on_property: "uuid", foreign_property: "object_uuid", filter: { properties: { name: "photo_type", value: "avatar"}}) {
     photo: property_upload(name: "photo") {
       url
       versions

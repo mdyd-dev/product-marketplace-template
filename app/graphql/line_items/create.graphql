@@ -9,7 +9,7 @@ mutation create_line_item(
 ) {
   model_create(
     model: {
-      model_schema_name: "line_item"
+      table: "line_item"
       properties: [
         { name: "item_id" value: $item_id }
         { name: "order_id" value: $order_id }
@@ -32,7 +32,7 @@ mutation create_line_item(
     price_cents: property_int(name: "price_cents")
     quantity: property_int(name: "quantity")
     total_price_cents: property_int(name: "total_price_cents")
-    order: related_models(join_on_property: "order_id", foreign_property: "id", model_schema_name: "order") {
+    order: related_records(join_on_property: "order_id", foreign_property: "id", table: "order") {
       id
     }
   }

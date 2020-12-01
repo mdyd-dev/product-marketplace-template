@@ -13,7 +13,7 @@ mutation update_post(
   model_update(
     id: $id
     model: {
-      model_schema_name: "post"
+      table: "post"
       properties: [
         { name: "title" value: $title }
         { name: "body" value: $body }
@@ -39,7 +39,7 @@ mutation update_post(
       downvote_profile_ids: property_array(name: "downvote_profile_ids")
       accepted_post_id: property(name: "accepted_post_id")
       c__score: property_int(name: "c__score")
-      parent: related_model(model_schema_name: "post", join_on_property: "parent_id", foreign_property: "id") {
+      parent: related_record(table: "post", join_on_property: "parent_id", foreign_property: "id") {
         id
       }
     }
