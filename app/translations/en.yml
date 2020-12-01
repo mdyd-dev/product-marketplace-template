@@ -1041,6 +1041,8 @@ en:
           tags: Tags
           upvotes: Upvotes
           downvotes: Downvotes
+    style_guide:
+      title: Style guide
   lib:
     sort_options:
       relevance: Relevance
