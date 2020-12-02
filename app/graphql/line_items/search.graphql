@@ -9,11 +9,11 @@ query search(
   $quantity: String
   $total_price_cents: String
 ) {
-  line_items: records(
+  line_items: models(
     per_page: $limit
     filter: {
       id: { value: $id }
-      table: { value: "line_item" }
+      model_schema_name: { value: "line_item" }
       properties: [
         { name: "item_id" value: $item_id }
         { name: "order_id" value: $order_id }
@@ -32,7 +32,7 @@ query search(
     results {
       id
       created_at
-      type: table
+      type: model_schema_name
       item_id: property(name: "item_id")
       order_id: property(name: "order_id")
       name: property(name: "name")
@@ -40,7 +40,7 @@ query search(
       price_cents: property(name: "price_cents")
       quantity: property(name: "quantity")
       total_price_cents: property(name: "total_price_cents")
-      order: related_records(join_on_property: "order_id", foreign_property: "id", table: "order") {
+      order: related_models(join_on_property: "order_id", foreign_property: "id", model_schema_name: "order") {
         id
       }
     }

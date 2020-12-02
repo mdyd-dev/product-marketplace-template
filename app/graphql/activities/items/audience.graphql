@@ -1,9 +1,9 @@
 query search($id: ID, $limit: Int = 1) {
-  records(
+  models(
     per_page: $limit,
     filter: {
       id: {value: $id},
-      table: {value: "item"},
+      model_schema_name: {value: "item"},
       deleted_at: { exists: false }
     }
   )

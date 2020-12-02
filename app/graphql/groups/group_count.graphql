@@ -1,8 +1,8 @@
 query search($limit: Int = 20, $name: String) {
-  groups: records(
+  groups: models(
     per_page: $limit
     filter: {
-      table: { value: "group" }
+      model_schema_name: { value: "group" }
       properties: [
         { name: "name" value: $name }
       ]

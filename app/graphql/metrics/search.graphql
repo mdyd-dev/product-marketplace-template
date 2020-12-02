@@ -1,9 +1,9 @@
-query records($id: ID, $limit: Int = 20, $date: String) {
-  records(
+query models($id: ID, $limit: Int = 20, $date: String) {
+  models(
     per_page: $limit
     filter: {
       id: { value: $id }
-      table: { value: "metric" }
+      model_schema_name: { value: "metric" }
       created_at: { lte: $date }
     }
     sort: [

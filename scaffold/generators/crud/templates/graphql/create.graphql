@@ -5,7 +5,7 @@ mutation create_<%= modelName %>(
 ) {
   model_create(
     model: {
-      table: "<%= modelName %>"
+      model_schema_name: "<%= modelName %>"
       properties: [
       <% attributes.forEach((attr) => { -%>
         { name: "<%= attr.name %>" <%= graphqlArgumentValueMap[attr.type] %>: $<%= attr.name %> }

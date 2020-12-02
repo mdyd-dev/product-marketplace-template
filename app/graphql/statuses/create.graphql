@@ -9,7 +9,7 @@ mutation create_status(
 ) {
   model_create(
     model: {
-      table: "status"
+      model_schema_name: "status"
       properties: [
               { name: "name" value: $name }
               { name: "fullname" value: $fullname }

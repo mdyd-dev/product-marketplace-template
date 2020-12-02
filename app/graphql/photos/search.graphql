@@ -1,8 +1,8 @@
 query search($object_uuid: String!){
-  photos: records(
+  photos: models(
     per_page: 20
     filter: {
-      table: { value: "photo" },
+      model_schema_name: { value: "photo" },
       properties: { name: "object_uuid", value: $object_uuid}
     }
   ){

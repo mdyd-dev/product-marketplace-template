@@ -1,9 +1,9 @@
 query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String, $name: String, $status: [String!]) {
-  orders: records(
+  orders: models(
     per_page: $limit
     filter: {
       id: { value: $id }
-      table: { value: "order" }
+      model_schema_name: { value: "order" }
       properties: [
         { name: "buyer" value: $buyer }
         { name: "seller" value: $seller }
@@ -25,16 +25,16 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String, $name: 
       products_price_cents: property_int(name: "products_price_cents")
       c__status: property(name: "c__status")
 
-      buyer: related_record(join_on_property: "buyer", foreign_property: "id" table: "profile") {
+      buyer: related_model(join_on_property: "buyer", foreign_property: "id" model_schema_name: "profile") {
         ...profile
       }
 
-      seller: related_record(join_on_property: "seller", foreign_property: "id" table: "profile") {
+      seller: related_model(join_on_property: "seller", foreign_property: "id" model_schema_name: "profile") {
         ...profile
       }
 
 
-      line_items: related_records(join_on_property: "id", foreign_property: "order_id", table: "line_item") {
+      line_items: related_models(join_on_property: "id", foreign_property: "order_id", model_schema_name: "line_item") {
         id
         created_at
         item_id: property(name: "item_id")
@@ -43,15 +43,15 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String, $name: 
         price_cents: property_int(name: "price_cents")
         total_price_cents: property_int(name: "total_price_cents")
 
-        status: related_record(join_on_property: "id", foreign_property: "object_id", table: "status" sort: { created_at: { order: ASC } }) {
+        status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status" sort: { created_at: { order: ASC } }) {
           id
           created_at
           name: property(name: "fullname")
         }
-        item: related_record(join_on_property: "item_id", foreign_property: "id", table: "item") {
+        item: related_model(join_on_property: "item_id", foreign_property: "id", model_schema_name: "item") {
           id
           cover_photo_url: property(name: "cover_photo_url")
-          photos: related_records(table: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
+          photos: related_models(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
             id
             photo: property_upload(name: "photo") {
               file_name
@@ -62,7 +62,7 @@ query search($id: ID, $limit: Int = 20, $buyer: String, $seller: String, $name: 
         }
       }
 
-      status: related_record(join_on_property: "id", foreign_property: "object_id", table: "status" sort: { created_at: { order: ASC } }) {
+      status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status" sort: { created_at: { order: ASC } }) {
         id
         created_at
         name: property(name: "name")

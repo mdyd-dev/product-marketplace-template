@@ -6,11 +6,11 @@ query search(
   $category: String
   $sort: ModelsSortInput = { created_at: { order: DESC } }
 ) {
-  records(
+  models(
     per_page: $limit
     filter: {
       id: { value: $id }
-      table: { value_in: ["item", "group", "profile"] }
+      model_schema_name: { value_in: ["item", "group", "profile"] }
       deleted_at: { exists: false }
       properties: [
         { name: "tags", contains: $tag }
@@ -30,7 +30,7 @@ query search(
     results {
       id
       created_at
-      type: table
+      type: model_schema_name
 
       uuid: property(name: "uuid")
       name: property(name: "name")
@@ -44,8 +44,8 @@ query search(
         email
       }
 
-      photo: related_record(
-        table: "photo"
+      photo: related_model(
+        model_schema_name: "photo"
         join_on_property: "uuid"
         foreign_property: "object_uuid"
       ) {
