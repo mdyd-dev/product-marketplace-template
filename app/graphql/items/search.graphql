@@ -1,4 +1,4 @@
-query search($id: ID, $limit: Int = 20, $status: [String!], $tag: String, $keyword: String, $category: String, $owner: String, $sort: ModelsSortInput = {created_at: {order: DESC}}, $withStatuses: Boolean = false, $withOrders: Boolean = false) {
+query search($id: ID, $limit: Int = 20, $status: [String!], $tag: String, $keyword: String, $category: String, $owner: String, $sort: RecordsSortInput = {created_at: {order: DESC}}, $withStatuses: Boolean = false, $withOrders: Boolean = false) {
   items: records(
     per_page: $limit,
     filter: {

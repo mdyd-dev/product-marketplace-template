@@ -4,7 +4,7 @@ query search($id: ID, $limit: Int = 20, $member_id: String) {
     filter: {
       id: { value: $id }
       table: { value: "group" }
-      related_models: {
+      related_records: {
         join: { join_on_property: "id", foreign_property: "r_id"}
         filter: {
           table: { value: "relationship" },

@@ -1,7 +1,7 @@
 mutation create_item($name: String!, $income: Int!, $users: Int!, $orders: Int!, $items: Int!) {
   model_create(
     model: {
-      table: "metric"
+      model_schema_name: "metric"
       properties: [
         { name: "name" value: $name }
         { name: "income" value_int: $income }

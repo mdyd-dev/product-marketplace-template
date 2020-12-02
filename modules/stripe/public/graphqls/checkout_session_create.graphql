@@ -1,7 +1,7 @@
 mutation create($external_id: String!, $data: String!, $status: String!) {
   model: model_create(
     model: {
-      table: "modules/stripe/checkout_session"
+      model_schema_name: "modules/stripe/checkout_session"
       properties: [
         { name: "external_id" value: $external_id }
         { name: "data" value: $data }

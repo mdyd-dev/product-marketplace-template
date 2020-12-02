@@ -76,7 +76,7 @@ query search(
   }
 }
 
-fragment profile on Model {
+fragment profile on Record {
   id
   name: property(name: "name")
   first_name: property(name: "first_name")
