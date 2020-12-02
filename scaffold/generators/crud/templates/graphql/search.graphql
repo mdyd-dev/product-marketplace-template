@@ -5,11 +5,11 @@ query search(
   $<%= attr.name %>: String
 <% }); -%>
 ) {
-  <%= modelNamePlural %>: records(
+  <%= modelNamePlural %>: models(
     per_page: $limit
     filter: {
       id: { value: $id }
-      table: { value: "<%= modelName %>" }
+      model_schema_name: { value: "<%= modelName %>" }
       properties: [
       <% attributes.forEach((attr) => { -%>
         { name: "<%= attr.name %>" value: $<%= attr.name %> }
@@ -24,7 +24,7 @@ query search(
     results {
       id
       created_at
-      type: table
+      type: model_schema_name
 
     <% attributes.forEach((attr) => { -%>
       <%= attr.name %>: <%= graphqlPropertyMap[attr.type] %>(name: "<%= attr.name %>")

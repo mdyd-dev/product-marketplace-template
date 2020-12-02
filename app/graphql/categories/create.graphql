@@ -4,7 +4,7 @@ mutation create_category(
 ) {
   model_create(
     model: {
-      table: "category"
+      model_schema_name: "category"
       properties: [
               { name: "key" value: $key }
               { name: "uuid" value: $uuid }

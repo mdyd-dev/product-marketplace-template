@@ -3,14 +3,14 @@ query find_messages(
     $page: Int = 1,
     $per_page: Int = 9999
   ){
-  records(
+  models(
     page: $page
     per_page: $per_page,
     sort: {
       properties: { name: "timestamp", order: DESC }
     }
     filter: {
-      table: { exact: "modules/chat/message" },
+      model_schema_name: { exact: "modules/chat/message" },
       properties: [{ name: "conversation_id", value: $conversation_id }]
     }
   ) {
@@ -19,14 +19,14 @@ query find_messages(
       timestamp: property(name: "timestamp")
       message: property(name: "message")
       from_id: property(name: "from_id")
-      from_user: related_record(table: "profile", join_on_property: "from_id") {
+      from_user: related_model(model_schema_name: "profile", join_on_property: "from_id") {
         id
         slug: property(name: "slug")
         name: property(name: "name")
         user_id: property(name: "user_id")
       }
       to_id: property(name: "to_id")
-      to_user: related_record(table: "profile", join_on_property: "to_id") {
+      to_user: related_model(model_schema_name: "profile", join_on_property: "to_id") {
         id
         slug: property(name: "slug")
         name: property(name: "name")

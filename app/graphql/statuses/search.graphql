@@ -8,11 +8,11 @@ query search(
   $object_id: String
   $payload: String
 ) {
-  statuses: records(
+  statuses: models(
     per_page: $limit
     filter: {
       id: { value: $id }
-      table: { value: "status" }
+      model_schema_name: { value: "status" }
       properties: [
               { name: "name" value: $name }
               { name: "fullname" value: $fullname }
@@ -30,7 +30,7 @@ query search(
     results {
       id
       created_at
-      type: table
+      type: model_schema_name
 
           name: property(name: "name")
           fullname: property(name: "fullname")

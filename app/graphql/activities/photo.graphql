@@ -1,10 +1,10 @@
-query record($uuid: String!) {
-  records(per_page: 3
+query model($uuid: String!) {
+  models(per_page: 3
     filter: {
       properties: [
         { name: "object_uuid" value: $uuid }
       ]
-      table: { value: "photo"}
+      model_schema_name: { value: "photo"}
     } ){
     results {
       url: property_upload(name: "photo") {

@@ -1,8 +1,8 @@
 query accounts($external_id: String, $gateway_id: String) {
-  accounts: records(
+  accounts: models(
     per_page: 1
     filter: {
-      table: { value: "modules/stripe/account" }
+      model_schema_name: { value: "modules/stripe/account" }
       properties: [
         { name: "external_id", value: $external_id },
         { name: "gateway_id", value: $gateway_id }

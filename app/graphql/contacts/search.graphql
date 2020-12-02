@@ -5,11 +5,11 @@ query search(
   $message: String
   $reason: String
 ) {
-  contacts: records(
+  contacts: models(
     per_page: $limit
     filter: {
       id: { value: $id }
-      table: { value: "contact" }
+      model_schema_name: { value: "contact" }
       properties: [
               { name: "email" value: $email }
               { name: "message" value: $message }
@@ -24,7 +24,7 @@ query search(
     results {
       id
       created_at
-      type: table
+      type: model_schema_name
 
           email: property(name: "email")
           message: property(name: "message")

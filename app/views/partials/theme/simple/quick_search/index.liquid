@@ -1,7 +1,7 @@
 <div class="container mx-auto">
   <div class="flex flex-wrap -mx-4 cards">
-    {% if records.results.size > 0 %}
-      {% for model in records.results %}
+    {% if models.results.size > 0 %}
+      {% for model in models.results %}
         {% render 'theme/simple/quick_search/card', model: model %}
       {% endfor %}
     {% else %}

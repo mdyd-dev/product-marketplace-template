@@ -3,7 +3,7 @@
         <div class="w-1/3 flex flex-col">
           <div class="flex-1 overflow-auto">
             {% liquid
-            for conversation in conversations.records.results
+            for conversation in conversations.models.results
               if conversation["from_user"]["id"] == current_user.id
                 assign from_user_id = conversation["to_user"]["id"]
               else
@@ -29,7 +29,7 @@
           <div class="flex-1 overflow-auto" id="chat-messagesList-container">
             <ul class="max-w-full p-3" id="chat-messagesList">
               {% liquid
-              assign messages_desc = messages.records.results | reverse
+              assign messages_desc = messages.models.results | reverse
 
               for message in messages_desc
                 if message["from_user"]["name"] != current_user.name
