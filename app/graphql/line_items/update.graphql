@@ -6,7 +6,7 @@ mutation update_line_item(
   model_update(
     id: $id
     model: {
-      model_schema_name: "line_item"
+      table: "line_item"
       properties: [
         { name: "quantity" value_int: $quantity }
         { name: "total_price_cents" value_int: $total_price_cents }

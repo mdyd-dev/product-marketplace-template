@@ -2,7 +2,7 @@ mutation account_update($id: ID!, $state: String!) {
   model_update(
     id: $id,
     model: {
-      model_schema_name: "modules/stripe/account"
+      table: "modules/stripe/account"
       properties: [
         { name: "state" value: $state }
       ]

@@ -11,7 +11,7 @@ mutation create_post(
 ) {
   model_create(
     model: {
-      model_schema_name: "post"
+      table: "post"
       properties: [
               { name: "parent_id" value: $parent_id }
               { name: "creator_id" value: $creator_id }
