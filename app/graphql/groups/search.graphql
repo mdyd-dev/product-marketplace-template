@@ -7,7 +7,7 @@ query search($id: ID, $limit: Int = 20, $name: String, $owner_id: String, $with_
       properties: [
         { name: "name" value: $name }
       ]
-      related_models: {
+      related_records: {
         join: { join_on_property: "id", foreign_property: "r_id"}
         filter: {
           table: { value: "relationship" },

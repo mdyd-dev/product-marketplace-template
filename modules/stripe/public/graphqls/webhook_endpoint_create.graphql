@@ -1,7 +1,7 @@
 mutation create($gateway_id: String!, $url: String!, $secret: String!, $livemode: String!, $enabled_events: [String!]) {
   model: model_create(
     model: {
-      table: "modules/stripe/webhook_endpoint"
+      model_schema_name: "modules/stripe/webhook_endpoint"
       properties: [
         { name: "gateway_id" value: $gateway_id }
         { name: "url" value: $url }

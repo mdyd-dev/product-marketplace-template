@@ -5,7 +5,7 @@ mutation create_contact(
 ) {
   model_create(
     model: {
-      table: "contact"
+      model_schema_name: "contact"
       properties: [
               { name: "email" value: $email }
               { name: "message" value: $message }

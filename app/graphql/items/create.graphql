@@ -1,7 +1,7 @@
 mutation create_item($name: String!, $description: String, $tags: [String], $owner: String!, $category: String, $price: Int!, $uuid: String!) {
   model_create(
     model: {
-      table: "item"
+      model_schema_name: "item"
       properties: [
         { name: "uuid" value: $uuid }
         { name: "name" value: $name }
@@ -20,9 +20,9 @@ mutation create_item($name: String!, $description: String, $tags: [String], $own
     price: property(name: "price")
     uuid: property(name: "uuid")
     category: property(name: "category")
-    owner: related_record(table: "profile" join_on_property: "owner", foreign_property: "id") {
+    owner: related_model(model_schema_name: "profile" join_on_property: "owner", foreign_property: "id") {
       id
-      type: table
+      type: model_schema_name
       name: property(name: "name")
       slug: property(name: "slug")
     }

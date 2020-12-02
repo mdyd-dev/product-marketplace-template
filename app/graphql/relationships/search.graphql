@@ -20,16 +20,16 @@ query records($model: [String!] = ["profile", "group"] $name: String! $r_id: Str
       l_accepted_at: property(name: "l_accepted_at")
 
       l: related_record(foreign_property: "id" join_on_property: "l_id" table: $model){
-        ...model
+        ...record
       }
       r: related_record(foreign_property: "id" join_on_property: "r_id" table: $model){
-        ...model
+        ...record
       }
     }
   }
 }
 
-fragment model on Model {
+fragment record on Record {
   id
   name: property(name: "name")
   first_name: property(name: "first_name")

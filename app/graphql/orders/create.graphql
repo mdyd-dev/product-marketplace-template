@@ -1,7 +1,7 @@
 mutation create($buyer: String!, $seller: String!) {
   model_create(
     model: {
-      table: "order"
+      model_schema_name: "order"
       properties: [
         { name: "buyer" value: $buyer }
         { name: "seller" value: $seller }
@@ -20,7 +20,7 @@ mutation create($buyer: String!, $seller: String!) {
       email
     }
 
-    status: related_record(join_on_property: "id", foreign_property: "object_id", table: "status") {
+    status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status") {
       id
       created_at
       name: property(name: "name")
