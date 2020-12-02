@@ -1035,6 +1035,7 @@ en:
         your_answer: Your Answer
         answers: answers
         score: score
+        questions-tagged-by: 'Questions tagged: <span class="font-bold">%{tag}</span>'
         form:
           body: Body
           title: Title

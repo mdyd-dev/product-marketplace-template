@@ -18,7 +18,7 @@
 
     <div class="mt-5">
       <label class="block" for="title">{{ 'app.models.posts.form.title' | t }}</label>
-      <input class="w-2/3 form-input" id="title" name="post[title]" value="{{ object.title }}">
+      <input class="w-2/3 form-input" type="text" id="title" name="post[title]" value="{{ object.title }}">
       {% include 'theme/simple/field_error', errors: object.errors.title %}
     </div>
 
