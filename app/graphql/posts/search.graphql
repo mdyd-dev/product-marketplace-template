@@ -54,7 +54,7 @@ query search(
         ...profile
       }
 
-      parent: related_records(table: "post", join_on_property: "id", foreign_property: "parent_id") {
+      parent: related_records(table: "post", join_on_property: "parent_id", foreign_property: "id") {
         id
       }
 

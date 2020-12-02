@@ -39,9 +39,13 @@
                </div> -->
         </div>
         <span>
-          {% if root_post.creator.id == current_profile.id %}
+          {% if post.id == root_post.id and root_post.creator.id == current_profile.id %}
             <a href="/dashboard/posts/edit?id={{ post.id }}" class="pr-5">
               {{ 'app.models.posts.edit' | t }}
+            </a>
+          {% elsif post.creator_id == current_profile.id %}
+            <a href="/dashboard/posts/edit_answer?id={{ post.id }}" class="pr-5">
+              {{ 'app.models.posts.edit_answer' | t }}
             </a>
           {% endif %}
           {% for tag in post.tags %}
