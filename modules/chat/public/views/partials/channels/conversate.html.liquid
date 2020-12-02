@@ -24,11 +24,11 @@
   if context["params"]["create"] == true
 	assign message_safe = context["params"]["message"] | raw_escape_string
 
-    if conversation.models.results.size > 0
-      assign conversation_id = conversation.models.results.first.id
+    if conversation.records.results.size > 0
+      assign conversation_id = conversation.records.results.first.id
       graphql message = "modules/chat/find_message", from_id: fromId, to_id: toId, conversation_id: conversation_id, timestamp: context["params"]["timestamp"]
 
-      if message.models.results.size == 0
+      if message.records.results.size == 0
         graphql result = 'modules/chat/create_message', conversation_id: conversation_id, message: message_safe, timestamp: context["params"]["timestamp"], from_id: fromId, to_id: toId
       endif
     else
