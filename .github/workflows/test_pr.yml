@@ -64,7 +64,7 @@ jobs:
         run: |
           echo "Start liquid tests"
           testname=$(curl -s ${MPKIT_URL}/tests/run_async)
-          testname=`echo $testname`
+          testname=`echo ${testname/https//}`
           sleep 15
           response=$(curl -s ${MPKIT_URL}/api/app_builder/logs -H  "Authorization: Token ${MPKIT_TOKEN}")
           echo "End liquid tests"
