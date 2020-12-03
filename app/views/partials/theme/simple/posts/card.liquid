@@ -37,10 +37,15 @@
       <div class="flex-1 mt-3 markdown">
         {{post.body | default: '' | markdownify}}
       </div>
+<<<<<<< HEAD
       <div class="w-full md:flex justify-between mt-4">
         {% if root_post.creator.id == current_profile.id %}
           <a href="/dashboard/posts/edit?id={{ post.id }}" class="button button-secondary button-small">
             {{ 'app.models.posts.edit' | t }}
+          </a>
+        {% elsif post.creator_id == current_profile.id %}
+          <a href="/dashboard/posts/edit_answer?id={{ post.id }}" class="button button-secondary button-small">
+            {{ 'app.models.posts.edit_answer' | t }}
           </a>
         {% endif %}
       </div>

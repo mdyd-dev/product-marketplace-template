@@ -2,11 +2,11 @@ query search(
   $id: ID, $limit: Int = 20 $uuid: String $user_id: String $slug: String, $name: String
   $followships: Boolean = false, $membership: Boolean = false
 ) {
-  models(
+  records(
     per_page: $limit
     filter: {
       id: { value: $id }
-      model_schema_name: { value: "profile" }
+      table: { value: "profile" }
       properties: [
         { name: "uuid" value: $uuid }
         { name: "user_id" value: $user_id }
@@ -22,7 +22,7 @@ query search(
     results {
       id
       created_at
-      type: model_schema_name
+      type: table
 
       user_id: property(name: "user_id")
       uuid: property(name: "uuid")
@@ -33,8 +33,8 @@ query search(
       last_name: property(name: "last_name")
       bio: property(name: "bio")
 
-      followed_ids: related_models(
-        model_schema_name: "relationship"
+      followed_ids: related_records(
+        table: "relationship"
         join_on_property: "id"
         foreign_property: "l_id"
         filter: { properties: { name: "name" value: "followship" } }
@@ -42,8 +42,8 @@ query search(
         id: property(name: "r_id")
       }
 
-      joined_group_ids: related_models(
-        model_schema_name: "relationship"
+      joined_group_ids: related_records(
+        table: "relationship"
         join_on_property: "id"
         foreign_property: "l_id"
         filter: { properties: { name: "name" value: "membership" } }
@@ -51,7 +51,7 @@ query search(
         id: property(name: "r_id")
       }
 
-      avatar: related_model(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid", filter: { properties: { name: "photo_type", value: "avatar"}}) {
+      avatar: related_record(table: "photo", join_on_property: "uuid", foreign_property: "object_uuid", filter: { properties: { name: "photo_type", value: "avatar"}}) {
         photo: property_upload(name: "photo") {
           url
           versions

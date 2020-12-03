@@ -955,6 +955,7 @@ en:
         delete: Delete
         delete_failed: Delete failed
         deleted: Deleted
+        updated: Updated
       contacts:
         reasons:
           purchase: Purchase
@@ -1029,6 +1030,7 @@ en:
         new: Ask Question
         add: Add Question
         edit: Edit Question
+        edit_answer: Edit Answer
         empty_state: You haven't added any questions yet. <br> Create your first one now!
         read_more: Read more
         post_answer: Post answer
@@ -1036,6 +1038,8 @@ en:
         answers: answers
         score: score
         questions-tagged-by: 'Questions tagged: <span class="font-bold">%{tag}</span>'
+        errors:
+          only_owner_can_accept_answer: Only owner can accept answer
         form:
           body: Body
           title: Title
