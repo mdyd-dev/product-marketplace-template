@@ -59,7 +59,9 @@ export const John = {
   password: 'password',
   name: 'johnsmith',
   firstName: 'John',
-  lastName: 'Smith'
+  lastName: 'Smith',
+  item: "johnsmith watch",
+  group: "johnsmith group"
 }
 
 export const Admin = {
@@ -82,7 +84,6 @@ export const item = {
   type: faker.commerce.productMaterial(),
   description: faker.lorem.word(),
   price: '10000',
-  commonName: "johnsmith watch"
 }
 
 export const editedItem = {
@@ -100,7 +101,6 @@ export const itemSearch = new ItemSearch(item, editedItem)
 
 export const group = {
   name: groupName,
-  commonName: "johnsmith group",
   audifans: "audi fans",
   summary: "fun-club",
   description: (loremSentence + " " + loremSentence + " " + loremSentence)

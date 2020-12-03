@@ -132,14 +132,14 @@ test('Deleting item', async (t) => {
 
 test('Creating new item for sell', async (t) => {
   await t.useRole(sellerRole)
-  await createItem(item.commonName, item.description, item.price)
+  await createItem(John.item, item.description, item.price)
 })
 
 test('Buying an item and following the seller', async (t) => {
   await t
     .useRole(buyerRole)
     .click(topMenu.buttons.items)
-    .typeText(itemSearch.search.keyword, item.commonName)
+    .typeText(itemSearch.search.keyword, John.item)
     .click(itemSearch.buttons.search)
     .expect(itemSearch.links.commonItem.exists).ok()
     .click(itemSearch.links.commonItem)
@@ -153,7 +153,7 @@ test('Buying an item and following the seller', async (t) => {
     .click(topMenu.buttons.dashboard)
     .click(dashboard.nav.purchases) // buyer's order check
     .click(orders.tableRows.firstLink)
-    .click(link.withText(item.commonName))
+    .click(link.withText(John.item))
     .expect(itemShow.status.ordered.exists).ok()
     .click(topMenu.buttons.menuDropdown)
     .click(topMenu.buttons.dashboard)
@@ -253,9 +253,9 @@ test('Groups', async (t) => {
     await t.expect(link.withText(group.name).exists).ok()
   //edit group
     .click(groupsPage.buttons.editGroup)
-    .typeText(groupsPage.inputs.name, group.commonName, { replace: true })
+    .typeText(groupsPage.inputs.name, John.group, { replace: true })
     .click(groupsPage.buttons.submitForm)
-    .expect(link.withText(group.commonName).exists).ok()
+    .expect(link.withText(John.group).exists).ok()
 })
 
  test('Activity', async (t) => {
@@ -302,8 +302,8 @@ test('Smart search', async (t) => {
     .click(itemSearch.buttons.search)
     // expects item, group and profile with 'common name'
     await checkErrors()
-    await t.expect(link.withText(group.commonName).exists).ok()
-    .expect(link.withText(item.commonName).exists).ok()
+    await t.expect(link.withText(John.group).exists).ok()
+    .expect(link.withText(John.item).exists).ok()
     .expect(link.withText(John.name).exists).ok()
 })
 
@@ -315,7 +315,7 @@ test('Products', async (t) => {
     .click(publicProfile.menu.products)
     await checkErrors()
     // expects an item that belongs to the profile we are currently visiting
-    await t.expect(link.withText(item.commonName).exists).ok()
+    await t.expect(link.withText(John.item).exists).ok()
 })
 
 fixture`Question/Topics`
