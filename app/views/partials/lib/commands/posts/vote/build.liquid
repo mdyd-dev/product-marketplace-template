@@ -26,5 +26,7 @@
 {% endcase %}
 
 {% liquid
+  hash_assign object['profile_id'] = profile.id
+  hash_assign object['owner_id'] = post.creator_id
   return object
 %}

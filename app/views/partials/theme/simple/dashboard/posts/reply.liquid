@@ -1,5 +1,5 @@
 <div class="container flex flex-wrap mx-auto groups-center">
-  <form action="/dashboard/posts/reply" method="post" class="w-full md:w-2/3">
+  <form action="/dashboard/posts/reply" method="post" class="w-full">
     {% include 'authenticity_token' %}
     <input type="hidden" name="post[parent_id]" value="{{ post.id }}" />
     <input type="hidden" name="return_to" value="{% render 'link_to', post: post %}" />
