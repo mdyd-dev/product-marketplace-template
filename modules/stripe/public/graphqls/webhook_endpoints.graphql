@@ -1,8 +1,8 @@
 query webhook_endpoints($url: String!) {
-  webhook_endpoints: models(
+  webhook_endpoints: records(
     per_page: 1
     filter: {
-      model_schema_name: { value: "modules/stripe/webhook_endpoint" }
+      table: { value: "modules/stripe/webhook_endpoint" }
       properties: [{ name: "url", value: $url }]
     }
     sort: { created_at: { order: DESC } }

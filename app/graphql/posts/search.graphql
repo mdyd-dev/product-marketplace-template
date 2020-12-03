@@ -12,11 +12,11 @@ query search(
   $c__score: String
   $parent_id_exists: Boolean
 ) {
-  posts: models(
+  posts: records(
     per_page: $limit
     filter: {
       id: { value: $id }
-      model_schema_name: { value: "post" }
+      table: { value: "post" }
       properties: [
         { name: "parent_id" value: $parent_id }
         { name: "creator_id" value: $creator_id }
@@ -38,7 +38,7 @@ query search(
     results {
       id
       created_at
-      type: model_schema_name
+      type: table
 
       parent_id: property(name: "parent_id")
       creator_id: property(name: "creator_id")
@@ -50,25 +50,25 @@ query search(
       accepted_post_id: property(name: "accepted_post_id")
 
       c__score: property_int(name: "c__score")
-      creator: related_model(model_schema_name: "profile", join_on_property: "creator_id"){
+      creator: related_record(table: "profile", join_on_property: "creator_id"){
         ...profile
       }
 
-      parent: related_models(model_schema_name: "post", join_on_property: "id", foreign_property: "parent_id") {
+      parent: related_records(table: "post", join_on_property: "id", foreign_property: "parent_id") {
         id
       }
 
-      posts: related_models(model_schema_name: "post", join_on_property: "id", foreign_property: "parent_id", sort: { properties: { name: "accepted_post_id", order: ASC }, created_at: { order: ASC } }) {
+      posts: related_records(table: "post", join_on_property: "id", foreign_property: "parent_id", sort: { properties: { name: "accepted_post_id", order: ASC }, created_at: { order: ASC } }) {
         id
         created_at
-        type: model_schema_name
+        type: table
         parent_id: property(name: "parent_id")
         title: property(name: "title")
         body: property(name: "body")
         upvote_profile_ids: property_array(name: "upvote_profile_ids")
         downvote_profile_ids: property_array(name: "downvote_profile_ids")
         score: property_int(name: "score")
-        creator: related_model(model_schema_name: "profile", join_on_property: "creator_id"){
+        creator: related_record(table: "profile", join_on_property: "creator_id"){
           ...profile
         }
       }
@@ -76,13 +76,13 @@ query search(
   }
 }
 
-fragment profile on Model {
+fragment profile on Record {
   id
   name: property(name: "name")
   first_name: property(name: "first_name")
   last_name: property(name: "last_name")
   slug: property(name: "slug")
-  avatar: related_model(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid", filter: { properties: { name: "photo_type", value: "avatar"}}) {
+  avatar: related_record(table: "photo", join_on_property: "uuid", foreign_property: "object_uuid", filter: { properties: { name: "photo_type", value: "avatar"}}) {
     photo: property_upload(name: "photo") {
       url
       versions
