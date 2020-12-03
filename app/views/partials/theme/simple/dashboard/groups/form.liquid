@@ -1,5 +1,5 @@
 {% liquid
-  if group.id
+  if object.id
     assign method = 'put'
   else
     assign method = 'post'
@@ -13,6 +13,7 @@
     <input type="hidden" name="_method" value="{{method}}" />
 
     {% if object.id %}
+      <input type="hidden" name="id" value="{{ object.id }}" />
       <input type="hidden" name="group[id]" value="{{ object.id }}" />
     {% endif %}
     <input type="hidden" name="group[uuid]" value="{{ group_uuid }}" />

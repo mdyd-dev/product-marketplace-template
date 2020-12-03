@@ -4,10 +4,9 @@ method: delete
 ---
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
-
-  function group = 'lib/queries/groups/find', id: context.params.id, owner_id: current_profile.id
+  function group = 'lib/queries/groups/find', id: context.params.id, owner_id: current_profile.id, relation_name: 'owner'
+  include 'lib/present_or_404', property:  group.id
   function object = 'lib/commands/groups/delete', group: group
-  log object
 
   if object.valid
     include 'redirect_to', url: '/dashboard/groups', notice: 'app.groups.deleted'

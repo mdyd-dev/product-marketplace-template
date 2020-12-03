@@ -1,17 +1,16 @@
 ---
 slug: inbox
 ---
-
 {% liquid
 	include 'lib/must_be_authenticated'
 
 	function current_user = 'lib/queries/profiles/find', user_id: context.current_user.id
 
 	assign new_conversation = false
-	assign active_conversation = params['active_conversation']
+	assign active_conversation = context.params['active_conversation']
 
-	if params['active_conversation'] == 'new'
-		graphql conv = 'modules/chat/create_conversation', from_id: params['from_id'], to_id: params['to_id']
+	if context.params['active_conversation'] == 'new'
+		graphql conv = 'modules/chat/create_conversation', from_id: context.params['from_id'], to_id: context.params['to_id']
 
 		assign new_conversation = true
 		assign active_conversation = conv.model_create.id
