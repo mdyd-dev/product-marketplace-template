@@ -23,7 +23,7 @@
         </div>
 
         <div class="w-2/3 border-l flex flex-col relative">
-          <div class="hidden absolute left-0 right-0 text-center" id="chat-loadingIndicator" data-more="{{ messages.models.has_next_page }}">
+          <div class="hidden absolute left-0 right-0 text-center" id="chat-loadingIndicator" data-more="{{ messages.records.has_next_page }}">
             <span class="inline-block mt-2 py-2 px-4 bg-blue-600 rounded shadow-md text-white">{{ 'modules/chat/loading_previous' | t }}</span>
           </div>
           <div class="flex-1 overflow-auto" id="chat-messagesList-container">

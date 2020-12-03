@@ -115,6 +115,7 @@ styleGuide.typography = () => {
       row.querySelector('.styleGuide-color').textContent = textStyle.getPropertyValue('color');
       row.querySelector('.styleGuide-font').textContent = textStyle.getPropertyValue('font-family');
       row.querySelector('.styleGuide-size').textContent = textStyle.getPropertyValue('font-size');
+      row.querySelector('.styleGuide-lineHeight').textContent = textStyle.getPropertyValue('line-height');
     });
   };
 
