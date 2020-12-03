@@ -9,7 +9,7 @@ method: put
 
   function object = 'lib/commands/call', object: context.params.group, command: 'groups/update', selection: 'model_update'
   if object.valid
-    include 'redirect_to', url: '/dashboard/groups'
+    include 'redirect_to', url: '/dashboard/groups', notice: 'app.models.shared.updated'
   else
     graphql presigned_url = 'photos/presign' | dig: 'presigned'
     include 'theme/simple/dashboard/groups/edit', object: object, presigned_url: presigned_url
