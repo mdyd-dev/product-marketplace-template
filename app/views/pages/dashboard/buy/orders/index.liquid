@@ -1,6 +1,8 @@
 ---
 metadata:
   breadcrumbs:
+    - label: app.dashboard
+      url: /dashboard
     - label: app.buyer
     - label: app.orders.list
 ---
@@ -9,6 +11,6 @@ metadata:
 
   function orders = 'lib/queries/orders/search', limit: 100, buyer: current_profile.id, withStatuses: true
 
-  include 'theme/simple/dashboard/breadcrumbs', name: 'orders', total_entries: orders.total_entries, role: 'buyer'
+  render 'theme/simple/ui/breadcrumbs', breadcrumbs: context.page.metadata.breadcrumbs, value: orders.total_entries
   include 'theme/simple/dashboard/orders/index', orders: orders, role: 'buyer'
 %}

@@ -1,6 +1,8 @@
 ---
 metadata:
   breadcrumbs:
+    - label: app.dashboard
+      url: /dashboard
     - label: app.groups.list
 ---
 {% liquid
@@ -8,6 +10,6 @@ metadata:
 
   function groups = 'lib/queries/groups/search', limit: 100, owner_id: current_profile.id
 
-  include 'theme/simple/dashboard/breadcrumbs', name: 'groups', total_entries: groups.total_entries
+  render 'theme/simple/ui/breadcrumbs', breadcrumbs: context.page.metadata.breadcrumbs, value: groups.total_entries
   include 'theme/simple/dashboard/groups/index', groups: groups
 %}

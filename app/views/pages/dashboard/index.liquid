@@ -2,8 +2,11 @@
 slug: dashboard
 metadata:
   breadcrumbs:
+    - label: app.dashboard
+      url: /dashboard
     - label: app.feed.title
 ---
+
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true, followships: true, membership: true
 
@@ -28,7 +31,7 @@ metadata:
     function list = 'lib/queries/items/search', query: context.params, limit: 20, owner: profile_id
   endif
 
-  include 'theme/simple/dashboard/breadcrumbs', name: 'feed'
+  render 'theme/simple/ui/breadcrumbs', breadcrumbs: context.page.metadata.breadcrumbs
   include 'theme/simple/profile/private_feed', section: section, user: profile, list: list, current_profile: current_profile, presigned_url: presigned_url
   render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
   render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token

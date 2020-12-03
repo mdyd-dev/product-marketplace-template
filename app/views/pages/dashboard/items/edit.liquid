@@ -1,10 +1,13 @@
 ---
 metadata:
   breadcrumbs:
-    - url: /dashboard/sell/items
-      label: app.items.list
+    - label: app.dashboard
+      url: /dashboard
+    - label: app.items.list
+      url: /dashboard/sell/items
     - label: app.edit
 ---
+
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
 
@@ -20,6 +23,6 @@ metadata:
   function filters = 'lib/queries/search/filters'
   function presigned_url = 'lib/queries/presigned_url'
 
-  include 'theme/simple/dashboard/breadcrumbs'
+  render 'theme/simple/ui/breadcrumbs', breadcrumbs: context.page.metadata.breadcrumbs
   include 'theme/simple/items/edit', item: item, lib: filters, presigned_url: presigned_url, user: context.current_user
 %}

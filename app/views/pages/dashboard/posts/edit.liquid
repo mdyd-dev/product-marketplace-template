@@ -1,14 +1,18 @@
 ---
 metadata:
   breadcrumbs:
-    - url: /dashboard/posts
-      label: app.posts.list
+    - label: app.dashboard
+      url: /dashboard
+    - label: app.p-dashboard.posts
+      url: /dashboard/posts
     - label: app.edit
 ---
+
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
   function post = 'lib/queries/posts/find', id: context.params.id, creator_id: current_profile.id
   include 'lib/present_or_404', property:  post.id
 
+  render 'theme/simple/ui/breadcrumbs', breadcrumbs: context.page.metadata.breadcrumbs
   include 'theme/simple/dashboard/posts/edit', object: post
 %}
