@@ -9,7 +9,8 @@ method: put
 
   function object = 'lib/commands/call', object: context.params.post, command: 'posts/update', selection: 'model_update'
   if object.valid
-    include 'redirect_to', url: '/dashboard/posts'
+    function post_url = 'link_to', post: post.parent
+    include 'redirect_to', url: post_url, notice: 'app.models.shared.updated'
   else
     include 'theme/simple/dashboard/posts/edit', object: object
   endif
