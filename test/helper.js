@@ -22,7 +22,7 @@ export async function register(user) {
     .typeText(registerForm.inputs.password, user.password)
     await t.click(registerForm.buttons.regSubmit)
     const getLocation = await getURL()
-    await t.expect(getLocation).contains(myUrl+ 'dashboard/profile/edit')
+    await t.expect(getLocation).contains(myUrl+ '/dashboard/profile/edit')
     .typeText(profileEditForm.inputs.name, user.name)
     .typeText(profileEditForm.inputs.firstName, user.firstName)
     .typeText(profileEditForm.inputs.lastName, user.lastName)

@@ -21,10 +21,11 @@ jobs:
           github_token: ${{ github.token }}
           paths_ignore: '["**/README.md"]'
 
-  deploy_pr:
+  main:
     needs: pre_job
     if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
     runs-on: ubuntu-latest
+    container: platformos/testcafe:3.0.1
     strategy:
       max-parallel: 1
     env:
@@ -34,46 +35,38 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
       - name: Build
+        shell: sh
         run: |
           npm ci
           npm run build
       - name: Deploy
+        shell: sh
         run: |
+          set -e
           npm -g install @platformos/pos-cli
           pos-cli data clean --auto-confirm --include-schema
           pos-cli deploy
           pos-cli data import --path=./seed/data.zip --zip
-
-  test_qa:
-    needs: deploy_pr
-    runs-on: ubuntu-latest
-    container: platformos/testcafe:latest
-    strategy:
-      max-parallel: 1
-    env:
-      MPKIT_URL: ${{ secrets.MPKIT_URL_PR }}
-      MPKIT_TOKEN: ${{ secrets.MPKIT_TOKEN }}
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v1
-      - name: Run tests
+      - name: UnitTest
+        shell: sh
         run: |
-          echo "Start liquid tests"
-          testname=$(curl -s ${MPKIT_URL}/tests/run_async)
-          testname=`echo $testname`
+          set -e
+          TEST_ID=$(curl -sf ${MPKIT_URL}/tests/run_async)
+          echo triggered tests on ${MPKIT_URL/https:\/\//} - ID: ${TEST_ID}
           sleep 15
-          response=$(curl -s ${MPKIT_URL}/api/app_builder/logs -H  "Authorization: Token ${MPKIT_TOKEN}")
-          echo "End liquid tests"
-          matchstring="Success_${testname}"
-          echo "${response}"
-          echo $matchstring
-          if [[ $response =~ $matchstring ]]; then
-            testcafe "chromium:headless" test
-          else
-            exit 1
-          fi
-        shell: bash
+
+          curl -s ${MPKIT_URL}/api/app_builder/logs -H "Authorization: Token ${MPKIT_TOKEN}" -o app.log
+
+          grep -q "Success_${TEST_ID}" app.log
+      - name: Testcafe test
+        shell: sh
+        run: |
+          npm run test
+      - name: Publish test reports
+        if: ${{ failure() }}
+        shell: sh
+        run: |
+          set -e
+          npm run ci:test:publish
+          echo "test published to ${MPKIT_URL/https:\/\//}/_test_results"
