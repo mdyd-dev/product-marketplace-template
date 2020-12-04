@@ -2,7 +2,7 @@
   {% include 'authenticity_token' %}
   <input type="hidden" name="post[id]" value="{{ post.id }}"/>
   <input type="hidden" name="post[type]" value="{% if post.upvote_profile_ids contains current_profile.id %}clear{% else %}up{% endif %}"/>
-  <button class="{% if post.upvote_profile_ids contains current_profile.id %}text-green-600{% else %}text-blue-700{% endif %}" data-tc="voteup">
+  <button class="{% if post.upvote_profile_ids contains current_profile.id %}text-yellow-600{% else %}text-blue-700{% endif %}" data-tc="voteup">
     <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /> </svg>
   </button>
 </form>
@@ -13,7 +13,7 @@
   {% include 'authenticity_token' %}
   <input type="hidden" name="post[id]" value="{{ post.id }}"/>
   <input type="hidden" name="post[type]" value="{% if post.downvote_profile_ids contains current_profile.id %}clear{% else %}down{% endif %}"/>
-  <button class="{% if post.downvote_profile_ids contains current_profile.id %}text-green-600{% else %}text-blue-700{% endif %}">
+  <button class="{% if post.downvote_profile_ids contains current_profile.id %}text-yellow-600{% else %}text-blue-700{% endif %}">
     <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /> </svg>
   </button>
 </form>
