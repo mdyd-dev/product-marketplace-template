@@ -1040,6 +1040,7 @@ en:
         questions-tagged-by: 'Questions tagged: <span class="font-bold">%{tag}</span>'
         errors:
           only_owner_can_accept_answer: Only owner can accept answer
+          owner_cant_vote_his_answer: "You can't vote on answer you wrote"
         form:
           body: Body
           title: Title
