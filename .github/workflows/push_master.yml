@@ -25,6 +25,7 @@ jobs:
     needs: pre_job
     if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
     container: platformos/testcafe:3.0.1
+    runs-on: ubuntu-latest
     env:
       MPKIT_URL: ${{ secrets.MPKIT_URL_QA }}
       MPKIT_EMAIL: ${{ secrets.MPKIT_EMAIL }}
