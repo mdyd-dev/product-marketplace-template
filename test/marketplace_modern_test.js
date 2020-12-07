@@ -96,7 +96,7 @@ test('Editing item and search', async (t) => {
     .click(topMenu.buttons.dashboard)
     .click(dashboard.nav.publicProfile)
     const sellerProfilePage = ClientFunction(() => document.location.href)
-    await t.expect(sellerProfilePage()).contains(myUrl+'profile/' + SellerRandomUser.name) // checks if href contains slugified username
+    await t.expect(sellerProfilePage()).contains(myUrl+'/profile/' + SellerRandomUser.name) // checks if href contains slugified username
     .click(topMenu.buttons.items)
     await checkErrors()
     await t.click(itemSearch.buttons.sort)

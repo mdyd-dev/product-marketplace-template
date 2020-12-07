@@ -7,12 +7,13 @@
     "start": "npx concurrently npm:dev-*",
     "build": "cross-env NODE_ENV=production npx webpack-cli",
     "build:dev": "cross-env NODE_ENV=development npx webpack-cli",
-    "test": "testcafe 'chromium:headless' test",
+    "test": "testcafe 'chromium:headless --sandbox' test --reporter html:test-report.html -s path=test/screenshots,takeOnFails=true",
     "clean": "npx rimraf app/assets/{js,css}/*",
     "deploy": "npm run build && CI=true pos-cli deploy",
     "predeploy": "npm run clean",
     "ci:build": "docker run -it -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD:/app -w /app node:12-alpine npm ci && npm run build",
-    "ci:test": "docker run -it -e MPKIT_URL=$MPKIT_URL -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD/test:/app -w /app platformos/testcafe \"testcafe 'chromium:headless --sandbox' --skip-js-errors /app\""
+    "ci:test": "docker run -it -e MPKIT_URL=$MPKIT_URL -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD:/app -w /app platformos/testcafe \"npm run test\"",
+    "ci:test:publish": "curl -sf -XPUT ${MPKIT_URL}/api/app_builder/marketplace_releases/sync -H \"Authorization: Token $MPKIT_TOKEN\" -F \"marketplace_builder_file_body=@test-report.html\" -F \"path=app/views/pages/_test_results/index.liquid\" -o /dev/null"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
@@ -71,6 +72,7 @@
     "lodash.startcase": "^4.4.0",
     "testcafe-browser-provider-lambdatest": "^2.0.3",
     "testcafe-reporter-html": "^1.4.6",
+    "testcafe-reporter-multiple-html": "0.0.2",
     "testcafe-reporter-spec-time": "^3.0.1"
   }
 }
