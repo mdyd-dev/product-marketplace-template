@@ -1,0 +1,14 @@
+/*
+  small text inputs
+*/
+
+
+
+/* small text inputs
+============================================================================ */
+.form-input-small {
+  @apply
+    pt-1
+    pb-1
+    text-sm;
+}
