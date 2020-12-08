@@ -36,9 +36,17 @@
 				</a>
 
                 <div x-data="{ dropdownOpen: false }" class="relative">
+
+                  {%liquid
+                    assign avatar_url = profile.avatar.versions.tiny
+                    if avatar_url == blank
+                      assign avatar_url = "images/user.svg" | asset_url
+                    endif
+                  %}
+
                     <button @click="dropdownOpen = !dropdownOpen" class="flex items-center relative z-10 px-3 py-2 bg-white rounded-md focus:outline-none" data-menu-dropdown>
 						<span class="hover:text-gray-900">{{ profile.first_name | default: profile.name }}</span>
-	                        <img src="{{ profile.avatar.versions.tiny }}" class="w-5 h-5 rounded-full ml-2">
+	                        <img src="{{ avatar_url }}" class="w-5 h-5 rounded-full ml-2">
 					</button>
 
                     <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>
