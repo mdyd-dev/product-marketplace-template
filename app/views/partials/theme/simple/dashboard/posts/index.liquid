@@ -1,69 +1,62 @@
-<div class="w-full mx-auto">
-  <div class="mb-5 text-right">
-    <a href="/dashboard/posts/new" class="button">
-      {{ 'app.models.posts.add' | t }}
-    </a>
-  </div>
-  <div class="my-6 bg-white rounded shadow-md">
-    {% if posts.results.size > 0 %}
-      <table class="w-full text-left border-collapse">
-        <thead>
-          <tr>
-            <th class="px-6 py-4 text-sm font-bold uppercase border-b bg-grey-lightest text-grey-dark border-grey-light">
-              {{ "app.models.posts.form.title" | t }}
-            </th>
-            <th class="px-6 py-4 text-sm font-bold uppercase border-b bg-grey-lightest text-grey-dark border-grey-light">
-              {{ "app.models.posts.form.tags" | t }}
-            </th>
-            <th class="px-6 py-4 text-sm font-bold uppercase border-b bg-grey-lightest text-grey-dark border-grey-light">
-              {{ "app.models.posts.form.upvotes" | t }}
-            </th>
-            <th class="px-6 py-4 text-sm font-bold uppercase border-b bg-grey-lightest text-grey-dark border-grey-light">
-              {{ "app.models.posts.form.downvotes" | t }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for post in posts.results %}
-            <tr class="hover:bg-grey-lighter">
-              <td class="px-6 py-4 border-b border-grey-light">
-                <a href="/posts/show/{{ post.id }}">
-                  {{ post.title }}
-                </a>
-              </td>
-              <td class="px-6 py-4 border-b border-grey-light">
-                <a href="/posts/show/{{ post.id }}">
-                  {{ post.tags | join: ', ' }}
-                </a>
-              </td>
-              <td class="px-6 py-4 border-b border-grey-light">
-                <a href="/posts/show/{{ post.id }}">
-                  {{ post.upvote_profile_ids.size }}
-                </a>
-              </td>
-              <td class="px-6 py-4 border-b border-grey-light">
-                <a href="/posts/show/{{ post.id }}">
-                  {{ post.downvote_profile_ids.size }}
-                </a>
-              </td>
-              <td class="px-6 py-4 border-b border-grey-light">
-                <a href="/dashboard/posts/edit?id={{ post.id }}" class="button">
-                  {{ 'app.models.posts.edit' | t }}
-                </a>
-                <form action="/dashboard/posts" method="post" class="inline ml-2" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
-                  {% include 'authenticity_token' %}
-                  <input type="hidden" name="_method" value="delete" />
-                  <input type="hidden" name="id" value="{{ post.id }}">
-
-                  <button id="deletebutton" class="button button-warning">{{ 'app.models.shared.delete' | t }}</button>
-                </form>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    {% else %}
-      {% include 'theme/simple/posts/empty_state' %}
-    {% endif %}
-  </div>
+<div class="mb-5 text-right">
+  <a href="/dashboard/posts/new" class="button">
+    {{ 'app.models.posts.add' | t }}
+  </a>
 </div>
+
+{% if posts.results.size > 0 %}
+  <section class="w-full lg:table">
+
+    <header class="hidden lg:table-row font-bold">
+      <div class="lg:pl-2 lg:py-4 lg:table-cell">{{ 'app.models.posts.form.title' | t }}</div>
+      <div class="lg:pl-2 lg:py-4 lg:table-cell">{{ 'app.models.posts.form.tags' | t }}</div>
+      <div class="lg:pl-2 lg:py-4 lg:table-cell">{{ 'app.models.posts.form.upvotes' | t }}</div>
+      <div class="lg:pl-2 lg:py-4 lg:table-cell">{{ 'app.models.posts.form.downvotes' | t }}</div>
+      <div class="lg:table-cell"></div>
+    </header>
+
+    {% for post in posts.results %}
+      <div class="lg:table-row pb-5 mb-4 border-b">
+
+        <div class="lg:pl-2 lg:py-4 lg:table-cell lg:border-t">
+          <span class="lg:hidden">{{ 'app.models.posts.form.title' | t }}: </span>
+          <a href="/posts/show/{{ post.id }}">
+            {{ post.title }}
+          </a>
+        </div>
+
+        <div class="lg:pl-2 lg:py-4 lg:table-cell lg:border-t">
+          <span class="lg:hidden">{{ 'app.models.posts.form.tags' | t }}: </span>
+          {{ post.tags | join: ', ' }}
+        </div>
+
+        <div class="lg:pl-2 lg:py-4 lg:table-cell lg:border-t">
+          <span class="lg:hidden">{{ 'app.models.posts.form.upvotes' | t }}: </span>
+          {{ post.upvote_profile_ids.size }}
+        </div>
+
+        <div class="lg:pl-2 lg:py-4 lg:table-cell lg:border-t">
+          <span class="lg:hidden">{{ 'app.models.posts.form.downvotes' | t }}: </span>
+          {{ post.downvote_profile_ids.size }}
+        </div>
+
+        <div class="mt-2 lg:mt-0 lg:pl-2 lg:py-4 lg:table-cell lg:border-t lg:text-right whitespace-nowrap">
+          <a href="/dashboard/posts/edit?id={{ post.id }}" class="button">
+            {{ 'app.models.posts.edit' | t }}
+          </a>
+          <form action="/dashboard/posts" method="post" class="inline ml-2" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
+            {% include 'authenticity_token' %}
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="id" value="{{ post.id }}">
+
+            <button class="button button-danger">{{ 'app.models.shared.delete' | t }}</button>
+          </form>
+        </div>
+
+      </div>
+    {% endfor %}
+
+  </section>
+{% else %}
+    {% include 'theme/simple/posts/empty_state' %}
+{% endif %}
