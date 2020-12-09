@@ -335,3 +335,34 @@ CA
 94010
 USA
 ```
+
+
+## Updating your related app
+
+You will most probably clone the repository and build your own app based on this template. In the meantime it is probable that the core template will be updated as well. If you’d like to update your dependent project with the changes applied to the template you can merge those to your own repository.
+
+First, set the upstream to the template repository:
+
+```
+git remote add upstream https://github.com/mdyd-dev/product-marketplace-template.git
+```
+
+After doing this once, you will be able to merge changes from the template to your own project repository:
+
+```
+git checkout master
+git pull
+git checkout -b update
+git fetch upstream
+git merge upstream/master --no-commit
+```
+
+After this you will most likely have to resolve some conflicts if your code differs from the template. It is up to you to choose which changes would you like to keep and which will be overwriten by the changes in template. When you resolve the conflicts and keep only the changes you want, you just need to push them to your repository:
+
+```
+git add *
+git commit -m "Resolving conflicts after update"
+git push
+```
+
+After those operations you will have a separate branch that has been updated with the code from the main template repository.
