@@ -49,14 +49,38 @@ styleGuide.colors = () => {
   };
 
 
+  // purpose:		convert the color from rgb[a] to hex
+  // arguments: color in rgb[a]
+  // returns:   color in hex
+  // ------------------------------------------------------------------------
+  function rgbaToHex(color){
+    if( color.indexOf('#') != -1 ) return color;
+
+    color = color
+                .replace('rgba', '')
+                .replace('rgb', '')
+                .replace('(', '')
+                .replace(')', '');
+    color = color.split(',');
+
+    return  '#'
+            + ( '0' + parseInt(color[0], 10).toString(16) ).slice(-2)
+            + ( '0' + parseInt(color[1], 10).toString(16) ).slice(-2)
+            + ( '0' + parseInt(color[2], 10).toString(16) ).slice(-2);
+  };
+
+
   // purpose:		finds the background color class name and shows it in corresponding place
   // ------------------------------------------------------------------------
   module.showBackgroundClass = () => {
     module.settings.propertiesList.forEach(element => {
-      let classNames = element.parentElement.querySelector('.styleGuide-colorBox').className.split(' ');
-      let backgroundClass = classNames.filter((name) => name.startsWith('bg-'));
+      let classNames = '';
 
-      element.querySelector('.styleGuide-className').textContent = backgroundClass;
+      Array.from(element.parentElement.querySelector('.styleGuide-colorBox').children).forEach(element => {
+        classNames += '<li>' + Array.from(element.classList).filter((name) => name.startsWith('bg-')) + '</li>';
+      });
+
+      element.querySelector('.styleGuide-className ul').insertAdjacentHTML('beforeend', classNames.replaceAll('bg', ''));
     });
   };
 
@@ -64,10 +88,13 @@ styleGuide.colors = () => {
   // ------------------------------------------------------------------------
   module.showBackgroundColor = () => {
     module.settings.propertiesList.forEach(element => {
-      let colorBox = element.parentElement.querySelector('.styleGuide-colorBox');
-      let color = window.getComputedStyle(colorBox).getPropertyValue('background-color');
+      let colorNames = '';
 
-      element.querySelector('.styleGuide-color').textContent = color;
+      Array.from(element.parentElement.querySelector('.styleGuide-colorBox').children).forEach(element => {
+        colorNames += '<li>' + rgbaToHex(window.getComputedStyle(element).getPropertyValue('background-color')) + '</li>';
+      });
+
+      element.querySelector('.styleGuide-color ul').insertAdjacentHTML('beforeend', colorNames);
     });
   };
 
@@ -170,7 +197,6 @@ styleGuide.clipboard = () => {
   module.init();
 
 };
-
 
 
 

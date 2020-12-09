@@ -14,88 +14,131 @@ metadata:
     <header>
       {% render 'theme/simple/ui/title', label: 'Colors' %}
     </header>
-    <ul class="grid grid-cols-3 gap-x-4 gap-y-10">
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10">
       <li>
-        <div class="h-32 mb-1 border bg-white styleGuide-colorBox"></div>
-        {% render 'theme/simple/ui/subtitle', label: 'Elements backgrounds' %}
-        <dl>
-          <div class="flex justify-between w-full">
-            <dt>Class name:</dt>
-            <dd class="font-mono styleGuide-className"></dd>
-          </div>
-          <div class="flex justify-between w-full">
-            <dt>Color:</dt>
-            <dd class="font-mono styleGuide-color"></dd>
-          </div>
-        </dl>
-      </li>
-      <li>
-        <div class="h-32 mb-1 border bg-gray-100 styleGuide-colorBox"></div>
+        <div class="mb-1 border styleGuide-colorBox">
+          <div class="h-32 bg-page"></div>
+        </div>
         {% render 'theme/simple/ui/subtitle', label: 'Page background' %}
         <dl class="flex flex-wrap justify-between">
           <div class="flex justify-between w-full">
-            <dt>Class name:</dt>
-            <dd class="font-mono styleGuide-className"></dd>
+            <dt>Class suffix:</dt>
+            <dd class="text-right font-mono styleGuide-className">
+              <ul></ul>
+            </dd>
           </div>
           <div class="flex justify-between w-full">
             <dt>Color:</dt>
-            <dd class="font-mono styleGuide-color"></dd>
+            <dd class="font-mono styleGuide-color">
+              <ul></ul>
+            </dd>
           </div>
         </dl>
       </li>
       <li>
-        <div class="h-32 mb-1 border bg-blue-700 styleGuide-colorBox"></div>
-        {% render 'theme/simple/ui/subtitle', label: 'Interactive elements' %}
-        <dl class="flex flex-wrap justify-between">
+        <div class="mb-1 border styleGuide-colorBox">
+          <div class="h-32 bg-panel"></div>
+        </div>
+        {% render 'theme/simple/ui/subtitle', label: 'Panel background' %}
+        <dl>
           <div class="flex justify-between w-full">
-            <dt>Class name:</dt>
-            <dd class="font-mono styleGuide-className"></dd>
+            <dt>Class suffix:</dt>
+            <dd class="text-right font-mono styleGuide-className">
+              <ul></ul>
+            </dd>
           </div>
           <div class="flex justify-between w-full">
             <dt>Color:</dt>
-            <dd class="font-mono styleGuide-color"></dd>
+            <dd class="font-mono styleGuide-color">
+              <ul></ul>
+            </dd>
           </div>
         </dl>
       </li>
       <li>
-        <div class="h-32 mb-1 border bg-gray-700 styleGuide-colorBox"></div>
-        {% render 'theme/simple/ui/subtitle', label: 'Texts' %}
+        <div class="mb-1 border styleGuide-colorBox">
+          <div class="h-24 bg-text"></div>
+          <div class="h-8 bg-text-inverted"></div>
+        </div>
+        {% render 'theme/simple/ui/subtitle', label: 'Text' %}
         <dl class="flex flex-wrap justify-between">
           <div class="flex justify-between w-full">
-            <dt>Class name:</dt>
-            <dd class="font-mono styleGuide-className"></dd>
+            <dt>Class suffix:</dt>
+            <dd class="text-right font-mono styleGuide-className">
+              <ul></ul>
+            </dd>
           </div>
           <div class="flex justify-between w-full">
             <dt>Color:</dt>
-            <dd class="font-mono styleGuide-color"></dd>
+            <dd class="font-mono styleGuide-color">
+              <ul></ul>
+            </dd>
           </div>
         </dl>
       </li>
       <li>
-        <div class="h-32 mb-1 border bg-red-700 styleGuide-colorBox"></div>
-        {% render 'theme/simple/ui/subtitle', label: 'Importants' %}
+        <div class="mb-1 border styleGuide-colorBox">
+          <div class="h-16 bg-interaction"></div>
+          <div class="h-8 bg-interaction-hover"></div>
+          <div class="h-8 bg-interaction-disabled"></div>
+        </div>
+        {% render 'theme/simple/ui/subtitle', label: 'Interactive element' %}
         <dl class="flex flex-wrap justify-between">
           <div class="flex justify-between w-full">
-            <dt>Class name:</dt>
-            <dd class="font-mono styleGuide-className"></dd>
+            <dt>Class suffix:</dt>
+            <dd class="text-right font-mono styleGuide-className">
+              <ul></ul>
+            </dd>
           </div>
           <div class="flex justify-between w-full">
             <dt>Color:</dt>
-            <dd class="font-mono styleGuide-color"></dd>
+            <dd class="font-mono styleGuide-color">
+              <ul></ul>
+            </dd>
           </div>
         </dl>
       </li>
       <li>
-        <div class="h-32 mb-1 border bg-green-700 styleGuide-colorBox"></div>
-        {% render 'theme/simple/ui/subtitle', label: 'Confirmations' %}
+        <div class="mb-1 border styleGuide-colorBox">
+          <div class="h-16 bg-danger"></div>
+          <div class="h-8 bg-danger-hover"></div>
+          <div class="h-8 bg-danger-disabled"></div>
+        </div>
+        {% render 'theme/simple/ui/subtitle', label: 'Danger' %}
         <dl class="flex flex-wrap justify-between">
           <div class="flex justify-between w-full">
-            <dt>Class name:</dt>
-            <dd class="font-mono styleGuide-className"></dd>
+            <dt>Class suffix:</dt>
+            <dd class="text-right font-mono styleGuide-className">
+              <ul></ul>
+            </dd>
           </div>
           <div class="flex justify-between w-full">
             <dt>Color:</dt>
-            <dd class="font-mono styleGuide-color"></dd>
+            <dd class="font-mono styleGuide-color">
+              <ul></ul>
+            </dd>
+          </div>
+        </dl>
+      </li>
+      <li>
+        <div class="mb-1 border styleGuide-colorBox">
+          <div class="h-16 bg-confirmation"></div>
+          <div class="h-8 bg-confirmation-hover"></div>
+          <div class="h-8 bg-confirmation-disabled"></div>
+        </div>
+        {% render 'theme/simple/ui/subtitle', label: 'Confirmation' %}
+        <dl class="flex flex-wrap justify-between">
+          <div class="flex justify-between w-full">
+            <dt>Class suffix:</dt>
+            <dd class="text-right font-mono styleGuide-className">
+              <ul></ul>
+            </dd>
+          </div>
+          <div class="flex justify-between w-full">
+            <dt>Color:</dt>
+            <dd class="font-mono styleGuide-color">
+              <ul></ul>
+            </dd>
           </div>
         </dl>
       </li>
