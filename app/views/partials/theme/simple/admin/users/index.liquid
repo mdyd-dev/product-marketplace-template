@@ -1,19 +1,37 @@
-<table class="table w-1/2 max-w-full">
-  <thead>
-    <tr>
-      <th class="w-8 text-left">{{ 'app.users.attr.id' | t }}</th>
-      <th class="text-left">{{ 'app.users.attr.email' | t }}</th>
-      <th class="text-left">{{ 'app.users.attr.created_at' | t }}</th>
-    </tr>
-  </thead>
+<section>
+  <header class="hidden lg:flex gap-2 mb-5 font-bold">
+    <div class="w-2/6">{{ 'app.users.attr.email' | t }}</div>
+    <div class="w-1/6 lg:pl-2">{{ 'app.users.attr.created_at' | t }}</div>
+    <div class="w-3/6 lg:pl-2">{{ 'app.users.attr.profile' | t }}</div>
+  </header>
 
-  <tbody class="leading-8">
-    {% for record in list.results %}
-      <tr>
-        <td>{{ record.id }}</td>
-        <td>{{ record.email }}</td>
-        <td>{{ record.created_at | l }}</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  {% for record in list.results %}
+  <article class="lg:flex gap-2 mb-5 pt-5 border-t">
+    <div class="lg:w-2/6 lg:pl-2">
+      <span class="lg:hidden">{{ 'app.users.attr.email' | t }}: </span>
+      <span class="font-bold lg:font-normal">{{ record.email }}</span>
+    </div>
+    <div class="lg:w-1/6 lg:pl-2">
+      <span class="lg:hidden">{{ 'app.users.attr.created_at' | t }}</span>
+      {{ record.created_at | l }}
+    </div>
+    <div class="sm:flex items-end lg:items-center lg:w-3/6 lg:pl-2">
+      {% if record.profile %}
+        <div>
+          <p><a href="/profile/{{ record.profile.slug }}">{{ record.profile.name }}</a></p>
+          <p class="text-sm">{{ 'admin.menu.users.slug' | t }} {{ record.profile.slug }}</p>
+          <p class="text-sm">{{ 'admin.menu.users.id' | t }} {{ record.profile.id }}</p>
+          <p class="text-sm">{{ 'admin.menu.users.uuid' | t }} {{ record.profile.uuid }}</p>
+        </div>
+        <div class="ml-auto">
+          <a class="mt button button-small mt-2" href="/u/{{ record.profile.slug }}">
+            {{ 'app.items.list' | t }}
+          </a>
+        </div>
+      {% else %}
+        <em>{{ 'admin.menu.users.missing_profile' | t }}</em>
+      {% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</section>

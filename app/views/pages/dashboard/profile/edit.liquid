@@ -1,0 +1,7 @@
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true, require_profile: false
+
+  graphql presigned_url = 'photos/presign' | dig: 'presigned'
+
+  render 'theme/simple/dashboard/profile/edit', object: current_profile, presigned_url: presigned_url, context: context
+%}

@@ -1,0 +1,5 @@
+{% liquid
+  function records = 'lib/queries/models/search', keyword: context.params.qkeyword, limit: 15
+
+  render 'theme/simple/quick_search/index', records: records
+%}

@@ -1,0 +1,25 @@
+{% liquid
+  if object.id
+    assign method = 'put'
+  else
+    assign method = 'post'
+  endif
+%}
+<div class="container flex flex-wrap mx-auto groups-center">
+  <form action="categories" method="post" class="w-full md:w-2/3">
+    {% include 'authenticity_token' %}
+    <input type="hidden" name="_method" value="{{method}}" />
+
+    {% if object.id %}
+      <input type="hidden" name="category[id]" value="{{ object.id }}" />
+    {% endif %}
+
+    <div class="mt-5">
+      <label class="block" for="key">{{ 'app.models.categories.form.key' | t }}</label>
+      <input class="w-2/3 form-input" type="text" id="key" name="category[key]" value="{{ object.key }}" autofocus required />
+      {% include 'theme/simple/field_error', errors: object.errors.key %}
+    </div>
+
+    <button class="mt-8 button">{{ 'app.models.shared.submit' | t }}</button>
+  </form>
+</div>

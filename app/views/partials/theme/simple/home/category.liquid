@@ -1,0 +1,16 @@
+<div class="flex flex-col bg-white rounded shadow">
+  <a class="block w-full h-64 overflow-hidden rounded-tl rounded-tr" href="{% render 'link_to', category: object.key %}">
+    <img alt="{{ object.key }}" class="block object-cover object-center w-full h-full" src="https://dummyimage.com/800x4:3/000/fff&text={{ object.key | t: scope: 'categories' }}">
+  </a>
+
+  <div class="p-4">
+
+    <!-- TODO: If empty, dont show. -->
+    <h2 class="text-lg font-medium text-gray-900">
+      <a href="{% render 'link_to', category: object.key %}">{{ object.key | t: scope: 'categories'  }}</a>
+    </h2>
+    <p class="mt-2 break-all">
+      {{ object.key }}
+    </p>
+  </div>
+</div>

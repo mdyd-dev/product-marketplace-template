@@ -1,46 +1,46 @@
-{% if order.status.name == 'app.order_statuses.placed' %}
+{% if order.status.name == 'app.statuses.orders.placed' %}
   {% if order.properties.paid_at == null and role == 'seller' %}
-    <form action="/order_statuses/create" method="post">
+    <form action="/statuses/create" method="post">
       {% include 'authenticity_token' %}
-      <input type="hidden" name="status" value="app.order_statuses.paid"/>
+      <input type="hidden" name="status" value="app.statuses.orders.paid"/>
       <input type="hidden" name="order_id" value="{{ order.id }}"/>
 
-      <button class="button button-sm">{{ 'app.mark-as-paid' | t }}</button>
+      <button class="button button-small">{{ 'app.mark-as-paid' | t }}</button>
     </form>
   {% endif %}
 
   {% if order.properties.paid_at == null and role == 'buyer' %}
-    <form action="/order_statuses/create" method="post" class="mt-2">
+    <form action="/statuses/create" method="post" class="mt-2">
       {% include 'authenticity_token' %}
-      <input type="hidden" name="status" value="app.order_statuses.paid"/>
+      <input type="hidden" name="status" value="app.statuses.orders.paid"/>
       <input type="hidden" name="order_id" value="{{ order.id }}"/>
 
-      <button class="button button-sm">{{ 'app.pay' | t }}</button>
+      <button class="button button-small">{{ 'app.pay' | t }}</button>
     </form>
 
-    <a href="/orders/review?order_id={{order.id}}" class="button button-sm mt-2">
+    <a href="/orders/review?order_id={{order.id}}" class="button button-small mt-2">
       {{ 'app.pay_online' | t }}
     </a>
   {% endif %}
 {% endif %}
 
-{% if order.status.name == 'app.order_statuses.placed' %}
-  <form action="/order_statuses/create" method="post" class="mt-2">
+{% if order.status.name == 'app.statuses.orders.placed' %}
+  <form action="/statuses/create" method="post" class="mt-2">
     {% include 'authenticity_token' %}
-    <input type="hidden" name="status" value="app.order_statuses.canceled"/>
+    <input type="hidden" name="status" value="app.statuses.orders.canceled"/>
     <input type="hidden" name="order_id" value="{{ order.id }}"/>
 
-    <button class="button button-sm button-secondary">{{ 'app.cancel' | t }}</button>
+    <button class="button button-small button-secondary">{{ 'app.cancel' | t }}</button>
   </form>
 {% endif %}
 
-{% if order.status.name == 'app.order_statuses.paid' and role == 'seller' %}
-  <form action="/order_statuses/create" method="post" class="mt-2">
+{% if order.status.name == 'app.statuses.orders.paid' and role == 'seller' %}
+  <form action="/statuses/create" method="post" class="mt-2">
     {% include 'authenticity_token' %}
-    <input type="hidden" name="status" value="app.order_statuses.shipped"/>
+    <input type="hidden" name="status" value="app.statuses.orders.shipped"/>
     <input type="hidden" name="order_id" value="{{ order.id }}"/>
 
-    <button class="button button-sm button-secondary">{{ 'app.ship' | t }}</button>
+    <button class="button button-small button-secondary">{{ 'app.ship' | t }}</button>
   </form>
 {% endif %}
 

@@ -1,0 +1,6 @@
+{% liquid
+  if object[field_name] == blank
+    function contract = 'test/register_error_f', contract: contract, field_name: field_name, key: 'test.should.not.be_blank'
+  endif
+  return contract
+%}

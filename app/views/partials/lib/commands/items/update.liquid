@@ -1,0 +1,10 @@
+{%  liquid
+  function object = 'lib/commands/items/update/build', object: object
+  function object = 'lib/commands/items/update/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/items/update/execute', object: object
+  endif
+
+  return object
+%}

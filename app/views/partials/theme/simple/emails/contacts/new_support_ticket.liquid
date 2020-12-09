@@ -1,0 +1,11 @@
+{{ 'app.emails.contact-us.subject' | t: host: data.host }}
+<br />
+<b>{{ 'app.models.contacts.form.email' | t }}:</b> {{ data.object.email }}
+<br />
+<b>{{ 'app.models.contacts.form.reason' | t }}:</b> {{ data.object.reason }}
+<br />
+<b>{{ 'app.models.contacts.form.message' | t }}:</b>
+<br />
+<pre>
+  {{ data.object.message }}
+</pre>

@@ -1,0 +1,12 @@
+{% liquid
+  graphql r = 'users/update_password', args: object
+
+  if r.errors
+    log r.errors, type: 'errors.graphql.invalid'
+
+    hash_assign object['valid'] = false
+    hash_assign object['errors'] = r.errors
+  endif
+
+  return object
+%}

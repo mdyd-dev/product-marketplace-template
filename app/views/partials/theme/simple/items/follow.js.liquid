@@ -1,0 +1,48 @@
+<style>
+  button > * { pointer-events: none; }
+
+  button:not(.following) .follow { display: visible }
+  button:not(.following) .unfollow { display: none }
+
+  button.following .unfollow { display: visible }
+  button.following .follow { display: none }
+</style>
+
+<script>
+  (()=>{
+    const toggleFollowingUser = (action, user_id) => {
+      fetch('/api/users/followers/toggle.json', {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_id: user_id,
+          action_name: action,
+          authenticity_token: {{ authenticity_token | json }}
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+    }
+
+    const followButtons = Array.from(document.querySelectorAll('button[data-follow-user]'))
+    const setButtonState = (button) => button.classList.toggle('following')
+
+    const toggleFollowing = (event) => {
+      event.preventDefault();
+
+      const action = event.target.classList.contains('following') ? 'unfollow' : 'follow'
+
+      toggleFollowingUser(action, event.target.dataset.followUser)
+
+      followButtons
+        .filter(e => e.dataset.followUser == event.target.dataset.followUser)
+        .forEach(b => setButtonState(b))
+    }
+
+    followButtons.forEach(button => button.addEventListener('click', toggleFollowing, true))
+  })()
+</script>

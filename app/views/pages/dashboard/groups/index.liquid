@@ -1,0 +1,15 @@
+---
+metadata:
+  breadcrumbs:
+    - label: app.dashboard
+      url: /dashboard
+    - label: app.groups.list
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+
+  function groups = 'lib/queries/groups/search', limit: 100, owner_id: current_profile.id, relation_name: 'owner'
+
+  render 'theme/simple/ui/breadcrumbs', breadcrumbs: context.page.metadata.breadcrumbs, value: groups.total_entries
+  include 'theme/simple/dashboard/groups/index', groups: groups
+%}

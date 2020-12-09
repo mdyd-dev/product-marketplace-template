@@ -1,0 +1,78 @@
+<h1 class="mb-3 text-2xl">{{ 'app.models.contacts.contact-us' | t }}</h1>
+
+{% liquid
+  if object.id
+    assign method = 'put'
+  else
+    assign method = 'post'
+  endif
+%}
+<div class="container flex flex-wrap mx-auto mt-10 groups-center">
+  <form action="/contacts" method="post" class="w-full md:w-2/3">
+    {% include 'authenticity_token' %}
+    <input type="hidden" name="_method" value="{{method}}" />
+
+    {% if object.id %}
+      <input type="hidden" name="contact[id]" value="{{ object.id }}" />
+    {% endif %}
+
+    <div class="md:flex md:items-start mb-6 md:mb-10">
+      <div class="mb-2 md:mb-0 md:w-56 md:mr-8 md:min-w-0 md:flex-shrink-0">
+        <label class="block text-lg md:text-xl font-bold" for="form-properties-attributes-email">
+          {{ 'app.models.contacts.form.email' | t }}
+        </label>
+      </div>
+      <div class="md:flex-grow md:min-w-0">
+        <input type="email" value="" name="contact[email]" id="form-properties-attributes-email" class="form-input w-full disabled:opacity-50 " placeholder="Email" required="" aria-describedby="form-properties-attributes-email-desc">
+      </div>
+      {% include 'theme/simple/field_error', errors: object.errors.email %}
+    </div>
+    <div class="md:flex md:items-start mb-6 md:mb-10">
+      <div class="mb-2 md:mb-0 md:w-56 md:mr-8 md:min-w-0 md:flex-shrink-0">
+        <label class="block text-lg md:text-xl font-bold" for="form-properties-attributes-reason">
+          {{ 'app.models.contacts.form.reason' | t }}
+        </label>
+      </div>
+      <div class="md:flex-grow md:min-w-0">
+        <select name="contact[reason]" id="form-properties-attributes-reason" class="form-select w-full disabled:opacity-50 " required="" aria-describedby="form-properties-attributes-reason-desc"><option value="">Select reason...</option>
+          <option value="purchase">
+            {{ 'app.models.contacts.reasons.purchase' | t }}
+          </option>
+          <option value="delivery_return_complaint">
+            {{ 'app.models.contacts.reasons.delivery' | t }}
+          </option>
+          <option value="payments">
+            {{ 'app.models.contacts.reasons.payments' | t }}
+          </option>
+          <option value="account">
+            {{ 'app.models.contacts.reasons.account' | t }}
+          </option>
+          <option value="other">
+            {{ 'app.models.contacts.reasons.other' | t }}
+          </option>
+        </select>
+      </div>
+      {% include 'theme/simple/field_error', errors: object.errors.reason %}
+    </div>
+
+    <div class="md:flex md:items-start mb-6 md:mb-10">
+      <div class="mb-2 md:mb-0 md:w-56 md:mr-8 md:min-w-0 md:flex-shrink-0">
+        <label class="block text-lg md:text-xl font-bold" for="form-properties-attributes-message">
+          {{ 'app.models.contacts.form.message' | t }}
+        </label>
+        <div class="font-normal text-sm">
+          {{ 'app.models.contacts.message-explain' | t }}
+        </div>
+      </div>
+      <div class="md:flex-grow md:min-w-0">
+        <textarea name="contact[message]" id="form-properties-attributes-message" class="form-textarea w-full disabled:opacity-50 " placeholder="Your Message" required="" rows="8" aria-describedby="form-properties-attributes-message-desc"></textarea>
+      </div>
+      {% include 'theme/simple/field_error', errors: object.errors.message %}
+    </div>
+    <p class="md:ml-64">
+      <button class="button">
+       {{ 'app.models.contacts.form.submit' | t }}
+      </button>
+    </p>
+  </form>
+</div>

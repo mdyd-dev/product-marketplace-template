@@ -1,10 +1,24 @@
-<div class="container flex flex-col min-h-screen">
-  {% include 'theme/simple/layout/header' %}
+<div class="container flex flex-col min-h-screen px-5">
+  {% liquid
+    if context.current_user.id
+      assign profile = context.session.profile | default: '{}' | parse_json
+    endif
+    include 'theme/simple/layout/header', profile: profile
+  %}
 
   <main class="flex-1">
     {% include 'lib/flash/display' %}
 
-    {{ content_for_layout }}
+    {% if context.location.pathname contains '/dashboard' %}
+      <div class="flex flex-col md:flex-row">
+        {% include 'theme/simple/dashboard/sidebar' %}
+        <div class="flex-1 md:ml-10">
+          {{content_for_layout}}
+        </div>
+      </div>
+    {% else %}
+      {{content_for_layout}}
+    {% endif %}
   </main>
 
   {% include 'theme/simple/layout/footer' %}

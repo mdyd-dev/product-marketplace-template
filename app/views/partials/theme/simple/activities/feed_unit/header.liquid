@@ -1,0 +1,54 @@
+{% liquid
+  assign url = payload.actor.url
+  assign name = payload.actor.name
+  assign photo = payload.actor.photo.url.versions.tiny
+  assign date = payload.date
+  assign type = payload.type
+%}
+
+
+<div class="md:flex items-center">
+	<div class="flex items-center">
+		<p class="w-8 mr-3">
+			{% if photo %}
+				<img class="object-cover w-8 h-8 overflow-hidden rounded-full" src="{{ photo }}" alt="{{ name }}">
+			{% else %}
+				{% render 'theme/simple/activities/feed_unit/default_photo' %}
+			{% endif %}
+		</p>
+
+		<p>
+			<a href="{{ url }}">
+				{{ name }}
+			</a>
+
+			{% liquid
+			case type
+			when 'user_followed_user', 'user_unfollowed_user'
+				render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload
+			when 'page_visited'
+				render 'theme/simple/activities/feed_unit/type/visit', payload: payload
+			when 'account_created', 'profile_created'
+				render 'theme/simple/activities/feed_unit/type/user_activity', payload: payload
+			when 'order_status_created'
+				render 'theme/simple/activities/feed_unit/type/order_status', payload: payload
+			when 'order_created'
+				render 'theme/simple/activities/feed_unit/type/order_created', payload: payload
+			when 'item_created'
+				render 'theme/simple/activities/feed_unit/type/item_created', payload: payload
+			when 'comment_created'
+				render 'theme/simple/activities/feed_unit/type/comment_created', payload: payload
+			when 'user_joined_group'
+				render 'theme/simple/activities/feed_unit/type/user_joined_group', payload: payload
+			else
+				echo type
+			endcase
+			%}
+
+			<time datetime="{{ date }}" class="block mt-1 text-sm text-gray-500">{{ date | localize: 'long' }}</p>
+		</p>
+	</div>
+</div>
+
+
+

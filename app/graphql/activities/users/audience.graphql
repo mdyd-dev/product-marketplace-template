@@ -1,0 +1,17 @@
+query audience($id: [String!] $limit: Int = 500)
+{
+  records(
+    per_page: $limit,
+    filter: {
+      table: { value: "relationship" }
+      properties: [
+        { name: "name" value: "followship" }
+        { name: "r_id" value_in: $id }
+      ]
+    }
+  ) {
+    results {
+      l_id: property(name: "l_id")
+    }
+  }
+}

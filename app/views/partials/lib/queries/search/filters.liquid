@@ -1,0 +1,15 @@
+{% liquid
+  assign search_form = '{}' | parse_json
+
+  assign sort_options = 'lib.sort_options' | t
+  hash_assign search_form['sort_options'] = sort_options
+
+  function categories = 'lib/queries/categories/search', limit: 100
+  hash_assign search_form['categories'] = categories | dig: 'results' | map: 'key'
+
+  hash_assign search_form['query'] = query
+
+  hash_assign search_form['statuses'] = 'app.statuses' | t
+
+  return search_form
+%}

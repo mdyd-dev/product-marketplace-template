@@ -1,0 +1,9 @@
+{% liquid
+  function object = 'lib/commands/photos/delete/check',  object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'model_delete', selection: 'model_delete', object: object
+  endif
+
+  return object
+%}

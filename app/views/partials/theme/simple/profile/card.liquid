@@ -1,0 +1,16 @@
+{% liquid
+assign img_url = user.avatar.photo.versions.small
+unless img_url
+  assign img_url = 'images/user.svg' | asset_url
+endunless
+%}
+
+<img src="{{ img_url }}" alt="Picture of {{ user.name }}" class="inline-block object-cover object-center w-32 h-32 rounded-full shadow-md mb-5">
+
+{% liquid
+	assign name = user.first_name | append: ' ' | append: user.last_name
+	unless name
+		assign name = user.name
+	endunless
+	%}
+<h2 class="mb-10 text-xl">{{ name }}</h2>

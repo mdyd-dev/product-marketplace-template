@@ -1,0 +1,5 @@
+{% liquid
+  graphql r = 'users/search', limit: limit, username: username, ids: ids, sort_order: sort_order, slug: slug
+
+  return r.users
+%}

@@ -1,0 +1,72 @@
+name: Test PR
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  pre_job:
+    # continue-on-error: true # Uncomment once integration is finished
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@master
+        with:
+          github_token: ${{ github.token }}
+          paths_ignore: '["**/README.md"]'
+
+  main:
+    needs: pre_job
+    if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
+    runs-on: ubuntu-latest
+    container: platformos/testcafe:3.0.1
+    strategy:
+      max-parallel: 1
+    env:
+      MPKIT_URL: ${{ secrets.MPKIT_URL_PR }}
+      MPKIT_EMAIL: ${{ secrets.MPKIT_EMAIL }}
+      MPKIT_TOKEN: ${{ secrets.MPKIT_TOKEN }}
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Build
+        shell: sh
+        run: |
+          npm ci
+          npm run build
+      - name: Deploy
+        shell: sh
+        run: |
+          set -e
+          npm -g install @platformos/pos-cli
+          pos-cli data clean --auto-confirm --include-schema
+          pos-cli deploy
+          pos-cli data import --path=./seed/data.zip --zip
+      - name: UnitTest
+        shell: sh
+        run: |
+          set -e
+          TEST_ID=$(curl -sf ${MPKIT_URL}/tests/run_async)
+          echo triggered tests on ${MPKIT_URL/https:\/\//} - ID: ${TEST_ID}
+          sleep 15
+
+          curl -s ${MPKIT_URL}/api/app_builder/logs -H "Authorization: Token ${MPKIT_TOKEN}" -o app.log
+
+          grep -q "Success_${TEST_ID}" app.log
+      - name: Testcafe test
+        shell: sh
+        run: |
+          npm run test
+      - name: Publish test reports
+        if: ${{ failure() }}
+        shell: sh
+        run: |
+          set -e
+          npm run ci:test:publish
+          echo "test published to ${MPKIT_URL/https:\/\//}/_test_results"

@@ -1,0 +1,17 @@
+---
+slug: dashboard/profile
+method: put
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true, require_profile: false
+
+  function object = 'lib/commands/profiles/update', object: context.params.profile, profile: current_profile
+  if object.valid
+    include 'lib/commands/events/create', type: 'profile_updated', actor_id: object.id
+    include 'redirect_to', url: '/dashboard'
+  else
+  log object, type: 'showme'
+    graphql presigned_url = 'photos/presign' | dig: 'presigned'
+    render 'theme/simple/dashboard/profile/edit', object: object, context: context, presigned_url: presigned_url
+  endif
+%}

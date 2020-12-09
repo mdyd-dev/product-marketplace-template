@@ -1,0 +1,6 @@
+name: category
+properties:
+  - name: key
+    type: string
+  - name: uuid
+    type: string

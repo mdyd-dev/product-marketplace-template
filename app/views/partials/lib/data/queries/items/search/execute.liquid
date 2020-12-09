@@ -1,8 +1,0 @@
-{% liquid
-  graphql r = 'items/search', args: query
-
-  echo query
-  echo r
-
-  return_rc r.items
-%}

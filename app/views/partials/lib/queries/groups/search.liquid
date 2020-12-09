@@ -1,0 +1,5 @@
+{% liquid
+  graphql r = 'groups/search', limit: limit, page: 1, owner_id: owner_id, relation_name: relation_name
+
+  return r.groups
+%}

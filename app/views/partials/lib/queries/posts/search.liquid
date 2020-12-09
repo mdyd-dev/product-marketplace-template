@@ -1,0 +1,6 @@
+{% liquid
+  graphql r = 'posts/search', limit: limit, page: 1, parent_id_exists: parent_id_exists, creator_id: creator_id, tags: tags
+  include 'lib/handle_graphql_response', r: r, name: 'queries/posts/search'
+
+  return r.posts
+%}

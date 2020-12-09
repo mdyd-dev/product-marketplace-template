@@ -1,11 +1,18 @@
+  <a href="?" class="button {% if filters.query.status == blank %}{%else%}button-secondary{%endif%} button-small"> {% print 'app.items.all' | t %} </a>
+{% for s in filters.statuses.items %}
+  <a href="?status={{ s[0] }}" class="button {% if s[0] == filters.query.status %}{%else%}button-secondary{%endif%} button-small">
+    {{ s[1] }}
+  </a>
+{% endfor %}
+
 {% if items.results.size > 0 %}
   <table class="w-full table-auto">
     <thead>
       <tr>
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.item" | t }}</th>
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.items.attr.category" | t }}</th>
+        <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.status" | t }}</th>
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.created_at" | t }}</th>
-        <!-- <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.status" | t }}</th> -->
         <th class="px-4 py-2 text-lg font-medium text-left">{{ "app.dashboard-items.actions" | t }}</th>
       </tr>
     </thead>
@@ -13,25 +20,35 @@
       {% for item in items.results %}
         <tr>
           <td class="px-4 py-2 border-b">
-            {% function_rc item_url = 'link_to', item: item %}
+            {% function item_url = 'link_to', path: '/items/', item: item %}
             <a href="{{ item_url }}">
-              {% print item.name %}
-              <small> {% echo item.status.name | default: 'app.item_statuses.none' | t %}</small>
+              {{ item.name }}
             </a>
           </td>
           <td class="px-4 py-2 border-b">{{ item.category }}</td>
+
+          <td class="px-4 py-2 border-b">
+            <select class="form-select" name="status" data-item-status-object-id="{% print item.id %}" data-item-status-scope="app.statuses.items">
+              {% for s in filters.statuses.items %}
+                <option value="{{ s[0] }}" {% if item.status.name == s[0] %}selected{% endif %}>
+                  {{ s[1] }}
+                </option>
+              {% endfor %}
+            </select>
+            <small> {% print item.c__status %}</small>
+          </td>
           <td class="px-4 py-2 border-b">{{ item.created_at | l }}</td>
           <!--
           <td class="px-4 py-2 border-b">
             {{ item.status.name | default: 'missing-state-invalid-order' | t }}
-            {% if item.order_status.timestamp %}
-            <br/><small>{{ item.order_status.timestamp | to_time | l }}</small>
+            {% if item.order.status.timestamp %}
+            <br/><small>{{ item.order.status.timestamp | to_time | l }}</small>
             {% endif %}
           </td>
           -->
           <td class="px-4 py-2 border-b">
-            <a href="/items/edit?id={{ item.id }}" class="button">Edit</a>
-            <form action="/items/delete" method="post" class="ml-2 inline"
+            <a href="/dashboard/items/edit?id={{ item.id }}" class="button">Edit</a>
+            <form action="/dashboard/items/delete" method="post" class="ml-2 inline"
               onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }"
             >
               {% include 'authenticity_token' %}
@@ -45,9 +62,9 @@
     </tbody>
   </table>
 {% else %}
-  <p>You don't have any items yet.</p>
+  <p>{{ 'app.items.none' | t }}</p>
   <div class="flex mt-4">
-    <a href="/items/new" class="w-auto flex-0 button">
+    <a href="/dashboard/items/new" class="w-auto flex-0 button">
       {{ 'app.dashboard-items.list-your-first-item' | t }}
     </a>
   </div>

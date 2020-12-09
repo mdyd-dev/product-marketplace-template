@@ -1,0 +1,7 @@
+{% liquid
+  if given != expected
+    assign msg = 'test.should.equal' | t: given: given, expected: expected
+    function contract = 'test/register_error_f', contract: contract, field_name: field_name, message: msg
+  endif
+  return contract
+%}

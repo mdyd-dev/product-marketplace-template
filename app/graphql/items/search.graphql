@@ -1,13 +1,14 @@
-query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $category: String, $owner: String, $sort: ModelsSortInput = {created_at: {order: DESC}}, $withOrders: Boolean = false) {
-  items: models(
+query search($id: ID, $limit: Int = 20, $status: [String!], $tag: String, $keyword: String, $category: String, $owner: String, $sort: RecordsSortInput = {created_at: {order: DESC}}, $withStatuses: Boolean = false, $withOrders: Boolean = false) {
+  items: records(
     per_page: $limit,
     filter: {
       id: {value: $id},
-      model_schema_name: {value: "item"},
+      table: { value: "item" }
       deleted_at: { exists: false }
       properties: [
+        { name: "c__status", value_in: $status },
+        { name: "owner", value: $owner },
         { name: "tags", contains: $tag },
-        { name: "owner", value: $owner }
         { name: "category", starts_with: $category }
       ]
       or: [
@@ -23,6 +24,7 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
     results {
       id
       created_at
+      type: table
 
       uuid: property(name: "uuid")
       name: property(name: "name")
@@ -31,31 +33,30 @@ query search($id: ID, $limit: Int = 20, $tag: String, $keyword: String, $categor
       price: property_int(name: "price")
       tags: property_array(name: "tags")
       cover_photo_url: property(name: "cover_photo_url")
+      c__status: property(name: "c__status")
 
-      owner: related_user(join_on_property: "owner", foreign_property: "id") {
+      owner: related_record(table: "profile" join_on_property: "owner", foreign_property: "id") {
         id
-        email
+        type: table
+        name: property(name: "name")
+        slug: property(name: "slug")
       }
 
-      status: related_model(join_on_property: "id", foreign_property: "item_id", model_schema_name: "item_status") {
+      status: related_record(join_on_property: "id", foreign_property: "object_id", table: "status" sort: { created_at: { order: ASC } }) @include(if: $withStatuses) {
         id
         created_at
         name: property(name: "name")
-        item_id: property(name: "item_id")
+        object_id: property(name: "object_id")
       }
 
-      orders: related_models(join_on_property: "id", foreign_property: "item_id", model_schema_name: "order") @include(if: $withOrders) {
+      line_items: related_records(join_on_property: "id", foreign_property: "item_id", table: "line_item") @include(if: $withOrders) {
         id
-        created_at
-        order_status: related_model(join_on_property: "id", foreign_property: "order_id", model_schema_name: "order_status") {
-          id
-          created_at
-          name: property(name: "name")
-        }
       }
 
-      photos: related_models(model_schema_name: "item_photo", join_on_property: "uuid", foreign_property: "item_uuid") {
+      photos: related_records(table: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
+        id
         photo: property_upload(name: "photo") {
+          file_name
           url
           versions
         }

@@ -1,0 +1,28 @@
+---
+metadata:
+  breadcrumbs:
+    - label: app.dashboard
+      url: /dashboard
+    - label: app.items.list
+      url: /dashboard/sell/items
+    - label: app.edit
+---
+
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+
+  function item = 'lib/queries/items/find', id: params.id
+
+  unless item.id
+    render 'theme/simple/404', status: 404
+    break
+  endunless
+
+  include 'lib/can_edit', user_id: current_profile.id, item: item
+
+  function filters = 'lib/queries/search/filters'
+  function presigned_url = 'lib/queries/presigned_url'
+
+  render 'theme/simple/ui/breadcrumbs', breadcrumbs: context.page.metadata.breadcrumbs
+  include 'theme/simple/items/edit', item: item, lib: filters, presigned_url: presigned_url, user: context.current_user
+%}

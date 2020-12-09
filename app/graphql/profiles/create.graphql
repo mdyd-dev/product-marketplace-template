@@ -1,0 +1,22 @@
+mutation create($uuid: String! $user_id: String!) {
+  model_create(
+    model: {
+      model_schema_name: "profile"
+      properties: [
+        { name: "uuid" value: $uuid }
+        { name: "user_id" value: $user_id }
+      ]
+    }
+  ){
+    id
+    created_at
+
+    uuid: property(name: "uuid")
+    user_id: property(name: "user_id")
+
+    user: related_user(join_on_property: "user_id" foreign_property: "id") {
+      id
+      email
+    }
+  }
+}

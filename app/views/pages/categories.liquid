@@ -5,7 +5,8 @@ slug: c
   assign template = "/c/{+category}"
   assign query = context.location.pathname | extract_url_params: template
 
-  function_rc items = 'lib/data/queries/items/search', query: query, limit: 100
-  function_rc categories = 'lib/data/queries/categories/search'
-  include 'theme/simple/categories/index', items: items, category: query.category, categories: categories
+  function filters = 'lib/queries/search/filters', query: query
+  function items = 'lib/queries/items/search', params: query, limit: 21
+
+  include 'theme/simple/items/index', items: items, category: query.category, categories: categories
 %}

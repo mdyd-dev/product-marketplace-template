@@ -1,0 +1,96 @@
+<div class="mt-10 mb-5">
+  <h1 class="text-3xl font-medium">
+    {{ 'app.orders.show.order' | t }} {{order.id}}
+  </h1>
+</div>
+
+<section class="p-8 text-gray-800 bg-white shadow-lg">
+
+	<header class="hidden lg:flex gap-2 mb-5 font-bold">
+		<div class="lg:w-8/12">{{ 'app.orders.show.item' | t }}</div>
+    <div class="lg:w-1/12 lg:pl-2 lg:text-center">
+      <span class="">{{ 'app.orders.show.quantity' | t }}</span>
+    </div>
+    <div class="lg:w-2/12 lg:pl-2 lg:text-right">{{ 'app.orders.show.total_price' | t }}</div>
+    <div class="lg:w-1/12"></div>
+  </header>
+
+  {% for line_item in order.line_items %}
+    {% function item_url = 'link_to', item: line_item.item %}
+    <article class="lg:flex gap-2 mb-5 last:mb-0 pb-5 last:pb-0 border-b last:border-b-0">
+      <div class="lg:w-8/12">
+        <a href="{{ item_url }}" class="flex items-center">
+          {% function cover_url = 'theme/simple/items/cover_url', item: line_item.item %}
+          <img src="{{ cover_url }}" class="w-20 mr-5 rounded">
+          {{line_item.name}}
+        </a>
+      </div>
+      <div class="flex items-center lg:w-1/12 lg:pl-2 mt-5 lg:mt-0">
+        <span class="lg:hidden mr-2">{{ 'app.orders.show.quantity' | t }}: </span>
+        <form action="/orders/line_items" method="post" class="inline">
+          {% include 'authenticity_token' %}
+          <input type="hidden" name="_method" value="put" />
+          <input type="hidden" name="id" value="{{ line_item.id }}">
+          <input type="number"
+            name="line_item[quantity]" value="{{line_item.quantity}}"
+            onchange="this.form.submit();"
+            class="w-24 lg:w-full font-semibold text-center text-gray-700 bg-gray-200 hover:text-black focus:text-black">
+        </form>
+      </div>
+      <div class="flex items-center lg:w-2/12 lg:pl-2 mt-2 lg:mt-0 lg:justify-end">
+        <span class="mr-1 lg:hidden">{{ 'app.orders.show.total_price' | t }}: </span>
+        <span class="text-sm lg:text-base font-medium">
+          {{ line_item.total_price_cents | pricify_cents }}
+        </span>
+        <form action="/orders/line_items" method="post">
+          {% include 'authenticity_token' %}
+          <input type="hidden" name="_method" value="delete" />
+          <input type="hidden" name="id" value="{{ line_item.id }}">
+        </form>
+      </div>
+      <div class="flex items-center lg:w-1/12 justify-end">
+        <button type="submit" title="{{ 'app.orders.show.remove_item' | t }}" class="button button-small button-danger">
+          <span class="lg:hidden">{{ 'app.orders.show.remove_item' | t }} </span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 lg:w-5 ml-2 lg:ml-0 fill-current"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+        </button>
+      </div>
+    </article>
+  {% endfor %}
+</section>
+
+<ul class="mt-16 text-lg lg:text-xl font-bold text-gray-800">
+  <li class="flex gap-4 py-3 justify-between border-b">
+    <div>
+      {{ 'app.orders.show.subtotal' | t }}
+    </div>
+    <div>
+      {{ order.products_price_cents | pricify_cents }}
+    </div>
+  </li>
+  <li class="flex gap-4 py-3 justify-between border-b">
+    <div>
+      {{ 'app.orders.show.delivery' | t }}
+    </div>
+    <div>
+      {{ order.total_shipping_cost_cents | pricify_cents }}
+    </div>
+  </li>
+  <li class="flex gap-4 py-3 justify-between border-b text-xl lg:text-2xl">
+    <div>
+      {{ 'app.orders.show.total' | t }}
+    </div>
+    <div>
+      {{ order.total_price_cents | pricify_cents }}
+    </div>
+  </li>
+</ul>
+
+  <div class="mt-6 gap-5 flex flex-wrap justify-between items-center">
+    <a href="/search">
+      {{ 'app.orders.show.continue-shopping' | t }}
+    </a>
+    <a href="/dashboard/buy/orders_checkout/{{order.id}}" class="button font-semibold uppercase text-lg">
+      {{ 'app.orders.show.checkout' | t }}
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 ml-2 fill-current"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+    </a>
+  </div>

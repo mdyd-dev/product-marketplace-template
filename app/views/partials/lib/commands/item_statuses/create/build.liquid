@@ -1,9 +1,0 @@
-{% parse_json object %}
-{
-  "name": {{ name | json }},
-  "item_id": {{ item_id | json }},
-  "timestamp": {{ 'now' | to_time | json }}
-}
-{% endparse_json %}
-
-{% return_rc object %}

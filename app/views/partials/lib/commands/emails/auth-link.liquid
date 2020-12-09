@@ -1,0 +1,25 @@
+---
+metadata:
+  parameters:
+    object:
+    - url
+    - email
+    - id
+---
+{% parse_json object %}
+  {
+    "to":      {{ object.email | json }},
+    "from":    {% print 'app.support_email' | t | json %},
+    "subject": {% print 'app.emails.passwords.reset.subject' | t | json %},
+    "url":     {% print object.url | json %},
+    "user": {
+      "id":    {% print object.id | json %}
+    }
+  }
+{% endparse_json %}
+
+{% liquid
+  function object = 'lib/commands/emails/send', template: 'passwords/reset', object: object
+%}
+
+{% return object %}

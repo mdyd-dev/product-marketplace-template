@@ -1,0 +1,16 @@
+{% parse_json object %}
+  {
+    "id": {{ object.id | json }},
+    "title": {{ object.title | json }},
+    "body": {{ object.body | json }},
+    "tags": {{ object.tags | downcase | split: ',' | uniq }},
+    "upvote_profile_ids": {{ object.upvote_profile_ids | json }},
+    "downvote_profile_ids": {{ object.downvote_profile_ids | json }},
+    "accepted_post_id": {{ object.accepted_post_id | json }},
+    "c__score": {{ object.c__score | json }}
+  }
+{% endparse_json %}
+
+{% liquid
+  return object
+%}

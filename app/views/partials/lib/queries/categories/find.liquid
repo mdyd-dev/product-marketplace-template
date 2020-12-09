@@ -1,0 +1,9 @@
+{% liquid
+  if id == blank and key == blank
+    return null
+  endif
+
+  graphql r  = 'categories/search', id: id, key: key, limit: 1
+
+  return r.categories.results.first
+%}

@@ -1,0 +1,15 @@
+---
+slug: categories
+method: put
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  include 'lib/must_be_superadmin'
+
+  function object = 'lib/commands/call', object: context.params.category, command: 'categories/update', selection: 'model_update'
+  if object.valid
+    include 'redirect_to', url: '/categories'
+  else
+    include 'theme/simple/categories/edit', object: object
+  endif
+%}

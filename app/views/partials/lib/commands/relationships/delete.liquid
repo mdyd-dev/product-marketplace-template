@@ -1,0 +1,10 @@
+{% liquid
+  function object = 'lib/commands/relationships/delete/build', object: object
+  function object = 'lib/commands/relationships/delete/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'relationships/delete' object: object, selection: 'model_delete'
+  endif
+
+  return object
+%}

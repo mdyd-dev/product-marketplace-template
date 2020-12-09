@@ -1,0 +1,27 @@
+{% liquid
+  if object.id
+    assign method = 'put'
+  else
+    assign method = 'post'
+  endif
+%}
+<div class="container flex flex-wrap mx-auto groups-center">
+  <form action="/<%= modelNamePlural %>" method="post" class="w-full md:w-2/3">
+    {% include 'authenticity_token' %}
+    <input type="hidden" name="_method" value="{{method}}" />
+
+    {% if object.id %}
+      <input type="hidden" name="<%= modelName %>[id]" value="{{ object.id }}" />
+    {% endif %}
+
+<% attributes.forEach((attr) => { -%>
+    <div class="mt-5">
+      <label class="block" for="<%= attr.name %>">{{ 'app.models.<%= modelNamePlural %>.form.<%= attr.name %>' | t }}</label>
+      <input class="w-2/3 form-input" type="text" id="<%= attr.name %>" name="<%= modelName %>[<%= attr.name %>]" value="{{ object.<%= attr.name %> }}" autofocus required />
+      {% include 'theme/simple/field_error', errors: object.errors.<%= attr.name %> %}
+    </div>
+<% }); -%>
+
+    <button class="mt-8 button">{{ 'app.models.shared.submit' | t }}</button>
+  </form>
+</div>

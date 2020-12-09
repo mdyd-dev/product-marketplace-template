@@ -1,5 +1,38 @@
+---
+slug: dashboard
+metadata:
+  breadcrumbs:
+    - label: app.dashboard
+      url: /dashboard
+    - label: app.feed.title
+---
+
 {% liquid
-  include 'lib/must_be_authenticated'
-  include 'theme/simple/dashboard/index'
-  include 'lib/commands/events/create', type: 'page_visited', actor_id: context.current_user.id, object_id: 'dashboard'
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true, followships: true, membership: true
+
+  include 'lib/validate_profile_completeness', profile: current_profile
+
+  assign template = "/dashboard/{slug}/{section}"
+  assign query = context.location.pathname | extract_url_params: template
+
+  assign section = query.section | default: 'activity'
+  assign profile_id = current_profile.id | default: 'there-should-be'
+
+  if section == 'activity'
+    function list = 'lib/queries/activities/search', feed: 'user-private', feed_id: current_profile.id, limit: 100
+    function presigned_url = 'lib/queries/presigned_url'
+  elsif section == 'groups'
+    function list = 'lib/queries/groups/search_for_member', limit: 20, name: 'membership', member_id: profile_id
+  elsif section == 'following'
+    function list = 'lib/queries/relationships/search', limit: 20, name: 'followship', l_id: profile_id
+  elsif section == 'followers'
+    function list = 'lib/queries/relationships/search', limit: 20, name: 'followship', r_id: profile_id
+  elsif section == 'products'
+    function list = 'lib/queries/items/search', query: context.params, limit: 20, owner: profile_id
+  endif
+
+  render 'theme/simple/ui/breadcrumbs', breadcrumbs: context.page.metadata.breadcrumbs
+  include 'theme/simple/profile/private_feed', section: section, user: profile, list: list, current_profile: current_profile, presigned_url: presigned_url
+  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
+  render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token
 %}

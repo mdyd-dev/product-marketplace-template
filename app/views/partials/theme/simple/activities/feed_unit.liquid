@@ -1,0 +1,23 @@
+{% assign type = payload.type %}
+
+<div class="flex flex-col p-6 mb-6 bg-white rounded-lg shadow">
+  {% render 'theme/simple/activities/feed_unit/header', payload: payload %}
+
+  {% if payload.object.description or payload.object.body %}
+	<div class="py-2 leading-snug break-all">
+		<p>{{ payload.object.description }}</p>
+		<p>{{ payload.object.body }}</p>
+	</div>
+  {% endif %}
+
+  <!-- Photo should be inserted only if event = create -->
+  {% if payload.object.photos.size > 0 %}
+    <div class="mt-2">
+      <img class="object-cover rounded-lg w-9" src="{{ payload.object.photos.first.url.versions.small }}" alt="{{ payload.object.name }}">
+    </div>
+  {% elsif payload.target.photos.size > 0 %}
+    <div class="mt-2">
+      <img class="object-cover rounded-lg w-9" src="{{ payload.target.photos.first.url.versions.small }}" alt="{{ payload.target.name }}">
+    </div>
+  {% endif %}
+</div>

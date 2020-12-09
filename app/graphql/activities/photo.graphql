@@ -1,0 +1,15 @@
+query record($uuid: String!) {
+  records(per_page: 3
+    filter: {
+      properties: [
+        { name: "object_uuid" value: $uuid }
+      ]
+      table: { value: "photo"}
+    } ){
+    results {
+      url: property_upload(name: "photo") {
+        versions(names: "small")
+      }
+    }
+  }
+}

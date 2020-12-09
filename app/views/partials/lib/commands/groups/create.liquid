@@ -1,0 +1,14 @@
+{%  liquid
+  function object = 'lib/commands/groups/create/build', object: object, owner_id: owner_id
+  function object = 'lib/commands/groups/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'groups/create' object: object
+
+    assign now = 'now' | to_time
+    function relation = 'lib/commands/relationships/create', name: 'owner', l_id: owner_id, r_id: object.id, l_at: now, r_at: now
+  endif
+
+  return object
+%}
+>

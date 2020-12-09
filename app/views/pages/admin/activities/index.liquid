@@ -1,9 +1,27 @@
 {% liquid
-  include 'lib/must_be_authenticated'
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
   include 'lib/must_be_superadmin'
 
-  function_rc list = 'lib/data/queries/activities/search', feed: 'system', feed_id: '1', limit: 1000
+  assign feed = context.params.feed | split: '.'
+  assign feed_name = feed[0] | default: 'system'
+  assign feed_id = feed[1] | default: '1'
+
+  if feed_name != 'system'
+    if context.params.public
+      assign feed_name = feed_name | append: '-public'
+    else
+      assign feed_name = feed_name | append: '-private'
+    endif
+  endif
+
+  function list = 'lib/queries/activities/search', feed: feed_name, feed_id: feed_id, limit: 200
+  function users = 'lib/queries/profiles/search', limit: 100
+  function groups = 'lib/queries/groups/search', limit: 100
+
+  function selected = 'lib/queries/profiles/find', id: feed_id
 
   include 'theme/simple/admin/menu', section: 'activities'
-  include 'theme/simple/admin/activities/index', list: list, section: 'activities'
+  include 'theme/simple/admin/activities/index', list: list, section: 'activities', users: users, current_profile: current_profile, selected: selected
+
+  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
 %}

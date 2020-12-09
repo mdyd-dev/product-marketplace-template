@@ -1,0 +1,35 @@
+---
+slug: inbox
+---
+{% liquid
+	include 'lib/must_be_authenticated'
+
+	function current_user = 'lib/queries/profiles/find', user_id: context.current_user.id
+
+	assign new_conversation = false
+	assign active_conversation = context.params['active_conversation']
+
+	if context.params['active_conversation'] == 'new'
+		graphql conv = 'modules/chat/create_conversation', from_id: context.params['from_id'], to_id: context.params['to_id']
+
+		assign new_conversation = true
+		assign active_conversation = conv.model_create.id
+	endif
+
+	graphql conversations = 'modules/chat/inbox', user_id: current_user.id
+	assign current_conversation = conversations.records.results | where: "id", active_conversation | first | default: conversations.records.results.first
+	graphql messages = 'modules/chat/find_messages', conversation_id: current_conversation.id, page: 1, per_page: 30
+
+	if current_conversation != blank
+		render 'modules/chat/inbox/conversations', current_conversation: current_conversation, conversations: conversations, current_user: current_user, messages: messages
+	else
+		render 'modules/chat/inbox/blank'
+	endif
+%}
+
+<script>
+	// this is a workaround that prevents user from creating X conversations with the same user by refreshing the page
+	if({{ new_conversation }}){
+		history.pushState({}, '', '/inbox/?active_conversation={{ active_conversation }}');
+	}
+</script>

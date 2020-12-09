@@ -1,0 +1,9 @@
+{% liquid
+  if object_uuid == blank
+    return null
+  endif
+
+  graphql r = 'photos/search', object_uuid: object_uuid
+
+  return r.photos
+%}

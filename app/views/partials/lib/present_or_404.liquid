@@ -1,0 +1,6 @@
+{% liquid
+  unless property
+    render 'theme/simple/404', status: 404
+    break
+  endunless
+%}

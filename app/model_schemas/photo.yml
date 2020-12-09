@@ -1,0 +1,39 @@
+name: photo
+properties:
+  - name: object_uuid
+  - name: photo_type
+  - name: photo
+    type: upload
+    options:
+      versions:
+        - name: uncropped
+          output:
+            format: jpeg
+            quality: 80
+          resize:
+            fit: inside
+        - name: uncropped_webp
+          output:
+            format: webp
+            quality: 70
+          resize:
+            fit: inside
+        - name: small
+          output:
+            format: jpeg
+            quality: 80
+          resize:
+            width: 406
+            height: 256
+            fit: inside
+            without_enlargement: true
+
+        - name: tiny
+          output:
+            format: jpeg
+            quality: 80
+          resize:
+            width: 100
+            height: 100
+            fit: inside
+            without_enlargement: true

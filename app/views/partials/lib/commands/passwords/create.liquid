@@ -1,0 +1,10 @@
+{% liquid
+  function object = 'lib/commands/passwords/create/build', object: object
+  function object = 'lib/commands/passwords/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/passwords/create/execute', object: object
+  endif
+
+  return object
+%}

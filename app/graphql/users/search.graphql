@@ -1,17 +1,45 @@
-query users($id: ID, $email: String, $limit: Int = 1){
+query users(
+  $id: ID,
+  $ids: [ID!],
+  $email: String,
+  $limit: Int = 1,
+  $valid_for: Int = 1,
+  $with_token: Boolean = false,
+  $sort_order: SortOrderEnum = ASC){
   users(
     per_page: $limit
     filter: {
       email: { value: $email }
-      id: { value: $id }
+      id:    { value: $id value_in: $ids }
     }
-    sort: [{ id: { order: ASC } }]
+    sort: [{ id: { order: $sort_order  } }]
   ){
     total_entries
     results {
       id
       email
       created_at
+      uuid: property(name: "uuid")
+      token: temporary_token(valid_for: $valid_for) @include(if: $with_token)
+
+      profile: related_record(table: "profile" join_on_property: "id" foreign_property: "user_id"){
+        id
+        created_at
+
+        uuid: property(name: "uuid")
+        slug: property(name: "slug")
+
+        name: property(name: "name")
+        first_name: property(name: "first_name")
+        last_name: property(name: "last_name")
+
+        avatar: related_record(table: "photo", join_on_property: "uuid", foreign_property: "object_uuid", filter: { properties: { name: "photo_type", value: "avatar"}}) {
+          photo: property_upload(name: "photo") {
+            url
+            versions
+          }
+        }
+      }
     }
   }
 }

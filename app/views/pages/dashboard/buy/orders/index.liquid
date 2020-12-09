@@ -1,7 +1,16 @@
+---
+metadata:
+  breadcrumbs:
+    - label: app.dashboard
+      url: /dashboard
+    - label: app.buyer
+    - label: app.orders.list
+---
 {% liquid
-  include 'lib/must_be_authenticated'
-  function_rc orders = 'lib/data/queries/orders/search', limit: 100, buyer: context.current_user.id
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
 
-  include 'theme/simple/dashboard/breadcrumbs', name: 'orders', total_entries: orders.total_entries, role: 'buyer'
+  function orders = 'lib/queries/orders/search', limit: 100, buyer: current_profile.id, withStatuses: true
+
+  render 'theme/simple/ui/breadcrumbs', breadcrumbs: context.page.metadata.breadcrumbs, value: orders.total_entries
   include 'theme/simple/dashboard/orders/index', orders: orders, role: 'buyer'
 %}

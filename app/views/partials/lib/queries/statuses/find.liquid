@@ -1,0 +1,9 @@
+{% liquid
+  if id == blank
+    return null
+  endif
+
+  graphql r  = 'statuses/search', id: id, limit: 1
+
+  return r.statuses.results.first
+%}

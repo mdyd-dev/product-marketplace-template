@@ -1,0 +1,5 @@
+{% liquid
+  graphql r = 'activities/search', feed: feed, feed_id: feed_id, limit: limit
+
+  return r.activities
+%}

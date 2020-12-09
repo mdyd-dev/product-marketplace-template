@@ -1,0 +1,62 @@
+{% liquid
+  if object.id
+    assign method = 'put'
+  else
+    assign method = 'post'
+  endif
+  assign uuid = '' | uuid
+  assign group_uuid = object.uuid | default: uuid
+%}
+<div class="container flex flex-wrap mx-auto groups-center">
+  <form action="/dashboard/groups" method="post" class="w-full md:w-2/3">
+    {% include 'authenticity_token' %}
+    <input type="hidden" name="_method" value="{{method}}" />
+
+    {% if object.id %}
+      <input type="hidden" name="id" value="{{ object.id }}" />
+      <input type="hidden" name="group[id]" value="{{ object.id }}" />
+    {% endif %}
+    <input type="hidden" name="group[uuid]" value="{{ group_uuid }}" />
+
+    <div class="mt-5">
+      <label class="block" for="name">{{ 'app.groups.form.name' | t }}</label>
+      <input class="w-2/3 form-input" type="text" id="name" name="group[name]" value="{{ object.name }}" autofocus required />
+      {% include 'theme/simple/field_error', errors: object.errors.name %}
+    </div>
+
+    <div class="mt-5">
+      <label class="block" for="summary">{{ 'app.groups.form.summary' | t }}</label>
+      <textarea class="w-2/3 form-input" id="summary" name="group[summary]" rows="3" required>{{ object.summary }}</textarea>
+      {% include 'theme/simple/field_error', errors: object.errors.summary %}
+    </div>
+
+    <div class="mt-5">
+      <label class="block">{{ 'app.groups.form.photo' | t }}</label>
+      {% include 'theme/simple/photos/uppy_area' %}
+    </div>
+
+    <div class="mt-5">
+      <label class="block" for="description">{{ 'app.groups.form.description' | t }}</label>
+      <textarea class="w-full form-input" id="description" name="group[description]" rows="3" required>{{ object.description }}</textarea>
+
+      {% include 'theme/simple/field_error', errors: object.errors.description %}
+    </div>
+
+    <button class="mt-8 button">{{ 'app.groups.form.submit' | t }}</button>
+  </form>
+</div>
+
+{% liquid
+  assign photo = photos[0] | default: object.main_photo
+  assign photos = '[]' | parse_json
+  assign photos = photos | add_to_array: photo | compact
+%}
+{% include 'theme/simple/photos/uppy_form',
+  object_uuid: group_uuid,
+  presigned_url: presigned_url,
+  user_id: user.id,
+  photo_type: 'main',
+  note: 'Image up to 2MB',
+  max_number_of_files: 1,
+  existing_photos: photos
+%}

@@ -6,14 +6,15 @@ const brandColors = {
 
 const systemColors = {
   blue: '#007aff',
+  'body-bg': ''
 };
 
 module.exports = {
   purge: {
-    content: ['app/**/*.liquid', 'modules/**/*.liquid', './src/js/**/*.js'],
-  },
-  future: {
-    removeDeprecatedGapUtilities: true
+    content: ['**/*.liquid', './src/js/**/*.js'],
+    options: {
+      safelist: [/^uppy-/]
+    }
   },
   theme: {
     container: {
@@ -27,19 +28,17 @@ module.exports = {
     },
     extend: {
       colors: {
-        // `ex` prefix will create classes like `text-ex-red`
         ex: {
           ...brandColors,
           ...systemColors,
         },
       },
-      // fontFamily: {
-      //   sans: ['Lato', ...defaultTheme.fontFamily.sans],
-      // },
     },
   },
   variants: {
-    borderWidth: ['responsive', 'hover'],
+	borderWidth: ['responsive', 'hover', 'last'],
+	padding: ['responsive', 'last'],
+	margin: ['responsive', 'first', 'last']
   },
-  plugins: [require('@tailwindcss/custom-forms')],
+  plugins: [require('@tailwindcss/forms')]
 };

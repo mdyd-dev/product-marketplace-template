@@ -1,0 +1,40 @@
+query search($id: ID, $limit: Int = 20, $member_id: String) {
+  groups: records(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      table: { value: "group" }
+      related_records: {
+        join: { join_on_property: "id", foreign_property: "r_id"}
+        filter: {
+          table: { value: "relationship" },
+          properties: [
+            { name: "l_id", value: $member_id }
+            { name: "name", value: "membership" }
+          ]
+        }
+      }
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+      created_at
+      type: table
+
+      uuid: property(name: "uuid")
+      name: property(name: "name")
+      summary: property(name: "summary")
+      description: property(name: "description")
+      main_photo: related_record(table: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
+        photo: property_upload(name: "photo") {
+          url
+          versions
+        }
+      }
+    }
+  }
+}

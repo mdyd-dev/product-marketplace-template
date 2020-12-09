@@ -1,0 +1,18 @@
+---
+slug: passwords
+method: post
+---
+
+{% liquid
+  assign input = context.params.password
+  hash_assign input['user_id'] = context.session.reset_password_session_user_id
+
+  function object = 'lib/commands/passwords/create', object: input
+
+  if object.valid
+    session reset_password_session_user_id = null
+    include 'redirect_to', url: '/sessions/new', notice: 'app.passwords.updated'
+  else
+    include 'theme/simple/passwords/edit'
+  endif
+%}

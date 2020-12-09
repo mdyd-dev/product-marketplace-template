@@ -1,0 +1,16 @@
+{% if messages.records.results[0] %}
+  {% if messages.records.results[0].from_id == current_user_id or messages.records.results[0].to_id == current_user_id %}
+    {{ messages.models | json }}
+  {% else %}
+    {% response_status 403 %}
+    {
+      "code": 403,
+      "message": "Trying to view conversation from another user"
+    }
+  {% endif %}
+{% else %}
+  {
+    "code": 200,
+    "message": "No messages in given conversation"
+  }
+{% endif %}

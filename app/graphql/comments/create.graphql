@@ -1,0 +1,34 @@
+mutation create_comment(
+  $uuid: String!
+  $commentable_uuid: String
+  $commentable_type: String
+  $creator_id: String!
+  $title: String
+  $body: String!
+) {
+  model_create(
+    model: {
+      model_schema_name: "comment"
+      properties: [
+        { name: "uuid" value: $uuid }
+        { name: "commentable_uuid" value: $commentable_uuid }
+        { name: "commentable_type" value: $commentable_type }
+        { name: "creator_id" value: $creator_id }
+        { name: "title" value: $title }
+        { name: "body" value: $body }
+      ]
+    }
+  ){
+    id
+    created_at
+    deleted_at
+
+    properties
+    uuid: property(name: "uuid")
+    commentable_uuid: property(name: "commentable_uuid")
+    commentable_type: property(name: "commentable_type")
+    creator_id: property(name: "creator_id")
+    title: property(name: "title")
+    body: property(name: "body")
+  }
+}

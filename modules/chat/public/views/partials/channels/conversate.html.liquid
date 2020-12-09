@@ -1,0 +1,43 @@
+{% comment %}
+  Send email notification
+{% parse_json data %}
+    {
+      "email": "email"
+      "username": "",
+      "sender": {{ context["params"]["sender_name"] | to_json }},
+      "message": {{ context["params"]["message"] | to_json }}
+    }
+{% endparse_json %}
+  graphql notify = 'modules/chat/notify', data: data
+  log notify
+%}
+{% endcomment %}
+
+
+{% liquid
+
+  assign fromId = context["params"]["from_id"]
+  assign toId = context["params"]["to_id"]
+
+  graphql conversation = "modules/chat/find_conversation", from_id: fromId, to_id: toId
+
+  if context["params"]["create"] == true
+	assign message_safe = context["params"]["message"] | raw_escape_string
+
+    if conversation.records.results.size > 0
+      assign conversation_id = conversation.records.results.first.id
+      graphql message = "modules/chat/find_message", from_id: fromId, to_id: toId, conversation_id: conversation_id, timestamp: context["params"]["timestamp"]
+
+      if message.records.results.size == 0
+        graphql result = 'modules/chat/create_message', conversation_id: conversation_id, message: message_safe, timestamp: context["params"]["timestamp"], from_id: fromId, to_id: toId
+      endif
+    else
+      graphql conv = 'modules/chat/create_conversation', from_id: fromId, to_id: toId
+
+      graphql result = 'modules/chat/create_message', conversation_id: conv.model_create.id, message: message_safe, timestamp: context["params"]["timestamp"], from_id: fromId, to_id: toId
+    endif
+  else
+    log "Skippind. Message will be persisted on sender side", 'channel_actions/conversate skip_message'
+  endif
+
+%}

@@ -1,0 +1,18 @@
+<div class="container mx-auto">
+  <form action="/u/{{ user.id }}" name="search">
+    {% include 'theme/simple/home/search_form', query: search.query, filters: filters %}
+    {% if current_profile.id == user.id %}
+    <p>{{ 'app.items.self-list' | t }}</p>
+    {% else %}
+    <p>{{ 'app.items.user-list' | t: name: user.name, id: user.id }}</p>
+    {% endif %}
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-5">
+      {% for item in items.results %}
+      {% include 'theme/simple/items/card', item: item %}
+      {% else %}
+      <p class="text-lg">{{ 'app.no_items_found' | t }}</p>
+      {% endfor %}
+    </div>
+  </form>
+</div>

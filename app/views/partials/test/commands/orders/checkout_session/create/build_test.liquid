@@ -1,24 +1,19 @@
 {% parse_json order %}
 {
   "id": "123",
-  "total": 40000,
-  "lines": [
+  "total_price_cents": 40000,
+  "line_items": [
     {
       "name": "bag",
       "item_id": 1,
-      "price": 40000
+      "total_price_cents": 40000
     }
   ]
 }
 {% endparse_json %}
 {% liquid
-  function_rc checkout_session = 'lib/commands/orders/checkout_session/create/build', order: order
+  function checkout_session = 'lib/commands/orders/checkout_session/create/build', order: order, mpo_fee_percent: 10
 
-  unless checkout_session.line_items[0].price_data.unit_amount == 40000
-    include 'test/register_error', contract: contract, field_name: 'base', message: 'wrong amount'
-  endunless
-
-  unless checkout_session['payment_intent_data[application_fee_amount]'] == 5190
-    include 'test/register_error', contract: contract, field_name: 'base', key: 'test.should.equal'
-  endunless
+  include 'test/assertions/equal', contract: contract, field_name: 'unit_amount', given: checkout_session.line_items[0].price_data.unit_amount, expected: 40000
+  include 'test/assertions/equal', contract: contract, field_name: 'application_fee_amount', given: checkout_session['payment_intent_data[application_fee_amount]'], expected: 5190
 %}

@@ -1,26 +1,36 @@
-<div class="container flex flex-wrap items-center mx-auto mb-10">
-  <h1 class="text-2xl">
-    Profile Settings
-  </h1>
-</div>
+<div class="flex flex-col md:flex-row ">
+  <div class="mr-5 mb-5 text-center">
+	{% liquid
+		render 'theme/simple/profile/card', user: user, current_profile: current_profile
 
-<div class="flex items-start max-w-xl">
-  <div class="mr-10">
-    <img src="https://img.icons8.com/cotton/2x/person-male.png" alt="" class="w-32 h-32 mx-auto rounded-full shadow md:mx-0">
+		if user != blank and user.id == current_profile.id
+			render 'theme/simple/profile/owner_actions', user: user
+		elsif current_profile != blank
+			render 'theme/simple/follow_button', current_profile: current_profile, user: user, big: true
+		endif
+	
+		if current_profile.id != user.id and chat_enabled != blank
+			render "modules/chat/message_button", current_profile: current_profile, user: user, conversation: conversation
+		endif	
+	%}
   </div>
 
-  <div class="mr-10">
-    <p>Email: <b>{{ user.email }}</b></p>
-    <p>Password: <b class="font-mono">******</b></p>
-  </div>
+  <div class="w-full md:flex-1">
+    {% liquid
+      render 'theme/simple/profile/nav', tab: section, user: user, path: 'profile'
 
-  <!--
-    TODO: implement
-  -->
-  <!--
-  <a href="/profile/edit" class="text-sm button">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 383.95 383.95" class="w-3 mr-1"><path d="M0 303.95v80h80l236.05-236.06-80-80zM377.7 56.05L327.9 6.24a21.37 21.37 0 00-30.2 0l-39.03 39.04 80 80 39.04-39.04a21.37 21.37 0 000-30.19z" fill="currentColor" /></svg>
-    Edit <span class="sr-only">name and avatar</span>
-  </a>
-  -->
+      if section == 'activity'
+        render 'theme/simple/profile/sections/activity', list: list, current_profile: current_profile
+      elsif section == 'groups'
+        render 'theme/simple/profile/sections/groups', list: list, current_profile: current_profile
+      elsif section == 'following'
+        render 'theme/simple/profile/sections/following', list: list, current_profile: current_profile
+      elsif section == 'followers'
+        render 'theme/simple/profile/sections/followers', list: list, current_profile: current_profile
+      elsif section == 'products'
+        render 'theme/simple/profile/sections/products', list: list, current_profile: current_profile
+      endif
+    %}
+  </div>
 </div>
+

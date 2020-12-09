@@ -1,0 +1,33 @@
+<script>
+  (() => {
+    const createStatus = (name, object_id, scope) => {
+      fetch('/api/statuses.json', {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          status: {
+            object_id: object_id,
+            name: name,
+            scope: scope
+          },
+          authenticity_token: {{ authenticity_token | json }}
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success: ', data)
+        })
+    };
+
+    const statusSelector = Array.from(document.querySelectorAll('select[data-item-status-object-id]'))
+
+    const statusChanged = (event) => {
+      event.preventDefault();
+      createStatus(event.target.value, event.target.dataset.itemStatusObjectId, event.target.dataset.itemStatusScope)
+    }
+
+    statusSelector.forEach(button => button.addEventListener('change', statusChanged, true))
+  })()
+</script>

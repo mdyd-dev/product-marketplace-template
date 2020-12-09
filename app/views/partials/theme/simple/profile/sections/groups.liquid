@@ -1,0 +1,7 @@
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-5">
+  {% for record in list.results %}
+    {% render 'theme/simple/groups/card', group: record, current_profile: current_profile %}
+  {% else %}
+    <p class="text-lg">{{ 'app.no_groups_found' | t }}</p>
+  {% endfor %}
+</section>

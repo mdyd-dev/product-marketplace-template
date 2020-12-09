@@ -1,0 +1,25 @@
+mutation update_<%= modelName %>(
+  $id: ID!
+<% attributes.forEach((attr) => { -%>
+  $<%= attr.name %>: <%= graphqlArgumentMap[attr.type] %>
+<% }); -%>
+) {
+  model_update(
+    id: $id
+    model: {
+      model_schema_name: "<%= modelName %>"
+      properties: [
+      <% attributes.forEach((attr) => { -%>
+        { name: "<%= attr.name %>" <%= graphqlArgumentValueMap[attr.type] %>: $<%= attr.name %> }
+      <% }); -%>
+      ]
+    }
+  ){
+    id
+    created_at
+    updated_at
+  <% attributes.forEach((attr) => { -%>
+    <%= attr.name %>: <%= graphqlPropertyMap[attr.type] %>(name: "<%= attr.name %>")
+  <% }); -%>
+  }
+}

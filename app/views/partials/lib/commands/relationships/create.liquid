@@ -1,0 +1,13 @@
+
+{%  liquid
+  function object = 'lib/commands/relationships/create/build', name: name, l_id: l_id, r_id: r_id, l_accepted_at: l_at, r_accepted_at: r_at
+  function object = 'lib/commands/relationships/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'relationships/create' object: object
+  else
+    log object, type: 'showme relationships/create object invalid'
+  endif
+
+  return object
+%}

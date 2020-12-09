@@ -1,14 +1,40 @@
-body {
-  @apply antialiased;
+/*
+  links
+  content
+*/
+
+
+
+/* links
+============================================================================ */
+main a {
+  @apply
+    text-blue-700;
 }
 
-/* purgecss start ignore */
-main a[href] {
-  @apply text-blue-700;
+main a:hover {
+  @apply
+    text-blue-600;
 }
 
-main a[href]:hover {
-  @apply text-blue-600;
-}
-/* purgecss end ignore */
 
+
+/* content
+============================================================================ */
+main p + p {
+  @apply
+    mt-4;
+}
+
+/* small annotations and sidenotes */
+.sidenote {
+  @apply
+    text-xs;
+}
+
+
+
+/* used by alpine.js to mark items before JS initializes */
+[x-cloak] {
+	display: none;
+}

@@ -1,0 +1,36 @@
+query inbox($user_id: String!) {
+  records(per_page: 1000,
+    filter: {
+      table: { exact: "modules/chat/conversation" },
+      or: [
+        { properties: [
+            { name: "from_id", value: $user_id }
+          ] },
+        { properties: [
+            { name: "to_id", value: $user_id }
+          ] },
+      ]
+    }
+  ) {
+    results {
+      from_id: property(name: "from_id")
+      from_user: related_record(table: "profile", join_on_property: "from_id") {
+        id
+        slug: property(name: "slug")
+        name: property(name: "name")
+        user_id: property(name: "user_id")
+      }
+      to_id: property(name: "to_id")
+      to_user: related_record(table: "profile", join_on_property: "to_id") {
+        id
+        slug: property(name: "slug")
+        name: property(name: "name")
+        user_id: property(name: "user_id")
+      }
+      id
+      last_message: related_record(table: "modules/chat/message" join_on_property: "id" foreign_property: "conversation_id" sort: {created_at: {order: ASC}}){
+        timestamp: property(name: "timestamp")
+      }
+    }
+  }
+}

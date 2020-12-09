@@ -1,0 +1,7 @@
+{% liquid
+  if object.valid
+    hash_assign object['url'] = 'https://{host}/passwords/edit?token={token}&email={email}' | expand_url_template: object
+  endif
+
+  return object
+%}

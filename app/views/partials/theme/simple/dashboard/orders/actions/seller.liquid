@@ -1,30 +1,27 @@
-{% if order.status.name == 'app.order_statuses.placed' %}
-  {% if order.properties.paid_at == null %}
-    <form action="/order_statuses/create" method="post">
-      {% include 'authenticity_token' %}
-      <input type="hidden" name="status" value="app.order_statuses.paid"/>
-      <input type="hidden" name="order_id" value="{{ order.id }}"/>
+{% if order.status.fullname == 'app.statuses.orders.placed' %}
+  {% render 'theme/simple/statuses/quick_form',
+    authenticity_token: context.authenticity_token,
+    name: 'paid',
+    scope: 'app.statuses.orders',
+    object_id: order.id,
+    return_to: context.location.href,
+    label: 'app.mark-as-paid' %}
 
-      <button class="button button-sm">{{ 'app.mark-as-paid' | t }}</button>
-    </form>
-  {% endif %}
-
-  <form action="/order_statuses/create" method="post" class="mt-2">
-    {% include 'authenticity_token' %}
-    <input type="hidden" name="status" value="app.order_statuses.canceled"/>
-    <input type="hidden" name="order_id" value="{{ order.id }}"/>
-
-    <button class="button button-sm button-secondary">{{ 'app.cancel' | t }}</button>
-  </form>
+  {% render 'theme/simple/statuses/quick_form',
+    authenticity_token: context.authenticity_token,
+    name: 'cancelled',
+    scope: 'app.statuses.orders',
+    object_id: order.id,
+    return_to: context.location.href,
+    label: 'app.cancel', secondary: true %}
 {% endif %}
 
-{% if order.status.name == 'app.order_statuses.paid' %}
-  <form action="/order_statuses/create" method="post" class="mt-2">
-    {% include 'authenticity_token' %}
-    <input type="hidden" name="status" value="app.order_statuses.shipped"/>
-    <input type="hidden" name="order_id" value="{{ order.id }}"/>
-
-    <button class="button button-sm button-secondary">{{ 'app.ship' | t }}</button>
-  </form>
+{% if order.status.fullname == 'app.statuses.orders.paid' %}
+  {% render 'theme/simple/statuses/quick_form',
+    authenticity_token: context.authenticity_token,
+    name: 'shipped',
+    scope: 'app.statuses.orders',
+    object_id: order.id,
+    return_to: context.location.href,
+    label: 'app.ship' %}
 {% endif %}
-

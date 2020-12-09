@@ -1,0 +1,15 @@
+---
+method: post
+---
+
+{% liquid
+  include 'lib/must_be_authenticated'
+
+  function object = 'lib/commands/items/create', object: context.params.item, owner: context.current_user.id
+
+  if object.valid
+    include 'lib/commands/events/create', type: 'item_created', actor_id: context.current_user.id, object_id: object.id
+  endif
+
+  render 'theme/json/items/index', response: object
+%}

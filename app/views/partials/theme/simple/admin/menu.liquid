@@ -1,39 +1,44 @@
 {% assign s = section %}
 
 <div class="w-full">
-  <ul class="flex mb-5 text-lg text-gray-900">
-    <li>
+  <ul class="flex flex-wrap text-lg text-gray-900">
+    <li class="mb-5">
       <a class="mr-2 px-3 py-2 {% if s == 'home' %}bg-gray-200{% endif %}" href='/admin'>
         {{ 'admin.menu.home' | t }}
       </a>
     </li>
-    <li>
-      <a class="mr-2 px-3 py-2 {% if s == 'users' %}bg-gray-200{% endif %}" href='/admin/users'>
-        {{ 'admin.menu.users' | t }}
+    <li class="mb-5 mr-2">
+      <a class="px-3 py-2 {% if s == 'users' %}bg-gray-200{% endif %}" href='/admin/users'>
+        {{ 'admin.menu.users_title' | t }}
       </a>
     </li>
-    <li>
-      <a class="mr-2 px-3 py-2 {% if s == 'orders' %}bg-gray-200{% endif %}" href='/admin/orders'>
+    <li class="mb-5 mr-2">
+      <a class="px-3 py-2 {% if s == 'orders' %}bg-gray-200{% endif %}" href='/admin/orders'>
         {{ 'admin.menu.orders' | t }}
       </a>
     </li>
-    <li>
-      <a class="mr-2 px-3 py-2 {% if s == 'items' %}bg-gray-200{% endif %}" href='/admin/items'>
+    <li class="mb-5 mr-2">
+      <a class="px-3 py-2 {% if s == 'items' %}bg-gray-200{% endif %}" href='/admin/items'>
         {{ 'admin.menu.items' | t }}
       </a>
     </li>
-    <li>
-      <a class="mr-2 px-3 py-2 {% if s == 'categories' %}bg-gray-200{% endif %}" href='/admin/categories'>
+    <li class="mb-5 mr-2">
+      <a class="px-3 py-2 {% if s == 'categories' %}bg-gray-200{% endif %}" href='/admin/categories'>
         {{ 'admin.menu.categories' | t }}
       </a>
     </li>
-    <li>
-      <a class="mr-2 px-3 py-2 {% if s == 'activities' %}bg-gray-200{% endif %}" href='/admin/activities'>
-        {{ 'admin.menu.activities' | t }}
+    <li class="mb-5 mr-2">
+      <a class="px-3 py-2 {% if s == 'activities' %}bg-gray-200{% endif %}" href='/admin/activities'>
+        {{ 'admin.menu.activities.name' | t }}
       </a>
     </li>
-    <li>
-      <a class="mr-2 px-3 py-2 {% if s == 'setup' %}bg-gray-200{% endif %}" href='/marketplace_setup'>
+    <li class="mb-5 mr-2">
+      <a class="px-3 py-2 {% if s == 'support-tickets' %}bg-gray-200{% endif %}" href='/admin/support-tickets'>
+        {{ 'admin.menu.support-tickets' | t }}
+      </a>
+    </li>
+    <li class="mb-5 mr-2">
+      <a class="px-3 py-2 {% if s == 'setup' %}bg-gray-200{% endif %}" href='/marketplace_setup'>
         {{ 'admin.menu.setup' | t }}
       </a>
     </li>

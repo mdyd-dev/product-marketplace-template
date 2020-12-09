@@ -1,0 +1,4 @@
+{{ payload.type | t: actor: payload.actor.username,
+     obj: payload.object.pathname,
+     target: payload.target.username,
+     scope: 'app.activities.types' }}

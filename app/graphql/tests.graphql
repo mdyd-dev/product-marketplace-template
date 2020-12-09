@@ -1,7 +1,7 @@
 query test_partials($path: String){
   admin_liquid_partials(
     filter: {
-      path: { ends_with: "_test", value: $path }
+      path: { ends_with: "_test", contains: $path }
     }
   ) {
     total_entries

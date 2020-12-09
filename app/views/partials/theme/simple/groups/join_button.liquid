@@ -1,0 +1,30 @@
+{% if current_profile %}
+  {% liquid
+    assign group_id = group.id | append: ''
+    assign ids = current_profile.joined_group_ids | map: 'id'
+    if ids contains group_id
+      assign joined = true
+    else
+      assign joined = false
+    endif
+  %}
+
+  <button href="#" class="{% if joined %} joined{% endif %}"
+    title="join/leave"
+    data-join-group="{% print group.id %}">
+
+    <span class="button join">
+      {{ 'app.groups.join' | t }}
+    </span>
+
+    <span class="button button-secondary leave">
+      {{ 'app.groups.leave' | t }}
+    </span>
+  </button>
+{% else %}
+  <a href="/sessions/new">
+    <span class="button">
+      {{ 'app.groups.join' | t }}
+    </span>
+  </a>
+{% endif %}

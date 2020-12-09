@@ -1,0 +1,68 @@
+<div class="container flex flex-wrap items-center mx-auto mb-10">
+  <h1 class="text-2xl">{{ 'app.profiles.edit' | t }}</h1>
+</div>
+
+<div class="sm:flex">
+
+  <div class="flex flex-col w-64 mb-6 text-center">
+    <div>
+      {% liquid
+        assign img_url = object.avatar.photo.versions.small
+        unless img_url
+        assign img_url = 'images/user.svg' | asset_url
+        endunless
+      %}
+      <img src="{{ img_url }}" alt="" class="object-cover object-center w-48 h-48 mx-auto text-gray-400 rounded-full shadow-md md:mx-0">
+    </div>
+    <div class="mt-10">
+      {% render 'theme/simple/photos/uppy_area' %}
+    </div>
+  </div>
+
+  <div class="ml-2 md:border-l sm:flex-grow sm:pl-8 sm:order-2 border-1">
+    <form action="/dashboard/profile" method="post">
+      {% render 'authenticity_token', context: context %}
+      <input type="hidden" name="_method" value="put" />
+
+      <div class="lg::w-1/2">
+        <div class="mb-6">
+          <label class="block mb-2 cursor-pointer" for="name">{{ 'app.profiles.username' | t }}</label>
+          <input id="name" name="profile[name]" value="{{ object.name }}" type="text" maxlength="45" class="w-full form-input" autocomplete="given-name">
+          {% render 'theme/simple/field_error', errors: object.errors.name %}
+        </div>
+
+        <div class="mb-6">
+          <label class="block mb-2 cursor-pointer" for="first-name">{{ 'app.profiles.first_name' | t }}</label>
+          <input id="first-name" name="profile[first_name]" value="{{ object.first_name }}" type="text" maxlength="45" class="w-full form-input" autocomplete="given-name">
+          {% render 'theme/simple/field_error', errors: object.errors.first_name %}
+        </div>
+
+        <div class="mb-6">
+          <label class="block mb-2 cursor-pointer" for="last-name">{{ 'app.profiles.last_name' | t }}</label>
+          <input id="last-name" name="profile[last_name]" value="{{ object.last_name }}" type="text" maxlength="45" class="w-full form-input"  autocomplete="family-name">
+          {% render 'theme/simple/field_error', errors: object.errors.last_name %}
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label class="block mb-2 cursor-pointer" for="bio">{{ 'app.profiles.bio' | t }}</label>
+        <textarea id="bio" name="profile[bio]" aria-invalid="false" rows="5" class="w-full form-input" autocomplete="bio">{{ object.bio }}</textarea>
+        {% render 'theme/simple/field_error', errors: object.errors.bio %}
+      </div>
+
+      <div class="flex mt-4">
+        <button type="submit" class="text-sm button">{{ 'app.save' | t }}</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+{% render 'theme/simple/photos/uppy_form',
+  object_uuid: object.uuid,
+  presigned_url: presigned_url,
+  user_id: user.id,
+  photo_type: 'avatar',
+  note: 'Image up to 2MB',
+  max_number_of_files: 1
+%}

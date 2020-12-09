@@ -1,0 +1,16 @@
+{%  liquid
+  function object = 'lib/commands/items/create/build', object: object, owner: owner
+  function object = 'lib/commands/items/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/items/create/execute', object: object
+
+    if object.valid
+      assign now = 'now' | to_time
+      function relation = 'lib/commands/relationships/create', name: 'ownership', l_id: current_profile.id, r_id: object.id, l_at: now, r_at: now
+      function status = 'lib/commands/statuses/create', object: object, name: 'app.statues.items.created', timestamp: now
+    endif
+  endif
+
+  return object
+%}

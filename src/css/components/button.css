@@ -1,27 +1,116 @@
-.button, .button[href] {
-  @apply flex items-center justify-center px-6 py-2 text-center text-white bg-blue-700 border-0 rounded;
+/*
+  main
+  secondary
+  danger
+  small
+  small secondary
+*/
+
+
+
+/* main
+============================================================================ */
+.button {
+  @apply
+    px-5
+    py-2
+    inline-flex
+    items-center
+    justify-center
+    border-2
+    border-transparent
+    rounded
+    bg-blue-700
+    whitespace-nowrap
+    text-center
+    text-white;
 }
 
 .button:focus {
-  @apply outline-none;
+  @apply
+    outline-none;
 }
 
-.button:hover, .button[href]:hover {
-  @apply text-white bg-blue-700;
+.button:hover {
+  @apply
+    bg-blue-600
+    text-white;
 }
 
-.button.button-secondary {
-  @apply text-blue-700 bg-white border-2 border-blue-700;
+.button:disabled,
+.button.button-disabled {
+  @apply
+    pointer-events-none
+    bg-blue-200;
 }
 
-.button.button-secondary:hover  {
-  @apply bg-blue-100 border-blue-700;
+
+
+/* secondary
+============================================================================ */
+.button-secondary {
+  @apply
+    border-blue-700
+    bg-white
+    text-blue-700;
 }
 
-.button-secondary.button-sm {
-  @apply border;
+.button-secondary:hover {
+  @apply
+    border-blue-700
+    bg-blue-100
+    text-blue-700;
 }
 
-.button-sm {
-  @apply px-3 py-1 text-sm;
+.button-secondary:disabled,
+.button-secondary.button-disabled {
+  @apply
+    pointer-events-none
+    bg-white
+    border-blue-200
+    text-blue-200;
+}
+
+
+
+/* danger
+============================================================================ */
+.button-danger {
+  @apply
+    bg-red-700
+    text-white;
+}
+
+.button-danger:hover {
+  @apply
+    bg-red-600
+    text-white;
+}
+
+.button-danger:disabled,
+.button-danger.button-disabled {
+  @apply
+    pointer-events-none
+    bg-red-200;
+}
+
+
+
+/* small
+============================================================================ */
+.button-small {
+  @apply
+    px-3
+    py-1
+    border
+    text-sm;
+}
+
+
+
+/* small secondary
+============================================================================ */
+.button-small.button-secondary {
+  @apply
+    border;
 }

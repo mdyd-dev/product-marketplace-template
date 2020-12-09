@@ -1,0 +1,49 @@
+<div class="w-full mx-auto">
+  <div class="mb-5 text-right">
+    <a href="/<%= modelNamePlural %>/new" class="button">
+      {{ 'app.models.<%= modelNamePlural %>.add' | t }}
+    </a>
+  </div>
+  <div class="my-6 bg-white rounded shadow-md">
+    {% if <%= modelNamePlural %>.results.size > 0 %}
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr>
+<% attributes.forEach((attr) => { -%>
+            <th class="px-6 py-4 text-sm font-bold uppercase border-b bg-grey-lightest text-grey-dark border-grey-light">
+              {{ "app.models.<%= modelNamePlural %>.form.<%= attr.name %>" | t }}
+            </th>
+<% }); -%>
+          </tr>
+        </thead>
+        <tbody>
+          {% for <%= modelName %> in <%= modelNamePlural %>.results %}
+            <tr class="hover:bg-grey-lighter">
+<% attributes.forEach((attr) => { -%>
+              <td class="px-6 py-4 border-b border-grey-light">
+                <a href="/<%= modelNamePlural %>/show/{{ <%= modelName %>.id }}">
+                  {{ <%= modelName %>.<%= attr.name %> }}
+                </a>
+              </td>
+<% }); -%>
+              <td class="px-6 py-4 border-b border-grey-light">
+                <a href="/<%= modelNamePlural %>/edit?id={{ <%= modelName %>.id }}" class="button">
+                  {{ 'app.models.<%= modelNamePlural %>.edit' | t }}
+                </a>
+                <form action="/<%= modelNamePlural %>" method="post" class="inline ml-2" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
+                  {% include 'authenticity_token' %}
+                  <input type="hidden" name="_method" value="delete" />
+                  <input type="hidden" name="id" value="{{ <%= modelName %>.id }}">
+
+                  <button id="deletebutton" class="button button-secondary">{{ 'app.models.shared.delete' | t }}</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      {% include 'theme/simple/<%= modelNamePlural %>/empty_state' %}
+    {% endif %}
+  </div>
+</div>

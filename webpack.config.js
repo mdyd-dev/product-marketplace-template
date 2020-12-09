@@ -36,7 +36,7 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader?url=false', 'postcss-loader'],
+        use: [MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { url: false } }, 'postcss-loader'],
       },
     ],
   },
@@ -53,11 +53,6 @@ const config = {
         extractComments: false,
       }),
     ],
-    splitChunks: {
-      cacheGroups: {
-        vendors: false, // Do not emit vendors~* files that are almost empty in this setup
-      },
-    },
   },
   plugins: [
     new MiniCssExtractPlugin({

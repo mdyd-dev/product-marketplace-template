@@ -1,0 +1,5 @@
+{% liquid
+  graphql r  = 'metrics/search', limit: 1, date: date
+
+  return r.records.results.first
+%}

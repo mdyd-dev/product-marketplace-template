@@ -1,18 +1,36 @@
-{% background "bg-task-name", type: type, object_id: object_id, actor_id: actor_id, target_id: target_id %}
+{% assign delay = delay | default: '0.0001' %}
+{% background "bg-task-name", type: type, object_id: object_id, actor_id: actor_id, target_id: target_id, object: object, delay: delay %}
 
-{% liquid
-  function_rc object = 'lib/commands/events/create/build', type: type, actor_id: actor_id, object_id: object_id, target_id: target_id
-  function_rc object = 'lib/commands/events/create/check', object: object
+  {% liquid
+    for i in (0..10)
+      function actor  = 'lib/queries/activities/model', id: actor_id
+      if actor
+        break
+       endif
+    else
+      unless actor
+        log 'actor could not be found', type: 'ERROR showme'
+      endunless
+    endfor
 
-  if object.valid
-    function_rc object = 'lib/commands/events/create/execute', object: object
+    function target = 'lib/queries/activities/model', id: target_id
 
-    if object.valid
-      include 'lib/commands/events/broadcast/execute', object: object
+    if object_id
+      function object = 'lib/queries/activities/model', id: object_id
     endif
-  else
-    log object, type: 'errors.events.invalid'
-  endif
-%}
+
+    function event = 'lib/commands/events/create/build', type: type, actor: actor, object: object, target: target
+    function event = 'lib/commands/events/create/check', object: event
+
+    if event.valid
+      function event = 'lib/commands/events/create/execute', object: event
+
+      if event.valid
+        include 'lib/commands/events/broadcast/execute', object: event
+      endif
+    else
+      log event, type: 'errors.events.invalid showme'
+    endif
+  %}
 
 {% endbackground %}

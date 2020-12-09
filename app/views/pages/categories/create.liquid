@@ -1,0 +1,15 @@
+---
+slug: categories
+method: post
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  include 'lib/must_be_superadmin'
+
+  function object = 'lib/commands/categories/create', object: context.params.category
+  if object.valid
+    include 'redirect_to', url: 'admin/categories'
+  else
+    include 'theme/simple/categories/new', object: object
+  endif
+%}

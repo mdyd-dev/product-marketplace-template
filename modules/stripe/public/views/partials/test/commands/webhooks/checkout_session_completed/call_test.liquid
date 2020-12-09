@@ -8,7 +8,7 @@
 }
 {% endparse_json %}
 {% liquid
-  function_rc object = 'modules/stripe/lib/webhooks/checkout_session_completed/call', post_params: params
+  function object = 'modules/stripe/lib/webhooks/checkout_session_completed/call', post_params: params
 
   unless object.valid
     echo object

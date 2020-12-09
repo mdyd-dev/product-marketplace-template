@@ -1,0 +1,49 @@
+{% if conversation.id != current_conversation.id %}
+	<a href="/inbox?active_conversation={{ conversation.id }}">
+{% endif %}
+
+		{% liquid
+			assign active_class = 'bg-gray-300'
+			unless conversation.id == current_conversation.id
+				assign active_class = 'text-gray-600 border-b'
+			endunless
+		%}
+		
+		<div class="px-3 py-2 flex items-center {{ active_class }}">
+		
+			<div>
+				<img src="{{ img_url }}" alt="" class="object-cover object-center w-16 h-16 mx-auto text-gray-400 rounded-full shadow-md md:mx-0">
+			</div>
+
+			<div class="ml-4 flex-1">
+				<div class="flex items-bottom justify-between">
+		
+				{% liquid
+					if from_user.first_name
+						assign name = from_user.first_name | append: ' ' | append: from_user.last_name
+					else
+						assign name = from_user.name
+					endif
+				%}
+
+				{% if conversation.id == current_conversation.id %}
+					<a href="/profile/{{ from_user.slug }}">
+						{{ name }}
+					</a>
+				{% else %}
+					<p>{{ name }}</p>
+				{% endif %}
+
+				</div>
+
+				<p class="text-gray-500 mt-1 text-sm">
+					{{ conversation.last_message.timestamp | localize: 'long' }}
+				</p>
+
+			</div>
+
+		</div>
+
+{% if conversation.id != current_conversation.id %}
+	</a>
+{% endif %}

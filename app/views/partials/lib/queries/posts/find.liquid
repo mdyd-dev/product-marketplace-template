@@ -1,0 +1,9 @@
+{% liquid
+  if id == blank
+    return null
+  endif
+
+  graphql r  = 'posts/search', id: id, limit: 1, creator_id: creator_id
+
+  return r.posts.results.first
+%}

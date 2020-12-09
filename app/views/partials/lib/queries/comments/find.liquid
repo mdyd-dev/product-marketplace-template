@@ -1,0 +1,11 @@
+{% liquid
+  unless id
+    log 'no id'
+    return null
+  endunless
+
+  graphql r  = 'comments/search', id: id, limit: 1
+  include 'lib/handle_graphql_response', r: r, name: 'queries/comments/find'
+
+  return r.comments.results.first
+%}

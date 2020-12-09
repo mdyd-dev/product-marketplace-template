@@ -1,0 +1,11 @@
+{% if payload.object.name %}
+  {% assign status = payload.object.name | t %}
+{% endif %}
+
+{{ payload.type | t: actor: payload.actor.username,
+    target: payload.target.type,
+    target_id: payload.target.id,
+    target: payload.target,
+    status: status,
+    scope: 'app.activities.types'
+}}

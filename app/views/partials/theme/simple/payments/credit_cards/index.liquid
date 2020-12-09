@@ -1,10 +1,10 @@
 <div class="container flex flex-wrap items-center mx-auto">
-  <h1 class="text-2xl">Credit Cards</h1>
+  <h1 class="text-2xl">{{ 'app.credit_cards.name' | t }}</h1>
 </div>
 
 <div class="relative">
   {% if credit_cards == empty %}
-    <p>You have not saved any credit cards yet.</p>
+    <p>{{ 'app.credit_cards.no_cards' | t }}</p>
   {%- else -%}
     <ol class="grid gap-4 mb-4 sm:grid-cols-2 xl:grid-cols-3">
       {% for credit_card in credit_cards -%}
@@ -23,7 +23,7 @@
               </h3>
 
               <div class="text-sm ">
-                Expires: {{ credit_card.properties.exp_month }}/{{ credit_card.properties.exp_year }}
+                {{ 'app.credit_cards.expires' | t }} {{ credit_card.properties.exp_month }}/{{ credit_card.properties.exp_year }}
               </div>
             </div>
           </div>
@@ -36,6 +36,6 @@
     </ol>
   {% endif %}
   <button type="button" class="btn btn-green" data-stripe-checkout-button="{&quot;email&quot;:&quot;piotr@near-me.com&quot;,&quot;icon&quot;:&quot;https://uploads.staging.oregon.platform-os.com/instances/1306/assets/img/logo.png?updated=1581944039&quot;,&quot;title&quot;:&quot;Golfstix&quot;,&quot;description&quot;:&quot;Save your Credit Card&quot;,&quot;publicKey&quot;:&quot;pk_test_SPPcNzeM8erhW5dFekV6nniy00gwTzJtrX&quot;,&quot;label&quot;:&quot;Save Card&quot;}">
-    Add Credit Card
+    {{ 'app.credit_cards.add' | t }}
   </button>
 </div>

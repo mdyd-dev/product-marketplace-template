@@ -8,7 +8,7 @@ callback: >
   {% if response_data.error %}
     {%- log response_data.error, type: 'modules/payments/delete_account' -%}
   {% endif %}
-headers: >
+request_headers: >
   {% if data %}
     {
       "Stripe-Account": "{{ data.gateway_id }}",

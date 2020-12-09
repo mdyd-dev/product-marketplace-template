@@ -1,0 +1,12 @@
+{% parse_json helpers %}
+{
+  "authenticity_token": {% print context.authenticity_token | json %}
+}
+{% endparse_json %}
+
+{% liquid
+  graphql presigned_url = 'photos/presign' | dig: 'presigned'
+  hash_assign helpers['presigned_url'] = presigned_url
+
+  return helpers
+%}

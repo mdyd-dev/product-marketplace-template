@@ -1,6 +1,6 @@
 {% parse_json data %}
   {
-    "url": "https://{{ context.location.host }}{{path}}",
+    "url": "https://{{ host }}{{path}}",
     "connect": "{{connect}}",
     "enabled_events": {
        "0": "{{event}}"
@@ -15,5 +15,5 @@
   graphql response = 'modules/stripe/api_call', template: 'modules/stripe/webhook_create', data: data
   log response, type: 'webhooks/create api_call'
   assign response = response | dig: 'api_call', 'response'
-  return_rc response
+  return response
 %}

@@ -1,0 +1,19 @@
+query search($limit: Int = 20, $name: String) {
+  groups: records(
+    per_page: $limit
+    filter: {
+      table: { value: "group" }
+      properties: [
+        { name: "name" value: $name }
+      ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+    }
+  }
+}

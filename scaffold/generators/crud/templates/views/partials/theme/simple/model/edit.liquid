@@ -1,0 +1,5 @@
+<div class="container flex flex-wrap items-center mx-auto">
+  <h1 class="text-2xl">{{ 'app.models.<%= modelNamePlural %>.edit' | t }} {{ object.name  }}</h1>
+</div>
+
+{% include 'theme/simple/<%= modelNamePlural %>/form', object: object %}

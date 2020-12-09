@@ -1,0 +1,22 @@
+{% liquid
+  assign c = '{ "errors": {}, "valid": true }' | parse_json
+
+  function c = 'lib/validations/presence', c: c, object: object, field_name: 'id'
+
+  if object['owner_id'] == object['profile_id']
+    include 'lib/register_error', contract: c, field_name: 'base', key: 'app.models.posts.errors.owner_cant_vote_his_answer'
+  endif
+
+  if object['upvote_profile_id_append'] == blank and object['upvote_profile_id_remove'] == blank
+    include 'lib/register_error', contract: c, field_name: 'upvote_profile_ids', key: 'app.errors.blank'
+  endif
+
+  if object['downvote_profile_id_append'] == blank and object['downvote_profile_id_remove'] == blank
+    include 'lib/register_error', contract: c, field_name: 'downvote_profile_ids', key: 'app.errors.blank'
+  endif
+
+  hash_assign object['valid'] = c.valid
+  hash_assign object['errors'] = c.errors
+
+  return object
+%}

@@ -1,9 +1,9 @@
 {% liquid
-  function_rc object = 'modules/stripe/lib/webhooks/account_updated/build', post_params
-  function_rc object = 'modules/stripe/lib/webhooks/account_updated/validate', object: object
+  function object = 'modules/stripe/lib/webhooks/account_updated/build', post_params: post_params
+  function object = 'modules/stripe/lib/webhooks/account_updated/validate', object: object
   if object.valid
-    function_rc object = 'modules/stripe/lib/account/update/call', object: object
+    function object = 'modules/stripe/lib/account/update/call', object: object
   endif
 
-  return_rc object
+  return object
 %}

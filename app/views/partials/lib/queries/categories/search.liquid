@@ -1,0 +1,7 @@
+{% liquid
+  assign limit = limit | default: 100
+  graphql r = 'categories/search', limit: limit, page: 1
+  include 'lib/handle_graphql_response', r: r, name: 'queries/categories/search'
+
+  return r.categories
+%}

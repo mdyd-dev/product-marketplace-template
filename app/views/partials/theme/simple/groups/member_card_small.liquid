@@ -1,0 +1,18 @@
+<div class="p-2 md:w-1/2">
+  <div class="h-full pt-5 overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm">
+    {% liquid
+      assign img_url = user.avatar.photo.versions.small
+      unless img_url
+        assign img_url = 'images/user.svg' | asset_url
+      endunless
+    %}
+    <img class="object-cover object-center w-24 h-24 mx-auto rounded-full shadow-sm md:h-32 md:w-32" src="{{ img_url }}" alt="blog">
+    <div class="p-4">
+      <h2 class="mb-1 font-medium text-gray-900 truncate">
+        <a href="/profile/{{user.slug}}">
+          {{ user.first_name }} {{ user.last_name  }}
+        </a>
+      </h2>
+    </div>
+  </div>
+</div>

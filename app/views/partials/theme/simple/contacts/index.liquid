@@ -1,0 +1,40 @@
+<section>
+  <header class="hidden lg:flex gap-2 mb-5 font-bold">
+		<div class="lg:w-1/6">{{ 'app.models.contacts.form.email' | t }}</div>
+		<div class="lg:w-1/6">{{ 'app.models.contacts.form.reason' | t }}</div>
+		<div class="lg:w-3/6">{{ 'app.models.contacts.form.message' | t }}</div>
+		<div class="lg:w-1/6"></div>
+  </header>
+
+  {% for contact in contacts.results %}
+    <article class="lg:flex gap-2 mb-5 pt-5 border-t">
+      <div class="lg:w-1/6">
+        <span class="lg:hidden">{{ 'app.models.contacts.form.email' | t }}: </span>
+        <a href="/admin/support-tickets/show/{{ contact.id }}">
+          {{ contact.email }}
+        </a>
+      </div>
+      <div class="lg:w-1/6">
+        <span class="lg:hidden">{{ 'app.models.contacts.form.reason' | t }}: </span>
+        <a href="/admin/support-tickets/show/{{ contact.id }}">
+          {{ contact.reason }}
+        </a>
+      </div>
+      <div class="lg:w-3/6">
+        <span class="lg:hidden">{{ 'app.models.contacts.form.message' | t }}: </span>
+        <a href="/admin/support-tickets/show/{{ contact.id }}">
+          {{ contact.message | truncatewords: 30 }}
+        </a>
+      </div>
+      <div class="mt-2 lg:mt-0 lg:w-1/6">
+        <form action="/admin/support-tickets" method="post" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
+          {% include 'authenticity_token' %}
+          <input type="hidden" name="_method" value="delete" />
+          <input type="hidden" name="id" value="{{ contact.id }}">
+
+          <button id="deletebutton" class="button button-danger">{{ 'app.models.shared.delete' | t }}</button>
+        </form>
+      </div>
+    </article>
+  {% endfor %}
+</section>

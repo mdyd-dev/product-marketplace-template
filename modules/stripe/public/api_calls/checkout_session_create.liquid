@@ -10,7 +10,7 @@ callback: >
       log response_data.error, type: 'modules/stripe/checkout_session_create'
     endif
   %}
-headers: >
+request_headers: >
   {% if data %}
     {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -19,6 +19,6 @@ headers: >
   {% endif %}
 ---
 {% liquid
-  function_rc encoded = 'modules/stripe/lib/json_to_encoded', data: data
+  function encoded = 'modules/stripe/lib/json_to_encoded', data: data
   echo encoded
 %}

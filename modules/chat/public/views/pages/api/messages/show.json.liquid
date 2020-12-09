@@ -1,0 +1,23 @@
+---
+slug: api/chat/messages
+method: get
+---
+
+{% comment %}
+  Get messages for given conversation
+
+  Params:
+  - conversation id (string, required)
+  - page number for pagination (int, default: 1)
+  - items per page (int, default: 30)
+{% endcomment %}
+
+{% liquid
+  assign conversation_id = context.params.conversation_id
+  assign page = context.params.page | plus: 0 | default: 1
+  assign per_page = context.params.per_page | plus: 0 | default: 30
+
+  graphql messages = 'modules/chat/find_messages', conversation_id: conversation_id, page: page, per_page: per_page
+
+  render 'modules/chat/theme/json/messages/show', messages: messages, current_user_id: context.current_user.id
+%}

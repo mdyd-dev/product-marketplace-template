@@ -1,0 +1,14 @@
+---
+slug: admin/support-tickets/show
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  include 'lib/must_be_superadmin'
+
+  assign contact_id = context.params.slugs | split: '-' | last
+  function contact = 'lib/queries/contacts/find', id: contact_id
+  include 'lib/present_or_404', property: contact.id
+
+  include 'theme/simple/admin/menu', section: 'support-tickets'
+  include 'theme/simple/contacts/show', contact: contact
+%}

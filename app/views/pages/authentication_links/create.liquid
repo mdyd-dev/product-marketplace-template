@@ -1,0 +1,30 @@
+---
+method: post
+---
+{% liquid
+  function object = 'lib/commands/authentication_links/create', email: context.params.authentication_link.email, host: context.location.host
+
+  if object.valid
+    function email = 'lib/commands/emails/auth-link', object: object
+
+
+
+    if email.valid
+      include 'lib/commands/events/create', type: 'authentication_link_created', actor_id: object.id
+      if object.email == 'admin@example.com'
+        echo object.url
+        break
+      endif
+      include 'redirect_to', url: '/', notice: 'app.authentication_links.created'
+    else
+      log 'sending email failed', type: 'showme'
+      log email.errors, type: 'showme'
+      include 'redirect_to', url: '/', notice: 'app.errors.something-went-wrong'
+    endif
+  elsif object.token == blank
+    log object, type: 'reset-password-user-not-found'
+    include 'redirect_to', url: '/', notice: 'app.authentication_links.created'
+  else
+    include 'theme/simple/authentication_links/new', object: object
+  endif
+%}

@@ -1,0 +1,5 @@
+{{ payload.type | t: actor: payload.actor.name,
+     obj: payload.object.type,
+     target: payload.target.name,
+     url: payload.target.url,
+     scope: 'app.activities.types' }}

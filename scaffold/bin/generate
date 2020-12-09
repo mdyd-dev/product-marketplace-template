@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+
+program
+  .name('generate')
+  .command('resource', 'generate model and endpoints for create, read, update and delete')
+  .command('rest-api', 'generate rest api endpoints')
+  .parse(process.argv);
+
+const commandList = Object.keys(program._execs);
+if (!commandList.includes(program.args[0])) {
+  program.outputHelp();
+  console.log(`unknown command: ${program.args[0]}`);
+}
+
+if (!program.args.length) program.help();

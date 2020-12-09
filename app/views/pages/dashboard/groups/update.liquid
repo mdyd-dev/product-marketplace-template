@@ -1,0 +1,17 @@
+---
+slug: dashboard/groups
+method: put
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function group = 'lib/queries/groups/find', id: context.params.id, owner_id: current_profile.id, relation_name: 'owner'
+  include 'lib/present_or_404', property:  group.id
+
+  function object = 'lib/commands/call', object: context.params.group, command: 'groups/update', selection: 'model_update'
+  if object.valid
+    include 'redirect_to', url: '/dashboard/groups', notice: 'app.models.shared.updated'
+  else
+    graphql presigned_url = 'photos/presign' | dig: 'presigned'
+    include 'theme/simple/dashboard/groups/edit', object: object, presigned_url: presigned_url
+  endif
+%}

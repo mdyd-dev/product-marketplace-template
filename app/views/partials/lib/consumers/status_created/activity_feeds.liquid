@@ -1,0 +1,8 @@
+{% comment %}
+  actor:nope
+  target:nope
+  object:nope
+{% endcomment %}
+
+{% comment %} system:audit {% endcomment %}
+{% include 'lib/commands/activities/publish', uuid: event.uuid, type: "system", ids: "1" %}

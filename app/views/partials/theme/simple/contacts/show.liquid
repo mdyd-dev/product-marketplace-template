@@ -1,0 +1,22 @@
+<article class="p-8 text-gray-800 bg-white shadow-lg rounded">
+
+  <h1 class="mb-5 border-b text-4xl font-medium">
+    contact - {{ contact.id }}
+  </h1>
+
+  <div class="mt-5 font-medium">
+    {{ 'app.models.contacts.form.email' | t }}
+  </div>
+  <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+
+  <div class="mt-5 font-medium">
+    {{ 'app.models.contacts.form.reason' | t }}
+  </div>
+  {{ contact.reason }}
+
+  <div class="mt-5 font-medium">
+    {{ 'app.models.contacts.form.message' | t }}
+  </div>
+  {{ contact.message }}
+
+</article>

@@ -1,28 +1,20 @@
 ---
 method: post
 ---
-
 {% liquid
-  function_rc item = 'lib/data/queries/items/find', id: context.params.item_id
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
 
-  function_rc object = 'lib/commands/orders/create/build', item: item, current_user_id: context.current_user.id
-  function_rc object = 'lib/commands/orders/create/check', object: object
+  function item = 'lib/queries/items/find', id: context.params.item_id
 
+  function object = 'lib/commands/orders/create', item: item, current_profile: current_profile
   if object.valid
-    function_rc object = 'lib/commands/orders/create/execute', object: object
+    function status = 'lib/commands/statuses/create', profile_id: current_profile.id, object_id: object.id, name: 'placed', scope: 'app.statuses.orders'
 
-    if object.valid
-      function_rc status = 'lib/commands/order_statuses/create', order: object, current_user_id: current_user_id, name: 'app.order_statuses.placed'
+    include 'lib/commands/events/create', type: 'order_created', actor_id: object.buyer.id, target_id: context.params.item_id, object_id: object.id
 
-      include 'lib/commands/events/create', type: 'order_created', actor_id: object.buyer.id, target_id: object.seller.id, object_id: object.id
-
-      include 'lib/flash/publish', notice: 'app.orders.created'
-      include 'redirect_to', url: '/dashboard/buy/orders'
-    else
-      redirect_to '/500'
-      break
-    endif
+    include 'redirect_to', url: '/dashboard/buy/orders', notice:  'app.orders.created'
   else
+    log object
     include 'theme/simple/orders/new', item: item, order: object
   endif
 

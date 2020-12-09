@@ -1,5 +1,6 @@
 {% liquid
   graphql g = 'modules/stripe/accounts', gateway_id: object.id
+  log g, type: 'graph'
   assign account = g.accounts.results.first
 %}
 
@@ -11,5 +12,5 @@
   }
 {% endparse_json %}
 {% liquid
-  return_rc object
+  return object
 %}

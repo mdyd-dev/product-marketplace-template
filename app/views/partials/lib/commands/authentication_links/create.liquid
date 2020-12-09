@@ -1,0 +1,10 @@
+{% liquid
+  function object = 'lib/commands/authentication_links/create/build', email: email, host: host
+  function object = 'lib/commands/authentication_links/create/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/authentication_links/create/execute', object: object
+  endif
+
+  return object
+%}

@@ -1,0 +1,23 @@
+{% liquid
+  case object.type
+
+  when 'group'
+    return "/groups/show/" | append: object.id
+
+  when 'profile'
+    return "/profile/" | append: object.slug
+
+  when 'item'
+    assign id = object.name | slugify | append: "-" | append: object.id
+    return "/items/" | append: id
+
+  when 'category'
+    return "/c/" | append: object
+
+  when 'comment'
+    return "/comments/" | append: object.id
+
+  else
+    return null
+  endcase
+%}

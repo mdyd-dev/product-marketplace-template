@@ -1,17 +1,14 @@
-mutation create($item_id: String!, $buyer: String!, $total: Int!, $seller: String!) {
+mutation create($buyer: String!, $seller: String!) {
   model_create(
     model: {
       model_schema_name: "order"
       properties: [
-        { name: "item_id" value: $item_id }
         { name: "buyer" value: $buyer }
         { name: "seller" value: $seller }
-        { name: "total" value_int: $total }
       ]
     }
   ){
     id
-    total: property(name: "total")
 
     buyer: related_user(join_on_property: "buyer", foreign_property: "id") {
       id
@@ -23,14 +20,7 @@ mutation create($item_id: String!, $buyer: String!, $total: Int!, $seller: Strin
       email
     }
 
-    item: related_model(join_on_property: "item_id", foreign_property: "id", model_schema_name: "item") {
-      id
-      created_at
-      name: property(name: "name")
-      price: property(name: "price")
-    }
-
-    status: related_model(join_on_property: "id", foreign_property: "order_id", model_schema_name: "order_status") {
+    status: related_model(join_on_property: "id", foreign_property: "object_id", model_schema_name: "status") {
       id
       created_at
       name: property(name: "name")

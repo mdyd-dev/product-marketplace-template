@@ -1,0 +1,58 @@
+{% comment %}
+  breadcrumbs module that uses the following object to render the navigation,
+  it can be passed from context.page.metadata.breadcrumbs or as a standalone object
+
+  arguments:
+    breadcrumbs with label and url (array of objects)
+    a value that is appended on the end (string or int, optional)
+
+  [
+    {
+      "label": "Navigation 1",
+      "url": "http://platformos.com"
+    },
+    {
+      "label": "Navigation 2",
+      "url": "http://platformos.com"
+    }
+  ]
+{% endcomment %}
+
+<nav class="mb-6 text-2xl">
+  <ul>
+    {% for breadcrumb in breadcrumbs %}
+
+      {% liquid
+        assign is_translation = breadcrumb.label | slice: 0, 4
+
+        if is_translation == 'app.'
+          assign label = breadcrumb.label | t
+        else
+          assign label = breadcrumb.label
+        endif
+      %}
+
+      <li class="inline">
+        {% if forloop.last %}
+          <h2 class="inline">
+        {% else %}
+          {% if breadcrumb.url %}
+            <a href="{{ breadcrumb.url }}">
+          {% endif %}
+        {% endif %}
+            {{ label }}
+        {% if forloop.last %}
+          {% if value %}
+              ({{ value }})
+          {% endif %}
+          </h2>
+        {% else %}
+          {% if breadcrumb.url %}
+            </a>
+          {% endif %}
+          /
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

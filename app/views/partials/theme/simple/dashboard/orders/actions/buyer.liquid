@@ -1,23 +1,19 @@
-{% if order.status.name == 'app.order_statuses.placed' %}
-  {% if order.properties.paid_at == null %}
-    <form action="/order_statuses/create" method="post" class="mt-2">
-      {% include 'authenticity_token' %}
-      <input type="hidden" name="status" value="app.order_statuses.paid"/>
-      <input type="hidden" name="order_id" value="{{ order.id }}"/>
+{% if order.status.fullname == 'app.statuses.orders.placed' %}
+  {% include 'theme/simple/orders/review', order: order, checkout_session: checkout_session %}
 
-      <button class="button button-sm">{{ 'app.pay' | t }}</button>
-    </form>
+  {% render 'theme/simple/statuses/quick_form',
+    authenticity_token: context.authenticity_token,
+    name: 'cancelled',
+    scope: 'app.statuses.orders',
+    object_id: order.id,
+    return_to: context.location.href,
+	label: 'app.cancel', secondary: true %}
 
-    <a href="/orders/review?order_id={{order.id}}" class="button button-sm mt-2">
-      {{ 'app.pay_online' | t }}
-    </a>
-  {% endif %}
-
-  <form action="/order_statuses/create" method="post" class="mt-2">
-    {% include 'authenticity_token' %}
-    <input type="hidden" name="status" value="app.order_statuses.canceled"/>
-    <input type="hidden" name="order_id" value="{{ order.id }}"/>
-
-    <button class="button button-sm button-secondary">{{ 'app.cancel' | t }}</button>
-  </form>
+	{% render 'theme/simple/statuses/quick_form',
+    authenticity_token: context.authenticity_token,
+    name: 'paid',
+    scope: 'app.statuses.orders',
+    object_id: order.id,
+    return_to: context.location.href,
+    label: 'app.orders.checkout.pay-manually' %}
 {% endif %}

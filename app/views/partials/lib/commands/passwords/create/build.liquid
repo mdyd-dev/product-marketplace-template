@@ -1,0 +1,16 @@
+---
+metadata:
+  parameters:
+    - name: password
+    - name: password_confirmation
+    - name: user_id
+---
+{% parse_json object %}
+{
+  "id": {{ object.user_id | json }},
+  "password": {{ object.password | json }},
+  "password_confirmation": {{ object.password_confirmation | json }}
+}
+{% endparse_json %}
+
+{% return object %}

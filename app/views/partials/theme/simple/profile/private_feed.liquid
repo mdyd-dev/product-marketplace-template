@@ -1,0 +1,18 @@
+<div class="mb-4 md:mb-0">
+  {% liquid
+    render 'theme/simple/profile/nav', tab: section, user: current_profile, path: 'dashboard'
+
+    if section == 'activity'
+      include 'theme/simple/comments/new_entry', commentable: current_profile, commentable_type: 'profile', placeholder: "What's new?", presigned_url: presigned_url
+      render 'theme/simple/profile/sections/activity', list: list, current_profile: current_profile
+    elsif section == 'groups'
+      render 'theme/simple/profile/sections/groups', list: list, current_profile: current_profile
+    elsif section == 'following'
+      render 'theme/simple/profile/sections/following', list: list, current_profile: current_profile
+    elsif section == 'followers'
+      render 'theme/simple/profile/sections/followers', list: list, current_profile: current_profile
+    elsif section == 'products'
+      render 'theme/simple/profile/sections/products', list: list, current_profile: current_profile
+    endif
+  %}
+</div>

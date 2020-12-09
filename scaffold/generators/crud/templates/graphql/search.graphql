@@ -1,0 +1,34 @@
+query search(
+  $id: ID
+  $limit: Int = 20
+<% attributes.forEach((attr) => { -%>
+  $<%= attr.name %>: String
+<% }); -%>
+) {
+  <%= modelNamePlural %>: records(
+    per_page: $limit
+    filter: {
+      id: { value: $id }
+      table: { value: "<%= modelName %>" }
+      properties: [
+      <% attributes.forEach((attr) => { -%>
+        { name: "<%= attr.name %>" value: $<%= attr.name %> }
+      <% }); -%>
+      ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+      created_at
+      type: table
+
+    <% attributes.forEach((attr) => { -%>
+      <%= attr.name %>: <%= graphqlPropertyMap[attr.type] %>(name: "<%= attr.name %>")
+    <% }); -%>
+    }
+  }
+}

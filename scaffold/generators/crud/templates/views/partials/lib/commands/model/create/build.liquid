@@ -1,0 +1,12 @@
+{% parse_json object %}
+  {
+    "id": {{ object.id | json }},
+<% attributes.forEach((attr, i) => { -%>
+    "<%= attr.name %>": {{ object.<%= attr.name %> | json }}<% if (i+1 < attributes.length){ %>,<% } %>
+<% }); -%>
+  }
+{% endparse_json %}
+
+{% liquid
+  return object
+%}

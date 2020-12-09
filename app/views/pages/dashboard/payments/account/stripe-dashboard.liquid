@@ -1,0 +1,11 @@
+{% liquid
+  function account = 'modules/stripe/lib/payments/account', user_id: context.current_user.id
+
+  if account.id
+    function login_link_url = 'modules/stripe/lib/account/login_link/call', account: account
+    log login_link_url, type: 'login_link_url'
+    redirect_to login_link_url
+  else
+    redirect_to '/dashboard/payments/account'
+  endif
+%}

@@ -1,7 +1,0 @@
-{% liquid
-  graphql seller_account = 'modules/stripe/accounts', external_id: order.seller.id | dig: 'accounts', 'results', 0
-  function_rc object = 'lib/commands/orders/checkout_session/create/build', order: order, seller_account: seller_account
-  function_rc checkout_session = 'modules/stripe/lib/stripe_checkout/create/call', object: object
-
-  return_rc checkout_session
-%}

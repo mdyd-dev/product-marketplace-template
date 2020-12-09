@@ -1,0 +1,28 @@
+{% liquid
+  assign c = '{ "errors": {}, "valid": true }' | parse_json
+
+  if object.id == blank
+    include 'lib/register_error', contract: c, field_name: 'id', key: 'app.errors.blank'
+  endif
+
+  if object.password == blank
+    include 'lib/register_error', contract: c, field_name: 'password', key: 'app.errors.blank'
+  endif
+
+  if object.password_confirmation == blank
+    include 'lib/register_error', contract: c, field_name: 'password_confirmation', key: 'app.errors.blank'
+  endif
+
+  unless object.password_confirmation == object.password
+    include 'lib/register_error', contract: c, field_name: 'password_confirmation', key: 'app.errors.do_not_match'
+  endunless
+
+  if object.password.size < 6
+    include 'lib/register_error', contract: c, field_name: 'password', key: 'app.errors.too_short'
+  endif
+
+  hash_assign object['valid'] = c.valid
+  hash_assign object['errors'] = c.errors
+
+  return object
+%}

@@ -1,0 +1,32 @@
+{% case object.type %}
+{% when 'up' %}
+  {% parse_json object %}
+    {
+      "id": {{ object.id | json }},
+      "upvote_profile_id_append": {{ profile.id | json }},
+      "downvote_profile_id_remove": {{ profile.id | json }}
+    }
+  {% endparse_json %}
+{% when 'down' %}
+  {% parse_json object %}
+    {
+      "id": {{ object.id | json }},
+      "upvote_profile_id_remove": {{ profile.id | json }},
+      "downvote_profile_id_append": {{ profile.id | json }}
+    }
+  {% endparse_json %}
+{% when 'clear' %}
+  {% parse_json object %}
+    {
+      "id": {{ object.id | json }},
+      "upvote_profile_id_remove": {{ profile.id | json }},
+      "downvote_profile_id_remove": {{ profile.id | json }}
+    }
+  {% endparse_json %}
+{% endcase %}
+
+{% liquid
+  hash_assign object['profile_id'] = profile.id
+  hash_assign object['owner_id'] = post.creator_id
+  return object
+%}

@@ -7,10 +7,10 @@ callback: >
   {% liquid
     assign response_data = response.body | to_hash
     if response_data.error
-      log response_data.error, type: 'modules/payments/create_webhook'
+      log response_data.error, type: 'modules/stripe/create_webhook'
     endif
   %}
-headers: >
+request_headers: >
   {% if data %}
     {
       "Content-Type": "application/x-www-form-urlencoded",

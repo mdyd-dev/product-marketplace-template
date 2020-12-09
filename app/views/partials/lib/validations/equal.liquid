@@ -1,0 +1,12 @@
+{% comment %}
+  params: @given
+          @expected
+          @c
+{% endcomment %}
+{% liquid
+  if given != expected
+    assign msg = 'test.should.equal' | t: given: given, expected: expected
+    include 'lib/register_error', contract: c, field_name: field_name, message: msg
+  endif
+  return c
+%}

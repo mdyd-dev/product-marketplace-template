@@ -1,0 +1,7 @@
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-5">
+  {% for relation in list.results %}
+    {% render 'theme/simple/profile/user_card', user: relation.r, current_profile: current_profile %}
+  {% else %}
+    <p class="text-lg">{{ 'app.no_following_found' | t }}</p>
+  {% endfor %}
+</section>

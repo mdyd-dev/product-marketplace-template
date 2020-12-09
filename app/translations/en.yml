@@ -1,14 +1,35 @@
 en:
+  time:
+    formats:
+      long: '%a, %b %e, %Y at %H:%M'
+      compact: '%b %d %Y at %H:%M'
   admin:
     menu:
-      setup: Configuration
       items: Items
-      activities: Activities
+      users:
+        slug: 'slug: '
+        id: 'id: '
+        uuid: 'uuid: '
+        missing_profile: 'missing profile'
+      activities:
+        name: Activities
+        following: 'following:'
+        list:
+          public: public
+          audit: audit all events
+          all: all
+          comments: comments
+          user: 'user: '
+          user_id: 'id: '
+          group: 'group: '
+          group_id: 'id: '
+          apply: 'Apply'
       setup: Setup
       categories: Categories
       orders: Orders
-      users: Users
+      users_title: Users
       home: Home
+      support-tickets: Support tickets
     metric:
       period:
         montly: Montly
@@ -16,7 +37,7 @@ en:
         total: Total
       income:
         name: Income
-        description: "Marketplace Owner fee is set to 10%"
+        description: Marketplace Owner fee is set to 10%
         delta: Since yesterday
       users:
         name: Users
@@ -31,27 +52,108 @@ en:
         description: Listings counter
         delta: Since yesterday
   app:
+    quick_search:
+      name: Search...
+      type:
+        profile: Profile
+        group: Group
+        comment: Post
+        item: Item
+    home:
+      feeds:
+        comments: People posting
+        groups: People gathering
+        items: People selling
+        profiles: People joining
+        categories: Popular categories
+    relationships:
+      type:
+        - followship
+        - membership
+        - collaboration
+        - owner
+        - ownership
+    feed:
+      title: Feed
     title: MVP Marketplace
-
-    total_entries: "Total items:"
+    support_email: support@getmarketplace.co
+    page_not_found: Page not found.
+    total_entries: 'Total items:'
     no_items_found: No items found
-
+    no_members_found: This group has no members
+    no_following_found: You are not following anyone
+    no_followers_found: Noone is following you
+    no_groups_found: You have no groups
+    no_activities_found: You have no activities yet
     list-your-item: List your item
     admin: Admin
     dashboard: Dashboard
     login: Log in
-    logout: Log out %{user}
-
+    logout: 'Log out %{user}'
+    login_form:
+      log_in: Log In
+      email: E-mail
+      password: Password
+      register: Register
+      reset: Reset
+      anonymous: Don't have an account?
+      password_lost: Password lost?
     order: Order
     your-orders: Your orders
+    self-list: You are now on <b class="font-semibold">your</b> list
+    user-list: 'You are now on <b class="font-semibold">%{name}''s</b> list'
     back: Back
+    save: Save
+    new: New
+    edit: Edit
+    send_message: Send message
     continue: Continue
-
+    community: Community
+    header:
+      add: Add
+      feed: Feed
+      dashboard: Dashboard
+      log-out: Log out
+      chat: Chat
+      inbox: Inbox
+    footer:
+      description: >-
+        MVP Marketplace template is modern marketplace to gather your clients
+        together
+      copyrights:
+        year: © 2020
+        title: MVP Marketplace — Powered by
+        product_owner: platformOS
+      social_links:
+        twitter: Twitter
+        instagram: Instagram
+        facebook: Facebook
+      contact:
+        email: info@arabimall.com
+      header:
+        title:
+          general: GENERAL
+          join: JOIN
+          support: SUPPORT
+        list:
+          home: Home
+          about_us: About us
+          terms_of_service: Terms of service
+          sign_up: Sign up
+          log_in: Log in
+          contact_us: Contact Us
+          faq: FAQ
+    hero:
+      shop: Find your dream watch
+      sell: Sell part of your collection
+      main-sentence: Find Your Time
+      secondary-sentence: MVP Marketplace is a social marketplace to buy and sell all things
     orders:
       created: Order has been placed
       new: new order
       list: Orders
       payment_success: Payment success
+      none: Your orders will appear here. Right now you don't have any.
       status:
         updated: Order status changed
       attr:
@@ -60,7 +162,57 @@ en:
         seller: Seller
         buyer: Buyer
         total: Total
-
+      show:
+        order: Order
+        item: Item
+        qtd: Qtd
+        quantity: Quantity
+        total_price: Total price
+        remove_item: Remove item
+        subtotal: Subtotal
+        delivery: Delivery
+        checkout: Checkout
+        total: Total
+        continue-shopping: Continue shopping
+      checkout:
+        confirm: Please confirm and choose payment method
+        order_total: 'Order total: '
+        success: Your order has been paid.
+        pay-manually: Pay Manually
+        pay-online: Pay Online
+      line-items:
+        failed-to-create: Failed to add product to cart
+    groups:
+      list: Groups
+      group: Group
+      owner: ', Owner'
+      description: Description
+      members: Members
+      view_all: View all
+      name: Name
+      picture: Picture
+      summary: Summary
+      actions: Actions
+      add: Add group
+      deleted: Group has been deleted
+      new: New
+      new_group: New Group
+      edit: 'Edit Group: '
+      empty_state: You haven’t added any groups yet. <br> Create your first one now!
+      join: Join
+      leave: Leave
+      nav:
+        activity: Activity
+        about: About
+        members: Members
+      form:
+        name: Name
+        summary: Summary (displayed on list)
+        photo: Main Photo
+        description: Description
+        submit: Submit
+      errors:
+        description_too_short: 'Description is too short, it has to be longer than %{size} chars'
     activities:
       list: Activities
       new: new
@@ -71,94 +223,190 @@ en:
         target: Target
         actor: Actor
         type: Type
-
+      types:
+        user_followed_user: 'started following <a href="%{url}">%{target}</a>'
+        user_unfollowed_user: 'stopped following <a href="%{url}">%{target}</a>'
+        page_visited: 'visited <a href="%{obj}">%{obj}</a> page'
+        order_status_created: >-
+          changed status of the [%{target_id}] order to <span
+          class="font-semibold">%{status}</span>
+        order_created: >-
+          placed an [%{object_id}] order for <a
+          href="/items/%{target_id}">%{target}</a>
+        account_created: created an account.
+        profile_updated: updated profile information
+        item_created: 'created a <a href="/items/%{object_id}">%{name}</a>'
+        comment_created: 'posted a comment on <a href="%{url}"> %{target} </a> %{type} page'
+        user_joined_group: 'joined to <a href="%{url}"> %{target} </a> group'
     users:
       new: new user
       list: Users
+      create_account: Create an Account
+      form:
+        email: E-mail
+        password: Password
+        signup: Sign Up
       attr:
         id: ID
         created_at: Created at
         email: Email
-
+        list_id: List ID
+        slug: slug
+        followers: Followers
+        profile: Profile
     items:
+      all: All
+      by_user: Browse this user's items
+      self-list: You are now on <span class="font-semibold">your</span> list
+      user-list: >-
+        You are now on <span class="font-semibold">%{name}'s</span> list
+        (%{name})
+      yours: My items
       list: Items
-      new: new item
+      items_404: 404 item not found
+      first_question: Do you want to add one?
+      new: New Item
+      buy_for: Buy for
+      item_administration: Item Administration
       created: Item created
+      edit: Edit Item
       updated: Item updated
       deleted: Item has been deleted successfully
+      none: You don't have any items yet.
+      form:
+        name: Name
+        photos: Photos
+        category: Category
+        description: Description
+        price: Price ($)
+        submit: Submit
       ordered_times:
-        other: Ordered %{count} times
-        one: Ordered %{count} time
+        other: 'Ordered %{count} times'
+        one: 'Ordered %{count} time'
       attr:
         id: ID
         name: Name
         category: Category
-        created_at: CreatedAt
-
+        created_at: 'Created At'
+        owner: Owner
     categories:
       list: Categories
       new: new category
       attr:
         name: Category Name
         key: Key
-
+    stripe:
+      header: Stripe
+      register: >-
+        Please visit <a href="https://stripe.com" target="_blank" rel="extrnal
+        noopener">https://stripe.com</a> and register your <span
+        class="font-semibold">Stripe Connect</span> account.
+      copy_and_add: Copy and add this redirect URL in your
+      public_key: 'Enter your Stripe public key, secret key, and connect account client ID'
+      settings: 'stripe settings: '
+      save: Save
     payments:
       account:
         bank_account: Bank Account
         new:
           to_start_selling: To start selling please
           no_account: No Account
-          you_have_to_connect: You have not connected your Product MVP Marketplace account to Stripe yet. It’s required if you are planning to sell products on Product MVP Marketplace.
+          you_have_to_connect: >-
+            You have not connected your Product MVP Marketplace account to
+            Stripe yet. It’s required if you are planning to sell products on
+            Product MVP Marketplace.
           connect_with_stripe: Connect with Stripe
         show:
           account_information: Seller Account Information
           account_verified: Account verified
           verification_pending: Verification pending
           stripe_account_dashboard: Stripe Account Dashboard
-          you_have_connected: Your Stripe account is connected, but it is still
+          you_have_connected: 'Your Stripe account is connected, but it is still'
           pending_verification: pending verification
-          check_details: You can check details of the verification process and manage account details in the
+          check_details: >-
+            You can check details of the verification process and manage account
+            details in the
           there_is_a_problem: There is a problem with your bank account verification process.
           go_to: Go to
           to_find_more: to find out more.
-          verification_status: "Verification status:"
+          verification_status: 'Verification status:'
           you_have_successfully_connected: You have successfully connected and verified your Stripe account.
           you_can_manage_details: You can manage account details in the
         success:
           payout_account_added: Your payout account has been added.
+          account: Your payout account has been added.\
         failure:
           failed_adding_account: Failed adding payout account.
-
     item: Item
     your-items: Your items
-
     item_id: Item ID
     created_at: Created at
     buyer: Buyer
     seller: Seller
     status: Status
     paid_at: Paid at
-
     name: Name
     price: Price
     quantity: Quantity
     total: Total
-
     checkout: Checkout
     mark-as-paid: Mark as paid
     pay: Pay
     pay_online: Pay online
     cancel: Cancel
     ship: Ship
-
+    passwords:
+      edit: Change password
+      updated: Your new password has been set successfully.
+      password: Password
+      password_confirmation: Password Confirmation
+      password_update: Update Password
+    emails:
+      passwords:
+        reset:
+          subject: Reset Password
+      contact-us:
+        subject: 'New message from Contact-Us form on %{host}'
+    credit_cards:
+      name: Credit Cards
+      no_cards: You don't have any cards connected
+      expires: Expires
+      add: Add Credit Card
     p-dashboard:
       selling: Selling
       buying: Buying
       settings: Settings
+      community: Community
       bank_account: Bank Account
       credit_cards: Credit Cards
       profile: Profile
-
+      payments: Payments
+      edit-profile: Edit Profile
+      your-profile: Public Profile
+      my-groups: My Groups
+      posts: Questions
+      chat: Chat
+      inbox: Inbox
+      your-feed: Activity Feed
+      items-for-sell: Items for sell
+      items-to-buy: Items to buy
+      list-an-item: List an Item
+      buy-orders: Purchases
+      sell-orders: Sold
+    profiles:
+      edit: Profile Edit
+      username: Username
+      first_name: First Name
+      last_name: Last Name
+      profile_photo: Profile Photo
+      incomplete: Fill your profile
+      bio: Short Bio
+      nav:
+        activity: Activity
+        groups: Groups
+        following: Following
+        followers: Followers
+        products: Products
     search:
       all_categories: All categories
       all_tags: All tags
@@ -167,52 +415,640 @@ en:
       category: Category
       tags: Tags
       sort_by: Sort by
-
     dashboard-items:
       actions: Actions
       list-your-first-item: Add your first item
-
     marketplace_setup:
       mpo_fee_percent: Marketplace Owner Fee (percent)
       stripe_pk_key: Stripe Publishable Key
       stripe_sk_key: Stripe Secret Key
       stripe_client_id: Stripe Owner Connect Account client ID
-
-    item_statuses:
-      sold: sold
-      none: "&nbsp;"
-
-    order_statuses:
-      order_status: status
-      pending_payment: pending
-      placed: new
-      paid: paid
-      canceled: canceled
-      shipped: shipped
-
+    statuses:
+      orders:
+        pending_payment: pending
+        placed: new
+        paid: paid
+        cancelled: canceled
+        shipped: shipped
+      items:
+        published: Published
+        unpublished: Unpublished
+        unavailable: Out of stock
     sessions:
       created: Logged in
       destroyed: Logged out
-
     account:
       created: Your account has been created
-
+      reset_password:
+        title: Reset password
+        send_link: Send email with authentication link
+    authentication_links:
+      created: >-
+        Please check your email. We have sent you a password resetting
+        instructions.
+    faq:
+      title: Frequently Asked Questions
+      subtitle: >-
+        The most common questions about how our business works and what can do
+        for you.
+      questions:
+        section1:
+          q1:
+            question: How it works?
+            answer: Good and fast
+          q2:
+            question: How much it cost?
+            answer: It's cheap
+        section2:
+          q1:
+            question: Is it safe?
+            answer: Yes it is
+          q2:
+            question: Does it works
+            answer: Always
+    about-us:
+      our-story: Our story
+      our-story-subtitle: Watches. It all started with a classic Casio F-91W
+      our-story-paragraph: >-
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      our-story-paragraph2: >-
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+        voluptas nulla pariatur?
+      our-team: Our team
+      our-team-subtitle: >-
+        Because no great company could exist without accountants, sellers, stock
+        workers, and of course - paper.
+      person1-name: Karen Filippelli
+      person1-position: 'Founder, Chief Executive Officer'
+      person1-description: >-
+        Started as a Sales representative at Stamford branch, moved to Scranton.
+        Operated in both private and public company structures.
+      person2-name: Darryl Philbin
+      person2-position: Marketing Director
+      person2-description: >-
+        The warehouse is not a piece of cake, man. I started there as an
+        Assistant and finally got a promotion to the Marketing Director.
+      person3-name: Kelly Kapoor
+      person3-position: Customer Service
+      person3-description: >-
+        I work for MVP Marketplace for a few years now. I learned a lot. You
+        know, one person department is not easy to manage.
+    terms:
+      terms-of-service: TERMS OF SERVICE
+      last-updated: 'These Terms of Service were last updated on September 1, 2020.'
+      section1: >-
+        MVP MARKETPLACE CORPORATION ("MVP MARKETPLACE," "we," "us," and/or
+        "our") provides its services (described below) to you through its mobile
+        applications and other software made available by MVP MARKETPLACE
+        ("Software") and its website located at http://www.MVP MARKETPLACE.com
+        (the "Site") (collectively, such services, Software and the Site,
+        collectively, the "Service(s)"), subject to the following Terms of
+        Service (as amended from time to time, these "Terms of Service"). We
+        reserve the right, at our sole discretion, to change or modify portions
+        of these Terms of Service at any time without further notice. You should
+        periodically visit this page to review the current Terms of Service so
+        you are aware of any revision to which you are bound. If we do this, we
+        will post the changes to these Terms of Service on this page and will
+        indicate at the top of this page the date these terms were last revised.
+        We will also notify you, either through the Services user interface, in
+        an email notification or through other reasonable means. Any such
+        changes will become effective for existing users no earlier than ten
+        (10) days after they are posted, except that changes addressing new
+        functions of the Services or changes made for legal reasons will be
+        effective immediately. Your continued use of the Service after the date
+        any such changes become effective constitutes your acceptance of the new
+        Terms of Service. If you do not agree to abide by these or any future
+        Terms of Service, do not use or access (or continue to use or access)
+        the Service.
+      please-read: >-
+        PLEASE READ THESE TERMS OF SERVICE CAREFULLY AS THEY CONTAIN AN
+        AGREEMENT TO ARBITRATE AND OTHER IMPORTANT INFORMATION REGARDING YOUR
+        LEGAL RIGHTS, REMEDIES AND OBLIGATIONS. THE AGREEMENT TO ARBITRATE
+        REQUIRES (WITH LIMITED EXCEPTION) THAT YOU SUBMIT CLAIMS YOU HAVE
+        AGAINST US TO BINDING AND FINAL ARBITRATION, AND FURTHER (1) YOU WILL
+        ONLY BE PERMITTED TO PURSUE CLAIMS AGAINST COMPANY ON AN INDIVIDUAL
+        BASIS, NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY CLASS OR REPRESENTATIVE
+        ACTION OR PROCEEDING, AND (2) YOU WILL ONLY BE PERMITTED TO SEEK RELIEF
+        (INCLUDING MONETARY, INJUNCTIVE, AND DECLARATORY RELIEF) ON AN
+        INDIVIDUAL BASIS. PLEASE INDICATE YOUR ACCEPTANCE TO THESE TERMS OF
+        SERVICE IN ACCORDANCE WITH THE INSTRUCTIONS PROVIDED BY MVP MARKETPLACE.
+        INDICATING ACCEPTANCE ESTABLISHES A BINDING AND EXECUTED WRITTEN
+        AGREEMENT BETWEEN YOU AND MVP MARKETPLACE. IF YOU DO NOT ACCEPT THESE
+        TERMS OF SERVICE, YOU CANNOT USE THE SERVICE.
+      in-addition: >-
+        In addition, when using certain services, you shall be subject to any
+        additional terms, policies or guidelines applicable to such services
+        that may be posted on the Service from time to time, including, without
+        limitation,
+      the-privacy-policy-at: the Privacy Policy at
+      the-fee-policy-at: the Fee Policy at
+      and-the-prohibited: and the Prohibited Items Policy at
+      all-such-terms: >-
+        All such terms, policies and guidelines are hereby incorporated by
+        reference into these Terms of Service.
+      termination: Termination
+      termination-content: >-
+        You agree that MVP MARKETPLACE, in its sole discretion, may suspend or
+        terminate your account (or any part thereof) or use of the Service and
+        remove and discard any items or content within the Service, for any
+        reason, including, without limitation, for lack of use or if MVP
+        MARKETPLACE believes that you have violated or acted inconsistently with
+        the letter or spirit of these Terms of Service. Any suspected
+        fraudulent, abusive or illegal activity that may be grounds for
+        termination of your use of Service, may be referred to appropriate law
+        enforcement authorities. MVP MARKETPLACE may also in its sole discretion
+        and at any time discontinue providing the Service, or any part thereof,
+        with or without notice. You agree that any termination of your access to
+        the Service under any provision of these Terms of Service may be
+        effected without prior notice, and acknowledge and agree that MVP
+        MARKETPLACE may immediately deactivate or delete your account and all
+        related information and files in your account and/or bar any further
+        access to such files or the Service. Further, you agree that MVP
+        MARKETPLACE shall not be liable to you or any third-party for any
+        termination of your access to the Service.
+      user-disputes: User Disputes
+      user-disputes-content: >-
+        You agree that you are solely responsible for your interactions
+        (including any purchase and sale transactions) with any other user in
+        connection with the Service and MVP MARKETPLACE will have no liability
+        or responsibility with respect thereto. MVP MARKETPLACE reserves the
+        right, but has no obligation, to become involved in any way with
+        disputes between you and any other user of the Service.
+      general: General
+      general-content: >-
+        These Terms of Service constitute the entire agreement between you and
+        MVP MARKETPLACE and govern your use of the Service, superseding any
+        prior agreements between you and MVP MARKETPLACE with respect to the
+        Service. You also may be subject to additional terms and conditions that
+        may apply when you use affiliate or third-party services, third-party
+        content or third-party software. These Terms of Service shall be
+        governed by the laws of the State of California without regard to its
+        conflict of law provisions. With respect to any disputes or claims not
+        subject to arbitration, as set forth above, you and MVP MARKETPLACE
+        agree to submit to the personal and exclusive jurisdiction of the state
+        and federal courts located within San Diego County, California. The
+        failure of MVP MARKETPLACE to exercise or enforce any right or provision
+        of these Terms of Service shall not constitute a waiver of such right or
+        provision. If any provision of these Terms of Service is found by a
+        court of competent jurisdiction to be invalid, the parties nevertheless
+        agree that the court should endeavor to give effect to the parties'
+        intentions as reflected in the provision, and the other provisions of
+        these Terms of Service remain in full force and effect. You agree that
+        regardless of any statute or law to the contrary, any claim or cause of
+        action arising out of or related to use of the Service or these Terms of
+        Service must be filed within one (1) year after such claim or cause of
+        action arose or be forever barred. A printed version of this agreement
+        and of any notice given in electronic form shall be admissible in
+        judicial or administrative proceedings based upon or relating to this
+        agreement to the same extent and subject to the same conditions as other
+        business documents and records originally generated and maintained in
+        printed form. The section titles in these Terms of Service are for
+        convenience only and have no legal or contractual effect. Notices to you
+        may be made via either email or regular mail. The Service may also
+        provide notices to you of changes to these Terms of Service or other
+        matters by displaying notices or links to notices generally on the
+        Service.&nbsp;
+      your-privacy: Your Privacy
+      your-privacy-content: >-
+        At MVP MARKETPLACE, we respect the privacy of our users. For details
+        please see our Privacy Policy. By using the Service, you consent to our
+        collection and use of personal data as outlined therein.&nbsp;
+      questions: Questions? Concerns? Suggestions?&nbsp;
+      please-contact: Please contact us at
+      please-contact-continue: >-
+        . to report any violations of these Terms of Service or to pose any
+        questions regarding these Terms of Service or the Service.
+    privacy:
+      privacy-policy: PRIVACY POLICY
+      last-updated: 'This Privacy Policy was last updated on October 21, 2020.'
+      our-policy: 'Our Policy:'
+      our-policy-inner: >-
+        Welcome to the service provided by MVP CORPORATION. ("MVP","we", "us"
+        and/or "our"). This privacy policy has been created to provide
+        information about our company, our website and the services we provide
+        (including through our mobile applications) (collectively, the
+        "Services") to our users ("you" and/or "your"). This Privacy Policy sets
+        forth MVP's policy with respect to information, including personally
+        identifiable data ("Personal Data"), that is collected from users of the
+        Services.
+      info-we-collect: 'Information We Collect:'
+      info-we-collect-inner: >-
+        When you interact with us through the Services, we may collect Personal
+        Data and other information from you, as further described below:
+      personal-data: 'Personal Data That You Provide Through the Services: '
+      personal-data-inner: >-
+        We collect Personal Data from you when you voluntarily provide such
+        information, such as when you register for access to our Services and/or
+        third party services (for example, username and email address provided
+        by services such as Facebook), provide us with credit card and other
+        payment information, use certain Services including withdrawal of funds,
+        contact us with inquiries or respond to one of our surveys. Wherever MVP
+        collects Personal Data we make an effort to provide a link to this
+        Privacy Policy.
+      by-voluntarily: >-
+        By voluntarily providing us with Personal Data, you are consenting to
+        our use of it in accordance with this Privacy Policy. If you provide
+        Personal Data, you acknowledge and agree that such Personal Data may be
+        transferred from your current location to the offices and servers of MVP
+        and the authorized third parties referred to herein located in the
+        United States.
+      non-identifiable: 'Non-Identifiable or Aggregated Data: '
+      non-identifiable-inner: >-
+        When you interact with MVP through the Services, we receive and store
+        certain personally non-identifiable information. Such information, which
+        is collected passively using various technologies, cannot presently be
+        used to specifically identify you. MVP may store such information itself
+        or such information may be included in databases owned and maintained by
+        MVP affiliates, agents or service providers. The Services may use such
+        information and pool it with other information to track, for example,
+        the number of transactions that are effected through the Service, the
+        number of messages you send and receive, the total number of users of
+        our Services, the domain names of our visitors' Internet service
+        providers, and how our users use and interact with the Services. Also,
+        in an ongoing effort to better understand and serve the users of the
+        Services, MVP may conduct research on its customer demographics,
+        interests and behavior based on the Personal Data and other information
+        provided to us. This research may be compiled and analyzed on an
+        aggregate basis. MVP may share this non-identifiable and aggregate data
+        with its affiliates, agents and business partners, but this type of
+        non-identifiable and aggregate information does not identify you
+        personally. MVP may also disclose aggregated user statistics in order to
+        describe our services to current and prospective business partners, and
+        to other third parties for other lawful purposes.&nbsp; In operating the
+        Services (and in particular in making our website available), we may
+        also use a technology called "cookies." A cookie is a piece of
+        information that the computer that hosts our Services gives to your
+        browser when you access the Services. Our cookies help provide
+        additional functionality to the Services and help us analyze Services
+        usage more accurately. For instance, our Services may set a cookie on
+        your browser that allows you to access the Services without needing to
+        remember and then enter a password more than once during a visit to the
+        Services. In all cases in which we use cookies, we will not collect
+        Personal Data except with your permission. On most web browsers, you
+        will find a "help" section on the toolbar. Please refer to this section
+        for information on how to receive notification when you are receiving a
+        new cookie and how to turn cookies off. We recommend that you leave
+        cookies turned on because they allow you to take advantage of some of
+        the Services features.
+      paragraph1: >-
+        We may also employ the use of anonymous identifiers, which are random
+        strings of characters that are used for the same purposes as cookies on
+        platforms, including certain mobile devices, where cookie technology is
+        not available.
+      paragraph2: >-
+        We may use Web beacons or similar technology on the Services. Web
+        beacons are small, invisible graphic images that may be used on the
+        Service or in emails relating to the Service to collect certain
+        personally non-identifiable information and monitor user activity on the
+        Services, such as to count visits, understand usage effectiveness and to
+        tell if an email has been opened and acted upon.
+      paragraph3: >-
+        We may collect device-specific information (such as your hardware model,
+        operating system version, unique device identifiers, and mobile network
+        information including phone number). We may associate your device
+        identifiers or phone number with your MVP account.
+      paragraph4-title: 'Do Not Track Signals: '
+      paragraph4-inner: >-
+        We may (and we may allow third party service providers to) use cookies
+        or similar technologies to collect information about your browsing
+        activities over time and across different websites following your use of
+        the Service. Our Service currently does not respond to "Do Not Track"
+        (DNT) signals and operates as described in this Privacy Policy whether
+        or not a DNT signal is received. If we do so in the future, we will
+        describe how we do so in this Privacy Policy.
+      our-use-of-your-personal-data: 'Our Use of Your Personal Data and Other Information:'
+      our-use-of-your-personal-data-inner: >-
+        MVP uses the Personal Data you provide in a manner that is consistent
+        with this Privacy Policy. If you provide Personal Data for a certain
+        reason, we may use the Personal Data in connection with the reason for
+        which it was provided. For instance, if you contact us by email or other
+        messaging means, we will use the Personal Data you provide to answer
+        your question or resolve your problem, or if you confirm a transaction
+        using the Services, we will use the financial data you provide to
+        consummate the transaction. Also, if you provide Personal Data in order
+        to obtain access to the Services, we will use your Personal Data to
+        provide you with access to such services and to monitor your use of such
+        services. MVP and its subsidiaries and affiliates (the "Related
+        Companies") may also use your Personal Data and other personally
+        non-identifiable information collected through the Services to help us
+        customize the Services, improve the content and functionality of the
+        Services, better understand our users, prevent fraud and improve the
+        Services. MVP and its Related Companies may use this information to
+        communicate with you regarding the Services or to tell you about
+        services we believe will be of interest to you. If we do so, any
+        marketing communication we send you will contain instructions permitting
+        you to "opt-out" of receiving future marketing communications. In
+        addition, if at any time you wish not to receive any future marketing
+        communications or you wish to have your name deleted from our mailing
+        lists, please contact us as indicated below. Note however that as user
+        of the Service you cannot opt-out of some administrative communications
+        that are reasonably necessary to the Service, such as billing or service
+        notifications.
+      our-use-of-your-personal-data-inner-p1: >-
+        Please also note that to the extent you include any Personal Data or
+        other information in a listing or any other content that you upload to
+        the Service, we have the right to publish that listing and other content
+        (including without limitation any Personal Data or other information
+        including in the listing) in connection with the operation of the
+        Service or any other products or services of MVP, or the promotion,
+        advertising or marketing thereof (including publishing that listing and
+        other content on the Internet or on Third Party Services such as
+        Facebook, sharing it with blogs, etc.). In addition, users have the
+        ability as part of the Service to share your listings with others.
+      our-use-of-your-personal-data-inner-p2: >-
+        If MVP intends on using any Personal Data in any manner that is not
+        consistent with this Privacy Policy, you will be informed of such
+        anticipated use prior to or at the time at which the Personal Data is
+        collected.
+      our-disclosure-of-your-personal-data: 'Our Disclosure of Your Personal Data and Other Information: '
+      our-disclosure-of-your-personal-data-inner: >-
+        MVP is not in the business of selling your information. We consider this
+        information to be a vital part of our relationship with you. There are,
+        however, certain circumstances in which we may share your Personal Data
+        with certain third parties without further notice to you, as set forth
+        below:
+      business-transfers: >-
+        <span class="font-bold">Business Transfers: </span> As we develop our
+        business, we might sell or buy businesses or assets. In the event of a
+        corporate sale, merger, reorganization, dissolution or similar event,
+        Personal Data may be part of the transferred assets.
+      related-companies: >-
+        <span class="font-bold">Related Companies: </span> We may also share
+        your Personal Data with our Related Companies for purposes consistent
+        with this Privacy Policy.
+      agents-service-providers: >-
+        <span class="font-bold">Agents, Service Providers, Consultants and
+        Related Third Parties: </span>MVP, like many businesses, sometimes hires
+        other companies to perform certain business-related functions. Examples
+        of such functions include maintaining databases, identity verification,
+        fraud monitoring, processing credit card payments etc. When we employ
+        another company to perform a function of this nature, we only provide
+        them with the information that they need to perform their specific
+        function (for example, providing our credit card payment provider with
+        your credit card information).
+      legal-requirements: >-
+        <span class="font-bold">Legal Requirements: </span>MVP may disclose your
+        Personal Data if required to do so by law or in the good faith belief
+        that such action is necessary to (i) comply with a legal obligation,
+        (ii) protect and defend the rights or property of MVP, (iii) act in
+        urgent circumstances to protect the personal safety of users of the
+        Services or the public, or (iv) protect against legal liability.
+      enforcement: >-
+        <span class="font-bold">Enforcement: </span> MVP may disclose your
+        Personal Data to enforce or apply this Privacy Policy, the MVP Terms of
+        Service, or our other policies posted on the Site from time to time or
+        agreements to which you are a party.
+      your-choices: 'Your Choices:'
+      your-choices-inner: >-
+        If you choose not to provide any Personal Data, you may not be able to
+        use certain Services. In addition, you may request that we delete your
+        account, and any information associated with your account, but please
+        note that we may be required (by law or otherwise) to retain this
+        information and not delete it (or to keep this information for a certain
+        time, in which case we will comply with your deletion request only after
+        we have fulfilled such requirements). When we delete your information,
+        it will be deleted from the active database but may remain in our
+        archives.&nbsp;
+      exclusions: 'Exclusions:'
+      exclusions-inner: >-
+        This Privacy Policy does not apply to any Personal Data collected by MVP
+        other than Personal Data collected through the Services. This Privacy
+        Policy shall not apply to any unsolicited information you provide to MVP
+        through the Services or through any other means. This includes, but is
+        not limited to, information posted to any public areas of the Services,
+        such as forums (collectively, "Public Areas"), any ideas for new
+        products or modifications to existing products and other unsolicited
+        submissions (collectively, "Unsolicited Information"). All Unsolicited
+        Information shall be deemed to be non-confidential and MVP shall be free
+        to reproduce, use, disclose, distribute and exploit such Unsolicited
+        Information without limitation or attribution.&nbsp;
+      children: 'Children:'
+      children-inner: >-
+        MVP does not knowingly collect Personal Data from children under the age
+        of 13. If you are under the age of 13, please do not submit any Personal
+        Data through the Services. We encourage parents and legal guardians to
+        monitor their children's Internet usage and to help enforce our Privacy
+        Policy by instructing their children never to provide Personal Data
+        through the Services without their permission. If you have reason to
+        believe that a child under the age of 13 has provided Personal Data to
+        MVP through the Services, please contact us, and we will endeavor to
+        delete that information from our databases.
+      links-to-other-sites: 'Links to Other Web Sites:'
+      links-to-other-sites-inner: >-
+        This Privacy Policy applies only to the Services. The Services may
+        contain links to other web sites not operated or controlled by MVP (the
+        "Third Party Sites"). The policies and procedures we described here do
+        not apply to the Third Party Sites. The links from the Services do not
+        imply that MVP endorses or has reviewed the Third Party Sites. We
+        suggest contacting those sites directly for information on their privacy
+        policies.
+      integrating-third-party: 'Integrating Third Party Services within the Services:'
+      integrating-third-party-inner: >-
+        One of the special features of the Service is that it allows you to
+        enable various online third party services, such as Facebook and other
+        social media and networking services, payment service providers etc.
+        ("Third Party Services"), to be directly integrated into your MVP
+        experience. To take advantage of this feature, we will ask you to
+        provide us your username and password for the relevant Third Party
+        Services. By enabling such Third Party Services, you are allowing us to
+        pass your log-in information to these service providers for this
+        purpose. When you add a Third Party Service account to the Service, we
+        will collect your login information and other relevant information
+        necessary to enable the Service to access that Third Party Service and
+        your data contained within that Third Party Service. As part of such
+        integration, such Third Party Services will provide us with access to
+        certain information that you have provided to such Third Party Services,
+        and we will use, store and disclose such information in accordance with
+        this Privacy Policy. However, please remember that the manner in which
+        Third Party Services use, store and disclose your information is
+        governed solely by the policies of such third parties, and MVP shall
+        have no liability or responsibility for the privacy practices or other
+        actions of any Third Party Service that may be enabled within the
+        Service.
+      security: Security
+      security-inner: >-
+        MVP takes reasonable steps to protect the Personal Data provided via the
+        Services from loss, misuse, and unauthorized access, disclosure,
+        alteration, or destruction. However, no Internet, email or other
+        electronic transmission is ever fully secure or error free, so you
+        should take special care in deciding what information you send to us in
+        this way.
+      other-terms-and-conditions: 'Other Terms and Conditions:'
+      other-terms-and-conditions-inner: >-
+        Your access to and use of the Services is subject to the MVP Terms of
+        Service located at <a class="link"
+        href="http://www.golfstix.com/terms">http://www.MVP.com/terms</a>.
+      changes-to-policy: 'Changes to MVP''s Privacy Policy:'
+      changes-to-policy-inner: >-
+        The Services and our business may change from time to time. As a result,
+        at times it may be necessary for MVP to make changes to this Privacy
+        Policy. MVP reserves the right to update or modify this Privacy Policy
+        at any time and from time to time without prior notice. Please review
+        this policy periodically, and especially before you provide any Personal
+        Data. This Privacy Policy was last updated on the date indicated above.
+        Your continued use of the Services after any changes or revisions to
+        this Privacy Policy shall indicate your agreement with the terms of such
+        revised Privacy Policy.
+      access-to-info: 'Access to Information; Contacting MVP:'
+      access-to-info-p1: >-
+        To keep your Personal Data accurate, current, and complete, please
+        contact us as specified below. We will take reasonable steps to update
+        or correct Personal Data in our possession that you have previously
+        submitted via the Services.
+      access-to-info-p2: >-
+        Please also feel free to contact us if you have any questions about
+        MVP's Privacy Policy or the information practices of MVP.
+      contact-us: >-
+        <span class="font-bold">You may contact us as follows: <a class="link"
+        href="mailto:support@MVP.com">support@MVP.com.</a></span>
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself
+      disallowed: is not valid
       blank: cannot be blank
-      too_little: "has to be equal or greater than %{value}"
-      too_much: "has to be equal or smaller than %{value}"
+      length:
+        minimum: 'is too short (minimum is %{count} characters)'
+        maximum: 'is too long (maximum is %{count} characters)'
+        is: 'is the wrong length (should be %{count} characters)'
+      too_little: 'has to be equal or greater than %{value}'
+      too_much: 'has to be equal or smaller than %{value}'
+      too_short: 'has to longer than %{value} letters'
       taken: already taken
       session_create_failed: Invalid email or password
-      unauthorized: The system has determined that <span class="font-semibold">you are not</span> presently <span class="font-semibold">authorized</span> to use this system function.
-      unauthenticated: Please <b class="font-semibold">sign in</b> with you credentials or <b class="font-semibold">register</b> new account before continuing.
-      item_with_orders: The system has determined that <span class="font-semibold">your item</span> has <span class="font-semibold">open orders</span>. Cowardly refusing destroying.
-      cannot_edit_coz_has_active_orders: The system has determined that <span class="font-semibold">your item</span> has <span class="font-semibold">orders</span>. Editing is not allowed.
+      unauthorized: >-
+        The system has determined that <span class="font-semibold">you are
+        not</span> presently <span class="font-semibold">authorized</span> to
+        use this system function.
+      unauthenticated: >-
+        Please <b class="font-semibold">sign in</b> with you credentials or <b
+        class="font-semibold">register</b> new account before continuing.
+      item_with_orders: >-
+        The system has determined that <span class="font-semibold">your
+        item</span> has <span class="font-semibold">open orders</span>. Cowardly
+        refusing destroying.
+      cannot_edit_coz_has_active_orders: >-
+        The system has determined that <span class="font-semibold">your
+        item</span> has <span class="font-semibold">orders</span>. Editing is
+        not allowed.
       denied: Permission denied
-
     confirm-delete: Are you sure you want to delete this item?
     delete: Delete
-
+    models:
+      shared:
+        submit: Save
+        delete: Delete
+        delete_failed: Delete failed
+        deleted: Deleted
+        updated: Updated
+      contacts:
+        reasons:
+          purchase: Purchase
+          delivery: Delivery
+          payments: Payments
+          account: Account
+          other: Other
+        contact-us: Contact Us
+        message_sent: Message sent. We will contact with you shortly.
+        message-explain: >-
+          Please explain your message in detail so that we may help you as best
+          as possible in the shortest amount of time.
+        form:
+          email: Email
+          message: Message
+          reason: Reason
+          submit: Send message
+      categories:
+        new: New category
+        add: Add category
+        edit: Edit category
+        empty_state: You haven't added any categories yet. <br> Create your first one now!
+        form:
+          key: key
+          uuid: uuid
+      statuses:
+        new: New status
+        add: Add status
+        edit: Edit status
+        empty_state: You haven't added any statuses yet. <br> Create your first one now!
+        form:
+          name: name
+          fullname: fullname
+          scope: scope
+          timestamp: timestamp
+          object_id: object_id
+          payload: payload
+      orders:
+        form:
+          id: ID
+      line_items:
+        new: New line_item
+        add: Add line_item
+        edit: Edit line_item
+        empty_state: You haven't added any line_items yet. <br> Create your first one now!
+        deleted: Items removed from order
+        update_failed: We can't update the order
+        updated: Line item updated
+        form:
+          item_id: item_id
+          order_id: order_id
+          name: name
+          description: description
+          price_cents: price_cents
+          quantity: quantity
+          total_price_cents: total_price_cents
+      comments:
+        new: New comment
+        add: Add comment
+        edit: Edit comment
+        empty_state: You haven't added any comments yet. <br> Create your first one now!
+        read_more: Read more
+        form:
+          creator_id: creator_id
+          body: Body
+          title: Title
+          uuid: uuid
+          commentable_id: commentable_id
+          commentable_type: commentable_type
+      posts:
+        list: Questions
+        new: Ask Question
+        add: Add Question
+        edit: Edit Question
+        edit_answer: Edit Answer
+        empty_state: You haven't added any questions yet. <br> Create your first one now!
+        read_more: Read more
+        post_answer: Post answer
+        your_answer: Your Answer
+        answers: answers
+        score: score
+        questions-tagged-by: 'Questions tagged: <span class="font-bold">%{tag}</span>'
+        errors:
+          only_owner_can_accept_answer: Only owner can accept answer
+          owner_cant_vote_his_answer: "You can't vote on answer you wrote"
+        form:
+          body: Body
+          title: Title
+          tags: Tags
+          upvotes: Upvotes
+          downvotes: Downvotes
+    style_guide:
+      title: Style guide
   lib:
     sort_options:
       relevance: Relevance

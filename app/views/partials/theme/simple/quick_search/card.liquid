@@ -1,0 +1,24 @@
+{% function url = "f_link_to", object: model %}
+{% assign default_photo = "https://dummyimage.com/800x4:3/eee/000&text=edit-" | append: model.type | append: '-and-upload-cover-photo' %}
+
+<div class="w-full px-0 mx-4 mb-8 overflow-hidden bg-white rounded lg:w-1/4 md:w-3/3 card">
+  <a class="relative block h-64 overflow-hidden shadow-sm" href="{{ url }}">
+    <img alt="{{ object.name | default: object.id | truncate: 120 }}"
+         class="block object-cover object-center w-full h-full"
+         src="{{ model.photo.photo.versions.small | default: default_photo }}">
+  </a>
+
+  <div class="md:p-4">
+    <header class="text-xs">
+      {% print model.type | t: scope: 'app.quick_search.type' %}
+    </header>
+
+    <div class="mt-4">
+      {% if url %}
+        <h2 class="text-lg font-medium text-gray-900 ">
+          <a href="{{ url }}">{{ model.name }}</a>
+        </h2>
+      {% endif %}
+    </div>
+  </div>
+</div>

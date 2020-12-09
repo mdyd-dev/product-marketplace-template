@@ -1,0 +1,20 @@
+<div class="mb-5 bg-white">
+  <nav class="flex flex-col sm:flex-row">
+    {% assign active_class = 'text-blue-500 border-b-2 font-medium border-blue-500'  %}
+    <a href="/{{path}}/{{ user.slug }}" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'activity' %}{{ active_class }}{% endif %}">
+      {{ 'app.profiles.nav.activity' | t }}
+    </a>
+    <a href="/{{path}}/{{ user.slug }}/groups" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'groups' %}{{ active_class }}{% endif %}">
+      {{ 'app.profiles.nav.groups' | t }}
+    </a>
+    <a href="/{{path}}/{{ user.slug }}/following" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'following' %}{{ active_class }}{% endif %}">
+      {{ 'app.profiles.nav.following' | t }}
+    </a>
+    <a href="/{{path}}/{{ user.slug }}/followers" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'followers' %}{{ active_class }}{% endif %}">
+      {{ 'app.profiles.nav.followers' | t }}
+    </a>
+    <a href="/{{path}}/{{user.slug}}/products" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none {% if tab == 'products' %}{{ active_class }}{% endif %}">
+      {{ 'app.profiles.nav.products' | t }}
+    </a>
+  </nav>
+</div>
