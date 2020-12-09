@@ -8,6 +8,10 @@ method: put
   function object = 'lib/commands/profiles/update', object: context.params.profile, profile: current_profile
   if object.valid
     include 'lib/commands/events/create', type: 'profile_updated', actor_id: object.id
+
+    function profile = 'lib/queries/profiles/find', user_id: context.current_user.id
+    function _result = 'lib/commands/sessions/store_profile_in_session', object: profile
+
     include 'redirect_to', url: '/dashboard'
   else
   log object, type: 'showme'
