@@ -94,9 +94,6 @@ styleGuide.colors = () => {
         colorNames += '<li>' + rgbaToHex(window.getComputedStyle(element).getPropertyValue('background-color')) + '</li>';
       });
 
-      // let colorBox = element.parentElement.querySelector('.styleGuide-colorBox');
-      // let color = window.getComputedStyle(colorBox).getPropertyValue('background-color');
-
       element.querySelector('.styleGuide-color ul').insertAdjacentHTML('beforeend', colorNames);
     });
   };
