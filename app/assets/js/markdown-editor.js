@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{147:function(o,e){},4:function(o,e,n){"use strict";n.r(e);n(135);var t=n(136),c=n.n(t);const r=document.querySelector("[data-markdown-editor]"),u=new c.a({element:r,showIcons:["code"],status:!1}),s=r.attributes.id.value;document.querySelector(`label[for="${s}"]`).onclick=function(){u.codemirror.focus()}}}]);

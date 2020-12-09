@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{2:function(e,o){const t=document.querySelector("[data-comment-new-post]");t.querySelector("[data-comment-photo-upload]").addEventListener("click",(function(){t.querySelector("#drag-drop-area").classList.toggle("hidden")}))}}]);
