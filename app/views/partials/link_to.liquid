@@ -33,7 +33,8 @@
   endif
 
   if post
-    print "/posts/show/" | append: post.id
-    return "/posts/show/" | append: post.id
+    assign slug = post.title | slugify | append: '-' | append: post.id
+    print "/posts/" | append: slug
+    return "/posts/" | append: slug
   endif
 %}
