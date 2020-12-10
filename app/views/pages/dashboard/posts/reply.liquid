@@ -8,7 +8,7 @@ method: post
   function object = 'lib/commands/posts/reply', object: context.params.post, current_profile: current_profile
 
   if object.valid
-    include 'lib/commands/events/create', type: 'post_replied', actor_id: current_profile.id, object_id: object.id
+    include 'lib/commands/events/create', type: 'reply_created', actor_id: current_profile.id, object_id: object.id, target_id: object.parent_id
     redirect_to context.params.return_to
   else
     function post = 'lib/queries/posts/find', id: object.parent_id
