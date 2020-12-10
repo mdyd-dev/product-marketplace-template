@@ -13,18 +13,18 @@ mutation create_post(
     model: {
       model_schema_name: "post"
       properties: [
-              { name: "parent_id" value: $parent_id }
-              { name: "creator_id" value: $creator_id }
-              { name: "title" value: $title }
-              { name: "body" value: $body }
-              { name: "tags" value_array: $tags }
-              { name: "upvote_profile_ids" value_array: $upvote_profile_ids }
-              { name: "downvote_profile_ids" value_array: $downvote_profile_ids }
-              { name: "accepted_post_id" value: $accepted_post_id }
-              { name: "c__score" value_int: $c__score }
-            ]
+        { name: "parent_id", value: $parent_id }
+        { name: "creator_id", value: $creator_id }
+        { name: "title", value: $title }
+        { name: "body", value: $body }
+        { name: "tags", value_array: $tags }
+        { name: "upvote_profile_ids", value_array: $upvote_profile_ids }
+        { name: "downvote_profile_ids", value_array: $downvote_profile_ids }
+        { name: "accepted_post_id", value: $accepted_post_id }
+        { name: "c__score", value_int: $c__score }
+      ]
     }
-  ){
+  ) {
     id
     created_at
     deleted_at
@@ -38,5 +38,6 @@ mutation create_post(
     downvote_profile_ids: property_array(name: "downvote_profile_ids")
     accepted_post_id: property(name: "accepted_post_id")
     c__score: property_int(name: "c__score")
-     }
+    current_slug: property(name: "current_slug")
+  }
 }
