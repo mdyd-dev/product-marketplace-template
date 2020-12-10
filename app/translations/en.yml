@@ -98,7 +98,6 @@ en:
       reset: Reset
       anonymous: Don't have an account?
       password_lost: Password lost?
-
     order: Order
     your-orders: Your orders
     self-list: You are now on <b class="font-semibold">your</b> list
