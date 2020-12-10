@@ -20,7 +20,7 @@
       endif
     %}
 
-    <div class="pr-10 pl-5 my-4 py-6 bg-white rounded-lg shadow-md">
+    <div class="pr-10 pl-5 my-4 py-6 bg-panel rounded-lg shadow-md">
       <div class="flex">
         <div class="pt-4 pr-5 text-center">
           <span class="px-4 py-3 border  {{ score_css }} rounded-lg">
@@ -44,7 +44,7 @@
             <p class="mt-2 text-gray-600">{{post.body | truncatewords: 20, '...'}}</p>
           </div>
           <div class="flex justify-between items-center mt-4">
-            <a class="text-blue-600 hover:underline" href="{{post_path}}">
+            <a class="text-interaction-hover hover:underline" href="{{post_path}}">
               {{'app.models.posts.read_more' | t }}
             </a>
             <div>

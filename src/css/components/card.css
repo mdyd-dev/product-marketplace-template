@@ -9,7 +9,7 @@
 .card {
   @apply
     p-4
-    bg-white
+    bg-panel
     rounded
     shadow
 }

@@ -20,10 +20,10 @@
     border-2
     border-transparent
     rounded
-    bg-blue-700
+    bg-interaction
     whitespace-nowrap
     text-center
-    text-white;
+    text-content-inverted;
 }
 
 .button:focus {
@@ -33,15 +33,15 @@
 
 .button:hover {
   @apply
-    bg-blue-600
-    text-white;
+    bg-interaction-hover
+    text-content-inverted;
 }
 
 .button:disabled,
 .button.button-disabled {
   @apply
     pointer-events-none
-    bg-blue-200;
+    bg-interaction-disabled;
 }
 
 
@@ -50,25 +50,25 @@
 ============================================================================ */
 .button-secondary {
   @apply
-    border-blue-700
-    bg-white
-    text-blue-700;
+    border-interaction
+    bg-panel
+    text-interaction;
 }
 
 .button-secondary:hover {
   @apply
-    border-blue-700
-    bg-blue-100
-    text-blue-700;
+    border-interaction-hover
+    bg-interaction-disabled
+    text-interaction-hover;
 }
 
 .button-secondary:disabled,
 .button-secondary.button-disabled {
   @apply
     pointer-events-none
-    bg-white
-    border-blue-200
-    text-blue-200;
+    bg-panel
+    border-interaction-disabled
+    text-interaction-disabled;
 }
 
 
@@ -77,21 +77,21 @@
 ============================================================================ */
 .button-danger {
   @apply
-    bg-red-700
-    text-white;
+    bg-danger
+    text-content-inverted;
 }
 
 .button-danger:hover {
   @apply
-    bg-red-600
-    text-white;
+    bg-danger-hover
+    text-content-inverted;
 }
 
 .button-danger:disabled,
 .button-danger.button-disabled {
   @apply
     pointer-events-none
-    bg-red-200;
+    bg-danger-disabled;
 }
 
 

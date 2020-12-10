@@ -19,7 +19,7 @@
 }
 
 .markdown a {
-  @apply text-blue-600 font-semibold;
+  @apply text-interaction font-semibold;
 }
 
 .markdown strong a {

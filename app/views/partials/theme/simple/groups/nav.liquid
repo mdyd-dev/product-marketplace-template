@@ -1,13 +1,13 @@
-  <nav class="flex justify-between mb-5 bg-white sm:flex-row">
+  <nav class="flex justify-between mb-5 bg-panel sm:flex-row">
     <div class="flex h-full text-lg">
-      {% assign active_class = 'text-blue-500 border-b-2 font-medium border-blue-500'  %}
-      <a href="/groups/show/{{ group.id }}" class="pt-5 pb-4 px-6 hover:text-blue-500 focus:outline-none {% if tab == 'activity' %}{{ active_class }}{% endif %}">
+      {% assign active_class = 'text-interaction-hover border-b-2 font-medium border-interaction-hover'  %}
+      <a href="/groups/show/{{ group.id }}" class="pt-5 pb-4 px-6 focus:outline-none {% if tab == 'activity' %}{{ active_class }}{% endif %}">
         {{ 'app.groups.nav.activity' | t }}
       </a>
-      <a href="/groups/about/{{ group.id }}" class="pt-5 pb-4 px-6 hover:text-blue-500 focus:outline-none {% if tab == 'about' %}{{ active_class }}{% endif %}">
+      <a href="/groups/about/{{ group.id }}" class="pt-5 pb-4 px-6 focus:outline-none {% if tab == 'about' %}{{ active_class }}{% endif %}">
         {{ 'app.groups.nav.about' | t }}
       </a>
-      <a href="/groups/members/{{ group.id }}" class="pt-5 pb-4 px-6 hover:text-blue-500 focus:outline-none {% if tab == 'members' %}{{ active_class }}{% endif %}">
+      <a href="/groups/members/{{ group.id }}" class="pt-5 pb-4 px-6 focus:outline-none {% if tab == 'members' %}{{ active_class }}{% endif %}">
         {{ 'app.groups.nav.members' | t }}
       </a>
     </div>

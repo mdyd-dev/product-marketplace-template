@@ -57,8 +57,28 @@ metadata:
       </li>
       <li>
         <div class="mb-1 border styleGuide-colorBox">
-          <div class="h-24 bg-text"></div>
-          <div class="h-8 bg-text-inverted"></div>
+          <div class="h-32 bg-frame"></div>
+        </div>
+        {% render 'theme/simple/ui/subtitle', label: 'Frames' %}
+        <dl>
+          <div class="flex justify-between w-full">
+            <dt>Class suffix:</dt>
+            <dd class="text-right font-mono styleGuide-className">
+              <ul></ul>
+            </dd>
+          </div>
+          <div class="flex justify-between w-full">
+            <dt>Color:</dt>
+            <dd class="font-mono styleGuide-color">
+              <ul></ul>
+            </dd>
+          </div>
+        </dl>
+      </li>
+      <li>
+        <div class="mb-1 border styleGuide-colorBox">
+          <div class="h-24 bg-content"></div>
+          <div class="h-8 bg-content-inverted"></div>
         </div>
         {% render 'theme/simple/ui/subtitle', label: 'Text' %}
         <dl class="flex flex-wrap justify-between">
@@ -205,7 +225,7 @@ metadata:
             <dd class="table-cell font-mono styleGuide-lineHeight"></dd>
           </div>
         </dl>
-        <div class="mt-5 p-5 border bg-white font-mono styleGuide-code">
+        <div class="mt-5 p-5 border bg-panel font-mono styleGuide-code">
           {% raw %}{% render 'theme/simple/ui/title', label: 'Example title' %}{% endraw %}
           <button class="float-right styleGuide-copy" title="Copy to clipboard">
             <svg width="24" height="24" class="text-gray-700" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -241,7 +261,7 @@ metadata:
             <dd class="table-cell font-mono styleGuide-lineHeight"></dd>
           </div>
         </dl>
-        <div class="mt-5 p-5 border bg-white font-mono styleGuide-code">
+        <div class="mt-5 p-5 border bg-panel font-mono styleGuide-code">
           {% raw %}{% render 'theme/simple/ui/subtitle', label: 'Example subtitle' %}{% endraw %}
           <button class="float-right styleGuide-copy" title="Copy to clipboard">
             <svg width="24" height="24" class="text-gray-700" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -549,7 +569,7 @@ metadata:
     <div class="flex gap-10">
       <section class="w-2/3">
         {% render 'theme/simple/ui/subtitle', label: 'Breadcrumbs' %}
-        <div class="p-5 border bg-white font-mono whitespace-pre styleGuide-code">{% raw %}---
+        <div class="p-5 border bg-panel font-mono whitespace-pre styleGuide-code">{% raw %}---
 metadata:
   breadcrumbs:
     - label: Example
@@ -558,7 +578,7 @@ metadata:
       url: /style-guide
 ---
 {% endraw %}</div>
-        <div class="mt-5 p-5 border bg-white font-mono whitespace-pre styleGuide-code">{% raw %}{% parse_json breadcrumbs %}
+        <div class="mt-5 p-5 border bg-panel font-mono whitespace-pre styleGuide-code">{% raw %}{% parse_json breadcrumbs %}
 [
 {
   "label": "Example",
@@ -570,7 +590,7 @@ metadata:
 }
 ]
 {% endparse_json %}{% endraw %}</div>
-        <div class="mt-5 p-5 border bg-white font-mono styleGuide-code">
+        <div class="mt-5 p-5 border bg-panel font-mono styleGuide-code">
           {% raw %}{% render 'theme/simple/ui/breadcrumbs', breadcrumbs: context.page.metadata.breadcrumbs, value: 2 %}{% endraw %}
           <button class="float-right styleGuide-copy" title="Copy to clipboard">
             <svg width="24" height="24" class="text-gray-700" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
