@@ -6,6 +6,15 @@ slug: posts/:slug
 
   assign post_id = context.params.slug | split: '-' | last
   function post = 'lib/queries/posts/find', id: post_id
+
+  comment
+    Redirect the page if we have a newer slug.
+  endcomment
+  if post.current_slug and post.current_slug != context.params.slug
+    assign redirect_path = '/posts/' | append: post.current_slug
+    redirect_to redirect_path, status: 301
+  endif
+
   include 'lib/present_or_404', property: post.id
 
   include 'theme/simple/posts/show', root_post: post
