@@ -317,10 +317,23 @@ REST api endpoints generated
 ### e2e tests
 
 Testcafe tests are located in `test/` directory.
+To run tests you have to seed test data by:
+```
+  pos-cli data import --path=./seed/data.zip --zip your_environment
+```
 
 ```
-  testcafe "chromium:headless" test --skip-js-errors
+  MPKIT_URL=<your instance> testcafe "chromium:headless" test/
 ```
+
+To manually debug test on fails:
+
+```
+  MPKIT_URL=<your instance> testcafe "chromium" test/ --debug-on-fail
+```
+
+
+
 
 ### unit tests
 
