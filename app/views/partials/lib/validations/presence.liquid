@@ -5,7 +5,10 @@
 {% endcomment %}
 {% liquid
   if object[field_name] == blank
-    include 'lib/register_error', contract: c, field_name: field_name, key: key
+
+  assign key = key | default: "app.errors.blank"
+
+  include 'lib/register_error', contract: c, field_name: field_name, key: key
   endif
   return c
 %}
