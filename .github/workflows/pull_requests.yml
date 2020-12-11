@@ -64,7 +64,7 @@ jobs:
         run: |
           npm run test
       - name: Publish test reports
-        if: ${{ always() }}
+        if: ${{ failure() }}
         shell: sh
         run: |
           set -e
