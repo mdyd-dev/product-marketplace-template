@@ -317,7 +317,7 @@ REST api endpoints generated
 ### e2e tests
 
 Testcafe tests are located in `test/` directory.
-To run tests you have to seed test data by:
+To run tests first you have to seed test data by:
 ```
   pos-cli data import --path=./seed/data.zip --zip <YOUR_ENV_NAME>
 ```
