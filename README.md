@@ -319,9 +319,10 @@ REST api endpoints generated
 Testcafe tests are located in `test/` directory.
 To run tests you have to seed test data by:
 ```
-  pos-cli data import --path=./seed/data.zip --zip your_environment
+  pos-cli data import --path=./seed/data.zip --zip <YOUR_ENV_NAME>
 ```
 
+Headless test run:
 ```
   MPKIT_URL=<your instance> testcafe "chromium:headless" test/
 ```
