@@ -24,6 +24,8 @@ en:
           group: 'group: '
           group_id: 'id: '
           apply: 'Apply'
+          questions: questions
+          answers: answers
       setup: Setup
       categories: Categories
       orders: Orders
@@ -76,8 +78,8 @@ en:
         - ownership
     feed:
       title: Feed
-    title: MVP Marketplace
-    support_email: support@getmarketplace.co
+    title: platformOS Community
+    support_email: support@platformos.com
     page_not_found: Page not found.
     total_entries: 'Total items:'
     no_items_found: No items found
@@ -117,20 +119,20 @@ en:
       log-out: Log out
       chat: Chat
       inbox: Inbox
+      questions: My questions
+      profile: Profile
     footer:
-      description: >-
-        MVP Marketplace template is modern marketplace to gather your clients
-        together
+      description: platformOS Gives you the flexibility to customize every aspect of your digital build
       copyrights:
         year: © 2020
-        title: MVP Marketplace — Powered by
+        title: platformOS Community — Powered by platformOS
         product_owner: platformOS
       social_links:
         twitter: Twitter
         instagram: Instagram
         facebook: Facebook
       contact:
-        email: info@arabimall.com
+        email: support@platformos.com
       header:
         title:
           general: GENERAL
@@ -145,10 +147,10 @@ en:
           contact_us: Contact Us
           faq: FAQ
     hero:
-      shop: Find your dream watch
-      sell: Sell part of your collection
-      main-sentence: Find Your Time
-      secondary-sentence: MVP Marketplace is a social marketplace to buy and sell all things
+      shop: platformOS Community
+      sell: platformOS
+      main-sentence: platformOS
+      secondary-sentence: platformOS Community
     orders:
       created: Order has been placed
       new: new order
@@ -238,6 +240,8 @@ en:
         profile_updated: updated profile information
         item_created: 'created a <a href="/items/%{object_id}">%{name}</a>'
         comment_created: 'posted a comment on <a href="%{url}"> %{target} </a> %{type} page'
+        post_created: 'created a question <a href="%{url}"> %{title} </a>'
+        reply_created: 'replied to a question <a href="%{target_url}"> %{target} </a>'
         user_joined_group: 'joined to <a href="%{url}"> %{target} </a> group'
     users:
       new: new user
@@ -314,9 +318,9 @@ en:
           to_start_selling: To start selling please
           no_account: No Account
           you_have_to_connect: >-
-            You have not connected your Product MVP Marketplace account to
+            You have not connected your Product pOS Marketplace account to
             Stripe yet. It’s required if you are planning to sell products on
-            Product MVP Marketplace.
+            Product pOS Marketplace.
           connect_with_stripe: Connect with Stripe
         show:
           account_information: Seller Account Information
@@ -469,57 +473,20 @@ en:
             question: Does it works
             answer: Always
     about-us:
-      our-story: Our story
-      our-story-subtitle: Watches. It all started with a classic Casio F-91W
+      our-story: Our mission
+      our-story-subtitle: is to help people bring digital projects to life
       our-story-paragraph: >-
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        PlatformOS was founded in 2014 by Adam Broadway in San Francisco,
       our-story-paragraph2: >-
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
-        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
-        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
-        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
-        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
-        voluptas nulla pariatur?
-      our-team: Our team
-      our-team-subtitle: >-
-        Because no great company could exist without accountants, sellers, stock
-        workers, and of course - paper.
-      person1-name: Karen Filippelli
-      person1-position: 'Founder, Chief Executive Officer'
-      person1-description: >-
-        Started as a Sales representative at Stamford branch, moved to Scranton.
-        Operated in both private and public company structures.
-      person2-name: Darryl Philbin
-      person2-position: Marketing Director
-      person2-description: >-
-        The warehouse is not a piece of cake, man. I started there as an
-        Assistant and finally got a promotion to the Marketing Director.
-      person3-name: Kelly Kapoor
-      person3-position: Customer Service
-      person3-description: >-
-        I work for MVP Marketplace for a few years now. I learned a lot. You
-        know, one person department is not easy to manage.
+        I’ve been fortunate enough to be surrounded by truly breathtaking tech talent living in San Francisco. This place is a melting pot full of diverse, intelligent, and entrepreneurial innovators who continue to push how we engage with the world we live in. The ideas, problem-solving, disruption and execution of these ideas into real products, services and ecosystems has made Silicon Valley the tech hub of the modern world.
     terms:
       terms-of-service: TERMS OF SERVICE
       last-updated: 'These Terms of Service were last updated on September 1, 2020.'
       section1: >-
-        MVP MARKETPLACE CORPORATION ("MVP MARKETPLACE," "we," "us," and/or
+        PlatformOS ("platformOS," "we," "us," and/or
         "our") provides its services (described below) to you through its mobile
-        applications and other software made available by MVP MARKETPLACE
-        ("Software") and its website located at http://www.MVP MARKETPLACE.com
+        applications and other software made available by platformOS
+        ("Software") and its website located at http://www.platformOS.com
         (the "Site") (collectively, such services, Software and the Site,
         collectively, the "Service(s)"), subject to the following Terms of
         Service (as amended from time to time, these "Terms of Service"). We
@@ -550,9 +517,9 @@ en:
         ACTION OR PROCEEDING, AND (2) YOU WILL ONLY BE PERMITTED TO SEEK RELIEF
         (INCLUDING MONETARY, INJUNCTIVE, AND DECLARATORY RELIEF) ON AN
         INDIVIDUAL BASIS. PLEASE INDICATE YOUR ACCEPTANCE TO THESE TERMS OF
-        SERVICE IN ACCORDANCE WITH THE INSTRUCTIONS PROVIDED BY MVP MARKETPLACE.
+        SERVICE IN ACCORDANCE WITH THE INSTRUCTIONS PROVIDED BY platformOS.
         INDICATING ACCEPTANCE ESTABLISHES A BINDING AND EXECUTED WRITTEN
-        AGREEMENT BETWEEN YOU AND MVP MARKETPLACE. IF YOU DO NOT ACCEPT THESE
+        AGREEMENT BETWEEN YOU AND platformOS. IF YOU DO NOT ACCEPT THESE
         TERMS OF SERVICE, YOU CANNOT USE THE SERVICE.
       in-addition: >-
         In addition, when using certain services, you shall be subject to any
@@ -567,46 +534,46 @@ en:
         reference into these Terms of Service.
       termination: Termination
       termination-content: >-
-        You agree that MVP MARKETPLACE, in its sole discretion, may suspend or
+        You agree that platformOS, in its sole discretion, may suspend or
         terminate your account (or any part thereof) or use of the Service and
         remove and discard any items or content within the Service, for any
-        reason, including, without limitation, for lack of use or if MVP
+        reason, including, without limitation, for lack of use or if pOS
         MARKETPLACE believes that you have violated or acted inconsistently with
         the letter or spirit of these Terms of Service. Any suspected
         fraudulent, abusive or illegal activity that may be grounds for
         termination of your use of Service, may be referred to appropriate law
-        enforcement authorities. MVP MARKETPLACE may also in its sole discretion
+        enforcement authorities. platformOS may also in its sole discretion
         and at any time discontinue providing the Service, or any part thereof,
         with or without notice. You agree that any termination of your access to
         the Service under any provision of these Terms of Service may be
-        effected without prior notice, and acknowledge and agree that MVP
+        effected without prior notice, and acknowledge and agree that pOS
         MARKETPLACE may immediately deactivate or delete your account and all
         related information and files in your account and/or bar any further
-        access to such files or the Service. Further, you agree that MVP
+        access to such files or the Service. Further, you agree that pOS
         MARKETPLACE shall not be liable to you or any third-party for any
         termination of your access to the Service.
       user-disputes: User Disputes
       user-disputes-content: >-
         You agree that you are solely responsible for your interactions
         (including any purchase and sale transactions) with any other user in
-        connection with the Service and MVP MARKETPLACE will have no liability
-        or responsibility with respect thereto. MVP MARKETPLACE reserves the
+        connection with the Service and platformOS will have no liability
+        or responsibility with respect thereto. platformOS reserves the
         right, but has no obligation, to become involved in any way with
         disputes between you and any other user of the Service.
       general: General
       general-content: >-
         These Terms of Service constitute the entire agreement between you and
-        MVP MARKETPLACE and govern your use of the Service, superseding any
-        prior agreements between you and MVP MARKETPLACE with respect to the
+        platformOS and govern your use of the Service, superseding any
+        prior agreements between you and platformOS with respect to the
         Service. You also may be subject to additional terms and conditions that
         may apply when you use affiliate or third-party services, third-party
         content or third-party software. These Terms of Service shall be
         governed by the laws of the State of California without regard to its
         conflict of law provisions. With respect to any disputes or claims not
-        subject to arbitration, as set forth above, you and MVP MARKETPLACE
+        subject to arbitration, as set forth above, you and platformOS
         agree to submit to the personal and exclusive jurisdiction of the state
         and federal courts located within San Diego County, California. The
-        failure of MVP MARKETPLACE to exercise or enforce any right or provision
+        failure of platformOS to exercise or enforce any right or provision
         of these Terms of Service shall not constitute a waiver of such right or
         provision. If any provision of these Terms of Service is found by a
         court of competent jurisdiction to be invalid, the parties nevertheless
@@ -629,7 +596,7 @@ en:
         Service.&nbsp;
       your-privacy: Your Privacy
       your-privacy-content: >-
-        At MVP MARKETPLACE, we respect the privacy of our users. For details
+        At platformOS, we respect the privacy of our users. For details
         please see our Privacy Policy. By using the Service, you consent to our
         collection and use of personal data as outlined therein.&nbsp;
       questions: Questions? Concerns? Suggestions?&nbsp;
@@ -642,12 +609,12 @@ en:
       last-updated: 'This Privacy Policy was last updated on October 21, 2020.'
       our-policy: 'Our Policy:'
       our-policy-inner: >-
-        Welcome to the service provided by MVP CORPORATION. ("MVP","we", "us"
+        Welcome to the service provided by platformOS. ("pOS","we", "us"
         and/or "our"). This privacy policy has been created to provide
         information about our company, our website and the services we provide
         (including through our mobile applications) (collectively, the
         "Services") to our users ("you" and/or "your"). This Privacy Policy sets
-        forth MVP's policy with respect to information, including personally
+        forth pOS's policy with respect to information, including personally
         identifiable data ("Personal Data"), that is collected from users of the
         Services.
       info-we-collect: 'Information We Collect:'
@@ -661,37 +628,37 @@ en:
         third party services (for example, username and email address provided
         by services such as Facebook), provide us with credit card and other
         payment information, use certain Services including withdrawal of funds,
-        contact us with inquiries or respond to one of our surveys. Wherever MVP
+        contact us with inquiries or respond to one of our surveys. Wherever pOS
         collects Personal Data we make an effort to provide a link to this
         Privacy Policy.
       by-voluntarily: >-
         By voluntarily providing us with Personal Data, you are consenting to
         our use of it in accordance with this Privacy Policy. If you provide
         Personal Data, you acknowledge and agree that such Personal Data may be
-        transferred from your current location to the offices and servers of MVP
+        transferred from your current location to the offices and servers of pOS
         and the authorized third parties referred to herein located in the
         United States.
       non-identifiable: 'Non-Identifiable or Aggregated Data: '
       non-identifiable-inner: >-
-        When you interact with MVP through the Services, we receive and store
+        When you interact with pOS through the Services, we receive and store
         certain personally non-identifiable information. Such information, which
         is collected passively using various technologies, cannot presently be
-        used to specifically identify you. MVP may store such information itself
+        used to specifically identify you. pOS may store such information itself
         or such information may be included in databases owned and maintained by
-        MVP affiliates, agents or service providers. The Services may use such
+        pOS affiliates, agents or service providers. The Services may use such
         information and pool it with other information to track, for example,
         the number of transactions that are effected through the Service, the
         number of messages you send and receive, the total number of users of
         our Services, the domain names of our visitors' Internet service
         providers, and how our users use and interact with the Services. Also,
         in an ongoing effort to better understand and serve the users of the
-        Services, MVP may conduct research on its customer demographics,
+        Services, pOS may conduct research on its customer demographics,
         interests and behavior based on the Personal Data and other information
         provided to us. This research may be compiled and analyzed on an
-        aggregate basis. MVP may share this non-identifiable and aggregate data
+        aggregate basis. pOS may share this non-identifiable and aggregate data
         with its affiliates, agents and business partners, but this type of
         non-identifiable and aggregate information does not identify you
-        personally. MVP may also disclose aggregated user statistics in order to
+        personally. pOS may also disclose aggregated user statistics in order to
         describe our services to current and prospective business partners, and
         to other third parties for other lawful purposes.&nbsp; In operating the
         Services (and in particular in making our website available), we may
@@ -725,7 +692,7 @@ en:
         We may collect device-specific information (such as your hardware model,
         operating system version, unique device identifiers, and mobile network
         information including phone number). We may associate your device
-        identifiers or phone number with your MVP account.
+        identifiers or phone number with your pOS account.
       paragraph4-title: 'Do Not Track Signals: '
       paragraph4-inner: >-
         We may (and we may allow third party service providers to) use cookies
@@ -737,7 +704,7 @@ en:
         describe how we do so in this Privacy Policy.
       our-use-of-your-personal-data: 'Our Use of Your Personal Data and Other Information:'
       our-use-of-your-personal-data-inner: >-
-        MVP uses the Personal Data you provide in a manner that is consistent
+        pOS uses the Personal Data you provide in a manner that is consistent
         with this Privacy Policy. If you provide Personal Data for a certain
         reason, we may use the Personal Data in connection with the reason for
         which it was provided. For instance, if you contact us by email or other
@@ -747,12 +714,12 @@ en:
         consummate the transaction. Also, if you provide Personal Data in order
         to obtain access to the Services, we will use your Personal Data to
         provide you with access to such services and to monitor your use of such
-        services. MVP and its subsidiaries and affiliates (the "Related
+        services. pOS and its subsidiaries and affiliates (the "Related
         Companies") may also use your Personal Data and other personally
         non-identifiable information collected through the Services to help us
         customize the Services, improve the content and functionality of the
         Services, better understand our users, prevent fraud and improve the
-        Services. MVP and its Related Companies may use this information to
+        Services. pOS and its Related Companies may use this information to
         communicate with you regarding the Services or to tell you about
         services we believe will be of interest to you. If we do so, any
         marketing communication we send you will contain instructions permitting
@@ -769,19 +736,19 @@ en:
         the Service, we have the right to publish that listing and other content
         (including without limitation any Personal Data or other information
         including in the listing) in connection with the operation of the
-        Service or any other products or services of MVP, or the promotion,
+        Service or any other products or services of pOS, or the promotion,
         advertising or marketing thereof (including publishing that listing and
         other content on the Internet or on Third Party Services such as
         Facebook, sharing it with blogs, etc.). In addition, users have the
         ability as part of the Service to share your listings with others.
       our-use-of-your-personal-data-inner-p2: >-
-        If MVP intends on using any Personal Data in any manner that is not
+        If pOS intends on using any Personal Data in any manner that is not
         consistent with this Privacy Policy, you will be informed of such
         anticipated use prior to or at the time at which the Personal Data is
         collected.
       our-disclosure-of-your-personal-data: 'Our Disclosure of Your Personal Data and Other Information: '
       our-disclosure-of-your-personal-data-inner: >-
-        MVP is not in the business of selling your information. We consider this
+        pOS is not in the business of selling your information. We consider this
         information to be a vital part of our relationship with you. There are,
         however, certain circumstances in which we may share your Personal Data
         with certain third parties without further notice to you, as set forth
@@ -797,7 +764,7 @@ en:
         with this Privacy Policy.
       agents-service-providers: >-
         <span class="font-bold">Agents, Service Providers, Consultants and
-        Related Third Parties: </span>MVP, like many businesses, sometimes hires
+        Related Third Parties: </span>pOS, like many businesses, sometimes hires
         other companies to perform certain business-related functions. Examples
         of such functions include maintaining databases, identity verification,
         fraud monitoring, processing credit card payments etc. When we employ
@@ -806,15 +773,15 @@ en:
         function (for example, providing our credit card payment provider with
         your credit card information).
       legal-requirements: >-
-        <span class="font-bold">Legal Requirements: </span>MVP may disclose your
+        <span class="font-bold">Legal Requirements: </span>pOS may disclose your
         Personal Data if required to do so by law or in the good faith belief
         that such action is necessary to (i) comply with a legal obligation,
-        (ii) protect and defend the rights or property of MVP, (iii) act in
+        (ii) protect and defend the rights or property of pOS, (iii) act in
         urgent circumstances to protect the personal safety of users of the
         Services or the public, or (iv) protect against legal liability.
       enforcement: >-
-        <span class="font-bold">Enforcement: </span> MVP may disclose your
-        Personal Data to enforce or apply this Privacy Policy, the MVP Terms of
+        <span class="font-bold">Enforcement: </span> pOS may disclose your
+        Personal Data to enforce or apply this Privacy Policy, the pOS Terms of
         Service, or our other policies posted on the Site from time to time or
         agreements to which you are a party.
       your-choices: 'Your Choices:'
@@ -830,35 +797,35 @@ en:
         archives.&nbsp;
       exclusions: 'Exclusions:'
       exclusions-inner: >-
-        This Privacy Policy does not apply to any Personal Data collected by MVP
+        This Privacy Policy does not apply to any Personal Data collected by pOS
         other than Personal Data collected through the Services. This Privacy
-        Policy shall not apply to any unsolicited information you provide to MVP
+        Policy shall not apply to any unsolicited information you provide to pOS
         through the Services or through any other means. This includes, but is
         not limited to, information posted to any public areas of the Services,
         such as forums (collectively, "Public Areas"), any ideas for new
         products or modifications to existing products and other unsolicited
         submissions (collectively, "Unsolicited Information"). All Unsolicited
-        Information shall be deemed to be non-confidential and MVP shall be free
+        Information shall be deemed to be non-confidential and pOS shall be free
         to reproduce, use, disclose, distribute and exploit such Unsolicited
         Information without limitation or attribution.&nbsp;
       children: 'Children:'
       children-inner: >-
-        MVP does not knowingly collect Personal Data from children under the age
+        pOS does not knowingly collect Personal Data from children under the age
         of 13. If you are under the age of 13, please do not submit any Personal
         Data through the Services. We encourage parents and legal guardians to
         monitor their children's Internet usage and to help enforce our Privacy
         Policy by instructing their children never to provide Personal Data
         through the Services without their permission. If you have reason to
         believe that a child under the age of 13 has provided Personal Data to
-        MVP through the Services, please contact us, and we will endeavor to
+        pOS through the Services, please contact us, and we will endeavor to
         delete that information from our databases.
       links-to-other-sites: 'Links to Other Web Sites:'
       links-to-other-sites-inner: >-
         This Privacy Policy applies only to the Services. The Services may
-        contain links to other web sites not operated or controlled by MVP (the
+        contain links to other web sites not operated or controlled by pOS (the
         "Third Party Sites"). The policies and procedures we described here do
         not apply to the Third Party Sites. The links from the Services do not
-        imply that MVP endorses or has reviewed the Third Party Sites. We
+        imply that pOS endorses or has reviewed the Third Party Sites. We
         suggest contacting those sites directly for information on their privacy
         policies.
       integrating-third-party: 'Integrating Third Party Services within the Services:'
@@ -866,7 +833,7 @@ en:
         One of the special features of the Service is that it allows you to
         enable various online third party services, such as Facebook and other
         social media and networking services, payment service providers etc.
-        ("Third Party Services"), to be directly integrated into your MVP
+        ("Third Party Services"), to be directly integrated into your pOS
         experience. To take advantage of this feature, we will ask you to
         provide us your username and password for the relevant Third Party
         Services. By enabling such Third Party Services, you are allowing us to
@@ -880,13 +847,13 @@ en:
         and we will use, store and disclose such information in accordance with
         this Privacy Policy. However, please remember that the manner in which
         Third Party Services use, store and disclose your information is
-        governed solely by the policies of such third parties, and MVP shall
+        governed solely by the policies of such third parties, and pOS shall
         have no liability or responsibility for the privacy practices or other
         actions of any Third Party Service that may be enabled within the
         Service.
       security: Security
       security-inner: >-
-        MVP takes reasonable steps to protect the Personal Data provided via the
+        pOS takes reasonable steps to protect the Personal Data provided via the
         Services from loss, misuse, and unauthorized access, disclosure,
         alteration, or destruction. However, no Internet, email or other
         electronic transmission is ever fully secure or error free, so you
@@ -894,21 +861,21 @@ en:
         this way.
       other-terms-and-conditions: 'Other Terms and Conditions:'
       other-terms-and-conditions-inner: >-
-        Your access to and use of the Services is subject to the MVP Terms of
+        Your access to and use of the Services is subject to the pOS Terms of
         Service located at <a class="link"
-        href="http://www.golfstix.com/terms">http://www.MVP.com/terms</a>.
-      changes-to-policy: 'Changes to MVP''s Privacy Policy:'
+        href="https://www.platformos.com/terms">https://www.platformos.com/terms</a>.
+      changes-to-policy: 'Changes to pOS''s Privacy Policy:'
       changes-to-policy-inner: >-
         The Services and our business may change from time to time. As a result,
-        at times it may be necessary for MVP to make changes to this Privacy
-        Policy. MVP reserves the right to update or modify this Privacy Policy
+        at times it may be necessary for pOS to make changes to this Privacy
+        Policy. pOS reserves the right to update or modify this Privacy Policy
         at any time and from time to time without prior notice. Please review
         this policy periodically, and especially before you provide any Personal
         Data. This Privacy Policy was last updated on the date indicated above.
         Your continued use of the Services after any changes or revisions to
         this Privacy Policy shall indicate your agreement with the terms of such
         revised Privacy Policy.
-      access-to-info: 'Access to Information; Contacting MVP:'
+      access-to-info: 'Access to Information; Contacting pOS:'
       access-to-info-p1: >-
         To keep your Personal Data accurate, current, and complete, please
         contact us as specified below. We will take reasonable steps to update
@@ -916,10 +883,10 @@ en:
         submitted via the Services.
       access-to-info-p2: >-
         Please also feel free to contact us if you have any questions about
-        MVP's Privacy Policy or the information practices of MVP.
+        pOS's Privacy Policy or the information practices of pOS.
       contact-us: >-
         <span class="font-bold">You may contact us as follows: <a class="link"
-        href="mailto:support@MVP.com">support@MVP.com.</a></span>
+        href="mailto:support@platformos.com">support@platformos.com.</a></span>
     errors:
       cannot_sell_to_yourself: You cannot sell to yourself
       disallowed: is not valid

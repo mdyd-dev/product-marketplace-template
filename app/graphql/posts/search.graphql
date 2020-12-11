@@ -17,6 +17,7 @@ query search(
     filter: {
       id: { value: $id }
       table: { value: "post" }
+      deleted_at: { exists: false }
       properties: [
         { name: "parent_id" value: $parent_id }
         { name: "creator_id" value: $creator_id }

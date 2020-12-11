@@ -15,7 +15,7 @@
   endif
 
   if object.agreed == blank
-    include 'lib/register_error', contract: c, field_name: 'agreed', key: 'app.errors.must_be_selected'
+    function c = 'lib/validations/presence', c: c, object: object, field_name: 'agreed', key: 'app.errors.must_be_selected'
   endif
 
   hash_assign object['valid'] = c.valid

@@ -16,6 +16,7 @@
 
   when 'comment'
     return "/comments/" | append: object.id
+
   when 'post'
     return "/posts/show/" | append: object.id
   else

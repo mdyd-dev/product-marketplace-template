@@ -39,7 +39,9 @@
 			when 'comment_created'
 				render 'theme/simple/activities/feed_unit/type/comment_created', payload: payload
 			when 'user_joined_group'
-				render 'theme/simple/activities/feed_unit/type/user_joined_group', payload: payload
+        render 'theme/simple/activities/feed_unit/type/user_joined_group', payload: payload
+      when 'post_created', 'reply_created'
+        render 'theme/simple/activities/feed_unit/type/post_created', payload: payload
 			else
 				echo type
 			endcase
