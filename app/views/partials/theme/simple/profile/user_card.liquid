@@ -1,4 +1,4 @@
-<div class="h-full pt-5 overflow-hidden bg-panel border border-gray-200 rounded-lg shadow-sm">
+<div class="h-full pt-5 overflow-hidden bg-panel border rounded-lg shadow-sm">
   {% liquid
     assign img_url = user.avatar.photo.versions.small
     unless img_url
@@ -10,11 +10,11 @@
   <div class="flex items-center justify-between p-6">
     {% render 'theme/simple/follow_button', current_profile: current_profile, user: user %}
 
-    <a href="/profile/{{ user.slug }}" class="mb-1 ml-3 font-medium text-gray-900">
+    <a href="/profile/{{ user.slug }}" class="mb-1 ml-3 font-medium text-content">
       {{ user.name }}
     </a>
 
-    <span class="inline-flex text-right text-gray-600 items-centertext-sm lg:ml-auto md:ml-0" title="Following">
+    <span class="inline-flex text-right items-centertext-sm lg:ml-auto md:ml-0" title="Following">
       <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"> <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path> <circle cx="12" cy="12" r="3"></circle> </svg>
       1.2K
     </span>
