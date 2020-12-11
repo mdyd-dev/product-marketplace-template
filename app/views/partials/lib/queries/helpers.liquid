@@ -1,6 +1,6 @@
 {% parse_json helpers %}
 {
-  "authenticity_token": {% print context.authenticity_token | json %}
+  "authenticity_token": "{{ context.authenticity_token }}"
 }
 {% endparse_json %}
 
