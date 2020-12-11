@@ -1,0 +1,14 @@
+{% comment %}
+  expect presigned_url as photo_presigned_url
+{% endcomment %}
+
+<form action="{{ presigned_url.upload_url }}"
+  data-s3-uppy-object-uuid="{{ object_uuid }}"
+  data-s3-uppy-photo-type="{{ photo_type }}"
+  data-s3-photo="form"
+  method="POST"
+  hidden>
+  {% for field in presigned_url.upload_url_payload %}
+    <input type="hidden" name="{{ field[0] }}" value='{{ field[1] }}'>
+  {% endfor %}
+</form>

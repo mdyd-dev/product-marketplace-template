@@ -6,6 +6,9 @@
     assign method = 'post'
     assign submit_label = 'app.models.posts.add'
   endif
+  unless object.uuid
+    hash_assign object['uuid'] = '' | uuid
+  endunless
 %}
 <div class="container flex flex-wrap mx-auto groups-center">
   <form action="/dashboard/posts" method="post" class="w-full md:w-2/3">
@@ -15,6 +18,7 @@
     {% if object.id %}
       <input type="hidden" name="post[id]" value="{{ object.id }}" />
     {% endif %}
+    <input type="hidden" name="post[uuid]" value="{{ object.uuid }}" />
 
     <div class="mt-5">
       <label class="block" for="title">{{ 'app.models.posts.form.title' | t }}</label>
@@ -37,3 +41,9 @@
     <button class="mt-8 button">{{ submit_label | t }}</button>
   </form>
 </div>
+{% render 'theme/simple/photos/s3_form',
+  object_uuid: object.uuid,
+  presigned_url: presigned_url,
+  user_id: user.id,
+  photo_type: 'screenshot'
+%}
