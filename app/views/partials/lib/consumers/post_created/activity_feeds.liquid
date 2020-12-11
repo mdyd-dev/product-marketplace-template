@@ -4,8 +4,6 @@
 {% endcomment %}
 
 {% liquid
-  log event, type: 'event'
-
   function audience = 'lib/queries/activities/users/audience', id: event.actor.id
   render 'lib/commands/activities/publish', uuid: event.uuid, type: "user-private", ids: audience
 
