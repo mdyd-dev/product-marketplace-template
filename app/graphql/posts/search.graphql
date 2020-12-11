@@ -63,6 +63,7 @@ query search(
         created_at
         type: table
         parent_id: property(name: "parent_id")
+        creator_id: property(name: "creator_id")
         title: property(name: "title")
         body: property(name: "body")
         upvote_profile_ids: property_array(name: "upvote_profile_ids")

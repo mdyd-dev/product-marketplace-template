@@ -6,7 +6,8 @@ slug: posts/show
 
   assign post_id = context.params.slug3 | split: '-' | last
   function post = 'lib/queries/posts/find', id: post_id
+  graphql presigned_url = 'photos/presign' | dig: 'presigned'
   include 'lib/present_or_404', property: post.id
 
-  include 'theme/simple/posts/show', root_post: post
+  include 'theme/simple/posts/show', root_post: post, presigned_url: presigned_url
 %}

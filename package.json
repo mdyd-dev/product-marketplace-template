@@ -13,7 +13,7 @@
     "predeploy": "npm run clean",
     "ci:build": "docker run -it -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD:/app -w /app node:12-alpine npm ci && npm run build",
     "ci:test": "docker run -it -e MPKIT_URL=$MPKIT_URL -u $(id -u ${USER}):$(id -g ${USER}) --rm -v $PWD:/app -w /app platformos/testcafe \"npm run test\"",
-    "ci:test:publish": "curl -sf -XPUT ${MPKIT_URL}/api/app_builder/marketplace_releases/sync -H \"Authorization: Token $MPKIT_TOKEN\" -F \"marketplace_builder_file_body=@test-report.html\" -F \"path=app/views/pages/_test_results/index.liquid\" -o /dev/null"
+    "ci:test:publish": "sh scripts/upload-test-report.sh"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",

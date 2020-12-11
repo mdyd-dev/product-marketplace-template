@@ -39,7 +39,7 @@
       </div>
 
       <div class="w-full md:flex justify-between mt-4">
-        {% if root_post.creator.id == current_profile.id %}
+        {% if root_post.id == post.id and root_post.creator.id == current_profile.id %}
           <a href="/dashboard/posts/edit?id={{ post.id }}" class="button button-secondary button-small">
             {{ 'app.models.posts.edit' | t }}
           </a>
@@ -47,6 +47,15 @@
           <a href="/dashboard/posts/edit_answer?id={{ post.id }}" class="button button-secondary button-small">
             {{ 'app.models.posts.edit_answer' | t }}
           </a>
+
+          <form action="/dashboard/posts/" method="post" class="inline ml-2" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
+            {% include 'authenticity_token' %}
+            <input type="hidden" name="_method" value="delete" />
+            <input type="hidden" name="id" value="{{ post.id }}">
+            <input type="hidden" name="return_to" value="{% render 'link_to', post: root_post %}">
+
+            <button id="deletebutton" class="button button-secondary button-small button-danger">{{ 'app.models.shared.delete' | t }}</button>
+          </form>
         {% endif %}
       </div>
     </div>
