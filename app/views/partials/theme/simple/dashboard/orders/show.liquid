@@ -4,7 +4,7 @@
   </h1>
 </div>
 
-<section class="p-8 text-gray-800 bg-white shadow-lg">
+<section class="p-8 bg-panel shadow-lg">
 
 	<header class="hidden lg:flex gap-2 mb-5 font-bold">
 		<div class="lg:w-8/12">{{ 'app.orders.show.item' | t }}</div>
@@ -34,7 +34,7 @@
           <input type="number"
             name="line_item[quantity]" value="{{line_item.quantity}}"
             onchange="this.form.submit();"
-            class="w-24 lg:w-full font-semibold text-center text-gray-700 bg-gray-200 hover:text-black focus:text-black">
+            class="w-24 lg:w-full font-semibold text-center">
         </form>
       </div>
       <div class="flex items-center lg:w-2/12 lg:pl-2 mt-2 lg:mt-0 lg:justify-end">
@@ -58,7 +58,7 @@
   {% endfor %}
 </section>
 
-<ul class="mt-16 text-lg lg:text-xl font-bold text-gray-800">
+<ul class="mt-16 text-lg lg:text-xl font-bold">
   <li class="flex gap-4 py-3 justify-between border-b">
     <div>
       {{ 'app.orders.show.subtotal' | t }}

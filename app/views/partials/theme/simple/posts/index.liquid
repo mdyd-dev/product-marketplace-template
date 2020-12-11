@@ -20,7 +20,7 @@
       endif
     %}
 
-    <div class="pr-10 pl-5 my-4 py-6 bg-white rounded-lg shadow-md">
+    <div class="pr-10 pl-5 my-4 py-6 bg-panel rounded-lg shadow-md">
       <div class="flex">
         <div class="pt-4 pr-5 text-center">
           <span class="px-4 py-3 border  {{ score_css }} rounded-lg">
@@ -33,7 +33,7 @@
             <span class="font-light text-gray-600">{{post.created_at | l: 'compact'}}</span>
             <span>
               {% for tag in post.tags %}
-                <a class="px-2 py-1 bg-gray-200 text-blue-400 rounded hover:bg-gray-400" href="/posts?tag={{tag}}">{{tag}}</a>
+                <a class="px-2 py-1 bg-frame rounded" href="/posts?tag={{tag}}">{{tag}}</a>
               {% endfor %}
             </span>
           </div>
@@ -44,7 +44,7 @@
             <p class="mt-2 text-gray-600">{{post.body | truncatewords: 20, '...'}}</p>
           </div>
           <div class="flex justify-between items-center mt-4">
-            <a class="text-blue-600 hover:underline" href="{{post_path}}">
+            <a href="{{post_path}}">
               {{'app.models.posts.read_more' | t }}
             </a>
             <div>
@@ -55,8 +55,8 @@
                     assign img_url = 'images/user.svg' | asset_url
                   endunless
                 %}
-                <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="{{ img_url }}" alt="avatar">
-                <h1 class="text-gray-700 font-bold">{{post.creator.name}}</h1>
+                <img class="mx-3 w-10 h-10 object-cover rounded-full hidden sm:block" src="{{ img_url }}" alt="avatar">
+                <h1 class="text-content font-bold">{{post.creator.name}}</h1>
               </a>
             </div>
           </div>

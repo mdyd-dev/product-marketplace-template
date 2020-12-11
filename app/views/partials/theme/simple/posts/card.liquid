@@ -2,7 +2,7 @@
   function creator_url = 'link_to', profile: post.creator
 %}
 
-<article class="flex bg-white shadow-lg rounded-lg border {% if root_post.accepted_post_id == post.id %}border-green-600{% else %}border-white{% endif %} mx-4 md:mx-auto mb-10" data-tc="postcard">
+<article class="flex bg-panel shadow-lg rounded-lg border {% if root_post.accepted_post_id == post.id %}border-green-600{% else %}border-white{% endif %} mx-4 md:mx-auto mb-10" data-tc="postcard">
   <div class="flex items-start px-4 py-6 w-full">
     <aside class="flex flex-col flex-shrink-0 items-center pr-4">
       <a href="{{ creator_url }}">
