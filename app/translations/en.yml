@@ -59,6 +59,7 @@ en:
         group: Group
         comment: Post
         item: Item
+        post: Question
     home:
       feeds:
         comments: People posting
