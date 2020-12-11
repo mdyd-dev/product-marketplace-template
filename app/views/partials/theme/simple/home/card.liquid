@@ -1,4 +1,4 @@
-<div class="flex flex-col bg-white rounded shadow">
+<div class="flex flex-col bg-panel rounded shadow">
   {% if object.photo %}
     <a class="block w-full h-64 overflow-hidden rounded-tl rounded-tr" href="{{ object.url }}">
       <img alt="{{ object.name | default: object.id | truncate: 120 }}" class="block object-cover object-center w-full h-full" src="{{ object.photo.url.versions.small }}">
@@ -11,7 +11,7 @@
 
   <div class="p-4">
     <!-- TODO: If empty, dont show. -->
-    <h2 class="text-lg font-medium text-gray-900 ">
+    <h2 class="text-lg font-medium">
       <a href="{% render 'link_to', comment: target %}">{{ item.name }}</a>
     </h2>
 

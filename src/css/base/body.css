@@ -9,12 +9,12 @@
 ============================================================================ */
 main a {
   @apply
-    text-blue-700;
+    text-interaction;
 }
 
 main a:hover {
   @apply
-    text-blue-600;
+    text-interaction-hover;
 }
 
 

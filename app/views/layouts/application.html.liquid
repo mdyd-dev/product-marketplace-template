@@ -6,7 +6,7 @@
     {% yield 'custom_styles' %}
   </head>
 
-  <body class="font-sans antialiased leading-normal text-gray-700 bg-gray-100">
+  <body class="font-sans antialiased leading-normal text-content bg-page">
     {% include 'theme/simple/layout/main', current_user_id: context.current_user.id %}
     {% yield 'custom_scripts' %}
   </body>
