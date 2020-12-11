@@ -12,7 +12,7 @@
             name: name,
             scope: scope
           },
-          authenticity_token: {{ authenticity_token | json }}
+          authenticity_token: "{{ authenticity_token }}"
         })
       })
         .then(response => response.json())
