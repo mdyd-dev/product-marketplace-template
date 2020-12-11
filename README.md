@@ -334,6 +334,23 @@ To manually debug in case when test fails:
 ```
 
 
+To save screenshots of test fails:
+```
+  MPKIT_URL=<your instance> testcafe "chromium" test/ -s takeOnFails=true
+```
+
+### e2e test report
+
+To make test report as page (with screenshots):
+```
+  MPKIT_URL=<your instance> testcafe chrome:headless test/ report --reporter html:app/views/pages/_test_results/index.liquid -s path=test/screenshots/,takeOnFails=true
+```
+
+Then open your browser and you can visit it at:
+```
+  <your instance>/_test_results
+```
+
 
 
 ### unit tests
