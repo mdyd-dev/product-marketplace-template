@@ -322,12 +322,12 @@ To run tests you have to seed test data by:
   pos-cli data import --path=./seed/data.zip --zip <YOUR_ENV_NAME>
 ```
 
-Headless test run:
+To run headless tests:
 ```
   MPKIT_URL=<your instance> testcafe "chromium:headless" test/
 ```
 
-To manually debug test on fails:
+To manually debug in case when test fails:
 
 ```
   MPKIT_URL=<your instance> testcafe "chromium" test/ --debug-on-fail
