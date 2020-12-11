@@ -317,10 +317,41 @@ REST api endpoints generated
 ### e2e tests
 
 Testcafe tests are located in `test/` directory.
+To run tests first you have to seed test data by:
+```
+  pos-cli data import --path=./seed/data.zip --zip <YOUR_ENV_NAME>
+```
+
+To run tests in headless mode:
+```
+  MPKIT_URL=<your instance> testcafe "chromium:headless" test/
+```
+
+To manually debug in case when test fails:
 
 ```
-  testcafe "chromium:headless" test --skip-js-errors
+  MPKIT_URL=<your instance> testcafe "chromium" test/ --debug-on-fail
 ```
+
+
+To save screenshots of test fails:
+```
+  MPKIT_URL=<your instance> testcafe "chromium" test/ -s takeOnFails=true
+```
+
+### e2e test report
+
+To make test report as page (with screenshots):
+```
+  MPKIT_URL=<your instance> testcafe chrome:headless test/ report --reporter html:app/views/pages/_test_results/index.liquid -s path=test/screenshots/,takeOnFails=true
+```
+
+Then open your browser and you can visit it at:
+```
+  <your instance>/_test_results
+```
+
+
 
 ### unit tests
 
