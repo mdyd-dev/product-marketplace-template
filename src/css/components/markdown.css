@@ -94,3 +94,7 @@
 .markdown .highlight pre {
   @apply bg-gray-100 !important;
 }
+
+.markdown img{
+  @apply border p-1 my-2 cursor-pointer max-w-sm;
+}

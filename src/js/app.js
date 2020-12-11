@@ -27,6 +27,12 @@ if (markdownEditor) {
   });
 }
 
+const markdownImages = document.querySelector('.markdown img');
+if (markdownImages) {
+  import(/* webpackChunkName: "markdown-images" */ './markdown-images.js').then(() => {
+  });
+}
+
 const styleGuide = document.querySelector('#styleGuide');
 if (styleGuide) {
   import(/* webpackChunkName: "style-guide" */ './style-guide.js').then(() => {
