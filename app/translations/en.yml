@@ -460,19 +460,73 @@ en:
       questions:
         section1:
           q1:
-            question: How it works?
-            answer: Good and fast
+            question: How to post questions?
+            answer: Anyone can see the questions and answers posted by community members, but for posting a question or answering one, you need to register first. All we want from you is a valid email address, a password, and a username.
           q2:
-            question: How much it cost?
-            answer: It's cheap
+            question: What is upvote and how to use it
+            answer: If you find a question or answer interesting and you think that it adds value to the conversation, you can signal your interest or approval by upvoting it. You can upvote questions and answers separately. Answers that get the most votes appear first. Upvote is always a somewhat subjective category, but here are our recommendations - Upvote a question if you feel it is particularly useful, for example because you have also encountered a similar issue. You can also praise a question for identifying a problem very clearly. Upvote an answer if you think it provides a useful explanation for the question. We suggest upvoting answers that have one or more of the following qualities Precise Detailed Educative Well-written
+
         section2:
           q1:
-            question: Is it safe?
-            answer: Yes it is
+            question: How to ask a good question?
+            answer: "Search first - it is possible that someone else has already encountered the same or similar problem Summarize your issue in one sentence in the title. Include keywords that differentiate your question from similar ones on the site. Use the Description for details Give context to your question: it might be useful if you explain how you encountered the problem you’re trying to solve and what prevented you from solving it Include code if necessary Include all relevant tags Proofread before posting Respond to comments: if you missed an important piece of information edit your question to make sure you get useful answers Try out the suggestions and share the outcome"
+
           q2:
-            question: Does it works
-            answer: Always
+            question: How to use the editor?
+            answer: With the editor you can format content by selecting it then clicking the appropriate formatting options in the toolbar. Here’s a summary of what you can do.
+
+        section3:
+          q1:
+            question: What to do if I didn't get an answer to an urgent question?
+            answer: We have community members all over the timezones; someone might be busy typing you an answer while you are asleep. But if you are really tight with time send an email to support@platformos.com.
+
+          q2:
+            question: Found a bug. How do I report it?
+            answer: Send email to support@platformos.com
+
+        section4:
+          q1:
+            question: Found a security vulnerability. How do I report it?
+            answer: Send email to support@platformos.com
+
+          q2:
+            question: How to report spam?
+            answer: Send email to support@platformos.com
+
+        section5:
+          q1:
+            question: How to delete my account?
+            answer: Send email to support@platformos.com
+
+          q2:
+            question: Is there a suggested style guide
+            answer: Send email to support@platformos.com
     about-us:
+      link-to-platformos: <a href="https://platformos.com/" target="_blank">platformos.com</a>
+      about-platformos: Learn about our solutions, values and success stories.
+      link-to-partner-portal: <a href="https://partners.platformos.com/" target="_blank">partners.platformos.com</a>
+      about-partner-portal: Read the latest news about platformOS and our partners.
+      link-to-documentation: <a href="https://documentation.platformos.com/" target="_blank">documentation.platformos.com</a>
+      about-blog: Read the latest news about platformOS and our partners.
+      link-to-blog: <a href="https://www.platformos.com/blog" target="_blank">platformos.com/blog</a>
+      about-documentation: Create, manage, configure and deploy your platformOS Instances, and manage other users of the Partner Portal.
+      about-pos-community-title: About platformOS Community
+      additional-resources: Additional Resources
+      about-pos-community-body1: At platformOS, we are passionate about creating a world where a community of global industry experts from startups to enterprise engage with each other in a co-opetition (co-operative competition).
+      about-pos-community-body2: The goal of our community site is to build an ecosystem for users across all industry verticals to help and encourage each other to build the best of breed technology solutions that change the way we live and engage with the world.
+      about-pos-community-body3: We are a community of professionals and while many of our users are developers, you can find agency owners, business strategists, product owners, marketing gurus, and many more sharing their expertise and seeking your expertise in return.
+      be-part-of-title: Be part of a diverse, professional, dynamic and honest community to
+      be-part-of-li1: <b>-</b> Ask for help or advice
+      be-part-of-li2: <b>-</b> Enjoy the company of like-minded professionals
+      be-part-of-li3: <b>-</b> Meet members of the platformOS team
+      be-part-of-li4: <b>-</b> Meet platformOS partners and module creators
+      be-part-of-li5: <b>-</b> Share your experiences with pOS
+      be-part-of-li6: <b>-</b> Learn from the experiences of others
+      be-part-of-li7: <b>-</b> Provide feedback and improvements to platformOS
+      be-part-of-li8: <b>-</b> Find experienced platformOS developers for your project
+      be-part-of-li9: <b>-</b> Discuss technologies and APIs you use with platformOS
+      be-part-of-li10: <b>-</b> Have fun
+      additional-resources: Additional Resources
       our-story: Our mission
       our-story-subtitle: is to help people bring digital projects to life
       our-story-paragraph: >-
