@@ -1,4 +1,4 @@
-{% assign slug = object.title | slugify | append: '-' | append: object.id %}
+{% function slug = 'get_slug', title: object.title, id: object.id %}
 {% parse_json object %}
   {
     "id": {{ object.id | json }},
