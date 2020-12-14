@@ -1,9 +1,11 @@
-  <ul>
-    {% for tag in tags %}
-      <li class="inline-block">
-        <a href="{{ tag.url }}" class="px-2 py-1 rounded bg-frame">
-          {{ tag.label }}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+  {% if tags.size > 0 %}
+    <ul>
+      {% for tag in tags %}
+        <li class="inline-block">
+          <a href="{{ url }}{{ tag | strip | url_encode }}" class="px-2 py-1 rounded bg-frame">
+            {{ tag }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
