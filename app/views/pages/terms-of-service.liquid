@@ -1,3 +1,7 @@
-{% liquid
-  render 'theme/simple/terms-of-service'
-%}
+<section class="py-16 bg-white">
+  <div class="container">
+    <div class="markdown">
+      {{ 'terms_of_use_md' | t | markdown }}
+    </div>
+  </div>
+</section>

@@ -453,32 +453,64 @@ en:
         Please check your email. We have sent you a password resetting
         instructions.
     faq:
-      title: Frequently Asked Questions
+      title: FAQ
       subtitle: >-
-        The most common questions about how our business works and what can do
-        for you.
+        Everything you need to know about using pOS Community
       questions:
         section1:
           q1:
-            question: How it works?
-            answer: Good and fast
+            question: How to post questions?
+            answer: Anyone can see the questions and answers posted by community members, but for posting a question or answering one, you need to register first. All we want from you is a valid email address, a password, and a username.
           q2:
-            question: How much it cost?
-            answer: It's cheap
+            question: What is upvote and how to use it
+            answer: 'If you find a question or answer interesting and you think that it adds value to the conversation, you can signal your interest or approval by upvoting it. You can upvote questions and answers separately. Answers that get the most votes appear first. Upvote is always a somewhat subjective category, but here are our recommendations:
+                     <ul><li><b>Upvote a question</b> if you feel it is particularly useful, for example because you have also encountered a similar issue. You can also praise a question for identifying a problem very clearly.
+                     <li><b>Upvote an answer</b> if you think it provides a useful explanation for the question. We suggest upvoting answers that have one or more of the following qualities:
+                     <ul><li>Precise</li> <li>Detailed</li> <li>Educative</li> <li>Well-written</li></ul>
+                     </ul>'
         section2:
           q1:
-            question: Is it safe?
-            answer: Yes it is
+            question: How to ask a good question?
+            answer: '<ul><li><b>Search first</b> - it is possible that someone else has already encountered the same or similar problem</li>
+                    <li><b>Summarize</b> your issue in one sentence in the title. Include keywords that differentiate your question from similar ones on the site.</li>
+                    <li>Use the <b>Description</b> for details</li>
+                    <ul><li>Give <b>context</b> to your question: it might be useful if you explain how you encountered the problem you’re trying to solve and what prevented you from solving it</li>
+                    <li>Include <b>code</b> if necessary</li></ul>
+                    <li>Include all relevant <b>tags</b></li>
+                    <li><b>Proofread</b> before posting</li>
+                    <li><b>Respond</b> to comments:</li>
+                    <ul><li>if you missed an important piece of information edit your question to make sure you get useful answers</li>
+                    <li>Try out the suggestions and share the outcome</li>
+                    </ul></ul>'
+
           q2:
-            question: Does it works
-            answer: Always
-    about-us:
-      our-story: Our mission
-      our-story-subtitle: is to help people bring digital projects to life
-      our-story-paragraph: >-
-        PlatformOS was founded in 2014 by Adam Broadway in San Francisco,
-      our-story-paragraph2: >-
-        I’ve been fortunate enough to be surrounded by truly breathtaking tech talent living in San Francisco. This place is a melting pot full of diverse, intelligent, and entrepreneurial innovators who continue to push how we engage with the world we live in. The ideas, problem-solving, disruption and execution of these ideas into real products, services and ecosystems has made Silicon Valley the tech hub of the modern world.
+            question: How to use the editor?
+            answer: With the editor you can format content by selecting it then clicking the appropriate formatting options in the toolbar. Here’s a <a href="https://web.humboldt.edu/openhsu/guide/wysiwyg">summary</a> of what you can do.
+        section3:
+          q1:
+            question: What to do if I didn't get an answer to an urgent question?
+            answer: We have community members all over the timezones; someone might be busy typing you an answer while you are asleep. But if you are really tight with time send an email to <a href="mailto:support@platformos.com">support@platformos.com</a>.
+          q2:
+            question: Found a bug. How do I report it?
+            answer: Send email to <a href="mailto:support@platformos.com">support@platformos.com</a>
+        section4:
+          q1:
+            question: Found a security vulnerability. How do I report it?
+            answer: Send email to <a href="mailto:support@platformos.com">support@platformos.com</a>
+          q2:
+            question: How to report spam?
+            answer: Send email to <a href="mailto:support@platformos.com">support@platformos.com</a
+        section5:
+          q1:
+            question: How to delete my account?
+            answer: Send email to <a href="mailto:support@platformos.com">support@platformos.com</a>
+          q2:
+            question: Is there a suggested style guide
+            answer: 'Please check our Code of Conduct, and here’s a quick checklist.
+                     <ul><li>Use inclusive and welcoming language</li>
+                     <li>Refer to people by the preferred pronoun and be gender neutral when in doubt</li>
+                     <li>Be open minded when getting  and respectful when giving constructive criticism</li>
+                     <li>Focus on what is best for the community </li></ul>'
     terms:
       terms-of-service: TERMS OF SERVICE
       last-updated: 'These Terms of Service were last updated on September 1, 2020.'
