@@ -20,7 +20,8 @@
 
         <div class="lg:pl-2 lg:py-4 lg:table-cell lg:border-t">
           <span class="lg:hidden">{{ 'app.models.posts.form.title' | t }}: </span>
-          <a href="/posts/show/{{ post.id }}">
+          {% function url = 'link_to', post: post %}
+          <a href="{{ url }}">
             {{ post.title }}
           </a>
         </div>
