@@ -1,0 +1,9 @@
+  <ul>
+    {% for tag in tags %}
+      <li class="inline-block">
+        <a href="{{ tag.url }}" class="px-2 py-1 rounded bg-frame">
+          {{ tag.label }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
