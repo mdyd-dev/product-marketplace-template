@@ -3,6 +3,7 @@
     "email":       {{ object.email | json }},
     "password":    {{ object.password | json }},
     "uuid":        {{ '' | uuid | json }},
+    "agreed":       {{ object.agreed | json }},
     "remember_me": true
   }
 {% endparse_json %}

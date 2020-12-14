@@ -12,6 +12,10 @@
     <input name="user[password]" type="password" id="password" value="{{ object.password | raw_escape_string }}" class="w-full form-input" />
     {% include 'theme/simple/field_error', errors: object.errors.password %}
   </label>
-
+  <label class="block mt-3" for="agreed">
+    <input type="checkbox" name="user[agreed]">
+    {{ 'app.users.form.agreed' | t}}
+    {% include 'theme/simple/field_error', errors: object.errors.agreed %}
+    </label>
   <button class="mt-3 button">{{ 'app.users.form.signup' | t }}</button>
 </form>

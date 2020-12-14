@@ -10,7 +10,8 @@ slug: posts/:slug
   assign redirect_path = '/posts/' | append: post.slug
   include 'lib/redirect_to_last_slug', redirect_to: redirect_path, last_slug: post.slug, current_slug: context.params.slug
 
+  graphql presigned_url = 'photos/presign' | dig: 'presigned'
   include 'lib/present_or_404', property: post.id
 
-  include 'theme/simple/posts/show', root_post: post
+  include 'theme/simple/posts/show', root_post: post, presigned_url: presigned_url
 %}

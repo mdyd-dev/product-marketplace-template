@@ -19,7 +19,7 @@
 }
 
 .markdown a {
-  @apply text-blue-600 font-semibold;
+  @apply text-interaction font-semibold;
 }
 
 .markdown strong a {
@@ -78,19 +78,11 @@
   @apply text-xs inline-block rounded border px-1 py-5 align-middle font-normal font-mono shadow;
 }
 
-.markdown table {
-  @apply text-base border-gray-600;
-}
-
-.markdown th {
-  @apply border py-1 px-3;
-}
-
-.markdown td {
-  @apply border py-1 px-3;
-}
-
 /* Override pygments style background color. */
 .markdown .highlight pre {
   @apply bg-gray-100 !important;
+}
+
+.markdown img{
+  @apply border p-1 my-2 cursor-pointer max-w-sm;
 }

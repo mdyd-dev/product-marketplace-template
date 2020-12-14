@@ -19,7 +19,7 @@
         body: JSON.stringify({
           group_id: group_id,
           action_name: action,
-          authenticity_token: {{ authenticity_token | json }}
+          authenticity_token: "{{ authenticity_token }}"
         })
       })
         .then(response => response.json())

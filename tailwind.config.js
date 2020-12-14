@@ -1,5 +1,3 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
-
 module.exports = {
 
   theme: {
@@ -7,7 +5,8 @@ module.exports = {
       colors: {
         page: '#f3f4f6',
         panel: '#fff',
-        text: {
+        frame: '#e2e8f0',
+        content: {
           DEFAULT: '#374151',
           inverted: '#fff'
         },
@@ -38,6 +37,11 @@ module.exports = {
         xl: '0',
       },
     },
+
+    borderColor: theme => ({
+      ...theme('colors'),
+      DEFAULT: theme('colors.frame')
+    })
 
   },
 
