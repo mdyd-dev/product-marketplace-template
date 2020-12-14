@@ -24,15 +24,7 @@
           </a>
           <date datetime="{{ post.created_at }}" class="block text-sm text-gray-700">{{post.created_at | l: 'compact'}}</date>
         </header>
-        {% if post.tags %}
-          <ul class="ml-auto">
-            {% for tag in post.tags %}
-              <li class="inline-block leading-9">
-                <a class="px-2 py-1 bg-gray-200 rounded" href="/posts?tag={{tag}}">{{tag}}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% endif %}
+        {% render 'theme/simple/ui/tags', tags: post.tags, url: '/posts?tag=' %}
       </div>
       <div class="flex-1 mt-3 markdown">
         {{post.body | default: '' | markdownify}}
