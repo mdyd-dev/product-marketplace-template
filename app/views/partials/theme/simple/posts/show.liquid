@@ -1,3 +1,7 @@
+{% content_for metatags %}
+  {% include 'theme/simple/posts/metatags', post: post %}
+{% endcontent_for %}
+
 <h1 class="text-4xl font-medium">
   {{root_post.title}}
 </h1>
