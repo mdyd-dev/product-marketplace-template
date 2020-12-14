@@ -1,0 +1,8 @@
+{% liquid
+  assign redirect_to = redirect_to | default: '/'
+  assign status = status | default: 301
+
+  if last_slug and last_slug != current_slug
+    redirect_to redirect_to, status: status
+  endif
+%}
