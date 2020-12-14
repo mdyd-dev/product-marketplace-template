@@ -46,7 +46,7 @@ query search(
       upvote_profile_ids: property_array(name: "upvote_profile_ids")
       downvote_profile_ids: property_array(name: "downvote_profile_ids")
       accepted_post_id: property(name: "accepted_post_id")
-      current_slug: property(name: "current_slug")
+      slug: property(name: "slug")
 
       c__score: property_int(name: "c__score")
       creator: related_record(

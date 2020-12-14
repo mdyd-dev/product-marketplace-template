@@ -38,6 +38,6 @@ mutation create_post(
     downvote_profile_ids: property_array(name: "downvote_profile_ids")
     accepted_post_id: property(name: "accepted_post_id")
     c__score: property_int(name: "c__score")
-    current_slug: property(name: "current_slug")
+    slug: property(name: "slug")
   }
 }

@@ -18,5 +18,5 @@ properties:
     type: string
   - name: c__score
     type: integer
-  - name: current_slug
+  - name: slug
     type: string

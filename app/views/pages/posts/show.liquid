@@ -7,8 +7,8 @@ slug: posts/:slug
   assign post_id = context.params.slug | split: '-' | last
   function post = 'lib/queries/posts/find', id: post_id
 
-  assign redirect_path = '/posts/' | append: post.current_slug
-  include 'lib/redirect_to_last_slug', redirect_to: redirect_path, last_slug: post.current_slug, current_slug: context.params.slug
+  assign redirect_path = '/posts/' | append: post.slug
+  include 'lib/redirect_to_last_slug', redirect_to: redirect_path, last_slug: post.slug, current_slug: context.params.slug
 
   include 'lib/present_or_404', property: post.id
 
