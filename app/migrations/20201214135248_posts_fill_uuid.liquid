@@ -1,0 +1,30 @@
+{% graphql posts %}
+query {
+  records(
+    per_page: 1000
+    filter: {
+      table: { value: "post" }
+      deleted_at: { exists: false }
+      properties: [
+        { name: "uuid" exists: false }
+      ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+    }
+  }
+}
+{% endgraphql %}
+{% liquid
+  echo posts
+  for post in posts.results
+    assign uuid = '' | uuid
+    graphql r = 'posts/update', id: post.id, uuid: uuid
+    echo r
+  endfor
+%}

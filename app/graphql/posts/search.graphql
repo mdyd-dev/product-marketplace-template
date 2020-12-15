@@ -39,6 +39,7 @@ query search(
       created_at
       type: table
 
+      uuid: property(name: "uuid")
       parent_id: property(name: "parent_id")
       creator_id: property(name: "creator_id")
       title: property(name: "title")
@@ -55,6 +56,9 @@ query search(
         join_on_property: "creator_id"
       ) {
         ...profile
+      }
+      comments: related_records(table: "comment", join_on_property: "uuid", foreign_property: "commentable_uuid") {
+        ...comment
       }
 
       parent: related_record(
@@ -77,6 +81,7 @@ query search(
         id
         created_at
         type: table
+        uuid: property(name: "uuid")
         parent_id: property(name: "parent_id")
         creator_id: property(name: "creator_id")
         title: property(name: "title")
@@ -89,6 +94,9 @@ query search(
           join_on_property: "creator_id"
         ) {
           ...profile
+        }
+        comments: related_records(table: "comment", join_on_property: "uuid", foreign_property: "commentable_uuid") {
+          ...comment
         }
       }
     }
@@ -111,5 +119,13 @@ fragment profile on Record {
       url
       versions
     }
+  }
+}
+fragment comment on Record {
+  id
+  created_at
+  body: property(name: "body")
+  creator: related_record(table: "profile", join_on_property: "creator_id"){
+    ...profile
   }
 }

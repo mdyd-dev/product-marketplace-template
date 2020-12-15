@@ -1,5 +1,6 @@
 mutation update_post(
   $id: ID!
+  $uuid: String
   $title: String
   $body: String
   $tags: [String]
@@ -16,6 +17,7 @@ mutation update_post(
     model: {
       model_schema_name: "post"
       properties: [
+        { name: "uuid" value: $uuid }
         { name: "title", value: $title }
         { name: "body", value: $body }
         { name: "tags", value_array: $tags }
