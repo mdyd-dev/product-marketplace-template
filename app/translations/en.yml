@@ -1012,9 +1012,12 @@ en:
           only_owner_can_accept_answer: Only owner can accept answer
           owner_cant_vote_his_answer: "You can't vote on answer you wrote"
         form:
-          body: Body
-          title: Title
+          title: Question
+          title_help: Be specific and imagine you’re asking a question to another person
+          body: Description
+          body_help: Include all the information someone would need to answer your question
           tags: Tags
+          tags_help: Add up to 5 tags to describe what your question is about. Separated by comma.
           upvotes: Upvotes
           downvotes: Downvotes
     style_guide:
