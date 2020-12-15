@@ -1,0 +1,4 @@
+{% liquid
+  assign slug = title | slugify | append: '-' | append: id
+  return slug
+%}
