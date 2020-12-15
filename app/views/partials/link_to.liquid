@@ -33,7 +33,7 @@
   endif
 
   if post
-    function slug = 'get_slug', title: post.title, id: post.id
+    function slug = 'generate_slug', title: post.title, id: post.id
     print "/posts/" | append: slug
     return "/posts/" | append: slug
   endif
