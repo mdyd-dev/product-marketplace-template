@@ -37,7 +37,7 @@
             </select>
             <small> {% print item.c__status %}</small>
           </td>
-          <td class="px-4 py-2 border-b">{{ item.created_at | l }}</td>
+          <td class="px-4 py-2 border-b">{{ item.created_at | l: 'long' }}</td>
           <!--
           <td class="px-4 py-2 border-b">
             {{ item.status.name | default: 'missing-state-invalid-order' | t }}
