@@ -58,6 +58,7 @@
   @apply
     max-w-full
     mt-3
+    inline-block
     bg-gray-100
     rounded
     p-4
