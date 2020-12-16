@@ -2,7 +2,7 @@
   <div class="container flex flex-col flex-wrap items-center mx-auto md:flex-row">
 
     <a class="flex items-center font-medium" href="/">
-      <img src="{{ 'images/logo.svg' | asset_url }}" alt="platformOS" class="w-10 h-10 p-2">
+      <img width="40" height="40" src="{{ 'images/logo.svg' | asset_url }}" alt="platformOS" class="w-10 h-10 p-2">
       <span class="ml-3 text-xl">{{ 'app.title' | t }}</span>
     </a>
 
@@ -45,7 +45,7 @@
 
           <button @click="dropdownOpen = !dropdownOpen" class="flex items-center relative z-10 px-3 py-2 bg-panel rounded-md focus:outline-none" data-menu-dropdown>
             <span>{{ profile.first_name | default: profile.name }}</span>
-            <img src="{{ avatar_url }}" class="w-5 h-5 rounded-full ml-2">
+            <img width="20" height="20" src="{{ avatar_url }}" class="w-5 h-5 rounded-full ml-2">
           </button>
 
           <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>
