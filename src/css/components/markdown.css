@@ -1,7 +1,3 @@
-.markdown {
-  @apply text-gray-900 leading-normal break-words;
-}
-
 .markdown > * + * {
   @apply mt-0 mb-4;
 }
@@ -59,11 +55,20 @@
 }
 
 .markdown pre {
-  @apply mt-3 bg-gray-100 rounded p-4;
+  @apply
+    max-w-full
+    mt-3
+    bg-gray-100
+    rounded
+    p-4
+    overflow-x-auto;
 }
 
 .markdown pre code {
-  @apply block bg-transparent p-0 overflow-visible rounded-none;
+  @apply
+    bg-transparent
+    p-0
+    rounded-none;
 }
 
 .markdown ul {
@@ -80,7 +85,8 @@
 
 /* Override pygments style background color. */
 .markdown .highlight pre {
-  @apply bg-gray-100 !important;
+  @apply
+    bg-gray-100 !important;
 }
 
 .markdown img{
