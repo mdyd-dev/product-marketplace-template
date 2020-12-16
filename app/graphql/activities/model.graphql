@@ -1,5 +1,5 @@
 query search($id: ID, $limit: Int = 1) {
-  models(
+  records(
     per_page: $limit
     sort: [ { created_at: { order: DESC } } ]
     filter: {
@@ -9,15 +9,16 @@ query search($id: ID, $limit: Int = 1) {
   {
     total_entries
     results {
-      type: model_schema_name
+      type: table
       id
       name: property(name: "name")
       uuid: property(name: "uuid")
       slug: property(name: "slug")
       description: property(name: "description")
       body: property(name: "body")
+      title: property(name: "title")
 
-      photo: related_model(model_schema_name: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
+      photo: related_record(table: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
         url: property_upload(name: "photo") {
           versions
         }

@@ -1,0 +1,73 @@
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+
+<meta property="og:title" content='{{ post.title }}' />
+<meta property="og:description" content='{{ post.body }}' />
+<meta property="og:url" content="{{ context.location.url }}" />
+<meta property="og:site_name" content="{{ 'app.title' | t }}" />
+<meta property="article:section" content="{{ post.tags | join: ',' }}" />
+
+<meta property="article:published_time" content="{{ post.created_at }}" />
+<meta property="article:modified_time" content="{{ post.updated_at }}" />
+<meta property="og:updated_time" content="{{ post.updated_at }}" />
+
+{% assign img = 'images/logo.svg' | asset_url %}
+{% if img -%}
+<meta property="og:image" content="{{ img }}" />
+<meta property="og:image:width" content="730" />
+<meta property="og:image:height" content="412" />
+{%- endif %}
+
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content='{{ post.body }}' />
+<meta name="twitter:title" content='{{ post.title }}' />
+<meta name="twitter:image" content="{{ img }}" />
+
+
+<script type='application/ld+json'>
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://{{ context.location.host }}",
+        "url": "https://{{ context.location.host }}",
+        "name": "MVP Marketplace",
+        "inLanguage": "en-US",
+        "description": "MVP Marketplace is the best way to sell your unnecessary things."
+      },
+      {
+        "@type": "ImageObject",
+        "inLanguage": "en-US",
+        "url": "{{ img }}",
+        "width": 730,
+        "height": 412,
+        "caption": "{{ post.title }}"
+      },
+      {
+        "@type": "WebPage",
+        "url": "{{ context.location.url }}",
+        "name": "{{ post.title }}",
+        "description": "{{ post.body }}",
+        "isPartOf": {
+          "@id": "https://{{ context.location.host }}"
+        },
+        "inLanguage": "en-US",
+        "primaryImageOfPage": {
+          "@id": "{{ img }}"
+        },
+        "datePublished": "{{ post.created_at }}",
+        "dateModified": "{{ post.updated_at }}",
+        "potentialAction": [
+          {
+            "@type": "ReadAction",
+            "target": [
+              "{{ context.location.url }}"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  </script>

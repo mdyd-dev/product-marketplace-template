@@ -1,22 +1,34 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
-
-const brandColors = {
-  green: '#2b322b',
-};
-
-const systemColors = {
-  blue: '#007aff',
-  'body-bg': ''
-};
-
 module.exports = {
-  purge: {
-    content: ['**/*.liquid', './src/js/**/*.js'],
-    options: {
-      safelist: [/^uppy-/]
-    }
-  },
+
   theme: {
+    extend: {
+      colors: {
+        page: '#f3f4f6',
+        panel: '#fff',
+        frame: '#e2e8f0',
+        content: {
+          DEFAULT: '#374151',
+          inverted: '#fff',
+          sidenote: '#4a586d'
+        },
+        interaction: {
+          DEFAULT: '#1d4ed8',
+          hover: '#3466e3',
+          disabled: '#bfdbfe'
+        },
+        danger: {
+          DEFAULT: '#b91c1c',
+          hover: '#ca3a31',
+          disabled: '#fecaca'
+        },
+        confirmation: {
+          DEFAULT: '#047857',
+          hover: '#098f69',
+          disabled: '#bbddd3'
+        }
+      }
+    },
+
     container: {
       center: true,
       padding: {
@@ -26,25 +38,27 @@ module.exports = {
         xl: '0',
       },
     },
-    extend: {
-      colors: {
-        ex: {
-          ...brandColors,
-          ...systemColors,
-        },
-      },
-    },
+
+    borderColor: theme => ({
+      ...theme('colors'),
+      DEFAULT: theme('colors.frame')
+    })
+
   },
+
   variants: {
-	borderWidth: ['responsive', 'hover', 'last'],
-	padding: ['responsive', 'last'],
-	margin: ['responsive', 'last']
+	  borderWidth: ['responsive', 'hover', 'last'],
+	  padding: ['responsive', 'last'],
+	  margin: ['responsive', 'first', 'last']
   },
-  plugins: [require('@tailwindcss/custom-forms')],
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-    defaultLineHeights: true,
-    standardFontWeights: true
+
+  plugins: [require('@tailwindcss/forms')],
+
+  purge: {
+    content: ['**/*.liquid', './src/js/**/*.js'],
+    options: {
+      safelist: [/^uppy-/]
+    }
   }
+
 };

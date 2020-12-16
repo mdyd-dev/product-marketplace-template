@@ -18,3 +18,5 @@ properties:
     type: string
   - name: c__score
     type: integer
+  - name: slug
+    type: string

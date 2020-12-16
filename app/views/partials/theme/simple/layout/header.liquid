@@ -1,59 +1,72 @@
 <header class="py-4">
-    <div class="container flex flex-col flex-wrap items-center mx-auto md:flex-row">
+  <div class="container flex flex-col flex-wrap items-center mx-auto md:flex-row">
 
-        <a class="flex items-center font-medium text-gray-900" href="/">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 p-2 text-white bg-blue-500 rounded-full" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
-            <span class="ml-3 text-xl">{{ 'app.title' | t }}</span>
+    <a class="flex items-center font-medium" href="/">
+      <img src="{{ 'images/logo.svg' | asset_url }}" alt="platformOS" class="w-10 h-10 p-2">
+      <span class="ml-3 text-xl">{{ 'app.title' | t }}</span>
+    </a>
+
+    {% include 'theme/simple/home/quick_search_form', qkeyword: context.params.qkeyword %}
+
+    <nav class="flex flex-wrap items-center text-base mx-auto mt-4 lg:mx-0 lg:mt-0">
+      <a href="/dashboard/items/new" class="p-3">{{ 'app.header.add' | t }}</a>
+      <a href="/search" class="p-3">
+        {{ 'app.items.list' | t }}
+      </a>
+      <a href="/groups" class="p-3">
+        {{ 'app.groups.list' | t }}
+      </a>
+      <a href="/posts" class="p-3">
+        {{ 'app.models.posts.list' | t }}
+      </a>
+
+      {% if context.current_user.id %}
+        {% assign superadmins = context.constants.superadmins | split: ',' %}
+        {% if superadmins contains context.current_user.email %}
+          <a href="/admin" class="p-3">{{ 'app.admin' | t }}</a>
+        {% endif %}
+        <a href="/dashboard" class="p-3">{{ 'app.header.feed' | t }}</a>
+        <a href="/inbox" class="p-3" id="notifications-chat" data-current-user-id="{{ profile.id }}" data-current-user-slug="{{ profile.slug }}">
+          <p class="relative">
+            {{ 'app.header.chat' | t }}
+            <span id="notification-bell" style="top: -2px; right: -10px;" class="absolute rounded-full h-3 w-3 bg-pink-500 hidden"></span>
+          </p>
         </a>
 
-        {% include 'theme/simple/home/quick_search_form' %}
 
-        <nav class="flex flex-wrap items-center text-base mx-auto mt-4 lg:mx-0 lg:mt-0">
-            <a href="/dashboard/items/new" class="p-3 hover:text-gray-900">{{ 'app.header.add' | t }}</a>
-            <a href="/search" class="p-3 hover:text-gray-900">{{ 'app.items.list' | t }}</a>
-            <a href="/groups" class="p-3 hover:text-gray-900">{{ 'app.groups.list' | t }}</a>
-            <a href="/posts" class="p-3 hover:text-gray-900">{{ 'app.models.posts.list' | t }}</a>
+        <div x-data="{ dropdownOpen: false }" class="relative">
 
-            {% if context.current_user.id %}
-                {% assign superadmins = context.constants.superadmins | split: ',' %}
-                {% if superadmins contains context.current_user.email %}
-                    <a href="/admin" class="p-3 hover:text-gray-900">{{ 'app.admin' | t }}</a>
-                {% endif %}
-                <a href="/dashboard" class="p-3 hover:text-gray-900">{{ 'app.header.feed' | t }}</a>
-				<a href="/inbox" class="p-3 hover:text-gray-900" id="notifications-chat" data-current-user-id="{{ profile.id }}" data-current-user-slug="{{ profile.slug }}">
-					<p class="relative">
-						{{ 'app.header.chat' | t }}
-						<span id="notification-bell" style="top: -2px; right: -10px;" class="absolute rounded-full h-3 w-3 bg-pink-500 hidden"></span>
-					</p>
-				</a>
+          {% liquid
+            assign avatar_url = profile.avatar.versions.tiny
+            if avatar_url == blank
+            assign avatar_url = "images/user.svg" | asset_url
+            endif
+          %}
 
-                <div x-data="{ dropdownOpen: false }" class="relative">
-                    <button @click="dropdownOpen = !dropdownOpen" class="flex items-center relative z-10 px-3 py-2 bg-white rounded-md focus:outline-none" data-menu-dropdown>
-						<span class="hover:text-gray-900">{{ profile.first_name | default: profile.name }}</span>
-	                        <img src="{{ profile.avatar.versions.tiny }}" class="w-5 h-5 rounded-full ml-2">
-					</button>
+          <button @click="dropdownOpen = !dropdownOpen" class="flex items-center relative z-10 px-3 py-2 bg-panel rounded-md focus:outline-none" data-menu-dropdown>
+            <span>{{ profile.first_name | default: profile.name }}</span>
+            <img src="{{ avatar_url }}" class="w-5 h-5 rounded-full ml-2">
+          </button>
 
-                    <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>
+          <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>
 
-                    <div x-show="dropdownOpen" x-cloak class="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl">
-                        <a href="/dashboard" class="block px-4 py-2 text-gray-700 capitalize hover:bg-blue-700 hover:text-white">
-                            {{ 'app.header.dashboard' | t }}
-                        </a>
-                        <form action="/sessions/destroy" method="post">
-                            {% include 'authenticity_token' %}
-                            <button class="block w-full px-4 py-2 text-left text-gray-700 capitalize hover:bg-blue-700 hover:text-white">
-                                {{ 'app.header.log-out' | t }}
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            {% else %}
-                <a href="/sessions/new" class="ml-3 button button-sm">
-                    {{ 'app.login' | t }}
-                </a>
-            {% endif %}
-        </nav>
-    </div>
+          <div x-show="dropdownOpen" x-cloak class="absolute right-0 z-20 w-48 py-2 mt-2 bg-panel rounded-md shadow-xl">
+            <a href="/dashboard" class="block px-4 py-2 text-gray-700 capitalize hover:bg-interaction hover:text-content-inverted">
+              {{ 'app.header.dashboard' | t }}
+            </a>
+            <form action="/sessions/destroy" method="post">
+              {% include 'authenticity_token' %}
+              <button class="block w-full px-4 py-2 text-left text-gray-700 capitalize hover:bg-interaction hover:text-content-inverted">
+                {{ 'app.header.log-out' | t }}
+              </button>
+            </form>
+          </div>
+        </div>
+      {% else %}
+        <a href="/sessions/new" class="ml-3 button button-small">
+          {{ 'app.login' | t }}
+        </a>
+      {% endif %}
+    </nav>
+  </div>
 </header>

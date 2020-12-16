@@ -1,5 +1,5 @@
 {% liquid
   graphql r  = 'metrics/search', limit: 1, date: date
 
-  return r.models.results.first
+  return r.records.results.first
 %}

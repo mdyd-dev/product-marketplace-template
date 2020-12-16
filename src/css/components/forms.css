@@ -1,0 +1,69 @@
+/*
+  checkboxes
+  radios
+  texts
+  small texts
+  selects
+*/
+
+
+
+/* checkboxes
+============================================================================ */
+[type="checkbox"] {
+  @apply
+    text-interaction;
+}
+
+
+
+/* radios
+============================================================================ */
+[type="radio"] {
+  @apply
+    text-interaction;
+}
+
+
+
+/* texts
+============================================================================ */
+[type="text"]:focus,
+[type="email"]:focus,
+[type="url"]:focus,
+[type="password"]:focus,
+[type="number"]:focus,
+[type="date"]:focus,
+[type="datetime-local"]:focus,
+[type="month"]:focus,
+[type="search"]:focus,
+[type="tel"]:focus,
+[type="time"]:focus,
+[type="week"]:focus,
+[multiple]:focus,
+textarea:focus {
+  @apply
+    border-interaction
+    ring-0;
+}
+
+
+
+/* small texts
+============================================================================ */
+.form-input-small {
+  @apply
+    pt-1
+    pb-1
+    text-sm;
+}
+
+
+
+/* selects
+============================================================================ */
+select:focus {
+  @apply
+    border-interaction
+    ring-0;
+}

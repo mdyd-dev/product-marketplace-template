@@ -1,5 +1,5 @@
 {% liquid
-  function posts = 'lib/queries/posts/search', limit: 100, parent_id_exists: false
+  function posts = 'lib/queries/posts/search', limit: 100, parent_id_exists: false, tags: context.params.tag
 
   include 'theme/simple/posts/index', posts: posts
 %}

@@ -1,5 +1,13 @@
+{% liquid
+  unless object
+    assign object = '{}' | parse_json
+  endunless
+  unless object.uuid
+    hash_assign object['uuid'] = '' | uuid
+  endunless
+%}
 <div class="container flex flex-wrap mx-auto groups-center">
-  <form action="/dashboard/posts/reply" method="post" class="w-full md:w-2/3">
+  <form action="/dashboard/posts/reply" method="post" class="w-full">
     {% include 'authenticity_token' %}
     <input type="hidden" name="post[parent_id]" value="{{ post.id }}" />
     <input type="hidden" name="return_to" value="{% render 'link_to', post: post %}" />
@@ -7,13 +15,20 @@
     {% if object.id %}
       <input type="hidden" name="post[id]" value="{{ object.id }}" />
     {% endif %}
+    <input type="hidden" name="post[uuid]" value="{{ object.uuid }}" />
 
-    <div class="mt-5">
+    <div class="my-5">
       <label class="block" for="body">{{ 'app.models.posts.your_answer' | t }}</label>
       <textarea class="w-2/3 form-input" id="body" name="post[body]" data-markdown-editor>{{ object.body }}</textarea>
       {% render 'theme/simple/field_error', errors: object.errors.body %}
     </div>
-
     <button class="button">{{ 'app.models.posts.post_answer' | t }}</button>
   </form>
 </div>
+
+{% render 'theme/simple/photos/s3_form',
+  object_uuid: object.uuid,
+  presigned_url: presigned_url,
+  user_id: user.id,
+  photo_type: 'screenshot'
+%}

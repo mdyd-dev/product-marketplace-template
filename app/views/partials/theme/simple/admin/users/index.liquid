@@ -13,7 +13,7 @@
     </div>
     <div class="lg:w-1/6 lg:pl-2">
       <span class="lg:hidden">{{ 'app.users.attr.created_at' | t }}</span>
-      {{ record.created_at | l }}
+      {{ record.created_at | l: 'long' }}
     </div>
     <div class="sm:flex items-end lg:items-center lg:w-3/6 lg:pl-2">
       {% if record.profile %}
@@ -24,7 +24,7 @@
           <p class="text-sm">{{ 'admin.menu.users.uuid' | t }} {{ record.profile.uuid }}</p>
         </div>
         <div class="ml-auto">
-          <a class="mt button button-sm mt-2" href="/u/{{ record.profile.slug }}">
+          <a class="mt button button-small mt-2" href="/u/{{ record.profile.slug }}">
             {{ 'app.items.list' | t }}
           </a>
         </div>

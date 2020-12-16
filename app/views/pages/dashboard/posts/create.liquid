@@ -11,6 +11,7 @@ method: post
     function url = 'link_to', post: object
     redirect_to url
   else
-    include 'theme/simple/dashboard/posts/new', object: object
+    graphql presigned_url = 'photos/presign' | dig: 'presigned'
+    include 'theme/simple/dashboard/posts/new', object: object, presigned_url: presigned_url
   endif
 %}

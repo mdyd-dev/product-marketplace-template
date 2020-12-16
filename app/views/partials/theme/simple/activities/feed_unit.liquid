@@ -1,6 +1,6 @@
 {% assign type = payload.type %}
 
-<div class="flex flex-col p-6 mb-6 bg-white rounded-lg shadow">
+<div class="flex flex-col p-6 mb-6 bg-panel rounded-lg shadow">
   {% render 'theme/simple/activities/feed_unit/header', payload: payload %}
 
   {% if payload.object.description or payload.object.body %}

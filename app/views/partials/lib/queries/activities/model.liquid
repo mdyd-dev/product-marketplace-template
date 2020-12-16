@@ -10,7 +10,7 @@
     break
   endif
 
-  assign model = r.models.results.first
+  assign model = r.records.results.first
   unless model
     return null
   endunless
@@ -22,10 +22,12 @@
     break
   endif
 
-  hash_assign model['photos'] = ri.models.results
+  hash_assign model['photos'] = ri.records.results
 
   function url = 'f_link_to', object: model
   hash_assign model['url'] = url
+
+  hash_assign model['name'] = model['name'] | default: model['title']
 
   return model
 %}

@@ -39,13 +39,15 @@
 			when 'comment_created'
 				render 'theme/simple/activities/feed_unit/type/comment_created', payload: payload
 			when 'user_joined_group'
-				render 'theme/simple/activities/feed_unit/type/user_joined_group', payload: payload
+        render 'theme/simple/activities/feed_unit/type/user_joined_group', payload: payload
+      when 'post_created', 'reply_created'
+        render 'theme/simple/activities/feed_unit/type/post_created', payload: payload
 			else
 				echo type
 			endcase
 			%}
 
-			<time datetime="{{ date }}" class="block mt-1 text-sm text-gray-500">{{ date | localize: 'long' }}</p>
+			<time datetime="{{ date }}" class="block mt-1 text-sm text-gray-500">{{ date | l: 'long' }}</p>
 		</p>
 	</div>
 </div>

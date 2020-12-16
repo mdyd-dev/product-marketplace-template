@@ -1,12 +1,18 @@
 ---
 metadata:
   breadcrumbs:
-    - url: /dashboard/posts
-      label: app.posts.list
+    - label: app.dashboard
+      url: /dashboard
+    - label: app.p-dashboard.posts
+      url: /dashboard/posts
     - label: app.new
 ---
+
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  graphql presigned_url = 'photos/presign' | dig: 'presigned'
+  assign object = '{}' | parse_json
 
-  include 'theme/simple/dashboard/posts/new'
+  render 'theme/simple/ui/breadcrumbs', breadcrumbs: context.page.metadata.breadcrumbs
+  include 'theme/simple/dashboard/posts/new', presigned_url: presigned_url
 %}

@@ -1,9 +1,9 @@
-name: Deploy master
+name: Test PR
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:
+  pull_request:
     branches: [ master ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -20,65 +20,54 @@ jobs:
         with:
           github_token: ${{ github.token }}
           paths_ignore: '["**/README.md"]'
+          concurrent_skipping: 'always'
 
-  deploy_qa:
+  main:
     needs: pre_job
     if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
     runs-on: ubuntu-latest
+    container: platformos/testcafe:3.0.1
+    strategy:
+      max-parallel: 1
     env:
-      MPKIT_URL: ${{ secrets.MPKIT_URL_QA }}
+      MPKIT_URL: ${{ secrets.MPKIT_URL_PR }}
       MPKIT_EMAIL: ${{ secrets.MPKIT_EMAIL }}
       MPKIT_TOKEN: ${{ secrets.MPKIT_TOKEN }}
-      CI: true
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
       - name: Build
+        shell: sh
         run: |
           npm ci
           npm run build
       - name: Deploy
+        shell: sh
         run: |
+          set -e
           npm -g install @platformos/pos-cli
           pos-cli data clean --auto-confirm --include-schema
           pos-cli deploy
           pos-cli data import --path=./seed/data.zip --zip
+      - name: UnitTest
+        shell: sh
+        run: |
+          set -e
+          TEST_ID=$(curl -sf ${MPKIT_URL}/tests/run_async)
+          echo triggered tests on ${MPKIT_URL/https:\/\//} - ID: ${TEST_ID}
+          sleep 15
 
-  test_qa:
-    needs: deploy_qa
-    runs-on: ubuntu-latest
-    container: platformos/testcafe:latest
-    env:
-      MPKIT_URL: ${{ secrets.MPKIT_URL_QA }}
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v1
-      - name: Run testcafe
-        run: |
-          testcafe "chromium:headless" test
+          curl -s ${MPKIT_URL}/api/app_builder/logs -H "Authorization: Token ${MPKIT_TOKEN}" -o app.log
 
-  deploy_live:
-    needs: test_qa
-    runs-on: ubuntu-latest
-    env:
-      MPKIT_URL: ${{ secrets.MPKIT_URL_LIVE }}
-      MPKIT_EMAIL: ${{ secrets.MPKIT_EMAIL }}
-      MPKIT_TOKEN: ${{ secrets.MPKIT_TOKEN }}
-      CI: true
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - name: Build
+          grep -q "Success_${TEST_ID}" app.log
+      - name: Testcafe test
+        shell: sh
         run: |
-          npm ci
-          npm run build
-      - name: Deploy
+          npm run test
+      - name: Publish test reports
+        if: ${{ failure() }}
+        shell: sh
         run: |
-          npm -g install @platformos/pos-cli
-          pos-cli deploy
+          set -e
+          npm run ci:test:publish
+          echo "test published to ${MPKIT_URL/https:\/\//}/_test_results"

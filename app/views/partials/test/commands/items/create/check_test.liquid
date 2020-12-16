@@ -6,33 +6,16 @@
     "name":        "item-name",
     "tags":        ["item.tags"],
     "description": "item.description",
-    "price":       9,
+    "price":       900,
     "uuid":        "item.uuid"
   }
 {% endparse_json %}
 
-{% comment %}LOAD TESTED PARTIAL/FUNCTION{% endcomment %}
-{% include 'lib/commands/items/create/check', item: item %}
-
 {% comment %}TEST OUTPUT ERRORS RETURNED{% endcomment %}
 {% liquid
-  if context.exports.item.name == blank
-    include 'test/register_error', contract: contract, field_name: 'item.name', key: 'app.test.should.not.be_blank'
-  endif
+  function object = 'lib/commands/items/create/check', object: item
 
-  if context.exports.item.errors.name
-    include 'test/register_error', contract: contract, field_name: 'item.errors.name', key: 'app.test.should.be_blank'
-  endif
-
-  if context.exports.item.errors.size == 0
-    include 'test/register_error', contract: contract, field_name: 'contact.errors', key: 'app.test.should.not.be_empty'
-  endif
-
-  if context.exports.item.valid
-    include 'test/register_error', contract: contract, field_name: 'contract', key: 'app.test.should.not.be_valid'
-  endif
-
-  if context.exports.item.errors.price.size == 0
-    include 'test/register_error', contract: contract, field_name: 'item.price', key: 'app.test.should.not.be_valid'
-  endif
+  function contract = 'test/assertions/presence', contract: contract, object: object, field_name: 'name'
+  function contract = 'test/assertions/not_valid_object', contract: contract, object: object, field_name: 'item'
+  function contract = 'test/assertions/presence', contract: contract, object: object.errors, field_name: 'price'
 %}

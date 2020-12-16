@@ -14,6 +14,7 @@ export default class NewSessionForm {
     this.buttons = {
       logIn: Selector('button').withText('Log In'),
       regSubmit: Selector('button').withText('Sign Up'),
+      termsAccept: Selector('input[name="user[agreed]"]'),
       register: Selector('a').withText('Register'),
       resetPassword: Selector('a').withText('Reset')
     }

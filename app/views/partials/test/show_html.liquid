@@ -1,0 +1,21 @@
+<h2 class="text-xl">
+  Test results:
+  {% if total_errors > 0 %}
+    <span class="text-red-600">Failed</span>
+  {% else %}
+    <span class="text-green-600">Success</span>
+  {% endif %}
+</h2>
+{% liquid
+  for contract in contracts
+    render 'test/test_report_html', name: contract.test_path, contract: contract
+  endfor
+%}
+<hr class="border my-10"/>
+
+{% if total_errors > 0 %}
+  <h2 class="text-xl text-red-600">Total errors: {{ total_errors }}</h2>
+
+  {% response_status 500 %}
+{% endif %}
+<h3 class="">Finished in: {{ total_duration }}s</h2>

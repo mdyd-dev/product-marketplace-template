@@ -1,0 +1,23 @@
+{% comment %}
+  tags module that uses an array of tags to render the tag list
+
+  arguments:
+    tag list (array)
+    a link to the page that will list the tag related content, the tag name will be appended (string)
+
+  tags = ['tag #1', 'tag #2']
+  {% render 'theme/simple/ui/tags', tags: tags, url: 'http://platformos.com/?tag='  %}
+{% endcomment %}
+
+
+{% if tags.size > 0 %}
+    <ul>
+      {% for tag in tags %}
+        <li class="inline-block">
+          <a href="{{ url }}{{ tag | strip | url_encode }}" class="px-2 py-1 rounded bg-frame">
+            {{ tag }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}

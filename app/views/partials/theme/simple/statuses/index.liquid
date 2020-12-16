@@ -4,7 +4,7 @@
       {{ 'app.models.statuses.add' | t }}
     </a>
   </div>
-  <div class="my-6 bg-white rounded shadow-md">
+  <div class="my-6 bg-panel rounded shadow-md">
     {% if statuses.results.size > 0 %}
       <table class="w-full text-left border-collapse">
         <thead>
@@ -38,7 +38,7 @@
               </td>
               <td class="px-6 py-4 border-b border-grey-light">
                 <a href="/statuses/show/{{ status.id }}">
-                  {{ status.created_at }}
+                  {{ status.created_at | l: 'long' }}
                 </a>
               </td>
               <td class="px-6 py-4 border-b border-grey-light">

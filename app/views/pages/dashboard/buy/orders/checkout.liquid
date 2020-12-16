@@ -2,6 +2,8 @@
 slug: dashboard/buy/orders_checkout
 metadata:
   breadcrumbs:
+    - label: app.dashboard
+      url: '/dashboard'
     - label: app.buyer
     - label: app.orders.list
 ---
@@ -11,6 +13,6 @@ metadata:
   function order = 'lib/queries/orders/find', buyer: current_profile.id, id: context.params.slugs withStatuses: true
   function checkout_session = 'lib/commands/orders/checkout_session/create', order: order, constants: context.constants
 
-  include 'theme/simple/dashboard/breadcrumbs'
+  render 'theme/simple/ui/breadcrumbs', breadcrumbs: context.page.metadata.breadcrumbs
   include 'theme/simple/dashboard/orders/checkout', order: order, checkout_session: checkout_session
 %}

@@ -23,7 +23,7 @@ import TopicsPage from './pages/topicsPage'
 export const resetConfirmation = 'Please check your email.';
 export const loginConfirmation = 'Logged in'
 export const getURL = ClientFunction(() => window.location.href)
-export const myUrl = process.env.MPKIT_URL
+export const myUrl = process.env.MPKIT_URL.replace(/\/$/,'','')
 export const loremSentence = (faker.lorem.lines() + " " + faker.lorem.lines())
 export const editURL = '/dashboard/items/edit?id='
 export const notAuthorizedUser = 'Permission denied'

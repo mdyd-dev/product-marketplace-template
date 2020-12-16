@@ -1,3 +1,7 @@
+{% content_for metatags %}
+  {% include 'theme/simple/posts/metatags', post: post %}
+{% endcontent_for %}
+
 <h1 class="text-4xl font-medium">
   {{root_post.title}}
 </h1>
@@ -8,4 +12,4 @@
   {% endfor %}
 </div>
 
-{% include 'theme/simple/dashboard/posts/reply', post: root_post, object: object %}
+{% include 'theme/simple/dashboard/posts/reply', post: root_post, object: object, presigned_url: presigned_url %}

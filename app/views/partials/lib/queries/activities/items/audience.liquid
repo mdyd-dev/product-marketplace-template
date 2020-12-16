@@ -10,7 +10,7 @@
     break
   endif
 
-  assign ids = r.models.results | map: 'owner' | map: 'id'
+  assign ids = r.records.results | map: 'owner' | map: 'id'
 
   return ids
 %}
