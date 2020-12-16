@@ -12,11 +12,11 @@
             assign img_url = 'images/user.svg' | asset_url
           endunless
         %}
-        <img class="w-12 h-12 rounded-full object-cover mb-5 shadow" src="{{ img_url }}" alt="avatar">
+        <img width="40" height="40" class="w-12 h-12 rounded-full object-cover mb-5 shadow" src="{{ img_url }}" alt="{{ post.creator.name }}">
       </a>
       {% include 'theme/simple/posts/vote_box', post: post, current_profile: current_profile, root_post: root_post %}
     </aside>
-    <div class="flex flex-col min-w-0">
+    <div class="w-full flex flex-col min-w-0">
       <div class="md:flex items-start justify-between">
         <header>
           <a href="{{ creator_url }}" class="text-lg font-semibold -mt-1">

@@ -37,8 +37,8 @@
                 assign img_url = 'images/user.svg' | asset_url
               endunless
             %}
-            <img class="mx-3 w-10 h-10 object-cover rounded-full hidden sm:block" src="{{ img_url }}" alt="avatar">
-            <h1 class="text-content font-bold">{{post.creator.name}}</h1>
+            <img width="40" height="40" class="mx-3 w-10 h-10 object-cover rounded-full hidden sm:block" src="{{ img_url }}" alt="{{ post.creator.name }}">
+            <h1 class="text-content font-bold">{{ post.creator.name }}</h1>
           </a>
         </div>
       </div>
