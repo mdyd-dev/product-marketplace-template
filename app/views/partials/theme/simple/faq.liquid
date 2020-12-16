@@ -16,7 +16,7 @@
               {{ value.question }}
             </summary>
             <span>
-              {{ value.answer }}
+              {{ value.answer | html_safe }}
             </span>
           </details>
         {% endfor %}
@@ -31,7 +31,7 @@
             </summary>
 
             <span>
-              {{ value.answer }}
+              {{ value.answer | html_safe }}
             </span>
           </details>
         {% endfor %}
@@ -46,7 +46,7 @@
             </summary>
 
             <span>
-              {{ value.answer }}
+              {{ value.answer | html_safe }}
             </span>
           </details>
         {% endfor %}
@@ -61,7 +61,7 @@
             </summary>
 
             <span>
-              {{ value.answer }}
+              {{ value.answer | html_safe }}
             </span>
           </details>
         {% endfor %}
@@ -76,7 +76,7 @@
             </summary>
 
             <span>
-              {{ value.answer }}
+              {{ value.answer | html_safe }}
             </span>
           </details>
         {% endfor %}
