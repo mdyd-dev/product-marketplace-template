@@ -1,0 +1,28 @@
+<div class="mb-5 {% if list.size > 0 %} mt-5 border-t-2 {% endif %}">
+  {% for comment in list %}
+    <div class="flex items-start px-4 py-6 w-full border-b-2">
+      <aside class="flex flex-col flex-shrink-0 items-center pr-4">
+        <a href="{{ creator_url }}">
+          {% liquid
+            assign img_url = comment.creator.avatar.photo.versions.tiny
+            unless img_url
+              assign img_url = 'images/user.svg' | asset_url
+            endunless
+          %}
+          <img class="w-12 h-12 rounded-full object-cover mb-5 shadow" src="{{ img_url }}" alt="avatar">
+        </a>
+      </aside>
+      <div class="flex flex-col w-full h-full">
+        <div class="flex justify-between">
+          <a href="{{ creator_url }}" class="text-lg font-semibold -mt-1">
+            {{comment.creator.name}}
+          </a>
+          <date datetime="{{ comment.created_at }}" class="block text-sm text-gray-700">{{comment.created_at | l: 'compact'}}</date>
+        </div>
+        <div class="flex-1 mt-3">
+          {{comment.body}}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

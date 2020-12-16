@@ -6,6 +6,7 @@
     "title": {{ object.title | json }},
     "body": {{ object.body | json }},
     "tags": {{ object.tags | downcase | split: ',' | uniq }},
+    "uuid": {{ '' | uuid | json }},
     "c__score": 0
   }
 {% endparse_json %}

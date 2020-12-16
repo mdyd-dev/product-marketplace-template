@@ -1010,6 +1010,8 @@ en:
         edit: Edit comment
         empty_state: You haven't added any comments yet. <br> Create your first one now!
         read_more: Read more
+        send: Send
+        comment: Comment
         form:
           creator_id: creator_id
           body: Body

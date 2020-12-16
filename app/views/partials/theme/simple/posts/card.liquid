@@ -50,6 +50,12 @@
           </form>
         {% endif %}
       </div>
+      {% liquid
+        include 'theme/simple/posts/comments', list: post.comments
+        if current_profile.id
+          include 'theme/simple/comments/new_entry', commentable: post, commentable_type: 'post', placeholder: "Your comment", hidden: true, images: false
+        endif
+      %}
     </div>
   </div>
 </article>

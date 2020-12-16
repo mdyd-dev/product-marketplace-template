@@ -1,5 +1,6 @@
 name: post
 properties:
+  - name: uuid
   - name: parent_id
     type: string
   - name: creator_id
