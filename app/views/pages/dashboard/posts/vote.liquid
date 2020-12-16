@@ -11,16 +11,14 @@ method: post
 
   if object.valid
     include 'lib/commands/events/create', type: 'post_voted', actor_id: current_profile.id, object_id: object.id
-
-    if post.parent_id != null
-      assign post = post.parent
-    endif
-    function url = 'link_to', post: post
-    redirect_to url
   else
-    function post = 'lib/queries/posts/find', id: post.parent_id
     assign errors = object.errors.base | join: ', '
     include 'lib/flash/publish', error: errors
-    include 'theme/simple/posts/show', root_post: post, object: object
   endif
+
+  if post.parent_id != null
+    assign post = post.parent
+  endif
+  function url = 'link_to', post: post
+  redirect_to url
 %}
