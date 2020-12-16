@@ -963,7 +963,7 @@ en:
         form:
           email: Email
           message: Message
-          reason: Reason
+          reason: Subject
           submit: Send message
       categories:
         new: New category
