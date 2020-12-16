@@ -1,13 +1,13 @@
 <section class="text-gray-700">
-  <div class="container px-5 py-24 mx-auto">
+  <div class="container px-5 py-24 mx-auto markdown">
     <div class="text-center mb-20">
       <h1 class="text-4xl text-center mb-4 font-heading">{{'app.faq.title' | t}}</h1>
       <p class="text-base leading-relaxed xl:w-3/4 lg:w-3/4 mx-auto">
         {{'app.faq.subtitle' | t}}
       </p>
     </div>
-    <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
-      <div class="w-full lg:w-1/2 px-4 py-2">
+    <div class="center mb-20">
+      <div class="text-base leading-relaxed xl:w-3/4 lg:w-3/4 mx-auto">
         {% assign questions = 'app.faq.questions.section1' | t %}
         {% for item in questions %}
           {% assign value = item[1] %}
@@ -15,14 +15,13 @@
             <summary class="cursor-pointer font-semibold bg-panel rounded-md py-2 px-4">
               {{ value.question }}
             </summary>
-
             <span>
               {{ value.answer }}
             </span>
           </details>
         {% endfor %}
       </div>
-      <div class="w-full lg:w-1/2 px-4 py-2">
+      <div class="text-base leading-relaxed xl:w-3/4 lg:w-3/4 mx-auto">
         {% assign questions = 'app.faq.questions.section2' | t %}
         {% for item in questions %}
           {% assign value = item[1] %}
@@ -37,7 +36,7 @@
           </details>
         {% endfor %}
       </div>
-      <div class="w-full lg:w-1/2 px-4 py-2">
+      <div class="text-base leading-relaxed xl:w-3/4 lg:w-3/4 mx-auto">
         {% assign questions = 'app.faq.questions.section3' | t %}
         {% for item in questions %}
           {% assign value = item[1] %}
@@ -52,7 +51,7 @@
           </details>
         {% endfor %}
       </div>
-      <div class="w-full lg:w-1/2 px-4 py-2">
+      <div class="text-base leading-relaxed xl:w-3/4 lg:w-3/4 mx-auto">
         {% assign questions = 'app.faq.questions.section4' | t %}
         {% for item in questions %}
           {% assign value = item[1] %}
@@ -67,7 +66,7 @@
           </details>
         {% endfor %}
       </div>
-      <div class="w-full lg:w-1/2 px-4 py-2">
+      <div class="text-base leading-relaxed xl:w-3/4 lg:w-3/4 mx-auto">
         {% assign questions = 'app.faq.questions.section5' | t %}
         {% for item in questions %}
           {% assign value = item[1] %}
