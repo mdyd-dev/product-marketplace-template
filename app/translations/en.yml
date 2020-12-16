@@ -78,7 +78,7 @@ en:
         - ownership
     feed:
       title: Feed
-    title: platformOS MVP
+    title: MVP Marketplace
     support_email: support@platformos.com
     page_not_found: Page not found.
     total_entries: 'Total items:'
