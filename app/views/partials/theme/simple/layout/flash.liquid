@@ -6,7 +6,7 @@
       </div>
       <div class="ml-2 mr-6">
         <span class="font-semibold">
-          {{error}}
+          {{ error | html_safe }}
         </span>
       </div>
     </div>
@@ -21,11 +21,9 @@
       </div>
       <div class="ml-2 mr-6">
         <span class="font-semibold">
-          {{notice}}
+          {{ notice | html_safe }}
         </span>
       </div>
     </div>
   </div>
 {% endif %}
-
-

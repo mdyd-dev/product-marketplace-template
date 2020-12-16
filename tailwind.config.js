@@ -8,7 +8,8 @@ module.exports = {
         frame: '#e2e8f0',
         content: {
           DEFAULT: '#374151',
-          inverted: '#fff'
+          inverted: '#fff',
+          sidenote: '#4a586d'
         },
         interaction: {
           DEFAULT: '#1d4ed8',

@@ -1,0 +1,18 @@
+{% liquid
+  if content_key
+    assign content = content_key | t
+  endif
+%}
+
+
+<small class="mt-1 flex text-content-sidenote">
+
+  <svg viewBox="0 0 18 18" fill="none" class="w-5 h-5 mr-2 flex-shrink-0">
+    <path d="M10.5 12H10C9.44772 12 9 11.5523 9 11V8.5C9 8.22386 8.77614 8 8.5 8H8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M8.75 5.5C8.61193 5.5 8.5 5.61193 8.5 5.75C8.5 5.88807 8.61193 6 8.75 6C8.88807 6 9 5.88807 9 5.75C9 5.61193 8.88807 5.5 8.75 5.5V5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M9 16.5C13.1421 16.5 16.5 13.1421 16.5 9C16.5 4.85786 13.1421 1.5 9 1.5C4.85786 1.5 1.5 4.85786 1.5 9C1.5 13.1421 4.85786 16.5 9 16.5Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  {{ content }}
+
+</small>

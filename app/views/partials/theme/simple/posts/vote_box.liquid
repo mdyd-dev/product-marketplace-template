@@ -1,22 +1,54 @@
-<form action="/dashboard/posts/vote" method="post">
-  {% include 'authenticity_token' %}
-  <input type="hidden" name="post[id]" value="{{ post.id }}"/>
-  <input type="hidden" name="post[type]" value="{% if post.upvote_profile_ids contains current_profile.id %}clear{% else %}up{% endif %}"/>
-  <button class="{% if post.upvote_profile_ids contains current_profile.id %}text-yellow-600{% else %}text-interaction{% endif %}" data-tc="voteup">
+{% liquid
+  if post.downvote_profile_ids contains current_profile.id
+    assign downvote = true
+    assign down_action_type = 'clear'
+    assign down_action_title = 'app.models.posts.clear' | t
+  else
+    assign down_action_type = 'down'
+    assign down_action_title = 'app.models.posts.downvote' | t
+  endif
+
+  if post.upvote_profile_ids contains current_profile.id
+    assign upvote = true
+    assign up_action_type = 'clear'
+    assign up_action_title = 'app.models.posts.clear' | t
+  else
+    assign up_action_type = 'up'
+    assign up_action_title = 'app.models.posts.upvote' | t
+  endif
+%}
+{% if downvote %}
+  <div class="text-interaction-disabled">
     <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /> </svg>
-  </button>
-</form>
+  </div>
+{% else %}
+  <form action="/dashboard/posts/vote" method="post">
+    {% include 'authenticity_token' %}
+    <input type="hidden" name="post[id]" value="{{ post.id }}"/>
+    <input type="hidden" name="post[type]" value="{{up_action_type}}"/>
+    <button class="{% if upvote %}text-yellow-600{% else %}text-interaction{% endif %}" data-tc="voteup" title="{{up_action_title}}">
+      <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /> </svg>
+    </button>
+  </form>
+{% endif %}
 
 <span class="pb-2 text-3xl font-bold">{{ post.upvote_profile_ids.size | minus: post.downvote_profile_ids.size | default: 0 }}</span>
 
-<form action="/dashboard/posts/vote" method="post" data-tc="votedown">
-  {% include 'authenticity_token' %}
-  <input type="hidden" name="post[id]" value="{{ post.id }}"/>
-  <input type="hidden" name="post[type]" value="{% if post.downvote_profile_ids contains current_profile.id %}clear{% else %}down{% endif %}"/>
-  <button class="{% if post.downvote_profile_ids contains current_profile.id %}text-yellow-600{% else %}text-interaction{% endif %}">
+{% if upvote %}
+  <div class="text-interaction-disabled">
     <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /> </svg>
-  </button>
-</form>
+  </div>
+{% else %}
+  <form action="/dashboard/posts/vote" method="post" data-tc="votedown">
+    {% include 'authenticity_token' %}
+    <input type="hidden" name="post[id]" value="{{ post.id }}"/>
+    <input type="hidden" name="post[type]" value="{{down_action_type}}"/>
+    <button class="{% if downvote %}text-yellow-600{% else %}text-interaction{% endif %}" title="{{down_action_title}}">
+      <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /> </svg>
+    </button>
+  </form>
+{% endif %}
+
 {% if post.parent_id != null and root_post.creator.id == current_profile.id %}
   <form action="/dashboard/posts/accept" method="post">
     {% include 'authenticity_token' %}

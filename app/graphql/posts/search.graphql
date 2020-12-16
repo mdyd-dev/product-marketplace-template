@@ -73,10 +73,11 @@ query search(
         table: "post"
         join_on_property: "id"
         foreign_property: "parent_id"
-        sort: {
-          properties: { name: "accepted_post_id", order: ASC }
-          created_at: { order: ASC }
-        }
+        sort: [
+          { properties: { name: "accepted_post_id", order: ASC } }
+          { properties: { name: "c__score", order: DESC } }
+          { created_at: { order: ASC } }
+        ]
       ) {
         id
         created_at
@@ -89,6 +90,7 @@ query search(
         upvote_profile_ids: property_array(name: "upvote_profile_ids")
         downvote_profile_ids: property_array(name: "downvote_profile_ids")
         score: property_int(name: "score")
+        c__score: property_int(name: "c__score")
         creator: related_record(
           table: "profile"
           join_on_property: "creator_id"
