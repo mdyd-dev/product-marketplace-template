@@ -9,6 +9,8 @@ method: put
 
   function object = 'lib/commands/call', object: context.params.post, command: 'posts/update', selection: 'model_update'
   if object.valid
+    include 'lib/commands/events/create', type: 'post_updated', actor_id: current_profile.id, object_id: object.id
+
     if post.parent_id != null
       assign post = post.parent
     endif
