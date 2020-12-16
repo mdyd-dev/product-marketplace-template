@@ -13,8 +13,5 @@
 {% endparse_json %}
 
 {% liquid
-  if object.c__score
-    hash_assign object['c__score'] = object.c__score
-  endif
   return object
 %}
