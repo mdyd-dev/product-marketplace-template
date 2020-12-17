@@ -22,7 +22,7 @@
         <div class="lg:pl-2 lg:py-4 lg:table-cell lg:border-t">
           <span class="lg:hidden">{{ 'app.created_at' | t }}: </span>
           <a href="{{ order_url }}">
-            {{ order.created_at | l: 'long' }}
+            {{ order.created_at | l: 'compact' }}
           </a>
         </div>
 
