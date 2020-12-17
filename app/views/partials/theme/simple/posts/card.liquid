@@ -17,7 +17,7 @@
       {% include 'theme/simple/posts/vote_box', post: post, current_profile: current_profile, root_post: root_post %}
     </aside>
 
-    <div class="w-full flex-1 flex flex-col">
+    <div class="w-full min-w-0 flex-1 flex flex-col">
       <header class="w-full h-10 mb-2 md:flex justify-between items-center">
         <a href="{{ creator_url }}">
           {{ post.creator.name }}
@@ -41,11 +41,11 @@
 
           <form action="/dashboard/posts/" method="post" class="inline ml-2" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
             {% include 'authenticity_token' %}
-            <input type="hidden" name="_method" value="delete" />
+            <input type="hidden" name="_method" value="delete">
             <input type="hidden" name="id" value="{{ post.id }}">
             <input type="hidden" name="return_to" value="{% render 'link_to', post: root_post %}">
 
-            <button id="deletebutton" class="button button-secondary button-small button-danger">{{ 'app.models.shared.delete' | t }}</button>
+            <button class="button button-secondary button-small button-danger">{{ 'app.models.shared.delete' | t }}</button>
           </form>
         {% endif %}
       </footer>
