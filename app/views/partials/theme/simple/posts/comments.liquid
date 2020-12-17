@@ -1,7 +1,7 @@
 <ul>
   {% for comment in list %}
-    <li class="mt-5 ml-14 pl-2 pt-2 pr-4 flex border-t border-dashed">
-      <div class="pr-4">
+    <li class="mt-4 md:ml-14 pt-2 md:px-4 flex border-t border-dashed">
+      <div class="pr-2 md:pr-4 flex-shrink-0">
         <a href="{{ creator_url }}">
           {% liquid
             assign img_url = comment.creator.avatar.photo.versions.tiny
@@ -9,12 +9,12 @@
             assign img_url = 'images/user.svg' | asset_url
             endunless
           %}
-          <img class="w-10 h-10 rounded-full object-cover mb-5" src="{{ img_url }}" alt="{{ comment.creator.name }}">
+          <img class="w-6 h-6 md:w-10 md:h-10 rounded-full object-cover" src="{{ img_url }}" alt="{{ comment.creator.name }}">
         </a>
       </div>
       <div class="w-full">
-        <div class="h-10 mb-2 md:flex justify-between items-center">
-          <a href="{{ creator_url }}" class="text-lg font-semibold -mt-1">
+        <div class="md:h-10 mb-2 md:flex justify-between items-center">
+          <a href="{{ creator_url }}">
             {{ comment.creator.name }}
           </a>
           <date datetime="{{ comment.created_at }}" class="block text-sm text-content-sidenote">{{comment.created_at | l: 'compact'}}</date>

@@ -12,7 +12,7 @@
   <input type="hidden" name="comment[uuid]" value="{{ uuid }}" />
   <input type="hidden" name="return_to" value="{{ context.location.pathname }}" />
 
-  <div class="p-5 {% if hidden %}hidden{% endif %}" data-comment-form>
+  <div class="{% if hidden %}hidden{% endif %}" data-comment-form>
     <div class="relative">
       <textarea name="comment[body]" class="w-full p-2 outline-none" rows="3" placeholder="{{ placeholder }}"></textarea>
 

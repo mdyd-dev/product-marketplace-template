@@ -4,7 +4,7 @@
 
 <article class="mb-10 {% if post.parent_id == null %} mt-5 {% endif %}">
   <section class="w-full flex {% if post.parent_id == null %} card {% else %} p-4 border-t {% endif %}">
-    <aside class="flex flex-col flex-shrink-0 items-center pr-4">
+    <aside class="pr-4 flex flex-col flex-shrink-0 items-center">
       <a href="{{ creator_url }}">
         {% liquid
         assign img_url = post.creator.avatar.photo.versions.tiny
@@ -19,8 +19,8 @@
 
     <div class="w-full flex-1 flex flex-col">
       <header class="w-full h-10 mb-2 md:flex justify-between items-center">
-        <a href="{{ creator_url }}" class="-mt-1 text-lg font-semibold">
-          {{post.creator.name}}
+        <a href="{{ creator_url }}">
+          {{ post.creator.name }}
         </a>
         <date datetime="{{ post.created_at }}" class="block text-sm text-content-sidenote">{{ post.created_at | l: 'compact' }}</date>
       </header>
@@ -58,7 +58,7 @@
     %}
   </section>
 
-  <section class="mt-5 ml-14 pl-2 pt-2 pr-4 border-t border-dashed">
+  <section class="mt-4 md:ml-14 pt-2 md:px-4 border-t border-dashed">
     {% liquid
       if current_profile.id
         include 'theme/simple/comments/new_entry', commentable: post, commentable_type: 'post', placeholder: 'Your comment', hidden: true, images: false
