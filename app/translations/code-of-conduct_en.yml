@@ -15,8 +15,8 @@ en:
     - **Respect, respect, RESPECT!**
 
       - Everyone deserves respect regardless of gender, sexual orientation, disability, ethnicity, religion or personal characteristics.
-      - Developers are notoriously passionate about their preferences. Respect that every design or implementation choice, in any programming language, carries a trade-off and numerous costs. There is seldom a right answer, just personal preferences.
-      - Respect that people have a difference of opinion and you will disagree. Please be professional and courteous. There is no need to be mean or rude. (Honest disagreement is often a good sign of progress - Mahatma Gandhi)
+      - Developers are notoriously passionate about their <b>preferences</b>. Respect that every design or implementation choice, in any programming language, carries a trade-off and numerous costs. There is seldom a right answer, just personal preferences.
+      - Respect that people have a difference of <b>opinion</b> and you will disagree. Please be professional and courteous. There is no need to be mean or rude. (Honest disagreement is often a good sign of progress - Mahatma Gandhi)
 
     - Be **open minded** with the ideas and suggestions from others. Learning is an infinite game and everyone at every level brings something to the table that we can learn from.
     - Be **kind to new users**! Everyone was new once, and we all need a little kindness and guidance.
@@ -24,8 +24,10 @@ en:
     - **Criticism should be constructive**, not offensive. Personal attacks and hate speech will not be tolerated; this includes negative comments or slurs
     - Recommend great ideas from others, but make sure you’ve added the source and **give credit** where credit is due.
     - **Don’t spam**
-    - Persistent spamming of subforums or threads, or spamming of old threads will not be tolerated.
-    - We’re happy to get tips on useful tools and resources but do not post messages with the explicit intent to sell a product or service, or to drive people to a form or a website.
+
+      - Persistent spamming of subforums or threads, or spamming of old threads will not be tolerated.
+      - We’re happy to get tips on useful tools and resources but do not post messages with the explicit intent to sell a product or service, or to drive people to a form or a website.
+
     - Moderators may mark a thread as closed manually if the topic becomes **out of date**.
 
     ## Enforcement
