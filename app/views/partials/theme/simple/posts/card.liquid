@@ -45,20 +45,22 @@
             <input type="hidden" name="id" value="{{ post.id }}">
             <input type="hidden" name="return_to" value="{% render 'link_to', post: root_post %}">
 
-            <button class="button button-secondary button-small button-danger">{{ 'app.models.shared.delete' | t }}</button>
+            <button class="button button-small button-danger">{{ 'app.models.shared.delete' | t }}</button>
           </form>
         {% endif %}
       </footer>
     </div>
   </section>
 
-  <section>
-    {% liquid
-      include 'theme/simple/posts/comments', list: post.comments
-    %}
-  </section>
+  {% if post.comments.size > 0 %}
+    <section>
+      {% liquid
+        include 'theme/simple/posts/comments', list: post.comments
+      %}
+    </section>
+  {% endif %}
 
-  <section class="mt-4 md:ml-14 pt-2 md:px-4 border-t border-dashed">
+  <section class="mt-4 md:ml-14 md:px-4">
     {% liquid
       if current_profile.id
         include 'theme/simple/comments/new_entry', commentable: post, commentable_type: 'post', placeholder: 'Your comment', hidden: true, images: false
