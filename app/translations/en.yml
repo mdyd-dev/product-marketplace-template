@@ -466,7 +466,8 @@ en:
             answer: 'If you find a question or answer interesting and you think that it adds value to the conversation, you can signal your interest or approval by upvoting it. You can upvote questions and answers separately. Answers that get the most votes appear first. Upvote is always a somewhat subjective category, but here are our recommendations:
                      <ul><li><b>Upvote a question</b> if you feel it is particularly useful, for example because you have also encountered a similar issue. You can also praise a question for identifying a problem very clearly.
                      <li><b>Upvote an answer</b> if you think it provides a useful explanation for the question. We suggest upvoting answers that have one or more of the following qualities:
-                     <ul><li>Precise</li> <li>Detailed</li> <li>Educative Well-written</li></ul></li></ul>'
+                     <ul><li>Precise</li> <li>Detailed</li> <li>Educative</li> <li>Well-written</li></ul>
+                     </ul>'
         section2:
           q1:
             question: How to ask a good question?
