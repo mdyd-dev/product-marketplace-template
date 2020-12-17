@@ -4,7 +4,7 @@ Backbone for a marketplace-like project to be deployed on platformOS.com
 
 # Demo
 
-You can preview the marketplace template at our demo site here: 
+You can preview the marketplace template at our demo site here:
 
 [https://getmarketplace.co](https://getmarketplace.co)
 
@@ -14,7 +14,7 @@ You can preview the marketplace template at our demo site here:
 
 # Installation
 
-This is a cheat sheet for installing the Product Marketplace Template. For complete installation instructions visit [Get Started: pOS Marketplace Template](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template). 
+This is a cheat sheet for installing the Product Marketplace Template. For complete installation instructions visit [Get Started: pOS Marketplace Template](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template).
 
 1. [Install the pos-cli](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-1-install-the-pos-cli)
 
@@ -22,7 +22,7 @@ This is a cheat sheet for installing the Product Marketplace Template. For compl
 npm install -g @platformos/pos-cli
 ```
 
-2. [Create Instance](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-2-create-instance) 
+2. [Create Instance](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-2-create-instance)
 
 Go to https://partners.platformos.com/instances/new
 
@@ -65,10 +65,10 @@ pos-cli data import <YOUR_ENV_NAME> --path=seed/data.zip --zip
 # Setup
 
 - To access the admin panel of your marketplace register a user with this email address: `admin@example.com`
-- Enter the `Admin` section from main menu and go to the `Marketplace Setup` section. 
+- Enter the `Admin` section from main menu and go to the `Marketplace Setup` section.
 - Admins are identified based on email addresses defined in the Constant `superadmins` - see `app/migrations/20200811133711_set_superadmins.liquid`
 
-See our [Get Started documentation for Setting Up Stripe Connect](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-7-set-up-your-marketplace). 
+See our [Get Started documentation for Setting Up Stripe Connect](https://documentation.platformos.com/get-started/marketplace-template/marketplace-template#step-7-set-up-your-marketplace).
 
 # Benefits and features
 
@@ -158,13 +158,13 @@ To ensure frontend is maintanable and easy to change, we follow couple of import
 
 ## Custom validation error messages
 
-See [commit/c4c046](https://github.com/mdyd-dev/product-marketplace-template/commit/c4c046d34d5cd031d69dc02e2c1b6c03b3f54967) if you want to add custom message to any existing form field. 
+See [commit/c4c046](https://github.com/mdyd-dev/product-marketplace-template/commit/c4c046d34d5cd031d69dc02e2c1b6c03b3f54967) if you want to add custom message to any existing form field.
 
 ## Social Media / Community
 
-### following 
+### following
 
-- user can follow user 
+- user can follow user
 - TDB user can follow anything, category [topic] / item
 
 ### activity feeds
@@ -174,26 +174,26 @@ See [commit/c4c046](https://github.com/mdyd-dev/product-marketplace-template/com
   - user-public
 
     stream of activities accesible to everyone
-  
+
   - user-private
 
     private activities stream visible only to related user
-    
+
   - user-audience
 
     private streams of users which follows the user
-  
+
   - custom-audit [1]
 
-    all activities - visible 
+    all activities - visible
 
   - custom-items [2]
 
     created items
-    
+
 ### activities
 
-- user_followed_user 
+- user_followed_user
 
   actor = follower, target = followed
 
@@ -208,7 +208,7 @@ See [commit/c4c046](https://github.com/mdyd-dev/product-marketplace-template/com
   - actor:private
   - actor:public
   - actor:audience
-  
+
 - user_created_order
 
   actor = customer, audience = item's owner
@@ -234,7 +234,7 @@ CRUD generator will create all files needed to create, update, delete.
 ```
   ./scaffold/bin/generate resource --help
 
-    Usage: generate <model_name> <attribute_name:type_attribute...> ex. generate car car_model:string year:integer 
+    Usage: generate <model_name> <attribute_name:type_attribute...> ex. generate car car_model:string year:integer
 
     Generate model files for basic operations create, read, update, delete
 ```
@@ -286,7 +286,7 @@ REST API generator will create json endpoints
   ./scaffold/bin/generate rest-api --help
 
     Usage: generate <model_name>
-    
+
     Example:
 
     generate rest-api car
@@ -324,31 +324,37 @@ To run tests first you have to seed test data by:
 
 To run tests in headless mode:
 ```
-  MPKIT_URL=<your instance> testcafe "chromium:headless" test/
+  MPKIT_URL=https://your-instance.example.com testcafe "chromium:headless" test/
+```
+
+Please note, before you will be able to run tests again, you will most likely need to clean data:
+
+```
+  pos-cli data clean <env>
 ```
 
 To manually debug in case when test fails:
 
 ```
-  MPKIT_URL=<your instance> testcafe "chromium" test/ --debug-on-fail
+  MPKIT_URL=https://your-instance.example.com testcafe "chromium" test/ --debug-on-fail
 ```
 
 
 To save screenshots of test fails:
 ```
-  MPKIT_URL=<your instance> testcafe "chromium" test/ -s takeOnFails=true
+  MPKIT_URL=https://your-instance.example.com testcafe "chromium" test/ -s takeOnFails=true
 ```
 
 ### e2e test report
 
 To make test report as page (with screenshots):
 ```
-  MPKIT_URL=<your instance> testcafe chrome:headless test/ report --reporter html:app/views/pages/_test_results/index.liquid -s path=test/screenshots/,takeOnFails=true
+  MPKIT_URL=https://your-instance.example.com testcafe chrome:headless test/ report --reporter html:app/views/pages/_test_results/index.liquid -s path=test/screenshots/,takeOnFails=true
 ```
 
 Then open your browser and you can visit it at:
 ```
-  <your instance>/_test_results
+  https://your-instance.example.com/_test_results
 ```
 
 
