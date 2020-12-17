@@ -1,28 +1,27 @@
-<div class="mb-5 {% if list.size > 0 %} mt-5 border-t-2 {% endif %}">
+<ul>
   {% for comment in list %}
-    <div class="flex items-start px-4 py-6 w-full border-b-2">
-      <aside class="flex flex-col flex-shrink-0 items-center pr-4">
+    <li class="mt-5 ml-14 pl-2 pt-2 pr-4 flex border-t border-dashed">
+      <div class="pr-4">
         <a href="{{ creator_url }}">
           {% liquid
             assign img_url = comment.creator.avatar.photo.versions.tiny
             unless img_url
-              assign img_url = 'images/user.svg' | asset_url
+            assign img_url = 'images/user.svg' | asset_url
             endunless
           %}
-          <img class="w-12 h-12 rounded-full object-cover mb-5 shadow" src="{{ img_url }}" alt="avatar">
+          <img class="w-10 h-10 rounded-full object-cover mb-5" src="{{ img_url }}" alt="{{ comment.creator.name }}">
         </a>
-      </aside>
-      <div class="flex flex-col w-full h-full">
-        <div class="flex justify-between">
-          <a href="{{ creator_url }}" class="text-lg font-semibold -mt-1">
-            {{comment.creator.name}}
-          </a>
-          <date datetime="{{ comment.created_at }}" class="block text-sm text-gray-700">{{comment.created_at | l: 'compact'}}</date>
-        </div>
-        <div class="flex-1 mt-3">
-          {{comment.body}}
-        </div>
       </div>
-    </div>
+      <div class="w-full">
+        <div class="h-10 mb-2 md:flex justify-between items-center">
+          <a href="{{ creator_url }}" class="text-lg font-semibold -mt-1">
+            {{ comment.creator.name }}
+          </a>
+          <date datetime="{{ comment.created_at }}" class="block text-sm text-content-sidenote">{{comment.created_at | l: 'compact'}}</date>
+        </div>
+
+        {{ comment.body }}
+      </div>
+    </li>
   {% endfor %}
-</div>
+</ul>

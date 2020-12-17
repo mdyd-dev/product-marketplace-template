@@ -3,11 +3,11 @@ newCommentPost.querySelector('[data-comment-photo-upload]').addEventListener('cl
   newCommentPost.querySelector('#drag-drop-area').classList.toggle('hidden');
 });
 
-const showNewComments = document.querySelectorAll('[data-comment-show-new-post]');
+const showNewComments = document.querySelectorAll('[data-comment-show-new-post] .button');
 showNewComments.forEach((showComment)=> {
   showComment.onclick = (e) => {
     const button = e.currentTarget;
-    button.classList.toggle('hidden');
-    button.closest('[data-comment-new-post]').querySelector('[data-comment-form]').classList.toggle('hidden')
+    button.parentElement.classList.toggle('hidden');
+    button.parentElement.closest('[data-comment-new-post]').querySelector('[data-comment-form]').classList.toggle('hidden')
   };
 });
