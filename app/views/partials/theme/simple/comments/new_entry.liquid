@@ -12,7 +12,7 @@
   <input type="hidden" name="comment[uuid]" value="{{ uuid }}" />
   <input type="hidden" name="return_to" value="{{ context.location.pathname }}" />
 
-  <div class="p-5 {% if hidden %}hidden{% endif %}" data-comment-form>
+  <div class="{% if hidden %}hidden{% endif %}" data-comment-form>
     <div class="relative">
       <textarea name="comment[body]" class="w-full p-2 outline-none" rows="3" placeholder="{{ placeholder }}"></textarea>
 
@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div class="w-full flex justify-between mb-4 flex-row-reverse" data-comment-show-new-post>
+  <div class="w-full flex justify-between flex-row-reverse" data-comment-show-new-post>
     <span class="button button-secondary button-small cursor-pointer">{{ 'app.models.comments.comment' | t }}</span>
   </div>
 </form>

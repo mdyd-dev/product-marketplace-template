@@ -2,35 +2,34 @@
   function creator_url = 'link_to', profile: post.creator
 %}
 
-<article class="flex bg-panel shadow-lg rounded-lg border {% if root_post.accepted_post_id == post.id %}border-green-600{% else %}border-white{% endif %} mx-4 md:mx-auto mb-10" data-tc="postcard">
-  <div class="flex items-start px-4 py-6 w-full">
-    <aside class="flex flex-col flex-shrink-0 items-center pr-4">
+<article class="mb-10 {% if post.parent_id == null %} mt-5 {% endif %}">
+  <section class="w-full flex {% if post.parent_id == null %} card {% else %} p-4 border-t {% endif %}">
+    <aside class="pr-4 flex flex-col flex-shrink-0 items-center">
       <a href="{{ creator_url }}">
         {% liquid
-          assign img_url = post.creator.avatar.photo.versions.tiny
-          unless img_url
-            assign img_url = 'images/user.svg' | asset_url
-          endunless
+        assign img_url = post.creator.avatar.photo.versions.tiny
+        unless img_url
+          assign img_url = 'images/user.svg' | asset_url
+        endunless
         %}
-        <img width="40" height="40" class="w-12 h-12 rounded-full object-cover mb-5 shadow" src="{{ img_url }}" alt="{{ post.creator.name }}">
+        <img width="40" height="40" class="w-10 h-10 rounded-full object-cover mb-2" src="{{ img_url }}" alt="{{ post.creator.name }}">
       </a>
       {% include 'theme/simple/posts/vote_box', post: post, current_profile: current_profile, root_post: root_post %}
     </aside>
-    <div class="w-full flex flex-col min-w-0">
-      <div class="md:flex items-start justify-between">
-        <header>
-          <a href="{{ creator_url }}" class="text-lg font-semibold -mt-1">
-            {{post.creator.name}}
-          </a>
-          <date datetime="{{ post.created_at }}" class="block text-sm text-gray-700">{{post.created_at | l: 'compact'}}</date>
-        </header>
-        {% render 'theme/simple/ui/tags', tags: post.tags, url: '/posts?tag=' %}
-      </div>
-      <div class="flex-1 mt-3 markdown">
-        {{post.body | default: '' | markdownify}}
+
+    <div class="w-full min-w-0 flex-1 flex flex-col">
+      <header class="w-full h-10 mb-2 md:flex justify-between items-center">
+        <a href="{{ creator_url }}">
+          {{ post.creator.name }}
+        </a>
+        <date datetime="{{ post.created_at }}" class="block text-sm text-content-sidenote">{{ post.created_at | l: 'compact' }}</date>
+      </header>
+
+      <div class="markdown mb-5">
+        {{ post.body | default: '' | markdownify }}
       </div>
 
-      <div class="w-full md:flex justify-between mt-4">
+      <footer class="mt-auto self-end">
         {% if root_post.id == post.id and root_post.creator.id == current_profile.id %}
           <a href="/dashboard/posts/edit?id={{ post.id }}" class="button button-secondary button-small">
             {{ 'app.models.posts.edit' | t }}
@@ -42,20 +41,29 @@
 
           <form action="/dashboard/posts/" method="post" class="inline ml-2" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" >
             {% include 'authenticity_token' %}
-            <input type="hidden" name="_method" value="delete" />
+            <input type="hidden" name="_method" value="delete">
             <input type="hidden" name="id" value="{{ post.id }}">
             <input type="hidden" name="return_to" value="{% render 'link_to', post: root_post %}">
 
-            <button id="deletebutton" class="button button-secondary button-small button-danger">{{ 'app.models.shared.delete' | t }}</button>
+            <button class="button button-secondary button-small button-danger">{{ 'app.models.shared.delete' | t }}</button>
           </form>
         {% endif %}
-      </div>
-      {% liquid
-        include 'theme/simple/posts/comments', list: post.comments
-        if current_profile.id
-          include 'theme/simple/comments/new_entry', commentable: post, commentable_type: 'post', placeholder: "Your comment", hidden: true, images: false
-        endif
-      %}
+      </footer>
     </div>
-  </div>
+  </section>
+
+  <section>
+    {% liquid
+      include 'theme/simple/posts/comments', list: post.comments
+    %}
+  </section>
+
+  <section class="mt-4 md:ml-14 pt-2 md:px-4 border-t border-dashed">
+    {% liquid
+      if current_profile.id
+        include 'theme/simple/comments/new_entry', commentable: post, commentable_type: 'post', placeholder: 'Your comment', hidden: true, images: false
+      endif
+    %}
+  </section>
+
 </article>

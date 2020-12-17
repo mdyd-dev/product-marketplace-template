@@ -55,7 +55,7 @@
     font-mono
     text-sm
     inline
-    bg-gray-200
+    bg-frame
     rounded
     px-1
     py-1
@@ -67,7 +67,7 @@
     max-w-full
     mt-3
     inline-block
-    bg-gray-100
+    bg-frame
     rounded
     p-4
     overflow-x-auto;

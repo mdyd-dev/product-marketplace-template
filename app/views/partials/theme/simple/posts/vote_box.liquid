@@ -32,7 +32,7 @@
   </form>
 {% endif %}
 
-<span class="pb-2 text-3xl font-bold">{{ post.upvote_profile_ids.size | minus: post.downvote_profile_ids.size | default: 0 }}</span>
+<span class="pb-2 text-3xl font-bold" data-tc="votes-count">{{ post.upvote_profile_ids.size | minus: post.downvote_profile_ids.size | default: 0 }}</span>
 
 {% if upvote %}
   <div class="text-interaction-disabled">
