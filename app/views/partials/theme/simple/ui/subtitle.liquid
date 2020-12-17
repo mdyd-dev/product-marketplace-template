@@ -1,3 +1,10 @@
-<h3 class="mb-1 text-xl">
+{% liquid
+  if label_key
+    assign label = label_key | t
+  endif
+%}
+
+
+<h4 class="mb-1 text-xl">
   {{ label }}
-</h3>
+</h4>
