@@ -26,7 +26,7 @@ export default class TopicsPage {
       answerBody: Selector('div').find('p'),
     }
     this.ratings = {
-      question: Selector('main').find('div').find('span').withText('1').nth(0),
+      question: Selector('span[data-tc="votes-count"]').withText('1').nth(0),
       firstAnswer: Selector('main').find('div').find('span').withText('1').nth(1)
     }
   }
