@@ -23,7 +23,7 @@
 			</div>
 			<div class="lg:w-1/6 lg:pl-2">
 				<span class="lg:hidden">{{ 'app.items.attr.created_at' | t }}: </span>
-				{{ record.created_at | l: 'long' }}
+				{{ record.created_at | l: 'compact' }}
 			</div>
 		</article>
 	{% endfor %}

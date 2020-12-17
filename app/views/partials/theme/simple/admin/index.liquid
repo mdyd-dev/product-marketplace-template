@@ -12,7 +12,7 @@
                 {% for user in users.results %}
                   <td>{% print user.id %}</td>
                   <td>{{ user.email }}</td>
-                  <td>{{ user.created_at | l: 'long' }}</td>
+                  <td>{{ user.created_at | l: 'compact' }}</td>
                 {% endfor %}
               </tr>
             </table>
