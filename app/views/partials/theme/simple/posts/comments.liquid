@@ -1,6 +1,6 @@
 <ul>
   {% for comment in list %}
-    <li class="mt-4 md:ml-14 pt-2 md:px-4 flex border-t border-dashed">
+    <li class="mt-4 md:ml-14 pt-2 md:px-4 flex border-t border-dashed {% if forloop.last %} border-b pb-3 {% endif %}">
       <div class="pr-2 md:pr-4 flex-shrink-0">
         <a href="{{ creator_url }}">
           {% liquid
