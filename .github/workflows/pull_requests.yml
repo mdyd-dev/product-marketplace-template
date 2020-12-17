@@ -70,4 +70,3 @@ jobs:
         run: |
           set -e
           npm run ci:test:publish
-          echo "test published to ${MPKIT_URL/https:\/\//}/_test_results"

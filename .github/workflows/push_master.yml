@@ -63,7 +63,6 @@ jobs:
         if: always()
         shell: sh
         run: |
-          echo "test published to ${MPKIT_URL/https:\/\//}/_test_results"
           npm run ci:test:publish
 
       - name: Deploy LIVE
