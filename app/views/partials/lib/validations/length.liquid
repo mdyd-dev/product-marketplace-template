@@ -10,17 +10,17 @@
   assign size = object[field_name].size
   if minimum != null and size < minimum
     assign message = 'app.errors.length.minimum' | t: count: minimum, value: size
-    include 'lib/register_error', contract: c, field_name: field_name, key:
+    include 'lib/register_error', contract: c, field_name: field_name, message: message
   endif
 
   if maximum != null and size > maximum
     assign message = 'app.errors.length.maximum' | t: count: maximum, value: size
-    include 'lib/register_error', contract: c, field_name: field_name, key: 'app.errors.length.maximum'
+    include 'lib/register_error', contract: c, field_name: field_name, message: message
   endif
 
   if is != null and size != is
     assign message = 'app.errors.length.is' | t: count: is, value: size
-    include 'lib/register_error', contract: c, field_name: field_name, key: 'app.errors.length.is'
+    include 'lib/register_error', contract: c, field_name: field_name, message: message
   endif
 
   return c

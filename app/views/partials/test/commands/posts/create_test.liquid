@@ -11,3 +11,11 @@
   function contract = 'test/assertions/presence', contract: contract, object: object, field_name: 'id'
   function contract = 'test/assertions/valid_object', contract: contract, object: object, field_name: 'id'
 %}
+
+{% liquid
+  assign params = '{"title": "ooo oo", "body":"foo ooo ooo ooo", "uuid": "12345", "tags": "foo,bar,zoo,moo,boo,uuu"}' | parse_json
+  function object = 'lib/commands/posts/create', object: params, current_profile: profile
+
+  function contract = 'test/assertions/not_valid_object', contract: contract, object: object, field_name: 'id'
+  function contract = 'test/assertions/equal', contract: contract, field_name: 'errors', given: object.errors.tags[0], expected: "is too long (maximum is 5 characters)"
+%}
