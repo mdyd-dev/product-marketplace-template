@@ -20,7 +20,7 @@ fixture`Happy path scenario`
           .page(myUrl)
 
 test('Hero', async (t) => {
-  await t.expect(homePage.hero.image.exists).ok()
+  await t.expect(homePage.hero.image).ok()
   await t.expect(homePage.hero.h1.exists).ok()
   await t.expect(homePage.hero.h2.exists).ok()
   await t.expect(homePage.hero.firstButton.exists).ok()
