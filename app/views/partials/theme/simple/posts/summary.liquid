@@ -1,47 +1,45 @@
 {% liquid
   function post_path = 'link_to', post: post
+
   if post.accepted_post_id != blank
-    assign score_css = 'border-green-600 text-green-600'
+    assign score_css = 'border-confirmation text-confirmation'
   else
     assign score_css = null
   endif
 %}
-<div class="pr-10 pl-5 my-4 py-6 bg-panel rounded-lg shadow-md">
-  <div class="flex">
-    <div class="pt-4 pr-5 text-center">
-      <span class="px-4 py-3 border  {{ score_css }} rounded-lg">
-        {{ post.c__score | default: 0 }}
-      </span>
-      <div class="text-xs mt-3">{{ 'app.models.posts.score' | t }}</div>
-    </div>
-    <div class="w-full">
-      <div class="flex justify-between items-center">
-        <span class="font-light text-gray-600">{{post.created_at | l: 'compact'}}</span>
+
+<article class="card mb-10 flex">
+
+  <aside class="pr-4 flex flex-col flex-shrink-0 items-center">
+		<span class="px-4 py-3 border rounded-lg {{ score_css }}">
+		  {{ post.c__score | default: 0 }}
+    </span>
+    <span class="sidenote">
+      {{ 'app.models.posts.score' | t }}
+    </span>
+  </aside>
+
+  <div class="w-full min-w-0 flex-1 flex flex-col">
+
+    <div class="w-full mb-3 md:mb-1 md:flex justify-between">
+        <date datetime="{{ post.created_at }}" class="mb-1 md:mb-0 block text-content-sidenote">{{ post.created_at | l: 'compact' }}</date>
         {% render 'theme/simple/ui/tags', tags: post.tags, url: '/posts?tag=' %}
-      </div>
-      <div class="mt-2">
-        <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="{{post_path}}">
-          {{post.title}}
-        </a>
-        <p class="mt-2 text-gray-600">{{post.body | truncatewords: 20, '...'}}</p>
-      </div>
-      <div class="flex justify-between items-center mt-4">
-        <a href="{{post_path}}">
-          {{'app.models.posts.read_more' | t }}
-        </a>
-        <div>
-          <a class="flex items-center" href="{% render 'link_to', profile: post.creator %}">
-            {% liquid
-              assign img_url = post.creator.avatar.photo.versions.tiny
-              unless img_url
-                assign img_url = 'images/user.svg' | asset_url
-              endunless
-            %}
-            <img width="40" height="40" class="mx-3 w-10 h-10 object-cover rounded-full hidden sm:block" src="{{ img_url }}" alt="{{ post.creator.name }}">
-            <span class="text-content font-bold">{{ post.creator.name }}</span>
-          </a>
-        </div>
-      </div>
     </div>
+
+    <a class="" href="{{ post_path }}">
+      {% render 'theme/simple/ui/title', label: post.title %}
+    </a>
+
+    <a class="flex self-end items-center text-content" href="{% render 'link_to', profile: post.creator %}">
+      {% liquid
+        assign img_url = post.creator.avatar.photo.versions.tiny
+        unless img_url
+          assign img_url = 'images/user.svg' | asset_url
+        endunless
+      %}
+      <img width="40" height="40" class="w-10 h-10 mr-2 object-cover rounded-full" src="{{ img_url }}" alt="{{ post.creator.name }}">
+      {{ post.creator.name }}
+    </a>
+
   </div>
-</div>
+</article>
