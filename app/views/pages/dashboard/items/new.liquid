@@ -10,7 +10,8 @@ metadata:
 
 {% liquid
 
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_redirect', profile: current_profile
   function filters = 'lib/queries/search/filters', query: context.params
   function presigned_url = 'lib/queries/presigned_url'
 

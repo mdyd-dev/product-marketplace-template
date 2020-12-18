@@ -9,7 +9,8 @@ metadata:
 ---
 
 {% liquid
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_redirect', profile: current_profile
   function post = 'lib/queries/posts/find', id: context.params.id, creator_id: current_profile.id
   include 'lib/present_or_404', property:  post.id
   graphql presigned_url = 'photos/presign' | dig: 'presigned'

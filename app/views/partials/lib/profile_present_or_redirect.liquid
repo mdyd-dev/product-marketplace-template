@@ -10,6 +10,4 @@
   elsif required and profile.slug == blank
     include 'redirect_to', url: "/dashboard/profile/edit", notice: 'app.profiles.incomplete'
   endif
-
-  return profile
 %}

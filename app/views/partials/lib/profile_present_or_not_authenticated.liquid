@@ -1,0 +1,6 @@
+{% liquid
+  if profile.id == blank
+    include 'theme/json/shared/not_authenticated'
+    break
+  endif
+%}

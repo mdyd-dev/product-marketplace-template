@@ -2,6 +2,8 @@
 slug: line_items/show
 ---
 {% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_not_authenticated', profile: current_profile
 
   assign line_item_id = context.params.slug3 | split: '-' | last
   function line_item = 'lib/queries/line_items/find', id: line_item_id

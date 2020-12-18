@@ -2,7 +2,8 @@
 slug: admin/support-tickets/show
 ---
 {% liquid
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_redirect', profile: current_profile
   include 'lib/must_be_superadmin'
 
   assign contact_id = context.params.slugs | split: '-' | last

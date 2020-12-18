@@ -3,7 +3,8 @@ slug: dashboard/groups
 method: post
 ---
 {% liquid
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_redirect', profile: current_profile
   function object = 'lib/commands/groups/create', object: context.params.group, owner_id: current_profile.id
   if object.valid
     include 'lib/commands/events/create', type: 'group_created', actor_id: current_profile.id, object_id: object.id
