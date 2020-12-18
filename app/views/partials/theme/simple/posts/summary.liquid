@@ -21,7 +21,7 @@
 
   <div class="w-full min-w-0 flex-1 flex flex-col">
 
-    <div class="w-full mb-3 md:mb-1 md:flex justify-between">
+    <div class="w-full mb-3 md:mb-2 md:flex justify-between">
         <date datetime="{{ post.created_at }}" class="mb-1 md:mb-0 block text-content-sidenote">{{ post.created_at | l: 'compact' }}</date>
         {% render 'theme/simple/ui/tags', tags: post.tags, url: '/posts?tag=' %}
     </div>
