@@ -1,9 +1,13 @@
 <div class="w-full mx-auto">
-  <div class="mb-5 text-right">
+
+  <header class="mb-5 md:flex align-middle justify-between">
+    {% render 'theme/simple/ui/bigtitle', label_key: 'app.models.posts.title' %}
+
     <a href="/dashboard/posts/new" class="button">
       {{ 'app.models.posts.add' | t }}
     </a>
-  </div>
+  </header>
+
   {% liquid
     if context.params.tag
       assign title = 'app.models.posts.questions-tagged-by' | t: tag: context.params.tag
@@ -16,4 +20,5 @@
      include 'theme/simple/posts/empty_state'
     endfor
   %}
+
 </div>
