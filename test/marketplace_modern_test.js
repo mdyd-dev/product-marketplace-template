@@ -268,7 +268,6 @@ test('Groups', async (t) => {
 
  test('Activity', async (t) => {
    await t.useRole(buyerRole)
-     .debug()
      .click(topMenu.buttons.menuDropdown)
      .click(topMenu.buttons.dashboard)
      await checkErrors()
