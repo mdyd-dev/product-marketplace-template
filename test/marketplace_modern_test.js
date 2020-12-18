@@ -5,7 +5,7 @@ import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          adminPage, registerForm, loginForm, itemShow, editedItemShow,
          passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
          profileEditForm, orders, publicProfile, groupsPage, footer,
-         contactUsForm, activityFeed, categoryName, topicsPage } from './fixtures'
+         contactUsForm, activityFeed, categoryName, topicsPage, permissionDenied } from './fixtures'
 import { register, createItem, checkErrors } from './helper'
 
 
