@@ -26,7 +26,8 @@ export const getURL = ClientFunction(() => window.location.href)
 export const myUrl = process.env.MPKIT_URL.replace(/\/$/,'','')
 export const loremSentence = (faker.lorem.lines() + " " + faker.lorem.lines())
 export const editURL = '/dashboard/items/edit?id='
-export const notAuthorizedUser = 'Permission denied'
+export const permissionDenied = 'Permission denied'
+export const notAuthorizedUser = "The system has determined that you are not presently authorized to use this system function."
 export const groupName = faker.lorem.words();
 export const translationMissing = (Selector('body').withText("translation missing"))
 export const link = Selector('a')

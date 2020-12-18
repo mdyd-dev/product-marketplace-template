@@ -45,9 +45,10 @@ export async function createItem(itemName, itemDescription, itemPrice) {
 
 export async function checkErrors() {
   await t.expect(Selector('body').withText("translation missing").exists).notOk();
-  await t.expect(Selector('main').find('img[alt="Page missing"]').exists).notOk();
-  await t.expect('body').notContains('Liquid Error')
-  await t.expect('body').notContains('RenderFormTag Error:')
-  await t.expect('body').notContains('QueryGraphTag Error:')
-  await t.expect('body').notContains('ExecuteQueryTagError:');
+  await t.expect(Selector('body').find('img[alt="Page missing"]').exists).notOk();
+  await t.expect(Selector('body').withText('Liquid Error').exists).notOk();
+  await t.expect(Selector('body').withText('RenderFormTag Error:').exists).notOk();
+  await t.expect(Selector('body').withText('QueryGraphTag Error:').exists).notOk();
+  await t.expect(Selector('body').withText('Liquid error:').exists).notOk();
+  await t.expect(Selector('body').withText('ExecuteQueryTagError:').exists).notOk();
 };

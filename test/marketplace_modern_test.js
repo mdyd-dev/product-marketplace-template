@@ -5,7 +5,7 @@ import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          adminPage, registerForm, loginForm, itemShow, editedItemShow,
          passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
          profileEditForm, orders, publicProfile, groupsPage, footer,
-         contactUsForm, activityFeed, categoryName, topicsPage } from './fixtures'
+         contactUsForm, activityFeed, categoryName, topicsPage, permissionDenied } from './fixtures'
 import { register, createItem, checkErrors } from './helper'
 
 
@@ -221,7 +221,9 @@ test('Breakin-in test, edition by none user', async (t) => {
     var itemEditUrl = itemEditUrl.split('-')
     var editItemId = itemEditUrl[itemEditUrl.length - 1]
     await t.navigateTo(editURL + editItemId)
-    await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok('message ' + notAuthorizedUser + " doesn't exists")
+    await t.expect(Selector('div').withText(permissionDenied).exists).ok()
+    await t.navigateTo(myUrl + "/admin")
+    await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok()
 })
 
 test('Groups', async (t) => {
