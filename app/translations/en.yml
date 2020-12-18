@@ -1020,6 +1020,7 @@ en:
           commentable_id: commentable_id
           commentable_type: commentable_type
       posts:
+        title: Latest Questions
         list: Questions
         new: Ask Question
         add: Add Question
