@@ -5,7 +5,7 @@ import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          adminPage, registerForm, loginForm, itemShow, editedItemShow,
          passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
          profileEditForm, orders, publicProfile, groupsPage, footer,
-         contactUsForm, activityFeed, categoryName, topicsPage } from './fixtures'
+         contactUsForm, activityFeed, categoryName, topicsPage, homePage } from './fixtures'
 import { register, createItem, checkErrors } from './helper'
 
 
@@ -18,6 +18,14 @@ async function checkTranslation(translationMissing) {
 
 fixture`Happy path scenario`
           .page(myUrl)
+
+test('Hero', async (t) => {
+  await t.expect(homePage.hero.image.exists).ok()
+  await t.expect(homePage.hero.h1.exists).ok()
+  await t.expect(homePage.hero.h2.exists).ok()
+  await t.expect(homePage.hero.firstButton.exists).ok()
+  await t.expect(homePage.hero.secondButton.exists).ok()
+})
 
 test.page(myUrl + '/sign-up')('Register seller', async (t) => {
   await register(SellerRandomUser)

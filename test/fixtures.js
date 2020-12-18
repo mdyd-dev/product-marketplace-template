@@ -17,6 +17,7 @@ import ContactUs from './pages/contactUsForm'
 import PasswordReset from './pages/passwordReset'
 import NewSessionForm from './pages/newsession'
 import TopicsPage from './pages/topicsPage'
+import HomePage from './pages/homePage'
 
 
 //variables
@@ -36,6 +37,7 @@ export const categoryName = "Clothes"
 
 
 //pages
+export const homePage = new HomePage()
 export const adminPage = new AdminPanel()
 export const registerForm = new NewSessionForm()
 export const loginForm = new NewSessionForm()
