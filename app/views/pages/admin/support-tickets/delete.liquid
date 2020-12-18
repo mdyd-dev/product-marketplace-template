@@ -3,6 +3,10 @@ slug: admin/support-tickets
 method: delete
 ---
 {% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_redirect', profile: current_profile, require_profile: false
+  include 'lib/must_be_superadmin'
+
   function object = 'lib/queries/contacts/find', id: context.params.id
   function object = 'lib/commands/contacts/delete', object: object
 
