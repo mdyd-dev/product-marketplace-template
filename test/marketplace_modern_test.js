@@ -222,6 +222,8 @@ test('Breakin-in test, edition by none user', async (t) => {
     var editItemId = itemEditUrl[itemEditUrl.length - 1]
     await t.navigateTo(editURL + editItemId)
     await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok('message ' + notAuthorizedUser + " doesn't exists")
+    await t.navigateTo(myUrl + "/admin")
+    await t.expect(Selector('div').withText(notAuthorizedUser).exists).ok('message ' + notAuthorizedUser + " doesn't exists")
 })
 
 test('Groups', async (t) => {
