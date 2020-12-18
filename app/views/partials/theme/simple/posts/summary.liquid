@@ -26,9 +26,11 @@
         {% render 'theme/simple/ui/tags', tags: post.tags, url: '/posts?tag=' %}
     </div>
 
-    <a class="" href="{{ post_path }}">
-      {% render 'theme/simple/ui/title', label: post.title %}
-    </a>
+    <h3 class="title">
+      <a href="{{ post_path }}">
+        {{ post.title }}
+      </a>
+    </h3>
 
     <a class="flex self-end items-center text-content" href="{% render 'link_to', profile: post.creator %}">
       {% liquid
