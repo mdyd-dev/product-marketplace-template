@@ -2,8 +2,8 @@
   {% include 'theme/simple/posts/metatags', post: post %}
 {% endcontent_for %}
 
-<h1 class="mb-2 text-4xl font-medium">
-  {{root_post.title}}
+<h1 class="mb-3 text-4xl font-medium">
+  {{ root_post.title }}
 </h1>
 
 {% render 'theme/simple/ui/tags', tags: root_post.tags, url: '/posts?tag=' %}

@@ -1,5 +1,6 @@
 /*
   links
+  titles
   content
 */
 
@@ -15,6 +16,16 @@ main a {
 main a:hover {
   @apply
     text-interaction-hover;
+}
+
+
+
+/* titles
+============================================================================ */
+.title {
+  @apply
+    mb-4
+    text-2xl;
 }
 
 

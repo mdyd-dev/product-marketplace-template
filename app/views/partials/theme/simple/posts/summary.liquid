@@ -11,7 +11,7 @@
 <article class="card mb-10 flex">
 
   <aside class="pr-4 flex flex-col flex-shrink-0 items-center">
-		<span class="px-4 py-3 border rounded-lg {{ score_css }}">
+		<span class="w-12 h-12 flex items-center justify-center border rounded-lg {{ score_css }}">
 		  {{ post.c__score | default: 0 }}
     </span>
     <span class="sidenote">
@@ -21,14 +21,16 @@
 
   <div class="w-full min-w-0 flex-1 flex flex-col">
 
-    <div class="w-full mb-3 md:mb-1 md:flex justify-between">
+    <div class="w-full mb-3 md:mb-2 md:flex justify-between">
         <date datetime="{{ post.created_at }}" class="mb-1 md:mb-0 block text-content-sidenote">{{ post.created_at | l: 'compact' }}</date>
         {% render 'theme/simple/ui/tags', tags: post.tags, url: '/posts?tag=' %}
     </div>
 
-    <a class="" href="{{ post_path }}">
-      {% render 'theme/simple/ui/title', label: post.title %}
-    </a>
+    <h3 class="title">
+      <a href="{{ post_path }}">
+        {{ post.title }}
+      </a>
+    </h3>
 
     <a class="flex self-end items-center text-content" href="{% render 'link_to', profile: post.creator %}">
       {% liquid
@@ -37,7 +39,7 @@
           assign img_url = 'images/user.svg' | asset_url
         endunless
       %}
-      <img width="40" height="40" class="w-10 h-10 mr-2 object-cover rounded-full" src="{{ img_url }}" alt="{{ post.creator.name }}">
+      <img width="32" height="32" class="w-8 h-8 mr-2 object-cover rounded-full" src="{{ img_url }}" alt="{{ post.creator.name }}">
       {{ post.creator.name }}
     </a>
 
