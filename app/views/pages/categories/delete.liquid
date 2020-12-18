@@ -3,7 +3,8 @@ slug: categories
 method: delete
 ---
 {% liquid
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_redirect', profile: current_profile
   include 'lib/must_be_superadmin'
 
   function object = 'lib/queries/categories/find', id: context.params.id

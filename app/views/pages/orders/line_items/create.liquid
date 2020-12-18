@@ -3,7 +3,8 @@ method: post
 slug: orders/line_items
 ---
 {% liquid
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_redirect', profile: current_profile
 
   function item = 'lib/queries/items/find', id: context.params.line_item.item_id
   function order = 'lib/commands/line_items/find_or_create_order', item: item, current_profile: current_profile

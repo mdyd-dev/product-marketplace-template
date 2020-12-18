@@ -3,7 +3,8 @@ slug: api/statuses
 method: post
 ---
 {% liquid
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_not_authenticated', profile: current_profile
 
   function object = 'lib/commands/statuses/create', object: context.params.status, profile_id: current_profile.id
   if object.valid

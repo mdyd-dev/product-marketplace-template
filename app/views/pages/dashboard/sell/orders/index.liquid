@@ -8,7 +8,8 @@ metadata:
 ---
 
 {% liquid
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_redirect', profile: current_profile
 
   function orders = 'lib/queries/orders/search', limit: 100, seller: current_profile.id
 

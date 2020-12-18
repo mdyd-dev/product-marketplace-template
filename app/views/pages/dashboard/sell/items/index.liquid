@@ -7,7 +7,8 @@ metadata:
 ---
 
 {% liquid
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id, required: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_redirect', profile: current_profile
 
   function items = 'lib/queries/items/search', limit: 20, owner: current_profile.id, params: context.params, withStatuses: true
   function filters = 'lib/queries/search/filters', query: context.params

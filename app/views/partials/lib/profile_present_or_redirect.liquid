@@ -1,0 +1,13 @@
+{% liquid
+  if profile == blank
+    session return_to = context.location.href
+
+    include 'redirect_to', url: '/sessions/new', error: 'app.errors.unauthenticated'
+  endif
+
+  if require_profile == false
+    return profile
+  elsif required and profile.slug == blank
+    include 'redirect_to', url: "/dashboard/profile/edit", notice: 'app.profiles.incomplete'
+  endif
+%}

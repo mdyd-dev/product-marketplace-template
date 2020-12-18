@@ -3,8 +3,10 @@ slug: line_items
 method: delete
 ---
 {% liquid
-  include 'lib/must_be_authenticated_api'
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_not_authenticated', profile: current_profile
   function object = 'lib/queries/line_items/find', id: context.params.id
+
   function object = 'lib/commands/line_items/delete', object: object
 
   render 'theme/json/shared/show', object: object

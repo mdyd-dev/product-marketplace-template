@@ -2,7 +2,6 @@
 slug: passwords
 method: post
 ---
-
 {% liquid
   assign input = context.params.password
   hash_assign input['user_id'] = context.session.reset_password_session_user_id

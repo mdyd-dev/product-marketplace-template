@@ -2,7 +2,8 @@
 method: post
 ---
 {% liquid
-  include 'lib/must_be_authenticated_api'
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_not_authenticated', profile: current_profile
 
   function object = 'lib/commands/groups/membership/toggle', user_id: context.current_user.id, group_id: context.params.group_id, action_name: context.params.action_name
 

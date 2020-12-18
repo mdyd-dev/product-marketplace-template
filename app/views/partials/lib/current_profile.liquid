@@ -1,10 +1,6 @@
-
 {% liquid
-  if required and user_id == blank
-    session return_to = context.location.href
-
-    include 'redirect_to', url: '/sessions/new', error: 'app.errors.unauthenticated'
-    break
+  if user_id == blank
+    return null
   endif
 
   if membership == null
@@ -15,12 +11,5 @@
   endif
 
   function profile = 'lib/queries/profiles/find', user_id: user_id, id: id, followships: followships, membership: membership
-
-  if require_profile == false
-    return profile
-  elsif required and profile.slug == blank
-    include 'redirect_to', url: "/dashboard/profile/edit", notice: 'app.profiles.incomplete'
-  endif
-
   return profile
 %}

@@ -1,13 +1,14 @@
 {% liquid
+  unless url
+    if context.session.return_to
+      assign url = context.session.return_to
+      session return_to = null
+    endif
 
-  if context.session.return_to
-    assign url = context.session.return_to
-    session return_to = null
-  endif
-
-  if context.params.return_to
-    assign url = context.params.return_to
-  endif
+    if context.params.return_to
+      assign url = context.params.return_to
+    endif
+  endunless
 
   include 'lib/flash/publish', notice: notice, error: error
   redirect_to url

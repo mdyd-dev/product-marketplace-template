@@ -1,5 +1,9 @@
 {% liquid
-  include 'lib/must_be_authenticated'
+  unless context.current_user or context.session.reset_password_session_user_id
+    include 'theme/json/shared/not_authenticated'
+    break
+  endunless
+
 
   include 'theme/simple/passwords/edit'
 %}
