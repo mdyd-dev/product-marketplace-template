@@ -24,7 +24,7 @@
 
   hash_assign model['photos'] = ri.records.results
 
-  function url = 'f_link_to', object: model
+  function url = 'link_to', object: model
   hash_assign model['url'] = url
 
   hash_assign model['name'] = model['name'] | default: model['title']
