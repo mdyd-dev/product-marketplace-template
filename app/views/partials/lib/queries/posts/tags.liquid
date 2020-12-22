@@ -1,0 +1,7 @@
+{% liquid
+  graphql r = 'posts/tags', limit: limit, page: 1, query: query
+  include 'lib/handle_graphql_response', r: r, name: 'queries/posts/tags'
+
+  assign tags = r.posts.results | map: 'tags' | flatten
+  return tags
+%}

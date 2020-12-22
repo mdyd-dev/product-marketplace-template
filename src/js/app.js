@@ -39,3 +39,10 @@ if (styleGuide) {
     console.log('Style guide module loaded.');
   });
 }
+
+const tagsInput = document.querySelector('[data-tags-input]');
+if (tagsInput) {
+  import(/* webpackChunkName: "tags-input" */ './tags-input.js').then(() => {
+    console.log('Tags input module loaded.');
+  });
+}
