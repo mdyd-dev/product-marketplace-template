@@ -1,4 +1,21 @@
 {% liquid
+  if object
+    case object.type
+    when 'group'
+      assign group = object
+    when 'profile'
+      assign profile = object
+    when 'item'
+      assign item = object
+    when 'category'
+      assign category = object
+    when 'comment'
+      assign comment = object
+    when 'post'
+      assign post = object
+    endcase
+  endif
+
   if group
     print "/groups/show/" | append: group.id
     return "/groups/show/" | append: group.id
