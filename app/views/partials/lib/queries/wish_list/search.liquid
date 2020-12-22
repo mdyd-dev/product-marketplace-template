@@ -1,0 +1,8 @@
+{% liquid
+  assign product = item_id | downcase
+  assign user = context.current_user.id | downcase
+
+  graphql r  = 'user_wish_list/search', user_id: user
+
+  return_rc r.items.results
+%}

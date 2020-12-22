@@ -1,0 +1,15 @@
+---
+method: post
+---
+{% liquid
+  function_rc item = 'lib/queries/wish_list/find', item_id: context.params.id, user_id: context.params.user_id
+  function_rc object = 'lib/commands/wish_list/delete', item: item
+
+  if object.valid
+    include 'redirect_to', url: '/wish-list', notice: 'app.user_wish_list.item_deleted'
+  else
+    assign error = object.errors.base[0]
+
+    include 'redirect_to', url: '/wish-list', notice: 'app.user_wish_list.delete_failed'
+  endif
+%}

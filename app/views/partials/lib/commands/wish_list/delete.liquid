@@ -1,0 +1,12 @@
+{% liquid
+  function_rc object = 'lib/commands/wish_list/delete/build', item: item
+  function_rc object = 'lib/commands/wish_list/delete/check',  object: object
+
+  if object.valid
+    function_rc object = 'lib/commands/items/delete/execute', object: object
+  endif
+
+
+  return_rc object
+%}
+

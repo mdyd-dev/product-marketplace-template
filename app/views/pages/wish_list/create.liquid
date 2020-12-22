@@ -1,0 +1,12 @@
+---
+method: post
+---
+{% liquid
+  function_rc object = 'lib/commands/wish_list/create/build', item_id: context.params.id, user_id: context.params.user_id
+  function_rc object = 'lib/commands/wish_list/create/check', object: object
+  function_rc object = 'lib/commands/wish_list/create/execute', object: object
+
+    if object.valid
+      include 'redirect_to', url: '/wish-list', notice: 'app.user_wish_list.item_added'
+    endif
+%}

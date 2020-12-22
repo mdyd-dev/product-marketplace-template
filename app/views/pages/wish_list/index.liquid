@@ -1,0 +1,18 @@
+---
+slug: wish-list
+---
+{% liquid
+  include 'lib/must_be_authenticated'
+
+  graphql products = 'user_wish_list/search', user_id: context.current_user.id | fetch: 'items' | fetch: 'results' | map: "item_id"
+
+  assign ids = null | sort
+  for product in products
+    assign id = product | plus: 0 | sort
+    assign ids = ids | concat: id
+  endfor
+
+  graphql items = 'items/search',  value_in: ids | fetch: 'items'
+
+  include 'theme/simple/items/index', items: items
+%}

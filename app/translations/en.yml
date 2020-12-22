@@ -88,6 +88,7 @@ en:
     list-your-item: List your item
     admin: Admin
     dashboard: Dashboard
+    wish_list: Wish List
     login: Log in
     logout: 'Log out %{user}'
     login_form:
@@ -148,6 +149,14 @@ en:
       sell: Sell part of your collection
       main-sentence: Find Your Time
       secondary-sentence: MVP Marketplace is a social marketplace to buy and sell all things
+
+    user_wish_list:
+      item_deleted: Item has been removed from wish list
+      delete_failed: Something went wrong. Item has not been removed from wish list
+      item_added: Item has been added to wish list
+      add_failed: Something went wrong. Item has not been added to wish list
+
+
     orders:
       created: Order has been placed
       new: new order

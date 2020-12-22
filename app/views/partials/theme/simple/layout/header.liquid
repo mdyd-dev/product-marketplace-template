@@ -21,6 +21,9 @@
             <a href="/posts" class="p-3 hover:text-gray-900">
               {{ 'app.models.posts.list' | t }}
             </a>
+            <a href="/wish-list" class="p-3 hover:text-gray-900">
+              {{ 'app.wish_list' | t }}
+            </a>
 
             {% if context.current_user.id %}
                 {% assign superadmins = context.constants.superadmins | split: ',' %}

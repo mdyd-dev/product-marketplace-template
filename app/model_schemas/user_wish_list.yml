@@ -1,0 +1,7 @@
+---
+name: user_wish_list
+properties:
+  - name: item_id
+    type: string
+  - name: user_id
+    type: string

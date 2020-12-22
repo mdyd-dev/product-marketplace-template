@@ -1,0 +1,9 @@
+query search($user_id: String!, $item_id: String, $limit: Int = 20) {
+  items: models(per_page: $limit, filter: {model_schema_name: {value: "user_wish_list"}, properties: {name: "user_id", value: $user_id}, or: {properties: {name: "item_id", value: $item_id}}}) {
+
+    results {
+      id
+      item_id: property(name: "item_id")
+    }
+  }
+}

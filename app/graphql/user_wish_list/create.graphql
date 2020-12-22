@@ -1,0 +1,13 @@
+mutation create($item_id: String!, $user_id: String!) {
+  model_create(
+    model: {
+      model_schema_name: "user_wish_list"
+      properties: [
+        { name: "item_id" value: $item_id }
+        { name: "user_id" value: $user_id }
+      ]
+    }
+  ){
+    id
+  }
+}

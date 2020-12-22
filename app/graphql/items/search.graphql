@@ -1,8 +1,8 @@
-query search($id: ID, $limit: Int = 20, $status: [String!], $tag: String, $keyword: String, $category: String, $owner: String, $sort: RecordsSortInput = {created_at: {order: DESC}}, $withStatuses: Boolean = false, $withOrders: Boolean = false) {
+query search($id: ID, $limit: Int = 20, $status: [String!], $tag: String, $keyword: String, $category: String, $owner: String, $sort: RecordsSortInput = {created_at: {order: DESC}}, $withStatuses: Boolean = false, $withOrders: Boolean = false, $value_in: [ID!]) {
   items: records(
     per_page: $limit,
     filter: {
-      id: {value: $id},
+      id: {value: $id, value_in: $value_in},
       table: { value: "item" }
       deleted_at: { exists: false }
       properties: [

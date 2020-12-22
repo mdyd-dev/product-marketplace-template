@@ -2,6 +2,16 @@
   {% render 'theme/simple/items/metatags', item: item %}
 {% endcontent_for %}
 
+{% liquid
+  graphql wish_list_items = 'user_wish_list/search', user_id: current_profile.user.id | fetch: 'items' | fetch: 'results' | map: "item_id"
+
+  if wish_list_items contains item.id
+    assign favorite = true
+  else
+    assign favorite = false
+  endif
+%}
+
 <div class="container">
   <div class="flex flex-wrap">
     <div class="w-full md:w-1/2">
@@ -103,6 +113,23 @@
       </span>
       {%- endif %}
 
+      <p class="py-4 mt-4 border-t border-blue-300">Wish List</p>
+
+      <div class="flex mt-4">
+        {% if favorite %}
+        <form action="/wish_list/delete" method="post" class="ml-auto flex" >
+          <input type="hidden" name="id" value="{{ item.id }}">
+          <input type="hidden" name="user_id" value="{{ current_profile.user.id }}">
+          <button id="deletewishbutton" class="button button-secondary">Remove from wish list</button>
+        </form>
+        {% else %}
+        <form action="/wish_list/create" method="post" class="ml-auto flex" >
+          <input type="hidden" name="id" value="{{ item.id }}">
+          <input type="hidden" name="user_id" value="{{ current_profile.user.id }}">
+          <button id="addwishbutton" class="button button-primary">Add to wish list</button>
+        </form>
+        {% endif %}
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,15 @@
+{% liquid
+  graphql r= 'user_wish_list/create', item_id: object.item_id, user_id: object.user_id
+
+  if r.errors
+    log r.errors, type: 'errors.graphql.invalid'
+
+    hash_assign object['valid'] = false
+    hash_assign object['errors'] = r.errors
+  else
+    assign object = r.model_create
+    hash_assign object['valid'] = true
+  endif
+
+  return_rc object
+%}
