@@ -3,7 +3,9 @@ import Tagify from '@yaireo/tagify';
 import apiFetch from './apiFetch'
 
 const tagsInput = document.querySelector('[data-tags-input]')
-const tagify = new Tagify(tagsInput);
+const tagify = new Tagify(tagsInput,{
+  originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
+});
 let controller; // for aborting the call
 
 const onInput = (e) => {
