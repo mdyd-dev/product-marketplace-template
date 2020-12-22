@@ -1,0 +1,30 @@
+{% graphql posts %}
+query {
+  records(
+    per_page: 1000
+    filter: {
+      table: { value: "post" }
+      deleted_at: { exists: false }
+      properties: [
+        { name: "parent_id" exists: false }
+      ]
+    }
+    sort: [
+      { created_at: { order: DESC }}
+    ]
+  ){
+    total_entries
+    results {
+      id
+    }
+  }
+}
+{% endgraphql %}
+{% liquid
+  log posts, type: 'migration: posts_calculate_answers_cache'
+  log posts.records.total_entries, type: 'posts total entries'
+  for post in posts.records.results
+    function object = 'lib/commands/posts/cache', post_id: post.id
+    log object, type: 'migration: posts_fill_uuid'
+  endfor
+%}
