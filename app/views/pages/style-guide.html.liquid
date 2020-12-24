@@ -692,4 +692,17 @@ metadata:
       </section>
     </div>
 
+    {% content_for 'header' %}
+      ["one", "two", "three"]
+    {% endcontent_for %}
+
+    {% content_for 'content' %}
+      {
+        ["content11", "content12", "content13"],
+        ["content21", "content22", "content23"]
+      }
+    {% endcontent_for %}
+
+    {% render 'theme/simple/ui/datatable', data: header %}
+
 </section>

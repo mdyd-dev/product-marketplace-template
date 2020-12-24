@@ -1,0 +1,22 @@
+{{ data }}
+
+<section class="w-full lg:table">
+
+  <header class="hidden lg:table-row font-bold">
+    {% for heading in data.header %}
+      <div class="lg:pl-2 lg:py-4 lg:table-cell">{{ heading }}</div>
+    {% endfor %}
+  </header>
+
+  <div class="lg:table-row pb-5 mb-4 border-b">
+
+    {% for heading in data.header %}
+      <div class="lg:pl-2 lg:py-4 lg:table-cell lg:border-t">
+        <span class="lg:hidden">{{ heading }}: </span>
+        {{ content[forloop.index] }}
+      </div>
+    {% endfor %}
+
+  </div>
+
+</section>
