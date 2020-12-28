@@ -28,14 +28,14 @@ const createPhoto = (imageUrl) => {
   const photoType = _form.dataset.s3UppyPhotoType;
   // Create model for this user with s3 image url
   return apiFetch('/api/photos', {
-    data: { photo: { direct_url: imageUrl, photo_type: photoType, object_uuid: objectUuid } }
+    body: JSON.stringify({ photo: { direct_url: imageUrl, photo_type: photoType, object_uuid: objectUuid } })
   });
 };
 
 const deletePhoto = (photoId) => {
   return apiFetch('/api/photos', {
     method: 'DELETE',
-    data: { photo: { id: photoId } }
+    body: JSON.stringify({ photo: { id: photoId } })
   });
 };
 

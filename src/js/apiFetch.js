@@ -8,17 +8,18 @@ const getCSRFToken = () => {
   return csrfToken;
 }
 
-const apiFetch = (path, { method, data }) => {
-  fetch(path, {
-    method: method || 'POST',
+const apiFetch = (path, options) => {
+  const initOptions = {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify(
-      Object.assign(data, { authenticity_token: getCSRFToken() })
-    ),
-  }).then((response) => response.json())
+      'Accept': 'application/json',
+      "X-CSRF-Token": getCSRFToken()
+    }
+  };
+
+  return fetch(path, Object.assign(initOptions, options))
+    .then((response) => response.json())
 }
 
 export default apiFetch;

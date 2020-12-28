@@ -2,40 +2,35 @@ import '../css/app.css';
 
 const uppyPhotos = document.querySelector('[data-s3-uppy-photo]');
 if (uppyPhotos) {
-  import(/* webpackChunkName: "photo-upload" */ './photo-upload.js').then(() => {
-    console.log('Image upload module loaded.');
-  });
+  import(/* webpackChunkName: "photo-upload" */ './photo-upload.js').then(() => {});
 }
 
 const commentNewPost = document.querySelector('[data-comment-new-post]');
 if (commentNewPost) {
-  import(/* webpackChunkName: "comment-new-post" */ './comment-new-post.js').then(() => {
-  });
+  import(/* webpackChunkName: "comment-new-post" */ './comment-new-post.js').then(() => {});
 }
 
 const gallery = document.querySelector('.glider');
 if (gallery) {
-  import(/* webpackChunkName: "gallery" */ './gallery.js').then(() => {
-    console.log('Gallery module loaded.');
-  });
+  import(/* webpackChunkName: "gallery" */ './gallery.js').then(() => {});
 }
 
 const markdownEditor = document.querySelector('[data-markdown-editor]');
 if (markdownEditor) {
-  import(/* webpackChunkName: "markdown-editor" */ './markdown-editor.js').then(() => {
-    console.log('Markdown editor module loaded.');
-  });
+  import(/* webpackChunkName: "markdown-editor" */ './markdown-editor.js').then(() => {});
 }
 
 const markdownImages = document.querySelector('.markdown img');
 if (markdownImages) {
-  import(/* webpackChunkName: "markdown-images" */ './markdown-images.js').then(() => {
-  });
+  import(/* webpackChunkName: "markdown-images" */ './markdown-images.js').then(() => {});
 }
 
 const styleGuide = document.querySelector('#styleGuide');
 if (styleGuide) {
-  import(/* webpackChunkName: "style-guide" */ './style-guide.js').then(() => {
-    console.log('Style guide module loaded.');
-  });
+  import(/* webpackChunkName: "style-guide" */ './style-guide.js').then(() => {});
+}
+
+const tagsInput = document.querySelector('[data-tags-input]');
+if (tagsInput) {
+  import(/* webpackChunkName: "tags-input" */ './tags-input.js').then(() => {});
 }

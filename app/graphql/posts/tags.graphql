@@ -1,0 +1,21 @@
+query search(
+  $query: String
+  $limit: Int = 20
+) {
+  posts: records(
+    per_page: $limit
+    filter: {
+      table: { value: "post" }
+      properties: [
+        { name: "tags", contains: $query }
+      ]
+    }
+    sort: [{ properties: { name: "tags" order: DESC } }]
+  ) {
+    total_entries
+    results {
+      id
+      tags: property_array(name: "tags")
+    }
+  }
+}
