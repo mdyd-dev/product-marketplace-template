@@ -16,6 +16,7 @@ const styleGuide = function(){
   module.init = () => {
     styleGuide.colors();
     styleGuide.typography();
+    styleGuide.icons();
     styleGuide.clipboard();
   };
 
@@ -84,6 +85,7 @@ styleGuide.colors = () => {
     });
   };
 
+
   // purpose:		finds the background color and shows it in corresponding place
   // ------------------------------------------------------------------------
   module.showBackgroundColor = () => {
@@ -103,6 +105,81 @@ styleGuide.colors = () => {
 
 };
 
+
+
+// purpose:		handles the icons section
+// ************************************************************************
+styleGuide.icons = () => {
+
+  // cache 'this' value not to be overwritten later
+  const module = this;
+
+  // purpose:		settings that are being used across the module
+  // ------------------------------------------------------------------------
+  module.settings = {};
+  // the container with the icons list (dom node)
+  module.settings.container = document.querySelector('#styleGuide-icons');
+  // the attribute that stores the icon name (string)
+  module.settings.iconName = 'data-icon';
+  // the icons (dom node)
+  module.settings.icons = module.settings.container.querySelectorAll(`[${module.settings.iconName}]`)
+
+
+  // purpose:   initializes module
+  // ------------------------------------------------------------------------
+  module.init = () => {
+    module.wrap();
+    module.showNames();
+    module.clipboard();
+  };
+
+
+  // purpose:   wrap icons in list elements
+  // ------------------------------------------------------------------------
+  module.wrap = () => {
+    module.settings.icons.forEach((item) => {
+      let wrapper = document.createElement('li');
+
+      wrapper.classList.add('flex', 'flex-col', 'items-center', 'cursor-pointer');
+
+      item.parentNode.insertBefore(wrapper, item);
+      wrapper.appendChild(item);
+    });
+  };
+
+
+  // purpose:   shows the icon names
+  // ------------------------------------------------------------------------
+  module.showNames = () => {
+    module.settings.icons.forEach((item) => {
+      item.parentElement.insertAdjacentHTML('beforeend', item.getAttribute(module.settings.iconName));
+    });
+  };
+
+
+  // purpose:   copies the icon render function to clipboard on click
+  // ------------------------------------------------------------------------
+  module.clipboard = () => {
+    module.settings.icons.forEach((icon) => {
+      icon.parentElement.addEventListener('click', (event) => {
+        let name = icon.parentElement.childNodes[1].textContent.trim();
+
+        navigator.clipboard.writeText(`{% render 'theme/simple/ui/icon', icon: '${name}' %}`).then(() => {
+          icon.parentElement.classList.add('text-confirmation');
+
+          setTimeout(() => {
+            icon.parentElement.classList.remove('text-confirmation');
+          }, 800);
+        }, () => {
+          new Error('Could not copy the code to clipboard');
+        });
+      });
+    })
+  };
+
+
+  module.init();
+};
 
 
 // purpose:		handles the typography section
