@@ -45,6 +45,24 @@
 }
 
 
+/* with icon */
+.button svg {
+  @apply
+    w-4
+    h-4;
+}
+
+.button svg:first-child {
+  @apply
+    mr-2;
+}
+
+.button svg:last-child {
+  @apply
+    ml-2;
+}
+
+
 
 /* secondary
 ============================================================================ */
