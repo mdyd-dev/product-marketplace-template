@@ -19,5 +19,7 @@ properties:
     type: string
   - name: c__score
     type: integer
+  - name: c__answers
+    type: integer
   - name: slug
     type: string

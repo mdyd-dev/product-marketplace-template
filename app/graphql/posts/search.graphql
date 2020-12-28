@@ -51,6 +51,7 @@ query search(
       slug: property(name: "slug")
 
       c__score: property_int(name: "c__score")
+      c__answers: property_int(name: "c__answers")
       creator: related_record(
         table: "profile"
         join_on_property: "creator_id"
@@ -91,6 +92,7 @@ query search(
         downvote_profile_ids: property_array(name: "downvote_profile_ids")
         score: property_int(name: "score")
         c__score: property_int(name: "c__score")
+        c__answers: property_int(name: "c__answers")
         creator: related_record(
           table: "profile"
           join_on_property: "creator_id"

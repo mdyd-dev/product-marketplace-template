@@ -4,6 +4,7 @@
   assign object = '{}' | parse_json
   hash_assign object['id'] = post.id
   hash_assign object['c__score'] = post.upvote_profile_ids.size | minus: post.downvote_profile_ids.size | default: 0
+  hash_assign object['c__answers'] = post.posts.size
 
   function object = 'lib/commands/execute', mutation_name: 'posts/update' object: object, selection: 'model_update'
 

@@ -17,6 +17,14 @@
     <span class="sidenote">
       {{ 'app.models.posts.score' | t }}
     </span>
+
+    {% assign answers = post.c__answers | default: 0 %}
+    <span class="pt-5">
+      {{ answers }}
+    </span>
+    <span class="sidenote">
+      {{ 'app.models.posts.answers' | t | pluralize: answers }}
+    </span>
   </aside>
 
   <div class="w-full min-w-0 flex-1 flex flex-col">
