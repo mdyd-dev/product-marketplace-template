@@ -6,7 +6,7 @@ method: delete
   function current_profile = 'lib/current_profile', user_id: context.current_user.id
   include 'lib/profile_present_or_redirect', profile: current_profile
 
-  function comment = 'lib/queries/comments/find', id: context.params.id
+  function comment = 'lib/queries/comments/find', id: context.params.id, creator_id: current_profile.id
   include 'lib/present_or_404', property:  comment.id
   function object = 'lib/commands/call_delete', object: comment, command: 'comments/delete'
 

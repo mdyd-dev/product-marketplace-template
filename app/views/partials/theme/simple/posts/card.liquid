@@ -54,9 +54,7 @@
 
   {% if post.comments.size > 0 %}
     <section>
-      {% liquid
-        include 'theme/simple/posts/comments', list: post.comments, root_post: root_post
-      %}
+      {% include 'theme/simple/posts/comments', list: post.comments, root_post: root_post, current_profile: current_profile %}
     </section>
   {% endif %}
 

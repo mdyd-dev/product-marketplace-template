@@ -948,6 +948,7 @@ en:
         delete_failed: Delete failed
         deleted: Deleted
         updated: Updated
+        edit: Edit
       contacts:
         reasons:
           purchase: Purchase
