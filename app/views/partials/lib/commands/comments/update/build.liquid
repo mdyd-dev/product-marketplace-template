@@ -1,10 +1,6 @@
 {% parse_json object %}
   {
     "id": {{ object.id | json }},
-    "uuid": {{ object.uuid | json }},
-    "commentable_id": {{ object.commentable_id | json }},
-    "commentable_type": {{ object.commentable_type | json }},
-    "creator_id": {{ object.creator_id | json }},
     "title": {{ object.title | json }},
     "body": {{ object.body | json }}
   }

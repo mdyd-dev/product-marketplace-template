@@ -1,3 +1,6 @@
+{% liquid
+  function root_post_url = 'link_to', post: root_post
+%}
 <ul>
   {% for comment in list %}
     <li class="mt-4 md:ml-14 pt-2 md:px-4 flex border-t border-dashed {% if forloop.last %} border-b pb-3 {% endif %}">
@@ -8,7 +11,7 @@
           </a>
           <span class="block">
             <span class="pr-5">
-              <a href="/dashboard/posts/comments/edit/{{comment.id}}" class="text-interaction">Edit</a>
+              <a href="/comments/edit/{{comment.id}}?return_to={{root_post_url}}" class="text-interaction">Edit</a>
               |
               <form action="/comments" method="post" onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }" class="inline">
                 {% include 'authenticity_token' %}

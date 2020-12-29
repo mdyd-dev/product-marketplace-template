@@ -1,0 +1,15 @@
+---
+slug: comments
+method: put
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_redirect', profile: current_profile
+
+  function object = 'lib/commands/call', object: context.params.comment, command: 'comments/update', selection: 'model_update'
+  if object.valid
+    include 'redirect_to', url: context.params.return_to
+  else
+    include 'theme/simple/comments/edit', object: object
+  endif
+%}
