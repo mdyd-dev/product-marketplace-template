@@ -17,11 +17,13 @@
     inline-flex
     items-center
     justify-center
+    align-top
     border-2
     border-transparent
     rounded
     bg-interaction
     whitespace-nowrap
+    leading-6
     text-center
     text-content-inverted;
 }
@@ -48,18 +50,22 @@
 /* with icon */
 .button svg {
   @apply
-    w-4
-    h-4;
+    w-5
+    h-5
+    my-0.5
+    mr-2
+    ml-2
+    inline-block;
 }
 
-.button svg:first-child {
+.button-icon-right svg {
   @apply
-    mr-2;
+    mr-0;
 }
 
-.button svg:last-child {
+.button-icon-left svg {
   @apply
-    ml-2;
+    ml-0;
 }
 
 

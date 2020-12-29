@@ -389,7 +389,7 @@ metadata:
           </div>
           <div class="table-row">
             <dt class="table-cell">Modifiers:</dt>
-            <dt class="table-cell pl-4 font-mono">button-disabled button-small</dt>
+            <dt class="table-cell pl-4 font-mono">button-disabled button-small button-icon-left button-icon-right</dt>
           </div>
         </dl>
       </section>
@@ -401,6 +401,30 @@ metadata:
         <div class="mt-2 p-5 flex flex-wrap items-center justify-center space-x-1 border">
           <button class="button" disabled>Disabled</button>
           <a href="http://platformos.com" class="button button-disabled">Link disabled</a>
+        </div>
+      </section>
+    </div>
+
+    <div class="mt-16 flex gap-10">
+      <section class="w-2/3">
+        {% render 'theme/simple/ui/subtitle', label: 'Buttons' %}
+        <dl class="table">
+          <div class="table-row">
+            <dt class="table-cell">Class:</dt>
+            <dd class="table-cell pl-4 font-mono">button-icon-left button-icon-right</dd>
+          </div>
+        </dl>
+      </section>
+      <section class="w-1/3">
+        <div class="p-5 flex flex-wrap items-center justify-center space-x-1 border">
+          <button class="button button-icon-left">
+            {% render 'theme/simple/ui/icon', icon: 'plus' %}
+            Icon button
+          </button>
+          <a href="http://platformos.com" class="button button-icon-right">
+            Link button
+            {% render 'theme/simple/ui/icon', icon: 'plus' %}
+          </a>
         </div>
       </section>
     </div>
