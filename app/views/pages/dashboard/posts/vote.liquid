@@ -12,7 +12,7 @@ method: post
   function object = 'lib/commands/posts/vote', object: context.params.post, current_profile: current_profile, post: post
 
   if object.valid
-    include 'lib/commands/events/create', type: 'post_voted', actor_id: current_profile.id, object_id: object.id
+    include 'lib/commands/events/create', type: 'post_voted', actor_id: current_profile.id, object_id: object.id, delay: 2
   else
     assign errors = object.errors.base | join: ', '
     include 'lib/flash/publish', error: errors
