@@ -16,9 +16,9 @@
       <div class="lg:table-cell"></div>
     </header>
 
-    <div class="card px-0 table-row-group">
+    <div class="card p-0 lg:table-row-group">
       {% for post in posts.results %}
-        <div class="lg:table-row pb-5 mb-4 border-b last:border-0">
+        <div class="p-5 lg:table-row border-b last:border-0">
 
           <div class="lg:pl-4 lg:py-4 lg:table-cell lg:border-t {% if forloop.first %} rounded-tl {% endif %} {% if forloop.last %} rounded-bl {% endif %} align-middle">
             <span class="lg:hidden">{{ 'app.models.posts.form.title' | t }}: </span>
@@ -28,8 +28,8 @@
             </a>
           </div>
 
-          <div class="lg:pl-4 lg:py-4 lg:table-cell lg:border-t align-middle">
-            <span class="lg:hidden">{{ 'app.models.posts.form.tags' | t }}: </span>
+          <div class="flex items-center lg:pl-4 lg:py-4 lg:table-cell lg:border-t align-middle">
+            <span class="mr-2 lg:hidden">{{ 'app.models.posts.form.tags' | t }}: </span>
             {% render 'theme/simple/ui/tags', tags: post.tags, url: '/posts?tag='  %}
           </div>
 
