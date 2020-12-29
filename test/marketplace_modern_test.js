@@ -8,16 +8,38 @@ import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          contactUsForm, activityFeed, categoryName, topicsPage, permissionDenied } from './fixtures'
 import { register, createItem, checkErrors } from './helper'
 
-
-const translationMissing = Selector('body').withText('translation missing')
-async function checkTranslation(translationMissing) {
-  if (await translationMissing.exists)
-    await t.expect(translationMissing.exists).notOk();
-};
-
-
 fixture`Happy path scenario`
           .page(myUrl)
+
+test.page(myUrl + '/sign-up')('Uncompleted profile tests', async (t) => {
+  await t.typeText(loginForm.inputs.email, "tester@example.com")
+  .typeText(loginForm.inputs.password, "password")
+  .click(loginForm.buttons.termsAccept)
+  await t.click(loginForm.buttons.regSubmit)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  .click(dashboard.nav.publicProfile)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  .click(dashboard.nav.inbox)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  .click(topMenu.buttons.listItem)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  .click(topMenu.buttons.items)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  .click(topMenu.buttons.logo)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  .click(topMenu.buttons.questions)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  .click(topMenu.buttons.groups)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  .click(topMenu.buttons.feed)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  .click(topMenu.buttons.chat)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  .click(dashboard.nav.myGroups)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  .click(dashboard.nav.activityFeed)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+})
 
 test.page(myUrl + '/sign-up')('Register seller', async (t) => {
   await register(SellerRandomUser)

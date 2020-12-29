@@ -11,7 +11,10 @@ export default class TopMenuBtns {
       logOut: Selector('header').find('button').withText('Log out'),
       adminPanel: Selector('header').find('a').withText('Admin'),
       items: Selector('header').find('a').withText('Items'),
-      questions : Selector('a').withText('Questions')
+      questions: Selector('a').withText('Questions'),
+      groups: Selector('a').withText('Groups'),
+      feed: Selector('a').withText('Feed'),
+      chat: Selector('a').withText('Chat')
     }
   }
 }
