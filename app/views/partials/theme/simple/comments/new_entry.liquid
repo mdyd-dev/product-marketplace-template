@@ -34,9 +34,11 @@
     </div>
   </div>
 
-  <div class="w-full flex justify-between flex-row-reverse" data-comment-show-new-post>
-    <span class="button button-secondary button-small cursor-pointer">{{ 'app.models.comments.comment' | t }}</span>
-  </div>
+  {% if hidden %}
+    <div class="w-full flex justify-between flex-row-reverse" data-comment-show-new-post>
+      <span class="button button-secondary button-small cursor-pointer">{{ 'app.models.comments.comment' | t }}</span>
+    </div>
+  {% endif %}
 </form>
 
 {% liquid
