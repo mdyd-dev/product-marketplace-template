@@ -1,9 +1,11 @@
 /*
   main
+  with icon
   secondary
   danger
   small
   small secondary
+  compact
 */
 
 
@@ -47,7 +49,9 @@
 }
 
 
-/* with icon */
+
+/* secondary
+============================================================================ */
 .button svg {
   @apply
     w-5
@@ -137,4 +141,13 @@
 .button-small.button-secondary {
   @apply
     border;
+}
+
+
+
+/* compact
+============================================================================ */
+.button-compact {
+  @apply
+    px-1;
 }
