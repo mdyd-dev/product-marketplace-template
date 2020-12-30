@@ -3,10 +3,13 @@
 %}
 <ul>
   {% for comment in list %}
+    {% liquid
+      function comment_creator_url = 'link_to', profile: comment.creator
+    %}
     <li class="mt-4 md:ml-14 pt-2 md:px-4 flex border-t border-dashed {% if forloop.last %} border-b pb-3 {% endif %}">
       <div class="w-full">
         <div class="md:h-10 mb-2 md:flex justify-between items-center">
-          <a href="{{ creator_url }}">
+          <a href="{{ comment_creator_url }}">
             {{ comment.creator.name }}
           </a>
           <span class="block">
