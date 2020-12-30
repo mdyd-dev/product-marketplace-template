@@ -371,5 +371,5 @@ test('Delete question', async (t) => {
     .click(topMenu.buttons.dashboard)
     .click(dashboard.nav.questions)
     await t.setNativeDialogHandler(() => true)
-    .click(Selector('button').withText('Delete'))
+    .click(Selector('button').withAttribute('title', 'Delete'))
 })
