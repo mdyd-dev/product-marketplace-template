@@ -18,8 +18,7 @@
                   {% include 'authenticity_token' %}
                   <input type="hidden" name="_method" value="delete">
                   <input type="hidden" name="id" value="{{ comment.id }}">
-                  <input type="hidden" name="return_to" value="{% render 'link_to', post: root_post %}">
-
+                  <input type="hidden" name="return_to" value="{{ root_post_url }}">
                   <button class="text-danger">{{ 'app.models.shared.delete' | t }}</button>
                 </form>
               </span>
@@ -30,7 +29,12 @@
           </span>
         </div>
 
-        {{ comment.body }}
+        <span class="markdown">
+          {% liquid
+            assign comment_body_formatted = comment.body | markdown: '{ "elements": ["b","strong","i","em","a","code"], "attributes":{ "a": ["href"] } }'
+            echo comment_body_formatted
+          %}
+        </span>
       </div>
     </li>
   {% endfor %}

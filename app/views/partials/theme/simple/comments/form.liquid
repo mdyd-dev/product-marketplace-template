@@ -18,6 +18,8 @@
     <div class="mt-5">
       <label class="block" for="body">{{ 'app.models.comments.form.body' | t }}</label>
       <textarea name="comment[body]" class="w-full p-2 outline-none" rows="3" placeholder="{{ placeholder }}" autofocus required>{{object.body}}</textarea>
+      {% render 'theme/simple/ui/form-tip', content_key: 'app.models.comments.form.body_help' %}
+
       {% include 'theme/simple/field_error', errors: object.errors.body %}
     </div>
 
