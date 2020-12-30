@@ -15,6 +15,7 @@
   <div class="{% if hidden %}hidden{% endif %}" data-comment-form>
     <div class="relative">
       <textarea name="comment[body]" class="w-full p-2 outline-none" rows="3" placeholder="{{ placeholder }}"></textarea>
+      {% render 'theme/simple/ui/form-tip', content_key: 'app.models.comments.form.body_help' %}
 
       <div data-comment-photo-upload class="absolute top-0 right-0 w-8 h-8 mt-5 mr-5 text-gray-600 cursor-pointer" title="images">
         {% if images %}
@@ -34,9 +35,11 @@
     </div>
   </div>
 
-  <div class="w-full flex justify-between flex-row-reverse" data-comment-show-new-post>
-    <span class="button button-secondary button-small cursor-pointer">{{ 'app.models.comments.comment' | t }}</span>
-  </div>
+  {% if hidden %}
+    <div class="w-full flex justify-between flex-row-reverse" data-comment-show-new-post>
+      <span class="button button-secondary button-small cursor-pointer">{{ 'app.models.comments.comment' | t }}</span>
+    </div>
+  {% endif %}
 </form>
 
 {% liquid

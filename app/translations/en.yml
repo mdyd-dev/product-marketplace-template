@@ -948,6 +948,7 @@ en:
         delete_failed: Delete failed
         deleted: Deleted
         updated: Updated
+        edit: Edit
       contacts:
         reasons:
           purchase: Purchase
@@ -1015,6 +1016,7 @@ en:
         form:
           creator_id: creator_id
           body: Body
+          body_help: "You can use formatting: [link](https://example.com) _italic_ **bold** `code`"
           title: Title
           uuid: uuid
           commentable_id: commentable_id
