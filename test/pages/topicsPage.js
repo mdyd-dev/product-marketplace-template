@@ -15,7 +15,7 @@ export default class TopicsPage {
       questionBody: Selector('label[for="body"]'),
       //questionBody: Selector('div').find('textarea'),
       answerBody: Selector('label[for="body"]'),
-      questionTags: Selector('#tags')
+      questionTags: Selector('tags')
     }
     this.vote = {
       pointUpQuestion: Selector('button[data-tc="voteup"]'),
