@@ -8,12 +8,12 @@ method: delete
 
   function comment = 'lib/queries/comments/find', id: context.params.id, creator_id: current_profile.id
   include 'lib/present_or_404', property:  comment.id
-  function object = 'lib/commands/call_delete', object: comment, command: 'comments/delete'
+  function object = 'lib/commands/call', object: comment, command: 'comments/delete', selection: 'model_delete'
 
   if object.valid
     include 'lib/commands/events/create', type: 'comment_deleted', actor_id: current_profile.id, object_id: object.id, target_id: context.params.comment.commentable_id, delay: 0
-    redirect_to context.params.return_to
+    include 'redirect_to', url: context.params.return_to, notice: 'app.models.shared.deleted'
   else
-    echo object
+    include 'redirect_to', url: context.params.return_to, error: 'app.models.shared.delete_failed'
   endif
 %}
