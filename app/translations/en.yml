@@ -1026,7 +1026,9 @@ en:
         add: Add Question
         edit: Edit Question
         edit_answer: Edit Answer
-        empty_state: You haven't added any questions yet. <br> Create your first one now!
+        empty_state:
+          title: You haven't added any questions yet.
+          subtitle: Create your first one now!
         read_more: Read more
         post_answer: Post answer
         your_answer: Your Answer
