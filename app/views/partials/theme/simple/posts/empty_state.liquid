@@ -1,9 +1,13 @@
-<div class="flex items-center justify-around py-20">
-  <h1 class="text-2xl font-medium">
-    {{ 'app.models.posts.empty_state' | t }}
-  </h1>
+<section class="flex items-center justify-between gap-10">
+  <header>
+    {% render 'theme/simple/ui/bigtitle', label_key: 'app.models.posts.empty_state.title' %}
+    {% render 'theme/simple/ui/title', label_key: 'app.models.posts.empty_state.subtitle' %}
 
-  <a href="/dashboard/posts/new" class="text-lg button">
-    {{ 'app.models.posts.add' | t }}
-  </a>
-</div>
+    <a href="/dashboard/posts/new" class="mt-5 button button-icon-right">
+      {{ 'app.models.posts.add' | t }}
+      {% render 'theme/simple/ui/icon', icon: 'plus' %}
+    </a>
+  </header>
+
+  <img src="{{ 'images/empty_questions.svg' | asset_url }}" alt="" class="w-1/3">
+</section>

@@ -1,9 +1,11 @@
-<div class="mb-5 text-right">
-  <a href="/dashboard/posts/new" class="button button-icon-right">
-    {{ 'app.models.posts.add' | t }}
-    {% render 'theme/simple/ui/icon', icon: 'plus' %}
-  </a>
-</div>
+{% if posts.results.size > 0 %}
+  <div class="mb-5 text-right">
+    <a href="/dashboard/posts/new" class="button button-icon-right">
+      {{ 'app.models.posts.add' | t }}
+      {% render 'theme/simple/ui/icon', icon: 'plus' %}
+    </a>
+  </div>
+{% endif %}
 
 {% if posts.results.size > 0 %}
   <section class="w-full lg:table">
