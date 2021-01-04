@@ -1,0 +1,5 @@
+sample_item_photo/watch1.png
+sample_item_photo/watch2.png
+sample_item_photo/watch3.png
+sample_item_photo/watch5.png
+sample_item_photo/watch4.png
