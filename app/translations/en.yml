@@ -447,7 +447,8 @@ en:
       created: Your account has been created
       reset_password:
         title: Reset password
-        send_link: Send email with authentication link
+        description: Please provide your registered email address and we will send you a link that will enable you to reset the password.
+        send_link: Reset password
     authentication_links:
       created: >-
         Please check your email. We have sent you a password resetting
