@@ -18,7 +18,7 @@ test.page(myUrl + '/sign-up')('Uncompleted profile tests', async (t) => {
   .click(loginForm.buttons.termsAccept)
   await t.click(loginForm.buttons.regSubmit)
   await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-  for (var i = 0; i <= 9; i++) {
+  for (var i = 0; i <= 10; i++) {
     await t.click(notAllowedPlaces[i])
     await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
   }
