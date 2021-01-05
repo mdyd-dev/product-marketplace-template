@@ -1,9 +1,10 @@
 /*
   main
-  with icon
+    with icon
   secondary
   danger
   small
+    with icon
   small secondary
   compact
 */
@@ -48,10 +49,7 @@
     bg-interaction-disabled;
 }
 
-
-
-/* secondary
-============================================================================ */
+/* with icon */
 .button svg {
   @apply
     w-5
@@ -132,6 +130,13 @@
     py-1
     border
     text-sm;
+}
+
+/* with icon */
+.button-small svg {
+  @apply
+    w-4
+    h-4;
 }
 
 
