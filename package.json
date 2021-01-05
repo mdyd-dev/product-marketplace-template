@@ -70,6 +70,7 @@
     "faker-cli": "^2.0.0",
     "ffmpeg": "0.0.4",
     "glider-js": "^1.7.3",
+    "lodash.debounce": "^4.0.8",
     "lodash.startcase": "^4.4.0",
     "testcafe-browser-provider-lambdatest": "^2.0.3",
     "testcafe-reporter-html": "^1.4.6",
