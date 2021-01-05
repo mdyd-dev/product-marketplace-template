@@ -97,10 +97,15 @@ export const itemShow = new ItemShowPage(item)
 export const editedItemShow = new ItemShowPage(editedItem)
 export const itemSearch = new ItemSearch(item, editedItem)
 
-export var notAllowedPlaces = [dashboard.nav.inbox, topMenu.buttons.listItem,
-  topMenu.buttons.items, topMenu.buttons.logo, topMenu.buttons.questions,
-  topMenu.buttons.groups, topMenu.buttons.feed, topMenu.buttons.chat,
-  dashboard.nav.myGroups, dashboard.nav.activityFeed, dashboard.nav.publicProfile]
+export var notAllowedPlaces = [
+  dashboard.nav.inbox,
+  topMenu.buttons.listItem,
+  topMenu.buttons.feed,
+  topMenu.buttons.chat,
+  dashboard.nav.myGroups,
+  dashboard.nav.activityFeed,
+  dashboard.nav.publicProfile
+];
 
 export const group = {
   name: groupName,
