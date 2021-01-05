@@ -34,3 +34,8 @@ const tagsInput = document.querySelector('[data-tags-input]');
 if (tagsInput) {
   import(/* webpackChunkName: "tags-input" */ './tags-input.js').then(() => {});
 }
+
+const disableSpecialChars = document.querySelector('[data-disable-special-chars]');
+if (disableSpecialChars) {
+  import(/* webpackChunkName: "disable-special-chars" */ './disable-special-chars.js').then(() => {});
+}
