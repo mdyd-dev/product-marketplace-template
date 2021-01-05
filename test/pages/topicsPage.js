@@ -6,8 +6,8 @@ export default class TopicsPage {
       addQuestion: Selector('a').withText('Add Question'),
       postQuestion: Selector('button').withText('Add Question'),
       postAnswer: Selector('button').withText("Post answer"),
-      editQuestion: Selector('a').withText("Edit Question"),
-      deleteQuestion: Selector('button').withText('Delete'),
+      editQuestion: Selector('a').withAttribute("title", "Edit Question"),
+      deleteQuestion: Selector('button').withAttribute("title", 'Delete'),
       submitEdit:Selector('button').withText("Edit Question")
     }
     this.inputs = {
@@ -27,7 +27,7 @@ export default class TopicsPage {
     }
     this.ratings = {
       question: Selector('span[data-tc="votes-count"]').withText('1').nth(0),
-      firstAnswer: Selector('main').find('div').find('span').withText('1').nth(1)
+      firstAnswer: Selector('span[data-tc="votes-count"]').withText('1').nth(1)
     }
   }
 }

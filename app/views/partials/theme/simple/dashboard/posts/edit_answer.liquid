@@ -25,3 +25,5 @@
     <button class="mt-8 button">{{ submit_label | t }}</button>
   </form>
 </div>
+
+{% render 'theme/simple/photos/s3_form', object_uuid: object.uuid, presigned_url: presigned_url, photo_type: 'screenshot' %}

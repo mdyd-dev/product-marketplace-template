@@ -1,0 +1,19 @@
+---
+slug: comments
+method: delete
+---
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_redirect', profile: current_profile
+
+  function comment = 'lib/queries/comments/find', id: context.params.id, creator_id: current_profile.id
+  include 'lib/present_or_404', property:  comment.id
+  function object = 'lib/commands/call', object: comment, command: 'comments/delete', selection: 'model_delete'
+
+  if object.valid
+    include 'lib/commands/events/create', type: 'comment_deleted', actor_id: current_profile.id, object_id: object.id, target_id: context.params.comment.commentable_id, delay: 0
+    include 'redirect_to', url: context.params.return_to, notice: 'app.models.shared.deleted'
+  else
+    include 'redirect_to', url: context.params.return_to, error: 'app.models.shared.delete_failed'
+  endif
+%}

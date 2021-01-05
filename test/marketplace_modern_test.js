@@ -9,6 +9,7 @@ import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          notAllowedPlaces } from './fixtures'
 import { register, createItem, checkErrors } from './helper'
 
+
 fixture`Happy path scenario`
           .page(myUrl)
 
@@ -335,7 +336,7 @@ test('Add question and edit', async (t) => {
     await t.click(topicsPage.buttons.addQuestion)
     .typeText(topicsPage.inputs.questionTitle, "How to buy?")
     .click(Selector('label[for="body"]'))
-    .pressKey("t e s t 1 2 3")
+    .pressKey("q u e s t i o n")
     .typeText(topicsPage.inputs.questionTags, "test-question-tag")
     .click(topicsPage.buttons.postQuestion)
     //.expect(topicsPage.buttons.editQuestion.exists).ok()
@@ -347,14 +348,24 @@ test('Add question and edit', async (t) => {
     .click(topicsPage.buttons.submitEdit)
 })
 
-test.skip('Add answer', async (t) => {
+test('Add answer', async (t) => {
+  await t.debug()
   await t.useRole(buyerRole)
     .click(topMenu.buttons.questions)
     .click(link.withText('How to sell?'))
-    .click(Selector('label[for="body"]'))
-    .pressKey("t e s t")
+    .click(Selector('div.CodeMirror-scroll'))
+    .pressKey("a n s w e r")
     .click(topicsPage.buttons.postAnswer)
-    .expect(topicsPage.fields.answerBody.withText('test').exists).ok()
+    .expect(topicsPage.fields.answerBody.withText('answer').exists).ok()
+})
+
+test('Add comment', async (t) => {
+  await t.useRole(buyerRole)
+    .click(topMenu.buttons.questions)
+    .click(link.withText('How to sell?'))
+    .click(Selector('span').withText('Comment'))
+    .typeText(Selector('textarea[name="comment[body]"]'), "comment")
+    .click(Selector('button').withText('Send'))
 })
 
 test('Rate question and answer', async (t) => {
@@ -363,11 +374,11 @@ test('Rate question and answer', async (t) => {
     .click(link.withText('How to sell?'))
     await checkErrors()
     await t.click(topicsPage.vote.pointUpQuestion) // rate the question
-    //.click(topicsPage.vote.pointUpAnswer) // rate the answer
-    .expect(topicsPage.fields.questionBody.withText('test123').exists).ok()
-    //.expect(topicsPage.fields.answerBody.withText('test').exists).ok()
+    .click(topicsPage.vote.pointUpAnswer) // rate the answer
+    .expect(topicsPage.fields.questionBody.withText('question').exists).ok()
     .expect(topicsPage.ratings.question.exists).ok()
-    //.expect(topicsPage.ratings.firstAnswer.exists).ok()
+    .debug()
+    .expect(topicsPage.ratings.firstAnswer.exists).ok()
 })
 
 test('Delete question', async (t) => {
@@ -376,5 +387,5 @@ test('Delete question', async (t) => {
     .click(topMenu.buttons.dashboard)
     .click(dashboard.nav.questions)
     await t.setNativeDialogHandler(() => true)
-    .click(Selector('button').withText('Delete'))
+    .click(Selector('button').withAttribute('title', 'Delete'))
 })

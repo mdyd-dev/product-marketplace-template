@@ -7,8 +7,8 @@ export default class NewSessionForm {
       password: Selector('input[name="user[password]"]'),
     }
     this.labels = {
-      email: Selector('label').withText('E-mail'),
-      password: Selector('label').withText('Password'),
+      email: Selector('fieldset').withText('E-mail'),
+      password: Selector('fieldset').withText('Password'),
       username: Selector('label[for="username"]')
     }
     this.buttons = {

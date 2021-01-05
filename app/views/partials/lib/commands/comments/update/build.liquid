@@ -1,0 +1,11 @@
+{% parse_json object %}
+  {
+    "id": {{ object.id | json }},
+    "title": {{ object.title | json }},
+    "body": {{ object.body | json }}
+  }
+{% endparse_json %}
+
+{% liquid
+  return object
+%}
