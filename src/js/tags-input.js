@@ -28,6 +28,11 @@ const onInput = (e) => {
       tagify.settings.whitelist.splice(0, whitelist.length, ...whitelist)
       tagify.loading(false).dropdown.show.call(tagify, value); // render the suggestions dropdown
     })
+    .catch(err => {
+      if (err.name === 'AbortError') return;
+
+      throw err;
+    });
 };
 
 // listen to any keystrokes which modify tagify's input
