@@ -23,7 +23,7 @@
 
     <div class="mt-5">
       <label class="block" for="title">{{ 'app.models.posts.form.title' | t }}</label>
-      <input class="w-2/3 form-input" type="text" id="title" name="post[title]" value="{{ object.title }}" data-disable-special-chars />
+      <input class="w-2/3 form-input" type="text" id="title" name="post[title]" value="{{ object.title }}" />
       {% include 'theme/simple/field_error', errors: object.errors.title %}
       {% render 'theme/simple/ui/form-tip', content_key: 'app.models.posts.form.title_help' %}
     </div>
