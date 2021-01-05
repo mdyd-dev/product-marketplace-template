@@ -5,18 +5,25 @@ import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          adminPage, registerForm, loginForm, itemShow, editedItemShow,
          passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
          profileEditForm, orders, publicProfile, groupsPage, footer,
-         contactUsForm, activityFeed, categoryName, topicsPage, permissionDenied } from './fixtures'
+         contactUsForm, activityFeed, categoryName, topicsPage, permissionDenied,
+         notAllowedPlaces } from './fixtures'
 import { register, createItem, checkErrors } from './helper'
 
 
-const translationMissing = Selector('body').withText('translation missing')
-async function checkTranslation(translationMissing) {
-  if (await translationMissing.exists)
-    await t.expect(translationMissing.exists).notOk();
-};
-
 fixture`Happy path scenario`
           .page(myUrl)
+
+test.page(myUrl + '/sign-up')('Uncompleted profile tests', async (t) => {
+  await t.typeText(loginForm.inputs.email, "tester@example.com")
+  .typeText(loginForm.inputs.password, "password")
+  .click(loginForm.buttons.termsAccept)
+  await t.click(loginForm.buttons.regSubmit)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  for (var i = 0; i <= 10; i++) {
+    await t.click(notAllowedPlaces[i])
+    await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  }
+})
 
 test.page(myUrl + '/sign-up')('Register seller', async (t) => {
   await register(SellerRandomUser)
