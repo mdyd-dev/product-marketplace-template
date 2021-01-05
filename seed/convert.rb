@@ -6,7 +6,8 @@ require 'yaml'
 
 source = CSV.read('./data.csv', headers: true)
 category_list = File.read('./categories.txt').lines.map(&:strip)
-images = File.read('./images.txt').lines.map(&:strip).map(&:to_s)
+item_images = File.read('./item_images.txt').lines.map(&:strip).map(&:to_s)
+profile_images = File.read('./profile_images.txt').lines.map(&:strip).map(&:to_s)
 
 def to_cat(cat)
   JSON
@@ -20,7 +21,7 @@ def to_cat(cat)
     .downcase
 end
 
-def photo_for(object_uuid, file_path)
+def photo_for(object_uuid, file_path, photo_type: 'photo')
   file_name = File.basename(file_path)
   {
     "photo": {
@@ -34,7 +35,7 @@ def photo_for(object_uuid, file_path)
       "extension": File.extname(file_name),
       "file_name": file_name
     },
-    "photo_type": "photo",
+    "photo_type": photo_type,
     "object_uuid": object_uuid
   }
 end
@@ -85,11 +86,12 @@ output = CSV.generate do |csv|
 
   profiles.each do |profile|
     csv << [profile.to_json, 'profile', now, now, profile[:user_id]]
+    csv << [photo_for(profile[:uuid], profile_images.sample, photo_type: 'avatar').to_json, 'photo', now, now, id_sequence.call]
   end
 
   items.each do |item|
     csv << [item.to_json, 'item', now, now, item['_id']]
-    csv << [photo_for(item['uuid'], images.sample).to_json, 'photo', now, now, id_sequence.call]
+    csv << [photo_for(item['uuid'], item_images.sample).to_json, 'photo', now, now, id_sequence.call]
   end
 
   statuses.each do |item|
