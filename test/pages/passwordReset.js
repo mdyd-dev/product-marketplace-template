@@ -9,7 +9,7 @@ export default class PasswordReset {
     }
     this.buttons = {
       submit: Selector('button').withText('Update Password'),
-      resetPasswordSubmit: Selector('button').withText('Send email with')
+      resetPasswordSubmit: Selector('button').withText('Reset password')
     }
   }
 }

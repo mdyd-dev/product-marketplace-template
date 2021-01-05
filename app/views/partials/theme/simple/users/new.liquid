@@ -1,9 +1,5 @@
-<div class="container items-centermx-auto">
-  <div class="mx-auto mb-2 text-center lg:w-2/6 md:w-1/2">
-    <h1 class="text-2xl">{{ 'app.users.create_account' | t }}</h1>
-  </div>
+<section class="my-10 container items-center">
+  <h2 class="title text-center">{{ 'app.users.create_account' | t }}</h2>
 
-  <div class="w-full p-8 mx-auto mt-10 bg-panel rounded-lg shadow-md lg:w-2/6 md:w-1/2 md:mt-0">
-    {% include 'theme/simple/users/form' %}
-  </div>
-</div>
+  {% include 'theme/simple/users/form' %}
+</section>
