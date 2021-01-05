@@ -5,7 +5,8 @@ import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          adminPage, registerForm, loginForm, itemShow, editedItemShow,
          passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
          profileEditForm, orders, publicProfile, groupsPage, footer,
-         contactUsForm, activityFeed, categoryName, topicsPage, permissionDenied } from './fixtures'
+         contactUsForm, activityFeed, categoryName, topicsPage, permissionDenied,
+         notAllowedPlaces } from './fixtures'
 import { register, createItem, checkErrors } from './helper'
 
 fixture`Happy path scenario`
@@ -17,28 +18,10 @@ test.page(myUrl + '/sign-up')('Uncompleted profile tests', async (t) => {
   .click(loginForm.buttons.termsAccept)
   await t.click(loginForm.buttons.regSubmit)
   await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-  .click(dashboard.nav.publicProfile)
-  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-  .click(dashboard.nav.inbox)
-  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-  .click(topMenu.buttons.listItem)
-  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-  .click(topMenu.buttons.items)
-  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-  .click(topMenu.buttons.logo)
-  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-  .click(topMenu.buttons.questions)
-  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-  .click(topMenu.buttons.groups)
-  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-  .click(topMenu.buttons.feed)
-  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-  .click(topMenu.buttons.chat)
-  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-  .click(dashboard.nav.myGroups)
-  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-  .click(dashboard.nav.activityFeed)
-  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  for (var i = 0; i <= 9; i++) {
+    await t.click(notAllowedPlaces[i])
+    await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  }
 })
 
 test.page(myUrl + '/sign-up')('Register seller', async (t) => {
