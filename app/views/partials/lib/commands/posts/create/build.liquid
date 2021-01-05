@@ -1,3 +1,12 @@
+{% liquid
+  assign tags = object.tags | downcase | split: ',' | uniq
+  assign slugged_tags = '' | split: ','
+
+  for tag in tags
+    assign slugged_tag = tag | slugify
+    assign slugged_tags = slugged_tags | add_to_array: slugged_tag
+  endfor
+%}
 {% parse_json object %}
   {
     "id": {{ object.id | json }},
@@ -5,7 +14,7 @@
     "creator_id": {{ current_profile.id | json }},
     "title": {{ object.title | json }},
     "body": {{ object.body | json }},
-    "tags": {{ object.tags | downcase | split: ',' | uniq }},
+    "tags": {{ slugged_tags | json }},
     "uuid": {{ '' | uuid | json }},
     "c__score": 0
   }
