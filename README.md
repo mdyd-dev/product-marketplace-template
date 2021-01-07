@@ -62,7 +62,10 @@ Open your web browser with your Instance URL where you will be provided with pos
 pos-cli data import <YOUR_ENV_NAME> --path=seed/data.zip --zip
 pos-cli uploads upload <YOUR_ENV_NAME> --path=seed/images
 ```
-## Chat configuration
+
+# Configuration
+
+## Chat
 
 To enable chat you have to execute mutation via GraphiQL. Start the http server locally that will serve the GUI use:
 ```
@@ -80,7 +83,7 @@ mutation EnableChat {
     }
 ```
 
-## Slack notifications configuration
+## Slack notifications
 
 To enable slack notifications you have to enable mutation via GraphiQL. Start the http server locally that will serve the GUI use:
 ```
