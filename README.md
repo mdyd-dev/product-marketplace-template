@@ -63,6 +63,9 @@ pos-cli data import <YOUR_ENV_NAME> --path=seed/data.zip --zip
 pos-cli uploads upload <YOUR_ENV_NAME> --path=seed/images
 ```
 
+## Chat configuration
+## Slack notifications configuration
+
 # Setup
 
 - To access the admin panel of your marketplace register a user with this email address: `admin@example.com`
