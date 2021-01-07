@@ -5,7 +5,7 @@ method: put
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id
   include 'lib/profile_present_or_redirect', profile: current_profile
-  include 'lib/must_be_superadmin'
+  include 'lib/must_be_superadmin', profile: current_profile
 
   function object = 'lib/commands/call', object: context.params.category, command: 'categories/update', selection: 'model_update'
   if object.valid
