@@ -17,7 +17,7 @@
     when 'about'
       render 'theme/simple/groups/about', list: list, group: group
     when 'members'
-      render 'theme/simple/groups/members', list: list, group: group
+      render 'theme/simple/groups/members', list: list, group: group, current_profile: current_profile
     endcase
   %}
 </div>
