@@ -1,0 +1,15 @@
+---
+to: "{{ context.constants.SLACK_WEBHOOK_URL }}"
+trigger_condition: "{% if context.constants.SLACK_WEBHOOK_URL %}true{% endif %}"
+format: http
+request_type: POST
+request_headers: '{
+  "Content-Type": "application/json"
+}'
+---
+{% capture message %}
+{{ form.actor.name }} posted a new question: <https://{{ context.location.host }}{{ form.object.url }}|{{ form.object.name }}>
+{% endcapture %}
+{% log message, type: "body API notify" %}
+{"text": "{{ message }}", "type": "mrkdwn"}
+
