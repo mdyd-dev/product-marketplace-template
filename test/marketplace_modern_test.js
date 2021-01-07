@@ -13,17 +13,17 @@ import { register, createItem, checkErrors } from './helper'
 fixture`Happy path scenario`
           .page(myUrl)
 
-// test.page(myUrl + '/sign-up')('Uncompleted profile tests', async (t) => {
-//   await t.typeText(loginForm.inputs.email, "tester@example.com")
-//   .typeText(loginForm.inputs.password, "password")
-//   .click(loginForm.buttons.termsAccept)
-//   await t.click(loginForm.buttons.regSubmit)
-//   await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-//   for (var i = 0; i <= 10; i++) {
-//     await t.click(notAllowedPlaces[i])
-//     await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
-//   }
-// })
+test.page(myUrl + '/sign-up')('Uncompleted profile tests', async (t) => {
+  await t.typeText(loginForm.inputs.email, "tester@example.com")
+  .typeText(loginForm.inputs.password, "password")
+  .click(loginForm.buttons.termsAccept)
+  await t.click(loginForm.buttons.regSubmit)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  for (var i in notAllowedPlaces) {
+    await t.click(notAllowedPlaces[i])
+    await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  }
+})
 
 test.page(myUrl + '/sign-up')('Register seller', async (t) => {
   await register(SellerRandomUser)
