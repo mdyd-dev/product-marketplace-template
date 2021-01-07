@@ -64,11 +64,11 @@ pos-cli uploads upload <YOUR_ENV_NAME> --path=seed/images
 ```
 ## Chat configuration
 
-To enable chat you have to execute mutation. Start the http server locally that will serve the GUI use:
+To enable chat you have to execute mutation via GraphiQL. Start the http server locally that will serve the GUI use:
 ```
 pos-cli gui serve [environment]
 ```
-To open platformOS Admin go to http://localhost:3333 and then hit "Go to GraphiQL"
+To open GraphiQL go to http://localhost:3333 and then hit "Go to GraphiQL"
 
 Put this mutation into editor and run:
 ```
@@ -82,11 +82,11 @@ mutation EnableChat {
 
 ## Slack notifications configuration
 
-To enable slack notifications you have to enable mutation. Start the http server locally that will serve the GUI use:
+To enable slack notifications you have to enable mutation via GraphiQL. Start the http server locally that will serve the GUI use:
 ```
 pos-cli gui serve [environment]
 ```
-To open platformOS Admin go to http://localhost:3333 and then hit "Go to GraphiQL"
+To open GraphiQL go to http://localhost:3333 and then hit "Go to GraphiQL"
 
 
 
