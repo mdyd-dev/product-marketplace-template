@@ -8,5 +8,10 @@ method: post
 
   function object = 'lib/commands/photos/create', object: context.params.photo, current_profile: current_profile
 
+  if object.valid and object.photo_type == 'avatar'
+    function profile = 'lib/queries/profiles/find', id: current_profile.id
+    function _result = 'lib/commands/sessions/store_profile_in_session', object: profile
+  endif
+
   include 'theme/json/shared/show', object: object
 %}

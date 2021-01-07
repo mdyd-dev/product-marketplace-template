@@ -9,5 +9,11 @@ mutation model_create($direct_url: String!, $user_id: ID!, $object_uuid: String!
     ]
   }) {
     id
+    photo_type: property(name: "photo_type")
+    photo: property_upload(name: "photo") {
+      file_name
+      url
+      versions
+    }
   }
 }
