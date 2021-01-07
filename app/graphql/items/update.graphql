@@ -1,21 +1,32 @@
-mutation update_item($id: ID!, $name: String, $description: String, $tags: [String], $owner: String, $category: String, $price: Int, $c__status: String, $uuid: String) {
+mutation update_item(
+  $id: ID!
+  $name: String
+  $description: String
+  $tags: [String]
+  $owner: String
+  $category: String
+  $price: Int
+  $c__status: String
+  $uuid: String
+  $slug: String
+) {
   model_update(
     id: $id
     model: {
       properties: [
-        { name: "name" value: $name }
-        { name: "description" value: $description }
-        { name: "tags" value_array: $tags }
-        { name: "owner" value: $owner }
-        { name: "category" value: $category }
-        { name: "price" value_int: $price }
-        { name: "uuid" value: $uuid }
-
+        { name: "name", value: $name }
+        { name: "description", value: $description }
+        { name: "tags", value_array: $tags }
+        { name: "owner", value: $owner }
+        { name: "category", value: $category }
+        { name: "price", value_int: $price }
+        { name: "uuid", value: $uuid }
+        { name: "slug", value: $slug }
         # cache
-        { name: "c__status" value: $c__status }
+        { name: "c__status", value: $c__status }
       ]
     }
-  ){
+  ) {
     id
     name: property(name: "name")
   }
