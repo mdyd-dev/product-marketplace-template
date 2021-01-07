@@ -15,7 +15,8 @@ export default class ItemSearch {
     }
     this.buttons = {
       sort: Selector('select[name="sort_by"]'),
-      search: Selector('button').withText('Search'),
+      quickSearch: Selector('button').withText('Search'),
+      search: Selector('button').withText('Search').nth(1),
       qsearch: Selector('button').withText('Search').nth(0)
 
     }

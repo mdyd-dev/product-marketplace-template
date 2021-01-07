@@ -307,7 +307,7 @@ test('Groups', async (t) => {
 test('Smart search', async (t) => {
   await t.useRole(buyerRole)
     .typeText(itemSearch.quickSearch.keyword, John.name)
-    .click(itemSearch.buttons.search)
+    .click(itemSearch.buttons.quickSearch)
     // expects item, group and profile with 'common name'
     await checkErrors()
     await t.expect(link.withText(group.commonName).exists).ok()

@@ -8,7 +8,7 @@
     hash_assign object['c__status'] = status.fullname
 
     function object = 'lib/commands/execute', mutation_name: 'items/update' object: object, selection: 'model_update'
-    log object
+    log object, type: 'consumer.status_created object'
   endif
 
   if status.scope == 'app.statuses.orders'

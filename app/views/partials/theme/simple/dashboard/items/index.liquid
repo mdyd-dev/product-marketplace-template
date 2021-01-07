@@ -35,7 +35,7 @@
                 </option>
               {% endfor %}
             </select>
-            <small> {% print item.c__status %}</small>
+            <small>{% print item.c__status | t %}</small>
           </td>
           <td class="px-4 py-2 border-b">{{ item.created_at | l: 'compact' }}</td>
           <!--
@@ -47,7 +47,7 @@
           </td>
           -->
           <td class="px-4 py-2 border-b">
-            <a href="/dashboard/items/edit?id={{ item.id }}" class="button">Edit</a>
+            <a href="/dashboard/items/edit?id={{ item.id }}" class="button">{{ 'app.edit' | t }}</a>
             <form action="/dashboard/items/delete" method="post" class="ml-2 inline"
               onSubmit="if(!confirm('{{ 'app.confirm-delete' | t }}')){ return false; }"
             >
