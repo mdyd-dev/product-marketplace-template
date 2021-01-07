@@ -1,5 +1,5 @@
 {% liquid
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id, membership: true
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, membership: true, followships: true
 
   assign group_id = context.params.slug3 | split: '-' | last
   function group = 'lib/queries/groups/find', id: group_id, with_owner: false
