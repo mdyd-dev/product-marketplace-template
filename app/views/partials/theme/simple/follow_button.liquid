@@ -1,4 +1,4 @@
-{% if user.id != current_profile.id %}
+{% if current_profile and user.id != current_profile.id %}
   {% assign user_id = user.id | append: '' %}
   {% assign ids = current_profile.followed_ids | map: 'id' %}
 
