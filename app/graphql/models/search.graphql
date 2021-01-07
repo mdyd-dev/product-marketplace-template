@@ -16,14 +16,12 @@ query search(
         { name: "tags", contains: $tag }
         { name: "category", starts_with: $category }
       ]
-      or: [
-        { properties: { name: "description", contains: $keyword } }
-        { properties: { name: "name", contains: $keyword } }
-        { properties: { name: "tags", contains: $keyword } }
-        { properties: { name: "category", contains: $keyword } }
-        { properties: { name: "body", contains: $keyword } }
-        { properties: { name: "title", contains: $keyword } }
-      ]
+      fulltext: {
+        keyword: $keyword
+        fields: [
+          { name: "properties.name" }
+         ]
+         }
     }
     sort: [$sort]
   ) {
