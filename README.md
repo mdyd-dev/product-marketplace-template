@@ -64,13 +64,13 @@ pos-cli uploads upload <YOUR_ENV_NAME> --path=seed/images
 ```
 ## Chat configuration
 
-To enable chat you have to enable mutation. Start the http server locally that will serve the GUI use:
+To enable chat you have to execute mutation. Start the http server locally that will serve the GUI use:
 ```
 pos-cli gui serve [environment]
 ```
 To open platformOS Admin go to http://localhost:3333 and then hit "Go to GraphiQL"
 
-Put this mutation into editor:
+Put this mutation into editor and run:
 ```
 mutation EnableChat {
     constant_set(name: "USE_WEBSOCKET_CHAT", value: "true") {
@@ -82,13 +82,15 @@ mutation EnableChat {
 
 ## Slack notifications configuration
 
-To enable chat you have to enable mutation. Start the http server locally that will serve the GUI use:
+To enable slack notifications you have to enable mutation. Start the http server locally that will serve the GUI use:
 ```
 pos-cli gui serve [environment]
 ```
 To open platformOS Admin go to http://localhost:3333 and then hit "Go to GraphiQL"
 
-Put this mutation into editor (you have to paste your slack channel webhook in value):
+
+
+Put this mutation into editor and run (you have to paste your slack channel webhook in value):
 ```
 mutation EnableSlackMessages {
     constant_set(name: "SLACK_WEBHOOK_URL", value: "https://hooks.slack.com/services/xxx") {
