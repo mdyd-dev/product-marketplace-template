@@ -105,9 +105,11 @@ test('Editing item and search', async (t) => {
     await t.expect(sellerProfilePage()).contains(myUrl+'/profile/' + SellerRandomUser.name) // checks if href contains slugified username
     .click(topMenu.buttons.items)
     await checkErrors()
-    await t.click(itemSearch.buttons.sort)
-    .click(itemSearch.options.theMostRecent)
-    .click(itemSearch.buttons.search)
+    //await t.click(itemSearch.buttons.sort)
+    //.click(itemSearch.options.theMostRecent)
+    //.click(itemSearch.buttons.search)
+    await t.typeText(itemSearch.quickSearch.keyword, item.name)
+    .click(itemSearch.buttons.quickSearch)
     .click(itemSearch.links.item)
     .click(itemShow.buttons.browseUsersList) // goes on your list from item show
     .click(itemSearch.links.item)
@@ -145,8 +147,8 @@ test('Buying an item and following the seller', async (t) => {
   await t
     .useRole(buyerRole)
     .click(topMenu.buttons.items)
-    .typeText(itemSearch.search.keyword, item.commonName)
-    .click(itemSearch.buttons.search)
+    .typeText(itemSearch.quickSearch.keyword, item.commonName)
+    .click(itemSearch.buttons.quickSearch)
     .expect(itemSearch.links.commonItem.exists).ok()
     .click(itemSearch.links.commonItem)
     .click(itemShow.buttons.follow)
