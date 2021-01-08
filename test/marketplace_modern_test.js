@@ -105,10 +105,11 @@ test('Editing item and search', async (t) => {
     await t.expect(sellerProfilePage()).contains(myUrl+'/profile/' + SellerRandomUser.name) // checks if href contains slugified username
     .click(topMenu.buttons.items)
     await checkErrors()
-    await t.click(itemSearch.buttons.sort)
-    await t.wait(3000)
-    .click(itemSearch.options.theMostRecent)
-    .click(itemSearch.buttons.search)
+    //await t.click(itemSearch.buttons.sort)
+    //.click(itemSearch.options.theMostRecent)
+    //.click(itemSearch.buttons.search)
+    await t.typeText(itemSearch.quickSearch.keyword, item.name)
+    .click(itemSearch.buttons.quickSearch)
     .click(itemSearch.links.item)
     .click(itemShow.buttons.browseUsersList) // goes on your list from item show
     .click(itemSearch.links.item)
