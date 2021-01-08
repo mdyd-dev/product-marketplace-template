@@ -3,7 +3,11 @@
   function object = 'lib/commands/constants/set/check', object: object
 
   if object.valid
-    function object = 'lib/commands/execute', mutation_name: 'set_constant' object: object, selection: "constant"
+    if object.value == blank
+      function object = 'lib/commands/execute', mutation_name: 'marketplace_setup/unset_constant' object: object, selection: "constant"
+    else
+      function object = 'lib/commands/execute', mutation_name: 'marketplace_setup/set_constant' object: object, selection: "constant"
+    endif
   endif
 
   return object
