@@ -41,10 +41,12 @@
     <form action="/marketplace_setup/constants/set" method="post">
       {% include 'authenticity_token' %}
       <input type="hidden" name="name" value="chat">
+      <label class="block mt-4" for="test"></label>
       <input type="radio" class="mt-3" name="value" value="true" id="test"{% if chat_enabled %}checked{% endif %}>
-      <label class="block mt-4" for="test">enable</label>
+      {{ 'app.chat.setup.enable' | t }}</label></br>
+      <label class="block mt-4" for="test2"></label>
       <input type="radio" class="mt-3" name="value" value="false" id="test2"{% unless chat_enabled %}checked{% endunless %}>
-      <label class="block mt-4" for="test2">disable</label>
-      <input type="submit" value="submit" class="mt-3 button">
+      {{ 'app.chat.setup.disable' | t }}</label></br>
+      <input type="submit" value="{{ 'app.stripe.save' | t }}" class="mt-3 button">
     </form>
   </div>

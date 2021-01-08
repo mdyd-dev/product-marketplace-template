@@ -54,6 +54,11 @@ en:
         description: Listings counter
         delta: Since yesterday
   app:
+    chat:
+      setup:
+        enable: enable
+        disable: disable
+      disabled: Denied. Chat is currently disabled, if you think this is an issue please contact our support.
     quick_search:
       name: Search...
       type:
