@@ -1,0 +1,6 @@
+mutation set_constant($name: String!, $value: String!) {
+  constant: constant_set(name: $name, value: $value){
+    name
+    value
+  }
+}

@@ -1,0 +1,16 @@
+---
+method: post
+---
+{% liquid
+  include 'lib/must_be_superadmin'
+  function object = 'lib/commands/constants/set', name: context.params.name, value: context.params.value
+
+  if object.valid
+    redirect_to '/marketplace_setup'
+  else
+    echo context.constants["USE_WEBSOCKET_CHAT"]
+    echo context.params
+    echo object
+    break
+  endif
+%}
