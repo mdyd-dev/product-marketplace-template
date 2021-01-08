@@ -5,7 +5,7 @@
 </div>
 
 <section class="p-8 bg-panel shadow-lg">
-
+  {% if order.line_items.size > 0 %}
 	<header class="hidden lg:flex gap-2 mb-5 font-bold">
 		<div class="lg:w-8/12">{{ 'app.orders.show.item' | t }}</div>
     <div class="lg:w-1/12 lg:pl-2 lg:text-center">
@@ -58,32 +58,32 @@
   {% endfor %}
 </section>
 
-<ul class="mt-16 text-lg lg:text-xl font-bold">
-  <li class="flex gap-4 py-3 justify-between border-b">
-    <div>
-      {{ 'app.orders.show.subtotal' | t }}
-    </div>
-    <div>
-      {{ order.products_price_cents | pricify_cents }}
-    </div>
-  </li>
-  <li class="flex gap-4 py-3 justify-between border-b">
-    <div>
-      {{ 'app.orders.show.delivery' | t }}
-    </div>
-    <div>
-      {{ order.total_shipping_cost_cents | pricify_cents }}
-    </div>
-  </li>
-  <li class="flex gap-4 py-3 justify-between border-b text-xl lg:text-2xl">
-    <div>
-      {{ 'app.orders.show.total' | t }}
-    </div>
-    <div>
-      {{ order.total_price_cents | pricify_cents }}
-    </div>
-  </li>
-</ul>
+  <ul class="mt-16 text-lg lg:text-xl font-bold">
+    <li class="flex gap-4 py-3 justify-between border-b">
+      <div>
+        {{ 'app.orders.show.subtotal' | t }}
+      </div>
+      <div>
+        {{ order.products_price_cents | pricify_cents }}
+      </div>
+    </li>
+    <li class="flex gap-4 py-3 justify-between border-b">
+      <div>
+        {{ 'app.orders.show.delivery' | t }}
+      </div>
+      <div>
+        {{ order.total_shipping_cost_cents | pricify_cents }}
+      </div>
+    </li>
+    <li class="flex gap-4 py-3 justify-between border-b text-xl lg:text-2xl">
+      <div>
+        {{ 'app.orders.show.total' | t }}
+      </div>
+      <div>
+        {{ order.total_price_cents | pricify_cents }}
+      </div>
+    </li>
+  </ul>
 
   <div class="mt-6 gap-5 flex flex-wrap justify-between items-center">
     <a href="/search">
@@ -94,3 +94,7 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 ml-2 fill-current"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
     </a>
   </div>
+{% else %}
+  <p>{{ 'app.orders.show.empty' | t }}</p>
+</section>
+{% endif %}
