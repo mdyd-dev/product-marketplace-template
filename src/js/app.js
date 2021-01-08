@@ -35,7 +35,12 @@ if (tagsInput) {
   import(/* webpackChunkName: "tags-input" */ './tags-input.js').then(() => {});
 }
 
-const joinGroupButtons = document.querySelectorAll('button[data-join-group]')
-if (joinGroupButtons.length > 0) {
+const groupJoinButtons = document.querySelectorAll('button[data-join-group]')
+if (groupJoinButtons.length > 0) {
   import(/* webpackChunkName: "groups-join" */ './groups-join.js').then(() => {});
+}
+
+const userFollowButtons = document.querySelectorAll('button[data-follow-user]')
+if (userFollowButtons.length > 0) {
+  import(/* webpackChunkName: "user-follow" */ './user-follow.js').then(() => {});
 }

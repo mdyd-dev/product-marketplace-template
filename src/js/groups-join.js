@@ -6,8 +6,7 @@ const toggleGroupMembership = (action, group_id) => {
       group_id: group_id,
       action_name: action
     })
-  })
-    .then(data => {})
+  }).then(data => {});
 };
 
 const joinButtons = Array.from(document.querySelectorAll('button[data-join-group]'))
