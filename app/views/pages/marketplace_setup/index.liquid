@@ -2,7 +2,8 @@
 slug: marketplace_setup
 ---
 {% liquid
-  include 'lib/must_be_superadmin'
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/must_be_superadmin', profile: current_profile
 
   function config = 'lib/commands/marketplace_setup/current_config'
   include 'theme/simple/admin/menu', section: 'setup'
