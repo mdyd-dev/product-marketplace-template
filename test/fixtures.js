@@ -98,10 +98,8 @@ export const editedItemShow = new ItemShowPage(editedItem)
 export const itemSearch = new ItemSearch(item, editedItem)
 
 export var notAllowedPlaces = [
-  dashboard.nav.inbox,
   topMenu.buttons.listItem,
   topMenu.buttons.feed,
-  topMenu.buttons.chat,
   dashboard.nav.myGroups,
   dashboard.nav.activityFeed,
   dashboard.nav.publicProfile
