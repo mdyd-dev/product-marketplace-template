@@ -22,6 +22,15 @@ main a:hover {
 
 /* titles
 ============================================================================ */
+.bigtitle {
+  @apply
+    mb-4
+    mt-10
+    first:mt-0
+    text-3xl
+    font-semibold;
+}
+
 .title {
   @apply
     mb-4

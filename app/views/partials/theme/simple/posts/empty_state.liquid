@@ -1,6 +1,6 @@
 <section class="flex items-center justify-between gap-10">
   <header>
-    {% render 'theme/simple/ui/bigtitle', label_key: 'app.models.posts.empty_state.title' %}
+    <h2 class="bigtitle">{{ 'app.models.posts.empty_state.title' | t }}</h2>
     <h3 class="title">{{ 'app.models.posts.empty_state.subtitle' | t }}</h3>
 
     <a href="/dashboard/posts/new" class="mt-5 button button-icon-right">
