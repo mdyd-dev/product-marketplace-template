@@ -1,0 +1,5 @@
+button:not(.following) .follow { display: visible }
+button:not(.following) .unfollow { display: none }
+
+button.following .unfollow { display: visible }
+button.following .follow { display: none }

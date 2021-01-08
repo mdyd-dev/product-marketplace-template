@@ -8,6 +8,4 @@
   function list = 'lib/queries/relationships/search', limit: 20, name: 'membership', r_id: group_id
 
   include 'theme/simple/groups/show', group: group, current_profile: current_profile, tab: 'members', list: list, context: context
-  render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token
-  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
 %}
