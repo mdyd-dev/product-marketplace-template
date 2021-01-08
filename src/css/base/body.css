@@ -33,7 +33,7 @@ main a:hover {
 
 .title {
   @apply
-    mb-4
+    mb-2
     text-2xl;
 }
 

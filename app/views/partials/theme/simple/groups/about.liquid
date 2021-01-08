@@ -2,9 +2,9 @@
   <div class="w-2/3 p-5 bg-panel md:mr-10">
     <img class="object-cover object-center w-full h-64" src="{{ group.main_photo.photo.versions.uncropped | default: 'https://dummyimage.com/720x400' }}" alt="blog">
 
-    <h1 class="mt-5 mb-10 text-2xl font-medium">
+    <h2 class="title">
       {{ group.name }}
-    </h1>
+    </h2>
 
     <div class="flex items-center my-5">
       <img class="object-cover object-center w-16 h-16 mr-5 rounded-full shadow-md" src="{{  group.owner.profile.avatar.photo.versions.small | default: 'https://dummyimage.com/100x100' }}" />

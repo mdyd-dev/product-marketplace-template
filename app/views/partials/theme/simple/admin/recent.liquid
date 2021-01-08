@@ -12,7 +12,7 @@
             </span>
           </div>
           <div class="flex flex-col p-4">
-            <h3 class="mb-3 text-3xl font-semibold font-heading">
+            <h3 class="title">
               {% if metric.name == 'income' %}
                 {{ metric.value | pricify_cents }}
               {% else %}
