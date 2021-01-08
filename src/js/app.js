@@ -34,3 +34,8 @@ const tagsInput = document.querySelector('[data-tags-input]');
 if (tagsInput) {
   import(/* webpackChunkName: "tags-input" */ './tags-input.js').then(() => {});
 }
+
+const joinGroupButtons = document.querySelectorAll('button[data-join-group]')
+if (joinGroupButtons.length > 0) {
+  import(/* webpackChunkName: "groups-join" */ './groups-join.js').then(() => {});
+}
