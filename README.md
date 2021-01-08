@@ -60,7 +60,6 @@ Open your web browser with your Instance URL where you will be provided with pos
 
 ``` sh
 pos-cli data import <YOUR_ENV_NAME> --path=seed/data.zip --zip
-pos-cli uploads upload <YOUR_ENV_NAME> --path=seed/images
 ```
 
 # Setup
