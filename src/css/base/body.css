@@ -22,10 +22,25 @@ main a:hover {
 
 /* titles
 ============================================================================ */
-.title {
+.bigtitle {
   @apply
     mb-4
+    mt-10
+    first:mt-0
+    text-3xl
+    font-semibold;
+}
+
+.title {
+  @apply
+    mb-2
     text-2xl;
+}
+
+.subtitle {
+  @apply
+    mb-1
+    text-xl;
 }
 
 

@@ -46,9 +46,9 @@
         <a href="/u/{{ item.owner.id }}">{% print 'app.items.by_user' | t %}</a>
       </h2>
 
-      <h1 class="mb-1 text-2xl">
+      <h2 class="title mt-7">
         {{ item.name }}
-      </h1>
+      </h2>
 
       <div class="flex flex-wrap mb-4">
         <ul class="flex w-full categories">
@@ -73,7 +73,7 @@
       <p class="mt-4 leading-relaxed">{{ item.description }}</p>
 
       <div class="flex mt-4">
-        <span class="text-2xl text-gray-900 ">{{ item.price | pricify_cents }}</span>
+        <span class="title">{{ item.price | pricify_cents }}</span>
 
         <form action="/orders/line_items" method="post" class="ml-auto ">
           {% render 'authenticity_token', authenticity_token: authenticity_token %}
