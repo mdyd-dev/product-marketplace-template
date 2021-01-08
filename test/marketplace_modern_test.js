@@ -106,6 +106,7 @@ test('Editing item and search', async (t) => {
     .click(topMenu.buttons.items)
     await checkErrors()
     await t.click(itemSearch.buttons.sort)
+    await t.wait(3000)
     .click(itemSearch.options.theMostRecent)
     .click(itemSearch.buttons.search)
     .click(itemSearch.links.item)
