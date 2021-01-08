@@ -146,8 +146,8 @@ test('Buying an item and following the seller', async (t) => {
   await t
     .useRole(buyerRole)
     .click(topMenu.buttons.items)
-    .typeText(itemSearch.search.keyword, item.commonName)
-    .click(itemSearch.buttons.search)
+    .typeText(itemSearch.quickSearch.keyword, item.commonName)
+    .click(itemSearch.buttons.quickSearch)
     .expect(itemSearch.links.commonItem.exists).ok()
     .click(itemSearch.links.commonItem)
     .click(itemShow.buttons.follow)
