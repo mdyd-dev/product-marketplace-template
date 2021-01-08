@@ -28,6 +28,12 @@ main a:hover {
     text-2xl;
 }
 
+.subtitle {
+  @apply
+    mb-1
+    text-xl;
+}
+
 
 
 /* content
