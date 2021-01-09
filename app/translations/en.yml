@@ -56,6 +56,7 @@ en:
   app:
     chat:
       setup:
+        title: Chat
         enable: enable
         disable: disable
       disabled: Denied. Chat is currently disabled, if you think this is an issue please contact our support.

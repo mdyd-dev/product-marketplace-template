@@ -2,13 +2,13 @@
 slug: inbox
 ---
 {% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/profile_present_or_redirect', profile: current_profile
+
   function chat_enabled = 'lib/queries/constants/find' name: "USE_WEBSOCKET_CHAT", type: "boolean", context: context
   unless chat_enabled
     include 'redirect_to', url: '/', error: 'app.chat.disabled'
   endunless
-
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id
-  include 'lib/profile_present_or_redirect', profile: current_profile
 
   function current_user = 'lib/queries/profiles/find', user_id: context.current_user.id
 
