@@ -35,7 +35,7 @@
         <picture class="object-cover w-full">
           <source srcset="{{ item.photos[0].photo.versions.uncropped_webp }}" type="image/webp" alt="{{ item.name }}">
           <source srcset="{{ item.photos[0].photo.versions.uncropped }}" type="image/jpeg" alt="{{ item.name }}">
-          <img src="{{ item.photos[0].photo.versions.uncropped }}" alt="{{ item.name }}">
+          <img class="break-words" src="{{ item.photos[0].photo.versions.uncropped }}" alt="{{ item.name }}">
         </picture>
       {% endif %}
     </div>
