@@ -54,6 +54,11 @@ en:
         description: Listings counter
         delta: Since yesterday
   app:
+    slack:
+      setup:
+        title: Slack Notifications
+        webhook: 'Currently your slack-webhook is set as:'
+        none: none
     quick_search:
       name: Search...
       type:
