@@ -46,7 +46,7 @@
         <a href="/u/{{ item.owner.id }}">{% print 'app.items.by_user' | t %}</a>
       </h2>
 
-      <h2 class="title mt-7">
+      <h2 class="title mt-7 break-words">
         {{ item.name }}
       </h2>
 
@@ -70,7 +70,7 @@
       </div>
       {% endcomment %}
 
-      <p class="mt-4 leading-relaxed">{{ item.description }}</p>
+      <p class="mt-4 leading-relaxed break-words">{{ item.description }}</p>
 
       <div class="flex mt-4">
         <span class="title">{{ item.price | pricify_cents }}</span>
