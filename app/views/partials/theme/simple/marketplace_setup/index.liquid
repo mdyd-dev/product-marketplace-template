@@ -41,9 +41,9 @@
     <form action="/marketplace_setup/constants/set" method="post">
       {% include 'authenticity_token' %}
       <input type="hidden" name="name" value="chat">
-      <input type="radio" class="mt-3" name="value" value="true" id="chatOn"{% if chat_enabled %}checked{% endif %}>
+      <input type="radio" class="mt-3" name="value" value="true" id="chatOn"{% if chat_enabled %} checked{% endif %}>
       <label class="block mt-4" for="chatOn">enable</label>
-      <input type="radio" class="mt-3" name="value" value="false" id="chatOff"{% unless chat_enabled %}checked{% endunless %}>
+      <input type="radio" class="mt-3" name="value" value="false" id="chatOff"{% unless chat_enabled %} checked{% endunless %}>
       <label class="block mt-4" for="chatOff">disable</label>
       <input type="submit" value="submit" class="mt-3 button">
     </form>
@@ -56,11 +56,10 @@
   <div class="w-full p-6 mt-8 mb-2 bg-gray-200 rounded lg:w-4/6 md:w-3/4">
     <form action="/marketplace_setup/constants/set" method="post">
       {% include 'authenticity_token' %}
-      <label class="block mt-4">
       <input type="hidden" name="name" value="slack"></input>
-      <input type="text" name="value" value=""></input>
+      <label class="block mt-4" for="slack-alerts"></label>
+      <input type="text" id="slack-alerts" name="value" value=""></input>
       <input type="submit" class="ml-3 button button" value="submit" class="mt-3 button"></br>
-      <label class="block mt-4"><b>{{ 'app.slack.setup.webhook' | t }}</b></br> {% if context.constants.SLACK_WEBHOOK_URL == blank %}{{ 'app.slack.setup.none' | t }}{% else %}{{ context.constants.SLACK_WEBHOOK_URL }}{% endif %}</label>
-      </label>
+      <span class="block mb-1"><b>{{ 'app.slack.setup.webhook' | t }}</b></br> {% if context.constants.SLACK_WEBHOOK_URL == blank %}{{ 'app.slack.setup.none' | t }}{% else %}{{ context.constants.SLACK_WEBHOOK_URL }}{% endif %}<span class="block mb-1">
     </form>
   </div>
