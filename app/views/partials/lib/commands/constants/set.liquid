@@ -1,0 +1,10 @@
+{%  liquid
+  function object = 'lib/commands/constants/set/build', name: name, value: value
+  function object = 'lib/commands/constants/set/check', object: object
+
+  if object.valid
+    function object = 'lib/commands/execute', mutation_name: 'marketplace_setup/set_constant' object: object, selection: "constant"
+  endif
+
+  return object
+%}

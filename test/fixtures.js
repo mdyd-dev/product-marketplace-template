@@ -101,8 +101,8 @@ export var notAllowedPlaces = [
   dashboard.nav.inbox,
   topMenu.buttons.listItem,
   topMenu.buttons.feed,
-  topMenu.buttons.chat,
   dashboard.nav.myGroups,
+  topMenu.buttons.chat,
   dashboard.nav.activityFeed,
   dashboard.nav.publicProfile
 ];

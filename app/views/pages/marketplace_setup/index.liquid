@@ -7,5 +7,6 @@ slug: marketplace_setup
 
   function config = 'lib/commands/marketplace_setup/current_config'
   include 'theme/simple/admin/menu', section: 'setup'
-  include 'theme/simple/marketplace_setup/index', object: config
+  function chat_enabled = 'lib/queries/constants/find' name: "USE_WEBSOCKET_CHAT", type: "boolean", context: context
+  include 'theme/simple/marketplace_setup/index', object: config, chat_enabled: chat_enabled
 %}
