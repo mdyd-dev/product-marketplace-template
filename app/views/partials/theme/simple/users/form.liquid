@@ -3,20 +3,22 @@
 
   <fieldset>
     <label for="email">{{ 'app.users.form.email' | t }}</label>
-    <input name="user[email]" type="email" id="email" value="{{ object.email | raw_escape_string }}" class="w-full" autofocus>
+    <input name="user[email]" type="email" id="email" value="{{ object.email | raw_escape_string }}" class="w-full" autofocus required>
     {% include 'theme/simple/field_error', errors: object.errors.email %}
   </fieldset>
 
   <fieldset class="mt-3">
     <label for="password">{{ 'app.users.form.password' | t }}</label>
-    <input name="user[password]" type="password" id="password" value="{{ object.password | raw_escape_string }}" class="w-full">
+    <input name="user[password]" type="password" id="password" value="{{ object.password | raw_escape_string }}" class="w-full" required>
     {% include 'theme/simple/field_error', errors: object.errors.password %}
   </fieldset>
 
   <fieldset class="mt-3 flex items-center">
-    <input type="checkbox" name="user[agreed]" id="agreed">
-    <label for="agreed" class="ml-2">{{ 'app.users.form.agreed' | t}}</label>
-    {% include 'theme/simple/field_error', errors: object.errors.agreed %}
+    <input type="checkbox" name="user[agreed]" id="agreed" required>
+    <div class="ml-2">
+      <label for="agreed" class="block">{{ 'app.users.form.agreed' | t}}</label>
+      {% include 'theme/simple/field_error', errors: object.errors.agreed %}
+    </div>
   </fieldset>
 
   <fieldset class="mt-5 text-center">

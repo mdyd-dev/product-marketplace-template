@@ -77,6 +77,7 @@ test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log i
     .click(loginForm.buttons.register)
     .typeText(registerForm.inputs.email, 'admin@example.com')
     .typeText(registerForm.inputs.password, 'asd')
+    .click(loginForm.buttons.termsAccept)
     .click(registerForm.buttons.regSubmit)
     .expect(registerForm.labels.email.textContent).contains('already taken')
 })
