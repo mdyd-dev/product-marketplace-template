@@ -2,6 +2,7 @@
 slug: categories/show
 ---
 {% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
 
   assign category_id = context.params.slug3 | split: '-' | last
   function category = 'lib/queries/categories/find', id: category_id

@@ -1,8 +1,11 @@
 ---
 slug: comments
 ---
-{% function comment = 'lib/queries/comments/find', id: context.params.slug2 %}
-{% function url = 'link_to', object: comment.commentable %}
+{% liquid
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  function comment = 'lib/queries/comments/find', id: context.params.slug2
+  function url = 'link_to', object: comment.commentable
 
-{% assign url = url | append: '#' | append: comment.uuid  %}
-{% redirect_to url %}
+  assign url = url | append: '#' | append: comment.uuid
+  redirect_to url
+%}
