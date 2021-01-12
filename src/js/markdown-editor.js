@@ -38,7 +38,8 @@ const easyMDE = new EasyMDE({
       const xmlResponse = await response.text();
       const url = getXmlValue(xmlResponse, 'Location');
       const photo = await createPhoto(url);
-      success(photo.photo.versions.uncropped);
+      const photoUrl = photo.photo.versions.uncropped.replace(/\s/g, '%20');
+      success(photoUrl);
     } else {
       error("Can't upload an image");
     }
