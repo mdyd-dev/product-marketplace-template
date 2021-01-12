@@ -34,3 +34,18 @@ const tagsInput = document.querySelector('[data-tags-input]');
 if (tagsInput) {
   import(/* webpackChunkName: "tags-input" */ './tags-input.js').then(() => {});
 }
+
+const groupJoinButtons = document.querySelectorAll('button[data-join-group]')
+if (groupJoinButtons.length > 0) {
+  import(/* webpackChunkName: "groups-join" */ './groups-join.js').then(() => {});
+}
+
+const userFollowButtons = document.querySelectorAll('button[data-follow-user]')
+if (userFollowButtons.length > 0) {
+  import(/* webpackChunkName: "user-follow" */ './user-follow.js').then(() => {});
+}
+
+const itemStatusSelectors = document.querySelectorAll('select[data-item-status-object-id]')
+if (itemStatusSelectors.length > 0) {
+  import(/* webpackChunkName: "item-status-create" */ './item-status-create.js').then(() => {});
+}

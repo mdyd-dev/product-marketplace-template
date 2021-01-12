@@ -1,0 +1,5 @@
+button:not(.joined) .join { display: visible }
+button:not(.joined) .leave { display: none }
+
+button.joined .leave { display: visible }
+button.joined .join { display: none }

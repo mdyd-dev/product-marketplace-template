@@ -42,7 +42,4 @@ slug: profile
   function chat_enabled = 'lib/queries/constants/find' name: "USE_WEBSOCKET_CHAT", type: "boolean", context: context
 
   render 'theme/simple/profile/show', section: section, user: profile, list: list, current_profile: current_profile, conversation: conversation, messages: messages, chat_enabled: chat_enabled
-  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
-  render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token
 %}
-
