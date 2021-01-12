@@ -7,11 +7,10 @@ method: post
   include 'lib/profile_present_or_redirect', profile: current_profile
 
   function object = 'lib/commands/comments/create', object: context.params.comment, current_profile: current_profile
-
   if object.valid
     include 'lib/commands/events/create', type: 'comment_created', actor_id: current_profile.id, object_id: object.id, target_id: context.params.comment.commentable_id, delay: 0
     redirect_to context.params.return_to
   else
-    echo object
+    include 'redirect_to', url: context.params.return_to, error: 'app.models.comments.create_failed'
   endif
 %}

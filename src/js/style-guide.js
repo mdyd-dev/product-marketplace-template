@@ -216,6 +216,9 @@ styleGuide.typography = () => {
     rows.forEach((row) => {
       let textStyle = window.getComputedStyle(row.querySelector('.' + module.settings.typographyExample).firstElementChild);
 
+      if(row.querySelector('.styleGuide-class')){
+        row.querySelector('.styleGuide-class').textContent = row.querySelector('.' + module.settings.typographyExample).firstElementChild.classList;
+      }
       row.querySelector('.styleGuide-color').textContent = textStyle.getPropertyValue('color');
       row.querySelector('.styleGuide-font').textContent = textStyle.getPropertyValue('font-family');
       row.querySelector('.styleGuide-size').textContent = textStyle.getPropertyValue('font-size');

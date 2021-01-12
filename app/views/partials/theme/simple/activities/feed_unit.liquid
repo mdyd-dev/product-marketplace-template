@@ -15,7 +15,7 @@
     <div class="mt-2">
       <img class="object-cover rounded-lg w-9" src="{{ payload.object.photos.first.url.versions.small }}" alt="{{ payload.object.name }}">
     </div>
-  {% elsif payload.target.photos.size > 0 %}
+  {% elsif payload.target.photos.size > 0 and payload.type != 'comment_created' %}
     <div class="mt-2">
       <img class="object-cover rounded-lg w-9" src="{{ payload.target.photos.first.url.versions.small }}" alt="{{ payload.target.name }}">
     </div>

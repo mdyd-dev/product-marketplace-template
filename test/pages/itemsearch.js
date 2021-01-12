@@ -16,9 +16,7 @@ export default class ItemSearch {
     this.buttons = {
       sort: Selector('select[name="sort_by"]'),
       quickSearch: Selector('button').withText('Search'),
-      search: Selector('button').withText('Search').nth(1),
-      qsearch: Selector('button').withText('Search').nth(0)
-
+      search: Selector('button').withText('Search').nth(1)
     }
     this.options = {
       theMostRecent: Selector('option').withText('The Most Recent')

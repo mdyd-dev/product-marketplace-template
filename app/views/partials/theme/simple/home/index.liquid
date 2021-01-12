@@ -3,7 +3,7 @@
 {% for feed in feeds %}
   {% if feed[1].results.size > 0 %}
     <section class="mt-8">
-      <h2 class="mb-3 text-3xl">
+      <h2 class="bigtitle">
         {{ feed[0] | t: scope: 'app.home.feeds' }}
       </h2>
       <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">

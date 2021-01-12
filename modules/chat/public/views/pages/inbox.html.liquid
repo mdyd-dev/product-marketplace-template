@@ -5,6 +5,11 @@ slug: inbox
   function current_profile = 'lib/current_profile', user_id: context.current_user.id
   include 'lib/profile_present_or_redirect', profile: current_profile
 
+  function chat_enabled = 'lib/queries/constants/find' name: "USE_WEBSOCKET_CHAT", type: "boolean", context: context
+  unless chat_enabled
+    include 'redirect_to', url: '/', error: 'app.chat.disabled'
+  endunless
+
   function current_user = 'lib/queries/profiles/find', user_id: context.current_user.id
 
 	assign new_conversation = false
@@ -20,6 +25,7 @@ slug: inbox
 	graphql conversations = 'modules/chat/inbox', user_id: current_user.id
 	assign current_conversation = conversations.records.results | where: "id", active_conversation | first | default: conversations.records.results.first
 	graphql messages = 'modules/chat/find_messages', conversation_id: current_conversation.id, page: 1, per_page: 30
+
 
 	if current_conversation != blank
 		render 'modules/chat/inbox/conversations', current_conversation: current_conversation, conversations: conversations, current_user: current_user, messages: messages

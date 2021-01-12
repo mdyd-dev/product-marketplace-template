@@ -38,8 +38,8 @@ slug: profile
 
   graphql conversation = 'modules/chat/find_conversation', from_id: current_profile.id, to_id: profile.id
   graphql messages = 'modules/chat/find_messages', conversation_id: conversation.records.results.first.id
-  assign chat_enabled = context.constants.USE_WEBSOCKET_CHAT
-  assign slack_alerts_enabled = context.constants.SLACK_WEBHOOK_URL
+
+  function chat_enabled = 'lib/queries/constants/find' name: "USE_WEBSOCKET_CHAT", type: "boolean", context: context
 
   render 'theme/simple/profile/show', section: section, user: profile, list: list, current_profile: current_profile, conversation: conversation, messages: messages, chat_enabled: chat_enabled
   render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token

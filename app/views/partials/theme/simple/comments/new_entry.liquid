@@ -14,7 +14,7 @@
 
   <div class="{% if hidden %}hidden{% endif %}" data-comment-form>
     <div class="relative">
-      <textarea name="comment[body]" class="w-full p-2 outline-none" rows="3" placeholder="{{ placeholder }}"></textarea>
+      <textarea name="comment[body]" class="w-full p-2 outline-none" rows="3" placeholder="{{ placeholder }}" required></textarea>
       {% render 'theme/simple/ui/form-tip', content_key: 'app.models.comments.form.body_help' %}
 
       <div data-comment-photo-upload class="absolute top-0 right-0 w-8 h-8 mt-5 mr-5 text-gray-600 cursor-pointer" title="images">
