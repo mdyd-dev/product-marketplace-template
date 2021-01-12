@@ -8,5 +8,6 @@ slug: marketplace_setup
   function config = 'lib/commands/marketplace_setup/current_config'
   include 'theme/simple/admin/menu', section: 'setup'
   function chat_enabled = 'lib/queries/constants/find' name: "USE_WEBSOCKET_CHAT", type: "boolean", context: context
-  include 'theme/simple/marketplace_setup/index', object: config, chat_enabled: chat_enabled
+  function slack_alerts_enabled = 'lib/queries/constants/find' name: "SLACK_WEBHOOK_URL", type: "boolean", context: context
+  include 'theme/simple/marketplace_setup/index', object: config, chat_enabled: chat_enabled, slack_alerts_enabled: slack_alerts_enabled
 %}
