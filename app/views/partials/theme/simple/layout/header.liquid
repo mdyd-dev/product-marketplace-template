@@ -65,6 +65,19 @@
           {{ 'app.login' | t }}
         </a>
       {% endif %}
+      {% liquid
+        assign language_switch_url = context.localtion.pathname
+        assign language_icon = 'language-de'
+        if context.session.language == 'de'
+          assign language_switch_url = language_switch_url | append: '?language=en'
+          assign language_icon = 'language-en'
+        else
+          assign language_switch_url = language_switch_url | append: '?language=de'
+        endif
+      %}
+      <a href="{{ language_switch_url }}" class="hidden md:inline-block p-3 text-ex-dark-blue" aria-label="Change language">
+       {%- include "svg/icons", icon: language_icon, class: "w-8 h-8" -%}
+      </a>
     </nav>
   </div>
 </header>
