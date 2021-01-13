@@ -1,14 +1,25 @@
-query search($id: ID, $limit: Int = 20, $status: [String!], $tag: String, $keyword: String, $category: String, $owner: String, $sort: RecordsSortInput = {created_at: {order: DESC}}, $withStatuses: Boolean = false, $withOrders: Boolean = false) {
+query search(
+  $id: ID
+  $limit: Int = 20
+  $status: [String!]
+  $tag: String
+  $keyword: String
+  $category: String
+  $owner: String
+  $sort: RecordsSortInput = { created_at: { order: DESC } }
+  $withStatuses: Boolean = false
+  $withOrders: Boolean = false
+) {
   items: records(
-    per_page: $limit,
+    per_page: $limit
     filter: {
-      id: {value: $id},
+      id: { value: $id }
       table: { value: "item" }
       deleted_at: { exists: false }
       properties: [
-        { name: "c__status", value_in: $status },
-        { name: "owner", value: $owner },
-        { name: "tags", contains: $tag },
+        { name: "c__status", value_in: $status }
+        { name: "owner", value: $owner }
+        { name: "tags", contains: $tag }
         { name: "category", starts_with: $category }
       ]
       or: [
@@ -17,9 +28,9 @@ query search($id: ID, $limit: Int = 20, $status: [String!], $tag: String, $keywo
         { properties: { name: "tags", contains: $keyword } }
         { properties: { name: "category", contains: $keyword } }
       ]
-    },
-    sort: [$sort])
-  {
+    }
+    sort: [$sort]
+  ) {
     total_entries
     results {
       id
@@ -34,26 +45,44 @@ query search($id: ID, $limit: Int = 20, $status: [String!], $tag: String, $keywo
       tags: property_array(name: "tags")
       cover_photo_url: property(name: "cover_photo_url")
       c__status: property(name: "c__status")
+      slug: property(name: "slug")
 
-      owner: related_record(table: "profile" join_on_property: "owner", foreign_property: "id") {
+      owner: related_record(
+        table: "profile"
+        join_on_property: "owner"
+        foreign_property: "id"
+      ) {
         id
         type: table
         name: property(name: "name")
         slug: property(name: "slug")
       }
 
-      status: related_record(join_on_property: "id", foreign_property: "object_id", table: "status" sort: { created_at: { order: ASC } }) @include(if: $withStatuses) {
+      status: related_record(
+        join_on_property: "id"
+        foreign_property: "object_id"
+        table: "status"
+        sort: { created_at: { order: ASC } }
+      ) @include(if: $withStatuses) {
         id
         created_at
         name: property(name: "name")
         object_id: property(name: "object_id")
       }
 
-      line_items: related_records(join_on_property: "id", foreign_property: "item_id", table: "line_item") @include(if: $withOrders) {
+      line_items: related_records(
+        join_on_property: "id"
+        foreign_property: "item_id"
+        table: "line_item"
+      ) @include(if: $withOrders) {
         id
       }
 
-      photos: related_records(table: "photo", join_on_property: "uuid", foreign_property: "object_uuid") {
+      photos: related_records(
+        table: "photo"
+        join_on_property: "uuid"
+        foreign_property: "object_uuid"
+      ) {
         id
         photo: property_upload(name: "photo") {
           file_name

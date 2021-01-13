@@ -27,9 +27,9 @@
   endif
 
   if item
-    assign id = item.name | slugify | append: "-" | append: item.id
-    print "/items/" | append: id
-    return "/items/" | append: id
+    function slug = 'generate_slug', title: item.name, id: item.id
+    print "/items/" | append: slug
+    return "/items/" | append: slug
   endif
 
   if category

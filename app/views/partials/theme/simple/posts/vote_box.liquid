@@ -19,7 +19,7 @@
 %}
 {% if downvote %}
   <div class="text-interaction-disabled">
-    <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /> </svg>
+    {% render 'theme/simple/ui/icon', icon: 'dashUp' %}
   </div>
 {% else %}
   <form action="/dashboard/posts/vote" method="post">
@@ -27,7 +27,7 @@
     <input type="hidden" name="post[id]" value="{{ post.id }}"/>
     <input type="hidden" name="post[type]" value="{{up_action_type}}"/>
     <button class="{% if upvote %}text-yellow-600{% else %}text-interaction{% endif %}" data-tc="voteup" title="{{up_action_title}}">
-      <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /> </svg>
+      {% render 'theme/simple/ui/icon', icon: 'dashUp' %}
     </button>
   </form>
 {% endif %}
@@ -36,7 +36,7 @@
 
 {% if upvote %}
   <div class="text-interaction-disabled">
-    <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /> </svg>
+    {% render 'theme/simple/ui/icon', icon: 'dashDown' %}
   </div>
 {% else %}
   <form action="/dashboard/posts/vote" method="post" data-tc="votedown">
@@ -44,7 +44,7 @@
     <input type="hidden" name="post[id]" value="{{ post.id }}"/>
     <input type="hidden" name="post[type]" value="{{down_action_type}}"/>
     <button class="{% if downvote %}text-yellow-600{% else %}text-interaction{% endif %}" title="{{down_action_title}}">
-      <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /> </svg>
+      {% render 'theme/simple/ui/icon', icon: 'dashDown' %}
     </button>
   </form>
 {% endif %}

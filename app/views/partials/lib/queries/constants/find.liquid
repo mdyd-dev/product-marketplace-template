@@ -1,0 +1,15 @@
+{% liquid
+  assign value = context.constants[name]
+  log value
+
+  if type == "boolean"
+    if value == "true"
+      return true
+    else
+      return false
+    endif
+  else
+    return context.constants[name]
+  endif
+  %}
+

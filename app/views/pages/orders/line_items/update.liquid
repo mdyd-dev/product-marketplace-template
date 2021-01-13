@@ -7,12 +7,26 @@ method: put
   include 'lib/profile_present_or_redirect', profile: current_profile
 
   function line_item = 'lib/queries/line_items/find', id: context.params.id
-  function object = 'lib/commands/line_items/update', object: line_item, params: context.params.line_item
+
+  if context.params.line_item.quantity == "0"
+    function object = 'lib/commands/line_items/delete', object: line_item
+  else
+    function object = 'lib/commands/line_items/update', object: line_item, params: context.params.line_item
+  endif
+
   function order_url = 'link_to', order: line_item.order
   if object.valid
     function result = 'lib/commands/orders/recalculate', order_id: object.order_id
-    include 'redirect_to', url: order_url, notice: 'app.models.line_items.updated'
+    if context.params.line_item.quantity == "0"
+      include 'redirect_to', url: order_url, notice: 'app.models.line_items.deleted'
+    else
+      include 'redirect_to', url: order_url, notice: 'app.models.line_items.updated'
+    endif
   else
-    include 'redirect_to', url: order_url, error: 'app.models.line_items.update_failed'
+    if context.params.line_item.quantity == "0"
+      include 'redirect_to', url: order_url, error: 'app.models.shared.delete_failed'
+    else
+      include 'redirect_to', url: order_url, error: 'app.models.line_items.update_failed'
+    endif
   endif
 %}

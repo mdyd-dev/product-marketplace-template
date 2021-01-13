@@ -8,6 +8,8 @@ method: post
   function object = 'lib/commands/items/create', object: context.params.item, owner: current_profile.id
   if object.valid
     include 'lib/commands/events/create', type: 'item_created', actor_id: current_profile.id, object_id: object.id
+    function status = 'lib/commands/statuses/create', object_id: object.id, name: 'published', scope: 'app.statuses.items', profile_id: current_profile.id
+    include 'lib/commands/events/create', type: 'status_created', actor_id: current_profile.id, object_id: status.id, target_id: status.object_id
 
     function url = 'link_to', item: object
     include 'redirect_to', url: url, notice: 'app.items.created'

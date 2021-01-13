@@ -1,18 +1,26 @@
-mutation create_item($name: String!, $description: String, $tags: [String], $owner: String!, $category: String, $price: Int!, $uuid: String!) {
+mutation create_item(
+  $name: String!
+  $description: String
+  $tags: [String]
+  $owner: String!
+  $category: String
+  $price: Int!
+  $uuid: String!
+) {
   model_create(
     model: {
       model_schema_name: "item"
       properties: [
-        { name: "uuid" value: $uuid }
-        { name: "name" value: $name }
-        { name: "description" value: $description }
-        { name: "tags" value_array: $tags }
-        { name: "owner" value: $owner }
-        { name: "category" value: $category }
-        { name: "price" value_int: $price }
+        { name: "uuid", value: $uuid }
+        { name: "name", value: $name }
+        { name: "description", value: $description }
+        { name: "tags", value_array: $tags }
+        { name: "owner", value: $owner }
+        { name: "category", value: $category }
+        { name: "price", value_int: $price }
       ]
     }
-  ){
+  ) {
     id
     properties
     name: property(name: "name")
@@ -20,7 +28,12 @@ mutation create_item($name: String!, $description: String, $tags: [String], $own
     price: property(name: "price")
     uuid: property(name: "uuid")
     category: property(name: "category")
-    owner: related_model(model_schema_name: "profile" join_on_property: "owner", foreign_property: "id") {
+    slug: property(name: "slug")
+    owner: related_model(
+      model_schema_name: "profile"
+      join_on_property: "owner"
+      foreign_property: "id"
+    ) {
       id
       type: model_schema_name
       name: property(name: "name")

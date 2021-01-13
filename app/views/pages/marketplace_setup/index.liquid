@@ -2,9 +2,12 @@
 slug: marketplace_setup
 ---
 {% liquid
-  include 'lib/must_be_superadmin'
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  include 'lib/must_be_superadmin', profile: current_profile
 
   function config = 'lib/commands/marketplace_setup/current_config'
   include 'theme/simple/admin/menu', section: 'setup'
-  include 'theme/simple/marketplace_setup/index', object: config
+  function chat_enabled = 'lib/queries/constants/find' name: "USE_WEBSOCKET_CHAT", type: "boolean", context: context
+  function slack_alerts_enabled = 'lib/queries/constants/find' name: "SLACK_WEBHOOK_URL", type: "boolean", context: context
+  include 'theme/simple/marketplace_setup/index', object: config, chat_enabled: chat_enabled, slack_alerts_enabled: slack_alerts_enabled
 %}

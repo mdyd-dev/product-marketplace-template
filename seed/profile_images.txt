@@ -1,0 +1,6 @@
+sample_profile_photo/person1.jpg
+sample_profile_photo/person2.jpg
+sample_profile_photo/person3.jpg
+sample_profile_photo/person4.jpg
+sample_profile_photo/person5.jpg
+sample_profile_photo/person6.jpg

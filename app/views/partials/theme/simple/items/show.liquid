@@ -35,7 +35,7 @@
         <picture class="object-cover w-full">
           <source srcset="{{ item.photos[0].photo.versions.uncropped_webp }}" type="image/webp" alt="{{ item.name }}">
           <source srcset="{{ item.photos[0].photo.versions.uncropped }}" type="image/jpeg" alt="{{ item.name }}">
-          <img src="{{ item.photos[0].photo.versions.uncropped }}" alt="{{ item.name }}">
+          <img class="break-words" src="{{ item.photos[0].photo.versions.uncropped }}" alt="{{ item.name }}">
         </picture>
       {% endif %}
     </div>
@@ -46,9 +46,9 @@
         <a href="/u/{{ item.owner.id }}">{% print 'app.items.by_user' | t %}</a>
       </h2>
 
-      <h1 class="mb-1 text-2xl">
+      <h2 class="title mt-7 break-words">
         {{ item.name }}
-      </h1>
+      </h2>
 
       <div class="flex flex-wrap mb-4">
         <ul class="flex w-full categories">
@@ -70,10 +70,10 @@
       </div>
       {% endcomment %}
 
-      <p class="mt-4 leading-relaxed">{{ item.description }}</p>
+      <p class="mt-4 leading-relaxed break-words">{{ item.description }}</p>
 
       <div class="flex mt-4">
-        <span class="text-2xl text-gray-900 ">{{ item.price | pricify_cents }}</span>
+        <span class="title">{{ item.price | pricify_cents }}</span>
 
         <form action="/orders/line_items" method="post" class="ml-auto ">
           {% render 'authenticity_token', authenticity_token: authenticity_token %}

@@ -4,11 +4,11 @@ export default class NewSessionForm {
   constructor() {
     this.inputs = {
       email: Selector('input[name="user[email]"]'),
-      password: Selector('input[name="user[password]"]'),
+      password: Selector('input[name="user[password]"]')
     }
     this.labels = {
-      email: Selector('label').withText('E-mail'),
-      password: Selector('label').withText('Password'),
+      email: Selector('fieldset').withText('E-mail'),
+      password: Selector('fieldset').withText('Password'),
       username: Selector('label[for="username"]')
     }
     this.buttons = {

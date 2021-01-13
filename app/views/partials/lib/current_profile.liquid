@@ -10,6 +10,8 @@
     assign followships = false
   endif
 
-  function profile = 'lib/queries/profiles/find', user_id: user_id, id: id, followships: followships, membership: membership
-  return profile
+  function current_profile = 'lib/queries/profiles/find', user_id: user_id, id: id, followships: followships, membership: membership
+  export current_profile
+
+  return current_profile
 %}

@@ -13,7 +13,8 @@ export default class DashboardPage {
       bankAccount: Selector('a').withText('Bank Account'),
       activityFeed: Selector('main').find('a').withText('Activity Feed'),
       myGroups: Selector('a').withText('My Groups'),
-      questions: Selector('main').find('a').withText('Questions')
+      questions: Selector('main').find('a').withText('Questions'),
+      inbox: Selector('a').withText('Inbox')
     }
   }
 }

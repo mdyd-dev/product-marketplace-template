@@ -1,21 +1,27 @@
-<form action="/users" method="post">
+<form action="/users" method="post" class="card w-full md:w-96 mx-auto">
   {% include 'authenticity_token' %}
 
-  <label class="block mt-3" for="email">
-    <span class="block">{{ 'app.users.form.email' | t }}</span>
-    <input name="user[email]" type="email" id="email" value="{{ object.email | raw_escape_string }}" class="w-full form-input" autofocus />
+  <fieldset>
+    <label for="email">{{ 'app.users.form.email' | t }}</label>
+    <input name="user[email]" type="email" id="email" value="{{ object.email | raw_escape_string }}" class="w-full" autofocus required>
     {% include 'theme/simple/field_error', errors: object.errors.email %}
-  </label>
+  </fieldset>
 
-  <label class="block mt-3" for="password">
-    <span class="block">{{ 'app.users.form.password' | t }}</span>
-    <input name="user[password]" type="password" id="password" value="{{ object.password | raw_escape_string }}" class="w-full form-input" />
+  <fieldset class="mt-3">
+    <label for="password">{{ 'app.users.form.password' | t }}</label>
+    <input name="user[password]" type="password" id="password" value="{{ object.password | raw_escape_string }}" class="w-full" required>
     {% include 'theme/simple/field_error', errors: object.errors.password %}
-  </label>
-  <label class="block mt-3" for="agreed">
-    <input type="checkbox" name="user[agreed]">
-    {{ 'app.users.form.agreed' | t}}
-    {% include 'theme/simple/field_error', errors: object.errors.agreed %}
-    </label>
-  <button class="mt-3 button">{{ 'app.users.form.signup' | t }}</button>
+  </fieldset>
+
+  <fieldset class="mt-3 flex items-center">
+    <input type="checkbox" name="user[agreed]" id="agreed" required>
+    <div class="ml-2">
+      <label for="agreed" class="block">{{ 'app.users.form.agreed' | t}}</label>
+      {% include 'theme/simple/field_error', errors: object.errors.agreed %}
+    </div>
+  </fieldset>
+
+  <fieldset class="mt-5 text-center">
+    <button class="mt-3 button">{{ 'app.users.form.signup' | t }}</button>
+  </fieldset>
 </form>

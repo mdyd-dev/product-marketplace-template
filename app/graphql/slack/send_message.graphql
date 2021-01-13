@@ -1,0 +1,14 @@
+mutation send_api_call ($data: HashObject) {
+  api_call_send(
+    data: $data
+    template: { name: "send_slack_message" }
+  ) {
+    response {
+      status
+      body
+    }
+    errors {
+      message
+    }
+  }
+}

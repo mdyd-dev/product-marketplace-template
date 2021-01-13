@@ -1,15 +1,17 @@
 ---
-slug: items
+slug: items/:slug
 ---
 
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id, followships: true
 
-  assign id = context.params.slug2 | split: '-' | last
+  assign id = context.params.slug | split: '-' | last
   function item = 'lib/queries/items/find', id: id, withOrders: true
+
+  assign redirect_path = '/items/' | append: item.slug
+  include 'lib/redirect_to_last_slug', redirect_to: redirect_path, last_slug: item.slug, current_slug: context.params.slug
 
   include 'lib/present_or_404', property: item.id
 
   render 'theme/simple/items/show', item: item, current_profile: current_profile, authenticity_token: context.authenticity_token
-  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
 %}

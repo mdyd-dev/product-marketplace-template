@@ -8,7 +8,7 @@ metadata:
 ---
 
 {% liquid
-  function current_profile = 'lib/current_profile', user_id: context.current_user.id
+  function current_profile = 'lib/current_profile', user_id: context.current_user.id, followships: true, membership: true
   include 'lib/profile_present_or_redirect', profile: current_profile, followships: true, membership: true
 
   include 'lib/validate_profile_completeness', profile: current_profile
@@ -34,6 +34,4 @@ metadata:
 
   render 'theme/simple/ui/breadcrumbs', breadcrumbs: context.page.metadata.breadcrumbs
   include 'theme/simple/profile/private_feed', section: section, user: profile, list: list, current_profile: current_profile, presigned_url: presigned_url
-  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
-  render 'theme/simple/groups/join.js', authenticity_token: context.authenticity_token
 %}

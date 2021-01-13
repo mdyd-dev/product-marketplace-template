@@ -1,21 +1,18 @@
-<section>
-  <div class="container items-center mx-auto">
-    <div class="mx-auto mb-2 text-center lg:w-2/6 md:w-1/2">
-      <h1 class="text-3xl font-medium">{{ 'app.account.reset_password.title' | t }}</h1>
-    </div>
+<section class="my-10 container items-center">
+  <h2 class="bigtitle text-center">{{ 'app.account.reset_password.title' | t }}</h2>
 
-    <div class="w-full p-8 mx-auto mt-10 bg-frame rounded-lg lg:w-2/6 md:w-1/2 md:mt-0">
-      <form action="/authentication_links/create" method="post">
-        {% include 'authenticity_token' %}
+  <form action="/authentication_links/create" method="post" class="card w-full md:w-96 mx-auto">
+    {% include 'authenticity_token' %}
 
-        <label class="block mt-3" for="email">
-          <span class="block">{% print 'app.users.attr.email' | t %}</span>
-          <input name="authentication_link[email]" type="email" id="email" value="{{ object.email }}" class="w-full form-input" autofocus required />
-          {% include 'theme/simple/field_error', errors: object.errors.email %}
-        </label>
+    <p>{{ 'app.account.reset_password.description' | t }}</p>
 
-        <button class="mt-3 button">{% print 'app.account.reset_password.send_link' | t %}</button>
-      </p>
-    </div>
-  </div>
+    <fieldset class="mt-5">
+      <label for="email">{{ 'app.users.attr.email' | t }}</label>
+      <input name="authentication_link[email]" type="email" id="email" value="{{ object.email }}" class="w-full" autofocus required>
+      {% include 'theme/simple/field_error', errors: object.errors.email %}
+    </fieldset>
+
+    <fieldset class="mt-5 text-center">
+      <button class="button">{{ 'app.account.reset_password.send_link' | t }}</button>
+    </fieldset>
 </section>

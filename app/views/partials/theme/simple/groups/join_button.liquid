@@ -13,18 +13,12 @@
     title="join/leave"
     data-join-group="{% print group.id %}">
 
-    <span class="button join">
+    <span class="button join pointer-events-none">
       {{ 'app.groups.join' | t }}
     </span>
 
-    <span class="button button-secondary leave">
+    <span class="button button-secondary leave pointer-events-none">
       {{ 'app.groups.leave' | t }}
     </span>
   </button>
-{% else %}
-  <a href="/sessions/new">
-    <span class="button">
-      {{ 'app.groups.join' | t }}
-    </span>
-  </a>
 {% endif %}

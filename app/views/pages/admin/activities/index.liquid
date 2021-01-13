@@ -1,7 +1,7 @@
 {% liquid
   function current_profile = 'lib/current_profile', user_id: context.current_user.id
   include 'lib/profile_present_or_redirect', profile: current_profile, require_profile: false
-  include 'lib/must_be_superadmin'
+  include 'lib/must_be_superadmin', profile: current_profile
 
   assign feed = context.params.feed | split: '.'
   assign feed_name = feed[0] | default: 'system'
@@ -23,6 +23,4 @@
 
   include 'theme/simple/admin/menu', section: 'activities'
   include 'theme/simple/admin/activities/index', list: list, section: 'activities', users: users, current_profile: current_profile, selected: selected
-
-  render 'theme/simple/items/follow.js', authenticity_token: context.authenticity_token
 %}

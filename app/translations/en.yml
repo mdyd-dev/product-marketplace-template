@@ -54,6 +54,17 @@ en:
         description: Listings counter
         delta: Since yesterday
   app:
+    slack:
+      setup:
+        title: Slack Notifications
+        webhook: 'Currently your slack-webhook is set as:'
+        none: none
+    chat:
+      setup:
+        title: Chat
+        enable: enable
+        disable: disable
+      disabled: Denied. Chat is currently disabled, if you think this is an issue please contact our support.
     quick_search:
       name: Search...
       type:
@@ -177,6 +188,7 @@ en:
         checkout: Checkout
         total: Total
         continue-shopping: Continue shopping
+        empty: This order is empty
       checkout:
         confirm: Please confirm and choose payment method
         order_total: 'Order total: '
@@ -447,7 +459,8 @@ en:
       created: Your account has been created
       reset_password:
         title: Reset password
-        send_link: Send email with authentication link
+        description: Please provide your registered email address and we will send you a link that will enable you to reset the password.
+        send_link: Reset password
     authentication_links:
       created: >-
         Please check your email. We have sent you a password resetting
@@ -469,7 +482,7 @@ en:
         section2:
           q1:
             question: How to ask a good question?
-            answer: "Search first - it is possible that someone else has already encountered the same or similar problem Summarize your issue in one sentence in the title. Include keywords that differentiate your question from similar ones on the site. Use the Description for details Give context to your question: it might be useful if you explain how you encountered the problem you’re trying to solve and what prevented you from solving it Include code if necessary Include all relevant tags Proofread before posting Respond to comments: if you missed an important piece of information edit your question to make sure you get useful answers Try out the suggestions and share the outcome"
+            answer: 'Search first - it is possible that someone else has already encountered the same or similar problem Summarize your issue in one sentence in the title. Include keywords that differentiate your question from similar ones on the site. Use the Description for details Give context to your question: it might be useful if you explain how you encountered the problem you’re trying to solve and what prevented you from solving it Include code if necessary Include all relevant tags Proofread before posting Respond to comments: if you missed an important piece of information edit your question to make sure you get useful answers Try out the suggestions and share the outcome'
 
           q2:
             question: How to use the editor?
@@ -886,7 +899,7 @@ en:
         Your access to and use of the Services is subject to the pOS Terms of
         Service located at <a class="link"
         href="https://www.platformos.com/terms">https://www.platformos.com/terms</a>.
-      changes-to-policy: 'Changes to pOS''s Privacy Policy:'
+      changes-to-policy: "Changes to pOS's Privacy Policy:"
       changes-to-policy-inner: >-
         The Services and our business may change from time to time. As a result,
         at times it may be necessary for pOS to make changes to this Privacy
@@ -1013,10 +1026,11 @@ en:
         read_more: Read more
         send: Send
         comment: Comment
+        create_failed: Create failed
         form:
           creator_id: creator_id
           body: Body
-          body_help: "You can use formatting: [link](https://example.com) _italic_ **bold** `code`"
+          body_help: 'You can use formatting: [link](https://example.com) _italic_ **bold** `code`'
           title: Title
           uuid: uuid
           commentable_id: commentable_id
@@ -1037,8 +1051,8 @@ en:
         answers: answers
         score: score
         questions-tagged-by: 'Questions tagged: <span class="font-bold">%{tag}</span>'
-        upvote: "+1"
-        downvote: "-1"
+        upvote: '+1'
+        downvote: '-1'
         clear: clear
         errors:
           only_owner_can_accept_answer: Only owner can accept answer

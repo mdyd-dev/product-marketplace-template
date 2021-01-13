@@ -6,17 +6,15 @@ import { John, Admin, SellerRandomUser, myUrl, loginConfirmation } from './fixtu
 const topMenu = new TopMenuBtns()
 const loginForm = new NewSessionForm()
 
-export const buyerRole = Role(myUrl, async (t) => {
+export const buyerRole = Role(myUrl + "/sessions/new", async (t) => {
   await t
-    .click(topMenu.buttons.logIn)
     .typeText(loginForm.inputs.email, John.email)
     .typeText(loginForm.inputs.password, John.password)
     .click(loginForm.buttons.logIn)
 })
 
-export const sellerRole = Role(myUrl, async (t) => {
+export const sellerRole = Role(myUrl + "/sessions/new", async (t) => {
   await t
-    .click(topMenu.buttons.logIn)
     .typeText(loginForm.inputs.email, SellerRandomUser.email)
     .typeText(loginForm.inputs.password, SellerRandomUser.password)
     .click(loginForm.buttons.logIn)
@@ -24,9 +22,8 @@ export const sellerRole = Role(myUrl, async (t) => {
   await t.expect(Selector('main').withText(loginConfirmation).exists).ok('message ' + loginConfirmation + " doesn't exists")
 })
 
-export const adminRole = Role(myUrl, async (t) => {
+export const adminRole = Role(myUrl + "/sessions/new", async (t) => {
   await t
-    .click(topMenu.buttons.logIn)
     .typeText(loginForm.inputs.email, Admin.email)
     .typeText(loginForm.inputs.password, Admin.newPassword)
     .click(loginForm.buttons.logIn)

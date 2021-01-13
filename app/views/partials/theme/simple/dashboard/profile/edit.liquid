@@ -1,5 +1,5 @@
 <div class="container flex flex-wrap items-center mx-auto mb-10">
-  <h1 class="text-2xl">{{ 'app.profiles.edit' | t }}</h1>
+  <h2 class="bigtitle">{{ 'app.profiles.edit' | t }}</h2>
 </div>
 
 <div class="sm:flex">
@@ -9,7 +9,7 @@
       {% liquid
         assign img_url = object.avatar.photo.versions.small
         unless img_url
-        assign img_url = 'images/user.svg' | asset_url
+          assign img_url = 'images/user.svg' | asset_url
         endunless
       %}
       <img src="{{ img_url }}" alt="" class="object-cover object-center w-48 h-48 mx-auto text-gray-400 rounded-full shadow-md md:mx-0">

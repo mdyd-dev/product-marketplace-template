@@ -1,31 +1,30 @@
-<div class="container items-center mx-auto">
-  <div class="mx-auto mb-2 text-center lg:w-2/6 md:w-1/2">
-    <h1 class="text-2xl">{{ 'app.login_form.log_in' | t }}</h1>
-  </div>
+<section class="my-10 container items-center">
+  <h2 class="bigtitle text-center">{{ 'app.login_form.log_in' | t }}</h2>
 
-  <div class="w-full p-8 mx-auto mt-10 rounded-lg shadow-md bg-panel lg:w-2/6 md:w-1/2 md:mt-0">
-    <form action="/sessions/create" method="post">
-      {% render 'authenticity_token', context: context %}
+  <form action="/sessions/create" method="post" class="card w-full md:w-96 mx-auto">
+    {% render 'authenticity_token', context: context %}
 
-      <label class="block mt-3" for="email">
-        <span class="block">{{ 'app.login_form.email' | t }}</span>
-        <input name="user[email]" type="email" id="email" value="{{ object.email | raw_escape_string }}" class="w-full" autofocus>
-        {% render 'theme/simple/field_error', errors: object.errors.email %}
-      </label>
+    <fieldset>
+      <label for="email">{{ 'app.login_form.email' | t }}</label>
+      <input name="user[email]" type="email" id="email" value="{{ object.email | raw_escape_string }}" class="w-full" autofocus>
+      {% render 'theme/simple/field_error', errors: object.errors.email %}
+    </fieldset>
 
-      <label class="block mt-3" for="password">
-        <span class="block">{{ 'app.login_form.password' | t }}</span>
-        <input name="user[password]" type="password" id="password" value="{{ object.password | raw_escape_string }}" class="w-full">
-        {% render 'theme/simple/field_error', errors: object.errors.password %}
-      </label>
+    <fieldset class="mt-3">
+      <label for="password">{{ 'app.login_form.password' | t }}</label>
+      <input name="user[password]" type="password" id="password" value="{{ object.password | raw_escape_string }}" class="w-full">
+      {% render 'theme/simple/field_error', errors: object.errors.password %}
+    </fieldset>
 
-      <button class="mt-3 button">{{ 'app.login_form.log_in' | t }}</button>
-    </form>
-    <p class="mt-8">
-      {{ 'app.login_form.anonymous' | t }} <a href='/sign-up' class="underline">{{ 'app.login_form.register' | t }}</a>
-    </p>
-    <p>
-      {{ 'app.login_form.password_lost' | t }} <a href='/passwords/reset' class="underline">{{ 'app.login_form.reset' | t }}</a>
-    </p>
-  </div>
-</div>
+    <fieldset class="mt-5 text-center">
+      <button class="button mt-3">{{ 'app.login_form.log_in' | t }}</button>
+    </fieldset>
+  </form>
+
+  <p class="text-center mt-8">
+    {{ 'app.login_form.anonymous' | t }} <a href='/sign-up' class="underline">{{ 'app.login_form.register' | t }}</a>
+  </p>
+  <p class="text-center">
+    {{ 'app.login_form.password_lost' | t }} <a href='/passwords/reset' class="underline">{{ 'app.login_form.reset' | t }}</a>
+  </p>
+</section>

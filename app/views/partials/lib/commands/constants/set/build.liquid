@@ -1,0 +1,17 @@
+{% parse_json mapping %}
+ {
+   "chat":  "USE_WEBSOCKET_CHAT",
+   "slack": "SLACK_WEBHOOK_URL"
+ }
+{% endparse_json %}
+
+{% parse_json object %}
+  {
+    "name":           {{ mapping[name] | json }},
+    "value":          {{ value | json }}
+  }
+{% endparse_json %}
+
+{% liquid
+  return object
+%}

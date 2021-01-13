@@ -20,9 +20,9 @@
         {{ 'app.models.posts.list' | t }}
       </a>
 
-      {% if context.current_user.id %}
+      {% if profile %}
         {% assign superadmins = context.constants.superadmins | split: ',' %}
-        {% if superadmins contains context.current_user.email %}
+        {% if superadmins contains profile.user.email %}
           <a href="/admin" class="p-3">{{ 'app.admin' | t }}</a>
         {% endif %}
         <a href="/dashboard" class="p-3">{{ 'app.header.feed' | t }}</a>
@@ -33,13 +33,11 @@
           </p>
         </a>
 
-
         <div x-data="{ dropdownOpen: false }" class="relative">
-
           {% liquid
-            assign avatar_url = profile.avatar.versions.tiny
+            assign avatar_url = profile.avatar.photo.versions.tiny
             if avatar_url == blank
-            assign avatar_url = "images/user.svg" | asset_url
+              assign avatar_url = "images/user.svg" | asset_url
             endif
           %}
 

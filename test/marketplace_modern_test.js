@@ -5,18 +5,25 @@ import { John, SellerRandomUser, myUrl, item, editedItem, getURL, editURL,
          adminPage, registerForm, loginForm, itemShow, editedItemShow,
          passwordResetForm, newItemForm, topMenu, itemSearch, dashboard,
          profileEditForm, orders, publicProfile, groupsPage, footer,
-         contactUsForm, activityFeed, categoryName, topicsPage, permissionDenied } from './fixtures'
+         contactUsForm, activityFeed, categoryName, topicsPage, permissionDenied,
+         notAllowedPlaces } from './fixtures'
 import { register, createItem, checkErrors } from './helper'
 
 
-const translationMissing = Selector('body').withText('translation missing')
-async function checkTranslation(translationMissing) {
-  if (await translationMissing.exists)
-    await t.expect(translationMissing.exists).notOk();
-};
-
 fixture`Happy path scenario`
           .page(myUrl)
+
+test.page(myUrl + '/sign-up')('Uncompleted profile tests', async (t) => {
+  await t.typeText(loginForm.inputs.email, "tester@example.com")
+  .typeText(loginForm.inputs.password, "password")
+  .click(loginForm.buttons.termsAccept)
+  await t.click(loginForm.buttons.regSubmit)
+  await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  for (var i in notAllowedPlaces) {
+    await t.click(notAllowedPlaces[i])
+    await t.expect(await getURL()).contains(myUrl+'/dashboard/profile/edit')
+  }
+})
 
 test.page(myUrl + '/sign-up')('Register seller', async (t) => {
   await register(SellerRandomUser)
@@ -70,6 +77,7 @@ test.page(myUrl + '/sessions/new')(`Trying to register with taken data and log i
     .click(loginForm.buttons.register)
     .typeText(registerForm.inputs.email, 'admin@example.com')
     .typeText(registerForm.inputs.password, 'asd')
+    .click(loginForm.buttons.termsAccept)
     .click(registerForm.buttons.regSubmit)
     .expect(registerForm.labels.email.textContent).contains('already taken')
 })
@@ -98,9 +106,11 @@ test('Editing item and search', async (t) => {
     await t.expect(sellerProfilePage()).contains(myUrl+'/profile/' + SellerRandomUser.name) // checks if href contains slugified username
     .click(topMenu.buttons.items)
     await checkErrors()
-    await t.click(itemSearch.buttons.sort)
-    .click(itemSearch.options.theMostRecent)
-    .click(itemSearch.buttons.search)
+    //await t.click(itemSearch.buttons.sort)
+    //.click(itemSearch.options.theMostRecent)
+    //.click(itemSearch.buttons.search)
+    await t.typeText(itemSearch.quickSearch.keyword, item.name)
+    .click(itemSearch.buttons.quickSearch)
     .click(itemSearch.links.item)
     .click(itemShow.buttons.browseUsersList) // goes on your list from item show
     .click(itemSearch.links.item)
@@ -138,8 +148,8 @@ test('Buying an item and following the seller', async (t) => {
   await t
     .useRole(buyerRole)
     .click(topMenu.buttons.items)
-    .typeText(itemSearch.search.keyword, item.commonName)
-    .click(itemSearch.buttons.search)
+    .typeText(itemSearch.quickSearch.keyword, item.commonName)
+    .click(itemSearch.buttons.quickSearch)
     .expect(itemSearch.links.commonItem.exists).ok()
     .click(itemSearch.links.commonItem)
     .click(itemShow.buttons.follow)
@@ -300,7 +310,7 @@ test('Groups', async (t) => {
 test('Smart search', async (t) => {
   await t.useRole(buyerRole)
     .typeText(itemSearch.quickSearch.keyword, John.name)
-    .click(itemSearch.buttons.search)
+    .click(itemSearch.buttons.quickSearch)
     // expects item, group and profile with 'common name'
     await checkErrors()
     await t.expect(link.withText(group.commonName).exists).ok()
