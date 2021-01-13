@@ -1,0 +1,27 @@
+{% comment %}
+  Required params:
+    icon: string
+
+  Optional params:
+    class: string
+{% endcomment %}
+{%- capture default_attrs -%}
+  aria-hidden="true" focusable="false" {% if class != blank %}class="{{ class }}"{% endif %} role="img" xmlns="http://www.w3.org/2000/svg"
+{%- endcapture -%}
+{%- case icon -%}
+
+  {%- when 'language-en' -%}
+  <svg data-icon="language" class="{{ class }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 27">
+    <text transform="translate(0 21)" fill="currentColor" font-size="19" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">EN</tspan></text>
+  </svg>
+
+  {%- when 'language-de' -%}
+  <svg data-icon="language" class="{{ class }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 27">
+    <text transform="translate(0 21)" fill="currentColor" font-size="19" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">DE</tspan></text>
+  </svg>
+
+  {% else %}
+
+  <script>window.addEventListener('load', function() { throw new Error("Missing icon: {{ icon | raw_escape_string }}"); })</script>
+
+{%- endcase -%}
