@@ -1,0 +1,14 @@
+de:
+  app:
+    hero:
+      shop: Finden Sie Ihre Traumuhr
+      sell: Verkaufe einen Teil deiner Sammlung
+      main-sentence: Finde deine Zeit
+      secondary-sentence: MVP Marketplace ist ein sozialer Marktplatz zum Kaufen und Verkaufen aller Dinge
+    home:
+      feeds:
+        comments: Leute posten
+        groups: Menschen versammeln sich
+        items: Leute, die verkaufen
+        profiles: Leute, die sich anschließen
+        categories: Beliebte Kategorien
