@@ -1060,7 +1060,7 @@ en:
         form:
           title_help: Be specific and imagine you’re asking a question to another person
           body_help: Include all the information someone would need to answer your question
-          tags_help: Add up to 5 tags to describe what your question is about. Separated by comma.
+          tags_help: Add up to 5 tags to describe what your question is about. Separated by comma. Use numbers, letters and dash characters.
           body: Body
           title: Title
           tags: Tags
