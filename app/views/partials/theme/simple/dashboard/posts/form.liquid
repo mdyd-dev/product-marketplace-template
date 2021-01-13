@@ -37,7 +37,7 @@
 
     <div class="mt-3">
       <label class="block" for="tags">{{ 'app.models.posts.form.tags' | t }}</label>
-      <input class="w-2/3 form-input" type="text" id="tags" name="post[tags]" value="{{ object.tags | join: ',' }}" data-tags-input />
+      <input class="w-2/3 form-input" type="text" id="tags" name="post[tags]" value="{{ object.tags | join: ',' }}" pattern="^[A-Za-z0-9-]$" data-tags-input />
       {% include 'theme/simple/field_error', errors: object.errors.tags %}
       {% render 'theme/simple/ui/form-tip', content_key: 'app.models.posts.form.tags_help' %}
     </div>
