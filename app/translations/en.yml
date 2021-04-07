@@ -34,7 +34,7 @@ en:
       support-tickets: Support tickets
     metric:
       period:
-        montly: Montly
+        monthly: Monthly
         daily: Daily
         total: Total
       income:
